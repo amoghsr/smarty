@@ -1,5 +1,6 @@
-import 'roomModel.dart';
 import 'package:flutter/material.dart';
+
+import 'roomModel.dart';
 
 class RoomCarousel extends StatelessWidget {
   @override

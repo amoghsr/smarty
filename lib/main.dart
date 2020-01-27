@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-
 import 'package:smarty/home.dart';
 import 'package:smarty/leaderboard.dart';
 import 'package:smarty/security.dart';
 import 'package:smarty/stats.dart';
+
 import 'constants.dart';
 
 void main() {
