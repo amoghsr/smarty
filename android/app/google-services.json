@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "211041701647",
+    "firebase_url": "https://smarty-242c8.firebaseio.com",
+    "project_id": "smarty-242c8",
+    "storage_bucket": "smarty-242c8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:211041701647:android:85f5452ea92fafe9dff87a",
+        "android_client_info": {
+          "package_name": "com.amogh.smarty"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "211041701647-73g926h5i4o59fq16te1not5d4ufuqds.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvakGFIkcJsXgLLe34wqnIStXUyDJ1BXE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "211041701647-73g926h5i4o59fq16te1not5d4ufuqds.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "211041701647-01a49gndbp4j4tovqpr3eq8ertsnhldl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.amogh.smarty"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
