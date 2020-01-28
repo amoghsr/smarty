@@ -1,14 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:smarty/auth.dart';
 import 'package:smarty/home.dart';
 import 'package:smarty/leaderboard.dart';
 import 'package:smarty/security.dart';
 import 'package:smarty/stats.dart';
+import 'package:smarty/login.dart';
 
 import 'constants.dart';
 
+import 'package:provider/provider.dart';
+import 'auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 void main() {
-  runApp(MyApp());
+  runApp(
+    ChangeNotifierProvider<AuthService>(
+      // Helps to look for AuthService in the entire widget tree
+      child: MyApp(),
+      create: (BuildContext context) {
+        return AuthService();
+      },
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -22,7 +36,27 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Montserrat',
         platform: TargetPlatform.iOS,
       ),
-      home: MyNavigationBar(),
+      home: FutureBuilder(
+        // Getting the Provider, and call the getUser method
+        future: Provider.of<AuthService>(context).getUser(),
+        // Wait for the future to resolve and render the appropriate
+        // Load the widget for Home page or LoginPage
+        builder: (context, AsyncSnapshot<FirebaseUser> snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            // Log any errors to the console
+            if (snapshot.error != null) {
+              print("Error");
+              return Text(snapshot.error.toString());
+            }
+            // Redirect to the Home() page
+            return snapshot.hasData ? MyNavigationBar() : LoginPage();
+          } else {
+            // Show the loading indicator
+            return LoadingCircle();
+          }
+        },
+      ),
+//      home: MyNavigationBar(),
     );
   }
 }
@@ -104,6 +138,18 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class LoadingCircle extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Container(
+        child: CircularProgressIndicator(),
+        alignment: Alignment(0.0, 0.0),
       ),
     );
   }

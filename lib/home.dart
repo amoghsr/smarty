@@ -5,7 +5,16 @@ import 'package:smarty/devicesCarousel.dart';
 import 'package:smarty/roomCarousel.dart';
 import 'package:smarty/routineCarousel.dart';
 
+
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
+import 'auth.dart';
+
 class Home extends StatefulWidget {
+
+//  final FirebaseUser currentUser;   //Ignore
+//  Home(this.currentUser);           //Ignore
+
   @override
   _HomeState createState() => _HomeState();
 }
@@ -105,6 +114,7 @@ class _HomeState extends State<Home> {
               padding: EdgeInsets.only(left: 20.0, right: 120.0),
               child: Text(
                 'Welcome Home, Ben',
+                //${widget.currentUser.email}`
                 style: TextStyle(
                     fontSize: 24.0,
                     fontWeight: FontWeight.w700,
