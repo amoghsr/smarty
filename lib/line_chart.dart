@@ -3,6 +3,11 @@ import 'package:flutter/material.dart';
 
 class LineChartSample2 extends StatefulWidget {
   @override
+  String groupby;
+  double aspect;
+  double maxX;
+  LineChartSample2(this.groupby, this.aspect, this.maxX);
+
   State<LineChartSample2> createState() => _LineChartSample2State();
 }
 
@@ -30,7 +35,7 @@ class _LineChartSample2State extends State<LineChartSample2> {
               Align(
                 alignment: Alignment.bottomCenter,
                 child: AspectRatio(
-                  aspectRatio: 1.70,
+                  aspectRatio: widget.aspect,
                   child: Container(
                     decoration: BoxDecoration(
                         borderRadius: const BorderRadius.all(
@@ -41,7 +46,9 @@ class _LineChartSample2State extends State<LineChartSample2> {
                       padding: const EdgeInsets.only(
                           right: 18.0, left: 12.0, top: 24, bottom: 12),
                       child: LineChart(
-                        showAvg ? avgData() : mainData(),
+                        showAvg
+                            ? avgData(widget.groupby)
+                            : mainData(widget.groupby),
                       ),
                     ),
                   ),
@@ -73,7 +80,7 @@ class _LineChartSample2State extends State<LineChartSample2> {
     );
   }
 
-  LineChartData mainData() {
+  LineChartData mainData(String groupby) {
     return LineChartData(
       gridData: FlGridData(
         show: true,
@@ -101,22 +108,103 @@ class _LineChartSample2State extends State<LineChartSample2> {
               fontWeight: FontWeight.normal,
               fontSize: 10),
           getTitles: (value) {
-            switch (value.toInt()) {
-              case 1:
-                return 'SUN';
-              case 3:
-                return 'MON';
-              case 5:
-                return 'TUE';
-              case 7:
-                return 'WED';
-              case 9:
-                return 'THU';
-              case 11:
-                return 'FRI';
-              case 13:
-                return 'SAT';
-            }
+            if (groupby == "Day")
+              switch (value.toInt()) {
+                case 1:
+                  return '12 AM';
+                case 3:
+                  return '1 AM';
+                case 5:
+                  return '2 AM';
+                case 7:
+                  return '3 AM';
+                case 9:
+                  return '4 AM';
+                case 11:
+                  return '5 AM';
+                case 13:
+                  return '6 AM';
+                case 15:
+                  return '7 AM';
+                case 17:
+                  return '8 AM';
+                case 19:
+                  return '9 AM';
+                case 21:
+                  return '10 AM';
+                case 23:
+                  return '11 AM';
+                case 25:
+                  return '12 PM';
+                case 27:
+                  return '1 PM';
+                case 29:
+                  return '2 PM';
+                case 31:
+                  return '3 PM';
+                case 33:
+                  return '4 PM';
+                case 35:
+                  return '5 PM';
+                case 37:
+                  return '6 PM';
+                case 39:
+                  return '7 PM';
+                case 41:
+                  return '8 PM';
+                case 43:
+                  return '9 PM';
+                case 45:
+                  return '10 PM';
+                case 47:
+                  return '11 PM';
+                case 49:
+                  return '12 PM';
+              }
+            else if (groupby == "Week")
+              switch (value.toInt()) {
+                case 1:
+                  return 'SUN';
+                case 3:
+                  return 'MON';
+                case 5:
+                  return 'TUE';
+                case 7:
+                  return 'WED';
+                case 9:
+                  return 'THU';
+                case 11:
+                  return 'FRI';
+                case 13:
+                  return 'SAT';
+              }
+            else
+              switch (value.toInt()) {
+                case 1:
+                  return 'JAN';
+                case 3:
+                  return 'FEB';
+                case 5:
+                  return 'MAR';
+                case 7:
+                  return 'APR';
+                case 9:
+                  return 'MAY';
+                case 11:
+                  return 'JUN';
+                case 13:
+                  return 'JUL';
+                case 15:
+                  return 'AUG';
+                case 17:
+                  return 'SEP';
+                case 19:
+                  return 'OCT';
+                case 21:
+                  return 'NOV';
+                case 23:
+                  return 'DEC';
+              }
             return '';
           },
           margin: 8,
@@ -147,7 +235,7 @@ class _LineChartSample2State extends State<LineChartSample2> {
           show: true,
           border: Border.all(color: const Color(0xff37434d), width: 0)),
       minX: 0,
-      maxX: 11,
+      maxX: widget.maxX,
       minY: 0,
       maxY: 6,
       lineBarsData: [
@@ -160,6 +248,8 @@ class _LineChartSample2State extends State<LineChartSample2> {
             FlSpot(8, 4),
             FlSpot(9.5, 3),
             FlSpot(11, 4),
+            FlSpot(30, 4),
+            FlSpot(49, 0),  
           ],
           isCurved: true,
           colors: gradientColors,
@@ -178,7 +268,7 @@ class _LineChartSample2State extends State<LineChartSample2> {
     );
   }
 
-  LineChartData avgData() {
+  LineChartData avgData(String groupby) {
     return LineChartData(
       lineTouchData: const LineTouchData(enabled: false),
       gridData: FlGridData(
@@ -208,22 +298,103 @@ class _LineChartSample2State extends State<LineChartSample2> {
             fontSize: 10,
           ),
           getTitles: (value) {
-            switch (value.toInt()) {
-              case 1:
-                return 'SUN';
-              case 3:
-                return 'MON';
-              case 5:
-                return 'TUE';
-              case 7:
-                return 'WED';
-              case 9:
-                return 'THU';
-              case 11:
-                return 'FRI';
-              case 13:
-                return 'SAT';
-            }
+            if (groupby == "Day")
+              switch (value.toInt()) {
+                case 1:
+                  return '12 AM';
+                case 3:
+                  return '1 AM';
+                case 5:
+                  return '2 AM';
+                case 7:
+                  return '3 AM';
+                case 9:
+                  return '4 AM';
+                case 11:
+                  return '5 AM';
+                case 13:
+                  return '6 AM';
+                case 15:
+                  return '7 AM';
+                case 17:
+                  return '8 AM';
+                case 19:
+                  return '9 AM';
+                case 21:
+                  return '10 AM';
+                case 23:
+                  return '11 AM';
+                case 25:
+                  return '12 PM';
+                case 27:
+                  return '1 PM';
+                case 29:
+                  return '2 PM';
+                case 31:
+                  return '3 PM';
+                case 33:
+                  return '4 PM';
+                case 35:
+                  return '5 PM';
+                case 37:
+                  return '6 PM';
+                case 39:
+                  return '7 PM';
+                case 41:
+                  return '8 PM';
+                case 43:
+                  return '9 PM';
+                case 45:
+                  return '10 PM';
+                case 47:
+                  return '11 PM';
+                case 49:
+                  return '12 PM';
+              }
+            else if (groupby == "Week")
+              switch (value.toInt()) {
+                case 1:
+                  return 'SUN';
+                case 3:
+                  return 'MON';
+                case 5:
+                  return 'TUE';
+                case 7:
+                  return 'WED';
+                case 9:
+                  return 'THU';
+                case 11:
+                  return 'FRI';
+                case 13:
+                  return 'SAT';
+              }
+            else
+              switch (value.toInt()) {
+                case 1:
+                  return 'JAN';
+                case 3:
+                  return 'FEB';
+                case 5:
+                  return 'MAR';
+                case 7:
+                  return 'APR';
+                case 9:
+                  return 'MAY';
+                case 11:
+                  return 'JUN';
+                case 13:
+                  return 'JUL';
+                case 15:
+                  return 'AUG';
+                case 17:
+                  return 'SEP';
+                case 19:
+                  return 'OCT';
+                case 21:
+                  return 'NOV';
+                case 23:
+                  return 'DEC';
+              }
             return '';
           },
           margin: 8,
@@ -256,12 +427,12 @@ class _LineChartSample2State extends State<LineChartSample2> {
             color: Theme.of(context).scaffoldBackgroundColor, width: 100),
       ),
       minX: 0,
-      maxX: 11,
+      maxX: widget.maxX,
       minY: 0,
       maxY: 6,
       lineBarsData: [
         LineChartBarData(
-          spots: const [
+          spots: [
             FlSpot(0, 3.44),
             FlSpot(2.6, 3.44),
             FlSpot(4.9, 3.44),
