@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:smarty/firebaseControlDevices.dart';
 
 import 'devicesModel.dart';
 
@@ -75,75 +76,83 @@ class DeviceCarousel extends StatelessWidget {
                   children: <Widget>[
                     Opacity(
                       opacity: device.opacity,
-                      child: Container(
-                        height: 180.0,
-                        width: 170.0,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10.0),
-                          color: Theme.of(context).backgroundColor,
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.all(14.0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                  Opacity(
-                                    opacity: 0.7,
-                                    child: Text(
-                                      device.inRoom,
-                                      style: TextStyle(
-                                        fontSize: 10,
-                                        fontWeight: FontWeight.w400,
-                                        fontFamily: 'Poppins',
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => FirebaseControlDevices()),
+                          );
+                        },
+                        child: Container(
+                          height: 180.0,
+                          width: 170.0,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10.0),
+                            color: Theme.of(context).backgroundColor,
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.all(14.0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Opacity(
+                                      opacity: 0.7,
+                                      child: Text(
+                                        device.inRoom,
+                                        style: TextStyle(
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.w400,
+                                          fontFamily: 'Poppins',
 //                                      color: Theme.of(context).accentColor,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  Icon(
-                                    FontAwesome.toggle_on,
-                                    size: 24,
-                                    color: Theme.of(context).accentColor,
-                                  )
-                                ],
-                              ),
-                              Row(
-                                children: <Widget>[
-                                  Image(
-                                    height: 50,
-                                    width: 50,
-                                    image: AssetImage(
-                                      device.imageUrl,
+                                    Icon(
+                                      FontAwesome.toggle_on,
+                                      size: 24,
+                                      color: Theme.of(context).accentColor,
+                                    )
+                                  ],
+                                ),
+                                Row(
+                                  children: <Widget>[
+                                    Image(
+                                      height: 50,
+                                      width: 50,
+                                      image: AssetImage(
+                                        device.imageUrl,
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                  Text(
-                                    device.deviceName,
-                                    style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w700,
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Text(
+                                      device.deviceName,
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w700,
+                                      ),
                                     ),
-                                  ),
-                                  Text(
-                                    device.state,
-                                    style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w500,
-                                      fontFamily: 'Poppins',
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ],
+                                    Text(
+                                      device.state,
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w500,
+                                        fontFamily: 'Poppins',
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
