@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'roomModel.dart';
-import 'package:smarty/Rooms.dart';
-import 'package:smarty/Room_test.dart';
-
-
 
 class RoomCarousel extends StatelessWidget {
   @override
@@ -76,61 +72,53 @@ class RoomCarousel extends StatelessWidget {
                 child: Stack(
                   alignment: Alignment.topCenter,
                   children: <Widget>[
-                    Padding(
-                      padding: EdgeInsets.all(0.0),
-                      child: FlatButton( //Issue with button
-                      onPressed: (){
-                        Navigator.push( context,
-                        MaterialPageRoute(builder: (context) => MyOtherRoom()),
-                        );
-
-                        },
-                        child: Container(
-                          height: 190.0,
-                          width: 140.0,
-                          decoration: BoxDecoration(
-                            //Image inside box
-                            image: DecorationImage(
-                              image: AssetImage(room.imageUrl),
-                              fit: BoxFit.fill,
-                            ),
-                            borderRadius: BorderRadius.circular(10.0),
-                            color: Theme.of(context).backgroundColor,
+                    GestureDetector(
+                      // onTap: () => Navigator.pushNamed(context),
+                      child: Container(
+                        height: 190.0,
+                        width: 140.0,
+                        decoration: BoxDecoration(
+                          //Image inside box
+                          image: DecorationImage(
+                            image: AssetImage(room.imageUrl),
+                            fit: BoxFit.fill,
                           ),
-                          child: Padding(
-                            padding: EdgeInsets.all(10.0),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Text(
-                                  room.roomName,
-                                  style: TextStyle(
-                                    fontFamily: 'Montserrat',
-                                    fontWeight: FontWeight.w700,
+                          borderRadius: BorderRadius.circular(10.0),
+                          color: Theme.of(context).backgroundColor,
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.all(10.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                room.roomName,
+                                style: TextStyle(
+                                  fontFamily: 'Montserrat',
+                                  fontWeight: FontWeight.w700,
 //                                color: Colors.white,
-                                    fontSize: 15,
-                                  ),
+                                  fontSize: 15,
                                 ),
-                                SizedBox(
-                                  height: 2,
-                                ),
-                                Opacity(
-                                  opacity: 0.8,
-                                  child: Text(
-                                    '${room.nDevices} devices',
-                                    style: TextStyle(
-                                      fontFamily: 'Poppins',
-                                      fontSize: 10,
+                              ),
+                              SizedBox(
+                                height: 2,
+                              ),
+                              Opacity(
+                                opacity: 0.8,
+                                child: Text(
+                                  '${room.nDevices} devices',
+                                  style: TextStyle(
+                                    fontFamily: 'Poppins',
+                                    fontSize: 10,
 //                                  color: Colors.white,
-                                    ),
                                   ),
                                 ),
-                                SizedBox(
-                                  height: 10.0,
-                                )
-                              ],
-                            ),
+                              ),
+                              SizedBox(
+                                height: 10.0,
+                              )
+                            ],
                           ),
                         ),
                       ),
