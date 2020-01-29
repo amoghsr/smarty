@@ -76,7 +76,9 @@ class RoomCarousel extends StatelessWidget {
                     GestureDetector(
                       onTap: () => Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => MyOtherRoom()),
+                        MaterialPageRoute(
+                          builder: (context) => MyOtherRoom(),
+                        ),
                       ),
                       child: Container(
                         height: 190.0,

@@ -43,7 +43,7 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
           style: kAppBarTextStyle,
         ),
       ),
-      drawer: Drawer(),
+//      drawer: Drawer(),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Container(

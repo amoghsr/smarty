@@ -24,12 +24,13 @@ class _LoginPageState extends State<LoginPage> {
             key: _formKey,
             child: SingleChildScrollView(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      SizedBox(height: 60.0),
+                      SizedBox(height: 140.0),
                       Text(
                         'Glad to have you back.',
                         style: TextStyle(
@@ -50,7 +51,9 @@ class _LoginPageState extends State<LoginPage> {
                           color: Theme.of(context).accentColor,
                         ),
                       ),
-                      SizedBox(height: 20.0),
+                      SizedBox(
+                        height: 30.0,
+                      ),
                       TextFormField(
                         onSaved: (value) => _email = value,
                         keyboardType: TextInputType.emailAddress,
@@ -65,15 +68,19 @@ class _LoginPageState extends State<LoginPage> {
                           labelText: "Password",
                         ),
                       ),
-                      SizedBox(height: 40.0),
+                      SizedBox(
+                        height: 40.0,
+                      ),
                       RaisedButton(
                         padding: EdgeInsets.symmetric(
-                          horizontal: 75,
+                          horizontal: 130,
                           vertical: 20,
                         ),
-                        child: Text("LOGIN"),
+                        child: Text(
+                          "LOGIN",
+                        ),
                         onPressed: () async {
-                          // save the fields..
+                          // Save the fields ...
                           final form = _formKey.currentState;
                           form.save();
 
@@ -97,10 +104,12 @@ class _LoginPageState extends State<LoginPage> {
                           }
                         },
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(100.0),
+                          borderRadius: BorderRadius.circular(50.0),
                         ),
                       ),
-                      SizedBox(height: 40.0),
+                      SizedBox(
+                        height: 40.0,
+                      ),
                       Text(
                         'Don\'t have an account? Sign up here',
                         style: TextStyle(
