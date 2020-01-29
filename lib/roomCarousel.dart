@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smarty/Rooms.dart';
 
 import 'roomModel.dart';
 
@@ -73,7 +74,10 @@ class RoomCarousel extends StatelessWidget {
                   alignment: Alignment.topCenter,
                   children: <Widget>[
                     GestureDetector(
-//                       onTap: () => Navigator.pushNamed(),
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => MyOtherRoom()),
+                      ),
                       child: Container(
                         height: 190.0,
                         width: 140.0,
