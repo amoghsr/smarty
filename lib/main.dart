@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:smarty/Rooms.dart';
 import 'package:smarty/auth.dart';
 import 'package:smarty/home.dart';
 import 'package:smarty/leaderboard.dart';
@@ -72,7 +73,7 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
   final List<Widget> _children = [
     Home(),
     Statistics(),
-    Security(),
+    MyOtherRoom(),
     Leaderboard(),
   ];
 
