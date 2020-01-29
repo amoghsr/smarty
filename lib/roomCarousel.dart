@@ -73,6 +73,7 @@ class RoomCarousel extends StatelessWidget {
                   alignment: Alignment.topCenter,
                   children: <Widget>[
                     GestureDetector(
+//                       onTap: () => Navigator.pushNamed(),
                       child: Container(
                         height: 190.0,
                         width: 140.0,

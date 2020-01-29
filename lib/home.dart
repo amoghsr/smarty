@@ -4,6 +4,8 @@ import 'package:smarty/constants.dart';
 import 'package:smarty/devicesCarousel.dart';
 import 'package:smarty/roomCarousel.dart';
 import 'package:smarty/routineCarousel.dart';
+import 'package:smarty/Room_test.dart';
+
 
 
 import 'package:firebase_auth/firebase_auth.dart';
