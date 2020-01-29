@@ -40,7 +40,7 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
                   width: screenwidth * 0.9,
                   decoration: BoxDecoration(
                     color: Theme.of(context).backgroundColor,
-                    borderRadius: BorderRadius.circular(10.0),
+                    borderRadius: BorderRadius.circular(9.0),
                   ),
 
                 ),
