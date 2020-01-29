@@ -15,8 +15,6 @@ class _StatisticsState extends State<Statistics> {
     double screenwidth = MediaQuery.of(context).size.width;
     double screenheight = MediaQuery.of(context).size.height;
 
-    bool pressed = false;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(

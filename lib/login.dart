@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:smarty/home.dart';
+import 'package:smarty/stats.dart';
 import 'auth.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -101,7 +102,7 @@ class _LoginPageState extends State<LoginPage> {
                   onTap: () => {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Home()),
+                      MaterialPageRoute(builder: (context) => Statistics()),
                     ),
                   },
                   child: Text(
