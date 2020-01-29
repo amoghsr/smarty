@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:smarty/home.dart';
 import 'auth.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -36,7 +37,9 @@ class _LoginPageState extends State<LoginPage> {
                     height: 1.1,
                   ),
                 ),
-                SizedBox(height: 20,),
+                SizedBox(
+                  height: 20,
+                ),
                 Text(
                   'Log in to continue',
                   style: TextStyle(
@@ -94,10 +97,18 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 SizedBox(height: 40.0),
-                Text(
+                InkWell(
+                  onTap: () => {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Home()),
+                    ),
+                  },
+                  child: Text(
                     'Don\'t have an account? Sign up here',
-                  style: TextStyle(
-                    fontSize: 13,
+                    style: TextStyle(
+                      fontSize: 13,
+                    ),
                   ),
                 ),
               ],
@@ -116,10 +127,10 @@ class _LoginPageState extends State<LoginPage> {
           content: Text(_message),
           actions: <Widget>[
             FlatButton(
-                child: Text('Cancel'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
+              child: Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
             )
           ],
         );
