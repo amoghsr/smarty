@@ -17,55 +17,95 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text("Login Page Flutter Firebase"),
-        ),
-        body: Container(
-            padding: EdgeInsets.all(20.0),
-            child: Form(
-                key: _formKey,
-                child: Column(children: <Widget>[
-                  SizedBox(height: 20.0),
-                  Text(
-                    'Login Information',
-                    style: TextStyle(fontSize: 20),
+      body: SafeArea(
+        child: Container(
+          padding: EdgeInsets.all(20.0),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                SizedBox(height: 60.0),
+                Text(
+                  'Glad to have you back.',
+                  style: TextStyle(
+                    fontSize: 48,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w700,
+                    height: 1.1,
                   ),
-                  SizedBox(height: 20.0),
-                  TextFormField(
-                      onSaved: (value) => _email = value,
-                      keyboardType: TextInputType.emailAddress,
-                      decoration: InputDecoration(labelText: "Email Address")),
-                  TextFormField(
-                      onSaved: (value) => _password = value,
-                      obscureText: true,
-                      decoration: InputDecoration(labelText: "Password")),
-                  SizedBox(height: 20.0),
-                  RaisedButton(
-                    child: Text("LOGIN"),
-                    onPressed: () async {
-                      // save the fields..
-                      final form = _formKey.currentState;
-                      form.save();
+                ),
+                SizedBox(height: 20,),
+                Text(
+                  'Log in to continue',
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                    color: Theme.of(context).accentColor,
+                  ),
+                ),
+                SizedBox(height: 20.0),
+                TextFormField(
+                  onSaved: (value) => _email = value,
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: InputDecoration(
+                    labelText: "Email Address",
+                  ),
+                ),
+                TextFormField(
+                  onSaved: (value) => _password = value,
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    labelText: "Password",
+                  ),
+                ),
+                SizedBox(height: 40.0),
+                RaisedButton(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 75,
+                    vertical: 20,
+                  ),
+                  child: Text("LOGIN"),
+                  onPressed: () async {
+                    // save the fields..
+                    final form = _formKey.currentState;
+                    form.save();
 
-                      // Validate will return true if is valid, or false if invalid.
-                      if (form.validate()) {
-                        try {
-                          FirebaseUser result = await Provider.of<AuthService>(
-                                  context,
-                                  listen: false)
-                              .loginUser(email: _email, password: _password);
-                          print(result);
-                        } on AuthException catch (error) {
-                          // handle the firebase specific error
-                          return _buildErrorDialog(context, error.message);
-                        } on Exception catch (error) {
-                          // gracefully handle anything else that might happen..
-                          return _buildErrorDialog(context, error.toString());
-                        }
+                    // Validate will return true if is valid, or false if invalid.
+                    if (form.validate()) {
+                      try {
+                        FirebaseUser result = await Provider.of<AuthService>(
+                                context,
+                                listen: false)
+                            .loginUser(email: _email, password: _password);
+                        print(result);
+                      } on AuthException catch (error) {
+                        // handle the firebase specific error
+                        return _buildErrorDialog(context, error.message);
+                      } on Exception catch (error) {
+                        // gracefully handle anything else that might happen..
+                        return _buildErrorDialog(context, error.toString());
                       }
-                    },
-                  )
-                ]))));
+                    }
+                  },
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(100.0),
+                  ),
+                ),
+                SizedBox(height: 40.0),
+                Text(
+                    'Don\'t have an account? Sign up here',
+                  style: TextStyle(
+                    fontSize: 13,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 
   Future _buildShowErrorDialog(BuildContext context, _message) {
@@ -79,7 +119,8 @@ class _LoginPageState extends State<LoginPage> {
                 child: Text('Cancel'),
                 onPressed: () {
                   Navigator.of(context).pop();
-                })
+                },
+            )
           ],
         );
       },
