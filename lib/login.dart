@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:smarty/home.dart';
 import 'auth.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -97,18 +96,10 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 SizedBox(height: 40.0),
-                InkWell(
-                  onTap: () => {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Home()),
-                    ),
-                  },
-                  child: Text(
-                    'Don\'t have an account? Sign up here',
-                    style: TextStyle(
-                      fontSize: 13,
-                    ),
+                Text(
+                  'Don\'t have an account? Sign up here',
+                  style: TextStyle(
+                    fontSize: 13,
                   ),
                 ),
               ],
