@@ -10,7 +10,8 @@ class FirebaseControlDevices extends StatefulWidget {
 }
 
 class _FirebaseControlDevicesState extends State<FirebaseControlDevices> {
-  bool val = false;
+  bool light1 = false;
+  bool light2 = false;
   final databaseReference = FirebaseDatabase.instance.reference();
   void createRecord(bool newvalue) {
     if (newvalue == false) {
@@ -32,16 +33,26 @@ class _FirebaseControlDevicesState extends State<FirebaseControlDevices> {
         body: SafeArea(
           child: Column(
             children: <Widget>[
-              Text('Light Switch'),
+              Text('Light 1 Switch'),
               Switch(
-                value: val,
+                value: light1,
                 onChanged: (bool newValue) {
                   createRecord(newValue);
                   setState(() {
-                    val = newValue;
+                    light1 = newValue;
                   });
                 },
-              )
+              ),
+              Text('Light 2 Switch'),
+              Switch(
+                value: light2,
+                onChanged: (bool newValue) {
+                  createRecord(newValue);
+                  setState(() {
+                    light2 = newValue;
+                  });
+                },
+              ),
             ],
           ),
         ),
