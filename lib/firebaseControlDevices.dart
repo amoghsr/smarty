@@ -1,8 +1,8 @@
-
 // THIS IS A TEST FILE.
 // THE FOLLOWING DART FILE IS FOR TESTING A LAMP/LIGHT/LED DEVICE USING THE FIREBASE SERVICE.
 
 import 'package:flutter/material.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 class FirebaseControlDevices extends StatefulWidget {
   @override
@@ -10,8 +10,18 @@ class FirebaseControlDevices extends StatefulWidget {
 }
 
 class _FirebaseControlDevicesState extends State<FirebaseControlDevices> {
-
   bool val = false;
+  final databaseReference = FirebaseDatabase.instance.reference();
+  void createRecord(bool newvalue) {
+    if (newvalue == false) {
+      databaseReference
+          .child("Devices/Lights/Light1/")
+          .update({'State': "off"});
+    } else {
+      databaseReference.child("Devices/Lights/Light1/").update({'State': "on"});
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -26,6 +36,7 @@ class _FirebaseControlDevicesState extends State<FirebaseControlDevices> {
               Switch(
                 value: val,
                 onChanged: (bool newValue) {
+                  createRecord(newValue);
                   setState(() {
                     val = newValue;
                   });
@@ -38,4 +49,3 @@ class _FirebaseControlDevicesState extends State<FirebaseControlDevices> {
     );
   }
 }
-
