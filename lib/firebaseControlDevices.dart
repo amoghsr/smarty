@@ -13,13 +13,16 @@ class _FirebaseControlDevicesState extends State<FirebaseControlDevices> {
   bool light1 = false;
   bool light2 = false;
   final databaseReference = FirebaseDatabase.instance.reference();
-  void createRecord(bool newvalue) {
+  void createRecord(bool newvalue, int light) {
+    toString();
     if (newvalue == false) {
       databaseReference
-          .child("Devices/Lights/Light1/")
+          .child("Devices/Lights/Light" + light.toString() + "/")
           .update({'State': "off"});
     } else {
-      databaseReference.child("Devices/Lights/Light1/").update({'State': "on"});
+      databaseReference
+          .child("Devices/Lights/Light" + light.toString() + "/")
+          .update({'State': "on"});
     }
   }
 
@@ -37,7 +40,7 @@ class _FirebaseControlDevicesState extends State<FirebaseControlDevices> {
               Switch(
                 value: light1,
                 onChanged: (bool newValue) {
-                  createRecord(newValue);
+                  createRecord(newValue, 1);
                   setState(() {
                     light1 = newValue;
                   });
@@ -47,7 +50,7 @@ class _FirebaseControlDevicesState extends State<FirebaseControlDevices> {
               Switch(
                 value: light2,
                 onChanged: (bool newValue) {
-                  createRecord(newValue);
+                  createRecord(newValue, 2);
                   setState(() {
                     light2 = newValue;
                   });
