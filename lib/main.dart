@@ -73,7 +73,7 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
   final List<Widget> _children = [
     Home(),
     Statistics(),
-    MyOtherRoom(),
+    Security(),
     Leaderboard(),
   ];
 

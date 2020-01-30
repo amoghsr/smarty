@@ -31,6 +31,8 @@ List<Text> getDevices(List<String> gDv) {
   return dv;
 }
 
+String rmName = tabList[0].text;
+
 class _MyOtherRoomState extends State<MyOtherRoom> {
   @override
   Widget build(BuildContext context) {
@@ -39,62 +41,55 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'MyOtherRoom',
+          rmName,
           style: kAppBarTextStyle,
         ),
       ),
       drawer: Drawer(),
-      body: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
+      body: Container(
+        color: Theme.of(context).scaffoldBackgroundColor,
         child: Container(
-          color: Theme.of(context).scaffoldBackgroundColor,
-          child: Container(
-            child: DefaultTabController(
-              length: 5,
-              child: Column(
-                children: <Widget>[
-                  TabBar(
-                      isScrollable: true,
-                      labelColor: Theme.of(context).accentColor,
-                      unselectedLabelColor: Theme.of(context).backgroundColor,
-                      indicatorColor: Colors.transparent,
-                      indicatorSize: TabBarIndicatorSize.tab,
-                      tabs: tabList),
-                  Column(
-                    children: <Widget>[
-                      Container(
-                        height: screenheight * 0.4,
-                        width: screenwidth,
-                        margin: EdgeInsets.only(left: 10, right: 10),
-                        color: Colors.red,
+          child: DefaultTabController(
+            length: 5,
+            child: Column(
+              children: <Widget>[
+                TabBar(
+                  isScrollable: true,
+                  labelColor: Theme.of(context).accentColor,
+                  unselectedLabelColor: Theme.of(context).backgroundColor,
+                  indicatorColor: Colors.transparent,
+                  indicatorSize: TabBarIndicatorSize.tab,
+                  tabs: tabList,
+                  onTap: (value) {
+                    setState(() {
+                      rmName = tabList[value].text;
+                    });
+                  },
+                ),
+                Column(
+                  children: <Widget>[
+                    Container(
+                      height: screenheight * 0.4,
+                      width: screenwidth,
+                      margin: EdgeInsets.only(left: 10, right: 10),
+                      color: Colors.red,
+                    ),
+                    Container(
+                      height: screenheight * 0.35,
+                      width: screenwidth,
+                      child: TabBarView(
+                        children: [
+                          Column(children: getDevices(rooms[0].d)),
+                          Column(children: getDevices(rooms[1].d)),
+                          Column(children: getDevices(rooms[2].d)),
+                          Column(children: getDevices(rooms[3].d)),
+                          Column(children: getDevices(rooms[4].d)),
+                        ],
                       ),
-                      Container(
-                        height: screenheight * 0.35,
-                        width: screenwidth,
-                        child: TabBarView(
-                          children: [
-                            Column(
-                              children: getDevices(rooms[0].d)
-                            ),
-                            Column(
-                              children: getDevices(rooms[1].d)
-                            ),
-                            Column(
-                              children: getDevices(rooms[2].d)
-                            ),
-                            Column(
-                              children: getDevices(rooms[3].d)
-                            ),
-                            Column(
-                              children: getDevices(rooms[4].d)
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
         ),
