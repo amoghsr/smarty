@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smarty/devicesModel.dart';
-
+import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 import 'package:smarty/roomModel.dart';
 import 'constants.dart';
 
@@ -8,6 +8,8 @@ class MyOtherRoom extends StatefulWidget {
   @override
   _MyOtherRoomState createState() => _MyOtherRoomState();
 }
+
+// final slider =
 
 List<Tab> tabList = [
   Tab(text: rooms[0].roomName, icon: rooms[0].icon),
@@ -28,7 +30,7 @@ Icon getIcons(String devIc) {
 Device getDevState(String roomName, String devName) {
   //bool isSwitched = true;
   for (var i in devices)
-      if ((i.inRoom == roomName) && (i.deviceName == devName)) return i;
+    if ((i.inRoom == roomName) && (i.deviceName == devName)) return i;
 }
 
 String rmName = tabList[0].text;
@@ -68,13 +70,36 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
                 ),
                 Column(
                   children: <Widget>[
+                    SizedBox(height: screenheight * 0.03),
                     Container(
                       height: screenheight * 0.4,
                       width: screenwidth,
                       margin: EdgeInsets.only(left: 10, right: 10),
-                      color: Colors.red,
+                      // color: Colors.red,
+                      child: SleekCircularSlider(
+                          initialValue: 24,
+                          min: 16,
+                          max: 26,
+                          appearance: CircularSliderAppearance(
+                              customColors: CustomSliderColors(
+                                trackColor: Theme.of(context).backgroundColor,
+                                progressBarColor: Theme.of(context).accentColor,
+                              ),
+                              customWidths: CustomSliderWidths(),
+                              infoProperties: InfoProperties(
+                                mainLabelStyle: TextStyle(
+                                    color: Colors.white, fontSize: 60),
+                                modifier: (value) {
+                                  final roundedValue =
+                                      (value).ceil().toInt().toString();
+                                  return '$roundedValue°C';
+                                },
+                              )),
+                          onChange: (double value) {
+                            print(value);
+                          }),
                     ),
-                    SizedBox(height: screenheight * 0.02),
+                    // SizedBox(height: screenheight * 0.001),
                     Container(
                       padding: EdgeInsets.only(left: 10),
                       child: Row(
@@ -132,10 +157,12 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
                   leading: getIcons(rooms[l].d[i]),
                   title: Text(rooms[l].d[i]),
                   trailing: Switch(
-                    value: getDevState(rooms[l].roomName, rooms[l].d[i]).toggleSt,
+                    value:
+                        getDevState(rooms[l].roomName, rooms[l].d[i]).toggleSt,
                     onChanged: (value) {
                       setState(() {
-                        getDevState(rooms[l].roomName, rooms[l].d[i]).toggleSt = value;
+                        getDevState(rooms[l].roomName, rooms[l].d[i]).toggleSt =
+                            value;
                       });
                     },
                     activeTrackColor: Colors.lightGreenAccent,
