@@ -1,8 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'auth.dart';
 
-import 'package:firebase_auth/firebase_auth.dart';
+import 'auth.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -55,7 +55,9 @@ class _LoginPageState extends State<LoginPage> {
                         height: 30.0,
                       ),
                       TextFormField(
-                        onSaved: (value) => _email = value,
+                        onSaved: (value) {
+                          _email = value;
+                        },
                         keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
                           labelText: "Email Address",
