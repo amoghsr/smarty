@@ -27,6 +27,7 @@ List<String> getDv (String roomname) {
   for (var i in devices) {
     if (i.inRoom == roomname) {
       devicelist.add(i.deviceName);
+      // devicelist.add(i.icon);
     }
   }
   print(devicelist);

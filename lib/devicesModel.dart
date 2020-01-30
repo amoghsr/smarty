@@ -1,3 +1,8 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 class Device {
   String imageUrl;
   String deviceName;
@@ -5,41 +10,49 @@ class Device {
   String state;
   String level;
   double opacity;
+  Icon icon;
+  bool toggleSt;
 
-  Device({
-    this.imageUrl,
-    this.deviceName,
-    this.inRoom,
-    this.state,
-    this.level,
-    this.opacity,
-  });
+  Device(
+      {this.imageUrl,
+      this.deviceName,
+      this.inRoom,
+      this.state,
+      this.level,
+      this.opacity,
+      this.icon,
+      this.toggleSt});
 }
 
 List<Device> devices = [
-
   //Living room devices
   Device(
     imageUrl: 'assets/images/deviceAssets/bulb.png',
     deviceName: 'Lamp',
+    icon: Icon(Icons.wb_incandescent),
     inRoom: 'Living Room',
-    state: 'On',
+    state: 'Off',
+    toggleSt: false,
     level: '5',
     opacity: 1,
   ),
-   Device(
+  Device(
     imageUrl: 'assets/images/deviceAssets/bulb.png',
     deviceName: 'A/C',
+    icon: Icon(Icons.ac_unit),
     inRoom: 'Living Room',
-    state: 'On',
+    state: 'Off',
+    toggleSt: false,
     level: '5',
     opacity: 1,
   ),
-   Device(
+  Device(
     imageUrl: 'assets/images/deviceAssets/bulb.png',
     deviceName: 'Speaker',
+    icon: Icon(Icons.speaker),
     inRoom: 'Living Room',
-    state: 'On',
+    state: 'Off',
+    toggleSt: false,
     level: '5',
     opacity: 1,
   ),
@@ -48,24 +61,30 @@ List<Device> devices = [
   Device(
     imageUrl: 'assets/images/deviceAssets/fan.png',
     deviceName: 'Lamp',
+    icon: Icon(FontAwesomeIcons.fan),
     inRoom: 'Kitchen',
     state: 'Off',
+    toggleSt: false,
     level: '5',
     opacity: 0.3,
   ),
   Device(
     imageUrl: 'assets/images/deviceAssets/fan.png',
     deviceName: 'Refrigerator',
+    icon: Icon(FontAwesomeIcons.egg),
     inRoom: 'Kitchen',
     state: 'Off',
+    toggleSt: false,
     level: '5',
     opacity: 0.3,
   ),
-   Device(
+  Device(
     imageUrl: 'assets/images/deviceAssets/fan.png',
     deviceName: 'Exhaust Fan',
+    icon: Icon(FontAwesomeIcons.fan),
     inRoom: 'Kitchen',
     state: 'Off',
+    toggleSt: false,
     level: '5',
     opacity: 0.3,
   ),
@@ -73,24 +92,30 @@ List<Device> devices = [
   Device(
     imageUrl: 'assets/images/deviceAssets/fan.png',
     deviceName: 'Lamp',
+    icon: Icon(Icons.wb_incandescent),
     inRoom: 'Bedroom',
     state: 'Off',
+    toggleSt: false,
     level: '5',
     opacity: 0.3,
   ),
-   Device(
+  Device(
     imageUrl: 'assets/images/deviceAssets/fan.png',
+    icon: Icon(FontAwesomeIcons.tv),
     deviceName: 'TV',
     inRoom: 'Bedroom',
     state: 'Off',
+    toggleSt: false,
     level: '5',
     opacity: 0.3,
   ),
-   Device(
+  Device(
     imageUrl: 'assets/images/deviceAssets/fan.png',
     deviceName: 'Speaker',
+    icon: Icon(Icons.speaker),
     inRoom: 'Bedroom',
     state: 'Off',
+    toggleSt: false,
     level: '5',
     opacity: 0.3,
   ),
@@ -98,24 +123,30 @@ List<Device> devices = [
   Device(
     imageUrl: 'assets/images/deviceAssets/ac.png',
     deviceName: 'Lamp',
+    icon: Icon(Icons.wb_incandescent),
     inRoom: 'Playroom',
-    state: 'On',
+    state: 'Off',
+    toggleSt: false,
     level: '5',
     opacity: 1,
   ),
-    Device(
+  Device(
     imageUrl: 'assets/images/deviceAssets/ac.png',
     deviceName: 'A/C',
+    icon: Icon(Icons.ac_unit),
     inRoom: 'Playroom',
-    state: 'On',
+    state: 'Off',
+    toggleSt: false,
     level: '5',
     opacity: 1,
   ),
-    Device(
+  Device(
     imageUrl: 'assets/images/deviceAssets/ac.png',
+    icon: Icon(FontAwesomeIcons.video),
     deviceName: 'Baby Monitor',
     inRoom: 'Playroom',
-    state: 'On',
+    state: 'Off',
+    toggleSt: false,
     level: '5',
     opacity: 1,
   ),
@@ -124,24 +155,30 @@ List<Device> devices = [
   Device(
     imageUrl: 'assets/images/deviceAssets/ac.png',
     deviceName: 'Lamp',
+    icon: Icon(Icons.wb_incandescent),
     inRoom: 'Bathroom',
-    state: 'On',
+    state: 'Off',
+    toggleSt: false,
     level: '5',
     opacity: 1,
   ),
   Device(
     imageUrl: 'assets/images/deviceAssets/ac.png',
+    icon: Icon(FontAwesomeIcons.fire),
     deviceName: 'Water Heater',
     inRoom: 'Bathroom',
-    state: 'On',
+    state: 'Off',
+    toggleSt: false,
     level: '5',
     opacity: 1,
   ),
   Device(
     imageUrl: 'assets/images/deviceAssets/ac.png',
+    icon: Icon(FontAwesomeIcons.fan),
     deviceName: 'Exhaust Fan',
     inRoom: 'Bathroom',
-    state: 'On',
+    state: 'Off',
+    toggleSt: false,
     level: '5',
     opacity: 1,
   ),

@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:smarty/constants.dart';
+
 import 'package:smarty/devicesCarousel.dart';
 import 'package:smarty/roomCarousel.dart';
 import 'package:smarty/routineCarousel.dart';
-
-
-
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
@@ -16,7 +15,6 @@ class Home extends StatefulWidget {
 
 //  final FirebaseUser currentUser;   //Ignore
 //  Home(this.currentUser);           //Ignore
-
   @override
   _HomeState createState() => _HomeState();
 }
@@ -74,7 +72,7 @@ class _HomeState extends State<Home> {
                 ),
               ),
               ListTile(
-                leading: Icon(FontAwesomeIcons.personBooth),
+                leading: Icon(Icons.settings),
                 title: Text(
                   'Account Settings',
                 ),
@@ -87,6 +85,9 @@ class _HomeState extends State<Home> {
               ),
               Divider(),
               ListTile(
+                onTap: () async {
+                  await Provider.of<AuthService>(context, listen: false).logout();
+                },
                 leading: Icon(Icons.exit_to_app),
                 title: Text(
                   'Log Out',

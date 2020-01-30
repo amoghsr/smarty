@@ -1,12 +1,8 @@
-import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:smarty/devicesModel.dart';
-import 'package:smarty/line_chart.dart';
+
 import 'package:smarty/roomModel.dart';
 import 'constants.dart';
-import 'routineModel.dart';
 
 class MyOtherRoom extends StatefulWidget {
   @override
@@ -21,14 +17,18 @@ List<Tab> tabList = [
   Tab(text: rooms[4].roomName, icon: rooms[4].icon),
 ];
 
-List<Text> getDevices(List<String> gDv) {
-  List<Text> dv = [];
-
-  for (var i in gDv) {
-    dv.add(Text(i));
+Icon getIcons(String devIc) {
+  for (var j in devices) {
+    if (j.deviceName == devIc) {
+      return j.icon;
+    }
   }
+}
 
-  return dv;
+Device getDevState(String roomName, String devName) {
+  //bool isSwitched = true;
+  for (var i in devices)
+      if ((i.inRoom == roomName) && (i.deviceName == devName)) return i;
 }
 
 String rmName = tabList[0].text;
@@ -45,9 +45,9 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
           style: kAppBarTextStyle,
         ),
       ),
-      drawer: Drawer(),
-      body: Container(
-        color: Theme.of(context).scaffoldBackgroundColor,
+//      drawer: Drawer(),
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
         child: Container(
           child: DefaultTabController(
             length: 5,
@@ -74,16 +74,35 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
                       margin: EdgeInsets.only(left: 10, right: 10),
                       color: Colors.red,
                     ),
+                    SizedBox(height: screenheight * 0.02),
+                    Container(
+                      padding: EdgeInsets.only(left: 10),
+                      child: Row(
+                        children: <Widget>[
+                          Text(
+                            'Devices',
+                            style: TextStyle(
+                              color: Theme.of(context).accentColor,
+                              fontSize: 20,
+                              fontFamily: 'Montserrat',
+                            ),
+                            // textAlign: TextAlign.left,
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: screenheight * 0.005),
                     Container(
                       height: screenheight * 0.35,
                       width: screenwidth,
                       child: TabBarView(
+                        physics: NeverScrollableScrollPhysics(),
                         children: [
-                          Column(children: getDevices(rooms[0].d)),
-                          Column(children: getDevices(rooms[1].d)),
-                          Column(children: getDevices(rooms[2].d)),
-                          Column(children: getDevices(rooms[3].d)),
-                          Column(children: getDevices(rooms[4].d)),
+                          getListTile(0),
+                          getListTile(1),
+                          getListTile(2),
+                          getListTile(3),
+                          getListTile(4),
                         ],
                       ),
                     ),
@@ -95,5 +114,37 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
         ),
       ),
     );
+  }
+
+  ListView getListTile(int l) {
+    return ListView.builder(
+        itemCount: rooms[l].d.length,
+        itemBuilder: (context, i) {
+          return Column(
+            children: <Widget>[
+              Container(
+                margin: EdgeInsets.all(5.5),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).cardColor,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: ListTile(
+                  leading: getIcons(rooms[l].d[i]),
+                  title: Text(rooms[l].d[i]),
+                  trailing: Switch(
+                    value: getDevState(rooms[l].roomName, rooms[l].d[i]).toggleSt,
+                    onChanged: (value) {
+                      setState(() {
+                        getDevState(rooms[l].roomName, rooms[l].d[i]).toggleSt = value;
+                      });
+                    },
+                    activeTrackColor: Colors.lightGreenAccent,
+                    activeColor: Colors.green,
+                  ),
+                ),
+              ),
+            ],
+          );
+        });
   }
 }
