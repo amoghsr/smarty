@@ -77,7 +77,7 @@ class RoomCarousel extends StatelessWidget {
                       onTap: () => Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => MyOtherRoom(),
+                          builder: (context) => MyOtherRoom(initRoom: index),
                         ),
                       ),
                       child: Container(

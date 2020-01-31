@@ -4,13 +4,6 @@ import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 import 'package:smarty/roomModel.dart';
 import 'constants.dart';
 
-class MyOtherRoom extends StatefulWidget {
-  @override
-  _MyOtherRoomState createState() => _MyOtherRoomState();
-}
-
-// final slider =
-
 List<Tab> tabList = [
   Tab(text: rooms[0].roomName, icon: rooms[0].icon),
   Tab(text: rooms[1].roomName, icon: rooms[1].icon),
@@ -33,11 +26,24 @@ Device getDevState(String roomName, String devName) {
     if ((i.inRoom == roomName) && (i.deviceName == devName)) return i;
 }
 
+class MyOtherRoom extends StatefulWidget {
+  @override
+  int initRoom;
+  MyOtherRoom({@required this.initRoom});
+  _MyOtherRoomState createState() => _MyOtherRoomState();
+}
+
 String rmName = tabList[0].text;
 
 class _MyOtherRoomState extends State<MyOtherRoom> {
   @override
   Widget build(BuildContext context) {
+
+    if (widget.initRoom != null) {
+      rmName = tabList[widget.initRoom].text ;
+    }
+
+    print(widget.initRoom);
     double screenwidth = MediaQuery.of(context).size.width;
     double screenheight = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -52,6 +58,7 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
         scrollDirection: Axis.vertical,
         child: Container(
           child: DefaultTabController(
+            initialIndex: widget.initRoom,
             length: 5,
             child: Column(
               children: <Widget>[
