@@ -37,8 +37,9 @@ class MyOtherRoom extends StatefulWidget {
 // String appBarrmName = tabList[0].text;
 
 Color bulb_color = Colors.white;
-String currDevice = 'Lamp';
-String currRoom = 'Living Room';
+
+String currRoom = tabList[0].text;
+String currDevice = rooms[0].d[0];
 String initrmName = tabList[0].text;
 String rmName = tabList[0].text;
 bool isAbsorbed = false;
@@ -170,11 +171,11 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: ListTile(
-                  onTap: () => {
+                  onTap: () {
                     setState(() {
                       currRoom = rooms[l].roomName;
                       currDevice = rooms[l].d[i];
-                    })
+                    });
                   },
                   leading: getIcons(rooms[l].d[i]),
                   title: Text(rooms[l].d[i]),
