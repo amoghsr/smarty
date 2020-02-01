@@ -3,7 +3,7 @@ import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 import 'package:smarty/devicesModel.dart';
 import 'package:smarty/roomModel.dart';
 import 'constants.dart';
-import 'package:smarty/devices.dart';
+import 'package:smarty/devices_controller.dart';
 
 List<Tab> tabList = [
   Tab(text: rooms[0].roomName, icon: rooms[0].icon),
@@ -34,30 +34,31 @@ class MyOtherRoom extends StatefulWidget {
   _MyOtherRoomState createState() => _MyOtherRoomState();
 }
 
-String rmName = tabList[0].text;
-String appBarrmName = tabList[0].text;
+// String appBarrmName = tabList[0].text;
 
 Color bulb_color = Colors.white;
-// DevicesController currDevice = DevicesController(chDevice: 'LAMP');
 String currDevice = 'Lamp';
 String currRoom = 'Living Room';
+String initrmName = tabList[0].text;
+String rmName = tabList[0].text;
+
 class _MyOtherRoomState extends State<MyOtherRoom> {
   @override
   bool isSwitched = true;
   int brightness = 60;
 
-  Widget build(BuildContext context) {
-    if (widget.initRoom != null) {
-      rmName = tabList[widget.initRoom].text;
-    }
+  void initState() {
+    initrmName = tabList[widget.initRoom].text;
+    rmName = tabList[widget.initRoom].text;
+  }
 
+  Widget build(BuildContext context) {
     double screenwidth = MediaQuery.of(context).size.width;
     double screenheight = MediaQuery.of(context).size.height;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          appBarrmName,
+          (rmName != tabList[widget.initRoom].text) ? rmName : initrmName,
           style: kAppBarTextStyle,
         ),
       ),
@@ -79,7 +80,7 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
                   tabs: tabList,
                   onTap: (value) {
                     setState(() {
-                      appBarrmName = tabList[value].text;
+                      rmName = tabList[value].text;
                     });
                   },
                 ),
