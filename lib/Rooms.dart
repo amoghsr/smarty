@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:smarty/devicesModel.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
+import 'package:smarty/devicesModel.dart';
 import 'package:smarty/roomModel.dart';
 import 'constants.dart';
+import 'package:smarty/devices.dart';
 
 List<Tab> tabList = [
   Tab(text: rooms[0].roomName, icon: rooms[0].icon),
@@ -34,22 +35,29 @@ class MyOtherRoom extends StatefulWidget {
 }
 
 String rmName = tabList[0].text;
+String appBarrmName = tabList[0].text;
 
+Color bulb_color = Colors.white;
+// DevicesController currDevice = DevicesController(chDevice: 'LAMP');
+String currDevice = 'Lamp';
+String currRoom = 'Living Room';
 class _MyOtherRoomState extends State<MyOtherRoom> {
   @override
-  Widget build(BuildContext context) {
+  bool isSwitched = true;
+  int brightness = 60;
 
+  Widget build(BuildContext context) {
     if (widget.initRoom != null) {
-      rmName = tabList[widget.initRoom].text ;
+      rmName = tabList[widget.initRoom].text;
     }
 
-    print(widget.initRoom);
     double screenwidth = MediaQuery.of(context).size.width;
     double screenheight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          rmName,
+          appBarrmName,
           style: kAppBarTextStyle,
         ),
       ),
@@ -71,40 +79,22 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
                   tabs: tabList,
                   onTap: (value) {
                     setState(() {
-                      rmName = tabList[value].text;
+                      appBarrmName = tabList[value].text;
                     });
                   },
                 ),
                 Column(
                   children: <Widget>[
-                    SizedBox(height: screenheight * 0.03),
+                    SizedBox(height: screenheight * 0.02),
                     Container(
                       height: screenheight * 0.4,
                       width: screenwidth,
                       margin: EdgeInsets.only(left: 10, right: 10),
                       // color: Colors.red,
-                      child: SleekCircularSlider(
-                          initialValue: 24,
-                          min: 16,
-                          max: 26,
-                          appearance: CircularSliderAppearance(
-                              customColors: CustomSliderColors(
-                                trackColor: Theme.of(context).backgroundColor,
-                                progressBarColor: Theme.of(context).accentColor,
-                              ),
-                              customWidths: CustomSliderWidths(),
-                              infoProperties: InfoProperties(
-                                mainLabelStyle: TextStyle(
-                                    color: Colors.white, fontSize: 60),
-                                modifier: (value) {
-                                  final roundedValue =
-                                      (value).ceil().toInt().toString();
-                                  return '$roundedValue°C';
-                                },
-                              )),
-                          onChange: (double value) {
-                            print(value);
-                          }),
+                      child: DevicesController(
+                        chDevice: currDevice,
+                        chRoom: currRoom,
+                      ),
                     ),
                     // SizedBox(height: screenheight * 0.001),
                     Container(
@@ -161,6 +151,12 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: ListTile(
+                  onTap: () => {
+                    setState(() {
+                      currRoom = rooms[l].roomName;
+                      currDevice = rooms[l].d[i];
+                    })
+                  },
                   leading: getIcons(rooms[l].d[i]),
                   title: Text(rooms[l].d[i]),
                   trailing: Switch(
@@ -172,8 +168,9 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
                             value;
                       });
                     },
-                    activeTrackColor: Colors.lightGreenAccent,
-                    activeColor: Colors.green,
+                    activeTrackColor: Theme.of(context).backgroundColor,
+                    activeColor: Colors.lightGreenAccent,
+                    inactiveTrackColor: Theme.of(context).backgroundColor,
                   ),
                 ),
               ),
