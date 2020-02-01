@@ -38,7 +38,7 @@ List<Device> devices = [
   ),
   Device(
     imageUrl: 'assets/images/deviceAssets/bulb.png',
-    deviceName: 'A/C',
+    deviceName: 'AC',
     icon: Icon(Icons.ac_unit),
     inRoom: 'Living Room',
     state: 'Off',
@@ -70,8 +70,8 @@ List<Device> devices = [
   ),
   Device(
     imageUrl: 'assets/images/deviceAssets/fan.png',
-    deviceName: 'Refrigerator',
-    icon: Icon(FontAwesomeIcons.egg),
+    deviceName: 'Faucet',
+    icon: Icon(FontAwesome.shower),
     inRoom: 'Kitchen',
     state: 'Off',
     toggleSt: false,
@@ -132,7 +132,7 @@ List<Device> devices = [
   ),
   Device(
     imageUrl: 'assets/images/deviceAssets/ac.png',
-    deviceName: 'A/C',
+    deviceName: 'AC',
     icon: Icon(Icons.ac_unit),
     inRoom: 'Playroom',
     state: 'Off',

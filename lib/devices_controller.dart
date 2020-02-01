@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 import 'package:smarty/constants.dart';
 
@@ -17,7 +18,7 @@ Color bulb_color = Colors.white;
 
 class _DevicesControllerState extends State<DevicesController> {
   @override
-  int brightness = 60;
+  int brightness = 50;
   var isPlaying = false;
   bool icon = false;
 
@@ -202,7 +203,7 @@ class _DevicesControllerState extends State<DevicesController> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'MIN',
+              '0%',
               style: kLightDeviceTopBar.copyWith(
                 fontFamily: 'Montserrat',
                 fontSize: 15,
@@ -226,20 +227,33 @@ class _DevicesControllerState extends State<DevicesController> {
               ),
               child: Container(
                 width: 250,
-                child: Slider(
-                  value: brightness.toDouble(),
-                  max: 100,
-                  min: 0,
-                  onChanged: (double newValue) {
-                    setState(() {
-                      brightness = newValue.round();
-                    });
-                  },
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    Slider(
+                      value: brightness.toDouble(),
+                      max: 100,
+                      min: 0,
+                      onChanged: (double newValue) {
+                        setState(() {
+                          brightness = newValue.round();
+                        });
+                      },
+                    ),
+                    // Padding(
+                    //   padding: const EdgeInsets.symmetric(horizontal: 40.0),
+                    //   child: Row(
+                    //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //     children:
+                    //         List.generate(3, (index) => Text("${(index+1) * 25}%")),
+                    //   ),
+                    // ),
+                  ],
                 ),
               ),
             ),
             Text(
-              'MAX',
+              '100%',
               style: kLightDeviceTopBar.copyWith(
                 fontFamily: 'Montserrat',
                 fontSize: 15,
@@ -270,7 +284,7 @@ class _DevicesControllerState extends State<DevicesController> {
       BuildContext context, String roomName, String devName) {
     return Column(
       children: <Widget>[
-        tvSpeakerTopAppBar(roomName, 'Speaker', Icons.speaker),
+        topAppBar(roomName, 'Speaker', Icons.speaker),
         SizedBox(height: 5),
         Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
           Text(
@@ -391,7 +405,7 @@ class _DevicesControllerState extends State<DevicesController> {
   Column tvController(BuildContext context, String roomName, String devName) {
     return Column(
       children: <Widget>[
-        tvSpeakerTopAppBar(roomName, 'TV', Icons.tv),
+        topAppBar(roomName, 'TV', Icons.tv),
         SizedBox(height: 5),
         Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
           Text(
@@ -536,8 +550,7 @@ class _DevicesControllerState extends State<DevicesController> {
     );
   }
 
-  Container tvSpeakerTopAppBar(
-      String roomName, String appliance, IconData icon) {
+  Container topAppBar(String roomName, String appliance, IconData icon) {
     return Container(
       padding: EdgeInsets.symmetric(
         horizontal: 15,
@@ -570,6 +583,93 @@ class _DevicesControllerState extends State<DevicesController> {
     );
   }
 
+  Column faucetController(
+      BuildContext context, String roomName, String devName) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        topAppBar(roomName, 'Faucet', FontAwesomeIcons.shower),
+        SizedBox(height: 5),
+        Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+          Text(
+            'OFF',
+            style: kLightDeviceBottomBar.copyWith(fontSize: 18),
+          ),
+          SizedBox(
+            width: 20,
+          ),
+          Container(
+            child: Transform.scale(
+              scale: 2,
+              child: Switch(
+                value: isSwitched,
+                onChanged: (value) {
+                  setState(() {
+                    isSwitched = value;
+                  });
+                },
+                activeTrackColor: Theme.of(context).backgroundColor,
+                activeColor: Colors.lightGreenAccent,
+                inactiveTrackColor: Theme.of(context).backgroundColor,
+              ),
+            ),
+          ),
+          SizedBox(
+            width: 20,
+          ),
+          Text(
+            'ON',
+            style: kLightDeviceBottomBar.copyWith(fontSize: 18),
+          ),
+        ]),
+        SizedBox(
+          height: 20,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+            Text(
+              'Water Dispensed',
+              style: kLightDeviceBottomBar,
+            ),
+            Text(
+              '8 Oz',
+              style: kLightDeviceBottomBar,
+            ),
+          ],
+        ),
+        Container(
+          margin: EdgeInsets.all(20),
+          child: LinearPercentIndicator(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            leading: Text(
+              '0%',
+              style: kLightDeviceTopBar.copyWith(
+                fontFamily: 'Montserrat',
+                fontSize: 15,
+                fontWeight: FontWeight.w600,
+                color: Colors.white.withOpacity(0.7),
+              ),
+            ),
+            trailing: Text(
+              '100%',
+              style: kLightDeviceTopBar.copyWith(
+                fontFamily: 'Montserrat',
+                fontSize: 15,
+                fontWeight: FontWeight.w600,
+                color: Colors.white.withOpacity(0.7),
+              ),
+            ),
+            lineHeight: 14.0,
+            percent: 0.7,
+            backgroundColor: Theme.of(context).backgroundColor,
+            progressColor: Theme.of(context).accentColor,
+          ),
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     // bool isSwitched = widget.isDisabled;
@@ -578,12 +678,14 @@ class _DevicesControllerState extends State<DevicesController> {
 
     if (widget.chDevice == 'LAMP') {
       showDevice = lightController(context, widget.chRoom, widget.chDevice);
-    } else if (widget.chDevice == 'A/C') {
+    } else if (widget.chDevice == 'AC') {
       showDevice = acController();
     } else if (widget.chDevice == 'Speaker') {
       showDevice = speakerController(context, widget.chRoom, widget.chDevice);
     } else if (widget.chDevice == 'TV') {
       showDevice = tvController(context, widget.chRoom, widget.chDevice);
+    } else if (widget.chDevice == 'Faucet') {
+      showDevice = faucetController(context, widget.chRoom, widget.chDevice);
     }
     return showDevice;
   }
