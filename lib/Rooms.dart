@@ -41,6 +41,7 @@ String currDevice = 'Lamp';
 String currRoom = 'Living Room';
 String initrmName = tabList[0].text;
 String rmName = tabList[0].text;
+bool isAbsorbed = false;
 
 class _MyOtherRoomState extends State<MyOtherRoom> {
   @override
@@ -87,16 +88,13 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
                 Column(
                   children: <Widget>[
                     SizedBox(height: screenheight * 0.02),
-                    Container(
-                      height: screenheight * 0.4,
-                      width: screenwidth,
-                      margin: EdgeInsets.only(left: 10, right: 10),
-                      // color: Colors.red,
-                      child: DevicesController(
-                        chDevice: currDevice,
-                        chRoom: currRoom,
-                      ),
-                    ),
+                    AbsorbPointer(
+                        absorbing: isAbsorbed,
+                        child: (isAbsorbed == true)
+                            ? controllerContainer(
+                                screenheight, screenwidth, 0.2)
+                            : controllerContainer(
+                                screenheight, screenwidth, 1)),
                     // SizedBox(height: screenheight * 0.001),
                     Container(
                       padding: EdgeInsets.only(left: 10),
@@ -139,6 +137,26 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
     );
   }
 
+  Opacity controllerContainer(
+      double screenheight, double screenwidth, double opc) {
+    return Opacity(
+      opacity: opc,
+      child: Container(
+        height: screenheight * 0.4,
+        width: screenwidth,
+        margin: EdgeInsets.only(left: 10, right: 10),
+        // color: Colors.red,
+        child: DevicesController(
+          chDevice: currDevice,
+          chRoom:
+              (rmName != tabList[widget.initRoom].text) ? rmName : initrmName,
+          // isDisabled: isAbsorbed,
+          // toggleState: getDevState(rooms[rmName].roomName, rooms[l].d[i]).toggleSt,
+        ),
+      ),
+    );
+  }
+
   ListView getListTile(int l) {
     return ListView.builder(
         itemCount: rooms[l].d.length,
@@ -167,6 +185,9 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
                       setState(() {
                         getDevState(rooms[l].roomName, rooms[l].d[i]).toggleSt =
                             value;
+                        isAbsorbed =
+                            !getDevState(rooms[l].roomName, rooms[l].d[i])
+                                .toggleSt;
                       });
                     },
                     activeTrackColor: Theme.of(context).backgroundColor,

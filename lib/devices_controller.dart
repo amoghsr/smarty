@@ -6,16 +6,15 @@ class DevicesController extends StatefulWidget {
   @override
   String chRoom;
   String chDevice;
+  // bool isDisabled;
   DevicesController({this.chDevice, this.chRoom});
   _DevicesControllerState createState() => _DevicesControllerState();
 }
-
+bool isSwitched = false;
 Color bulb_color = Colors.white;
 
 class _DevicesControllerState extends State<DevicesController> {
   @override
-  bool isSwitched = true;
-
   int brightness = 60;
 
   SleekCircularSlider acController() {
@@ -41,7 +40,8 @@ class _DevicesControllerState extends State<DevicesController> {
         });
   }
 
-  Column lightController(BuildContext context) {
+  Column lightController(
+      BuildContext context, String roomName, String devName) {
     return Column(
       children: <Widget>[
         Container(
@@ -54,7 +54,7 @@ class _DevicesControllerState extends State<DevicesController> {
               Column(
                 children: <Widget>[
                   Text(
-                    'Living Room',
+                    roomName,
                     style: kLightDeviceTopBar.copyWith(
                       color: Colors.white.withOpacity(0.5),
                     ),
@@ -264,10 +264,13 @@ class _DevicesControllerState extends State<DevicesController> {
 
   @override
   Widget build(BuildContext context) {
-    Widget showDevice = lightController(context);
+    // bool isSwitched = widget.isDisabled;
+    Widget showDevice =
+        lightController(context, widget.chRoom, widget.chDevice);
 
     if (widget.chDevice == 'LAMP') {
-      showDevice = lightController(context);
+      showDevice =
+          lightController(context, widget.chRoom, widget.chDevice);
     } else if (widget.chDevice == 'A/C') {
       showDevice = acController();
     }
