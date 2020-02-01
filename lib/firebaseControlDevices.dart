@@ -14,7 +14,6 @@ class FirebaseControlDevices extends StatefulWidget {
 }
 
 class _FirebaseControlDevicesState extends State<FirebaseControlDevices> {
-  final databaseReference = FirebaseDatabase.instance.reference();
   bool light1, light2;
   DatabaseReference itemRef;
 
@@ -25,66 +24,37 @@ class _FirebaseControlDevicesState extends State<FirebaseControlDevices> {
     super.initState();
     final FirebaseDatabase database = FirebaseDatabase
         .instance; //Rather then just writing FirebaseDatabase(), get the instance.
-    itemRef = database.reference().child('Devices/Lights/Light1/State');
-//    itemRef.onChildChanged.listen(_onEntryChanged);
-//    getData(1).then((news) {
-//      light1 = news;
-//    });
-//    getData(2).then((news) {
-//      light2 = news;
-//    });
+    itemRef = database.reference();
     light2 = false;
-    // ignore: unnecessary_statements
     light1 = false;
   }
 
-  void createRecord(bool newvalue, int light) {
+  void createRecord(bool newvalue, String room, String device) {
     if (newvalue == false) {
-      databaseReference
-          .child("Devices/Lights/Light" + light.toString() + "/")
+      itemRef
+          .child("Rooms/" + room + "/" + device + "/")
           .update({'State': "off"});
     } else {
-      databaseReference
-          .child("Devices/Lights/Light" + light.toString() + "/")
+      itemRef
+          .child("Rooms/" + room + "/" + device + "/")
           .update({'State': "on"});
     }
   }
-//
-//  _onEntryChanged(Event event) {
-//    setState(() {
-//      if (event.snapshot.value == "on") {
-//        light2 = true;
-//      } else {
-//        light2 = false;
-//      }
-//    });
-//  }
 
-//  Future<String> getString(int light) async {
-//    await databaseReference.once().then((DataSnapshot snapshot) {
-//      Future<String> x = snapshot.value['Devices']['Lights']
-//          ['Light' + light.toString()]['State'];
-//      return x;
-//    });
-//  }
-//
-//  Future<bool> getData(int light) async {
-//    String x;
-//    await getString(light).then((news) {
-//      x = news;
-//    });
-//    bool w;
-//    print(x);
-//    if (x == "on") {
-//      w = true;
-//    } else {
-//      w = false;
-//    }
-//    return w;
-//  }
+  Stream getString(String room, String device) {
+    Stream x;
+    final FirebaseDatabase database = FirebaseDatabase
+        .instance; //Rather then just writing FirebaseDatabase(), get the instance.
+
+    x = database
+        .reference()
+        .child("Rooms/" + room + "/" + device + "/")
+        .onValue;
+    return x;
+  }
+
   bool convert(String x) {
     bool w;
-    print(x);
     if (x == "on") {
       w = true;
     } else {
@@ -126,21 +96,22 @@ class _FirebaseControlDevicesState extends State<FirebaseControlDevices> {
               StreamBuilder(
                 stream: itemRef.onValue,
                 builder: (context, snap) {
-                  print(snap.data.snapshot.value);
-                  if (snap.hasData &&
-                      !snap.hasError &&
-                      snap.data.snapshot.value != null) {
-                    return Switch(
-                      value: convert(snap.data.snapshot.value),
-                      onChanged: (bool newValue) {
-                        createRecord(newValue, 1);
-                        setState(() {
-                          light2 = newValue;
-                        });
-                      },
-                    );
-                  } else
-                    return Text("No data");
+                  Map<String, dynamic> values =
+                      new Map<String, dynamic>.from(snap.data.snapshot.value);
+                  values.forEach((key, value) {
+                    value.forEach((key1, value1) {
+                      print(key1);
+                    });
+                  });
+                  return Switch(
+                    value: convert(values["State"]),
+                    onChanged: (bool newValue) {
+                      createRecord(newValue, "LivingRoom", "Light1");
+                      setState(() {
+                        light2 = newValue;
+                      });
+                    },
+                  );
                 },
               )
             ],
