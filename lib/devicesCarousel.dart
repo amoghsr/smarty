@@ -146,7 +146,7 @@ class DeviceCarousel extends StatelessWidget {
                                       style: TextStyle(
                                         fontSize: 15,
                                         fontWeight: FontWeight.w500,
-                                        fontFamily: 'Poppins',
+                                        fontFamily: 'Montserrat',
                                       ),
                                     )
                                   ],
