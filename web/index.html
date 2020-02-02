@@ -5,6 +5,26 @@
   <title>smarty</title>
 </head>
 <body>
+  <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-auth.js"></script>
+  <!-- ADD THIS BEFORE YOUR main.dart.js SCRIPT -->
+  <script>
+    // TODO: Replace the following with your app's Firebase project configuration.
+    // See: https://support.google.com/firebase/answer/7015592
+    var firebaseConfig = {
+      apiKey: "AIzaSyBRWzbwo2PpLxzh8y-zfg8x3DIF_roK9Cs",
+      authDomain: "smarty-242c8.firebaseapp.com",
+      databaseURL: "https://smarty-242c8.firebaseio.com",
+      projectId: "smarty-242c8",
+      storageBucket: "smarty-242c8.appspot.com",
+      messagingSenderId: "211041701647",
+      appId: "1:211041701647:web:5ac6ba6c0384058fdff87a",
+      measurementId: "G-CKXX0D73JG"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+  </script>
+  <!-- END OF FIREBASE INIT CODE -->
   <script src="main.dart.js" type="application/javascript"></script>
 </body>
 </html>

@@ -74,7 +74,7 @@ class RoutineCarousel extends StatelessWidget {
                 margin: EdgeInsets.all(8.0),
                 width: 160.0,
                 decoration: BoxDecoration(
-                  color: Theme.of(context).backgroundColor,
+                  color: Color(0xFF343434),
                   borderRadius: BorderRadius.circular(10.0),
                 ),
                 child: Stack(

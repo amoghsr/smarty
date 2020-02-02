@@ -90,10 +90,10 @@ class _LoginPageState extends State<LoginPage> {
                           if (form.validate()) {
                             try {
                               FirebaseUser result =
-                                  await Provider.of<AuthService>(context,
-                                          listen: false)
-                                      .loginUser(
-                                          email: _email, password: _password);
+                              await Provider.of<AuthService>(context,
+                                  listen: false)
+                                  .loginUser(
+                                  email: _email, password: _password);
                               print(result);
                             } on AuthException catch (error) {
                               // handle the firebase specific error
