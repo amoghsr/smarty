@@ -21,28 +21,108 @@ class _DevicesControllerState extends State<DevicesController> {
   int brightness = 50;
   var isPlaying = false;
   bool icon = false;
+  int water_amount = 8;
 
-  SleekCircularSlider acController() {
-    return SleekCircularSlider(
-        initialValue: 24,
-        min: 16,
-        max: 26,
-        appearance: CircularSliderAppearance(
-            customColors: CustomSliderColors(
-              trackColor: Colors.grey,
-              progressBarColor: Colors.lightGreenAccent,
-            ),
-            customWidths: CustomSliderWidths(),
-            infoProperties: InfoProperties(
-              mainLabelStyle: TextStyle(color: Colors.white, fontSize: 60),
-              modifier: (value) {
-                final roundedValue = (value).ceil().toInt().toString();
-                return '$roundedValue°C';
-              },
-            )),
-        onChange: (double value) {
-          print(value);
-        });
+  Expanded acController(BuildContext context, String roomName, String devName) {
+    return Expanded(
+      child: Column(
+        children: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Column(
+                children: <Widget>[
+                  Text(
+                    roomName,
+                    style: kLightDeviceTopBar.copyWith(
+                      color: Colors.white.withOpacity(0.5),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 8,
+                  ),
+                  Text(
+                    'AC',
+                    style: kLightDeviceBottomBar,
+                  ),
+                ],
+              ),
+              Row(
+                children: <Widget>[
+                  Column(
+                    children: <Widget>[
+                      Text(
+                        'Temperature',
+                        style: kLightDeviceTopBar.copyWith(
+                          color: Colors.white.withOpacity(0.5),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 8,
+                      ),
+                      Text(
+                        '24°C',
+                        style: kLightDeviceBottomBar,
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    width: 25,
+                  ),
+                  Column(
+                    children: <Widget>[
+                      Text(
+                        'Humidity',
+                        style: kLightDeviceTopBar.copyWith(
+                          color: Colors.white.withOpacity(0.5),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 8,
+                      ),
+                      Text(
+                        '50%',
+                        style: kLightDeviceBottomBar,
+                      ),
+                    ],
+                  )
+                ],
+              )
+            ],
+          ),
+          SizedBox(height: 20),
+          Expanded(
+            child: SleekCircularSlider(
+                initialValue: 24,
+                min: 16,
+                max: 26,
+                appearance: CircularSliderAppearance(
+                    size: 220,
+                    customColors: CustomSliderColors(
+                      trackColor: Colors.grey,
+                      progressBarColor: Colors.lightGreenAccent,
+                    ),
+                    customWidths: CustomSliderWidths(),
+                    infoProperties: InfoProperties(
+                      topLabelStyle: kLightDeviceTopBar.copyWith(
+                        color: Colors.white.withOpacity(0.5),
+                        fontSize: 16,
+                      ),
+                      topLabelText: 'Set Temp.',
+                      mainLabelStyle:
+                          TextStyle(color: Colors.white, fontSize: 40),
+                      modifier: (value) {
+                        final roundedValue = (value).ceil().toInt().toString();
+                        return '$roundedValue°C';
+                      },
+                    )),
+                onChange: (double value) {
+                  print(value);
+                }),
+          ),
+        ],
+      ),
+    );
   }
 
   Column lightController(
@@ -625,17 +705,36 @@ class _DevicesControllerState extends State<DevicesController> {
         SizedBox(
           height: 20,
         ),
+        Text(
+          'Water Dispensed',
+          style: kLightDeviceBottomBar,
+        ),
+        SizedBox(
+          height: 10,
+        ),
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'Water Dispensed',
-              style: kLightDeviceBottomBar,
+            InkWell(
+                onTap: () => setState(() {
+                      if (water_amount > 1) water_amount = water_amount - 1;
+                    }),
+                child: Icon(Icons.remove_circle_outline, size: 45)),
+            SizedBox(
+              width: 15,
             ),
             Text(
-              '8 Oz',
+              '$water_amount Oz',
               style: kLightDeviceBottomBar,
             ),
+            SizedBox(
+              width: 15,
+            ),
+            InkWell(
+                onTap: () => setState(() {
+                      if (water_amount < 20) water_amount = water_amount + 1;
+                    }),
+                child: Icon(Icons.add_circle_outline, size: 45)),
           ],
         ),
         Container(
@@ -679,7 +778,7 @@ class _DevicesControllerState extends State<DevicesController> {
     if (widget.chDevice == 'LAMP') {
       showDevice = lightController(context, widget.chRoom, widget.chDevice);
     } else if (widget.chDevice == 'AC') {
-      showDevice = acController();
+      showDevice = acController(context, widget.chRoom, widget.chDevice);
     } else if (widget.chDevice == 'Speaker') {
       showDevice = speakerController(context, widget.chRoom, widget.chDevice);
     } else if (widget.chDevice == 'TV') {
