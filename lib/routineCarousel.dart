@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'routines.dart';
 import 'routineModel.dart';
 
 class RoutineCarousel extends StatelessWidget {
@@ -20,9 +20,14 @@ class RoutineCarousel extends StatelessWidget {
                 ),
               ),
               GestureDetector(
-                onTap: () => print('Edit'),
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => RoutineScreen(),
+                  ),
+                ),
                 child: Text(
-                  'Edit',
+                  'See All Routines',
                   style: TextStyle(
                     fontSize: 12.0,
                     color: Theme.of(context).accentColor,
@@ -44,7 +49,7 @@ class RoutineCarousel extends StatelessWidget {
               Opacity(
                 opacity: 0.5,
                 child: Text(
-                  'Operate multiple devices on single tap.',
+                  'Tap to control multiple devices at once.',
                   style: TextStyle(
                     fontSize: 11,
                     fontWeight: FontWeight.w400,
@@ -88,7 +93,7 @@ class RoutineCarousel extends StatelessWidget {
                               children: <Widget>[
                                 routine.icon,
                                 Text(
-                                  routine.title,
+                                  routine.routineName,
                                   style: TextStyle(
                                     fontFamily: 'Poppins',
                                     fontWeight: FontWeight.w500,
