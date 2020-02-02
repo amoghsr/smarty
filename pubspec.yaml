@@ -24,7 +24,7 @@ dependencies:
   flutter:
     sdk: flutter
   firebase_core: ^0.4.0+9
-  firebase_auth: ^0.14.0+5
+  firebase_auth: ^0.15.2
   firebase_database: ^3.1.1
   provider: ^4.0.2
   sleek_circular_slider : ^1.0.7

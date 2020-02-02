@@ -3,11 +3,13 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Routine {
   Icon icon;
-  String title;
+  String routineName;
+  String routineDesc;
 
   Routine({
     this.icon,
-    this.title,
+    this.routineName,
+    this.routineDesc
   });
 }
 
@@ -17,20 +19,23 @@ List<Routine> routines = [
       FontAwesomeIcons.walking,
       color: Color(0xFFf8931f),
     ),
-    title: 'I\'m Leaving',
+    routineName: 'I\'m Leaving',
+    routineDesc: 'On Tap',
   ),
   Routine(
     icon: Icon(
       FontAwesomeIcons.film,
       color: Color(0xFFf8931f),
     ),
-    title: 'Movie Mode',
+    routineName: 'Movie Mode',
+    routineDesc: 'On Tap',
   ),
   Routine(
     icon: Icon(
       FontAwesomeIcons.solidMoon,
       color: Color(0xFFf8931f),
     ),
-    title: 'Night Time',
+    routineName: 'Night Time',
+    routineDesc: 'From 9:00 PM to 6:00 AM',
   ),
 ];

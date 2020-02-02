@@ -137,6 +137,7 @@ class _DevicesControllerState extends State<DevicesController> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
                     roomName,
