@@ -235,8 +235,7 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
                           new Map<String, dynamic>.from(
                               snap.data.snapshot.value);
                       return Switch(
-                        value: getDevState(rooms[l].roomName, rooms[l].d[i])
-                            .toggleSt,
+                        value: convert(values["State"]),
                         onChanged: (value) {
                           stateChange(value, rooms[l].roomName, rooms[l].d[i]);
                           setState(() {
