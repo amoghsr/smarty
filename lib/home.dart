@@ -36,24 +36,25 @@ class _HomeState extends State<Home> {
               semanticLabel: 'Notifcations',
             ),
             onPressed: () {
-              // showDialog(
-              //   context: context,
-              //   builder: (BuildContext context) => CustomDialog(
-              //     image: Image.asset("assets/images/fire.png"),
-              //     title: "FIRE DETECTED!",
-              //     description: "Sprinklers have been activated.",
-              //     col: Color(0xffE26069),
-              //     buttonText: "Okay",
-              //   ),
-              // );
-
-              // AlertNotification not = AlertNotification();
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => AlertNotification(),
+              showDialog(
+                context: context,
+                builder: (BuildContext context) => CustomDialog(
+                  image: Image.asset("assets/images/fire.png"),
+                  title: "FIRE DETECTED!",
+                  description: "Sprinklers have been activated.",
+                  col: Color(0xffE26069),
+                  buttonText: "Okay",
                 ),
               );
+
+              // AlertNotification not = AlertNotification();
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(
+              //     builder: (context) => AlertNotification(),
+              //   ),
+              // );
+              
             },
           ),
         ],

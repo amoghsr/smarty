@@ -1,60 +1,38 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:smarty/alertBox.dart';
 
+void main() {
+  runApp(
+    new MaterialApp(home: new AlertNotification()),
+  );
+}
+
 class AlertNotification extends StatefulWidget {
   @override
-  _AlertNotificationState createState() => _AlertNotificationState();
+  _AlertNotificationState createState() => new _AlertNotificationState();
 }
 
 class _AlertNotificationState extends State<AlertNotification> {
-  @override
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
 
-  void initState() {
-    FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-        new FlutterLocalNotificationsPlugin();
+  @override
+  initState() {
+    super.initState();
+    // initialise the plugin. app_icon needs to be a added as a drawable resource to the Android head project
+    // If you have skipped STEP 3 then change app_icon to @mipmap/ic_launcher
     var initializationSettingsAndroid =
-        new AndroidInitializationSettings('appicon.jpg');
-    var initializationSettingsIOS = IOSInitializationSettings();
-    var initializationSettings = InitializationSettings(
+        new AndroidInitializationSettings('app_icon');
+    var initializationSettingsIOS = new IOSInitializationSettings();
+    var initializationSettings = new InitializationSettings(
         initializationSettingsAndroid, initializationSettingsIOS);
-
     flutterLocalNotificationsPlugin = new FlutterLocalNotificationsPlugin();
-
-    flutterLocalNotificationsPlugin.initialize(initializationSettings,
-        onSelectNotification: onSelectNotification);
+    // flutterLocalNotificationsPlugin.initialize(initializationSettings,
+    //     onSelectNotification: onSelectNotification);
   }
 
-  // Future onSelectNotification(
-  //     String img, String title, String desc, Color color) async {
-  //   showDialog(
-  //       context: context,
-  //       builder: (_) {
-  //         return CustomDialog(
-  //           image: Image.asset(img),
-  //           title: title,
-  //           description: desc,
-  //           buttonText: "Okay",
-  //           col: color,
-  //         );
-  //       });
-  // }
-
-  Future onSelectNotification(String payload) {
-    debugPrint("payload : $payload");
-    showDialog(
-      context: context,
-      builder: (_) => new AlertDialog(
-        title: new Text('Notification'),
-        content: new Text('$payload'),
-      ),
-    );
-  }
-
-  // Widget build(BuildContext context) {
-  //   return showNotification();
-  // }
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: new AppBar(
@@ -62,7 +40,7 @@ class _AlertNotificationState extends State<AlertNotification> {
       ),
       body: new Center(
         child: new RaisedButton(
-          onPressed: showNotification,
+          onPressed: _showNotificationWithDefaultSound,
           child: new Text(
             'Demo',
             style: Theme.of(context).textTheme.headline,
@@ -72,14 +50,17 @@ class _AlertNotificationState extends State<AlertNotification> {
     );
   }
 
-  showNotification() async {
-    var android = new AndroidNotificationDetails(
-        'channel id', 'channel NAME', 'CHANNEL DESCRIPTION',
-        priority: Priority.High, importance: Importance.Max);
-    var iOS = new IOSNotificationDetails();
-    var platform = new NotificationDetails(android, iOS);
+  Future _showNotificationWithDefaultSound() async {
+    var androidPlatformChannelSpecifics = new AndroidNotificationDetails('Smarty', 'Kaizen Systems', 'Stage 2', importance: Importance.Max, priority: Priority.High);
+    var iOSPlatformChannelSpecifics = new IOSNotificationDetails();
+    var platformChannelSpecifics = new NotificationDetails(
+        androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
     await flutterLocalNotificationsPlugin.show(
-        0, 'New Video is out', 'Flutter Local Notification', platform,
-        payload: 'Nitish Kumar Singh is part time Youtuber');
+      0,
+      'FIRE DETECTED!',
+      'Sprinklers have been activated.',
+      platformChannelSpecifics,
+      // payload: 'Default_Sound',
+    );
   }
 }
