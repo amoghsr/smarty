@@ -3,7 +3,7 @@ import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 import 'package:smarty/devicesModel.dart';
 import 'package:smarty/roomModel.dart';
 import 'constants.dart';
-import 'package:smarty/devices.dart';
+import 'package:smarty/devices_controller.dart';
 
 List<Tab> tabList = [
   Tab(text: rooms[0].roomName, icon: rooms[0].icon),
@@ -34,30 +34,33 @@ class MyOtherRoom extends StatefulWidget {
   _MyOtherRoomState createState() => _MyOtherRoomState();
 }
 
-String rmName = tabList[0].text;
-String appBarrmName = tabList[0].text;
+// String appBarrmName = tabList[0].text;
 
 Color bulb_color = Colors.white;
-// DevicesController currDevice = DevicesController(chDevice: 'LAMP');
-String currDevice = 'Lamp';
-String currRoom = 'Living Room';
+
+String currRoom = tabList[0].text;
+String currDevice = rooms[0].d[0];
+String initrmName = tabList[0].text;
+String rmName = tabList[0].text;
+bool isAbsorbed = false;
+
 class _MyOtherRoomState extends State<MyOtherRoom> {
   @override
   bool isSwitched = true;
   int brightness = 60;
 
-  Widget build(BuildContext context) {
-    if (widget.initRoom != null) {
-      rmName = tabList[widget.initRoom].text;
-    }
+  void initState() {
+    initrmName = tabList[widget.initRoom].text;
+    rmName = tabList[widget.initRoom].text;
+  }
 
+  Widget build(BuildContext context) {
     double screenwidth = MediaQuery.of(context).size.width;
     double screenheight = MediaQuery.of(context).size.height;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          appBarrmName,
+          (rmName != tabList[widget.initRoom].text) ? rmName : initrmName,
           style: kAppBarTextStyle,
         ),
       ),
@@ -79,23 +82,20 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
                   tabs: tabList,
                   onTap: (value) {
                     setState(() {
-                      appBarrmName = tabList[value].text;
+                      rmName = tabList[value].text;
                     });
                   },
                 ),
                 Column(
                   children: <Widget>[
                     SizedBox(height: screenheight * 0.02),
-                    Container(
-                      height: screenheight * 0.4,
-                      width: screenwidth,
-                      margin: EdgeInsets.only(left: 10, right: 10),
-                      // color: Colors.red,
-                      child: DevicesController(
-                        chDevice: currDevice,
-                        chRoom: currRoom,
-                      ),
-                    ),
+                    AbsorbPointer(
+                        absorbing: isAbsorbed,
+                        child: (isAbsorbed == true)
+                            ? controllerContainer(
+                                screenheight, screenwidth, 0.2)
+                            : controllerContainer(
+                                screenheight, screenwidth, 1)),
                     // SizedBox(height: screenheight * 0.001),
                     Container(
                       padding: EdgeInsets.only(left: 10),
@@ -138,6 +138,26 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
     );
   }
 
+  Opacity controllerContainer(
+      double screenheight, double screenwidth, double opc) {
+    return Opacity(
+      opacity: opc,
+      child: Container(
+        height: screenheight * 0.4,
+        width: screenwidth,
+        margin: EdgeInsets.only(left: 10, right: 10),
+        // color: Colors.red,
+        child: DevicesController(
+          chDevice: currDevice,
+          chRoom:
+              (rmName != tabList[widget.initRoom].text) ? rmName : initrmName,
+          // isDisabled: isAbsorbed,
+          // toggleState: getDevState(rooms[rmName].roomName, rooms[l].d[i]).toggleSt,
+        ),
+      ),
+    );
+  }
+
   ListView getListTile(int l) {
     return ListView.builder(
         itemCount: rooms[l].d.length,
@@ -151,11 +171,11 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: ListTile(
-                  onTap: () => {
+                  onTap: () {
                     setState(() {
                       currRoom = rooms[l].roomName;
                       currDevice = rooms[l].d[i];
-                    })
+                    });
                   },
                   leading: getIcons(rooms[l].d[i]),
                   title: Text(rooms[l].d[i]),
@@ -166,6 +186,9 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
                       setState(() {
                         getDevState(rooms[l].roomName, rooms[l].d[i]).toggleSt =
                             value;
+                        isAbsorbed =
+                            !getDevState(rooms[l].roomName, rooms[l].d[i])
+                                .toggleSt;
                       });
                     },
                     activeTrackColor: Theme.of(context).backgroundColor,
