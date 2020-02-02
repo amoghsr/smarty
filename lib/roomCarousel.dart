@@ -20,17 +20,17 @@ class RoomCarousel extends StatelessWidget {
                   fontWeight: FontWeight.w600,
                 ),
               ),
-              GestureDetector(
-                onTap: () => print('See All'),
-                child: Text(
-                  'See All',
-                  style: TextStyle(
-                    fontSize: 12.0,
-                    color: Theme.of(context).accentColor,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
+              // GestureDetector(
+              //   onTap: () => print('See All'),
+              //   child: Text(
+              //     'See All',
+              //     style: TextStyle(
+              //       fontSize: 12.0,
+              //       color: Theme.of(context).accentColor,
+              //       fontWeight: FontWeight.w600,
+              //     ),
+              //   ),
+              // ),
             ],
           ),
         ),

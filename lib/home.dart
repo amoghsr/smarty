@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:smarty/alert_notification.dart';
 import 'package:smarty/constants.dart';
 
 import 'package:smarty/devicesCarousel.dart';
@@ -9,10 +10,10 @@ import 'package:smarty/routineCarousel.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
+import 'alertBox.dart';
 import 'auth.dart';
 
 class Home extends StatefulWidget {
-
 //  final FirebaseUser currentUser;   //Ignore
 //  Home(this.currentUser);           //Ignore
   @override
@@ -34,7 +35,26 @@ class _HomeState extends State<Home> {
               Icons.notifications_none,
               semanticLabel: 'Notifcations',
             ),
-            onPressed: () {},
+            onPressed: () {
+              // showDialog(
+              //   context: context,
+              //   builder: (BuildContext context) => CustomDialog(
+              //     image: Image.asset("assets/images/fire.png"),
+              //     title: "FIRE DETECTED!",
+              //     description: "Sprinklers have been activated.",
+              //     col: Color(0xffE26069),
+              //     buttonText: "Okay",
+              //   ),
+              // );
+
+              // AlertNotification not = AlertNotification();
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AlertNotification(),
+                ),
+              );
+            },
           ),
         ],
       ),
@@ -86,7 +106,8 @@ class _HomeState extends State<Home> {
               Divider(),
               ListTile(
                 onTap: () async {
-                  await Provider.of<AuthService>(context, listen: false).logout();
+                  await Provider.of<AuthService>(context, listen: false)
+                      .logout();
                 },
                 leading: Icon(Icons.exit_to_app),
                 title: Text(

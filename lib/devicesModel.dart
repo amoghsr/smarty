@@ -142,8 +142,8 @@ List<Device> devices = [
   ),
   Device(
     imageUrl: 'assets/images/deviceAssets/ac.png',
-    icon: Icon(FontAwesomeIcons.video),
-    deviceName: 'Baby Monitor',
+    icon: Icon(Icons.speaker),
+    deviceName: 'Speaker',
     inRoom: 'Playroom',
     state: 'Off',
     toggleSt: false,
