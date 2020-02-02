@@ -16,12 +16,35 @@ class DevicesController extends StatefulWidget {
 bool isSwitched = false;
 Color bulb_color = Colors.white;
 
-class _DevicesControllerState extends State<DevicesController> {
+class _DevicesControllerState extends State<DevicesController>
+    with SingleTickerProviderStateMixin {
   @override
   int brightness = 50;
   var isPlaying = false;
   bool icon = false;
   int water_amount = 8;
+
+  Animation<double> myAnimation;
+  AnimationController controller;
+
+  void initState() {
+    super.initState();
+    controller = AnimationController(
+        duration: const Duration(milliseconds: 500), vsync: this);
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  _onpressed() {
+    setState(() {
+      isPlaying = !isPlaying;
+      isPlaying ? controller.forward() : controller.reverse();
+    });
+  }
 
   Expanded acController(BuildContext context, String roomName, String devName) {
     return Expanded(
@@ -320,15 +343,17 @@ class _DevicesControllerState extends State<DevicesController> {
                           brightness = newValue.round();
                         });
                       },
+                      divisions: 4,
+                      activeColor: Theme.of(context).accentColor,
                     ),
-                    // Padding(
-                    //   padding: const EdgeInsets.symmetric(horizontal: 40.0),
-                    //   child: Row(
-                    //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    //     children:
-                    //         List.generate(3, (index) => Text("${(index+1) * 25}%")),
-                    //   ),
-                    // ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 60.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: List.generate(
+                            3, (index) => Text("${(index + 1) * 25}%")),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -411,17 +436,29 @@ class _DevicesControllerState extends State<DevicesController> {
             ),
             InkWell(
               onTap: () {
-                setState(() => icon = !icon);
+                _onpressed();
               },
-              child: (icon == true)
-                  ? Icon(
-                      Icons.pause_circle_outline,
-                      size: 60.0,
-                    )
-                  : Icon(
-                      Icons.play_circle_outline,
-                      size: 60.0,
-                    ),
+              child: AnimatedIcon(
+                size: 50,
+                icon: AnimatedIcons.play_pause,
+                progress: controller,
+              ),
+
+              // child: (icon == true)
+              //     animate() => myAnimation.reverse();
+              //     ? AnimatedIcon(
+              //         Icons.pause_circle_outline,
+              //         icon: AnimatedIcon.play_pause,
+              //         progress: myAnimation,
+              //         size: 60.0,
+              //       )
+              //     : Icon(
+              //         AnimatedIcon(
+              //         Icons.pause_circle_outline,
+              //         icon: AnimatedIcon.play_pause,
+              //         progress: myAnimation,
+              //         size: 60.0,
+              //       ),
             ),
             SizedBox(
               width: 20,
