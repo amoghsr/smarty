@@ -206,7 +206,7 @@ class _DevicesControllerState extends State<DevicesController>
             min: 16,
             max: 26,
             appearance: CircularSliderAppearance(
-                size: 220,
+                size: 205,
                 customColors: CustomSliderColors(
                   trackColor: Colors.grey,
                   progressBarColor: Colors.lightGreenAccent,
@@ -382,22 +382,22 @@ class _DevicesControllerState extends State<DevicesController>
                   });
                 },
                 child: colorRow(Colors.red)),
-            GestureDetector(
-                onTap: () {
-                  setColor(Colors.orange, roomName, devName);
-                  setState(() {
-                    bulb_color = Colors.orange;
-                  });
-                },
-                child: colorRow(Colors.orange)),
-            GestureDetector(
-                onTap: () {
-                  setColor(Colors.yellow, roomName, devName);
-                  setState(() {
-                    bulb_color = Colors.yellow;
-                  });
-                },
-                child: colorRow(Colors.yellow)),
+//            GestureDetector(
+//                onTap: () {
+//                  setColor(Colors.orange, roomName, devName);
+//                  setState(() {
+//                    bulb_color = Colors.orange;
+//                  });
+//                },
+//                child: colorRow(Colors.orange)),
+//            GestureDetector(
+//                onTap: () {
+//                  setColor(Colors.yellow, roomName, devName);
+//                  setState(() {
+//                    bulb_color = Colors.yellow;
+//                  });
+//                },
+//                child: colorRow(Colors.yellow)),
           ],
         ),
         SizedBox(
