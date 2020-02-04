@@ -3,7 +3,7 @@
 Built using Flutter.
 
 ## About Smarty
-
+<img alt="Smarty App Logo" src="assets/App_Icon_Smarty.png" width="256" height="256" title="Smarty App Logo">
 Smarty is a cross-platform smart home control system built using the Flutter framework. The app is
 built for the group project for F29SO - Software Engineering.
 
