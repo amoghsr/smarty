@@ -1,6 +1,6 @@
 # Smarty
-<img src="assets/App_Icon_Smarty.png" width="256" height="256" title="Github Logo">
 
+<img alt="Smarty App Logo" src="assets/App_Icon_Smarty.png" width="256" height="256" title="Smarty App Logo">
 
 Built using Flutter.
 
