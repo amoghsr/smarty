@@ -1,5 +1,7 @@
 # Smarty
 
+![](assets/images/App_Icon_Smarty.png)
+
 Built using Flutter.
 
 ## About Smarty
