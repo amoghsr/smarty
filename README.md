@@ -1,6 +1,6 @@
 # Smarty
 
-![](assets/images/App_Icon_Smarty.png)
+![](assets/App_Icon_Smarty.png)
 
 Built using Flutter.
 
