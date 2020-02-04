@@ -17,6 +17,7 @@ environment:
   sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
+  flutter_native_splash: ^0.1.9
   flutter_icons: ^1.0.0+1
   font_awesome_flutter: ^8.5.0
   fl_chart: ^0.8.0
