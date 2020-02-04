@@ -12,6 +12,6 @@ built for the group project for F29SO - Software Engineering.
 The project is currently in it's 2nd stage of three in development.
 
 ## Resources
-- [Youtube is a great tool](https://youtube.com)
+- [Youtube (For all the UI designs)](https://youtube.com)
 - [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
 - [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
