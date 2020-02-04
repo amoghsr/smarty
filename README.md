@@ -1,6 +1,6 @@
 # Smarty
 
-![Smarty App Logo](assets/App_Icon_Smarty.png =150x150)
+![Smarty App Logo](assets/App_Icon_Smarty.png | width = 100)
 
 Built using Flutter.
 
