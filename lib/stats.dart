@@ -89,68 +89,64 @@ class _StatisticsState extends State<Statistics> {
                     Container(
                       child: Container(
                         height: screenheight * 0.07,
-                        child: Expanded(
-                          child: Row(
-                            children: <Widget>[
-                              SizedBox(width: screenwidth * 0.05),
-                              Container(
-                                child: Column(
-                                  children: <Widget>[
-                                    Row(
-                                      children: <Widget>[
-                                        Text(
-                                          'TODAY 3PM',
-                                          style: TextStyle(
-                                            fontFamily: 'Montserrat',
-                                            color:
-                                                Theme.of(context).accentColor,
-                                            fontSize: 12,
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    Row(
-                                      children: <Widget>[
-                                        Text(
-                                          '76 kWh',
-                                          style: TextStyle(
-                                            fontFamily: 'Montserrat',
-                                            color:
-                                                Theme.of(context).accentColor,
-                                            fontSize: 20,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(width: screenwidth * 0.28),
-                              Column(
+                        child: Row(
+                          children: <Widget>[
+                            SizedBox(width: screenwidth * 0.05),
+                            Container(
+                              child: Column(
                                 children: <Widget>[
-                                  Container(
-                                    color: Theme.of(context).accentColor,
-                                    width: screenwidth * 0.4,
-                                    height: screenheight * 0.05,
-                                    child: Center(
-                                      child: Text(
-                                        'VIEW GENERATION',
+                                  Row(
+                                    children: <Widget>[
+                                      Text(
+                                        'TODAY 3PM',
                                         style: TextStyle(
-                                            color: Theme.of(context)
-                                                .bottomAppBarColor,
-                                            fontFamily: 'Montserrat',
-                                            fontSize: 10,
-                                            fontWeight: FontWeight.w500),
+                                          fontFamily: 'Montserrat',
+                                          color: Theme.of(context).accentColor,
+                                          fontSize: 12,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Row(
+                                    children: <Widget>[
+                                      Text(
+                                        '76 kWh',
+                                        style: TextStyle(
+                                          fontFamily: 'Montserrat',
+                                          color: Theme.of(context).accentColor,
+                                          fontSize: 20,
+                                        ),
                                       ),
-                                    ),
+                                    ],
                                   ),
                                 ],
                               ),
-                            ],
-                          ),
+                            ),
+                            SizedBox(width: screenwidth * 0.28),
+                            Column(
+                              children: <Widget>[
+                                Container(
+                                  color: Theme.of(context).accentColor,
+                                  width: screenwidth * 0.4,
+                                  height: screenheight * 0.05,
+                                  child: Center(
+                                    child: Text(
+                                      'VIEW GENERATION',
+                                      style: TextStyle(
+                                          color: Theme.of(context)
+                                              .bottomAppBarColor,
+                                          fontFamily: 'Montserrat',
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
                       ),
                     ),
@@ -165,81 +161,13 @@ class _StatisticsState extends State<Statistics> {
                           color: Theme.of(context).backgroundColor,
                           borderRadius: BorderRadius.circular(10.0),
                         ),
-                        child: Expanded(
-                          child: Row(
-                            // alignment: Alignment.,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: <Widget>[
-                              Padding(
-                                padding: EdgeInsets.all(6.0),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: <Widget>[
-                                        Column(
-                                          children: <Widget>[
-                                            Icon(
-                                              Icons.power,
-                                              size: 35,
-                                            ),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          width: screenwidth * 0.03,
-                                        ),
-                                        Column(
-                                          children: <Widget>[
-                                            Text(
-                                              'CONSUMING',
-                                              style: TextStyle(
-                                                fontFamily: 'Montserrat',
-                                                fontWeight: FontWeight.w100,
-                                                color: Colors.white
-                                                    .withOpacity(0.7),
-                                                fontSize: 10,
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: screenheight * 0.007,
-                                            ),
-                                            Text(
-                                              '2 kWh',
-                                              style: TextStyle(
-                                                fontFamily: 'Poppins',
-                                                fontWeight: FontWeight.w700,
-                                                color: Theme.of(context)
-                                                    .accentColor,
-                                                fontSize: 24,
-                                              ),
-                                            ),
-                                            Text(
-                                              '3 DEVICES',
-                                              style: TextStyle(
-                                                fontFamily: 'Montserrat',
-                                                fontWeight: FontWeight.w400,
-                                                color: Colors.white,
-                                                fontSize: 10,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                height: screenheight * 0.09,
-                                width: screenwidth * 0.13,
-                                child: VerticalDivider(
-                                  color: Colors.black,
-                                  thickness: 0.8,
-                                ),
-                              ),
-                              Column(
+                        child: Row(
+                          // alignment: Alignment.,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Padding(
+                              padding: EdgeInsets.all(6.0),
+                              child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
                                   Row(
@@ -248,7 +176,7 @@ class _StatisticsState extends State<Statistics> {
                                       Column(
                                         children: <Widget>[
                                           Icon(
-                                            Icons.flash_on,
+                                            Icons.power,
                                             size: 35,
                                           ),
                                         ],
@@ -259,7 +187,7 @@ class _StatisticsState extends State<Statistics> {
                                       Column(
                                         children: <Widget>[
                                           Text(
-                                            'GENERATING',
+                                            'CONSUMING',
                                             style: TextStyle(
                                               fontFamily: 'Montserrat',
                                               fontWeight: FontWeight.w100,
@@ -269,10 +197,10 @@ class _StatisticsState extends State<Statistics> {
                                             ),
                                           ),
                                           SizedBox(
-                                            height: screenheight * 0.005,
+                                            height: screenheight * 0.007,
                                           ),
                                           Text(
-                                            '103 Wh',
+                                            '2 kWh',
                                             style: TextStyle(
                                               fontFamily: 'Poppins',
                                               fontWeight: FontWeight.w700,
@@ -282,7 +210,7 @@ class _StatisticsState extends State<Statistics> {
                                             ),
                                           ),
                                           Text(
-                                            '40% COVERAGE',
+                                            '3 DEVICES',
                                             style: TextStyle(
                                               fontFamily: 'Montserrat',
                                               fontWeight: FontWeight.w400,
@@ -296,8 +224,73 @@ class _StatisticsState extends State<Statistics> {
                                   ),
                                 ],
                               ),
-                            ],
-                          ),
+                            ),
+                            Container(
+                              height: screenheight * 0.09,
+                              width: screenwidth * 0.13,
+                              child: VerticalDivider(
+                                color: Colors.black,
+                                thickness: 0.8,
+                              ),
+                            ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    Column(
+                                      children: <Widget>[
+                                        Icon(
+                                          Icons.flash_on,
+                                          size: 35,
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      width: screenwidth * 0.03,
+                                    ),
+                                    Column(
+                                      children: <Widget>[
+                                        Text(
+                                          'GENERATING',
+                                          style: TextStyle(
+                                            fontFamily: 'Montserrat',
+                                            fontWeight: FontWeight.w100,
+                                            color:
+                                                Colors.white.withOpacity(0.7),
+                                            fontSize: 10,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: screenheight * 0.005,
+                                        ),
+                                        Text(
+                                          '103 Wh',
+                                          style: TextStyle(
+                                            fontFamily: 'Poppins',
+                                            fontWeight: FontWeight.w700,
+                                            color:
+                                                Theme.of(context).accentColor,
+                                            fontSize: 24,
+                                          ),
+                                        ),
+                                        Text(
+                                          '40% COVERAGE',
+                                          style: TextStyle(
+                                            fontFamily: 'Montserrat',
+                                            fontWeight: FontWeight.w400,
+                                            color: Colors.white,
+                                            fontSize: 10,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
                       ),
                     ),
@@ -317,80 +310,76 @@ class _StatisticsState extends State<Statistics> {
                                   color: Theme.of(context).backgroundColor,
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
-                                child: Expanded(
-                                  child: Row(
-                                    // alignment: Alignment.,
-                                    children: <Widget>[
-                                      Padding(
-                                        padding: EdgeInsets.all(6.0),
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: <Widget>[
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: <Widget>[
-                                                Column(
-                                                  children: <Widget>[
-                                                    Icon(
-                                                      Icons.battery_full,
-                                                      size: 35,
+                                child: Row(
+                                  // alignment: Alignment.,
+                                  children: <Widget>[
+                                    Padding(
+                                      padding: EdgeInsets.all(6.0),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: <Widget>[
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: <Widget>[
+                                              Column(
+                                                children: <Widget>[
+                                                  Icon(
+                                                    Icons.battery_full,
+                                                    size: 35,
+                                                  ),
+                                                ],
+                                              ),
+                                              SizedBox(
+                                                width: screenwidth * 0.03,
+                                              ),
+                                              Column(
+                                                children: <Widget>[
+                                                  Text(
+                                                    'BATTERY LEVEL',
+                                                    style: TextStyle(
+                                                      fontFamily: 'Montserrat',
+                                                      fontWeight:
+                                                          FontWeight.w100,
+                                                      color: Colors.white
+                                                          .withOpacity(0.7),
+                                                      fontSize: 10,
                                                     ),
-                                                  ],
-                                                ),
-                                                SizedBox(
-                                                  width: screenwidth * 0.03,
-                                                ),
-                                                Column(
-                                                  children: <Widget>[
-                                                    Text(
-                                                      'BATTERY LEVEL',
-                                                      style: TextStyle(
-                                                        fontFamily:
-                                                            'Montserrat',
-                                                        fontWeight:
-                                                            FontWeight.w100,
-                                                        color: Colors.white
-                                                            .withOpacity(0.7),
-                                                        fontSize: 10,
-                                                      ),
+                                                  ),
+                                                  SizedBox(
+                                                    height:
+                                                        screenheight * 0.007,
+                                                  ),
+                                                  Text(
+                                                    '90%',
+                                                    style: TextStyle(
+                                                      fontFamily: 'Poppins',
+                                                      fontWeight:
+                                                          FontWeight.w700,
+                                                      color: Theme.of(context)
+                                                          .accentColor,
+                                                      fontSize: 24,
                                                     ),
-                                                    SizedBox(
-                                                      height:
-                                                          screenheight * 0.007,
+                                                  ),
+                                                  Text(
+                                                    '-',
+                                                    style: TextStyle(
+                                                      fontFamily: 'Montserrat',
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      color: Colors.white,
+                                                      fontSize: 10,
                                                     ),
-                                                    Text(
-                                                      '90%',
-                                                      style: TextStyle(
-                                                        fontFamily: 'Poppins',
-                                                        fontWeight:
-                                                            FontWeight.w700,
-                                                        color: Theme.of(context)
-                                                            .accentColor,
-                                                        fontSize: 24,
-                                                      ),
-                                                    ),
-                                                    Text(
-                                                      '-',
-                                                      style: TextStyle(
-                                                        fontFamily:
-                                                            'Montserrat',
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        color: Colors.white,
-                                                        fontSize: 10,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ],
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),
