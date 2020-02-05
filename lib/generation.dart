@@ -24,7 +24,7 @@ class Generation extends StatelessWidget {
 
   int averageDayData(AsyncSnapshot<QuerySnapshot> snapshot, int month, String date) {
     Map<String, int> hours = hourlyData(snapshot, month, date);
-    int sum = 0;
+    double sum = 0;
     hours.forEach((s, i) => sum += i);
     double avg = sum/hours.length;
     return avg.round();
