@@ -1,19 +1,5 @@
 import 'package:flutter/material.dart';
 
-// Future showAlertBox(
-//     BuildContext context, String img, String title, String desc, Color color) {
-//   return showDialog(
-//     context: context,
-//     builder: (BuildContext context) => CustomDialog(
-//       image: Image.asset(img),
-//       title: title,
-//       description: desc,
-//       buttonText: "Okay",
-//       col: color,
-//     ),
-//   );
-// }
-
 class CustomDialog extends StatelessWidget {
   @override
   final String title, description, buttonText;

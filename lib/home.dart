@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:smarty/alert_notification.dart';
+import 'package:smarty/constants.dart';
 import 'package:smarty/constants.dart';
 
 import 'package:smarty/devicesCarousel.dart';
@@ -22,6 +23,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   @override
+  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -35,7 +37,7 @@ class _HomeState extends State<Home> {
               Icons.notifications_none,
               semanticLabel: 'Notifcations',
             ),
-            onPressed: () {
+            onPressed: () async {
               showDialog(
                 context: context,
                 builder: (BuildContext context) => CustomDialog(
@@ -47,14 +49,8 @@ class _HomeState extends State<Home> {
                 ),
               );
 
-              // AlertNotification not = AlertNotification();
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //     builder: (context) => AlertNotification(),
-              //   ),
-              // );
-              
+              await _showNotificationWithDefaultSound(
+                  'FIRE DETECTED!', 'Sprinklers have been activated.');
             },
           ),
         ],
@@ -157,6 +153,23 @@ class _HomeState extends State<Home> {
           ],
         ),
       ),
+    );
+  }
+
+  Future _showNotificationWithDefaultSound(String title, String desc) async {
+    flutterLocalNotificationsPlugin = new FlutterLocalNotificationsPlugin();
+    var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
+        'Smarty', 'Kaizen Systems', 'Stage 2',
+        importance: Importance.Max, priority: Priority.High);
+    var iOSPlatformChannelSpecifics = new IOSNotificationDetails();
+    var platformChannelSpecifics = new NotificationDetails(
+        androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
+    await flutterLocalNotificationsPlugin.show(
+      0,
+      title,
+      desc,
+      platformChannelSpecifics,
+      payload: 'Default_Sound',
     );
   }
 }
