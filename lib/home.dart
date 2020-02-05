@@ -13,6 +13,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
 import 'alertBox.dart';
 import 'auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 class Home extends StatefulWidget {
 //  final FirebaseUser currentUser;   //Ignore
@@ -22,6 +23,14 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  DatabaseReference itemRef;
+  void initState() {
+    super.initState();
+    final FirebaseDatabase database = FirebaseDatabase
+        .instance; //Rather then just writing FirebaseDatabase(), get the instance.
+    itemRef = database.reference();
+  }
+
   @override
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
   Widget build(BuildContext context) {
@@ -39,14 +48,50 @@ class _HomeState extends State<Home> {
             ),
             onPressed: () async {
               showDialog(
-                context: context,
-                builder: (BuildContext context) => CustomDialog(
-                  image: Image.asset("assets/images/fire.png"),
-                  title: "FIRE DETECTED!",
-                  description: "Sprinklers have been activated.",
-                  col: Color(0xffE26069),
-                  buttonText: "Okay",
-                ),
+                  context: context,
+                  builder: (BuildContext context) => StreamBuilder(
+                        stream: itemRef.child("Sensors/Fire/").onValue,
+                        builder: (context, snap) {
+                          Map<String, dynamic> values =
+                              new Map<String, dynamic>.from(
+                                  snap.data.snapshot.value);
+                          if (values["Danger"] == "high") {
+                            return CustomDialog(
+                              image: Image.asset("assets/images/fire.png"),
+                              title: "FIRE DETECTED!",
+                              description: "Sprinklers have been activated.",
+                              col: Color(0xffE26069),
+                              buttonText: "Okay",
+                            );
+                          } else {
+                            return CustomDialog(
+                              image:
+                                  Image.asset("assets/images/pngguru.com.png"),
+                              title: "NO NOTIFICATION",
+                              description: "What a boring day",
+                              col: Color(0xffE26069),
+                              buttonText: "Okay",
+                            );
+                          }
+                        },
+                      ));
+              StreamBuilder(
+                stream: itemRef.child("Sensors/Fire/").onValue,
+                builder: (context, snap) {
+                  Map<String, dynamic> values =
+                      new Map<String, dynamic>.from(snap.data.snapshot.value);
+                  if (values["Danger"] == "high") {
+                    return CustomDialog(
+                      image: Image.asset("assets/images/fire.png"),
+                      title: "FIRE DETECTED!",
+                      description: "Sprinklers have been activated.",
+                      col: Color(0xffE26069),
+                      buttonText: "Okay",
+                    );
+                  } else {
+                    return null;
+                  }
+                },
               );
 
               await _showNotificationWithDefaultSound(

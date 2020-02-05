@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 import 'package:smarty/constants.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 class DevicesController extends StatefulWidget {
   @override
@@ -23,6 +24,7 @@ class _DevicesControllerState extends State<DevicesController>
   var isPlaying = false;
   bool icon = false;
   int water_amount = 8;
+  DatabaseReference itemRef;
 
   Animation<double> myAnimation;
   AnimationController controller;
@@ -31,6 +33,75 @@ class _DevicesControllerState extends State<DevicesController>
     super.initState();
     controller = AnimationController(
         duration: const Duration(milliseconds: 500), vsync: this);
+    final FirebaseDatabase database = FirebaseDatabase
+        .instance; //Rather then just writing FirebaseDatabase(), get the instance.
+    itemRef = database.reference();
+  }
+
+  void stateChange(bool newvalue, String room, String device) {
+    if (newvalue == false) {
+      itemRef
+          .child("Rooms/" + room + "/devices/" + device + "/")
+          .update({'State': "off"});
+    } else {
+      itemRef
+          .child("Rooms/" + room + "/devices/" + device + "/")
+          .update({'State': "on"});
+    }
+  }
+
+  Stream getString(String room, String device) {
+    Stream x;
+    final FirebaseDatabase database = FirebaseDatabase
+        .instance; //Rather then just writing FirebaseDatabase(), get the instance.
+
+    x = database
+        .reference()
+        .child("Rooms/" + room + "/" + device + "/")
+        .onValue;
+    return x;
+  }
+
+  bool convert(String x) {
+    bool w;
+    if (x == "on") {
+      w = true;
+    } else {
+      w = false;
+    }
+    return w;
+  }
+
+  void setColor(Color newvalue, String room, String device) {
+    var hex = '#${newvalue.value.toRadixString(16)}';
+    itemRef
+        .child("Rooms/" + room + "/devices/" + device + "/")
+        .update({'Color': hex});
+  }
+
+  void setBrightness(int newvalue, String room, String device) {
+    itemRef
+        .child("Rooms/" + room + "/devices/" + device + "/")
+        .update({'Brightness': newvalue});
+  }
+
+  Color stringtocol(String code) {
+    Map<String, Color> map = {
+      "#ff4caf50": Colors.green,
+      "#ff03a9f4": Colors.lightBlue,
+      "#ff3f51b5": Colors.indigo,
+      "#ff9c27b0": Colors.purple,
+      "#fff44336": Colors.red,
+      "#ffff9800": Colors.orange,
+      "#ffff9800": Colors.yellow
+    };
+    return map[code];
+  }
+
+  void setTemp(int newvalue, String room, String device) {
+    itemRef
+        .child("Rooms/" + room + "/devices/" + device + "/")
+        .update({'Temperature': newvalue});
   }
 
   @override
@@ -46,105 +117,118 @@ class _DevicesControllerState extends State<DevicesController>
     });
   }
 
-  Expanded acController(BuildContext context, String roomName, String devName) {
-    return Expanded(
-      child: Column(
-        children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Column(
-                children: <Widget>[
-                  Text(
-                    roomName,
-                    style: kLightDeviceTopBar.copyWith(
-                      color: Colors.white.withOpacity(0.5),
-                    ),
+//TODO: ac
+  Column acController(BuildContext context, String roomName, String devName) {
+    return Column(
+      children: <Widget>[
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Column(
+              children: <Widget>[
+                Text(
+                  roomName,
+                  style: kLightDeviceTopBar.copyWith(
+                    color: Colors.white.withOpacity(0.5),
                   ),
-                  SizedBox(
-                    height: 8,
-                  ),
-                  Text(
-                    'AC',
-                    style: kLightDeviceBottomBar,
-                  ),
-                ],
-              ),
-              Row(
-                children: <Widget>[
-                  Column(
-                    children: <Widget>[
-                      Text(
-                        'Temperature',
-                        style: kLightDeviceTopBar.copyWith(
-                          color: Colors.white.withOpacity(0.5),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 8,
-                      ),
-                      Text(
-                        '24°C',
-                        style: kLightDeviceBottomBar,
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    width: 25,
-                  ),
-                  Column(
-                    children: <Widget>[
-                      Text(
-                        'Humidity',
-                        style: kLightDeviceTopBar.copyWith(
-                          color: Colors.white.withOpacity(0.5),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 8,
-                      ),
-                      Text(
-                        '50%',
-                        style: kLightDeviceBottomBar,
-                      ),
-                    ],
-                  )
-                ],
-              )
-            ],
-          ),
-          SizedBox(height: 20),
-          Expanded(
-            child: SleekCircularSlider(
-                initialValue: 24,
-                min: 16,
-                max: 26,
-                appearance: CircularSliderAppearance(
-                    size: 220,
-                    customColors: CustomSliderColors(
-                      trackColor: Colors.grey,
-                      progressBarColor: Colors.lightGreenAccent,
-                    ),
-                    customWidths: CustomSliderWidths(),
-                    infoProperties: InfoProperties(
-                      topLabelStyle: kLightDeviceTopBar.copyWith(
+                ),
+                SizedBox(
+                  height: 8,
+                ),
+                Text(
+                  'AC',
+                  style: kLightDeviceBottomBar,
+                ),
+              ],
+            ),
+            Row(
+              children: <Widget>[
+                Column(
+                  children: <Widget>[
+                    Text(
+                      'Temperature',
+                      style: kLightDeviceTopBar.copyWith(
                         color: Colors.white.withOpacity(0.5),
-                        fontSize: 16,
                       ),
-                      topLabelText: 'Set Temp.',
-                      mainLabelStyle:
-                          TextStyle(color: Colors.white, fontSize: 40),
-                      modifier: (value) {
-                        final roundedValue = (value).ceil().toInt().toString();
-                        return '$roundedValue°C';
+                    ),
+                    SizedBox(
+                      height: 8,
+                    ),
+                    StreamBuilder(
+                      stream: itemRef.child("Sensors/TempandHumid/").onValue,
+                      builder: (context, snap) {
+                        Map<String, dynamic> values =
+                            new Map<String, dynamic>.from(
+                                snap.data.snapshot.value);
+                        return Text(
+                          values["Temp"].toString(),
+                          style: kLightDeviceBottomBar,
+                        );
                       },
-                    )),
-                onChange: (double value) {
-                  print(value);
-                }),
-          ),
-        ],
-      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  width: 25,
+                ),
+                Column(
+                  children: <Widget>[
+                    Text(
+                      'Humidity',
+                      style: kLightDeviceTopBar.copyWith(
+                        color: Colors.white.withOpacity(0.5),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 8,
+                    ),
+                    StreamBuilder(
+                      stream: itemRef.child("Sensors/TempandHumid/").onValue,
+                      builder: (context, snap) {
+                        Map<String, dynamic> values =
+                            new Map<String, dynamic>.from(
+                                snap.data.snapshot.value);
+                        return Text(
+                          values["Humid"].toString() + "%",
+                          style: kLightDeviceBottomBar,
+                        );
+                      },
+                    ),
+                  ],
+                )
+              ],
+            )
+          ],
+        ),
+        SizedBox(height: 20),
+        SleekCircularSlider(
+            initialValue: 24,
+            min: 16,
+            max: 26,
+            appearance: CircularSliderAppearance(
+                size: 205,
+                customColors: CustomSliderColors(
+                  trackColor: Colors.grey,
+                  progressBarColor: Colors.lightGreenAccent,
+                ),
+                customWidths: CustomSliderWidths(),
+                infoProperties: InfoProperties(
+                  topLabelStyle: kLightDeviceTopBar.copyWith(
+                    color: Colors.white.withOpacity(0.5),
+                    fontSize: 16,
+                  ),
+                  topLabelText: 'Set Temp.',
+                  mainLabelStyle: TextStyle(color: Colors.white, fontSize: 40),
+                  modifier: (value) {
+                    final roundedValue = (value).ceil().toInt().toString();
+                    return '$roundedValue°C';
+                  },
+                )),
+            onChangeEnd: (double value) {
+              setTemp(value.ceil().toInt(), roomName, devName);
+              print(value);
+            }),
+      ],
     );
   }
 
@@ -160,7 +244,6 @@ class _DevicesControllerState extends State<DevicesController>
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
                     roomName,
@@ -178,7 +261,18 @@ class _DevicesControllerState extends State<DevicesController>
                 ],
               ),
               Container(
-                child: Icon(Icons.wb_incandescent, size: 48, color: bulb_color),
+                child: StreamBuilder(
+                  stream: itemRef
+                      .child("Rooms/" + roomName + "/devices/" + devName + "/")
+                      .onValue,
+                  builder: (context, snap) {
+                    Map<String, dynamic> values =
+                        new Map<String, dynamic>.from(snap.data.snapshot.value);
+                    bulb_color = stringtocol(values["Color"]);
+                    return Icon(Icons.wb_incandescent,
+                        size: 48, color: bulb_color);
+                  },
+                ),
               ),
             ],
           ),
@@ -196,16 +290,26 @@ class _DevicesControllerState extends State<DevicesController>
             Container(
               child: Transform.scale(
                 scale: 2,
-                child: Switch(
-                  value: isSwitched,
-                  onChanged: (value) {
-                    setState(() {
-                      isSwitched = value;
-                    });
+                child: StreamBuilder(
+                  stream: itemRef
+                      .child("Rooms/" + roomName + "/devices/" + devName + "/")
+                      .onValue,
+                  builder: (context, snap) {
+                    Map<String, dynamic> values =
+                        new Map<String, dynamic>.from(snap.data.snapshot.value);
+                    return Switch(
+                      value: convert(values["State"]),
+                      onChanged: (value) {
+                        stateChange(value, roomName, devName);
+                        setState(() {
+                          isSwitched = value;
+                        });
+                      },
+                      activeTrackColor: Theme.of(context).backgroundColor,
+                      activeColor: Colors.lightGreenAccent,
+                      inactiveTrackColor: Theme.of(context).backgroundColor,
+                    );
                   },
-                  activeTrackColor: Theme.of(context).backgroundColor,
-                  activeColor: Colors.lightGreenAccent,
-                  inactiveTrackColor: Theme.of(context).backgroundColor,
                 ),
               ),
             ),
@@ -236,8 +340,10 @@ class _DevicesControllerState extends State<DevicesController>
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
+            //TODO :ADD db connection
             GestureDetector(
                 onTap: () {
+                  setColor(Colors.green, roomName, devName);
                   setState(() {
                     bulb_color = Colors.green;
                   });
@@ -245,6 +351,7 @@ class _DevicesControllerState extends State<DevicesController>
                 child: colorRow(Colors.green)),
             GestureDetector(
               onTap: () {
+                setColor(Colors.lightBlue, roomName, devName);
                 setState(() {
                   bulb_color = Colors.lightBlue;
                 });
@@ -253,6 +360,7 @@ class _DevicesControllerState extends State<DevicesController>
             ),
             GestureDetector(
                 onTap: () {
+                  setColor(Colors.indigo, roomName, devName);
                   setState(() {
                     bulb_color = Colors.indigo;
                   });
@@ -260,6 +368,7 @@ class _DevicesControllerState extends State<DevicesController>
                 child: colorRow(Colors.indigo)),
             GestureDetector(
                 onTap: () {
+                  setColor(Colors.purple, roomName, devName);
                   setState(() {
                     bulb_color = Colors.purple;
                   });
@@ -267,25 +376,28 @@ class _DevicesControllerState extends State<DevicesController>
                 child: colorRow(Colors.purple)),
             GestureDetector(
                 onTap: () {
+                  setColor(Colors.red, roomName, devName);
                   setState(() {
                     bulb_color = Colors.red;
                   });
                 },
                 child: colorRow(Colors.red)),
-            GestureDetector(
-                onTap: () {
-                  setState(() {
-                    bulb_color = Colors.orange;
-                  });
-                },
-                child: colorRow(Colors.orange)),
-            GestureDetector(
-                onTap: () {
-                  setState(() {
-                    bulb_color = Colors.yellow;
-                  });
-                },
-                child: colorRow(Colors.yellow)),
+//            GestureDetector(
+//                onTap: () {
+//                  setColor(Colors.orange, roomName, devName);
+//                  setState(() {
+//                    bulb_color = Colors.orange;
+//                  });
+//                },
+//                child: colorRow(Colors.orange)),
+//            GestureDetector(
+//                onTap: () {
+//                  setColor(Colors.yellow, roomName, devName);
+//                  setState(() {
+//                    bulb_color = Colors.yellow;
+//                  });
+//                },
+//                child: colorRow(Colors.yellow)),
           ],
         ),
         SizedBox(
@@ -307,7 +419,7 @@ class _DevicesControllerState extends State<DevicesController>
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              '0%',
+              'MIN',
               style: kLightDeviceTopBar.copyWith(
                 fontFamily: 'Montserrat',
                 fontSize: 15,
@@ -331,35 +443,30 @@ class _DevicesControllerState extends State<DevicesController>
               ),
               child: Container(
                 width: 250,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: <Widget>[
-                    Slider(
-                      value: brightness.toDouble(),
+                child: StreamBuilder(
+                  stream: itemRef
+                      .child("Rooms/" + roomName + "/devices/" + devName + "/")
+                      .onValue,
+                  builder: (context, snap) {
+                    Map<String, dynamic> values =
+                        new Map<String, dynamic>.from(snap.data.snapshot.value);
+                    return Slider(
+                      value: values["Brightness"].toDouble(),
                       max: 100,
                       min: 0,
                       onChanged: (double newValue) {
+                        setBrightness(newValue.round(), roomName, devName);
                         setState(() {
                           brightness = newValue.round();
                         });
                       },
-                      divisions: 4,
-                      activeColor: Theme.of(context).accentColor,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 60.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: List.generate(
-                            3, (index) => Text("${(index + 1) * 25}%")),
-                      ),
-                    ),
-                  ],
+                    );
+                  },
                 ),
               ),
             ),
             Text(
-              '100%',
+              'MAX',
               style: kLightDeviceTopBar.copyWith(
                 fontFamily: 'Montserrat',
                 fontSize: 15,
@@ -403,16 +510,26 @@ class _DevicesControllerState extends State<DevicesController>
           Container(
             child: Transform.scale(
               scale: 2,
-              child: Switch(
-                value: isSwitched,
-                onChanged: (value) {
-                  setState(() {
-                    isSwitched = value;
-                  });
+              child: StreamBuilder(
+                stream: itemRef
+                    .child("Rooms/" + roomName + "/devices/" + devName + "/")
+                    .onValue,
+                builder: (context, snap) {
+                  Map<String, dynamic> values =
+                      new Map<String, dynamic>.from(snap.data.snapshot.value);
+                  return Switch(
+                    value: convert(values["State"]),
+                    onChanged: (value) {
+                      stateChange(value, roomName, devName);
+                      setState(() {
+                        isSwitched = value;
+                      });
+                    },
+                    activeTrackColor: Theme.of(context).backgroundColor,
+                    activeColor: Colors.lightGreenAccent,
+                    inactiveTrackColor: Theme.of(context).backgroundColor,
+                  );
                 },
-                activeTrackColor: Theme.of(context).backgroundColor,
-                activeColor: Colors.lightGreenAccent,
-                inactiveTrackColor: Theme.of(context).backgroundColor,
               ),
             ),
           ),
@@ -536,16 +653,26 @@ class _DevicesControllerState extends State<DevicesController>
           Container(
             child: Transform.scale(
               scale: 2,
-              child: Switch(
-                value: isSwitched,
-                onChanged: (value) {
-                  setState(() {
-                    isSwitched = value;
-                  });
+              child: StreamBuilder(
+                stream: itemRef
+                    .child("Rooms/" + roomName + "/devices/" + devName + "/")
+                    .onValue,
+                builder: (context, snap) {
+                  Map<String, dynamic> values =
+                      new Map<String, dynamic>.from(snap.data.snapshot.value);
+                  return Switch(
+                    value: convert(values["State"]),
+                    onChanged: (value) {
+                      stateChange(value, roomName, devName);
+                      setState(() {
+                        isSwitched = value;
+                      });
+                    },
+                    activeTrackColor: Theme.of(context).backgroundColor,
+                    activeColor: Colors.lightGreenAccent,
+                    inactiveTrackColor: Theme.of(context).backgroundColor,
+                  );
                 },
-                activeTrackColor: Theme.of(context).backgroundColor,
-                activeColor: Colors.lightGreenAccent,
-                inactiveTrackColor: Theme.of(context).backgroundColor,
               ),
             ),
           ),
@@ -719,16 +846,26 @@ class _DevicesControllerState extends State<DevicesController>
           Container(
             child: Transform.scale(
               scale: 2,
-              child: Switch(
-                value: isSwitched,
-                onChanged: (value) {
-                  setState(() {
-                    isSwitched = value;
-                  });
+              child: StreamBuilder(
+                stream: itemRef
+                    .child("Rooms/" + roomName + "/devices/" + devName + "/")
+                    .onValue,
+                builder: (context, snap) {
+                  Map<String, dynamic> values =
+                      new Map<String, dynamic>.from(snap.data.snapshot.value);
+                  return Switch(
+                    value: convert(values["State"]),
+                    onChanged: (value) {
+                      stateChange(value, roomName, devName);
+                      setState(() {
+                        isSwitched = value;
+                      });
+                    },
+                    activeTrackColor: Theme.of(context).backgroundColor,
+                    activeColor: Colors.lightGreenAccent,
+                    inactiveTrackColor: Theme.of(context).backgroundColor,
+                  );
                 },
-                activeTrackColor: Theme.of(context).backgroundColor,
-                activeColor: Colors.lightGreenAccent,
-                inactiveTrackColor: Theme.of(context).backgroundColor,
               ),
             ),
           ),
