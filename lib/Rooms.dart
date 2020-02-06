@@ -125,7 +125,7 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
                       rmName = tabList[value].text;
                       currRoom = tabList[value].text;
                       currDevice = rooms[value].d[0];
-                      ;
+                      
                     });
                   },
                 ),

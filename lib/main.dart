@@ -5,15 +5,17 @@ import 'package:smarty/auth.dart';
 import 'package:smarty/home.dart';
 import 'package:smarty/leaderboard.dart';
 import 'package:smarty/security.dart';
-import 'package:smarty/stats.dart';
 import 'package:smarty/login.dart';
 
+import 'Statistics.dart';
 import 'constants.dart';
 
 import 'package:provider/provider.dart';
 import 'auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
+
+import 'energyData.dart';
 
 void main() {
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((_) {

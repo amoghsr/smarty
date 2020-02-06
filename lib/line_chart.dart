@@ -1,5 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'statsgeneration.dart';
 
 class LineChartSample2 extends StatefulWidget {
   @override
@@ -45,10 +47,15 @@ class _LineChartSample2State extends State<LineChartSample2> {
                     child: Padding(
                       padding: const EdgeInsets.only(
                           right: 18.0, left: 12.0, top: 24, bottom: 12),
-                      child: LineChart(
+                      child: StreamBuilder(
+                        stream: Firestore.instance.collection('consumed_energy').snapshots(),
+                        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                          return LineChart(
                         showAvg
-                            ? avgData(widget.groupby)
-                            : mainData(widget.groupby),
+                            ? avgData(widget.groupby, snapshot)
+                            : mainData(widget.groupby, snapshot),
+                          );
+                        }
                       ),
                     ),
                   ),
@@ -80,7 +87,9 @@ class _LineChartSample2State extends State<LineChartSample2> {
     );
   }
 
-  LineChartData mainData(String groupby) {
+  LineChartData mainData(String groupby, AsyncSnapshot<QuerySnapshot> snapshot) {
+    Map<String, int> hours = Generation().hourlyData(snapshot, 0, '1');
+    List<int> hourData = hours.values.toList();
     return LineChartData(
       gridData: FlGridData(
         show: true,
@@ -240,16 +249,33 @@ class _LineChartSample2State extends State<LineChartSample2> {
       maxY: 6,
       lineBarsData: [
         LineChartBarData(
-          spots: const [
-            FlSpot(0, 3),
-            FlSpot(2.6, 2),
-            FlSpot(4.9, 5),
-            FlSpot(6.8, 3.1),
-            FlSpot(8, 4),
-            FlSpot(9.5, 3),
-            FlSpot(11, 4),
-            FlSpot(30, 4),
-            FlSpot(49, 0),  
+          spots: [
+            FlSpot(0, hourData[0]%5.toDouble()),
+            FlSpot(1, hourData[0]%5.toDouble()),
+            FlSpot(3, hourData[1]%5.toDouble()),
+            FlSpot(5, hourData[2]%5.toDouble()),
+            FlSpot(7, hourData[3]%5.toDouble()),
+            FlSpot(9, hourData[4]%5.toDouble()),
+            FlSpot(11, hourData[5]%5.toDouble()),
+            FlSpot(13, hourData[6]%5.toDouble()),
+            FlSpot(15, hourData[7]%5.toDouble()),
+            FlSpot(17, hourData[8]%5.toDouble()),  
+            FlSpot(19, hourData[9]%5.toDouble()), 
+            FlSpot(21, hourData[10]%5.toDouble()), 
+            FlSpot(23, hourData[11]%5.toDouble()), 
+            FlSpot(25, hourData[12]%5.toDouble()),
+            FlSpot(27, hourData[13]%5.toDouble()), 
+            FlSpot(29, hourData[14]%5.toDouble()), 
+            FlSpot(31, hourData[15]%5.toDouble()), 
+            FlSpot(33, hourData[16]%5.toDouble()), 
+            FlSpot(35, hourData[17]%5.toDouble()), 
+            FlSpot(37, hourData[18]%5.toDouble()), 
+            FlSpot(39, hourData[19]%5.toDouble()), 
+            FlSpot(41, hourData[20]%5.toDouble()),
+            FlSpot(43, hourData[21]%5.toDouble()), 
+            FlSpot(45, hourData[22]%5.toDouble()), 
+            FlSpot(47, hourData[23]%5.toDouble()), 
+            FlSpot(49, hourData[23]%5.toDouble()),  
           ],
           isCurved: true,
           colors: gradientColors,
@@ -268,7 +294,8 @@ class _LineChartSample2State extends State<LineChartSample2> {
     );
   }
 
-  LineChartData avgData(String groupby) {
+  
+  LineChartData avgData(String groupby, AsyncSnapshot<QuerySnapshot> snapshot) {
     return LineChartData(
       lineTouchData: const LineTouchData(enabled: false),
       gridData: FlGridData(
