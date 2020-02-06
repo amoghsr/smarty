@@ -40,7 +40,6 @@ class _HomeState extends State<Home> {
           'Home',
           style: kAppBarTextStyle,
         ),
-        //Comment
         actions: <Widget>[
           new IconButton(
             icon: Icon(
