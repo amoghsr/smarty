@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:smarty/alert_notification.dart';
+import 'package:smarty/constants.dart';
 import 'package:smarty/constants.dart';
 
 import 'package:smarty/devicesCarousel.dart';
@@ -12,6 +13,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
 import 'alertBox.dart';
 import 'auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 class Home extends StatefulWidget {
 //  final FirebaseUser currentUser;   //Ignore
@@ -21,7 +23,16 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  DatabaseReference itemRef;
+  void initState() {
+    super.initState();
+    final FirebaseDatabase database = FirebaseDatabase
+        .instance; //Rather then just writing FirebaseDatabase(), get the instance.
+    itemRef = database.reference();
+  }
+
   @override
+  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -35,26 +46,56 @@ class _HomeState extends State<Home> {
               Icons.notifications_none,
               semanticLabel: 'Notifcations',
             ),
-            onPressed: () {
+            onPressed: () async {
               showDialog(
-                context: context,
-                builder: (BuildContext context) => CustomDialog(
-                  image: Image.asset("assets/images/fire.png"),
-                  title: "FIRE DETECTED!",
-                  description: "Sprinklers have been activated.",
-                  col: Color(0xffE26069),
-                  buttonText: "Okay",
-                ),
+                  context: context,
+                  builder: (BuildContext context) => StreamBuilder(
+                        stream: itemRef.child("Sensors/Fire/").onValue,
+                        builder: (context, snap) {
+                          Map<String, dynamic> values =
+                              new Map<String, dynamic>.from(
+                                  snap.data.snapshot.value);
+                          if (values["Danger"] == "high") {
+                            return CustomDialog(
+                              image: Image.asset("assets/images/fire.png"),
+                              title: "FIRE DETECTED!",
+                              description: "Sprinklers have been activated.",
+                              col: Color(0xffE26069),
+                              buttonText: "Okay",
+                            );
+                          } else {
+                            return CustomDialog(
+                              image:
+                                  Image.asset("assets/images/pngguru.com.png"),
+                              title: "NO NOTIFICATION",
+                              description: "What a boring day",
+                              col: Color(0xffE26069),
+                              buttonText: "Okay",
+                            );
+                          }
+                        },
+                      ));
+              StreamBuilder(
+                stream: itemRef.child("Sensors/Fire/").onValue,
+                builder: (context, snap) {
+                  Map<String, dynamic> values =
+                      new Map<String, dynamic>.from(snap.data.snapshot.value);
+                  if (values["Danger"] == "high") {
+                    return CustomDialog(
+                      image: Image.asset("assets/images/fire.png"),
+                      title: "FIRE DETECTED!",
+                      description: "Sprinklers have been activated.",
+                      col: Color(0xffE26069),
+                      buttonText: "Okay",
+                    );
+                  } else {
+                    return null;
+                  }
+                },
               );
 
-              // AlertNotification not = AlertNotification();
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //     builder: (context) => AlertNotification(),
-              //   ),
-              // );
-              
+              await _showNotificationWithDefaultSound(
+                  'FIRE DETECTED!', 'Sprinklers have been activated.');
             },
           ),
         ],
@@ -157,6 +198,23 @@ class _HomeState extends State<Home> {
           ],
         ),
       ),
+    );
+  }
+
+  Future _showNotificationWithDefaultSound(String title, String desc) async {
+    flutterLocalNotificationsPlugin = new FlutterLocalNotificationsPlugin();
+    var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
+        'Smarty', 'Kaizen Systems', 'Stage 2',
+        importance: Importance.Max, priority: Priority.High);
+    var iOSPlatformChannelSpecifics = new IOSNotificationDetails();
+    var platformChannelSpecifics = new NotificationDetails(
+        androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
+    await flutterLocalNotificationsPlugin.show(
+      0,
+      title,
+      desc,
+      platformChannelSpecifics,
+      payload: 'Default_Sound',
     );
   }
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:firebase_database/firebase_database.dart';
 // Future showAlertBox(
 //     BuildContext context, String img, String title, String desc, Color color) {
 //   return showDialog(
@@ -87,7 +87,10 @@ class CustomDialog extends StatelessWidget {
                 alignment: Alignment.bottomCenter,
                 child: FlatButton(
                   onPressed: () {
-                    Navigator.of(context).pop(); // To close the dialog
+                    FirebaseDatabase.instance
+                        .reference()
+                        .child("Sensors/Fire")
+                        .update({'Danger': "low"}); // To close the dialog
                   },
                   child: Container(
                     height: 40,

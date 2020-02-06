@@ -4,6 +4,9 @@ import 'package:smarty/devicesModel.dart';
 import 'package:smarty/roomModel.dart';
 import 'constants.dart';
 import 'package:smarty/devices_controller.dart';
+import 'package:firebase_database/firebase_database.dart';
+
+import 'roomModel.dart';
 
 List<Tab> tabList = [
   Tab(text: rooms[0].roomName, icon: rooms[0].icon),
@@ -48,10 +51,47 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
   @override
   bool isSwitched = true;
   int brightness = 60;
-
+  DatabaseReference itemRef;
   void initState() {
     initrmName = tabList[widget.initRoom].text;
     rmName = tabList[widget.initRoom].text;
+    super.initState();
+    final FirebaseDatabase database = FirebaseDatabase
+        .instance; //Rather then just writing FirebaseDatabase(), get the instance.
+    itemRef = database.reference();
+  }
+
+  void stateChange(bool newvalue, String room, String device) {
+    if (newvalue == false) {
+      itemRef
+          .child("Rooms/" + room + "/devices/" + device + "/")
+          .update({'State': "off"});
+    } else {
+      itemRef
+          .child("Rooms/" + room + "/devices/" + device + "/")
+          .update({'State': "on"});
+    }
+  }
+
+  Stream getString(String room, String device) {
+    Stream x;
+    final FirebaseDatabase database = FirebaseDatabase
+        .instance; //Rather then just writing FirebaseDatabase(), get the instance.
+    x = database
+        .reference()
+        .child("Rooms/" + room + "/" + device + "/")
+        .onValue;
+    return x;
+  }
+
+  bool convert(String x) {
+    bool w;
+    if (x == "on") {
+      w = true;
+    } else {
+      w = false;
+    }
+    return w;
   }
 
   Widget build(BuildContext context) {
@@ -83,6 +123,9 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
                   onTap: (value) {
                     setState(() {
                       rmName = tabList[value].text;
+                      currRoom = tabList[value].text;
+                      currDevice = rooms[value].d[0];
+                      ;
                     });
                   },
                 ),
@@ -175,25 +218,39 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
                     setState(() {
                       currRoom = rooms[l].roomName;
                       currDevice = rooms[l].d[i];
+                      print(currRoom);
+
+                      print(currDevice);
                     });
                   },
                   leading: getIcons(rooms[l].d[i]),
                   title: Text(rooms[l].d[i]),
-                  trailing: Switch(
-                    value:
-                        getDevState(rooms[l].roomName, rooms[l].d[i]).toggleSt,
-                    onChanged: (value) {
-                      setState(() {
-                        getDevState(rooms[l].roomName, rooms[l].d[i]).toggleSt =
-                            value;
-                        isAbsorbed =
-                            !getDevState(rooms[l].roomName, rooms[l].d[i])
-                                .toggleSt;
-                      });
+                  trailing: StreamBuilder(
+                    stream: itemRef
+                        .child("Rooms/" +
+                            rooms[l].roomName +
+                            "/devices/" +
+                            rooms[l].d[i] +
+                            "/")
+                        .onValue,
+                    builder: (context, snap) {
+                      Map<String, dynamic> values =
+                          new Map<String, dynamic>.from(
+                              snap.data.snapshot.value);
+                      return Switch(
+                        value: convert(values["State"]),
+                        onChanged: (value) {
+                          stateChange(value, rooms[l].roomName, rooms[l].d[i]);
+                          setState(() {
+                            getDevState(rooms[l].roomName, rooms[l].d[i])
+                                .toggleSt = value;
+                          });
+                        },
+                        activeTrackColor: Theme.of(context).backgroundColor,
+                        activeColor: Colors.lightGreenAccent,
+                        inactiveTrackColor: Theme.of(context).backgroundColor,
+                      );
                     },
-                    activeTrackColor: Theme.of(context).backgroundColor,
-                    activeColor: Colors.lightGreenAccent,
-                    inactiveTrackColor: Theme.of(context).backgroundColor,
                   ),
                 ),
               ),
