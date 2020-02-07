@@ -2,8 +2,6 @@ import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:smarty/line_chart.dart';
 
-import 'constants.dart';
-
 class EnergyStats extends StatefulWidget {
   @override
   String energyType;
@@ -235,7 +233,6 @@ class _EnergyStatsState extends State<EnergyStats> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: <Widget>[
                                     Column(
-                                      
                                       children: <Widget>[
                                         Icon(
                                           Icons.power,

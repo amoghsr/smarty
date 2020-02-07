@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:smarty/Rooms.dart';
 import 'package:smarty/auth.dart';
 import 'package:smarty/home.dart';
 import 'package:smarty/leaderboard.dart';
@@ -15,10 +14,10 @@ import 'auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 
-import 'energyData.dart';
-
 void main() {
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((_) {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((_) {
     runApp(
       ChangeNotifierProvider<AuthService>(
         // Helps to look for AuthService in the entire widget tree
@@ -73,7 +72,6 @@ class MyNavigationBar extends StatefulWidget {
 }
 
 class _MyNavigationBarState extends State<MyNavigationBar> {
-  @override
   int _currentIndex = 0;
   final List<Widget> _children = [
     Home(),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 import 'package:smarty/devicesModel.dart';
 import 'package:smarty/roomModel.dart';
 import 'constants.dart';
@@ -31,7 +30,7 @@ Device getDevState(String roomName, String devName) {
 }
 
 class MyOtherRoom extends StatefulWidget {
-  @override
+  
   int initRoom;
   MyOtherRoom({@required this.initRoom});
   _MyOtherRoomState createState() => _MyOtherRoomState();
@@ -39,7 +38,7 @@ class MyOtherRoom extends StatefulWidget {
 
 // String appBarrmName = tabList[0].text;
 
-Color bulb_color = Colors.white;
+// Color bulbColor = Colors.white;
 
 String currRoom = tabList[0].text;
 String currDevice = rooms[0].d[0];
@@ -48,7 +47,6 @@ String rmName = tabList[0].text;
 bool isAbsorbed = false;
 
 class _MyOtherRoomState extends State<MyOtherRoom> {
-  @override
   bool isSwitched = true;
   int brightness = 60;
   DatabaseReference itemRef;
