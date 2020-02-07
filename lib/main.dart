@@ -13,19 +13,22 @@ import 'constants.dart';
 import 'package:provider/provider.dart';
 import 'auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart';
 
 import 'energyData.dart';
 
 void main() {
-  runApp(
-    ChangeNotifierProvider<AuthService>(
-      // Helps to look for AuthService in the entire widget tree
-      child: MyApp(),
-      create: (BuildContext context) {
-        return AuthService();
-      },
-    ),
-  );
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((_) {
+    runApp(
+      ChangeNotifierProvider<AuthService>(
+        // Helps to look for AuthService in the entire widget tree
+        child: MyApp(),
+        create: (BuildContext context) {
+          return AuthService();
+        },
+      ),
+    );
+  });
 }
 
 class MyApp extends StatelessWidget {
