@@ -15,7 +15,6 @@ import 'package:firebase_database/firebase_database.dart';
 // }
 
 class CustomDialog extends StatelessWidget {
-  @override
   final String title, description, buttonText;
   final Image image;
   final Color col;

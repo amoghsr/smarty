@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:smarty/constants.dart';
-import 'package:flutter_icons/flutter_icons.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'routineModel.dart';
 
 class RoutineScreen extends StatefulWidget {

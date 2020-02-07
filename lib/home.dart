@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:smarty/constants.dart';
-import 'package:smarty/constants.dart';
-
 import 'package:smarty/devicesCarousel.dart';
 import 'package:smarty/roomCarousel.dart';
 import 'package:smarty/routineCarousel.dart';
-
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
 import 'alertBox.dart';
 import 'auth.dart';

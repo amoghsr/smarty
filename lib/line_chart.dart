@@ -26,8 +26,6 @@ class _LineChartSample2State extends State<LineChartSample2> {
 
   @override
   Widget build(BuildContext context) {
-    double screenwidth = MediaQuery.of(context).size.width;
-
     return Center(
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,

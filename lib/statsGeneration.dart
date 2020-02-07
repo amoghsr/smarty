@@ -11,7 +11,7 @@ void main() {
 
 class Generation extends StatelessWidget {
 
-  Map<String, int> weekData(AsyncSnapshot<QuerySnapshot> snapshot, int month, String date) {
+  void weekData(AsyncSnapshot<QuerySnapshot> snapshot, int month, String date) {
 
     for(int i = int.parse(date); i<int.parse(date)+7; i++) {
       averageDayData(snapshot, month, i.toString());
