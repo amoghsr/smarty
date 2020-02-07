@@ -36,12 +36,12 @@ class Generation extends StatelessWidget {
       stream: Firestore.instance.collection('consumed_energy').snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         return new Container(
-          child: Text(
-            averageDayData(snapshot, 0, '1').toString(),
-            textAlign: TextAlign.center,
-            textDirection: TextDirection.ltr,
-          ),
-        );
+            child: Text(
+              averageDayData(snapshot, 0, '1').toString(),
+              textAlign: TextAlign.center,
+              textDirection: TextDirection.ltr,
+            ),
+          );
       }
     );
   }
