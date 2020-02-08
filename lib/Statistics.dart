@@ -56,7 +56,7 @@ class _StatisticsState extends State<Statistics> {
                     // },)
                   ),
                   Container(
-                    height: screenheight * 0.82,
+                    height: screenheight,
                     width: screenwidth,
                     child: TabBarView(
                       physics: NeverScrollableScrollPhysics(),

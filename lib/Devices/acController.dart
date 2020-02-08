@@ -20,6 +20,8 @@ class ACController extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenwidth = MediaQuery.of(context).size.width;
+    double screenheight = MediaQuery.of(context).size.height;
     return Column(
       children: <Widget>[
         Row(
@@ -34,7 +36,7 @@ class ACController extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  height: 8,
+                  height: screenheight * 0.015,
                 ),
                 Text(
                   'AC',
@@ -53,7 +55,7 @@ class ACController extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      height: 8,
+                      height: screenheight * 0.015,
                     ),
                     StreamBuilder(
                       stream: itemRef.child("Sensors/TempandHumid/").onValue,
@@ -70,7 +72,7 @@ class ACController extends StatelessWidget {
                   ],
                 ),
                 SizedBox(
-                  width: 25,
+                  width: screenwidth * 0.06,
                 ),
                 Column(
                   children: <Widget>[
@@ -81,7 +83,7 @@ class ACController extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      height: 8,
+                      height: screenheight * 0.015,
                     ),
                     StreamBuilder(
                       stream: itemRef.child("Sensors/TempandHumid/").onValue,
@@ -101,37 +103,48 @@ class ACController extends StatelessWidget {
             )
           ],
         ),
-        SizedBox(height: 20),
-        SleekCircularSlider(
-            initialValue: 24,
-            min: 16,
-            max: 26,
-            appearance: CircularSliderAppearance(
-                size: 205,
-                customColors: CustomSliderColors(
-                  trackColor: Colors.grey,
-                  progressBarColor: Colors.lightGreenAccent,
-                ),
-                customWidths: CustomSliderWidths(),
-                infoProperties: InfoProperties(
-                  topLabelStyle: kLightDeviceTopBar.copyWith(
-                    color: Colors.white.withOpacity(0.5),
-                    fontSize: 16,
-                  ),
-                  topLabelText: 'Set Temp.',
-                  mainLabelStyle: TextStyle(color: Colors.white, fontSize: 40),
-                  modifier: (value) {
-                    final roundedValue = (value).ceil().toInt().toString();
-                    return '$roundedValue°C';
-                  },
-                )),
-            onChangeEnd: (double value) {
-              setTemp(value.ceil().toInt(), roomName, devName);
-              print(value);
-            }),
+        SizedBox(
+          height: screenheight * 0.01,
+        ),
+        Expanded(
+          child: Center(
+            child: Container(
+              child: SleekCircularSlider(
+                  initialValue: 24,
+                  min: 16,
+                  max: 26,
+                  appearance: CircularSliderAppearance(
+                      size: screenheight,
+                      customColors: CustomSliderColors(
+                        trackColor: Colors.grey,
+                        progressBarColor: Colors.lightGreenAccent,
+                      ),
+                      customWidths: CustomSliderWidths(
+                        trackWidth: 15,
+                        progressBarWidth: 15,
+                      ),
+                      infoProperties: InfoProperties(
+                        topLabelStyle: kLightDeviceTopBar.copyWith(
+                          color: Colors.white.withOpacity(0.5),
+                          fontSize: 16,
+                        ),
+                        topLabelText: 'Set Temp.',
+                        mainLabelStyle:
+                            TextStyle(color: Colors.white, fontSize: 35),
+                        modifier: (value) {
+                          final roundedValue =
+                              (value).ceil().toInt().toString();
+                          return '$roundedValue°C';
+                        },
+                      )),
+                  onChangeEnd: (double value) {
+                    setTemp(value.ceil().toInt(), roomName, devName);
+                    print(value);
+                  }),
+            ),
+          ),
+        ),
       ],
     );
   }
-
- 
 }
