@@ -8,7 +8,7 @@ class EnergyStats extends StatefulWidget {
   EnergyStats({this.energyType});
   _EnergyStatsState createState() => _EnergyStatsState();
 }
-
+//energy statistics
 class _EnergyStatsState extends State<EnergyStats> {
   @override
   Widget build(BuildContext context) {

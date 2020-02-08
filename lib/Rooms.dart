@@ -216,9 +216,9 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
                     setState(() {
                       currRoom = rooms[l].roomName;
                       currDevice = rooms[l].d[i];
-                      print(currRoom);
+                      // print(currRoom);
 
-                      print(currDevice);
+                      // print(currDevice);
                     });
                   },
                   leading: getIcons(rooms[l].d[i]),
