@@ -26,6 +26,8 @@ class _LineChartSample2State extends State<LineChartSample2> {
 
   @override
   Widget build(BuildContext context) {
+    double screenwidth = MediaQuery.of(context).size.width;
+
     return Center(
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
@@ -48,6 +50,7 @@ class _LineChartSample2State extends State<LineChartSample2> {
                       child: StreamBuilder(
                         stream: Firestore.instance.collection('consumed_energy').snapshots(),
                         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                          if(snapshot.data == null) return CircularProgressIndicator();
                           return LineChart(
                         showAvg
                             ? avgData(widget.groupby, snapshot)
@@ -86,8 +89,39 @@ class _LineChartSample2State extends State<LineChartSample2> {
   }
 
   LineChartData mainData(String groupby, AsyncSnapshot<QuerySnapshot> snapshot) {
-    Map<String, int> hours = Generation().hourlyData(snapshot, 0, '1');
-    List<int> hourData = hours.values.toList();
+    List<int> noofdays = [
+    30, 31, 31, 28, 31, 31, 30, 31, 31, 30, 31, 30];
+
+    Map<String, int> hourData = Generation().hourlyData(snapshot, 0, '1');
+    List<int> hours = hourData.values.toList();
+    List<FlSpot> hourCoords = new List<FlSpot>();
+
+    List<int> weekData = Generation().weekData(snapshot, 0, '1');
+    List<FlSpot> weekCoords = new List<FlSpot>();
+
+    List<int> monthData = new List<int>(12);
+    List<FlSpot> monthCoords = new List<FlSpot>();
+
+    for(int i = 0, j = 1; i<hourData.length; i++, j+=2) {
+      hourCoords.add(
+        FlSpot(j.toDouble(), hours[i].toDouble()%5+1)
+      );
+    }
+
+    for(int i = 0, j = 1; i<weekData.length; i++, j+=2) {
+      weekCoords.add(
+        FlSpot(j.toDouble(), weekData[i].toDouble()%5+1)
+      );
+    }
+
+    for(int i = 0, j = 1; i<monthData.length; i++, j+=2) {
+      print(Generation().monthData(snapshot, i, noofdays[i]).toString());
+      monthCoords.add(
+        FlSpot(
+          j.toDouble(), (Generation().monthData(snapshot, i, noofdays[i]).toDouble())%5+1,
+          )
+        );
+    }
     return LineChartData(
       gridData: FlGridData(
         show: true,
@@ -247,34 +281,7 @@ class _LineChartSample2State extends State<LineChartSample2> {
       maxY: 6,
       lineBarsData: [
         LineChartBarData(
-          spots: [
-            FlSpot(0, hourData[0]%5.toDouble()),
-            FlSpot(1, hourData[0]%5.toDouble()),
-            FlSpot(3, hourData[1]%5.toDouble()),
-            FlSpot(5, hourData[2]%5.toDouble()),
-            FlSpot(7, hourData[3]%5.toDouble()),
-            FlSpot(9, hourData[4]%5.toDouble()),
-            FlSpot(11, hourData[5]%5.toDouble()),
-            FlSpot(13, hourData[6]%5.toDouble()),
-            FlSpot(15, hourData[7]%5.toDouble()),
-            FlSpot(17, hourData[8]%5.toDouble()),  
-            FlSpot(19, hourData[9]%5.toDouble()), 
-            FlSpot(21, hourData[10]%5.toDouble()), 
-            FlSpot(23, hourData[11]%5.toDouble()), 
-            FlSpot(25, hourData[12]%5.toDouble()),
-            FlSpot(27, hourData[13]%5.toDouble()), 
-            FlSpot(29, hourData[14]%5.toDouble()), 
-            FlSpot(31, hourData[15]%5.toDouble()), 
-            FlSpot(33, hourData[16]%5.toDouble()), 
-            FlSpot(35, hourData[17]%5.toDouble()), 
-            FlSpot(37, hourData[18]%5.toDouble()), 
-            FlSpot(39, hourData[19]%5.toDouble()), 
-            FlSpot(41, hourData[20]%5.toDouble()),
-            FlSpot(43, hourData[21]%5.toDouble()), 
-            FlSpot(45, hourData[22]%5.toDouble()), 
-            FlSpot(47, hourData[23]%5.toDouble()), 
-            FlSpot(49, hourData[23]%5.toDouble()),  
-          ],
+          spots: groupby == "Day" ? hourCoords : groupby == "Week" ? weekCoords : monthCoords,
           isCurved: true,
           colors: gradientColors,
           barWidth: 5,
@@ -492,3 +499,4 @@ class _LineChartSample2State extends State<LineChartSample2> {
     );
   }
 }
+
