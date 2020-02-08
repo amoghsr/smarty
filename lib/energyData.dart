@@ -71,7 +71,11 @@ class _EnergyStatsState extends State<EnergyStats> {
                       height: screenheight * 0.35,
                       width: screenwidth,
                       child: TabBarView(
-                        children: [
+                        children: widget.energyType == 'Generation' ? [
+                          LineChartSample2('Day', 5, 49),
+                          LineChartSample2('Week', 1.7, 13),
+                          LineChartSample2('Month', 2.8, 23),
+                        ] : [
                           LineChartSample2('Day', 5, 49),
                           LineChartSample2('Week', 1.7, 13),
                           LineChartSample2('Month', 2.8, 23),

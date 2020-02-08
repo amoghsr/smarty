@@ -7,20 +7,7 @@ void main() {
   );
 }
 
-
-
 class Generation extends StatelessWidget {
-
-  void weekData(AsyncSnapshot<QuerySnapshot> snapshot, int month, String date) {
-
-    for(int i = int.parse(date); i<int.parse(date)+7; i++) {
-      averageDayData(snapshot, month, i.toString());
-    }
-  }
-  
-  Map<String, int> hourlyData(AsyncSnapshot<QuerySnapshot> snapshot, int month, String date) {
-    return new Map<String, int>.from(snapshot.data.documents[month][date]);
-  }
 
   int averageDayData(AsyncSnapshot<QuerySnapshot> snapshot, int month, String date) {
     Map<String, int> hours = hourlyData(snapshot, month, date);
@@ -30,18 +17,44 @@ class Generation extends StatelessWidget {
     return avg.round();
   }
 
+  int monthData(AsyncSnapshot<QuerySnapshot> snapshot, int month, int noOfDays) {
+    List<int> days = new List<int>(noOfDays);
+    double sum = 0;
+    for(int i = 1; i<=noOfDays; i++) {
+      days[i-1] = averageDayData(snapshot, month, i.toString());
+    }
+    days.forEach((i) => sum += i);
+    double avg = sum/days.length;
+    return avg.round();
+  }
+  
+  List<int> weekData(AsyncSnapshot<QuerySnapshot> snapshot, int month, String startdate) {    
+    List<int> week = new List<int>(7);
+    for(int i = int.parse(startdate); i<int.parse(startdate)+7; i++) {
+      week[i-1] = averageDayData(snapshot, month, i.toString());
+    }
+    return week;
+  }
+  
+  Map<String, int> hourlyData(AsyncSnapshot<QuerySnapshot> snapshot, int month, String date) {
+    return new Map<String, int>.from(snapshot.data.documents[month][date]);
+  }
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
       stream: Firestore.instance.collection('consumed_energy').snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-        return new Container(
-            child: Text(
-              averageDayData(snapshot, 0, '1').toString(),
-              textAlign: TextAlign.center,
-              textDirection: TextDirection.ltr,
+        if(snapshot.data == null) return CircularProgressIndicator();
+        return Center(
+          child: new Container(
+              child: Text(
+                monthData(snapshot, 5, 31).toString(),
+                textAlign: TextAlign.center,
+                textDirection: TextDirection.ltr,
+              ),
             ),
-          );
+        );
       }
     );
   }
