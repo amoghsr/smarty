@@ -34,14 +34,14 @@ class _FaucetControllerState extends State<FaucetController> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         topAppBar(widget.roomName, 'Faucet', FontAwesomeIcons.shower),
-        SizedBox(height: 5),
+        SizedBox(height: screenheight * 0.001),
         Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
           Text(
             'OFF',
             style: kLightDeviceBottomBar.copyWith(fontSize: 18),
           ),
           SizedBox(
-            width: 20,
+            width: screenwidth * 0.04,
           ),
           Container(
             child: Transform.scale(
@@ -55,6 +55,21 @@ class _FaucetControllerState extends State<FaucetController> {
                         "/")
                     .onValue,
                 builder: (context, snap) {
+                  if (snap.data == null)
+                    return Switch(
+                      value: false,
+                      onChanged: (value) {
+                        stateChange(value, widget.roomName, widget.devName);
+                        setState(() {
+                          isSwitched = value;
+                        });
+                      },
+                      activeTrackColor: Theme.of(context).canvasColor,
+                      activeColor: Theme.of(context).canvasColor,
+                      inactiveTrackColor: Theme.of(context).canvasColor,
+                      inactiveThumbColor: Theme.of(context).canvasColor,
+                    );
+
                   Map<String, dynamic> values =
                       new Map<String, dynamic>.from(snap.data.snapshot.value);
                   return Switch(
@@ -74,7 +89,7 @@ class _FaucetControllerState extends State<FaucetController> {
             ),
           ),
           SizedBox(
-            width: screenwidth * 0.2,
+            width: screenwidth * 0.04,
           ),
           Text(
             'ON',
@@ -82,14 +97,14 @@ class _FaucetControllerState extends State<FaucetController> {
           ),
         ]),
         SizedBox(
-          height: 20,
+          height: screenheight * 0.02,
         ),
         Text(
           'Water Dispensed',
           style: kLightDeviceBottomBar,
         ),
         SizedBox(
-          height: 10,
+          height: screenheight * 0.02,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -100,14 +115,14 @@ class _FaucetControllerState extends State<FaucetController> {
                     }),
                 child: Icon(Icons.remove_circle_outline, size: 45)),
             SizedBox(
-              width: 15,
+              width: screenwidth * 0.02,
             ),
             Text(
               '$waterAmount Oz',
               style: kLightDeviceBottomBar,
             ),
             SizedBox(
-              width: 15,
+              width: screenwidth * 0.02,
             ),
             InkWell(
                 onTap: () => setState(() {
@@ -117,7 +132,7 @@ class _FaucetControllerState extends State<FaucetController> {
           ],
         ),
         Container(
-          margin: EdgeInsets.all(20),
+          margin: EdgeInsets.all(screenheight * 0.02),
           child: LinearPercentIndicator(
             padding: EdgeInsets.symmetric(horizontal: 20),
             leading: Text(

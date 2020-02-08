@@ -93,6 +93,7 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
   }
 
   Widget build(BuildContext context) {
+    
     double screenwidth = MediaQuery.of(context).size.width;
     double screenheight = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -159,7 +160,7 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
                       height: screenheight * 0.35,
                       width: screenwidth,
                       child: TabBarView(
-                        physics: NeverScrollableScrollPhysics(),
+                        // physics: NeverScrollableScrollPhysics(),
                         children: [
                           getListTile(0),
                           getListTile(1),
@@ -216,9 +217,9 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
                     setState(() {
                       currRoom = rooms[l].roomName;
                       currDevice = rooms[l].d[i];
-                      print(currRoom);
+                      // print(currRoom);
 
-                      print(currDevice);
+                      // print(currDevice);
                     });
                   },
                   leading: getIcons(rooms[l].d[i]),
@@ -232,6 +233,7 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
                             "/")
                         .onValue,
                     builder: (context, snap) {
+                      
                       Map<String, dynamic> values =
                           new Map<String, dynamic>.from(
                               snap.data.snapshot.value);

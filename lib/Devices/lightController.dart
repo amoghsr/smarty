@@ -65,6 +65,10 @@ class _LightControllerState extends State<LightController> {
                             "/")
                         .onValue,
                     builder: (context, snap) {
+                      if (snap.data == null)
+                        return Icon(Icons.wb_incandescent,
+                            size: 48, color: Theme.of(context).canvasColor);
+
                       Map<String, dynamic> values =
                           new Map<String, dynamic>.from(
                               snap.data.snapshot.value);
@@ -99,6 +103,21 @@ class _LightControllerState extends State<LightController> {
                             "/")
                         .onValue,
                     builder: (context, snap) {
+                      if (snap.data == null)
+                        return Switch(
+                          value: false,
+                          onChanged: (value) {
+                            stateChange(value, widget.roomName, widget.devName);
+                            setState(() {
+                              isSwitched = value;
+                            });
+                          },
+                          activeTrackColor: Theme.of(context).canvasColor,
+                          activeColor: Theme.of(context).canvasColor,
+                          inactiveTrackColor: Theme.of(context).canvasColor,
+                          inactiveThumbColor: Theme.of(context).canvasColor,
+                        );
+
                       Map<String, dynamic> values =
                           new Map<String, dynamic>.from(
                               snap.data.snapshot.value);
@@ -257,6 +276,21 @@ class _LightControllerState extends State<LightController> {
                             "/")
                         .onValue,
                     builder: (context, snap) {
+                      if (snap.data == null)
+                        return Slider(
+                          value: 0.0,
+                          max: 100,
+                          min: 0,
+                          onChanged: (double newValue) {
+                            setBrightness(newValue.round(), widget.roomName,
+                                widget.devName);
+                            setState(() {
+                              brightness = newValue.round();
+                            });
+                          },
+                        );
+                      ;
+
                       Map<String, dynamic> values =
                           new Map<String, dynamic>.from(
                               snap.data.snapshot.value);

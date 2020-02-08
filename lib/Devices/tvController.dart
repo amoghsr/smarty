@@ -28,10 +28,14 @@ class TVController extends StatefulWidget {
 class _TVControllerState extends State<TVController> {
   @override
   Widget build(BuildContext context) {
+    double screenwidth = MediaQuery.of(context).size.width;
+    double screenheight = MediaQuery.of(context).size.height;
     return Column(
       children: <Widget>[
         topAppBar(widget.roomName, 'TV', Icons.tv),
-        SizedBox(height: 5),
+        SizedBox(
+          height: screenheight * 0.003,
+        ),
         Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
           Text(
             'OFF',
@@ -52,6 +56,20 @@ class _TVControllerState extends State<TVController> {
                         "/")
                     .onValue,
                 builder: (context, snap) {
+                  if (snap.data == null)
+                    return Switch(
+                      value: false,
+                      onChanged: (value) {
+                        stateChange(value, widget.roomName, widget.devName);
+                        setState(() {
+                          isSwitched = value;
+                        });
+                      },
+                      activeTrackColor: Theme.of(context).canvasColor,
+                      activeColor: Theme.of(context).canvasColor,
+                      inactiveTrackColor: Theme.of(context).canvasColor,
+                      inactiveThumbColor: Theme.of(context).canvasColor,
+                    );
                   Map<String, dynamic> values =
                       new Map<String, dynamic>.from(snap.data.snapshot.value);
                   return Switch(
@@ -79,7 +97,7 @@ class _TVControllerState extends State<TVController> {
           ),
         ]),
         SizedBox(
-          height: 20,
+          height: screenheight * 0.01,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -136,7 +154,7 @@ class _TVControllerState extends State<TVController> {
           ],
         ),
         SizedBox(
-          height: 20,
+          height: screenheight * 0.02,
         ),
         Text(
           'VOLUME',
@@ -148,7 +166,7 @@ class _TVControllerState extends State<TVController> {
           ),
         ),
         SizedBox(
-          height: 10,
+          height: screenheight * 0.01,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,

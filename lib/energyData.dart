@@ -8,7 +8,7 @@ class EnergyStats extends StatefulWidget {
   EnergyStats({this.energyType});
   _EnergyStatsState createState() => _EnergyStatsState();
 }
-
+//energy statistics
 class _EnergyStatsState extends State<EnergyStats> {
   @override
   Widget build(BuildContext context) {
@@ -71,17 +71,15 @@ class _EnergyStatsState extends State<EnergyStats> {
                       height: screenheight * 0.35,
                       width: screenwidth,
                       child: TabBarView(
-                        children: widget.energyType == 'Generation'
-                            ? [
-                                LineChartSample2('Day', 5, 49),
-                                LineChartSample2('Week', 1.7, 13),
-                                LineChartSample2('Month', 2.8, 23),
-                              ]
-                            : [
-                                LineChartSample2('Day', 5, 49),
-                                LineChartSample2('Week', 1.7, 13),
-                                LineChartSample2('Month', 2.8, 23),
-                              ],
+                        children: widget.energyType == 'Generation' ? [
+                          LineChartSample2('Generation','Day', 5, 49),
+                          LineChartSample2('Generation','Week', 1.7, 13),
+                          LineChartSample2('Generation','Month', 2.8, 23),
+                        ] : [
+                          LineChartSample2('Consumption','Day', 5, 49),
+                          LineChartSample2('Consumption','Week', 1.7, 13),
+                          LineChartSample2('Consumption','Month', 2.8, 23),
+                        ],
                       ),
                     ),
                     SizedBox(height: screenheight * 0.01),
@@ -313,7 +311,7 @@ class _EnergyStatsState extends State<EnergyStats> {
                                   margin: EdgeInsets.only(
                                     left: screenwidth * 0.02,
                                     right: screenwidth * 0.02,
-                                    top: screenheight * 0.01spo5,
+                                    top: screenheight * 0.015,
                                   ),
                                   width: screenwidth * 0.6,
                                   decoration: BoxDecoration(

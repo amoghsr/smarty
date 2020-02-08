@@ -1,5 +1,6 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 import 'package:smarty/Devices/CommonControllers/deviceCommonControllers.dart';
 import 'package:smarty/constants.dart';
@@ -60,6 +61,7 @@ class ACController extends StatelessWidget {
                     StreamBuilder(
                       stream: itemRef.child("Sensors/TempandHumid/").onValue,
                       builder: (context, snap) {
+                        if (snap.data == null) return Container();
                         Map<String, dynamic> values =
                             new Map<String, dynamic>.from(
                                 snap.data.snapshot.value);
@@ -88,6 +90,7 @@ class ACController extends StatelessWidget {
                     StreamBuilder(
                       stream: itemRef.child("Sensors/TempandHumid/").onValue,
                       builder: (context, snap) {
+                        if (snap.data == null) return Container();
                         Map<String, dynamic> values =
                             new Map<String, dynamic>.from(
                                 snap.data.snapshot.value);

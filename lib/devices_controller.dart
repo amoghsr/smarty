@@ -35,7 +35,7 @@ class _DevicesControllerState extends State<DevicesController>
         roomName: widget.chRoom,
         devName: widget.chDevice);
 
-    if (widget.chDevice == 'LAMP') {
+    if (widget.chDevice == 'Lamp') {
       showDevice = LightController(
           itemRef: itemRef,
           context: context,
@@ -68,6 +68,8 @@ class _DevicesControllerState extends State<DevicesController>
           context: context,
           roomName: widget.chRoom,
           devName: widget.chDevice);
+    } else {
+      return Container();
     }
     return showDevice;
   }
