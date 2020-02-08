@@ -91,16 +91,21 @@ class CustomDialog extends StatelessWidget {
                         .child("Sensors/Fire")
                         .update({'Danger': "low"}); // To close the dialog
                   },
-                  child: Container(
-                    height: 40,
-                    width: 100,
-                    decoration: BoxDecoration(
-                      color: col,
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(5),
+                  child: InkWell(
+                    onTap: () => Navigator.of(context).pop(),
+                    child: Container(
+                      height: 40,
+                      width: 100,
+                      decoration: BoxDecoration(
+                        color: col,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(5),
+                        ),
+                      ),
+                      child: Center(
+                        child: Text(buttonText),
                       ),
                     ),
-                    child: Center(child: Text(buttonText)),
                   ),
                 ),
               ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 import 'package:smarty/devicesModel.dart';
 import 'package:smarty/roomModel.dart';
 import 'constants.dart';
@@ -30,7 +31,7 @@ Device getDevState(String roomName, String devName) {
 }
 
 class MyOtherRoom extends StatefulWidget {
-  
+  @override
   int initRoom;
   MyOtherRoom({@required this.initRoom});
   _MyOtherRoomState createState() => _MyOtherRoomState();
@@ -38,7 +39,7 @@ class MyOtherRoom extends StatefulWidget {
 
 // String appBarrmName = tabList[0].text;
 
-// Color bulbColor = Colors.white;
+Color bulb_color = Colors.white;
 
 String currRoom = tabList[0].text;
 String currDevice = rooms[0].d[0];
@@ -47,6 +48,7 @@ String rmName = tabList[0].text;
 bool isAbsorbed = false;
 
 class _MyOtherRoomState extends State<MyOtherRoom> {
+  @override
   bool isSwitched = true;
   int brightness = 60;
   DatabaseReference itemRef;
@@ -93,7 +95,6 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
   }
 
   Widget build(BuildContext context) {
-    
     double screenwidth = MediaQuery.of(context).size.width;
     double screenheight = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -124,7 +125,6 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
                       rmName = tabList[value].text;
                       currRoom = tabList[value].text;
                       currDevice = rooms[value].d[0];
-                      
                     });
                   },
                 ),
@@ -160,7 +160,7 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
                       height: screenheight * 0.35,
                       width: screenwidth,
                       child: TabBarView(
-                        // physics: NeverScrollableScrollPhysics(),
+                        physics: NeverScrollableScrollPhysics(),
                         children: [
                           getListTile(0),
                           getListTile(1),
@@ -217,9 +217,9 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
                     setState(() {
                       currRoom = rooms[l].roomName;
                       currDevice = rooms[l].d[i];
-                      // print(currRoom);
+                      print(currRoom);
 
-                      // print(currDevice);
+                      print(currDevice);
                     });
                   },
                   leading: getIcons(rooms[l].d[i]),
@@ -233,7 +233,6 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
                             "/")
                         .onValue,
                     builder: (context, snap) {
-                      
                       Map<String, dynamic> values =
                           new Map<String, dynamic>.from(
                               snap.data.snapshot.value);

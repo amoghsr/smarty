@@ -1,6 +1,7 @@
 import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:smarty/line_chart.dart';
+import 'package:intl/intl.dart';
 
 class EnergyStats extends StatefulWidget {
   @override
@@ -8,7 +9,16 @@ class EnergyStats extends StatefulWidget {
   EnergyStats({this.energyType});
   _EnergyStatsState createState() => _EnergyStatsState();
 }
+
 //energy statistics
+var now = new DateTime.now();
+var date = new DateFormat('dd');
+String formattedDate = date.format(now);
+var day = new DateFormat('EEEEE');
+String formattedDay= day.format(now);
+var month = new DateFormat('MMMM');
+String formattedMonth = month.format(now);
+
 class _EnergyStatsState extends State<EnergyStats> {
   @override
   Widget build(BuildContext context) {
@@ -71,15 +81,20 @@ class _EnergyStatsState extends State<EnergyStats> {
                       height: screenheight * 0.35,
                       width: screenwidth,
                       child: TabBarView(
-                        children: widget.energyType == 'Generation' ? [
-                          LineChartSample2('Generation','Day', 5, 49),
-                          LineChartSample2('Generation','Week', 1.7, 13),
-                          LineChartSample2('Generation','Month', 2.8, 23),
-                        ] : [
-                          LineChartSample2('Consumption','Day', 5, 49),
-                          LineChartSample2('Consumption','Week', 1.7, 13),
-                          LineChartSample2('Consumption','Month', 2.8, 23),
-                        ],
+                        children: widget.energyType == 'Generation'
+                            ? [
+                                LineChartSample2('Generation', 'Day', 5, 49),
+                                LineChartSample2('Generation', 'Week', 1.7, 13),
+                                LineChartSample2(
+                                    'Generation', 'Month', 2.8, 23),
+                              ]
+                            : [
+                                LineChartSample2('Consumption', 'Day', 5, 49),
+                                LineChartSample2(
+                                    'Consumption', 'Week', 1.7, 13),
+                                LineChartSample2(
+                                    'Consumption', 'Month', 2.8, 23),
+                              ],
                       ),
                     ),
                     SizedBox(height: screenheight * 0.01),
@@ -87,37 +102,32 @@ class _EnergyStatsState extends State<EnergyStats> {
                       child: Container(
                         height: screenheight * 0.1,
                         child: Row(
+                          // crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            SizedBox(width: screenwidth * 0.05),
+                            SizedBox(width: screenwidth * 0.13),
                             Container(
                               child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
-                                  Row(
-                                    children: <Widget>[
-                                      Text(
-                                        'TODAY 3PM',
-                                        style: TextStyle(
-                                          fontFamily: 'Montserrat',
-                                          color: Theme.of(context).accentColor,
-                                          fontSize: 12,
-                                        ),
-                                      )
-                                    ],
+                                  Text(
+                                    '$formattedDay, $formattedDate $formattedMonth',
+                                    style: TextStyle(
+                                      fontFamily: 'Montserrat',
+                                      color: Theme.of(context).accentColor,
+                                      fontSize: 13,
+                                    ),
                                   ),
                                   SizedBox(
                                     height: screenheight * 0.01,
                                   ),
-                                  Row(
-                                    children: <Widget>[
-                                      Text(
-                                        '76 kWh',
-                                        style: TextStyle(
-                                          fontFamily: 'Montserrat',
-                                          color: Theme.of(context).accentColor,
-                                          fontSize: 20,
-                                        ),
-                                      ),
-                                    ],
+                                  Text(
+                                    '76 kWh',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      fontFamily: 'Montserrat',
+                                      color: Theme.of(context).accentColor,
+                                      fontSize: 20,
+                                    ),
                                   ),
                                 ],
                               ),

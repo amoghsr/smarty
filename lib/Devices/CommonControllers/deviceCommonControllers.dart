@@ -113,7 +113,7 @@ Container topAppBar(String roomName, String appliance, IconData icon) {
           ],
         ),
         Container(
-          child: Icon(icon, size: 48, color: bulbColor),
+          child: Icon(icon, size: 48, color: Colors.white),
         ),
       ],
     ),

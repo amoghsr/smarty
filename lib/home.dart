@@ -4,10 +4,10 @@
 * various routines and the nav bar (But this stays common to all)
 */
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intl/intl.dart';
 import 'package:smarty/constants.dart';
 import 'package:smarty/devicesCarousel.dart';
 import 'package:smarty/roomCarousel.dart';
@@ -24,8 +24,17 @@ class Home extends StatefulWidget {
   _HomeState createState() => _HomeState();
 }
 
+var now = new DateTime.now();
+var date = new DateFormat('dd');
+String formattedDate = date.format(now);
+var year = new DateFormat('y');
+String formattedYear = year.format(now);
+var month = new DateFormat('MMMM');
+String formattedMonth = month.format(now);
+
 class _HomeState extends State<Home> {
   DatabaseReference itemRef;
+
   void initState() {
     super.initState();
     final FirebaseDatabase database = FirebaseDatabase
@@ -84,6 +93,15 @@ class _HomeState extends State<Home> {
               StreamBuilder(
                 stream: itemRef.child("Sensors/Fire/").onValue,
                 builder: (context, snap) {
+                  if (snap.data == null)
+                    return CustomDialog(
+                      image: Image.asset("assets/images/fire.png"),
+                      title: "NO NOTIFICATION!",
+                      description: "What a boring day",
+                      col: Color(0xffE26069),
+                      buttonText: "Okay",
+                    );
+
                   Map<String, dynamic> values =
                       new Map<String, dynamic>.from(snap.data.snapshot.value);
                   if (values["Danger"] == "high") {
@@ -109,10 +127,8 @@ class _HomeState extends State<Home> {
       // Drawer is the hamburger menu.
       drawer: Drawer(
         child: SafeArea(
-
           // The various items in the hamburger menu are saved inside a ListView, which is basically a vertical list
           child: ListView(
-
             // ListView items are saved in a children list of Widgets
             children: <Widget>[
               UserAccountsDrawerHeader(
@@ -141,7 +157,6 @@ class _HomeState extends State<Home> {
 
               // ListTile represents a list tile item in the menu
               ListTile(
-
                 // Leading is an element in the start of the list tile horizontally
                 leading: Icon(FontAwesomeIcons.users),
 
@@ -189,7 +204,7 @@ class _HomeState extends State<Home> {
               child: Opacity(
                 opacity: 0.6,
                 child: Text(
-                  '24 January 2020',
+                  '$formattedDate $formattedMonth $formattedYear',
                   style: TextStyle(
                     fontWeight: FontWeight.w500,
                   ),
