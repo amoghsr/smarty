@@ -1,7 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'statsgeneration.dart';
+import 'statsGeneration.dart';
 
 class LineChartSample2 extends StatefulWidget {
   @override
@@ -26,8 +26,6 @@ class _LineChartSample2State extends State<LineChartSample2> {
 
   @override
   Widget build(BuildContext context) {
-    double screenwidth = MediaQuery.of(context).size.width;
-
     return Center(
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:smarty/Rooms.dart';
 import 'package:smarty/auth.dart';
 import 'package:smarty/home.dart';
 import 'package:smarty/leaderboard.dart';
@@ -13,19 +12,22 @@ import 'constants.dart';
 import 'package:provider/provider.dart';
 import 'auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
-import 'energyData.dart';
+import 'package:flutter/services.dart';
 
 void main() {
-  runApp(
-    ChangeNotifierProvider<AuthService>(
-      // Helps to look for AuthService in the entire widget tree
-      child: MyApp(),
-      create: (BuildContext context) {
-        return AuthService();
-      },
-    ),
-  );
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((_) {
+    runApp(
+      ChangeNotifierProvider<AuthService>(
+        // Helps to look for AuthService in the entire widget tree
+        child: MyApp(),
+        create: (BuildContext context) {
+          return AuthService();
+        },
+      ),
+    );
+  });
 }
 
 class MyApp extends StatelessWidget {
@@ -70,7 +72,6 @@ class MyNavigationBar extends StatefulWidget {
 }
 
 class _MyNavigationBarState extends State<MyNavigationBar> {
-  @override
   int _currentIndex = 0;
   final List<Widget> _children = [
     Home(),
