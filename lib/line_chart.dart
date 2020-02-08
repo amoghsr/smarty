@@ -5,10 +5,11 @@ import 'statsGeneration.dart';
 
 class LineChartSample2 extends StatefulWidget {
   @override
+  String energyType;
   String groupby;
   double aspect;
   double maxX;
-  LineChartSample2(this.groupby, this.aspect, this.maxX);
+  LineChartSample2(this.energyType, this.groupby, this.aspect, this.maxX);
 
   State<LineChartSample2> createState() => _LineChartSample2State();
 }
@@ -48,7 +49,9 @@ class _LineChartSample2State extends State<LineChartSample2> {
                       padding: const EdgeInsets.only(
                           right: 18.0, left: 12.0, top: 24, bottom: 12),
                       child: StreamBuilder(
-                        stream: Firestore.instance.collection('consumed_energy').snapshots(),
+                        stream: widget.energyType == 'Generation' ? 
+                        Firestore.instance.collection('generated_energy').snapshots() 
+                        : Firestore.instance.collection('consumed_energy').snapshots(), 
                         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
                           if(snapshot.data == null) return CircularProgressIndicator();
                           return LineChart(
@@ -94,13 +97,13 @@ class _LineChartSample2State extends State<LineChartSample2> {
 
     Map<String, int> hourData = Generation().hourlyData(snapshot, 0, '1');
     List<int> hours = hourData.values.toList();
-    List<FlSpot> hourCoords = new List<FlSpot>();
+    List<FlSpot> hourCoords = [FlSpot(0,0),];
 
     List<int> weekData = Generation().weekData(snapshot, 0, '1');
-    List<FlSpot> weekCoords = new List<FlSpot>();
+    List<FlSpot> weekCoords = [FlSpot(0,0),];
 
     List<int> monthData = new List<int>(12);
-    List<FlSpot> monthCoords = new List<FlSpot>();
+    List<FlSpot> monthCoords = [FlSpot(0,0),];
 
     for(int i = 0, j = 1; i<hourData.length; i++, j+=2) {
       hourCoords.add(
@@ -115,7 +118,6 @@ class _LineChartSample2State extends State<LineChartSample2> {
     }
 
     for(int i = 0, j = 1; i<monthData.length; i++, j+=2) {
-      print(Generation().monthData(snapshot, i, noofdays[i]).toString());
       monthCoords.add(
         FlSpot(
           j.toDouble(), (Generation().monthData(snapshot, i, noofdays[i]).toDouble())%5+1,
