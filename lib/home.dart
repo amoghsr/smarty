@@ -1,3 +1,10 @@
+/*
+* The home page and the initial page the app starts with.
+* This page acts as a doorway to all other parts such as the different rooms,
+* various routines and the nav bar (But this stays common to all)
+*/
+
+
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -27,6 +34,10 @@ class _HomeState extends State<Home> {
   }
 
   @override
+  /*
+  * A notification plugin that provides the app with the ability to send notifications to
+  * the user for certain events such as when there is an anomaly (fire) detected by the flame detector.
+  */
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
   Widget build(BuildContext context) {
     return Scaffold(
@@ -88,16 +99,21 @@ class _HomeState extends State<Home> {
                   }
                 },
               );
-
               await _showNotificationWithDefaultSound(
-                  'FIRE DETECTED!', 'Sprinklers have been activated.');
+                  'FIRE DETECTED', 'Sprinklers have been activated.');
             },
           ),
         ],
       ),
+
+      // Drawer is the hamburger menu.
       drawer: Drawer(
         child: SafeArea(
+
+          // The various items in the hamburger menu are saved inside a ListView, which is basically a vertical list
           child: ListView(
+
+            // ListView items are saved in a children list of Widgets
             children: <Widget>[
               UserAccountsDrawerHeader(
                 accountName: Text(
@@ -122,8 +138,14 @@ class _HomeState extends State<Home> {
                   ),
                 ),
               ),
+
+              // ListTile represents a list tile item in the menu
               ListTile(
+
+                // Leading is an element in the start of the list tile horizontally
                 leading: Icon(FontAwesomeIcons.users),
+
+                // Title of the list
                 title: Text(
                   'Manage Users',
                 ),
@@ -141,6 +163,7 @@ class _HomeState extends State<Home> {
                 ),
               ),
               Divider(),
+              // Log out button
               ListTile(
                 onTap: () async {
                   await Provider.of<AuthService>(context, listen: false)
@@ -155,6 +178,8 @@ class _HomeState extends State<Home> {
           ),
         ),
       ),
+
+      // Here starts the body of the Home Page, nested inside a SafeArea widget to keep content inside the viewport
       body: SafeArea(
         child: ListView(
           padding: EdgeInsets.symmetric(vertical: 20.0),
@@ -185,10 +210,13 @@ class _HomeState extends State<Home> {
             SizedBox(
               height: 20.0,
             ),
+            // The routine carousel is a carousel which lists the routines in the house based on a routine model. (routineCarousel.dart)
             RoutineCarousel(),
             Divider(),
+            // The room carousel is a carousel which lists the rooms in the house based on a room model. (roomCarousel.dart)
             RoomCarousel(),
             Divider(),
+            // The device carousel is a carousel which lists the devices in the house based on a device model. (deviceCarousel.dart)
             DeviceCarousel(),
           ],
         ),
