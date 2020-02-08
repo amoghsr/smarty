@@ -21,7 +21,7 @@ dependencies:
   flutter_icons: ^1.0.0+1
   font_awesome_flutter: ^8.5.0
   fl_chart: ^0.8.0
-#  flutter_spinkit: "^4.1.1"
+  flutter_spinkit: "^4.1.1"
   bubble_tab_indicator: "^0.1.4"
   flutter:
     sdk: flutter

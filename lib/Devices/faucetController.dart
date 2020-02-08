@@ -28,6 +28,8 @@ class FaucetController extends StatefulWidget {
 class _FaucetControllerState extends State<FaucetController> {
   @override
   Widget build(BuildContext context) {
+    double screenwidth = MediaQuery.of(context).size.width;
+    double screenheight = MediaQuery.of(context).size.height;
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
@@ -72,7 +74,7 @@ class _FaucetControllerState extends State<FaucetController> {
             ),
           ),
           SizedBox(
-            width: 20,
+            width: screenwidth * 0.2,
           ),
           Text(
             'ON',

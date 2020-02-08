@@ -313,7 +313,7 @@ class _EnergyStatsState extends State<EnergyStats> {
                                   margin: EdgeInsets.only(
                                     left: screenwidth * 0.02,
                                     right: screenwidth * 0.02,
-                                    top: screenheight * 0.015,
+                                    top: screenheight * 0.01spo5,
                                   ),
                                   width: screenwidth * 0.6,
                                   decoration: BoxDecoration(
