@@ -27,6 +27,7 @@ class _LightControllerState extends State<LightController> {
     return Column(
       children: <Widget>[
         Container(
+          color: Colors.white,
           padding: EdgeInsets.symmetric(
             horizontal: 15,
           ),

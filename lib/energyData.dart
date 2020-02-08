@@ -16,7 +16,6 @@ class _EnergyStatsState extends State<EnergyStats> {
     double screenheight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      // resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Container(
@@ -80,82 +79,77 @@ class _EnergyStatsState extends State<EnergyStats> {
                       ),
                     ),
                     SizedBox(height: screenheight * 0.01),
-                    // Container(
-                    //   child: Container(
-                    //     height: screenheight * 0.07,
-                    //     child: Row(
-                    //       children: <Widget>[
-                    //         SizedBox(width: screenwidth * 0.05),
-                    //         Container(
-                    //           child: Column(
-                    //             children: <Widget>[
-                    //               Row(
-                    //                 children: <Widget>[
-                    //                   Text(
-                    //                     'TODAY 3PM',
-                    //                     style: TextStyle(
-                    //                       fontFamily: 'Montserrat',
-                    //                       color: Theme.of(context).accentColor,
-                    //                       fontSize: 12,
-                    //                     ),
-                    //                   )
-                    //                 ],
-                    //               ),
-                    //               SizedBox(
-                    //                 height: 5,
-                    //               ),
-                    //               Row(
-                    //                 children: <Widget>[
-                    //                   Text(
-                    //                     '76 kWh',
-                    //                     style: TextStyle(
-                    //                       fontFamily: 'Montserrat',
-                    //                       color: Theme.of(context).accentColor,
-                    //                       fontSize: 20,
-                    //                     ),
-                    //                   ),
-                    //                 ],
-                    //               ),
-                    //             ],
-                    //           ),
-                    //         ),
-                    //         SizedBox(width: screenwidth * 0.28),
-                    //       //   Column(
-                    //       //     children: <Widget>[
-                    //       //       Container(
-                    //       //         color: Theme.of(context).accentColor,
-                    //       //         width: screenwidth * 0.4,
-                    //       //         height: screenheight * 0.05,
-                    //       //         child: Center(
-                    //       //           child: Text(
-                    //       //             'VIEW ' + widget.energyType.toUpperCase(),
-                    //       //             style: TextStyle(
-                    //       //                 color: Theme.of(context)
-                    //       //                     .bottomAppBarColor,
-                    //       //                 fontFamily: 'Montserrat',
-                    //       //                 fontSize: 10,
-                    //       //                 fontWeight: FontWeight.w500),
-                    //       //           ),
-                    //       //         ),
-                    //       //       ),
-                    //       //     ],
-                    //       //   ),
-                    //       ],
-                    //     ),
-                    //   ),
-                    // ),
-                    // Divider(),
+                     Container(
+                       child: Container(
+                         height: screenheight * 0.07,
+                         child: Row(
+                           children: <Widget>[
+                             SizedBox(width: screenwidth * 0.05),
+                             Container(
+                               child: Column(
+                                 children: <Widget>[
+                                   Row(
+                                     children: <Widget>[
+                                       Text(
+                                         'TODAY 3PM',
+                                         style: TextStyle(
+                                           fontFamily: 'Montserrat',
+                                           color: Theme.of(context).accentColor,
+                                           fontSize: 12,
+                                         ),
+                                       )
+                                     ],
+                                   ),
+                                   SizedBox(
+                                     height: 5,
+                                   ),
+                                   Row(
+                                     children: <Widget>[
+                                       Text(
+                                         '76 kWh',
+                                         style: TextStyle(
+                                           fontFamily: 'Montserrat',
+                                           color: Theme.of(context).accentColor,
+                                           fontSize: 20,
+                                         ),
+                                       ),
+                                     ],
+                                   ),
+                                 ],
+                               ),
+                             ),
+                             SizedBox(width: screenwidth * 0.28),
+                           //   Column(
+                           //     children: <Widget>[
+                           //       Container(
+                           //         color: Theme.of(context).accentColor,
+                           //         width: screenwidth * 0.4,
+                           //         height: screenheight * 0.05,
+                           //         child: Center(
+                           //           child: Text(
+                           //             'VIEW ' + widget.energyType.toUpperCase(),
+                           //             style: TextStyle(
+                           //                 color: Theme.of(context)
+                           //                     .bottomAppBarColor,
+                           //                 fontFamily: 'Montserrat',
+                           //                 fontSize: 10,
+                           //                 fontWeight: FontWeight.w500),
+                           //           ),
+                           //         ),
+                           //       ),
+                           //     ],
+                           //   ),
+                           ],
+                         ),
+                       ),
+                     ),
+                     Divider(),
                     Container(
                       height: screenheight * 0.15,
+//          color: Colors.blue,
                       child: Container(
-                        margin: EdgeInsets.only(
-                          left: screenwidth * 0.02,
-                          right: screenwidth * 0.02,
-                          top: screenheight * 0.01,
-                          bottom: screenheight * 0.01,
-                        ),
+                        margin: EdgeInsets.all(8.0),
                         width: screenwidth * 0.9,
-                        // height: screenheight * 0.8,
                         decoration: BoxDecoration(
                           color: Theme.of(context).backgroundColor,
                           borderRadius: BorderRadius.circular(10.0),
@@ -165,7 +159,7 @@ class _EnergyStatsState extends State<EnergyStats> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
                             Padding(
-                              padding: EdgeInsets.all(screenheight * 0.002),
+                              padding: EdgeInsets.all(6.0),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
@@ -303,12 +297,7 @@ class _EnergyStatsState extends State<EnergyStats> {
                               height: screenheight * 0.15,
 //          color: Colors.blue,
                               child: Container(
-                                margin: EdgeInsets.only(
-                                  left: screenwidth * 0.02,
-                                  right: screenwidth * 0.02,
-                                  top: screenheight * 0.01,
-                                  bottom: screenheight * 0.01,
-                                ),
+                                margin: EdgeInsets.all(8.0),
                                 width: screenwidth * 0.4,
                                 decoration: BoxDecoration(
                                   color: Theme.of(context).backgroundColor,
@@ -318,8 +307,7 @@ class _EnergyStatsState extends State<EnergyStats> {
                                   // alignment: Alignment.,
                                   children: <Widget>[
                                     Padding(
-                                      padding:
-                                          EdgeInsets.all(screenheight * 0.002),
+                                      padding: EdgeInsets.all(6.0),
                                       child: Column(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
@@ -368,7 +356,7 @@ class _EnergyStatsState extends State<EnergyStats> {
                                                     ),
                                                   ),
                                                   Text(
-                                                    'DISCHARGING',
+                                                    '-',
                                                     style: TextStyle(
                                                       fontFamily: 'Montserrat',
                                                       fontWeight:
@@ -397,12 +385,7 @@ class _EnergyStatsState extends State<EnergyStats> {
                             height: screenheight * 0.15,
 //          color: Colors.blue,
                             child: Container(
-                              margin: EdgeInsets.only(
-                                left: screenwidth * 0.02,
-                                right: screenwidth * 0.02,
-                                top: screenheight * 0.01,
-                                bottom: screenheight * 0.01,
-                              ),
+                              margin: EdgeInsets.all(8.0),
                               width: screenwidth * 0.6,
                               decoration: BoxDecoration(
                                 color: Theme.of(context).backgroundColor,
@@ -415,8 +398,7 @@ class _EnergyStatsState extends State<EnergyStats> {
                                   // alignment: Alignment.,
                                   children: <Widget>[
                                     Padding(
-                                      padding:
-                                          EdgeInsets.all(screenheight * 0.002),
+                                      padding: EdgeInsets.all(6.0),
                                       child: Column(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
