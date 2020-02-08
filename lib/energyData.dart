@@ -83,71 +83,71 @@ class _EnergyStatsState extends State<EnergyStats> {
                       ),
                     ),
                     SizedBox(height: screenheight * 0.01),
-                    // Container(
-                    //   child: Container(
-                    //     height: screenheight * 0.07,
-                    //     child: Row(
-                    //       children: <Widget>[
-                    //         SizedBox(width: screenwidth * 0.05),
-                    //         Container(
-                    //           child: Column(
-                    //             children: <Widget>[
-                    //               Row(
-                    //                 children: <Widget>[
-                    //                   Text(
-                    //                     'TODAY 3PM',
-                    //                     style: TextStyle(
-                    //                       fontFamily: 'Montserrat',
-                    //                       color: Theme.of(context).accentColor,
-                    //                       fontSize: 12,
-                    //                     ),
-                    //                   )
-                    //                 ],
-                    //               ),
-                    //               SizedBox(
-                    //                 height: 5,
-                    //               ),
-                    //               Row(
-                    //                 children: <Widget>[
-                    //                   Text(
-                    //                     '76 kWh',
-                    //                     style: TextStyle(
-                    //                       fontFamily: 'Montserrat',
-                    //                       color: Theme.of(context).accentColor,
-                    //                       fontSize: 20,
-                    //                     ),
-                    //                   ),
-                    //                 ],
-                    //               ),
-                    //             ],
-                    //           ),
-                    //         ),
-                    //         SizedBox(width: screenwidth * 0.28),
-                    //       //   Column(
-                    //       //     children: <Widget>[
-                    //       //       Container(
-                    //       //         color: Theme.of(context).accentColor,
-                    //       //         width: screenwidth * 0.4,
-                    //       //         height: screenheight * 0.05,
-                    //       //         child: Center(
-                    //       //           child: Text(
-                    //       //             'VIEW ' + widget.energyType.toUpperCase(),
-                    //       //             style: TextStyle(
-                    //       //                 color: Theme.of(context)
-                    //       //                     .bottomAppBarColor,
-                    //       //                 fontFamily: 'Montserrat',
-                    //       //                 fontSize: 10,
-                    //       //                 fontWeight: FontWeight.w500),
-                    //       //           ),
-                    //       //         ),
-                    //       //       ),
-                    //       //     ],
-                    //       //   ),
-                    //       ],
-                    //     ),
-                    //   ),
-                    // ),
-                    // Divider(),
+                     Container(
+                       child: Container(
+                         height: screenheight * 0.07,
+                         child: Row(
+                           children: <Widget>[
+                             SizedBox(width: screenwidth * 0.05),
+                             Container(
+                               child: Column(
+                                 children: <Widget>[
+                                   Row(
+                                     children: <Widget>[
+                                       Text(
+                                         'TODAY 3PM',
+                                         style: TextStyle(
+                                           fontFamily: 'Montserrat',
+                                           color: Theme.of(context).accentColor,
+                                           fontSize: 12,
+                                         ),
+                                       )
+                                     ],
+                                   ),
+                                   SizedBox(
+                                     height: 5,
+                                   ),
+                                   Row(
+                                     children: <Widget>[
+                                       Text(
+                                         '76 kWh',
+                                         style: TextStyle(
+                                           fontFamily: 'Montserrat',
+                                           color: Theme.of(context).accentColor,
+                                           fontSize: 20,
+                                         ),
+                                       ),
+                                     ],
+                                   ),
+                                 ],
+                               ),
+                             ),
+                             SizedBox(width: screenwidth * 0.28),
+                           //   Column(
+                           //     children: <Widget>[
+                           //       Container(
+                           //         color: Theme.of(context).accentColor,
+                           //         width: screenwidth * 0.4,
+                           //         height: screenheight * 0.05,
+                           //         child: Center(
+                           //           child: Text(
+                           //             'VIEW ' + widget.energyType.toUpperCase(),
+                           //             style: TextStyle(
+                           //                 color: Theme.of(context)
+                           //                     .bottomAppBarColor,
+                           //                 fontFamily: 'Montserrat',
+                           //                 fontSize: 10,
+                           //                 fontWeight: FontWeight.w500),
+                           //           ),
+                           //         ),
+                           //       ),
+                           //     ],
+                           //   ),
+                           ],
+                         ),
+                       ),
+                     ),
+                     Divider(),
                     Container(
                       height: screenheight * 0.15,
 //          color: Colors.blue,

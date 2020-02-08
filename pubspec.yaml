@@ -21,6 +21,7 @@ dependencies:
   flutter_icons: ^1.0.0+1
   font_awesome_flutter: ^8.5.0
   fl_chart: ^0.8.0
+#  flutter_spinkit: "^4.1.1"
   bubble_tab_indicator: "^0.1.4"
   flutter:
     sdk: flutter
@@ -30,7 +31,7 @@ dependencies:
   provider: ^4.0.2
   sleek_circular_slider : ^1.0.7
   percent_indicator: ^2.1.1+1
-  audioplayers: ^0.14.0
+#  audioplayers: ^0.14.0
   flutter_local_notifications: ^1.1.5+1
 #  cloud_functions: ^0.4.1
   cloud_firestore: ^0.12.9+5
