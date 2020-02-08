@@ -187,7 +187,7 @@ class _EnergyStatsState extends State<EnergyStats> {
                                       Column(
                                         children: <Widget>[
                                           Text(
-                                            'GENERATING',
+                                            'Generating',
                                             style: TextStyle(
                                               fontFamily: 'Montserrat',
                                               fontWeight: FontWeight.w100,
@@ -253,7 +253,7 @@ class _EnergyStatsState extends State<EnergyStats> {
                                     Column(
                                       children: <Widget>[
                                         Text(
-                                          'CONSUMING',
+                                          'Consuming',
                                           style: TextStyle(
                                             fontFamily: 'Montserrat',
                                             fontWeight: FontWeight.w100,

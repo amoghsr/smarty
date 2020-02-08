@@ -1,3 +1,7 @@
+/*
+This file is the entry point for any flutter app. The application starts from the main function.
+*/
+
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:smarty/auth.dart';
@@ -16,7 +20,7 @@ import 'package:flutter/services.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]) // Setting device orientation to portrait only.
       .then((_) {
     runApp(
       ChangeNotifierProvider<AuthService>(
