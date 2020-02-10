@@ -11,11 +11,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:smarty/services/auth.dart';
 import 'package:smarty/shared/constants.dart';
-
-import 'file:///C:/Users/amogh/AndroidStudioProjects/smarty/lib/widgets/devicesCarousel.dart';
-import 'file:///C:/Users/amogh/AndroidStudioProjects/smarty/lib/widgets/roomCarousel.dart';
-import 'file:///C:/Users/amogh/AndroidStudioProjects/smarty/lib/widgets/routineCarousel.dart';
-
+import 'package:smarty/widgets/devicesCarousel.dart';
+import '../widgets/roomCarousel.dart';
+import '../widgets/routineCarousel.dart';
 import '../alertBox.dart';
 
 class Home extends StatefulWidget {
