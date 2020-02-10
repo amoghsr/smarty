@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:smarty/shared/constants.dart';
 
 class Leaderboard extends StatefulWidget {

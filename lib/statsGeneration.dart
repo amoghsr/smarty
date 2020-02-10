@@ -13,7 +13,6 @@ void main() {
 }
 
 class Generation extends StatelessWidget {
-
   // Returns the average generation data in a day.
   int averageDayData(
       AsyncSnapshot<QuerySnapshot> snapshot, int month, String date) {
@@ -62,7 +61,6 @@ class Generation extends StatelessWidget {
 
         // Build based on the stream
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-
           // To show a CircularProgressIndicator as the content loads.
           if (snapshot.data == null) return CircularProgressIndicator();
 

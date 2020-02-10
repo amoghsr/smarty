@@ -4,19 +4,18 @@
 * various routines and the nav bar (But this stays common to all)
 */
 
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
-import 'package:smarty/shared/constants.dart';
 import 'package:smarty/devicesCarousel.dart';
 import 'package:smarty/roomCarousel.dart';
 import 'package:smarty/routineCarousel.dart';
-import 'package:provider/provider.dart';
-import 'alertBox.dart';
 import 'package:smarty/services/auth.dart';
-import 'package:firebase_database/firebase_database.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:smarty/shared/constants.dart';
+
+import 'alertBox.dart';
 
 class Home extends StatefulWidget {
 //  final FirebaseUser currentUser;   //Ignore
@@ -34,7 +33,6 @@ var month = new DateFormat('MMMM');
 String formattedMonth = month.format(now);
 
 class _HomeState extends State<Home> {
-
   final AuthService _auth = AuthService();
 
   DatabaseReference itemRef;
@@ -52,6 +50,7 @@ class _HomeState extends State<Home> {
   * the user for certain events such as when there is an anomaly (fire) detected by the flame detector.
   */
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(

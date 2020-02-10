@@ -1,6 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'statsGeneration.dart';
 
 class LineChartSample2 extends StatefulWidget {
@@ -9,6 +10,7 @@ class LineChartSample2 extends StatefulWidget {
   String groupby;
   double aspect;
   double maxX;
+
   LineChartSample2(this.energyType, this.groupby, this.aspect, this.maxX);
 
   State<LineChartSample2> createState() => _LineChartSample2State();
@@ -19,6 +21,7 @@ class _LineChartSample2State extends State<LineChartSample2> {
     Colors.lightGreenAccent,
     Colors.lightGreenAccent,
   ];
+
   // List<Color> gradientColors2 = [
   //   Colors.white,
   //   Colors.white,

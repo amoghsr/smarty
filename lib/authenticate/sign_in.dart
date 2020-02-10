@@ -1,9 +1,10 @@
+import 'package:flutter/material.dart';
 import 'package:smarty/services/auth.dart';
 import 'package:smarty/shared/loading.dart';
-import 'package:flutter/material.dart';
 
 class SignIn extends StatefulWidget {
   final Function toggleView;
+
   SignIn({this.toggleView});
 
   @override
@@ -61,7 +62,8 @@ class _SignInState extends State<SignIn> {
                       decoration: InputDecoration(
                         labelText: "Email Address",
                       ),
-                      validator: (val) => val.isEmpty ? 'Enter your email' : null,
+                      validator: (val) =>
+                          val.isEmpty ? 'Enter your email' : null,
                       onChanged: (val) {
                         setState(() => email = val);
                       },

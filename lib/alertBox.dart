@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/material.dart';
+
 // Future showAlertBox(
 //     BuildContext context, String img, String title, String desc, Color color) {
 //   return showDialog(
@@ -20,7 +21,8 @@ class CustomDialog extends StatelessWidget {
   final String title, description, buttonText;
   final Image image;
   final Color col;
-  CustomDialog ({
+
+  CustomDialog({
     @required this.title,
     @required this.description,
     @required this.buttonText,
@@ -34,9 +36,11 @@ class CustomDialog extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(Consts.padding),
       ),
-      elevation: 0.0, // Elevation means the height of element on the screen from the floor. Basically gives a drop shadow.
+      elevation: 0.0,
+      // Elevation means the height of element on the screen from the floor. Basically gives a drop shadow.
       backgroundColor: Colors.transparent,
-      child: dialogContent(context), // The required child is the content inside the dialog box.
+      child: dialogContent(
+          context), // The required child is the content inside the dialog box.
     );
   }
 

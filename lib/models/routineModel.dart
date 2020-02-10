@@ -6,11 +6,7 @@ class Routine {
   String routineName;
   String routineDesc;
 
-  Routine({
-    this.icon,
-    this.routineName,
-    this.routineDesc
-  });
+  Routine({this.icon, this.routineName, this.routineDesc});
 }
 
 List<Routine> routines = [

@@ -1,4 +1,3 @@
-
 /*
 This file stores styling for some of the components needed in the UI
  */

@@ -1,17 +1,20 @@
-import 'package:flutter/material.dart';
-import 'package:smarty/Devices/CommonControllers/deviceCommonControllers.dart';
-import 'package:smarty/Devices/acController.dart';
-import 'package:smarty/Devices/lightController.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'Devices/faucetController.dart';
-import 'Devices/speakerController.dart';
-import 'Devices/tvController.dart';
+import 'package:flutter/material.dart';
+import 'package:smarty/devices/CommonControllers/deviceCommonControllers.dart';
+import 'package:smarty/devices/acController.dart';
+import 'package:smarty/devices/lightController.dart';
+
+import 'devices/faucetController.dart';
+import 'devices/speakerController.dart';
+import 'devices/tvController.dart';
 
 class DevicesController extends StatefulWidget {
   String chRoom;
   String chDevice;
+
   // bool isDisabled;
   DevicesController({this.chDevice, this.chRoom});
+
   _DevicesControllerState createState() => _DevicesControllerState();
 }
 

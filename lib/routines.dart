@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:smarty/shared/constants.dart';
 import 'package:smarty/models/routineModel.dart';
+import 'package:smarty/shared/constants.dart';
 
 class RoutineScreen extends StatefulWidget {
   @override
@@ -64,10 +64,13 @@ class _RoutineScreenState extends State<RoutineScreen> {
                                 Expanded(
                                   flex: 2,
                                   child: Padding(
-                                    padding: EdgeInsets.symmetric(horizontal: 25.0),
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 25.0),
                                     child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: <Widget>[
                                         Row(
                                           children: <Widget>[
@@ -107,7 +110,10 @@ class _RoutineScreenState extends State<RoutineScreen> {
                                   children: <Widget>[
                                     Row(
                                       children: <Widget>[
-                                        Icon(Icons.arrow_forward_ios, color: Color(0xFFf8931f),),
+                                        Icon(
+                                          Icons.arrow_forward_ios,
+                                          color: Color(0xFFf8931f),
+                                        ),
                                       ],
                                     ),
                                   ],
@@ -118,7 +124,6 @@ class _RoutineScreenState extends State<RoutineScreen> {
                         ],
                       ),
                     );
-
                   },
                 ),
               ),

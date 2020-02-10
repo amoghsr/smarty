@@ -1,9 +1,10 @@
+import 'package:flutter/material.dart';
 import 'package:smarty/services/auth.dart';
 import 'package:smarty/shared/loading.dart';
-import 'package:flutter/material.dart';
 
 class Register extends StatefulWidget {
   final Function toggleView;
+
   Register({this.toggleView});
 
   @override
@@ -20,8 +21,6 @@ class _RegisterState extends State<Register> {
   String name = '';
   String email = '';
   String password = '';
-
-
 
   @override
   Widget build(BuildContext context) {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
 import 'package:smarty/shared/constants.dart';
+
 import 'energyData.dart';
 
 class Statistics extends StatefulWidget {
@@ -50,7 +50,6 @@ class _StatisticsState extends State<Statistics> {
                     ],
                   ),
                   Container(
-
                     height: screenheight,
                     width: screenwidth,
                     child: TabBarView(

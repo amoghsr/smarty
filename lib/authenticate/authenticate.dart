@@ -1,6 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:smarty/authenticate/register.dart';
 import 'package:smarty/authenticate/sign_in.dart';
-import 'package:flutter/material.dart';
 
 class Authenticate extends StatefulWidget {
   @override
@@ -8,9 +8,9 @@ class Authenticate extends StatefulWidget {
 }
 
 class _AuthenticateState extends State<Authenticate> {
-
   bool showSignIn = true;
-  void toggleView(){
+
+  void toggleView() {
     //print(showSignIn.toString());
     setState(() => showSignIn = !showSignIn);
   }
@@ -18,9 +18,9 @@ class _AuthenticateState extends State<Authenticate> {
   @override
   Widget build(BuildContext context) {
     if (showSignIn) {
-      return SignIn(toggleView:  toggleView);
+      return SignIn(toggleView: toggleView);
     } else {
-      return Register(toggleView:  toggleView);
+      return Register(toggleView: toggleView);
     }
   }
 }

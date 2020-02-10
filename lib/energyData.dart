@@ -1,12 +1,14 @@
 import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
 import 'package:flutter/material.dart';
-import 'package:smarty/line_chart.dart';
 import 'package:intl/intl.dart';
+import 'package:smarty/line_chart.dart';
 
 class EnergyStats extends StatefulWidget {
   @override
   String energyType;
+
   EnergyStats({this.energyType});
+
   _EnergyStatsState createState() => _EnergyStatsState();
 }
 
@@ -15,7 +17,7 @@ var now = new DateTime.now();
 var date = new DateFormat('dd');
 String formattedDate = date.format(now);
 var day = new DateFormat('EEEEE');
-String formattedDay= day.format(now);
+String formattedDay = day.format(now);
 var month = new DateFormat('MMMM');
 String formattedMonth = month.format(now);
 

@@ -84,7 +84,8 @@ class DeviceCarousel extends StatelessWidget {
                         onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => FirebaseControlDevices()),
+                            MaterialPageRoute(
+                                builder: (context) => FirebaseControlDevices()),
                           );
                         },
                         child: Container(

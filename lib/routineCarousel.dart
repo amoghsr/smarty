@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'routines.dart';
 import 'package:smarty/models/routineModel.dart';
+
+import 'routines.dart';
 
 class RoutineCarousel extends StatelessWidget {
   @override

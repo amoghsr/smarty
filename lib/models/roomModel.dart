@@ -21,7 +21,7 @@ class Room {
   });
 }
 
-List<String> getDv (String roomname) {
+List<String> getDv(String roomname) {
   List<String> devicelist = [];
   for (var i in devices) {
     if (i.inRoom == roomname) {

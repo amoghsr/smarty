@@ -1,10 +1,10 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:sleek_circular_slider/sleek_circular_slider.dart';
-import 'file:///C:/Users/amogh/AndroidStudioProjects/smarty/lib/models/devicesModel.dart';
+import 'package:smarty/devices_controller.dart';
 import 'package:smarty/models/roomModel.dart';
 import 'package:smarty/shared/constants.dart';
-import 'package:smarty/devices_controller.dart';
-import 'package:firebase_database/firebase_database.dart';
+
+import 'file:///C:/Users/amogh/AndroidStudioProjects/smarty/lib/models/devicesModel.dart';
 
 import 'models/roomModel.dart';
 
@@ -33,7 +33,9 @@ Device getDevState(String roomName, String devName) {
 class MyOtherRoom extends StatefulWidget {
   @override
   int initRoom;
+
   MyOtherRoom({@required this.initRoom});
+
   _MyOtherRoomState createState() => _MyOtherRoomState();
 }
 
@@ -52,6 +54,7 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
   bool isSwitched = true;
   int brightness = 60;
   DatabaseReference itemRef;
+
   void initState() {
     initrmName = tabList[widget.initRoom].text;
     rmName = tabList[widget.initRoom].text;
@@ -144,7 +147,7 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
                       child: Row(
                         children: <Widget>[
                           Text(
-                            'Devices',
+                            'devices',
                             style: TextStyle(
                               color: Theme.of(context).accentColor,
                               fontSize: 20,
