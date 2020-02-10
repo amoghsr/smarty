@@ -7,7 +7,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
-final FirebaseApp app = FirebaseApp();
+final FirebaseApp app = FirebaseApp(name: null);
 
 class FirebaseControlDevices extends StatefulWidget {
   @override
