@@ -9,13 +9,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
-import 'package:smarty/devicesCarousel.dart';
-import 'package:smarty/roomCarousel.dart';
-import 'package:smarty/routineCarousel.dart';
 import 'package:smarty/services/auth.dart';
 import 'package:smarty/shared/constants.dart';
 
-import 'alertBox.dart';
+import 'file:///C:/Users/amogh/AndroidStudioProjects/smarty/lib/widgets/devicesCarousel.dart';
+import 'file:///C:/Users/amogh/AndroidStudioProjects/smarty/lib/widgets/roomCarousel.dart';
+import 'file:///C:/Users/amogh/AndroidStudioProjects/smarty/lib/widgets/routineCarousel.dart';
+
+import '../alertBox.dart';
 
 class Home extends StatefulWidget {
 //  final FirebaseUser currentUser;   //Ignore
