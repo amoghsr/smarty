@@ -146,7 +146,7 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
                       child: Row(
                         children: <Widget>[
                           Text(
-                            'devices',
+                            'Devices',
                             style: TextStyle(
                               color: Theme.of(context).accentColor,
                               fontSize: 20,
