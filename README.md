@@ -13,8 +13,8 @@ The project is currently moving to it's 3rd stage of three in development.
 
 ## Milestones
 
-- Stage 1 complete. Report is available on Teams.
-- Stage 2 complete. Report is available on Teams.
+- (10/02/2020) Stage 2 complete. Report is available on Teams.
+- (28/11/2020) Stage 1 complete. Report is available on Teams.
 
 ## Resources
 - [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
