@@ -49,10 +49,10 @@ void setColor(Color newvalue, String room, String device) {
       .update({'Color': hex});
 }
 
-void setBrightness(int newvalue, String room, String device) {
+void setBrightness(int newvalue, String room, String device, String type) {
   itemRef
       .child("Rooms/" + room + "/devices/" + device + "/")
-      .update({'Brightness': newvalue});
+      .update({type: newvalue});
 }
 
 Color stringtocol(String code) {
@@ -119,4 +119,3 @@ Container topAppBar(String roomName, String appliance, IconData icon) {
     ),
   );
 }
-

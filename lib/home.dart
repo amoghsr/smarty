@@ -71,6 +71,14 @@ class _HomeState extends State<Home> {
                   builder: (BuildContext context) => StreamBuilder(
                         stream: itemRef.child("Sensors/Fire/").onValue,
                         builder: (context, snap) {
+                          if (snap.data == null)
+                            return CustomDialog(
+                              image: Image.asset("assets/images/fire.png"),
+                              title: "NO NOTIFICATION!",
+                              description: "What a boring day",
+                              col: Color(0xffE26069),
+                              buttonText: "Okay",
+                            );
                           Map<String, dynamic> values =
                               new Map<String, dynamic>.from(
                                   snap.data.snapshot.value);
@@ -84,9 +92,8 @@ class _HomeState extends State<Home> {
                             );
                           } else {
                             return CustomDialog(
-                              image:
-                                  Image.asset("assets/images/pngguru.com.png"),
-                              title: "NO NOTIFICATION",
+                              image: Image.asset("assets/images/fire.png"),
+                              title: "NO NOTIFICATION!",
                               description: "What a boring day",
                               col: Color(0xffE26069),
                               buttonText: "Okay",
@@ -94,33 +101,6 @@ class _HomeState extends State<Home> {
                           }
                         },
                       ));
-              StreamBuilder(
-                stream: itemRef.child("Sensors/Fire/").onValue,
-                builder: (context, snap) {
-                  if (snap.data == null)
-                    return CustomDialog(
-                      image: Image.asset("assets/images/fire.png"),
-                      title: "NO NOTIFICATION!",
-                      description: "What a boring day",
-                      col: Color(0xffE26069),
-                      buttonText: "Okay",
-                    );
-
-                  Map<String, dynamic> values =
-                      new Map<String, dynamic>.from(snap.data.snapshot.value);
-                  if (values["Danger"] == "high") {
-                    return CustomDialog(
-                      image: Image.asset("assets/images/fire.png"),
-                      title: "FIRE DETECTED!",
-                      description: "Sprinklers have been activated.",
-                      col: Color(0xffE26069),
-                      buttonText: "Okay",
-                    );
-                  } else {
-                    return null;
-                  }
-                },
-              );
               await _showNotificationWithDefaultSound(
                   'FIRE DETECTED', 'Sprinklers have been activated.');
             },

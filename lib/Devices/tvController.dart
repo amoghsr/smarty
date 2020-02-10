@@ -188,14 +188,44 @@ class _TVControllerState extends State<TVController> {
               ),
               child: Container(
                 width: 250,
-                child: Slider(
-                  value: widget.brightness.toDouble(),
-                  max: 100,
-                  min: 0,
-                  onChanged: (double newValue) {
-                    setState(() {
-                      widget.brightness = newValue.round();
-                    });
+                child: StreamBuilder(
+                  stream: widget.itemRef
+                      .child("Rooms/" +
+                          widget.roomName +
+                          "/devices/" +
+                          widget.devName +
+                          "/")
+                      .onValue,
+                  builder: (context, snap) {
+                    if (snap.data == null)
+                      return Slider(
+                        value: 0.0,
+                        max: 100,
+                        min: 0,
+                        onChanged: (double newValue) {
+                          setBrightness(newValue.round(), widget.roomName,
+                              widget.devName, "Volume");
+                          setState(() {
+                            brightness = newValue.round();
+                          });
+                        },
+                      );
+                    ;
+
+                    Map<String, dynamic> values =
+                        new Map<String, dynamic>.from(snap.data.snapshot.value);
+                    return Slider(
+                      value: values["Volume"].toDouble(),
+                      max: 100,
+                      min: 0,
+                      onChanged: (double newValue) {
+                        setBrightness(newValue.round(), widget.roomName,
+                            widget.devName, "Volume");
+                        setState(() {
+                          brightness = newValue.round();
+                        });
+                      },
+                    );
                   },
                 ),
               ),

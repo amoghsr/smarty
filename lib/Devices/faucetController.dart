@@ -69,7 +69,6 @@ class _FaucetControllerState extends State<FaucetController> {
                       inactiveTrackColor: Theme.of(context).canvasColor,
                       inactiveThumbColor: Theme.of(context).canvasColor,
                     );
-
                   Map<String, dynamic> values =
                       new Map<String, dynamic>.from(snap.data.snapshot.value);
                   return Switch(

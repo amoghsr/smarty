@@ -22,6 +22,13 @@ class LightController extends StatefulWidget {
 }
 
 class _LightControllerState extends State<LightController> {
+  void initState() {
+    super.initState();
+    final FirebaseDatabase database = FirebaseDatabase
+        .instance; //Rather then just writing FirebaseDatabase(), get the instance.
+    itemRef = database.reference();
+  }
+
   @override
   Widget build(BuildContext context) {
     double screenwidth = MediaQuery.of(context).size.width;
@@ -67,8 +74,7 @@ class _LightControllerState extends State<LightController> {
                     builder: (context, snap) {
                       if (snap.data == null)
                         return Icon(Icons.wb_incandescent,
-                            size: 48, color: Theme.of(context).canvasColor);
-
+                            size: 48, color: Colors.white);
                       Map<String, dynamic> values =
                           new Map<String, dynamic>.from(
                               snap.data.snapshot.value);
@@ -117,7 +123,6 @@ class _LightControllerState extends State<LightController> {
                           inactiveTrackColor: Theme.of(context).canvasColor,
                           inactiveThumbColor: Theme.of(context).canvasColor,
                         );
-
                       Map<String, dynamic> values =
                           new Map<String, dynamic>.from(
                               snap.data.snapshot.value);
@@ -283,7 +288,7 @@ class _LightControllerState extends State<LightController> {
                           min: 0,
                           onChanged: (double newValue) {
                             setBrightness(newValue.round(), widget.roomName,
-                                widget.devName);
+                                widget.devName, "Brightness");
                             setState(() {
                               brightness = newValue.round();
                             });
@@ -300,7 +305,7 @@ class _LightControllerState extends State<LightController> {
                         min: 0,
                         onChanged: (double newValue) {
                           setBrightness(newValue.round(), widget.roomName,
-                              widget.devName);
+                              widget.devName, "Brightness");
                           setState(() {
                             brightness = newValue.round();
                           });
