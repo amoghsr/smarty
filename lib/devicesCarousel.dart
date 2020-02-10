@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:smarty/firebaseControlDevices.dart';
 
-import 'devicesModel.dart';
+import 'models/devicesModel.dart';
 
 class DeviceCarousel extends StatelessWidget {
   @override
