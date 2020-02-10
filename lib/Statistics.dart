@@ -30,7 +30,6 @@ class _StatisticsState extends State<Statistics> {
             child: DefaultTabController(
               length: 2,
               child: Column(
-                // mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
                   TabBar(
                     labelPadding: EdgeInsets.only(left: 50, right: 50, top: 5),
@@ -49,14 +48,9 @@ class _StatisticsState extends State<Statistics> {
                         icon: Icon(FontAwesomeIcons.plug),
                       ),
                     ],
-                    // onTap: (value) {
-                    //   setState(() {
-                    //     ConsumptionStats();
-                    //   });
-                    // },)
                   ),
                   Container(
-                    // color: Colors.yellow,
+
                     height: screenheight,
                     width: screenwidth,
                     child: TabBarView(

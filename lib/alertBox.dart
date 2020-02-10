@@ -14,27 +14,33 @@ import 'package:firebase_database/firebase_database.dart';
 //   );
 // }
 
+// A dialog popup that is displayed when there is an anomaly (fire) detected by the sensors.
 class CustomDialog extends StatelessWidget {
+  // Init various values needed by the popup
   final String title, description, buttonText;
   final Image image;
   final Color col;
-  CustomDialog(
-      {@required this.title,
-      @required this.description,
-      @required this.buttonText,
-      this.image,
-      this.col});
+  CustomDialog ({
+    @required this.title,
+    @required this.description,
+    @required this.buttonText,
+    this.image,
+    this.col,
+  });
+
   Widget build(BuildContext context) {
+    // Returning a dialog box. Here we are specifying the properties of the dialog box.
     return Dialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(Consts.padding),
       ),
-      elevation: 0.0,
+      elevation: 0.0, // Elevation means the height of element on the screen from the floor. Basically gives a drop shadow.
       backgroundColor: Colors.transparent,
-      child: dialogContent(context),
+      child: dialogContent(context), // The required child is the content inside the dialog box.
     );
   }
 
+  // Content inside the dialogBox
   dialogContent(BuildContext context) {
     return Stack(
       children: <Widget>[
@@ -62,6 +68,7 @@ class CustomDialog extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min, // To make the card compact
             children: <Widget>[
+              // Title of the popup
               Text(
                 title,
                 style: TextStyle(
@@ -72,6 +79,7 @@ class CustomDialog extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 16.0),
+              // Description on the popup
               Text(
                 description,
                 textAlign: TextAlign.center,
@@ -84,6 +92,7 @@ class CustomDialog extends StatelessWidget {
               SizedBox(height: 24.0),
               Align(
                 alignment: Alignment.bottomCenter,
+                // A button used for closing the dialog plus switching off the fire alarm.
                 child: FlatButton(
                   onPressed: () {
                     FirebaseDatabase.instance

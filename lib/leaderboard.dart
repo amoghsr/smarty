@@ -19,7 +19,16 @@ class _LeaderboardState extends State<Leaderboard> {
       ),
       drawer: Drawer(),
       body: SafeArea(
-        child: ListView(
+        child: Column(
+          children: <Widget>[
+//            ListTile(
+//              leading: Image(
+//                image: AssetImage('assets/images/shield.png'),
+//              ),
+//              title: Text('John Doe'),
+//              subtitle: Text('Saved the most this week.'),
+//            )
+          ],
         ),
       ),
     );
