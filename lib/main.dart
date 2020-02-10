@@ -11,7 +11,9 @@ import 'package:smarty/shared/constants.dart';
 import 'package:smarty/wrapper.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    MyApp(),
+  );
 }
 
 class MyApp extends StatelessWidget {

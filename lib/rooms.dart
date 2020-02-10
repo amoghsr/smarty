@@ -4,7 +4,7 @@ import 'package:smarty/devices_controller.dart';
 import 'package:smarty/models/roomModel.dart';
 import 'package:smarty/shared/constants.dart';
 
-import 'file:///C:/Users/amogh/AndroidStudioProjects/smarty/lib/models/devicesModel.dart';
+import 'package:smarty/models/devicesModel.dart';
 
 import 'models/roomModel.dart';
 
