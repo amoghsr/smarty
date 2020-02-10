@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:smarty/constants.dart';
-
+import 'package:smarty/shared/constants.dart';
 class Security extends StatefulWidget {
   @override
   _SecurityState createState() => _SecurityState();

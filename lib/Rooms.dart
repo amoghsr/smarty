@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 import 'file:///C:/Users/amogh/AndroidStudioProjects/smarty/lib/models/devicesModel.dart';
 import 'package:smarty/models/roomModel.dart';
-import 'constants.dart';
+import 'package:smarty/shared/constants.dart';
 import 'package:smarty/devices_controller.dart';
 import 'package:firebase_database/firebase_database.dart';
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:smarty/constants.dart';
+import 'package:smarty/shared/constants.dart';
 import 'package:smarty/models/routineModel.dart';
 
 class RoutineScreen extends StatefulWidget {

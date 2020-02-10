@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:smarty/Devices/CommonControllers/deviceCommonControllers.dart';
-import 'package:smarty/constants.dart';
+import 'package:smarty/shared/constants.dart';
 
 class FaucetController extends StatefulWidget {
   const FaucetController({

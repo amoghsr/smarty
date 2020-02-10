@@ -1,6 +1,6 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:smarty/constants.dart';
+import 'package:smarty/shared/constants.dart';
 
 bool isSwitched = false;
 Color bulbColor = Colors.white;

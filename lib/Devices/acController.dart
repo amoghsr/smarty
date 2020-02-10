@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 import 'package:smarty/Devices/CommonControllers/deviceCommonControllers.dart';
-import 'package:smarty/constants.dart';
+import 'package:smarty/shared/constants.dart';
 
 class ACController extends StatelessWidget {
   const ACController({

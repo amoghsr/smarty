@@ -10,7 +10,7 @@ import 'package:provider/provider.dart';
 import 'package:smarty/models/user.dart';
 import 'package:smarty/services/auth.dart';
 
-import 'constants.dart';
+import 'package:smarty/shared/constants.dart';
 
 void main() {
   runApp(MyApp());

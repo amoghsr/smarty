@@ -1,7 +1,7 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:smarty/constants.dart';
+import 'package:smarty/shared/constants.dart';
 
 import 'CommonControllers/deviceCommonControllers.dart';
 

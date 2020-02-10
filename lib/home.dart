@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
-import 'package:smarty/constants.dart';
+import 'package:smarty/shared/constants.dart';
 import 'package:smarty/devicesCarousel.dart';
 import 'package:smarty/roomCarousel.dart';
 import 'package:smarty/routineCarousel.dart';
