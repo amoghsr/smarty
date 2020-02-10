@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:smarty/devices/CommonControllers/deviceCommonControllers.dart';
 import 'package:smarty/devices/acController.dart';
 import 'package:smarty/devices/lightController.dart';
-
 import 'devices/faucetController.dart';
 import 'devices/speakerController.dart';
 import 'devices/tvController.dart';
