@@ -4,7 +4,8 @@ This file helps create the carousels for the devices in the house.
 
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:smarty/firebaseControlDevices.dart';
+
+import 'file:///C:/Users/amogh/AndroidStudioProjects/smarty/lib/test/firebaseControlDevices.dart';
 
 import '../models/devicesModel.dart';
 

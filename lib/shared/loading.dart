@@ -1,15 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class Loading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.brown[100],
-      child: Center(
-        child: SpinKitChasingDots(
-          color: Colors.brown,
-          size: 50.0,
+    return Scaffold(
+      body: Center(
+        child: Container(
+          color: Theme.of(context).scaffoldBackgroundColor,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              CircularProgressIndicator(
+                backgroundColor: Theme.of(context).backgroundColor,
+              ),
+              SizedBox(
+                height: 25,
+              ),
+              Text(
+                'Taking you in',
+                style: TextStyle(
+                  fontWeight: FontWeight.w700,
+                  fontSize: 12,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

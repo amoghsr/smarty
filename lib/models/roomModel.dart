@@ -29,7 +29,6 @@ List<String> getDv(String roomname) {
       // devicelist.add(i.icon);
     }
   }
-  print(devicelist);
   return devicelist;
 }
 

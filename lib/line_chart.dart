@@ -22,10 +22,6 @@ class _LineChartSample2State extends State<LineChartSample2> {
     Colors.lightGreenAccent,
   ];
 
-  // List<Color> gradientColors2 = [
-  //   Colors.white,
-  //   Colors.white,
-  // ];
   bool showAvg = false;
 
   @override

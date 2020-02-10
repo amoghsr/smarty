@@ -5,19 +5,17 @@ import 'package:smarty/services/database.dart';
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  // create user obj based on firebase user
+  // Create user obj based on Firebase user
   User _userFromFirebaseUser(FirebaseUser user) {
     return user != null ? User(uid: user.uid) : null;
   }
 
-  // auth change user stream
+  // Auth change user stream
   Stream<User> get user {
-    return _auth.onAuthStateChanged
-        //.map((FirebaseUser user) => _userFromFirebaseUser(user));
-        .map(_userFromFirebaseUser);
+    return _auth.onAuthStateChanged.map(_userFromFirebaseUser);
   }
 
-  // sign in anon
+  // Sign in anon
   Future signInAnon() async {
     try {
       AuthResult result = await _auth.signInAnonymously();
@@ -29,7 +27,7 @@ class AuthService {
     }
   }
 
-  // sign in with email and password
+  // Sign in with email and password
   Future signInWithEmailAndPassword(String email, String password) async {
     try {
       AuthResult result = await _auth.signInWithEmailAndPassword(
@@ -50,7 +48,7 @@ class AuthService {
       FirebaseUser user = result.user;
       // create a new document for the user with the uid
       await DatabaseService(uid: user.uid)
-          .updateUserData('0', 'new crew member', 100);
+          .updateUserData('UserName1', 'Adult', 'KiwiLime');
       return _userFromFirebaseUser(user);
     } catch (error) {
       print(error.toString());

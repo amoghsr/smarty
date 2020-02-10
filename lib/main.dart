@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:provider/provider.dart';
-import 'package:smarty/statistics.dart';
-import 'package:smarty/home.dart';
-import 'package:smarty/leaderboard.dart';
 import 'package:smarty/models/user.dart';
-import 'package:smarty/security.dart';
+import 'package:smarty/screens/home.dart';
+import 'package:smarty/screens/leaderboard.dart';
+import 'package:smarty/screens/security.dart';
+import 'package:smarty/screens/statistics.dart';
 import 'package:smarty/services/auth.dart';
 import 'package:smarty/shared/constants.dart';
 import 'package:smarty/wrapper.dart';
