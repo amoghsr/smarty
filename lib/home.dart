@@ -14,8 +14,9 @@ import 'package:smarty/roomCarousel.dart';
 import 'package:smarty/routineCarousel.dart';
 import 'package:provider/provider.dart';
 import 'alertBox.dart';
-import 'auth.dart';
+import 'package:smarty/services/auth.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Home extends StatefulWidget {
 //  final FirebaseUser currentUser;   //Ignore
@@ -33,6 +34,9 @@ var month = new DateFormat('MMMM');
 String formattedMonth = month.format(now);
 
 class _HomeState extends State<Home> {
+
+  final AuthService _auth = AuthService();
+
   DatabaseReference itemRef;
 
   void initState() {
@@ -181,8 +185,7 @@ class _HomeState extends State<Home> {
               // Log out button
               ListTile(
                 onTap: () async {
-                  await Provider.of<AuthService>(context, listen: false)
-                      .logout();
+                  await _auth.signOut();
                 },
                 leading: Icon(Icons.exit_to_app),
                 title: Text(
