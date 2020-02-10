@@ -12,13 +12,8 @@ import 'package:intl/intl.dart';
 import 'package:smarty/services/auth.dart';
 import 'package:smarty/shared/constants.dart';
 import 'package:smarty/widgets/devicesCarousel.dart';
-<<<<<<< HEAD
-import '../widgets/roomCarousel.dart';
-import '../widgets/routineCarousel.dart';
-=======
 import 'package:smarty/widgets/roomCarousel.dart';
 import 'package:smarty/widgets/routineCarousel.dart';
->>>>>>> 5dffffe92bcba09e2bc02b9bbc718352ff8fdbb4
 import '../alertBox.dart';
 
 class Home extends StatefulWidget {
