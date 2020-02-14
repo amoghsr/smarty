@@ -6,10 +6,10 @@ import 'statsGeneration.dart';
 
 class LineChartSample2 extends StatefulWidget {
   @override
-  String energyType;
-  String groupby;
-  double aspect;
-  double maxX;
+  final String energyType;
+  final String groupby;
+  final double aspect;
+  final double maxX;
 
   LineChartSample2(this.energyType, this.groupby, this.aspect, this.maxX);
 

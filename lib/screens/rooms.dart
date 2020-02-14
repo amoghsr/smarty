@@ -38,7 +38,7 @@ class MyOtherRoom extends StatefulWidget {
 
 // String appBarrmName = tabList[0].text;
 
-Color bulb_color = Colors.white;
+Color bulbColor = Colors.white;
 
 String currRoom = tabList[0].text;
 String currDevice = rooms[0].d[0];
