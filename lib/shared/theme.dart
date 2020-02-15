@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 
-ThemeData darkTheme = ThemeData.dark().copyWith(
+ThemeData darkTheme = ThemeData(
   brightness: Brightness.dark,
   accentColor: Colors.lightGreenAccent,
   platform: TargetPlatform.iOS,
+  fontFamily: 'Montserrat',
 );
 
-ThemeData lightTheme = ThemeData.light().copyWith(
+ThemeData lightTheme = ThemeData(
   brightness: Brightness.light,
-//  accentColor: Color(0xff40bf7a),
   backgroundColor: Colors.grey,
+  accentColor: Colors.green,
+  primaryColor: Colors.green,
   platform: TargetPlatform.iOS,
+  fontFamily: 'Montserrat',
 );
