@@ -140,12 +140,10 @@ class _HomeState extends State<Home> {
                   ),
                 ),
               ),
-
               // ListTile represents a list tile item in the menu
               ListTile(
                 // Leading is an element in the start of the list tile horizontally
                 leading: Icon(FontAwesomeIcons.users),
-
                 // Title of the list
                 title: Text(
                   'Manage Users',
