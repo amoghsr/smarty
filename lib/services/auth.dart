@@ -40,15 +40,15 @@ class AuthService {
     }
   }
 
-  // register with email and password
-  Future registerWithEmailAndPassword(String email, String password) async {
+  // Register with email, password, name and age.
+  Future registerWithEmailAndPassword(String email, String password, String name, String age) async {
     try {
       AuthResult result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       FirebaseUser user = result.user;
       // create a new document for the user with the uid
       await DatabaseService(uid: user.uid)
-          .updateUserData('UserName1', 'Adult', 'KiwiLime');
+          .updateUserData(name, age);
       return _userFromFirebaseUser(user);
     } catch (error) {
       print(error.toString());
@@ -56,7 +56,7 @@ class AuthService {
     }
   }
 
-  // sign out
+  // Sign out
   Future signOut() async {
     try {
       return await _auth.signOut();
@@ -66,17 +66,4 @@ class AuthService {
     }
   }
 
-  Future createUser(
-      {String firstName,
-      String lastName,
-      String email,
-      String password}) async {
-    var r = await FirebaseAuth.instance
-        .createUserWithEmailAndPassword(email: email, password: password);
-
-    var u = r.user;
-    UserUpdateInfo info = UserUpdateInfo();
-    info.displayName = '$firstName $lastName';
-    return await u.updateProfile(info);
-  }
 }

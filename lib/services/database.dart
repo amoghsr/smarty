@@ -6,16 +6,15 @@ class DatabaseService {
   DatabaseService({this.uid});
 
   // collection reference
-  final CollectionReference userDataCollection =
-      Firestore.instance.collection('UserData');
+  final CollectionReference userDataCollection = Firestore.instance.collection('UserData');
 
-  Future<void> updateUserData(
-      String ageGroup, String name, String juice) async {
+  Future<void> updateUserData(String name, String age) async {
+
     return await userDataCollection.document(uid).setData({
       'name': name,
-      'age_group': ageGroup,
-      'juice': juice,
+      'age_group': age,
     });
+
   }
 
   // get brews stream
