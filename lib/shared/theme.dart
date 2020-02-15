@@ -4,8 +4,6 @@ ThemeData darkTheme = ThemeData.dark().copyWith(
   brightness: Brightness.dark,
   accentColor: Colors.lightGreenAccent,
   platform: TargetPlatform.iOS,
-  appBarTheme: AppBarTheme(
-  ),
 );
 
 ThemeData lightTheme = ThemeData.light().copyWith(
@@ -13,5 +11,4 @@ ThemeData lightTheme = ThemeData.light().copyWith(
 //  accentColor: Color(0xff40bf7a),
   backgroundColor: Colors.grey,
   platform: TargetPlatform.iOS,
-
 );
