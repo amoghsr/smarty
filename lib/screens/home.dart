@@ -15,6 +15,9 @@ import 'package:smarty/widgets/devicesCarousel.dart';
 import 'package:smarty/widgets/roomCarousel.dart';
 import 'package:smarty/widgets/routineCarousel.dart';
 import '../alertBox.dart';
+import 'package:provider/provider.dart';
+import 'package:smarty/models/themeModel.dart';
+import 'package:smarty/main.dart';
 
 class Home extends StatefulWidget {
 //  final FirebaseUser currentUser;   //Ignore
@@ -35,6 +38,7 @@ class _HomeState extends State<Home> {
   final AuthService _auth = AuthService();
 
   DatabaseReference itemRef;
+  bool valueSwitch = true;
 
   void initState() {
     super.initState();
@@ -151,6 +155,19 @@ class _HomeState extends State<Home> {
                 leading: Icon(Icons.settings),
                 title: Text(
                   'Account Settings',
+                ),
+              ),
+              ListTile(
+                leading: Icon(FontAwesomeIcons.solidMoon),
+                title: Text('Dark Mode'),
+                trailing: Switch(
+                  value: valueSwitch,
+                  onChanged: (value) {
+                    setState(() {
+                      valueSwitch = value;
+                      Provider.of<ThemeModel>(context, listen: false).toggleTheme();
+                    });
+                  },
                 ),
               ),
               ListTile(

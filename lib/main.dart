@@ -9,12 +9,15 @@ import 'package:smarty/screens/statistics.dart';
 import 'package:smarty/services/auth.dart';
 import 'package:smarty/shared/constants.dart';
 import 'package:smarty/wrapper.dart';
+import 'package:smarty/models/themeModel.dart';
+import 'package:provider/provider.dart';
 
-void main() {
-  runApp(
-    MyApp(),
-  );
-}
+void main() => runApp(
+      ChangeNotifierProvider<ThemeModel>(
+        create: (BuildContext context) => ThemeModel(),
+        child: MyApp(),
+      ),
+    );
 
 class MyApp extends StatelessWidget {
   @override
@@ -22,13 +25,16 @@ class MyApp extends StatelessWidget {
     return StreamProvider<User>.value(
       value: AuthService().user,
       child: MaterialApp(
-        theme: ThemeData(
-          brightness: Brightness.dark,
-//        primaryColor: Colors.lightGreen[500],
-          accentColor: Colors.lightGreenAccent,
-          fontFamily: 'Montserrat',
-          platform: TargetPlatform.iOS,
-        ),
+        debugShowCheckedModeBanner: false,
+        theme: Provider.of<ThemeModel>(context).currentTheme,
+// Old theme
+//        theme: ThemeData(
+//          brightness: Brightness.dark,
+////        primaryColor: Colors.lightGreen[500],
+//          accentColor: Colors.lightGreenAccent,
+//          fontFamily: 'Montserrat',
+//          platform: TargetPlatform.iOS,
+//        ),
         home: Wrapper(),
       ),
     );
