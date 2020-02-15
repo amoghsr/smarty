@@ -17,7 +17,6 @@ class DatabaseService {
 
   }
 
-  // get brews stream
   Stream<QuerySnapshot> get userData {
     return userDataCollection.snapshots();
   }
