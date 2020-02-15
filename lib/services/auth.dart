@@ -5,6 +5,16 @@ import 'package:smarty/services/database.dart';
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
+
+  Future resetPasswordEmail(String email) async {
+    try {
+      return await _auth.sendPasswordResetEmail(email: email);
+    } catch (error) {
+      print(error.toString());
+      return null;
+    }
+  }
+
   // Create user obj based on Firebase user
   User _userFromFirebaseUser(FirebaseUser user) {
     return user != null ? User(uid: user.uid) : null;
@@ -65,5 +75,7 @@ class AuthService {
       return null;
     }
   }
+
+
 
 }
