@@ -134,27 +134,29 @@ class _EnergyStatsState extends State<EnergyStats> {
                                 ],
                               ),
                             ),
-                            // SizedBox(width: screenwidth * 0.28),
-                            //   Column(
-                            //     children: <Widget>[
-                            //       Container(
-                            //         color: Theme.of(context).accentColor,
-                            //         width: screenwidth * 0.4,
-                            //         height: screenheight * 0.05,
-                            //         child: Center(
-                            //           child: Text(
-                            //             'VIEW ' + widget.energyType.toUpperCase(),
-                            //             style: TextStyle(
-                            //                 color: Theme.of(context)
-                            //                     .bottomAppBarColor,
-                            //                 fontFamily: 'Montserrat',
-                            //                 fontSize: 10,
-                            //                 fontWeight: FontWeight.w500),
-                            //           ),
-                            //         ),
-                            //       ),
-                            //     ],
-                            //   ),
+                            SizedBox(width: screenwidth * 0.13),
+                            Column(
+                              children: <Widget>[
+                                widget.energyType == 'Consumption'
+                                    ? Container(
+                                        color: Theme.of(context).accentColor,
+                                        width: screenwidth * 0.35,
+                                        height: screenheight * 0.05,
+                                        child: Center(
+                                          child: Text(
+                                            'SEE ALL DEVICES',
+                                            style: TextStyle(
+                                                color: Theme.of(context)
+                                                    .bottomAppBarColor,
+                                                fontFamily: 'Montserrat',
+                                                fontSize: 10,
+                                                fontWeight: FontWeight.w500),
+                                          ),
+                                        ),
+                                      )
+                                    : Container()
+                              ],
+                            ),
                           ],
                         ),
                       ),
