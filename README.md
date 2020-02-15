@@ -20,3 +20,4 @@ The project is currently moving to it's 3rd stage of three in development.
 - [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
 - [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 - ALL THEM YOUTUBE TUTORIALS
+- [Theming](https://dev.to/devdammak/managing-multiple-themes-in-flutter-application-399e)
