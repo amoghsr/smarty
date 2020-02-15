@@ -5,13 +5,12 @@ import 'package:flutter/material.dart';
 import 'statsGeneration.dart';
 
 class LineChartSample2 extends StatefulWidget {
-  @override
   final String energyType;
-  final String groupby;
+  final String groupBy;
   final double aspect;
   final double maxX;
 
-  LineChartSample2(this.energyType, this.groupby, this.aspect, this.maxX);
+  LineChartSample2(this.energyType, this.groupBy, this.aspect, this.maxX);
 
   State<LineChartSample2> createState() => _LineChartSample2State();
 }
@@ -58,7 +57,7 @@ class _LineChartSample2State extends State<LineChartSample2> {
                             if (snapshot.data == null)
                               return CircularProgressIndicator();
                             return LineChart(
-                              mainData(widget.groupby, snapshot),
+                              mainData(widget.groupBy, snapshot),
                             );
                           }),
                     ),

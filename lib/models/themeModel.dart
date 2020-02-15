@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smarty/shared/theme.dart';
 
-enum ThemeType {Light, Dark}
+enum ThemeType { Light, Dark }
 
 class ThemeModel extends ChangeNotifier {
   ThemeData currentTheme = darkTheme;

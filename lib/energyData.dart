@@ -4,7 +4,6 @@ import 'package:intl/intl.dart';
 import 'package:smarty/line_chart.dart';
 
 class EnergyStats extends StatefulWidget {
-
   String energyType;
 
   EnergyStats({this.energyType});

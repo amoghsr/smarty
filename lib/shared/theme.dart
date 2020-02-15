@@ -9,9 +9,9 @@ ThemeData darkTheme = ThemeData(
 
 ThemeData lightTheme = ThemeData(
   brightness: Brightness.light,
-  backgroundColor: Colors.grey,
+  backgroundColor: Colors.lightGreen,
   accentColor: Colors.green,
-  primaryColor: Colors.green,
+  primaryColor: Colors.lightGreen,
   platform: TargetPlatform.iOS,
   fontFamily: 'Montserrat',
 );

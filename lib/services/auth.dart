@@ -5,7 +5,6 @@ import 'package:smarty/services/database.dart';
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-
   Future resetPasswordEmail(String email) async {
     try {
       return await _auth.sendPasswordResetEmail(email: email);
@@ -51,14 +50,14 @@ class AuthService {
   }
 
   // Register with email, password, name and age.
-  Future registerWithEmailAndPassword(String email, String password, String name, String age) async {
+  Future registerWithEmailAndPassword(
+      String email, String password, String name, String age) async {
     try {
       AuthResult result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       FirebaseUser user = result.user;
       // create a new document for the user with the uid
-      await DatabaseService(uid: user.uid)
-          .updateUserData(name, age);
+      await DatabaseService(uid: user.uid).updateUserData(name, age);
       return _userFromFirebaseUser(user);
     } catch (error) {
       print(error.toString());
@@ -75,7 +74,4 @@ class AuthService {
       return null;
     }
   }
-
-
-
 }

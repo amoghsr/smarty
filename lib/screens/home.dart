@@ -9,15 +9,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+import 'package:smarty/models/themeModel.dart';
+import 'package:smarty/screens/manageUsers.dart';
 import 'package:smarty/services/auth.dart';
 import 'package:smarty/shared/constants.dart';
 import 'package:smarty/widgets/devicesCarousel.dart';
 import 'package:smarty/widgets/roomCarousel.dart';
 import 'package:smarty/widgets/routineCarousel.dart';
+
 import '../alertBox.dart';
-import 'package:provider/provider.dart';
-import 'package:smarty/models/themeModel.dart';
-import 'package:smarty/main.dart';
 
 class Home extends StatefulWidget {
 //  final FirebaseUser currentUser;   //Ignore
@@ -148,6 +149,12 @@ class _HomeState extends State<Home> {
                 title: Text(
                   'Manage Users',
                 ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ManageUsers()),
+                  );
+                },
               ),
               ListTile(
                 leading: Icon(Icons.settings),
@@ -163,7 +170,8 @@ class _HomeState extends State<Home> {
                   onChanged: (value) {
                     setState(() {
                       valueSwitch = value;
-                      Provider.of<ThemeModel>(context, listen: false).toggleTheme();
+                      Provider.of<ThemeModel>(context, listen: false)
+                          .toggleTheme();
                     });
                   },
                 ),

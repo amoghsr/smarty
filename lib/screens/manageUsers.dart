@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
 
-class manageUsers extends StatefulWidget {
+class ManageUsers extends StatefulWidget {
   @override
-  _manageUsersState createState() => _manageUsersState();
+  _ManageUsersState createState() => _ManageUsersState();
 }
 
-class _manageUsersState extends State<manageUsers> {
+class _ManageUsersState extends State<ManageUsers> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(),
+        body: Container(
+          child: Column(),
+        ),
+      ),
+    );
   }
 }
