@@ -23,7 +23,7 @@ class _HomeManagerState extends State<HomeManager> {
                 ListTile(
                   leading: Icon(Icons.settings),
                   title: Text(
-                    'Account Settings',
+                    'Sample Text',
                   ),
                 ),
                 ListTile(
@@ -31,10 +31,7 @@ class _HomeManagerState extends State<HomeManager> {
                       Icons.lock
                   ),
                   title: Text(
-                    'For Home Manager',
-                  ),
-                  trailing: Icon(
-                    Icons.arrow_forward,
+                    'Sample Text',
                   ),
                   onTap: () {
                     Navigator.push(
