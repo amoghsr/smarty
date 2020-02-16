@@ -5,6 +5,10 @@ import 'package:smarty/screens/leaderboard.dart';
 import 'package:smarty/screens/security.dart';
 import 'package:smarty/screens/statistics.dart';
 import 'package:smarty/shared/constants.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:smarty/services/auth.dart';
+import 'package:smarty/models/user.dart';
+import 'package:provider/provider.dart';
 
 class MyNavigationBar extends StatefulWidget {
   @override
@@ -12,6 +16,7 @@ class MyNavigationBar extends StatefulWidget {
 }
 
 class _MyNavigationBarState extends State<MyNavigationBar> {
+
   int _currentIndex = 0;
   final List<Widget> _children = [
     Home(),
@@ -31,6 +36,7 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
   );
 
   Widget build(BuildContext context) {
+    final user = Provider.of<User>(context);
     return SafeArea(
       child: Scaffold(
         body: _children[_currentIndex],

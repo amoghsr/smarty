@@ -11,6 +11,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:smarty/models/themeModel.dart';
+import 'package:smarty/screens/homeManager.dart';
 import 'package:smarty/screens/manageUsers.dart';
 import 'package:smarty/services/auth.dart';
 import 'package:smarty/shared/constants.dart';
@@ -161,6 +162,23 @@ class _HomeState extends State<Home> {
                 title: Text(
                   'Account Settings',
                 ),
+              ),
+              ListTile(
+                leading: Icon(
+                  Icons.lock
+                ),
+                title: Text(
+                  'For Home Manager',
+                ),
+                trailing: Icon(
+                  Icons.arrow_forward,
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => HomeManager()),
+                  );
+                },
               ),
               ListTile(
                 leading: Icon(FontAwesomeIcons.solidMoon),

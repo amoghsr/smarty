@@ -88,7 +88,8 @@ class _SignInState extends State<SignIn> {
                                     : Container(
                                         height: 0.0,
                                       )
-                              ]),
+                              ],
+                          ),
                         ),
                       ],
                     ),
@@ -192,7 +193,7 @@ class _SignInState extends State<SignIn> {
                         borderRadius: BorderRadius.circular(50.0),
                       ),
                     ),
-                    SizedBox(height: 12.0),
+                    SizedBox(height: 20.0),
                     Text(
                       error,
                       style: TextStyle(color: Colors.red, fontSize: 14.0),
