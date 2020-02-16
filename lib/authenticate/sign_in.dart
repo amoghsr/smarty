@@ -75,7 +75,7 @@ class _SignInState extends State<SignIn> {
                         labelText: "Password",
                       ),
                       validator: (val) => val.length < 6
-                          ? 'Enter a password 6+ char long'
+                          ? 'Passwords must be at least 6 characters long, and can\'t be things like “password”, “123456” or “abcdef”.'
                           : null,
                       onChanged: (val) {
                         setState(() => password = val);
@@ -124,7 +124,8 @@ class _SignInState extends State<SignIn> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => ForgotPassword()),
+                            builder: (context) => ForgotPassword(),
+                          ),
                         );
                       },
                       child: Text(
@@ -143,6 +144,7 @@ class _SignInState extends State<SignIn> {
                         'Don\'t have an account? Sign up here',
                         style: TextStyle(
                           fontSize: 13,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                     ),
