@@ -22,7 +22,8 @@ class DatabaseService {
     });
   }
 
-  Stream<QuerySnapshot> get userData {
-    return userDataCollection.snapshots();
+  Future<DocumentSnapshot> get userData {
+    return userDataCollection.document(uid).get();
   }
+
 }

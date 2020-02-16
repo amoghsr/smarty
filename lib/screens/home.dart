@@ -18,6 +18,7 @@ import 'package:smarty/shared/constants.dart';
 import 'package:smarty/widgets/devicesCarousel.dart';
 import 'package:smarty/widgets/roomCarousel.dart';
 import 'package:smarty/widgets/routineCarousel.dart';
+import 'package:smarty/services/database.dart';
 
 import '../alertBox.dart';
 
@@ -38,6 +39,7 @@ String formattedMonth = month.format(now);
 
 class _HomeState extends State<Home> {
   final AuthService _auth = AuthService();
+
 
   DatabaseReference itemRef;
   bool valueSwitch = true;
