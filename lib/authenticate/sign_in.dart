@@ -96,7 +96,7 @@ class _SignInState extends State<SignIn> {
                       children: <Widget>[
                         Expanded(
                           child: Stack(
-                              alignment: Alignment(0.0, 1.0),
+                              alignment: Alignment(1.0, 1.0),
                               children: <Widget>[
                                 TextFormField(
                                   obscureText: true,
