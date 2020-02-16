@@ -14,6 +14,9 @@ class _HomeManagerState extends State<HomeManager> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+
+        ),
         drawer: Drawer(
           child: SafeArea(
             // The various items in the hamburger menu are saved inside a ListView, which is basically a vertical list
