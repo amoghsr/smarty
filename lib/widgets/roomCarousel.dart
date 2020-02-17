@@ -3,9 +3,8 @@ This file helps create the carousels for the rooms in the house.
  */
 
 import 'package:flutter/material.dart';
-import 'package:smarty/screens/rooms.dart';
-
 import 'package:smarty/models/roomModel.dart';
+import 'package:smarty/screens/rooms.dart';
 
 class RoomCarousel extends StatelessWidget {
   @override

@@ -4,9 +4,8 @@ This file helps create the carousels for the devices in the house.
 
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-
-import 'package:smarty/test/firebaseControlDevices.dart';
 import 'package:smarty/models/devicesModel.dart';
+import 'package:smarty/test/firebaseControlDevices.dart';
 
 class DeviceCarousel extends StatelessWidget {
   @override

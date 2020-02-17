@@ -9,11 +9,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+import 'package:smarty/models/themeModel.dart';
+import 'package:smarty/screens/manageUsers.dart';
 import 'package:smarty/services/auth.dart';
 import 'package:smarty/shared/constants.dart';
 import 'package:smarty/widgets/devicesCarousel.dart';
 import 'package:smarty/widgets/roomCarousel.dart';
 import 'package:smarty/widgets/routineCarousel.dart';
+
 import '../alertBox.dart';
 
 class Home extends StatefulWidget {
@@ -35,6 +39,7 @@ class _HomeState extends State<Home> {
   final AuthService _auth = AuthService();
 
   DatabaseReference itemRef;
+  bool valueSwitch = true;
 
   void initState() {
     super.initState();
@@ -136,21 +141,39 @@ class _HomeState extends State<Home> {
                   ),
                 ),
               ),
-
               // ListTile represents a list tile item in the menu
               ListTile(
                 // Leading is an element in the start of the list tile horizontally
                 leading: Icon(FontAwesomeIcons.users),
-
                 // Title of the list
                 title: Text(
                   'Manage Users',
                 ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ManageUsers()),
+                  );
+                },
               ),
               ListTile(
                 leading: Icon(Icons.settings),
                 title: Text(
                   'Account Settings',
+                ),
+              ),
+              ListTile(
+                leading: Icon(FontAwesomeIcons.solidMoon),
+                title: Text('Dark Mode'),
+                trailing: Switch(
+                  value: valueSwitch,
+                  onChanged: (value) {
+                    setState(() {
+                      valueSwitch = value;
+                      Provider.of<ThemeModel>(context, listen: false)
+                          .toggleTheme();
+                    });
+                  },
                 ),
               ),
               ListTile(

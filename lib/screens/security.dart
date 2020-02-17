@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:smarty/shared/constants.dart';
 
 class Security extends StatefulWidget {
@@ -10,6 +8,7 @@ class Security extends StatefulWidget {
 
 class _SecurityState extends State<Security> {
   bool isLocked = true;
+
   Widget build(BuildContext context) {
     double screenwidth = MediaQuery.of(context).size.width;
     double screenheight = MediaQuery.of(context).size.height;

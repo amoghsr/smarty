@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smarty/authenticate/forgotPassword.dart';
 import 'package:smarty/services/auth.dart';
 import 'package:smarty/shared/loadingAuth.dart';
 
@@ -20,6 +21,8 @@ class _SignInState extends State<SignIn> {
   // text field state
   String email = '';
   String password = '';
+  var _controller = TextEditingController();
+  var _passController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -57,29 +60,105 @@ class _SignInState extends State<SignIn> {
                     SizedBox(
                       height: 30.0,
                     ),
-                    TextFormField(
-                      keyboardType: TextInputType.emailAddress,
-                      decoration: InputDecoration(
-                        labelText: "Email Address",
-                      ),
-                      validator: (val) =>
-                          val.isEmpty ? 'Enter your email' : null,
-                      onChanged: (val) {
-                        setState(() => email = val);
-                      },
+                    Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: Stack(
+                              alignment: Alignment(1.0, 1.0),
+                              children: <Widget>[
+                                TextFormField(
+                                  decoration: InputDecoration(
+                                    labelText: 'Email Address',
+                                  ),
+                                  validator: (val) =>
+                                      val.isEmpty ? 'Enter your email' : null,
+                                  onChanged: (val) {
+                                    setState(() => email = val);
+                                  },
+                                  controller: _controller,
+                                ),
+                                _controller.text.length > 0
+                                    ? new IconButton(
+                                        icon: new Icon(Icons.clear),
+                                        onPressed: () {
+                                          setState(() {
+                                            _controller.clear();
+                                          });
+                                        })
+                                    : Container(
+                                        height: 0.0,
+                                      )
+                              ]),
+                        ),
+                      ],
                     ),
-                    TextFormField(
-                      obscureText: true,
-                      decoration: InputDecoration(
-                        labelText: "Password",
-                      ),
-                      validator: (val) => val.length < 6
-                          ? 'Enter a password 6+ char long'
-                          : null,
-                      onChanged: (val) {
-                        setState(() => password = val);
-                      },
+                    Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: Stack(
+                              alignment: Alignment(0.0, 1.0),
+                              children: <Widget>[
+                                TextFormField(
+                                  obscureText: true,
+                                  decoration: InputDecoration(
+                                    labelText: 'Password',
+                                  ),
+                                  validator: (val) => val.length < 6
+                                      ? 'Passwords must be at least 6 characters long.'
+                                      : null,
+                                  onChanged: (val) {
+                                    setState(() => password = val);
+                                  },
+                                  controller: _passController,
+                                ),
+                                _passController.text.length > 0
+                                    ? new IconButton(
+                                    icon: new Icon(Icons.clear),
+                                    onPressed: () {
+                                      setState(() {
+                                        _passController.clear();
+                                      });
+                                    })
+                                    : Container(
+                                  height: 0.0,
+                                )
+                              ]),
+                        ),
+                      ],
                     ),
+//                    TextFormField(
+//                      keyboardType: TextInputType.emailAddress,
+//                      decoration: InputDecoration(
+//                        labelText: "Email Address",
+//                      ),
+//                      validator: (val) =>
+//                          val.isEmpty ? 'Enter your email' : null,
+//                      onChanged: (val) {
+//                        setState(() => email = val);
+//                      },
+//                    ),
+//                    TextFormField(
+//                      controller: _controller,
+//                      obscureText: true,
+//                      decoration: InputDecoration(
+//                        labelText: 'Password',
+//                        suffixIcon: IconButton(
+//                          icon: Icon(
+//                            Icons.close,
+//                            size: 18,
+//                          ),
+//                          onPressed: () {
+//                            _controller.clear();
+//                          },
+//                        ),
+//                      ),
+//                      validator: (val) => val.length < 6
+//                          ? 'Passwords must be at least 6 characters long, and can\'t be things like “password”, “123456” or “abcdef”.'
+//                          : null,
+//                      onChanged: (val) {
+//                        setState(() => password = val);
+//                      },
+//                    ),
                     SizedBox(height: 40.0),
                     RaisedButton(
                       padding: EdgeInsets.symmetric(
@@ -119,13 +198,47 @@ class _SignInState extends State<SignIn> {
                       style: TextStyle(color: Colors.red, fontSize: 14.0),
                     ),
                     GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ForgotPassword(),
+                          ),
+                        );
+                      },
+                      child: Text(
+                        'Forgot Password?',
+                        style: TextStyle(
+                          fontSize: 13,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    GestureDetector(
                       onTap: () => widget.toggleView(),
                       child: Text(
                         'Don\'t have an account? Sign up here',
                         style: TextStyle(
                           fontSize: 13,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
+                    ),
+                    RaisedButton(
+                      child: Text(
+                        'Sign In for Home Managers',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Poppins',
+                          color: Theme.of(context).primaryColor,
+                        ),
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(50.0),
+                      ),
+                      onPressed: () {},
                     ),
                   ],
                 ),
