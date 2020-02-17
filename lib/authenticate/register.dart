@@ -21,7 +21,7 @@ class _RegisterState extends State<Register> {
   String name = '';
   String email = '';
   String password = '';
-  String age = '';
+  String homeId = '';
 
   @override
   Widget build(BuildContext context) {
@@ -84,11 +84,11 @@ class _RegisterState extends State<Register> {
                     TextFormField(
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
-                        labelText: "Age",
+                        labelText: "Home ID",
                       ),
-                      validator: (val) => val.isEmpty ? 'Enter age' : null,
+                      validator: (val) => val.isEmpty ? 'Enter Home ID' : null,
                       onChanged: (val) {
-                        setState(() => age = val);
+                        setState(() => homeId = val);
                       },
                     ),
                     TextFormField(
@@ -125,7 +125,7 @@ class _RegisterState extends State<Register> {
                           setState(() => loading = true);
                           dynamic result =
                               await _auth.registerWithEmailAndPassword(
-                                  email, password, name, age);
+                                  email, password, name, homeId);
                           if (result == null) {
                             setState(() {
                               loading = false;
