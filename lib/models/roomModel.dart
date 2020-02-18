@@ -51,16 +51,16 @@ class Room {
   //     case 'Bathroom':
   //       return Icon(FontAwesomeIcons.bath);
   // }}
-
-  // factory Room.fromFirestore(DocumentSnapshot doc) {
-  //   Map data = doc.data;
-  //   return Room(
-  //     roomName: data.key,
-  //     nDevices: data['nDevices'],
-  //     icon: getIcons(data['roomName']),
-  //     imageUrl: getImageUrl(data['roomName']),
-  //   );
-  // }
+//
+//  factory Room.fromFirestore(DocumentSnapshot doc) {
+//    Map data = doc.data;
+//    return Room(
+//      roomName: data.key,
+//      nDevices: data['nDevices'],
+//      icon: getIcons(data['roomName']),
+//      imageUrl: getImageUrl(data['roomName']),
+//    );
+//  }
 }
 
 List<String> getDv(String roomname) {

@@ -13,7 +13,8 @@ class DatabaseService {
   // collection reference
   final CollectionReference homeDataCollection =
       Firestore.instance.collection('HouseID');
-  final Firestore userDataCollection = Firestore.instance;
+  final CollectionReference userDataCollection =
+      Firestore.instance.collection('UserData');
 
   Future<void> updateUserData(
       String displayName, String homeId, String email) async {
@@ -28,19 +29,6 @@ class DatabaseService {
       'displayName': displayName,
       'homeId': homeId,
       'email': email,
-    });
-  }
-
-  Stream<User> get userData {
-    Stream<User> stream = AuthService().user;
-    String uidd;
-    stream.listen((data) {
-      uidd = data.uid;
-      return userDataCollection
-          .collection("UserData")
-          .document(uidd)
-          .snapshots()
-          .map((snap) => User.fromMap(snap.data, uidd));
     });
   }
 }
