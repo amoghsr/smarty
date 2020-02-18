@@ -8,6 +8,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:smarty/services/auth.dart';
 import 'package:smarty/models/themeModel.dart';
 
+import 'models/roomModel.dart';
+
 class Wrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -15,8 +17,8 @@ class Wrapper extends StatelessWidget {
     if (user == null) {
       return Authenticate();
     } else {
-      return StreamProvider<User>.value(
-        value: AuthService().user,
+      return StreamProvider<List<Room>>.value(
+        value: DatabaseService1().streamRooms(user),
         child: MaterialApp(
           theme: Provider.of<ThemeModel>(context).currentTheme,
           home: MyNavigationBar(),

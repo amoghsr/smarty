@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'devicesModel.dart';
@@ -23,44 +22,56 @@ class Room {
   });
 
 //TODO: Fix Provider
-  // String getImageUrl(String roomName) {
-  //   switch (roomName) {
-  //     case 'Living Room':
-  //       return 'assets/images/livingroom.png';
-  //     case 'Kitchen':
-  //       return 'assets/images/kitchen.png';
-  //     case 'Bedroom':
-  //       return 'assets/images/bedroom.png';
-  //     case 'Playroom':
-  //       return 'assets/images/bedroom.png';
-  //     case 'Bathroom':
-  //       return 'assets/images/bathroom.png';
-  // }
-  // }
 
-  // Icon getIcons(String roomName) {
-  //   switch (roomName) {
-  //     case 'Living Room':
-  //       return Icon(FontAwesomeIcons.couch);
-  //     case 'Kitchen':
-  //       return Icon(FontAwesomeIcons.utensils);
-  //     case 'Bedroom':
-  //       return Icon(FontAwesomeIcons.bed);
-  //     case 'Playroom':
-  //       return Icon(FontAwesomeIcons.child);
-  //     case 'Bathroom':
-  //       return Icon(FontAwesomeIcons.bath);
-  // }}
-//
-//  factory Room.fromFirestore(DocumentSnapshot doc) {
-//    Map data = doc.data;
-//    return Room(
-//      roomName: data.key,
-//      nDevices: data['nDevices'],
-//      icon: getIcons(data['roomName']),
-//      imageUrl: getImageUrl(data['roomName']),
-//    );
-//  }
+  factory Room.fromFirestore(DocumentSnapshot doc) {
+    Map data = doc.data;
+    var room = Room(
+      roomName: doc.documentID,
+      nDevices: getDevice(data).length.toString(),
+      icon: getIcons(doc.documentID),
+      imageUrl: getImageUrl(doc.documentID),
+      d: getDevice(data),
+    );
+    print(room.d);
+    return room;
+  }
+}
+
+List<String> getDevice(Map data) {
+  List x = [];
+  data.forEach(
+    (key, value) => x.add(key),
+  );
+}
+
+String getImageUrl(String roomName) {
+  switch (roomName) {
+    case 'userID':
+      return 'assets/images/livingroom.png';
+    case 'Kitchen':
+      return 'assets/images/kitchen.png';
+    case 'Bedroom':
+      return 'assets/images/bedroom.png';
+    case 'Playroom':
+      return 'assets/images/bedroom.png';
+    case 'Bathroom':
+      return 'assets/images/bathroom.png';
+  }
+}
+
+Icon getIcons(String roomName) {
+  switch (roomName) {
+    case 'userID':
+      return Icon(FontAwesomeIcons.couch);
+    case 'Kitchen':
+      return Icon(FontAwesomeIcons.utensils);
+    case 'Bedroom':
+      return Icon(FontAwesomeIcons.bed);
+    case 'Playroom':
+      return Icon(FontAwesomeIcons.child);
+    case 'Bathroom':
+      return Icon(FontAwesomeIcons.bath);
+  }
 }
 
 List<String> getDv(String roomname) {

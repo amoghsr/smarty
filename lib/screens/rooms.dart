@@ -99,8 +99,9 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
   Widget build(BuildContext context) {
     double screenwidth = MediaQuery.of(context).size.width;
     double screenheight = MediaQuery.of(context).size.height;
-    final user = Provider.of<User>(context);
-    final rooms = Provider.of<List<Room>>(context);
+//    final user = Provider.of<User>(context);
+//    final rooms1 = Provider.of<List<Room>>(context);
+//    rooms1.forEach((room) => print(room.toString()));
     return Scaffold(
       appBar: AppBar(
         title: Text(

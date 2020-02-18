@@ -1,9 +1,4 @@
-//import 'dart:html';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_database/firebase_database.dart';
-import 'package:smarty/models/user.dart';
-import 'auth.dart';
 
 class DatabaseService {
   final String uid;

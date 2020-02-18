@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:smarty/models/roomModel.dart';
 import 'package:smarty/screens/home.dart';
 import 'package:smarty/screens/leaderboard.dart';
 import 'package:smarty/screens/security.dart';
@@ -37,6 +38,8 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
   );
 
   Widget build(BuildContext context) {
+    final room = Provider.of<List<Room>>(context);
+    print(room);
     return SafeArea(
       child: Scaffold(
         body: _children[_currentIndex],
