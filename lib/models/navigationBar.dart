@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:smarty/screens/home.dart';
@@ -9,6 +10,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:smarty/services/auth.dart';
 import 'package:smarty/models/user.dart';
 import 'package:provider/provider.dart';
+import 'package:smarty/services/database.dart';
 
 class MyNavigationBar extends StatefulWidget {
   @override
@@ -16,7 +18,6 @@ class MyNavigationBar extends StatefulWidget {
 }
 
 class _MyNavigationBarState extends State<MyNavigationBar> {
-
   int _currentIndex = 0;
   final List<Widget> _children = [
     Home(),
@@ -36,7 +37,6 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
   );
 
   Widget build(BuildContext context) {
-    final user = Provider.of<User>(context);
     return SafeArea(
       child: Scaffold(
         body: _children[_currentIndex],

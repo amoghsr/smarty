@@ -3,7 +3,7 @@ import 'package:smarty/models/user.dart';
 
 import 'roomModel.dart';
 
-class DatabaseService {
+class DatabaseService1 {
   final Firestore _db = Firestore.instance;
 
   Stream<List<Room>> streamRooms(User user) {
@@ -12,7 +12,7 @@ class DatabaseService {
         .document('123')
         .collection('123')
         .document('roomName');
-    
+
     //TODO: Fix Provider
     // return ref.snapshots().map((list) => list.data.forEach((key, value) });
   }

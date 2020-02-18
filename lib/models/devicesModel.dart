@@ -110,7 +110,7 @@ List<Device> devices = [
     opacity: 0.3,
   ),
   Device(
-    imageUrl: 'assets/images/deviceAssets/fan.png',
+    imageUrl: 'assets/images/deviceAssets/fa+n.png',
     deviceName: 'Speaker',
     icon: Icon(Icons.speaker),
     inRoom: 'Bedroom',
