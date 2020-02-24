@@ -32,21 +32,21 @@ class Room {
       imageUrl: getImageUrl(doc.documentID),
       d: getDevice(data),
     );
-    print(room.d);
     return room;
   }
 }
 
 List<String> getDevice(Map data) {
-  List x = [];
+  List<String> x = [];
   data.forEach(
     (key, value) => x.add(key),
   );
+  return x;
 }
 
 String getImageUrl(String roomName) {
   switch (roomName) {
-    case 'userID':
+    case 'Living Room':
       return 'assets/images/livingroom.png';
     case 'Kitchen':
       return 'assets/images/kitchen.png';
@@ -61,7 +61,7 @@ String getImageUrl(String roomName) {
 
 Icon getIcons(String roomName) {
   switch (roomName) {
-    case 'userID':
+    case 'Living Room':
       return Icon(FontAwesomeIcons.couch);
     case 'Kitchen':
       return Icon(FontAwesomeIcons.utensils);
