@@ -41,12 +41,12 @@ class MyOtherRoom extends StatefulWidget {
 // String appBarrmName = tabList[0].text;
 
 Color bulbColor = Colors.white;
-
 String currRoom = tabList[0].text;
 String currDevice = rooms[0].d[0];
 String initrmName = tabList[0].text;
 String rmName = tabList[0].text;
 bool isAbsorbed = false;
+
 
 class _MyOtherRoomState extends State<MyOtherRoom> {
   @override

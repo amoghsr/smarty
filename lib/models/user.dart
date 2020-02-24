@@ -7,8 +7,8 @@ class User {
       uid: id,
       houseId: data['homeId'] ?? '',
     );
-//    print(w.houseId);
-//    print(w.uid);
+  //  print(w.houseId);
+  //  print(w.uid);
     return w;
   }
   factory User.initialData() {
