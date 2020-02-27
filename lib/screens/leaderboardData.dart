@@ -29,125 +29,128 @@ class _LeaderboardDataState extends State<LeaderboardData> {
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         // physics: NeverScrollableScrollPhysics(),
-        child: Container(
-          color: Theme.of(context).scaffoldBackgroundColor,
-          child: Column(
-            children: <Widget>[
-              Container(
-                height: screenheight * 0.35,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: <Widget>[
-                    Column(
-                      children: <Widget>[
-                        SizedBox(
-                          height: screenheight * 0.06,
-                        ),
-                        Icon(
-                          FontAwesomeIcons.trophy,
-                          size: 30,
-                          color: Color(0xffAAA9AD),
-                        ),
-                        SizedBox(
-                          height: screenheight * 0.02,
-                        ),
-                        Container(
-                          // height: screenheight,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
+        child: GestureDetector(
+          onVerticalDragUpdate: (_) {},
+          child: Container(
+            color: Theme.of(context).scaffoldBackgroundColor,
+            child: Column(
+              children: <Widget>[
+                Container(
+                  height: screenheight * 0.4,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: <Widget>[
+                      Column(
+                        children: <Widget>[
+                          SizedBox(
+                            height: screenheight * 0.06,
                           ),
-                          child: CircleAvatar(
-                            radius: 40,
-                            backgroundColor: Theme.of(context).canvasColor,
-                            backgroundImage: NetworkImage(lb[1].userImage),
+                          Icon(
+                            FontAwesomeIcons.trophy,
+                            size: 30,
+                            color: Color(0xffAAA9AD),
                           ),
-                        ),
-                        SizedBox(
-                          height: screenheight * 0.01,
-                        ),
-                        Text(lb[1].userName.split(' ')[0]),
-                      ],
-                    ),
-                    Column(
-                      // mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        SizedBox(
-                          height: screenheight * 0.03,
-                        ),
-                        Icon(
-                          FontAwesomeIcons.trophy,
-                          size: 45,
-                          color: Color(0xffD4AF37),
-                        ),
-                        SizedBox(
-                          height: screenheight * 0.02,
-                        ),
-                        Container(
-                          // height: screenheight,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
+                          SizedBox(
+                            height: screenheight * 0.02,
                           ),
-                          child: CircleAvatar(
-                            radius: 65,
-                            backgroundColor: Theme.of(context).canvasColor,
-                            backgroundImage: NetworkImage(lb[0].userImage),
+                          Container(
+                            // height: screenheight,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                            ),
+                            child: CircleAvatar(
+                              radius: 40,
+                              backgroundColor: Theme.of(context).canvasColor,
+                              backgroundImage: NetworkImage(lb[1].userImage),
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          height: screenheight * 0.01,
-                        ),
-                        Text(lb[0].userName.split(' ')[0]),
-                      ],
-                    ),
-                    Column(
-                      children: <Widget>[
-                        SizedBox(
-                          height: screenheight * 0.06,
-                        ),
-                        Icon(
-                          FontAwesomeIcons.trophy,
-                          size: 30,
-                          color: Color(0xffBE5504),
-                        ),
-                        SizedBox(
-                          height: screenheight * 0.02,
-                        ),
-                        Container(
-                          // height: screenheight,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
+                          SizedBox(
+                            height: screenheight * 0.01,
                           ),
-                          child: CircleAvatar(
-                            radius: 40,
-                            backgroundColor: Theme.of(context).canvasColor,
-                            backgroundImage: NetworkImage(lb[2].userImage),
+                          Text(lb[1].userName.split(' ')[0]),
+                        ],
+                      ),
+                      Column(
+                        // mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          SizedBox(
+                            height: screenheight * 0.03,
                           ),
-                        ),
-                        SizedBox(
-                          height: screenheight * 0.01,
-                        ),
-                        Text(lb[2].userName.split(' ')[0]),
-                      ],
-                    ),
-                  ],
+                          Icon(
+                            FontAwesomeIcons.trophy,
+                            size: 45,
+                            color: Color(0xffD4AF37),
+                          ),
+                          SizedBox(
+                            height: screenheight * 0.02,
+                          ),
+                          Container(
+                            // height: screenheight,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                            ),
+                            child: CircleAvatar(
+                              radius: 65,
+                              backgroundColor: Theme.of(context).canvasColor,
+                              backgroundImage: NetworkImage(lb[0].userImage),
+                            ),
+                          ),
+                          SizedBox(
+                            height: screenheight * 0.01,
+                          ),
+                          Text(lb[0].userName.split(' ')[0]),
+                        ],
+                      ),
+                      Column(
+                        children: <Widget>[
+                          SizedBox(
+                            height: screenheight * 0.06,
+                          ),
+                          Icon(
+                            FontAwesomeIcons.trophy,
+                            size: 30,
+                            color: Color(0xffBE5504),
+                          ),
+                          SizedBox(
+                            height: screenheight * 0.02,
+                          ),
+                          Container(
+                            // height: screenheight,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                            ),
+                            child: CircleAvatar(
+                              radius: 40,
+                              backgroundColor: Theme.of(context).canvasColor,
+                              backgroundImage: NetworkImage(lb[2].userImage),
+                            ),
+                          ),
+                          SizedBox(
+                            height: screenheight * 0.01,
+                          ),
+                          Text(lb[2].userName.split(' ')[0]),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              Container(
-                // color: Colors.green,
-                height: screenheight * 0.5,
-                child: TabBarView(
-                  physics: NeverScrollableScrollPhysics(),
-                  children: [
-                    getListTile(lb),
-                    getListTile(lb),
-                    /* getListTile(lb),
-                          getListTile(lb),
-                          getListTile(lb),
-                          getListTile(lb), */
-                  ],
+                Container(
+                  // color: Colors.green,
+                  height: screenheight * 0.35,
+                  child: TabBarView(
+                    physics: NeverScrollableScrollPhysics(),
+                    children: [
+                      getListTile(lb),
+                      getListTile(lb),
+                      /* getListTile(lb),
+                            getListTile(lb),
+                            getListTile(lb),
+                            getListTile(lb), */
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -156,6 +159,7 @@ class _LeaderboardDataState extends State<LeaderboardData> {
 
   ListView getListTile(List<Leaderboard> lb) {
     return ListView.builder(
+        shrinkWrap: true,
         itemCount: lb.length,
         physics: BouncingScrollPhysics(),
         itemBuilder: (context, i) {

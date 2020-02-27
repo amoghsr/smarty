@@ -1,11 +1,22 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:smarty/models/themeModel.dart';
+import 'package:smarty/models/user.dart';
 import 'package:smarty/screens/homeManager.dart';
 import 'package:smarty/screens/manageUsers.dart';
 import 'package:smarty/services/auth.dart';
+import 'package:smarty/shared/constants.dart';
+import 'package:smarty/widgets/devicesCarousel.dart';
+import 'package:smarty/widgets/roomCarousel.dart';
+import 'package:smarty/widgets/routineCarousel.dart';
+import 'package:smarty/services/database.dart';
 
+import '../alertBox.dart';
 class DrawerPage extends StatefulWidget {
   @override
   _DrawerPageState createState() => _DrawerPageState();
@@ -14,13 +25,13 @@ class DrawerPage extends StatefulWidget {
 class _DrawerPageState extends State<DrawerPage> {
   final AuthService _auth = AuthService();
   bool valueSwitch = true;
-
+  @override
   Widget build(BuildContext context) {
     return Drawer(
       child: SafeArea(
-        // The various items in the hamburger menu are saved inside a ListView, which is basically a vertical list
+// The various items in the hamburger menu are saved inside a ListView, which is basically a vertical list
         child: ListView(
-          // ListView items are saved in a children list of Widgets
+// ListView items are saved in a children list of Widgets
           children: <Widget>[
             UserAccountsDrawerHeader(
               accountName: Text(
@@ -45,11 +56,11 @@ class _DrawerPageState extends State<DrawerPage> {
                 ),
               ),
             ),
-            // ListTile represents a list tile item in the menu
+// ListTile represents a list tile item in the menu
             ListTile(
-              // Leading is an element in the start of the list tile horizontally
+// Leading is an element in the start of the list tile horizontally
               leading: Icon(FontAwesomeIcons.users),
-              // Title of the list
+// Title of the list
               title: Text(
                 'Manage Users',
               ),
@@ -102,7 +113,7 @@ class _DrawerPageState extends State<DrawerPage> {
               ),
             ),
             Divider(),
-            // Log out button
+// Log out button
             ListTile(
               onTap: () async {
                 await _auth.signOut();
@@ -115,6 +126,10 @@ class _DrawerPageState extends State<DrawerPage> {
           ],
         ),
       ),
-    );
+    )
+    ;
   }
 }
+
+
+

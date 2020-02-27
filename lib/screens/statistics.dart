@@ -4,9 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:smarty/models/roomModel.dart';
 import 'package:smarty/models/user.dart';
 import 'package:smarty/shared/constants.dart';
-import 'package:smarty/screens/drawer.dart';
-
 import '../energyData.dart';
+import 'package:smarty/screens/Drawer.dart';
 
 class Statistics extends StatefulWidget {
   @override

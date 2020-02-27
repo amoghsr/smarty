@@ -5,7 +5,6 @@
 */
 
 //import 'dart:html';
-import 'package:smarty/screens/drawer.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -16,6 +15,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:smarty/models/themeModel.dart';
 import 'package:smarty/models/user.dart';
+import 'package:smarty/screens/Drawer.dart';
 import 'package:smarty/screens/homeManager.dart';
 import 'package:smarty/screens/manageUsers.dart';
 import 'package:smarty/services/auth.dart';
@@ -24,10 +24,13 @@ import 'package:smarty/widgets/devicesCarousel.dart';
 import 'package:smarty/widgets/roomCarousel.dart';
 import 'package:smarty/widgets/routineCarousel.dart';
 import 'package:smarty/services/database.dart';
+import 'package:smarty/models/weatherModel.dart';
 
 import '../alertBox.dart';
 
 class Home extends StatefulWidget {
+//  final weatherdata;
+//  Home(this.weatherdata);
 //  final FirebaseUser currentUser;   //Ignore
 //  Home(this.currentUser);           //Ignore
   @override
@@ -47,11 +50,17 @@ class _HomeState extends State<Home> {
 
   DatabaseReference itemRef;
   bool valueSwitch = true;
+
+  var weatherdata = WeatherModel().weatherData();
+
   void initState() {
     super.initState();
+//    var l = getLocationData();
     final FirebaseDatabase database = FirebaseDatabase
         .instance; //Rather then just writing FirebaseDatabase(), get the instance.
     itemRef = database.reference();
+//    storeValues(l);
+//    fetchData();
   }
 
   @override
@@ -61,7 +70,50 @@ class _HomeState extends State<Home> {
   */
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
 
+  WeatherModel wm = WeatherModel();
+
+  int temperature;
+  int condition;
+  String cityName;
+
+//  void storeValues(dynamic weatherdata) {
+//    setState(() {
+//      if (weatherdata == null) {
+//        temperature = 0;
+//        condition = 0;
+//        cityName = 'ERROR';
+//        return;
+//      }
+//      var temp = weatherdata['main']["temp"];
+//      temperature = temp.toInt();
+//      condition = weatherdata["weather"][0]["id"];
+//      cityName = weatherdata["name"];
+//    });
+//  }
+//  bool isLoading = false;
+//
+//  fetchData() async {
+//    setState(() {
+//      isLoading = true; //Data is loading
+//    });
+//    if (weatherdata == null) {
+//      temperature = 0;
+//      condition = 0;
+//      cityName = 'ERROR';
+//      return;
+//    }
+//    var temp = weatherdata['main']["temp"];
+//    temperature = temp.toInt();
+//    condition = weatherdata["weather"][0]["id"];
+//    cityName = weatherdata["name"];
+//    setState(() {
+//      isLoading = false; //Data has loaded
+//    });
+//  }
+
   Widget build(BuildContext context) {
+    double screenwidth = MediaQuery.of(context).size.width;
+    double screenheight = MediaQuery.of(context).size.height;
     return Scaffold(
       //TODO:make provider
 
@@ -120,8 +172,8 @@ class _HomeState extends State<Home> {
       ),
 
       // Drawer is the hamburger menu.
-      drawer: DrawerPage(),
       // Here starts the body of the Home Page, nested inside a SafeArea widget to keep content inside the viewport
+      drawer: DrawerPage(),
       body: SafeArea(
         child: ListView(
           padding: EdgeInsets.symmetric(vertical: 20.0),
@@ -139,16 +191,30 @@ class _HomeState extends State<Home> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(left: 20.0, right: 120.0),
-              child: Text(
-                'Welcome Home, Ben',
-                //${widget.currentUser.email}`
-                style: TextStyle(
-                    fontSize: 24.0,
-                    fontWeight: FontWeight.w700,
-                    fontFamily: 'Poppins'),
+              padding: EdgeInsets.symmetric(horizontal: 20.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text(
+                    'Welcome Home, Ben',
+                    //${widget.currentUser.email}`
+                    style: TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.w700,
+                        fontFamily: 'Poppins'),
+                  ),
+                  Text(
+                    '32°C',
+                    //${widget.currentUser.email}`
+                    style: TextStyle(
+                        fontSize: 24.0,
+                        fontWeight: FontWeight.w400,
+                        fontFamily: 'Poppins'),
+                  ),
+                ],
               ),
             ),
+
             SizedBox(
               height: 20.0,
             ),
