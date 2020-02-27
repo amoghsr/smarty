@@ -15,6 +15,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:smarty/models/themeModel.dart';
 import 'package:smarty/models/user.dart';
+import 'package:smarty/screens/Drawer.dart';
 import 'package:smarty/screens/homeManager.dart';
 import 'package:smarty/screens/manageUsers.dart';
 import 'package:smarty/services/auth.dart';
@@ -23,10 +24,13 @@ import 'package:smarty/widgets/devicesCarousel.dart';
 import 'package:smarty/widgets/roomCarousel.dart';
 import 'package:smarty/widgets/routineCarousel.dart';
 import 'package:smarty/services/database.dart';
+import 'package:smarty/models/weatherModel.dart';
 
 import '../alertBox.dart';
 
 class Home extends StatefulWidget {
+//  final weatherdata;
+//  Home(this.weatherdata);
 //  final FirebaseUser currentUser;   //Ignore
 //  Home(this.currentUser);           //Ignore
   @override
@@ -46,11 +50,17 @@ class _HomeState extends State<Home> {
 
   DatabaseReference itemRef;
   bool valueSwitch = true;
+
+  var weatherdata = WeatherModel().weatherData();
+
   void initState() {
     super.initState();
+//    var l = getLocationData();
     final FirebaseDatabase database = FirebaseDatabase
         .instance; //Rather then just writing FirebaseDatabase(), get the instance.
     itemRef = database.reference();
+//    storeValues(l);
+//    fetchData();
   }
 
   @override
@@ -60,7 +70,50 @@ class _HomeState extends State<Home> {
   */
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
 
+  WeatherModel wm = WeatherModel();
+
+  int temperature;
+  int condition;
+  String cityName;
+
+//  void storeValues(dynamic weatherdata) {
+//    setState(() {
+//      if (weatherdata == null) {
+//        temperature = 0;
+//        condition = 0;
+//        cityName = 'ERROR';
+//        return;
+//      }
+//      var temp = weatherdata['main']["temp"];
+//      temperature = temp.toInt();
+//      condition = weatherdata["weather"][0]["id"];
+//      cityName = weatherdata["name"];
+//    });
+//  }
+//  bool isLoading = false;
+//
+//  fetchData() async {
+//    setState(() {
+//      isLoading = true; //Data is loading
+//    });
+//    if (weatherdata == null) {
+//      temperature = 0;
+//      condition = 0;
+//      cityName = 'ERROR';
+//      return;
+//    }
+//    var temp = weatherdata['main']["temp"];
+//    temperature = temp.toInt();
+//    condition = weatherdata["weather"][0]["id"];
+//    cityName = weatherdata["name"];
+//    setState(() {
+//      isLoading = false; //Data has loaded
+//    });
+//  }
+
   Widget build(BuildContext context) {
+    double screenwidth = MediaQuery.of(context).size.width;
+    double screenheight = MediaQuery.of(context).size.height;
     return Scaffold(
       //TODO:make provider
 
@@ -119,108 +172,109 @@ class _HomeState extends State<Home> {
       ),
 
       // Drawer is the hamburger menu.
-      drawer: Drawer(
-        child: SafeArea(
-          // The various items in the hamburger menu are saved inside a ListView, which is basically a vertical list
-          child: ListView(
-            // ListView items are saved in a children list of Widgets
-            children: <Widget>[
-              UserAccountsDrawerHeader(
-                accountName: Text(
-                  'John Doe',
-                  style: TextStyle(
-                    fontFamily: 'Montserrat',
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-                accountEmail: Text(
-                  'johndoe@mail.com',
-                  style: TextStyle(
-                    fontFamily: 'Montserrat',
-                  ),
-                ),
-                currentAccountPicture: CircleAvatar(
-                  child: Text(
-                    'JD',
-                    style: TextStyle(
-                      fontFamily: 'Montserrat',
-                    ),
-                  ),
-                ),
-              ),
-              // ListTile represents a list tile item in the menu
-              ListTile(
-                // Leading is an element in the start of the list tile horizontally
-                leading: Icon(FontAwesomeIcons.users),
-                // Title of the list
-                title: Text(
-                  'Manage Users',
-                ),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => ManageUsers()),
-                  );
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.settings),
-                title: Text(
-                  'Account Settings',
-                ),
-              ),
-              ListTile(
-                leading: Icon(Icons.lock),
-                title: Text(
-                  'For Home Manager',
-                ),
-                trailing: Icon(
-                  Icons.arrow_forward,
-                ),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => HomeManager()),
-                  );
-                },
-              ),
-              ListTile(
-                leading: Icon(FontAwesomeIcons.solidMoon),
-                title: Text('Dark Mode'),
-                trailing: Switch(
-                  value: valueSwitch,
-                  onChanged: (value) {
-                    setState(() {
-                      valueSwitch = value;
-                      Provider.of<ThemeModel>(context, listen: false)
-                          .toggleTheme();
-                    });
-                  },
-                ),
-              ),
-              ListTile(
-                leading: Icon(FontAwesomeIcons.questionCircle),
-                title: Text(
-                  'About Developers',
-                ),
-              ),
-              Divider(),
-              // Log out button
-              ListTile(
-                onTap: () async {
-                  await _auth.signOut();
-                },
-                leading: Icon(Icons.exit_to_app),
-                title: Text(
-                  "Logout",
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
+//      drawer: Drawer(
+//        child: SafeArea(
+//          // The various items in the hamburger menu are saved inside a ListView, which is basically a vertical list
+//          child: ListView(
+//            // ListView items are saved in a children list of Widgets
+//            children: <Widget>[
+//              UserAccountsDrawerHeader(
+//                accountName: Text(
+//                  'John Doe',
+//                  style: TextStyle(
+//                    fontFamily: 'Montserrat',
+//                    fontWeight: FontWeight.w700,
+//                  ),
+//                ),
+//                accountEmail: Text(
+//                  'johndoe@mail.com',
+//                  style: TextStyle(
+//                    fontFamily: 'Montserrat',
+//                  ),
+//                ),
+//                currentAccountPicture: CircleAvatar(
+//                  child: Text(
+//                    'JD',
+//                    style: TextStyle(
+//                      fontFamily: 'Montserrat',
+//                    ),
+//                  ),
+//                ),
+//              ),
+//              // ListTile represents a list tile item in the menu
+//              ListTile(
+//                // Leading is an element in the start of the list tile horizontally
+//                leading: Icon(FontAwesomeIcons.users),
+//                // Title of the list
+//                title: Text(
+//                  'Manage Users',
+//                ),
+//                onTap: () {
+//                  Navigator.push(
+//                    context,
+//                    MaterialPageRoute(builder: (context) => ManageUsers()),
+//                  );
+//                },
+//              ),
+//              ListTile(
+//                leading: Icon(Icons.settings),
+//                title: Text(
+//                  'Account Settings',
+//                ),
+//              ),
+//              ListTile(
+//                leading: Icon(Icons.lock),
+//                title: Text(
+//                  'For Home Manager',
+//                ),
+//                trailing: Icon(
+//                  Icons.arrow_forward,
+//                ),
+//                onTap: () {
+//                  Navigator.push(
+//                    context,
+//                    MaterialPageRoute(builder: (context) => HomeManager()),
+//                  );
+//                },
+//              ),
+//              ListTile(
+//                leading: Icon(FontAwesomeIcons.solidMoon),
+//                title: Text('Dark Mode'),
+//                trailing: Switch(
+//                  value: valueSwitch,
+//                  onChanged: (value) {
+//                    setState(() {
+//                      valueSwitch = value;
+//                      Provider.of<ThemeModel>(context, listen: false)
+//                          .toggleTheme();
+//                    });
+//                  },
+//                ),
+//              ),
+//              ListTile(
+//                leading: Icon(FontAwesomeIcons.questionCircle),
+//                title: Text(
+//                  'About Developers',
+//                ),
+//              ),
+//              Divider(),
+//              // Log out button
+//              ListTile(
+//                onTap: () async {
+//                  await _auth.signOut();
+//                },
+//                leading: Icon(Icons.exit_to_app),
+//                title: Text(
+//                  "Logout",
+//                ),
+//              ),
+//            ],
+//          ),
+//        ),
+//      ),
 
       // Here starts the body of the Home Page, nested inside a SafeArea widget to keep content inside the viewport
+      drawer: DrawerPage(),
       body: SafeArea(
         child: ListView(
           padding: EdgeInsets.symmetric(vertical: 20.0),
@@ -238,16 +292,30 @@ class _HomeState extends State<Home> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(left: 20.0, right: 120.0),
-              child: Text(
-                'Welcome Home, Ben',
-                //${widget.currentUser.email}`
-                style: TextStyle(
-                    fontSize: 24.0,
-                    fontWeight: FontWeight.w700,
-                    fontFamily: 'Poppins'),
+              padding: EdgeInsets.symmetric(horizontal: 20.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text(
+                    'Welcome Home, Ben',
+                    //${widget.currentUser.email}`
+                    style: TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.w700,
+                        fontFamily: 'Poppins'),
+                  ),
+                  Text(
+                    '32°C',
+                    //${widget.currentUser.email}`
+                    style: TextStyle(
+                        fontSize: 24.0,
+                        fontWeight: FontWeight.w400,
+                        fontFamily: 'Poppins'),
+                  ),
+                ],
               ),
             ),
+
             SizedBox(
               height: 20.0,
             ),

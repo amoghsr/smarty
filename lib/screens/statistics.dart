@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:smarty/shared/constants.dart';
 
 import '../energyData.dart';
+import 'package:smarty/screens/Drawer.dart';
 
 class Statistics extends StatefulWidget {
   @override
@@ -21,7 +22,7 @@ class _StatisticsState extends State<Statistics> {
           style: kAppBarTextStyle,
         ),
       ),
-      drawer: Drawer(),
+      drawer: DrawerPage(),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Center(
