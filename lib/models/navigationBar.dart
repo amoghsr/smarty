@@ -39,9 +39,6 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
 
   Widget build(BuildContext context) {
     final room = Provider.of<List<Room>>(context);
-    print(room);
-
-    print("Hi ${Provider.of<List<Room>>(context)}");
     return SafeArea(
       child: Scaffold(
         body: _children[_currentIndex],

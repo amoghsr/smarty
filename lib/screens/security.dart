@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smarty/shared/constants.dart';
+import 'package:smarty/screens/drawer.dart';
 
 class Security extends StatefulWidget {
   @override
@@ -19,7 +20,7 @@ class _SecurityState extends State<Security> {
           style: kAppBarTextStyle,
         ),
       ),
-      drawer: Drawer(),
+      drawer: DrawerPage(),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Center(

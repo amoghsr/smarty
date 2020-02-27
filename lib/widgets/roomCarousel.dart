@@ -1,14 +1,16 @@
 /*
-This file helps create the carousels for the rooms in the house.
+This file helps create the carousels for the room1 in the house.
  */
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:smarty/models/roomModel.dart';
 import 'package:smarty/screens/rooms.dart';
 
 class RoomCarousel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final room1 = Provider.of<List<Room>>(context);
     return Column(
       children: <Widget>[
         Padding(
@@ -48,7 +50,7 @@ class RoomCarousel extends StatelessWidget {
               Opacity(
                 opacity: 0.5,
                 child: Text(
-                  'Scroll through all the rooms in your house.',
+                  'Scroll through all the room1 in your house.',
                   style: TextStyle(
                     fontSize: 11,
                     fontWeight: FontWeight.w400,
@@ -66,9 +68,9 @@ class RoomCarousel extends StatelessWidget {
 //          color: Colors.blue,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            itemCount: rooms.length,
+            itemCount: room1.length,
             itemBuilder: (BuildContext context, int index) {
-              Room room = rooms[index];
+              Room room = room1[index];
               return Container(
                 margin: EdgeInsets.all(8.0),
                 width: 140.0,

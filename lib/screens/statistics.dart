@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:smarty/models/roomModel.dart';
 import 'package:smarty/models/user.dart';
 import 'package:smarty/shared/constants.dart';
+import 'package:smarty/screens/drawer.dart';
 
 import '../energyData.dart';
 
@@ -24,7 +25,7 @@ class _StatisticsState extends State<Statistics> {
           style: kAppBarTextStyle,
         ),
       ),
-      drawer: Drawer(),
+      drawer: DrawerPage(),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Center(

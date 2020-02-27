@@ -6,14 +6,15 @@ import 'package:smarty/models/devicesModel.dart';
 import 'package:smarty/models/roomModel.dart';
 import 'package:smarty/models/user.dart';
 import 'package:smarty/shared/constants.dart';
+import 'package:smarty/screens/drawer.dart';
 
-List<Tab> tabList = [
-  Tab(text: rooms[0].roomName, icon: rooms[0].icon),
-  Tab(text: rooms[1].roomName, icon: rooms[1].icon),
-  Tab(text: rooms[2].roomName, icon: rooms[2].icon),
-  Tab(text: rooms[3].roomName, icon: rooms[3].icon),
-  Tab(text: rooms[4].roomName, icon: rooms[4].icon),
-];
+//List<Tab> rlist = [
+//  Tab(text: room1[0].roomName, icon: room1[0].icon),
+//  Tab(text: room1[1].roomName, icon: room1[1].icon),
+//  Tab(text: room1[2].roomName, icon: room1[2].icon),
+//  Tab(text: room1[3].roomName, icon: room1[3].icon),
+//  Tab(text: room1[4].roomName, icon: room1[4].icon),
+//];
 
 Icon getIcons(String devIc) {
   for (var j in devices) {
@@ -35,29 +36,22 @@ class MyOtherRoom extends StatefulWidget {
 
   MyOtherRoom({@required this.initRoom});
 
-  _MyOtherRoomState createState() => _MyOtherRoomState();
+  _MyOtherroom1tate createState() => _MyOtherroom1tate();
 }
 
-// String appBarrmName = tabList[0].text;
+// String appBarrmName = rlist[0].text;
 
 Color bulbColor = Colors.white;
-String currRoom = tabList[0].text;
-String currDevice = rooms[0].d[0];
-String initrmName = tabList[0].text;
-String rmName = tabList[0].text;
-bool isAbsorbed = false;
 
-
-class _MyOtherRoomState extends State<MyOtherRoom> {
+class _MyOtherroom1tate extends State<MyOtherRoom> {
   @override
   bool isSwitched = true;
   int brightness = 60;
   DatabaseReference itemRef;
 
   void initState() {
-    initrmName = tabList[widget.initRoom].text;
-    rmName = tabList[widget.initRoom].text;
     super.initState();
+
     final FirebaseDatabase database = FirebaseDatabase
         .instance; //Rather then just writing FirebaseDatabase(), get the instance.
     itemRef = database.reference();
@@ -66,11 +60,11 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
   void stateChange(bool newvalue, String room, String device) {
     if (newvalue == false) {
       itemRef
-          .child("Rooms/" + room + "/devices/" + device + "/")
+          .child("room1/" + room + "/devices/" + device + "/")
           .update({'State': "off"});
     } else {
       itemRef
-          .child("Rooms/" + room + "/devices/" + device + "/")
+          .child("room1/" + room + "/devices/" + device + "/")
           .update({'State': "on"});
     }
   }
@@ -81,11 +75,15 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
         .instance; //Rather then just writing FirebaseDatabase(), get the instance.
     x = database
         .reference()
-        .child("Rooms/" + room + "/" + device + "/")
+        .child("room1/" + room + "/" + device + "/")
         .onValue;
     return x;
   }
 
+  String initrmName;
+  String rmName;
+  String currDevice;
+  String currRoom;
   bool convert(String x) {
     bool w;
     if (x == "on") {
@@ -99,23 +97,35 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
   Widget build(BuildContext context) {
     double screenwidth = MediaQuery.of(context).size.width;
     double screenheight = MediaQuery.of(context).size.height;
-//    final user = Provider.of<User>(context);
-//    final rooms1 = Provider.of<List<Room>>(context);
-//    rooms1.forEach((room) => print(room.toString()));
+    final room1 = Provider.of<List<Room>>(context);
+
+    List<Tab> rlist = [];
+    for (var r in room1) {
+      rlist.add(
+        Tab(text: r.roomName, icon: r.icon),
+      );
+    }
+
+    currRoom = rlist[0].text;
+    currDevice = room1[0].d[0];
+    initrmName = rlist[0].text;
+    rmName = rlist[0].text;
+    bool isAbsorbed = false;
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          (rmName != tabList[widget.initRoom].text) ? rmName : initrmName,
+          (rmName != rlist[widget.initRoom].text) ? rmName : initrmName,
           style: kAppBarTextStyle,
         ),
       ),
-//      drawer: Drawer(),
+      // Drawer is the hamburger menu.
+      drawer: DrawerPage(),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Container(
           child: DefaultTabController(
             initialIndex: widget.initRoom,
-            length: 5,
+            length: 3,
             child: Column(
               children: <Widget>[
                 TabBar(
@@ -124,12 +134,12 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
                   unselectedLabelColor: Theme.of(context).backgroundColor,
                   indicatorColor: Colors.transparent,
                   indicatorSize: TabBarIndicatorSize.tab,
-                  tabs: tabList,
+                  tabs: rlist,
                   onTap: (value) {
                     setState(() {
-                      rmName = tabList[value].text;
-                      currRoom = tabList[value].text;
-                      currDevice = rooms[value].d[0];
+                      rmName = rlist[value].text;
+                      currRoom = rlist[value].text;
+                      currDevice = room1[value].d[0];
                     });
                   },
                 ),
@@ -165,15 +175,15 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
                       height: screenheight * 0.35,
                       width: screenwidth,
                       child: TabBarView(
-                        physics: NeverScrollableScrollPhysics(),
-                        children: [
-                          getListTile(0),
-                          getListTile(1),
-                          getListTile(2),
-                          getListTile(3),
-                          getListTile(4),
-                        ],
-                      ),
+                          physics: NeverScrollableScrollPhysics(),
+                          children: [
+                            for (var i in room1) getListTile(room1.indexOf(i)),
+                          ]
+//                            getListTile(0),
+//                          getListTile(1),
+//                          getListTile(2),
+
+                          ),
                     ),
                   ],
                 ),
@@ -187,6 +197,13 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
 
   Opacity controllerContainer(
       double screenheight, double screenwidth, double opc) {
+    final room1 = Provider.of<List<Room>>(context);
+    List<Tab> rlist = [];
+    for (var r in room1) {
+      rlist.add(
+        Tab(text: r.roomName, icon: r.icon),
+      );
+    }
     return Opacity(
       opacity: opc,
       child: Container(
@@ -196,18 +213,24 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
         // color: Colors.red,
         child: DevicesController(
           chDevice: currDevice,
-          chRoom:
-              (rmName != tabList[widget.initRoom].text) ? rmName : initrmName,
+          chRoom: (rmName != rlist[widget.initRoom].text) ? rmName : initrmName,
           // isDisabled: isAbsorbed,
-          // toggleState: getDevState(rooms[rmName].roomName, rooms[l].d[i]).toggleSt,
+          // toggleState: getDevState(room1[rmName].roomName, room1[l].d[i]).toggleSt,
         ),
       ),
     );
   }
 
   ListView getListTile(int l) {
+    final room1 = Provider.of<List<Room>>(context);
+    List<Tab> rlist = [];
+    for (var r in room1) {
+      rlist.add(
+        Tab(text: r.roomName, icon: r.icon),
+      );
+    }
     return ListView.builder(
-        itemCount: rooms[l].d.length,
+        itemCount: room1.length,
         itemBuilder: (context, i) {
           return Column(
             children: <Widget>[
@@ -220,18 +243,18 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
                 child: ListTile(
                   onTap: () {
                     setState(() {
-                      currRoom = rooms[l].roomName;
-                      currDevice = rooms[l].d[i];
+                      currRoom = room1[l].roomName;
+                      currDevice = room1[l].d[i];
                     });
                   },
-                  leading: getIcons(rooms[l].d[i]),
-                  title: Text(rooms[l].d[i]),
+                  leading: getIcons(room1[l].d[i]),
+                  title: Text(room1[l].d[i]),
                   trailing: StreamBuilder(
                     stream: itemRef
-                        .child("Rooms/" +
-                            rooms[l].roomName +
+                        .child("room1/" +
+                            room1[l].roomName +
                             "/devices/" +
-                            rooms[l].d[i] +
+                            room1[l].d[i] +
                             "/")
                         .onValue,
                     builder: (context, snap) {
@@ -241,9 +264,9 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
                       return Switch(
                         value: convert(values["State"]),
                         onChanged: (value) {
-                          stateChange(value, rooms[l].roomName, rooms[l].d[i]);
+                          stateChange(value, room1[l].roomName, room1[l].d[i]);
                           setState(() {
-                            getDevState(rooms[l].roomName, rooms[l].d[i])
+                            getDevState(room1[l].roomName, room1[l].d[i])
                                 .toggleSt = value;
                           });
                         },

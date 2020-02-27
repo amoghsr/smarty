@@ -5,6 +5,7 @@
 */
 
 //import 'dart:html';
+import 'package:smarty/screens/drawer.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -62,6 +63,8 @@ class _HomeState extends State<Home> {
 
   Widget build(BuildContext context) {
     return Scaffold(
+      //TODO:make provider
+
       appBar: AppBar(
         title: Text(
           'Home',
@@ -117,107 +120,7 @@ class _HomeState extends State<Home> {
       ),
 
       // Drawer is the hamburger menu.
-      drawer: Drawer(
-        child: SafeArea(
-          // The various items in the hamburger menu are saved inside a ListView, which is basically a vertical list
-          child: ListView(
-            // ListView items are saved in a children list of Widgets
-            children: <Widget>[
-              UserAccountsDrawerHeader(
-                accountName: Text(
-                  'John Doe',
-                  style: TextStyle(
-                    fontFamily: 'Montserrat',
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-                accountEmail: Text(
-                  'johndoe@mail.com',
-                  style: TextStyle(
-                    fontFamily: 'Montserrat',
-                  ),
-                ),
-                currentAccountPicture: CircleAvatar(
-                  child: Text(
-                    'JD',
-                    style: TextStyle(
-                      fontFamily: 'Montserrat',
-                    ),
-                  ),
-                ),
-              ),
-              // ListTile represents a list tile item in the menu
-              ListTile(
-                // Leading is an element in the start of the list tile horizontally
-                leading: Icon(FontAwesomeIcons.users),
-                // Title of the list
-                title: Text(
-                  'Manage Users',
-                ),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => ManageUsers()),
-                  );
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.settings),
-                title: Text(
-                  'Account Settings',
-                ),
-              ),
-              ListTile(
-                leading: Icon(Icons.lock),
-                title: Text(
-                  'For Home Manager',
-                ),
-                trailing: Icon(
-                  Icons.arrow_forward,
-                ),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => HomeManager()),
-                  );
-                },
-              ),
-              ListTile(
-                leading: Icon(FontAwesomeIcons.solidMoon),
-                title: Text('Dark Mode'),
-                trailing: Switch(
-                  value: valueSwitch,
-                  onChanged: (value) {
-                    setState(() {
-                      valueSwitch = value;
-                      Provider.of<ThemeModel>(context, listen: false)
-                          .toggleTheme();
-                    });
-                  },
-                ),
-              ),
-              ListTile(
-                leading: Icon(FontAwesomeIcons.questionCircle),
-                title: Text(
-                  'About Developers',
-                ),
-              ),
-              Divider(),
-              // Log out button
-              ListTile(
-                onTap: () async {
-                  await _auth.signOut();
-                },
-                leading: Icon(Icons.exit_to_app),
-                title: Text(
-                  "Logout",
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-
+      drawer: DrawerPage(),
       // Here starts the body of the Home Page, nested inside a SafeArea widget to keep content inside the viewport
       body: SafeArea(
         child: ListView(
