@@ -57,15 +57,18 @@ class _LeaderboardState extends State<Leaderboard> {
               ),
             ];
           },
-          body: Container(
-            height: screenheight * 0.8,
-            width: screenwidth,
-            child: TabBarView(
-              physics: NeverScrollableScrollPhysics(),
-              children: [
-                LeaderboardData(leaderboardType: 'DAILY STREAK'),
-                LeaderboardData(leaderboardType: 'DAILY SAVINGS'),
-              ],
+          body: GestureDetector(
+            onVerticalDragUpdate: (_) {},
+            child: Container(
+              height: screenheight * 0.8,
+              width: screenwidth,
+              child: TabBarView(
+                physics: NeverScrollableScrollPhysics(),
+                children: [
+                  LeaderboardData(leaderboardType: 'DAILY STREAK'),
+                  LeaderboardData(leaderboardType: 'DAILY SAVINGS'),
+                ],
+              ),
             ),
           ),
         ),

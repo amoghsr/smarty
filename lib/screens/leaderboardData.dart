@@ -36,7 +36,7 @@ class _LeaderboardDataState extends State<LeaderboardData> {
             child: Column(
               children: <Widget>[
                 Container(
-                  height: screenheight * 0.4,
+                  height: screenheight * 0.39,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
