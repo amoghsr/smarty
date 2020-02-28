@@ -67,6 +67,7 @@ class DeviceCarousel extends StatelessWidget {
 //          color: Colors.blue,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
+            //Todo: change devices from here to stream
             itemCount: devices.length,
             itemBuilder: (BuildContext context, int index) {
               Device device = devices[index];

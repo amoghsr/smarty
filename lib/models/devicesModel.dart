@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -22,6 +23,44 @@ class Device {
       this.opacity,
       this.icon,
       this.toggleSt});
+}
+
+String getImageUrl(String roomName) {
+  switch (roomName) {
+    case 'Lamp':
+      return 'assets/images/deviceAssets/bulb.png';
+    case 'Exhaust Fan':
+      return 'assets/images/deviceAssets/fan.png';
+    case 'Camera':
+      return 'assets/images/deviceAssets/cctv.png';
+    case 'AC':
+      return 'assets/images/deviceAssets/ac.png';
+    case 'Faucet':
+      return 'assets/images/deviceAssets/faucet.png';
+    case 'heater':
+      return 'assets/images/deviceAssets/heater.png';
+    case 'Speaker':
+      return 'assets/images/deviceAssets/speaker.png';
+  }
+}
+
+Icon getIcons(String roomName) {
+  switch (roomName) {
+    case 'Lamp':
+      return Icon(FontAwesomeIcons.couch);
+    case 'Exhaust Fan':
+      return Icon(FontAwesomeIcons.couch);
+    case 'Camera':
+      return Icon(FontAwesomeIcons.couch);
+    case 'AC':
+      return Icon(FontAwesomeIcons.couch);
+    case 'Faucet':
+      return Icon(FontAwesomeIcons.couch);
+    case 'heater':
+      return Icon(FontAwesomeIcons.couch);
+    case 'Speaker':
+      return Icon(FontAwesomeIcons.couch);
+  }
 }
 
 List<Device> devices = [

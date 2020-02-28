@@ -50,14 +50,14 @@ class AuthService {
   }
 
   // Register with email, password, name and age.
-  Future registerWithEmailAndPassword(
-      String email, String password, String name, String homeId) async {
+  Future registerWithEmailAndPassword(String email, String password,
+      String name, String homeId, String userType) async {
     try {
       AuthResult result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       UserUpdateInfo userUpdateInfo = UserUpdateInfo();
       FirebaseUser user1 = await _auth.currentUser();
-      userUpdateInfo.photoUrl = homeId;
+      userUpdateInfo.photoUrl = homeId + userType;
 
       await user1.updateProfile(userUpdateInfo);
       FirebaseUser user = result.user;

@@ -74,51 +74,41 @@ Icon getIcons(String roomName) {
   }
 }
 
-List<String> getDv(String roomname) {
-  List<String> devicelist = [];
-  for (var i in devices) {
-    if (i.inRoom == roomname) {
-      devicelist.add(i.deviceName);
-      // devicelist.add(i.icon);
-    }
-  }
-  return devicelist;
-}
-
-List<Room> rooms = [
-  Room(
-      imageUrl: 'assets/images/livingroom.png',
-      roomName: 'Living Room',
-      description: 'Family space',
-      nDevices: '5',
-      icon: Icon(FontAwesomeIcons.couch),
-      d: getDv('Living Room')),
-  Room(
-      imageUrl: 'assets/images/kitchen.png',
-      roomName: 'Kitchen',
-      description: 'Cooking space',
-      nDevices: '2',
-      icon: Icon(FontAwesomeIcons.utensils),
-      d: getDv('Kitchen')),
-  Room(
-      imageUrl: 'assets/images/bedroom.png',
-      roomName: 'Bedroom',
-      description: 'Sleeping Space',
-      nDevices: '4',
-      icon: Icon(FontAwesomeIcons.bed),
-      d: getDv('Bedroom')),
-  Room(
-      imageUrl: 'assets/images/bedroom.png',
-      roomName: 'Playroom',
-      description: 'Sleeping Space',
-      nDevices: '4',
-      icon: Icon(FontAwesomeIcons.child),
-      d: getDv('Playroom')),
-  Room(
-      imageUrl: 'assets/images/bathroom.png',
-      roomName: 'Bathroom',
-      description: 'Fresh!',
-      nDevices: '2',
-      icon: Icon(FontAwesomeIcons.bath),
-      d: getDv('Bathroom')),
-];
+//
+//List<Room> rooms = [
+//  Room(
+//      imageUrl: 'assets/images/livingroom.png',
+//      roomName: 'Living Room',
+//      description: 'Family space',
+//      nDevices: '5',
+//      icon: Icon(FontAwesomeIcons.couch),
+//      d: getDv('Living Room')),
+//  Room(
+//      imageUrl: 'assets/images/kitchen.png',
+//      roomName: 'Kitchen',
+//      description: 'Cooking space',
+//      nDevices: '2',
+//      icon: Icon(FontAwesomeIcons.utensils),
+//      d: getDv('Kitchen')),
+//  Room(
+//      imageUrl: 'assets/images/bedroom.png',
+//      roomName: 'Bedroom',
+//      description: 'Sleeping Space',
+//      nDevices: '4',
+//      icon: Icon(FontAwesomeIcons.bed),
+//      d: getDv('Bedroom')),
+//  Room(
+//      imageUrl: 'assets/images/bedroom.png',
+//      roomName: 'Playroom',
+//      description: 'Sleeping Space',
+//      nDevices: '4',
+//      icon: Icon(FontAwesomeIcons.child),
+//      d: getDv('Playroom')),
+//  Room(
+//      imageUrl: 'assets/images/bathroom.png',
+//      roomName: 'Bathroom',
+//      description: 'Fresh!',
+//      nDevices: '2',
+//      icon: Icon(FontAwesomeIcons.bath),
+//      d: getDv('Bathroom')),
+//];

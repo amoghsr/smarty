@@ -6,52 +6,54 @@ import 'package:smarty/models/devicesModel.dart';
 import 'package:smarty/models/roomModel.dart';
 import 'package:smarty/models/user.dart';
 import 'package:smarty/shared/constants.dart';
-import 'package:smarty/screens/drawer.dart';
 
+//Todo:first
 //List<Tab> rlist = [
-//  Tab(text: room1[0].roomName, icon: room1[0].icon),
-//  Tab(text: room1[1].roomName, icon: room1[1].icon),
-//  Tab(text: room1[2].roomName, icon: room1[2].icon),
-//  Tab(text: room1[3].roomName, icon: room1[3].icon),
-//  Tab(text: room1[4].roomName, icon: room1[4].icon),
+//  Tab(text: rooms[0].roomName, icon: rooms[0].icon),
+//  Tab(text: rooms[1].roomName, icon: rooms[1].icon),
+//  Tab(text: rooms[2].roomName, icon: rooms[2].icon),
+//  Tab(text: rooms[3].roomName, icon: rooms[3].icon),
+//  Tab(text: rooms[4].roomName, icon: rooms[4].icon),
 //];
-
-Icon getIcons(String devIc) {
-  for (var j in devices) {
-    if (j.deviceName == devIc) {
-      return j.icon;
-    }
-  }
-}
-
-Device getDevState(String roomName, String devName) {
-  //bool isSwitched = true;
-  for (var i in devices)
-    if ((i.inRoom == roomName) && (i.deviceName == devName)) return i;
-}
 
 class MyOtherRoom extends StatefulWidget {
   @override
   int initRoom;
+  List<Room> rooms;
+  MyOtherRoom({@required this.initRoom, @required this.rooms});
 
-  MyOtherRoom({@required this.initRoom});
-
-  _MyOtherroom1tate createState() => _MyOtherroom1tate();
+  _MyOtherRoomState createState() => _MyOtherRoomState();
 }
 
-// String appBarrmName = rlist[0].text;
-
-Color bulbColor = Colors.white;
-
-class _MyOtherroom1tate extends State<MyOtherRoom> {
+class _MyOtherRoomState extends State<MyOtherRoom> {
   @override
+  List<Room> rooms;
+  List<Tab> rlist = [];
   bool isSwitched = true;
   int brightness = 60;
   DatabaseReference itemRef;
+  //Todo:first
+  Color bulbColor = Colors.white;
+  String currRoom;
+  String currDevice;
+  String initrmName;
+  String rmName;
+  bool isAbsorbed = false;
 
   void initState() {
+    rooms = widget.rooms;
+    for (var r in rooms) {
+      rlist.add(
+        Tab(text: r.roomName, icon: r.icon),
+      );
+    }
+    initrmName = rlist[widget.initRoom].text;
+    rmName = rlist[widget.initRoom].text;
+    currRoom = rlist[0].text;
+    currDevice = rooms[0].d[0];
+    initrmName = rlist[0].text;
+    rmName = rlist[0].text;
     super.initState();
-
     final FirebaseDatabase database = FirebaseDatabase
         .instance; //Rather then just writing FirebaseDatabase(), get the instance.
     itemRef = database.reference();
@@ -60,13 +62,27 @@ class _MyOtherroom1tate extends State<MyOtherRoom> {
   void stateChange(bool newvalue, String room, String device) {
     if (newvalue == false) {
       itemRef
-          .child("room1/" + room + "/devices/" + device + "/")
+          .child("Rooms/" + room + "/devices/" + device + "/")
           .update({'State': "off"});
     } else {
       itemRef
-          .child("room1/" + room + "/devices/" + device + "/")
+          .child("Rooms/" + room + "/devices/" + device + "/")
           .update({'State': "on"});
     }
+  }
+
+  Icon getIcons(String devIc) {
+    for (var j in devices) {
+      if (j.deviceName == devIc) {
+        return j.icon;
+      }
+    }
+  }
+
+  Device getDevState(String roomName, String devName) {
+    //bool isSwitched = true;
+    for (var i in devices)
+      if ((i.inRoom == roomName) && (i.deviceName == devName)) return i;
   }
 
   Stream getString(String room, String device) {
@@ -75,15 +91,11 @@ class _MyOtherroom1tate extends State<MyOtherRoom> {
         .instance; //Rather then just writing FirebaseDatabase(), get the instance.
     x = database
         .reference()
-        .child("room1/" + room + "/" + device + "/")
+        .child("Rooms/" + room + "/" + device + "/")
         .onValue;
     return x;
   }
 
-  String initrmName;
-  String rmName;
-  String currDevice;
-  String currRoom;
   bool convert(String x) {
     bool w;
     if (x == "on") {
@@ -97,20 +109,7 @@ class _MyOtherroom1tate extends State<MyOtherRoom> {
   Widget build(BuildContext context) {
     double screenwidth = MediaQuery.of(context).size.width;
     double screenheight = MediaQuery.of(context).size.height;
-    final room1 = Provider.of<List<Room>>(context);
-
-    List<Tab> rlist = [];
-    for (var r in room1) {
-      rlist.add(
-        Tab(text: r.roomName, icon: r.icon),
-      );
-    }
-
-    currRoom = rlist[0].text;
-    currDevice = room1[0].d[0];
-    initrmName = rlist[0].text;
-    rmName = rlist[0].text;
-    bool isAbsorbed = false;
+//    rooms = Provider.of<List<Room>>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -118,14 +117,13 @@ class _MyOtherroom1tate extends State<MyOtherRoom> {
           style: kAppBarTextStyle,
         ),
       ),
-      // Drawer is the hamburger menu.
-      drawer: DrawerPage(),
+//      drawer: Drawer(),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Container(
           child: DefaultTabController(
             initialIndex: widget.initRoom,
-            length: 3,
+            length: rooms.length,
             child: Column(
               children: <Widget>[
                 TabBar(
@@ -139,7 +137,7 @@ class _MyOtherroom1tate extends State<MyOtherRoom> {
                     setState(() {
                       rmName = rlist[value].text;
                       currRoom = rlist[value].text;
-                      currDevice = room1[value].d[0];
+                      currDevice = rooms[value].d[0];
                     });
                   },
                 ),
@@ -175,15 +173,11 @@ class _MyOtherroom1tate extends State<MyOtherRoom> {
                       height: screenheight * 0.35,
                       width: screenwidth,
                       child: TabBarView(
-                          physics: NeverScrollableScrollPhysics(),
-                          children: [
-                            for (var i in room1) getListTile(room1.indexOf(i)),
-                          ]
-//                            getListTile(0),
-//                          getListTile(1),
-//                          getListTile(2),
-
-                          ),
+                        physics: NeverScrollableScrollPhysics(),
+                        children: [
+                          for (var i in rooms) getListTile(rooms.indexOf(i)),
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -197,13 +191,6 @@ class _MyOtherroom1tate extends State<MyOtherRoom> {
 
   Opacity controllerContainer(
       double screenheight, double screenwidth, double opc) {
-    final room1 = Provider.of<List<Room>>(context);
-    List<Tab> rlist = [];
-    for (var r in room1) {
-      rlist.add(
-        Tab(text: r.roomName, icon: r.icon),
-      );
-    }
     return Opacity(
       opacity: opc,
       child: Container(
@@ -215,22 +202,15 @@ class _MyOtherroom1tate extends State<MyOtherRoom> {
           chDevice: currDevice,
           chRoom: (rmName != rlist[widget.initRoom].text) ? rmName : initrmName,
           // isDisabled: isAbsorbed,
-          // toggleState: getDevState(room1[rmName].roomName, room1[l].d[i]).toggleSt,
+          // toggleState: getDevState(rooms[rmName].roomName, rooms[l].d[i]).toggleSt,
         ),
       ),
     );
   }
 
   ListView getListTile(int l) {
-    final room1 = Provider.of<List<Room>>(context);
-    List<Tab> rlist = [];
-    for (var r in room1) {
-      rlist.add(
-        Tab(text: r.roomName, icon: r.icon),
-      );
-    }
     return ListView.builder(
-        itemCount: room1.length,
+        itemCount: rooms[l].d.length,
         itemBuilder: (context, i) {
           return Column(
             children: <Widget>[
@@ -243,18 +223,18 @@ class _MyOtherroom1tate extends State<MyOtherRoom> {
                 child: ListTile(
                   onTap: () {
                     setState(() {
-                      currRoom = room1[l].roomName;
-                      currDevice = room1[l].d[i];
+                      currRoom = rooms[l].roomName;
+                      currDevice = rooms[l].d[i];
                     });
                   },
-                  leading: getIcons(room1[l].d[i]),
-                  title: Text(room1[l].d[i]),
+                  leading: getIcons(rooms[l].d[i]),
+                  title: Text(rooms[l].d[i]),
                   trailing: StreamBuilder(
                     stream: itemRef
-                        .child("room1/" +
-                            room1[l].roomName +
+                        .child("Rooms/" +
+                            rooms[l].roomName +
                             "/devices/" +
-                            room1[l].d[i] +
+                            rooms[l].d[i] +
                             "/")
                         .onValue,
                     builder: (context, snap) {
@@ -264,9 +244,9 @@ class _MyOtherroom1tate extends State<MyOtherRoom> {
                       return Switch(
                         value: convert(values["State"]),
                         onChanged: (value) {
-                          stateChange(value, room1[l].roomName, room1[l].d[i]);
+                          stateChange(value, rooms[l].roomName, rooms[l].d[i]);
                           setState(() {
-                            getDevState(room1[l].roomName, room1[l].d[i])
+                            getDevState(rooms[l].roomName, rooms[l].d[i])
                                 .toggleSt = value;
                           });
                         },
