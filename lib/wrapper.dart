@@ -23,6 +23,7 @@ class Wrapper extends StatelessWidget {
         child: MaterialApp(
           theme: Provider.of<ThemeModel>(context).currentTheme,
           home: MyNavigationBar(),
+
         ),
       );
     }
