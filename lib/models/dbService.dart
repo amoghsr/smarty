@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -29,12 +31,9 @@ class DatabaseService1 {
 
   List<Device> CreateDeviceList(QuerySnapshot data) {
     List<Device> x = [];
-//    print();
-    data.documents.map((doc) {
-      print("help me");
-      Map data1 = doc.data;
-      data1.forEach((key, value) {
-        x.add(Device.fromFirestore(key, value, doc.documentID));
+    data.documents.forEach((element) {
+      element.data.forEach((key, value) {
+        x.add(Device.fromFirestore(key, value, element.documentID));
       });
     });
     return x;

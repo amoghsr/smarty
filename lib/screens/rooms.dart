@@ -20,7 +20,9 @@ class MyOtherRoom extends StatefulWidget {
   @override
   int initRoom;
   List<Room> rooms;
-  MyOtherRoom({@required this.initRoom, @required this.rooms});
+  List<Device> devices;
+  MyOtherRoom(
+      {@required this.initRoom, @required this.rooms, @required this.devices});
 
   _MyOtherRoomState createState() => _MyOtherRoomState();
 }
@@ -31,6 +33,7 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
   List<Tab> rlist = [];
   bool isSwitched = true;
   int brightness = 60;
+  List<Device> devices;
   DatabaseReference itemRef;
   //Todo:first
   Color bulbColor = Colors.white;
@@ -42,6 +45,7 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
 
   void initState() {
     rooms = widget.rooms;
+    devices = widget.devices;
     for (var r in rooms) {
       rlist.add(
         Tab(text: r.roomName, icon: r.icon),
@@ -111,7 +115,7 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
     double screenheight = MediaQuery.of(context).size.height;
     final devi = Provider.of<List<Device>>(context);
     if (devi != null) {
-      print(devi[0]);
+      print(devi[0].inRoom);
       print("tester");
     }
     return Scaffold(

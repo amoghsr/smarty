@@ -4,6 +4,7 @@ This file helps create the carousels for the room1 in the house.
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:smarty/models/devicesModel.dart';
 import 'package:smarty/models/roomModel.dart';
 import 'package:smarty/screens/rooms.dart';
 
@@ -11,6 +12,8 @@ class RoomCarousel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final room1 = Provider.of<List<Room>>(context);
+    final devices = Provider.of<List<Device>>(context);
+
     if (room1 != null) {
       return Column(
         children: <Widget>[
@@ -72,8 +75,10 @@ class RoomCarousel extends StatelessWidget {
                         onTap: () => Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) =>
-                                MyOtherRoom(initRoom: index, rooms: room1),
+                            builder: (context) => MyOtherRoom(
+                                initRoom: index,
+                                rooms: room1,
+                                devices: devices),
                           ),
                         ),
                         child: Container(
