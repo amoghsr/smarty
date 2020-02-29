@@ -18,6 +18,21 @@ class DatabaseService1 {
     return ref.snapshots().map(CreateRoomList);
   }
 
+  Stream<List<String>> streamHomiIDs() {
+//    List<String> x = [];
+    var data = _db.collection('Homes');
+    return data.snapshots().map(IDlist);
+  }
+
+//  final x = Provider.of<List<String>>.(context),
+  List<String> IDlist(QuerySnapshot doc) {
+    List<String> x = [];
+    doc.documents.forEach((element) {
+      x.add(element.documentID);
+    });
+    return x;
+  }
+
   List<Room> CreateRoomList(QuerySnapshot data) {
     return data.documents.map((doc) {
       return Room.fromFirestore(doc);

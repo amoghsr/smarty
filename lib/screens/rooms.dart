@@ -2,6 +2,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:smarty/devices_controller.dart';
+import 'package:smarty/models/dbService.dart';
 import 'package:smarty/models/devicesModel.dart';
 import 'package:smarty/models/roomModel.dart';
 import 'package:smarty/models/user.dart';
@@ -42,6 +43,7 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
   String initrmName;
   String rmName;
   bool isAbsorbed = false;
+  List<String> x;
 
   void initState() {
     rooms = widget.rooms;
@@ -113,11 +115,7 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
   Widget build(BuildContext context) {
     double screenwidth = MediaQuery.of(context).size.width;
     double screenheight = MediaQuery.of(context).size.height;
-    final devi = Provider.of<List<Device>>(context);
-    if (devi != null) {
-      print(devi[0].inRoom);
-      print("tester");
-    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text(

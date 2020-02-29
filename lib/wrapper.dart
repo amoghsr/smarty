@@ -23,9 +23,12 @@ class Wrapper extends StatelessWidget {
         value: DatabaseService1().streamRooms(user),
         child: StreamProvider<List<Device>>.value(
           value: DatabaseService1().streamDevices(user),
-          child: MaterialApp(
-            theme: Provider.of<ThemeModel>(context).currentTheme,
-            home: MyNavigationBar(),
+          child: StreamProvider<List<String>>.value(
+            value: DatabaseService1().streamHomiIDs(),
+            child: MaterialApp(
+              theme: Provider.of<ThemeModel>(context).currentTheme,
+              home: MyNavigationBar(),
+            ),
           ),
         ),
       );
