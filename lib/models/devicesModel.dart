@@ -13,6 +13,7 @@ class Device {
   double opacity;
   Icon icon;
   bool toggleSt;
+  int count;
 
   Device(
       {this.imageUrl,
@@ -22,7 +23,27 @@ class Device {
       this.level,
       this.opacity,
       this.icon,
-      this.toggleSt});
+      this.toggleSt,
+      this.count});
+
+  static List<Device> fromFirestore(DocumentSnapshot doc) {
+    List<Device> x = [];
+    Map data = doc.data;
+    data.forEach((key, value) {
+      x.add(Device(
+        deviceName: key,
+        inRoom: doc.documentID,
+        icon: getIcons(key),
+        imageUrl: getImageUrl(key),
+        count: value,
+        state: 'Off',
+        toggleSt: false,
+        level: '5',
+        opacity: 1,
+      ));
+    });
+    return x;
+  }
 }
 
 String getImageUrl(String roomName) {

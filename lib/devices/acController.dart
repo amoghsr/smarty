@@ -155,7 +155,7 @@ class ACController extends StatelessWidget {
                             )),
                         onChangeEnd: (double value) {
                           setTemp(value.ceil().toInt(), roomName, devName);
-                          print(value);
+//                          print(value);
                         });
                   Map<String, dynamic> values =
                       new Map<String, dynamic>.from(snap.data.snapshot.value);
@@ -189,7 +189,7 @@ class ACController extends StatelessWidget {
                           )),
                       onChangeEnd: (double value) {
                         setTemp(value.ceil().toInt(), roomName, devName);
-                        print(value);
+//                        print(value);
                       });
                 },
               ),

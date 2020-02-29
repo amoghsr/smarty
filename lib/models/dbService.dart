@@ -10,14 +10,15 @@ import 'roomModel.dart';
 
 class DatabaseService1 {
   final Firestore _db = Firestore.instance;
+
   Stream<List<Room>> streamRooms(User user) {
     var ref = _db.collection('Homes').document("123").collection("1");
     return ref.snapshots().map(CreateRoomList);
   }
 
-  Stream<DocumentSnapshot> streamDevices(User user, String roomName) {
-    var ref = _db.collection('Homes').document("123").collection("1").document(roomName).snapshots();
-    return ref;
+  Stream<List<Device>> streamDevices(User user) {
+    var ref = _db.collection('Homes').document("123").collection("1");
+    return ref.snapshots().map(CreateDeviceList);
   }
 
   List<Room> CreateRoomList(QuerySnapshot data) {
@@ -26,9 +27,12 @@ class DatabaseService1 {
     }).toList();
   }
 
-  // List<Device> CreateDeviceList(QuerySnapshot data) {
-  //   return data.documents.map((doc) {
-  //     return Room.fromFirestore(doc);
-  //   }).toList();
-  // }
+  List<Device> CreateDeviceList(QuerySnapshot data) {
+    List<Device> x = [];
+    data.documents.map((doc) {
+      x.addAll(Device.fromFirestore(doc));
+    });
+
+    return x;
+  }
 }

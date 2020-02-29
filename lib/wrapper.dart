@@ -13,8 +13,8 @@ import 'models/roomModel.dart';
 class Wrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // final user = Provider.of<User>(context);
-    User user = User(houseId: '123',uid: '1');
+    final user = Provider.of<User>(context);
+
     if (user == null) {
       return Authenticate();
     } else {
