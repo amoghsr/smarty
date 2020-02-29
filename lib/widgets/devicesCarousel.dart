@@ -11,9 +11,12 @@ import 'package:smarty/test/firebaseControlDevices.dart';
 class DeviceCarousel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final devi = Provider.of<List<Device>>(context);
-    print(devi[0].deviceName);
-    print("please work");
+//    final devi = Provider.of<List<Device>>(context);
+//    if (devi != null) {
+//      print(devi[0].deviceName);
+//      print("tester");
+//    }
+
     return Column(
       children: <Widget>[
         Padding(

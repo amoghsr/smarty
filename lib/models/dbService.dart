@@ -16,23 +16,27 @@ class DatabaseService1 {
     return ref.snapshots().map(CreateRoomList);
   }
 
-  Stream<List<Device>> streamDevices(User user) {
-    var ref = _db.collection('Homes').document("123").collection("1");
-    return ref.snapshots().map(CreateDeviceList);
-  }
-
   List<Room> CreateRoomList(QuerySnapshot data) {
     return data.documents.map((doc) {
       return Room.fromFirestore(doc);
     }).toList();
   }
 
+  Stream<List<Device>> streamDevices(User user) {
+    var ref = _db.collection('Homes').document("123").collection("1");
+    return ref.snapshots().map(CreateDeviceList);
+  }
+
   List<Device> CreateDeviceList(QuerySnapshot data) {
     List<Device> x = [];
+//    print();
     data.documents.map((doc) {
-      x.addAll(Device.fromFirestore(doc));
+      print("help me");
+      Map data1 = doc.data;
+      data1.forEach((key, value) {
+        x.add(Device.fromFirestore(key, value, doc.documentID));
+      });
     });
-
     return x;
   }
 }

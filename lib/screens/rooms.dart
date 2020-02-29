@@ -109,6 +109,11 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
   Widget build(BuildContext context) {
     double screenwidth = MediaQuery.of(context).size.width;
     double screenheight = MediaQuery.of(context).size.height;
+    final devi = Provider.of<List<Device>>(context);
+    if (devi != null) {
+      print(devi[0]);
+      print("tester");
+    }
     return Scaffold(
       appBar: AppBar(
         title: Text(
