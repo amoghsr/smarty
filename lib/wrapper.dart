@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:smarty/authenticate/authenticate.dart';
 import 'package:smarty/models/dbService.dart';
@@ -6,6 +7,7 @@ import 'package:smarty/models/devicesModel.dart';
 import 'package:smarty/models/navigationBar.dart';
 import 'package:smarty/models/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:smarty/screens/rooms.dart';
 import 'package:smarty/services/auth.dart';
 import 'package:smarty/models/themeModel.dart';
 
@@ -32,6 +34,30 @@ class Wrapper extends StatelessWidget {
           ),
         ),
       );
+//              home: MyOtherRoom(
+//                  initRoom: 0,
+//                  rooms: [
+//                    Room(
+//                        imageUrl: 'assets/images/bathroom.png',
+//                        roomName: 'Bathroom',
+//                        description: 'Fresh!',
+//                        nDevices: '2',
+//                        icon: Icon(FontAwesomeIcons.bath),
+//                        d: ['Lamp', 'AC']),
+//                    Room(
+//                        imageUrl: 'assets/images/kitchen.png',
+//                        roomName: 'Kitchen',
+//                        description: 'Cooking space',
+//                        nDevices: '2',
+//                        icon: Icon(FontAwesomeIcons.utensils),
+//                        d: ['Lamp', 'AC']),
+//                  ],
+//                  devices: devices),
+//            ),
+//          ),
+//        ),
+//      );
+
     }
   }
 }

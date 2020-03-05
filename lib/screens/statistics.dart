@@ -5,7 +5,7 @@ import 'package:smarty/models/roomModel.dart';
 import 'package:smarty/models/user.dart';
 import 'package:smarty/shared/constants.dart';
 import '../energyData.dart';
-import 'package:smarty/screens/Drawer.dart';
+import 'package:smarty/screens/drawer.dart';
 
 class Statistics extends StatefulWidget {
   @override
@@ -44,7 +44,9 @@ class _StatisticsState extends State<Statistics> {
                     tabs: [
                       Tab(
                         text: "Generation",
-                        icon: Icon(FontAwesomeIcons.solarPanel),
+                        icon: Container(
+                          width: screenwidth*0.03,
+                            child: Icon(FontAwesomeIcons.solarPanel)),
                       ),
                       Tab(
                         text: "Consumption",
@@ -58,6 +60,7 @@ class _StatisticsState extends State<Statistics> {
                     child: TabBarView(
                       physics: NeverScrollableScrollPhysics(),
                       children: [
+
                         EnergyStats(energyType: 'Generation'),
                         EnergyStats(energyType: 'Consumption'),
                       ],

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:smarty/screens/Drawer.dart';
+import 'package:smarty/screens/drawer.dart';
 import 'package:smarty/shared/constants.dart';
 
 class Security extends StatefulWidget {
@@ -23,6 +23,7 @@ class _SecurityState extends State<Security> {
       drawer: DrawerPage(),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
+        physics: NeverScrollableScrollPhysics(),
         child: Center(
           child: Container(
             color: Theme.of(context).scaffoldBackgroundColor,
@@ -55,13 +56,13 @@ class _SecurityState extends State<Security> {
                           Radius.circular(20),
                         ),
                       ),
-                      height: screenheight * 0.3,
+                      height: screenheight * 0.55,
                       width: screenwidth * 0.89,
                     ),
                   ],
                 ),
                 SizedBox(
-                  height: screenheight * 0.03,
+                  height: screenheight * 0.02,
                 ),
                 Row(
                   children: <Widget>[

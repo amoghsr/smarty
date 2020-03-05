@@ -1,7 +1,7 @@
 import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:smarty/screens/Drawer.dart';
+import 'package:smarty/screens/drawer.dart';
 import 'package:smarty/shared/constants.dart';
 import 'leaderboardData.dart';
 
@@ -36,21 +36,27 @@ class _LeaderboardState extends State<Leaderboard> {
                   'Leaderboard',
                   style: kAppBarTextStyle,
                 ),
+
                 bottom: TabBar(
-                  labelPadding: EdgeInsets.only(left: 40, right: 40, top: 5),
+//                  labelPadding: EdgeInsets.only(left: 40, right: 40, top: 5),
                   isScrollable: true,
                   labelColor: Theme.of(context).accentColor,
                   unselectedLabelColor: Theme.of(context).backgroundColor,
                   indicatorColor: Colors.transparent,
                   indicatorSize: TabBarIndicatorSize.tab,
                   tabs: [
-                    Tab(
-                      text: "DAILY STREAK",
-                      // icon: Icon(FontAwesomeIcons.solarPanel),
+                    Container(
+                      width: screenwidth * 0.4,
+                      child: Tab(
+                        text: "DAILY STREAK",
+                      ),
+
                     ),
-                    Tab(
-                      text: "DAILY SAVINGS",
-                      // icon: Icon(FontAwesomeIcons.plug),
+                    Container(
+                      width: screenwidth * 0.4,
+                      child: Tab(
+                        text: "DAILY SAVINGS",
+                      ),
                     ),
                   ],
                 ),

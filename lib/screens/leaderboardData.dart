@@ -45,10 +45,13 @@ class _LeaderboardDataState extends State<LeaderboardData> {
                           SizedBox(
                             height: screenheight * 0.06,
                           ),
-                          Icon(
-                            FontAwesomeIcons.trophy,
-                            size: 30,
-                            color: Color(0xffAAA9AD),
+                          Container(
+                            width: screenwidth*0.06,
+                            child: Icon(
+                              FontAwesomeIcons.trophy,
+                              size: 30,
+                              color: Color(0xffAAA9AD),
+                            ),
                           ),
                           SizedBox(
                             height: screenheight * 0.02,
@@ -76,10 +79,13 @@ class _LeaderboardDataState extends State<LeaderboardData> {
                           SizedBox(
                             height: screenheight * 0.03,
                           ),
-                          Icon(
-                            FontAwesomeIcons.trophy,
-                            size: 45,
-                            color: Color(0xffD4AF37),
+                          Container(
+                            width: screenwidth*0.06,
+                            child: Icon(
+                              FontAwesomeIcons.trophy,
+                              size: 45,
+                              color: Color(0xffD4AF37),
+                            ),
                           ),
                           SizedBox(
                             height: screenheight * 0.02,
@@ -106,10 +112,13 @@ class _LeaderboardDataState extends State<LeaderboardData> {
                           SizedBox(
                             height: screenheight * 0.06,
                           ),
-                          Icon(
-                            FontAwesomeIcons.trophy,
-                            size: 30,
-                            color: Color(0xffBE5504),
+                          Container(
+                            width: screenwidth*0.06,
+                            child: Icon(
+                              FontAwesomeIcons.trophy,
+                              size: 30,
+                              color: Color(0xffBE5504),
+                            ),
                           ),
                           SizedBox(
                             height: screenheight * 0.02,

@@ -74,7 +74,7 @@ Icon getIcons(String roomName) {
   }
 }
 
-//
+
 //List<Room> rooms = [
 //  Room(
 //      imageUrl: 'assets/images/livingroom.png',

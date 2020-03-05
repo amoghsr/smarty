@@ -163,39 +163,43 @@ class _EnergyStatsState extends State<EnergyStats> {
                     Divider(),
                     Container(
                       height: screenheight * 0.15,
+                      margin: EdgeInsets.only(
+                        left: screenwidth * 0.02,
+                        right: screenwidth * 0.02,
+                        top: screenheight * 0.015,
+                      ),
+                      width: screenwidth * 0.9,
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).backgroundColor,
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
                       child: Container(
-                        margin: EdgeInsets.only(
-                          left: screenwidth * 0.02,
-                          right: screenwidth * 0.02,
-                          top: screenheight * 0.015,
-                        ),
-                        width: screenwidth * 0.9,
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).backgroundColor,
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        child: Row(
-                          // alignment: Alignment.,
-                          crossAxisAlignment: CrossAxisAlignment.center,
+                        width: screenwidth * 0.8,
+//                        margin: EdgeInsets.symmetric(
+//                            horizontal: screenwidth * 0.05,
+//                            vertical: screenheight * 0.02),
+//                        color: Colors.blue,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            Padding(
-                              padding: EdgeInsets.all(screenwidth * 0.02),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  Row(
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Container(
+//                            padding: EdgeInsets.only(left: screenwidth * 0.01, right: screenwidth * 0.01),
+                                  alignment: Alignment.center,
+                                  width: screenwidth * 0.37,
+//                              color: Colors.yellow,
+
+                                  child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: <Widget>[
-                                      Column(
-                                        children: <Widget>[
-                                          Icon(
-                                            Icons.flash_on,
-                                            size: 35,
-                                          ),
-                                        ],
+                                      Icon(
+                                        Icons.flash_on,
+                                        size: 35,
                                       ),
                                       SizedBox(
-                                        width: screenwidth * 0.03,
+                                        width: screenwidth * 0.01,
                                       ),
                                       Column(
                                         children: <Widget>[
@@ -235,71 +239,74 @@ class _EnergyStatsState extends State<EnergyStats> {
                                       ),
                                     ],
                                   ),
-                                ],
-                              ),
-                            ),
-                            Container(
-                              height: screenheight * 0.09,
-                              width: screenwidth * 0.10,
-                              child: VerticalDivider(
-                                color: Colors.black,
-                                thickness: 0.8,
-                              ),
-                            ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    Column(
-                                      children: <Widget>[
-                                        Icon(
-                                          Icons.power,
-                                          size: 35,
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      width: screenwidth * 0.03,
-                                    ),
-                                    Column(
-                                      children: <Widget>[
-                                        Text(
-                                          'Consuming',
-                                          style: TextStyle(
-                                            fontFamily: 'Montserrat',
-                                            fontWeight: FontWeight.w100,
-                                            color:
-                                                Colors.white.withOpacity(0.7),
-                                            fontSize: 10,
+                                ),
+
+                                //DIVIDER:
+                                Container(
+                                  height: screenheight * 0.09,
+                                  width: screenwidth * 0.10,
+//                                  padding: EdgeInsets.only(
+//                                    left: screenwidth * 0.03,
+//                                  ),
+                                  child: VerticalDivider(
+                                    color: Colors.black,
+                                    thickness: 0.8,
+                                  ),
+                                ),
+                                Container(
+//                            padding: EdgeInsets.only(left: screenwidth * 0.01, right: screenwidth * 0.01),
+                                  alignment: Alignment.center,
+                                  width: screenwidth * 0.37,
+//                                  color: Colors.green,
+
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Icon(
+                                        Icons.power,
+                                        size: 35,
+                                      ),
+                                      SizedBox(
+                                        width: screenwidth * 0.01,
+                                      ),
+                                      Column(
+                                        children: <Widget>[
+                                          Text(
+                                            'Consuming',
+                                            style: TextStyle(
+                                              fontFamily: 'Montserrat',
+                                              fontWeight: FontWeight.w100,
+                                              color:
+                                                  Colors.white.withOpacity(0.7),
+                                              fontSize: 10,
+                                            ),
                                           ),
-                                        ),
-                                        SizedBox(
-                                          height: screenheight * 0.007,
-                                        ),
-                                        Text(
-                                          '2 kWh',
-                                          style: TextStyle(
-                                            fontFamily: 'Poppins',
-                                            fontWeight: FontWeight.w700,
-                                            color:
-                                                Theme.of(context).accentColor,
-                                            fontSize: 24,
+                                          SizedBox(
+                                            height: screenheight * 0.007,
                                           ),
-                                        ),
-                                        Text(
-                                          '3 DEVICES',
-                                          style: TextStyle(
-                                            fontFamily: 'Montserrat',
-                                            fontWeight: FontWeight.w400,
-                                            color: Colors.white,
-                                            fontSize: 10,
+                                          Text(
+                                            '2 kWh',
+                                            style: TextStyle(
+                                              fontFamily: 'Poppins',
+                                              fontWeight: FontWeight.w700,
+                                              color:
+                                                  Theme.of(context).accentColor,
+                                              fontSize: 24,
+                                            ),
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
+                                          Text(
+                                            '3 DEVICES',
+                                            style: TextStyle(
+                                              fontFamily: 'Montserrat',
+                                              fontWeight: FontWeight.w400,
+                                              color: Colors.white,
+                                              fontSize: 10,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ],
                             ),
@@ -307,207 +314,142 @@ class _EnergyStatsState extends State<EnergyStats> {
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: screenheight * 0.01,
-                    ),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
-                        Expanded(
-                          child: Container(
-                            padding: EdgeInsets.only(left: screenwidth * 0.03),
-                            child: Align(
-                              alignment: Alignment.bottomLeft,
-                              child: Container(
-                                height: screenheight * 0.15,
-                                child: Container(
-                                  margin: EdgeInsets.only(
-                                    left: screenwidth * 0.02,
-                                    right: screenwidth * 0.02,
-                                    top: screenheight * 0.015,
+                        //FIRST BOX
+
+                        Container(
+                          height: screenheight * 0.13,
+                          margin: EdgeInsets.only(
+                            left: screenwidth * 0.05,
+                            right: screenwidth * 0.02,
+                            top: screenheight * 0.02,
+                          ),
+                          width: screenwidth * 0.42,
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).backgroundColor,
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Icon(
+                                    Icons.battery_full,
+                                    size: 35,
                                   ),
-                                  width: screenwidth * 0.6,
-                                  decoration: BoxDecoration(
-                                    color: Theme.of(context).backgroundColor,
-                                    borderRadius: BorderRadius.circular(10.0),
+                                  SizedBox(
+                                    width: screenwidth * 0.01,
                                   ),
-                                  child: Row(
-                                    // alignment: Alignment.,
+                                  Column(
                                     children: <Widget>[
-                                      Padding(
-                                        padding:
-                                            EdgeInsets.all(screenwidth * 0.02),
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: <Widget>[
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: <Widget>[
-                                                Column(
-                                                  children: <Widget>[
-                                                    Icon(
-                                                      Icons.battery_full,
-                                                      size: 35,
-                                                    ),
-                                                  ],
-                                                ),
-                                                SizedBox(
-                                                  width: screenwidth * 0.03,
-                                                ),
-                                                Column(
-                                                  children: <Widget>[
-                                                    Text(
-                                                      'BATTERY LEVEL',
-                                                      style: TextStyle(
-                                                        fontFamily:
-                                                            'Montserrat',
-                                                        fontWeight:
-                                                            FontWeight.w100,
-                                                        color: Colors.white
-                                                            .withOpacity(0.7),
-                                                        fontSize: 10,
-                                                      ),
-                                                    ),
-                                                    SizedBox(
-                                                      height:
-                                                          screenheight * 0.007,
-                                                    ),
-                                                    Text(
-                                                      '90%',
-                                                      style: TextStyle(
-                                                        fontFamily: 'Poppins',
-                                                        fontWeight:
-                                                            FontWeight.w700,
-                                                        color: Theme.of(context)
-                                                            .accentColor,
-                                                        fontSize: 24,
-                                                      ),
-                                                    ),
-                                                    Text(
-                                                      'DISCHARGING',
-                                                      style: TextStyle(
-                                                        fontFamily:
-                                                            'Montserrat',
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        color: Colors.white,
-                                                        fontSize: 10,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          ],
+                                      Text(
+                                        'BATTERY LEVEL',
+                                        style: TextStyle(
+                                          fontFamily: 'Montserrat',
+                                          fontWeight: FontWeight.w100,
+                                          color: Colors.white.withOpacity(0.7),
+                                          fontSize: 10,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: screenheight * 0.007,
+                                      ),
+                                      Text(
+                                        '90%',
+                                        style: TextStyle(
+                                          fontFamily: 'Poppins',
+                                          fontWeight: FontWeight.w700,
+                                          color: Theme.of(context).accentColor,
+                                          fontSize: 24,
+                                        ),
+                                      ),
+                                      Text(
+                                        'DISCHARGING',
+                                        style: TextStyle(
+                                          fontFamily: 'Montserrat',
+                                          fontWeight: FontWeight.w400,
+                                          color: Colors.white,
+                                          fontSize: 10,
                                         ),
                                       ),
                                     ],
                                   ),
-                                ),
+                                ],
                               ),
-                            ),
+                            ],
                           ),
                         ),
-                        //3rd card
-                        Expanded(
-                          child: Container(
-                            padding: EdgeInsets.only(right: screenwidth * 0.03),
-                            height: screenheight * 0.15,
-//          color: Colors.blue,
-                            child: Container(
-                              margin: EdgeInsets.only(
-                                left: screenwidth * 0.02,
-                                right: screenwidth * 0.02,
-                                top: screenheight * 0.015,
-                              ),
-                              width: screenwidth * 0.6,
-                              decoration: BoxDecoration(
-                                color: Theme.of(context).backgroundColor,
-                                borderRadius: BorderRadius.circular(10.0),
-                              ),
-                              child: Container(
-                                padding:
-                                    EdgeInsets.only(left: screenwidth * 0.03),
-                                child: Row(
-                                  // alignment: Alignment.,
-                                  children: <Widget>[
-                                    Padding(
-                                      padding:
-                                          EdgeInsets.all(screenwidth * 0.02),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: <Widget>[
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: <Widget>[
-                                              Column(
-                                                children: <Widget>[
-                                                  Icon(
-                                                    Icons.euro_symbol,
-                                                    size: 35,
-                                                  ),
-                                                ],
-                                              ),
-                                              SizedBox(
-                                                width: screenwidth * 0.03,
-                                              ),
-                                              Column(
-                                                children: <Widget>[
-                                                  Text(
-                                                    'VIEW BILLS',
-                                                    style: TextStyle(
-                                                      fontFamily: 'Montserrat',
-                                                      fontWeight:
-                                                          FontWeight.w100,
-                                                      color: Colors.white
-                                                          .withOpacity(0.7),
-                                                      fontSize: 10,
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    height:
-                                                        screenheight * 0.007,
-                                                  ),
-                                                  Text(
-                                                    '103.5',
-                                                    style: TextStyle(
-                                                      fontFamily: 'Poppins',
-                                                      fontWeight:
-                                                          FontWeight.w700,
-                                                      color: Theme.of(context)
-                                                          .accentColor,
-                                                      fontSize: 24,
-                                                    ),
-                                                  ),
-                                                  Text(
-                                                    'AMOUNT DUE',
-                                                    style: TextStyle(
-                                                      fontFamily: 'Montserrat',
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                      color: Colors.white,
-                                                      fontSize: 10,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                        ],
+
+                        //2nd box
+                        Container(
+                          height: screenheight * 0.13,
+                          margin: EdgeInsets.only(
+                            left: screenwidth * 0.04,
+                            right: screenwidth * 0.04,
+                            top: screenheight * 0.02,
+                          ),
+                          width: screenwidth * 0.42,
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).backgroundColor,
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Icon(
+                                    Icons.euro_symbol,
+                                    size: 35,
+                                  ),
+                                  SizedBox(
+                                    width: screenwidth * 0.01,
+                                  ),
+                                  Column(
+                                    children: <Widget>[
+                                      Text(
+                                        'VIEW BILLS',
+                                        style: TextStyle(
+                                          fontFamily: 'Montserrat',
+                                          fontWeight: FontWeight.w100,
+                                          color: Colors.white.withOpacity(0.7),
+                                          fontSize: 10,
+                                        ),
                                       ),
-                                    ),
-                                  ],
-                                ),
+                                      SizedBox(
+                                        height: screenheight * 0.007,
+                                      ),
+                                      Text(
+                                        '103.5',
+                                        style: TextStyle(
+                                          fontFamily: 'Poppins',
+                                          fontWeight: FontWeight.w700,
+                                          color: Theme.of(context).accentColor,
+                                          fontSize: 24,
+                                        ),
+                                      ),
+                                      Text(
+                                        'AMOUNT DUE',
+                                        style: TextStyle(
+                                          fontFamily: 'Montserrat',
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 10,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
                               ),
-                            ),
+                            ],
                           ),
                         ),
                       ],
-                    ),
+                    )
                   ],
                 ),
               ],

@@ -41,9 +41,9 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
   Widget build(BuildContext context) {
     //Todo : this how you can access all house ids
     final x = Provider.of<List<String>>(context);
-    x.forEach((element) {
-      print(element);
-    });
+//    x.forEach((element) {
+//      print(element);
+//    });
     return SafeArea(
       child: Scaffold(
         body: _children[_currentIndex],

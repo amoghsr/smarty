@@ -17,6 +17,7 @@ import 'package:smarty/widgets/routineCarousel.dart';
 import 'package:smarty/services/database.dart';
 
 import '../alertBox.dart';
+
 class DrawerPage extends StatefulWidget {
   @override
   _DrawerPageState createState() => _DrawerPageState();
@@ -25,8 +26,11 @@ class DrawerPage extends StatefulWidget {
 class _DrawerPageState extends State<DrawerPage> {
   final AuthService _auth = AuthService();
   bool valueSwitch = true;
+
   @override
   Widget build(BuildContext context) {
+    double screenwidth = MediaQuery.of(context).size.width;
+    double screenheight = MediaQuery.of(context).size.height;
     return Drawer(
       child: SafeArea(
 // The various items in the hamburger menu are saved inside a ListView, which is basically a vertical list
@@ -59,7 +63,9 @@ class _DrawerPageState extends State<DrawerPage> {
 // ListTile represents a list tile item in the menu
             ListTile(
 // Leading is an element in the start of the list tile horizontally
-              leading: Icon(FontAwesomeIcons.users),
+              leading: Container(
+                width: screenwidth*0.03,
+                  child: Icon(FontAwesomeIcons.users)),
 // Title of the list
               title: Text(
                 'Manage Users',
@@ -126,10 +132,6 @@ class _DrawerPageState extends State<DrawerPage> {
           ],
         ),
       ),
-    )
-    ;
+    );
   }
 }
-
-
-
