@@ -23,7 +23,7 @@ class _SecurityState extends State<Security> {
       drawer: DrawerPage(),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
-        physics: NeverScrollableScrollPhysics(),
+        // physics: NeverScrollableScrollPhysics(),
         child: Center(
           child: Container(
             color: Theme.of(context).scaffoldBackgroundColor,
@@ -51,7 +51,7 @@ class _SecurityState extends State<Security> {
                   children: <Widget>[
                     Container(
                       decoration: BoxDecoration(
-                        color: Theme.of(context).cardColor,
+                        color:  Color(0xffBEBEBE),
                         borderRadius: BorderRadius.all(
                           Radius.circular(20),
                         ),

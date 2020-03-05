@@ -117,25 +117,30 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
     double screenheight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          (rmName != rlist[widget.initRoom].text) ? rmName : initrmName,
-          style: kAppBarTextStyle,
-        ),
-      ),
+      // appBar: AppBar(
+      //   title: Text(
+      //     (rmName != rlist[widget.initRoom].text) ? rmName : initrmName,
+      //     style: kAppBarTextStyle,
+      //   ),
+      // ),
 //      drawer: Drawer(),
-      body: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Container(
-          child: DefaultTabController(
-            initialIndex: widget.initRoom,
-            length: rooms.length,
-            child: Column(
-              children: <Widget>[
-                TabBar(
+      body: DefaultTabController(
+        initialIndex: widget.initRoom,
+        length: rooms.length,
+        child: NestedScrollView(
+          headerSliverBuilder: (BuildContext context, bool innerBoxisScrolled) {
+            return <Widget>[
+              SliverAppBar(
+                pinned: true,
+                floating: false,
+                title: Text(
+                  (rmName != rlist[widget.initRoom].text) ? rmName : initrmName,
+                  style: kAppBarTextStyle,
+                ),
+                bottom: TabBar(
                   isScrollable: true,
                   labelColor: Theme.of(context).accentColor,
-                  unselectedLabelColor: Theme.of(context).backgroundColor,
+                  // unselectedLabelColor: Theme.of(context).backgroundColor,
                   indicatorColor: Colors.transparent,
                   indicatorSize: TabBarIndicatorSize.tab,
                   tabs: rlist,
@@ -147,47 +152,50 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
                     });
                   },
                 ),
-                Column(
-                  children: <Widget>[
-                    SizedBox(height: screenheight * 0.02),
-                    AbsorbPointer(
-                        absorbing: isAbsorbed,
-                        child: (isAbsorbed == true)
-                            ? controllerContainer(
-                                screenheight, screenwidth, 0.2)
-                            : controllerContainer(
-                                screenheight, screenwidth, 1)),
-                    // SizedBox(height: screenheight * 0.001),
-                    Container(
-                      padding: EdgeInsets.only(left: 10),
-                      child: Row(
-                        children: <Widget>[
-                          Text(
-                            'Devices',
-                            style: TextStyle(
-                              color: Theme.of(context).accentColor,
-                              fontSize: 20,
-                              fontFamily: 'Montserrat',
-                            ),
-                            // textAlign: TextAlign.left,
+              ),
+            ];
+          },
+          body: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: Container(
+              child: Column(
+                children: <Widget>[
+                  SizedBox(height: screenheight * 0.02),
+                  AbsorbPointer(
+                      absorbing: isAbsorbed,
+                      child: (isAbsorbed == true)
+                          ? controllerContainer(screenheight, screenwidth, 0.2)
+                          : controllerContainer(screenheight, screenwidth, 1)),
+                  // SizedBox(height: screenheight * 0.001),
+                  Container(
+                    padding: EdgeInsets.only(left: 10),
+                    child: Row(
+                      children: <Widget>[
+                        Text(
+                          'Devices',
+                          style: TextStyle(
+                            color: Theme.of(context).accentColor,
+                            fontSize: 20,
+                            fontFamily: 'Montserrat',
                           ),
-                        ],
-                      ),
+                          // textAlign: TextAlign.left,
+                        ),
+                      ],
                     ),
-                    SizedBox(height: screenheight * 0.005),
-                    Container(
-                      height: screenheight * 0.35,
-                      width: screenwidth,
-                      child: TabBarView(
-                        physics: NeverScrollableScrollPhysics(),
-                        children: [
-                          for (var i in rooms) getListTile(rooms.indexOf(i)),
-                        ],
-                      ),
+                  ),
+                  SizedBox(height: screenheight * 0.005),
+                  Container(
+                    height: screenheight * 0.35,
+                    width: screenwidth,
+                    child: TabBarView(
+                      physics: NeverScrollableScrollPhysics(),
+                      children: [
+                        for (var i in rooms) getListTile(rooms.indexOf(i)),
+                      ],
                     ),
-                  ],
-                ),
-              ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),
