@@ -48,7 +48,7 @@ class _RoutineScreenState extends State<RoutineScreen> {
                             height: 80.0,
                             width: 400.0,
                             decoration: BoxDecoration(
-                              color: Color(0xff333333),
+                              color: Theme.of(context).cardColor,
                               borderRadius: BorderRadius.circular(5),
                             ),
                             child: Row(
