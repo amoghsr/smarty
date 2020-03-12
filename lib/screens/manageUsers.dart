@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smarty/shared/constants.dart';
 
 class ManageUsers extends StatefulWidget {
   @override
@@ -10,9 +11,16 @@ class _ManageUsersState extends State<ManageUsers> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(),
-        body: Container(
-          child: Column(),
+        appBar: AppBar(
+          title: Text(
+            'Manage Users',
+            style: kAppBarTextStyle,
+          ),
+        ),
+        body: SafeArea(
+          child: ListView(
+
+          ),
         ),
       ),
     );
