@@ -4,8 +4,8 @@ import 'package:smarty/shared/theme.dart';
 enum ThemeType { Light, Dark }
 
 class ThemeModel extends ChangeNotifier {
-  ThemeData currentTheme = lightTheme;
-  ThemeType _themeType = ThemeType.Light;
+  ThemeData currentTheme = darkTheme;
+  ThemeType _themeType = ThemeType.Dark;
 
   toggleTheme() {
     if (_themeType == ThemeType.Dark) {
