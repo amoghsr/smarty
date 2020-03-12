@@ -1,22 +1,12 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:smarty/models/themeModel.dart';
-import 'package:smarty/models/user.dart';
-import 'package:smarty/screens/homeManager.dart';
+import 'package:smarty/screens/home_manager/navigation_manager.dart';
 import 'package:smarty/screens/manageUsers.dart';
 import 'package:smarty/services/auth.dart';
-import 'package:smarty/shared/constants.dart';
-import 'package:smarty/widgets/devicesCarousel.dart';
-import 'package:smarty/widgets/roomCarousel.dart';
-import 'package:smarty/widgets/routineCarousel.dart';
-import 'package:smarty/services/database.dart';
-
-import '../alertBox.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 
 class DrawerPage extends StatefulWidget {
   @override
@@ -27,7 +17,16 @@ class _DrawerPageState extends State<DrawerPage> {
   final AuthService _auth = AuthService();
   bool valueSwitch = true;
 
-  @override
+  _launchCaller() async {
+    const url = 'tel:800123';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+
   Widget build(BuildContext context) {
     double screenwidth = MediaQuery.of(context).size.width;
     double screenheight = MediaQuery.of(context).size.height;
@@ -64,7 +63,7 @@ class _DrawerPageState extends State<DrawerPage> {
             ListTile(
 // Leading is an element in the start of the list tile horizontally
               leading: Container(
-                width: screenwidth*0.03,
+                  width: screenwidth * 0.03,
                   child: Icon(FontAwesomeIcons.users)),
 // Title of the list
               title: Text(
@@ -94,7 +93,7 @@ class _DrawerPageState extends State<DrawerPage> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => HomeManager()),
+                  MaterialPageRoute(builder: (context) => NavigationManager()),
                 );
               },
             ),
@@ -113,6 +112,13 @@ class _DrawerPageState extends State<DrawerPage> {
               ),
             ),
             ListTile(
+              leading: Icon(MaterialIcons.phone),
+              title: Text(
+                'Customer Helpline',
+              ),
+              onTap: _launchCaller,
+            ),
+            ListTile(
               leading: Icon(FontAwesomeIcons.questionCircle),
               title: Text(
                 'About Developers',
@@ -126,7 +132,7 @@ class _DrawerPageState extends State<DrawerPage> {
               },
               leading: Icon(Icons.exit_to_app),
               title: Text(
-                "Logout",
+                'Log out',
               ),
             ),
           ],
