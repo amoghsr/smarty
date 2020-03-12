@@ -75,7 +75,7 @@ class RoutineCarousel extends StatelessWidget {
                 margin: EdgeInsets.all(8.0),
                 width: 160.0,
                 decoration: BoxDecoration(
-                  color: Color(0xFF343434),
+                  color: Theme.of(context).cardColor,
                   borderRadius: BorderRadius.circular(10.0),
                 ),
                 child: Stack(
@@ -98,7 +98,6 @@ class RoutineCarousel extends StatelessWidget {
                                   style: TextStyle(
                                     fontFamily: 'Poppins',
                                     fontWeight: FontWeight.w500,
-                                    color: Colors.white,
                                     fontSize: 15,
                                   ),
                                 ),

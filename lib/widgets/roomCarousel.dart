@@ -43,7 +43,7 @@ class RoomCarousel extends StatelessWidget {
                 Opacity(
                   opacity: 0.5,
                   child: Text(
-                    'Scroll through all the room1 in your house.',
+                    'Scroll through all the rooms in your house.',
                     style: TextStyle(
                       fontSize: 11,
                       fontWeight: FontWeight.w400,
