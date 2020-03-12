@@ -6,27 +6,17 @@
 
 //import 'dart:html';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
-import 'package:smarty/models/dbService.dart';
-import 'package:smarty/models/devicesModel.dart';
-import 'package:smarty/models/themeModel.dart';
-import 'package:smarty/models/user.dart';
+import 'package:smarty/models/weatherModel.dart';
 import 'package:smarty/screens/drawer.dart';
-import 'file:///C:/Users/amogh/AndroidStudioProjects/smarty/lib/screens/home_manager/homeManager.dart';
-import 'package:smarty/screens/manageUsers.dart';
 import 'package:smarty/services/auth.dart';
 import 'package:smarty/shared/constants.dart';
 import 'package:smarty/widgets/devicesCarousel.dart';
 import 'package:smarty/widgets/roomCarousel.dart';
 import 'package:smarty/widgets/routineCarousel.dart';
-import 'package:smarty/services/database.dart';
-import 'package:smarty/models/weatherModel.dart';
 
 import '../alertBox.dart';
 

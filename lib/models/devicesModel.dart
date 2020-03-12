@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -121,7 +120,7 @@ List<Device> devices = [
     opacity: 1,
   ),
   Device(
-    imageUrl: 'assets/images/deviceAssets/bulb.png',
+    imageUrl: 'assets/images/deviceAssets/speaker.png',
     deviceName: 'Speaker',
     icon: Icon(Icons.speaker),
     inRoom: 'Living Room',
@@ -133,7 +132,7 @@ List<Device> devices = [
 
   //Kitchen devices
   Device(
-    imageUrl: 'assets/images/deviceAssets/fan.png',
+    imageUrl: 'assets/images/deviceAssets/bulb.png',
     deviceName: 'Lamp',
     icon: Icon(FontAwesomeIcons.fan),
     inRoom: 'Kitchen',
@@ -143,7 +142,7 @@ List<Device> devices = [
     opacity: 0.3,
   ),
   Device(
-    imageUrl: 'assets/images/deviceAssets/fan.png',
+    imageUrl: 'assets/images/deviceAssets/faucet.png',
     deviceName: 'Faucet',
     icon: Icon(FontAwesome.shower),
     inRoom: 'Kitchen',
@@ -164,7 +163,7 @@ List<Device> devices = [
   ),
   //Bedroom devices
   Device(
-    imageUrl: 'assets/images/deviceAssets/fan.png',
+    imageUrl: 'assets/images/deviceAssets/bulb.png',
     deviceName: 'Lamp',
     icon: Icon(Icons.wb_incandescent),
     inRoom: 'Bedroom',
@@ -174,7 +173,7 @@ List<Device> devices = [
     opacity: 0.3,
   ),
   Device(
-    imageUrl: 'assets/images/deviceAssets/fan.png',
+    imageUrl: 'assets/images/deviceAssets/ac.png',
     icon: Icon(FontAwesomeIcons.tv),
     deviceName: 'TV',
     inRoom: 'Bedroom',

@@ -1,22 +1,10 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:smarty/models/themeModel.dart';
-import 'package:smarty/models/user.dart';
-import 'file:///C:/Users/amogh/AndroidStudioProjects/smarty/lib/screens/home_manager/homeManager.dart';
+import 'package:smarty/screens/home_manager/navigation_manager.dart';
 import 'package:smarty/screens/manageUsers.dart';
 import 'package:smarty/services/auth.dart';
-import 'package:smarty/shared/constants.dart';
-import 'package:smarty/widgets/devicesCarousel.dart';
-import 'package:smarty/widgets/roomCarousel.dart';
-import 'package:smarty/widgets/routineCarousel.dart';
-import 'package:smarty/services/database.dart';
-
-import '../alertBox.dart';
 
 class DrawerPage extends StatefulWidget {
   @override
@@ -64,7 +52,7 @@ class _DrawerPageState extends State<DrawerPage> {
             ListTile(
 // Leading is an element in the start of the list tile horizontally
               leading: Container(
-                width: screenwidth*0.03,
+                  width: screenwidth * 0.03,
                   child: Icon(FontAwesomeIcons.users)),
 // Title of the list
               title: Text(
@@ -94,7 +82,7 @@ class _DrawerPageState extends State<DrawerPage> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => HomeManager()),
+                  MaterialPageRoute(builder: (context) => NavigationManager()),
                 );
               },
             ),

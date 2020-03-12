@@ -1,11 +1,8 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:smarty/devices_controller.dart';
-import 'package:smarty/models/dbService.dart';
 import 'package:smarty/models/devicesModel.dart';
 import 'package:smarty/models/roomModel.dart';
-import 'package:smarty/models/user.dart';
 import 'package:smarty/shared/constants.dart';
 
 //Todo:first
@@ -22,6 +19,7 @@ class MyOtherRoom extends StatefulWidget {
   int initRoom;
   List<Room> rooms;
   List<Device> devices;
+
   MyOtherRoom(
       {@required this.initRoom, @required this.rooms, @required this.devices});
 
@@ -36,6 +34,7 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
   int brightness = 60;
   List<Device> devices;
   DatabaseReference itemRef;
+
   //Todo:first
   Color bulbColor = Colors.white;
   String currRoom;

@@ -1,5 +1,3 @@
-import 'package:flutter/cupertino.dart';
-
 class Leaderboard {
   String userImage;
   String userName;
@@ -22,8 +20,7 @@ List<Leaderboard> streakLeaderboard = [
     points: 5,
   ),
   Leaderboard(
-    userImage:
-        'https://pbs.twimg.com/media/EOI2sKJX4AEyPBu.jpg',
+    userImage: 'https://pbs.twimg.com/media/EOI2sKJX4AEyPBu.jpg',
     userName: 'Peter Smith',
     points: 12,
   ),
@@ -55,8 +52,7 @@ List<Leaderboard> dailySavingsLeaderboard = [
     points: 31,
   ),
   Leaderboard(
-    userImage:
-        'https://pbs.twimg.com/media/EOI2sKJX4AEyPBu.jpg',
+    userImage: 'https://pbs.twimg.com/media/EOI2sKJX4AEyPBu.jpg',
     userName: 'Peter Smith',
     points: 10,
   ),
@@ -73,4 +69,3 @@ List<Leaderboard> dailySavingsLeaderboard = [
     points: 40,
   ),
 ];
-

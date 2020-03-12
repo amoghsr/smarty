@@ -97,7 +97,7 @@ class DeviceCarousel extends StatelessWidget {
                             width: 170.0,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10.0),
-                              color: Theme.of(context).backgroundColor,
+                              color: Theme.of(context).cardColor,
                             ),
                             child: Padding(
                               padding: EdgeInsets.all(14.0),
@@ -129,17 +129,17 @@ class DeviceCarousel extends StatelessWidget {
                                       )
                                     ],
                                   ),
-                                  Row(
-                                    children: <Widget>[
-                                      Image(
-                                        height: 50,
-                                        width: 50,
-                                        image: AssetImage(
-                                          device.imageUrl,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
+//                                  Row(
+//                                    children: <Widget>[
+//                                      Image(
+//                                        height: 50,
+//                                        width: 50,
+//                                        image: AssetImage(
+//                                          device.imageUrl,
+//                                        ),
+//                                      ),
+//                                    ],
+//                                  ),
                                   Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,

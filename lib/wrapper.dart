@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:smarty/authenticate/authenticate.dart';
 import 'package:smarty/models/dbService.dart';
 import 'package:smarty/models/devicesModel.dart';
 import 'package:smarty/models/navigationBar.dart';
-import 'package:smarty/models/user.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:smarty/screens/rooms.dart';
-import 'package:smarty/services/auth.dart';
 import 'package:smarty/models/themeModel.dart';
+import 'package:smarty/models/user.dart';
 
 import 'models/roomModel.dart';
 
