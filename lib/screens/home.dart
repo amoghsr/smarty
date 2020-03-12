@@ -18,7 +18,7 @@ import 'package:smarty/models/devicesModel.dart';
 import 'package:smarty/models/themeModel.dart';
 import 'package:smarty/models/user.dart';
 import 'package:smarty/screens/drawer.dart';
-import 'package:smarty/screens/homeManager.dart';
+import 'file:///C:/Users/amogh/AndroidStudioProjects/smarty/lib/screens/home_manager/homeManager.dart';
 import 'package:smarty/screens/manageUsers.dart';
 import 'package:smarty/services/auth.dart';
 import 'package:smarty/shared/constants.dart';
