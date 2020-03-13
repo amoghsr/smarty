@@ -27,8 +27,8 @@ dependencies:
   bubble_tab_indicator: "^0.1.4"
   flutter:
     sdk: flutter
-  firebase_core: ^0.4.0+9
-  firebase_auth: ^0.15.2
+  firebase_core: 0.4.4
+  firebase_auth: 0.15.4
   firebase_database: ^3.1.1
   provider: ^4.0.2
   sleek_circular_slider: ^1.0.7

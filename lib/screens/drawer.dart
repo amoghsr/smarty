@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
@@ -7,6 +8,8 @@ import 'package:smarty/screens/manageUsers.dart';
 import 'package:smarty/services/auth.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:smarty/models/user.dart';
+import 'package:smarty/models/dbService.dart';
 
 class DrawerPage extends StatefulWidget {
   @override
@@ -30,22 +33,28 @@ class _DrawerPageState extends State<DrawerPage> {
   Widget build(BuildContext context) {
     double screenwidth = MediaQuery.of(context).size.width;
     double screenheight = MediaQuery.of(context).size.height;
+    final user = Provider.of<User>(context);
     return Drawer(
       child: SafeArea(
 // The various items in the hamburger menu are saved inside a ListView, which is basically a vertical list
         child: ListView(
 // ListView items are saved in a children list of Widgets
           children: <Widget>[
-            UserAccountsDrawerHeader(
+            new FutureBuilder(
+              future: DatabaseService1().getUserDetails(user.uid), 
+              builder: (BuildContext context, AsyncSnapshot<Map<String,String>> snapshot){
+                if (snapshot.data == null)
+                  return Container();
+                return UserAccountsDrawerHeader(
               accountName: Text(
-                'John Doe',
+                snapshot.data['name'],
                 style: TextStyle(
                   fontFamily: 'Montserrat',
                   fontWeight: FontWeight.w700,
                 ),
               ),
               accountEmail: Text(
-                'johndoe@mail.com',
+                snapshot.data['email'],
                 style: TextStyle(
                   fontFamily: 'Montserrat',
                 ),
@@ -58,6 +67,8 @@ class _DrawerPageState extends State<DrawerPage> {
                   ),
                 ),
               ),
+            );
+              }
             ),
 // ListTile represents a list tile item in the menu
             ListTile(

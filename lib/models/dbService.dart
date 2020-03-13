@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:smarty/models/devicesModel.dart';
 import 'package:smarty/models/user.dart';
-
 import 'roomModel.dart';
 
 class DatabaseService1 {
@@ -47,4 +47,18 @@ class DatabaseService1 {
     });
     return x;
   }
+
+    Future<Map<String, String>> getUserDetails(String uid) async{
+    Map<String, String> userdetails = new Map<String, String>();
+    await _db
+        .collection("UserData")
+        .document(uid)
+        .get()
+        .then((snapshot) {
+          userdetails['name'] = snapshot.data['displayName'];
+          userdetails['email'] = snapshot.data['email'];
+        });
+    return userdetails;
+  }
+
 }
