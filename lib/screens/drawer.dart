@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
@@ -19,6 +18,8 @@ class DrawerPage extends StatefulWidget {
 class _DrawerPageState extends State<DrawerPage> {
   final AuthService _auth = AuthService();
   bool valueSwitch = true;
+  var user;
+  var stream;
 
   _launchCaller() async {
     const url = 'tel:800123';
@@ -29,25 +30,33 @@ class _DrawerPageState extends State<DrawerPage> {
     }
   }
 
+  @override
+  void initState() {
+    super.initState();
+    () {
+      user = Provider.of<User>(context, listen: false);
+      while(user==null){}
+      stream = DatabaseService1().getUserDetails(user.uid);
+    }();
+  }
 
   Widget build(BuildContext context) {
     double screenwidth = MediaQuery.of(context).size.width;
     double screenheight = MediaQuery.of(context).size.height;
-    final user = Provider.of<User>(context);
     return Drawer(
       child: SafeArea(
 // The various items in the hamburger menu are saved inside a ListView, which is basically a vertical list
         child: ListView(
 // ListView items are saved in a children list of Widgets
           children: <Widget>[
-            new FutureBuilder(
-              future: DatabaseService1().getUserDetails(user.uid), 
-              builder: (BuildContext context, AsyncSnapshot<Map<String,String>> snapshot){
+            new StreamBuilder(
+              stream: stream, 
+              builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot){
                 if (snapshot.data == null)
                   return Container();
                 return UserAccountsDrawerHeader(
               accountName: Text(
-                snapshot.data['name'],
+                snapshot.data['displayName'],
                 style: TextStyle(
                   fontFamily: 'Montserrat',
                   fontWeight: FontWeight.w700,

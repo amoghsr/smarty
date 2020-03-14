@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:smarty/models/devicesModel.dart';
 import 'package:smarty/models/user.dart';
 import 'roomModel.dart';
+import 'package:async/async.dart';
 
 class DatabaseService1 {
   final Firestore _db = Firestore.instance;
-
+  final AsyncMemoizer _memoizer = AsyncMemoizer();
   Stream<List<Room>> streamRooms(User user) {
     var ref = _db.collection('Homes').document("123").collection("1");
     return ref.snapshots().map(CreateRoomList);
@@ -48,17 +49,11 @@ class DatabaseService1 {
     return x;
   }
 
-    Future<Map<String, String>> getUserDetails(String uid) async{
-    Map<String, String> userdetails = new Map<String, String>();
-    await _db
+    Stream<DocumentSnapshot> getUserDetails(String uid){
+        return _db
         .collection("UserData")
         .document(uid)
-        .get()
-        .then((snapshot) {
-          userdetails['name'] = snapshot.data['displayName'];
-          userdetails['email'] = snapshot.data['email'];
-        });
-    return userdetails;
+        .get().asStream();
   }
 
 }
