@@ -16,19 +16,20 @@ class Loading extends StatelessWidget {
                 height: 25,
               ),
               Text(
-                'Success!',
+                'Owner Registered',
                 style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20,
                 ),
               ),
+              SizedBox(height: 4,),
               Opacity(
                 opacity: 0.5,
                 child: Text(
-                  'You can go back now',
+                  'You can go back now.',
                   style: TextStyle(
                     fontWeight: FontWeight.w500,
-                    fontSize: 20,
+                    fontSize: 14,
                   ),
                 ),
               ),

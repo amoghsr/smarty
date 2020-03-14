@@ -34,3 +34,17 @@ const kTextInputDecoration = InputDecoration(
     borderSide: BorderSide(color: Colors.pink, width: 2.0),
   ),
 );
+
+const kSubtitleText = TextStyle(
+  fontSize: 10,
+  fontWeight: FontWeight.w600,
+);
+
+const kUserDataText = TextStyle(
+  fontSize: 14,
+);
+
+const kUserTypeText = TextStyle(
+  fontSize: 19,
+  fontWeight: FontWeight.w600,
+);

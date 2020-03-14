@@ -12,6 +12,7 @@ ThemeData lightTheme = ThemeData(
   backgroundColor: Color(0xff78ab8a),
   accentColor: Color(0xff06d755),
   primaryColor: Color(0xfffffffF),
+  primaryColorLight: Color(0xff69e799),
   platform: TargetPlatform.iOS,
   fontFamily: 'Montserrat',
 );

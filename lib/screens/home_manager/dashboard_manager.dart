@@ -53,100 +53,93 @@ class _DashboardManagerState extends State<DashboardManager> {
             Padding(
               padding: EdgeInsets.all(14.0),
               child: Semantics(
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => RegisterHomeOwner()),
-                    );
-                  },
-                  child: Card(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        Container(
-                          height: 180,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Theme.of(context).cardColor,
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(24.0),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: <Widget>[
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: <Widget>[
-                                        Text(
-                                          'Register a',
-                                          style: TextStyle(
-//                                          fontFamily: 'Poppins',
-                                            fontWeight: FontWeight.w700,
-                                            fontSize: 22,
-                                          ),
-                                        ),
-                                        Text(
-                                          'Home Owner',
-                                          style: TextStyle(
-//                                          fontFamily: 'Poppins',
-                                            fontWeight: FontWeight.w700,
-                                            fontSize: 22,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    Column(
-                                      children: <Widget>[
-                                        Icon(
-                                          Icons.arrow_forward,
-                                          size: 35,
-                                          color: Theme.of(context).accentColor,
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Row(
-                                  children: <Widget>[
-                                    Opacity(
-                                      opacity: 0.6,
-                                      child: Text(
-                                        'Go here to add a new home owner to',
+                child: Card(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => RegisterHomeOwner()),
+                          );
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 44.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Text(
+                                        'Register a',
                                         style: TextStyle(
-                                          fontSize: 13,
+//                                          fontFamily: 'Poppins',
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: 22,
                                         ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  children: <Widget>[
-                                    Opacity(
-                                      opacity: 0.6,
-                                      child: Text(
-                                        'the database.',
+                                      Text(
+                                        'Home Owner',
                                         style: TextStyle(
-                                          fontSize: 13,
+//                                          fontFamily: 'Poppins',
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: 22,
                                         ),
                                       ),
+                                    ],
+                                  ),
+                                  Column(
+                                    children: <Widget>[
+                                      Icon(
+                                        Icons.arrow_forward,
+                                        size: 35,
+                                        color: Theme.of(context).accentColor,
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Row(
+                                children: <Widget>[
+                                  Opacity(
+                                    opacity: 0.6,
+                                    child: Text(
+                                      'Go here to add a new home owner to',
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                      ),
                                     ),
-                                  ],
-                                ),
-                              ],
-                            ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: <Widget>[
+                                  Opacity(
+                                    opacity: 0.6,
+                                    child: Text(
+                                      'the database.',
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ),
