@@ -28,7 +28,7 @@ class RoutineCarousel extends StatelessWidget {
                   ),
                 ),
                 child: Text(
-                  'See All Routines',
+                  'Edit or Add',
                   style: TextStyle(
                     fontSize: 12.0,
                     color: Theme.of(context).accentColor,

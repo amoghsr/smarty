@@ -39,12 +39,12 @@ class _RoutineScreenState extends State<RoutineScreen> {
                   itemBuilder: (BuildContext context, int index) {
                     Routine routine = routines[index];
                     return Container(
-                      margin: EdgeInsets.all(8.0),
+                      margin: EdgeInsets.symmetric(horizontal: 20.0, vertical: 8),
                       width: 400.0,
                       child: Stack(
                         children: <Widget>[
                           Container(
-                            padding: EdgeInsets.all(20),
+                            padding: EdgeInsets.all(20.0),
                             height: 80.0,
                             width: 400.0,
                             decoration: BoxDecoration(

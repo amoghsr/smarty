@@ -40,7 +40,7 @@ class _SignInState extends State<SignIn> {
                       'Glad to have you back.',
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        fontSize: 44,
+                        fontSize: 36,
                         fontFamily: 'Poppins',
                         fontWeight: FontWeight.w700,
                         height: 1.1,
