@@ -7,7 +7,7 @@ import 'package:async/async.dart';
 
 class DatabaseService1 {
   final Firestore _db = Firestore.instance;
-  final AsyncMemoizer _memoizer = AsyncMemoizer();
+
   Stream<List<Room>> streamRooms(User user) {
     var ref = _db.collection('Homes').document("123").collection("1");
     return ref.snapshots().map(CreateRoomList);
