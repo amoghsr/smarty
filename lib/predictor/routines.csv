@@ -1,0 +1,101 @@
+start_time,end_time,routine_info_1,routine_info_2,routine_info_3,routine_info_4,routine_info_5
+9,10,Bedroom AC ON 18°C Speaker OFF Lamp OFF,Living_Room TV OFF
+19,21,Living_Room Faucet ON 16oz TV ON 51%,Kitchen Speaker OFF Faucet OFF
+17,19,Kitchen Lamp OFF Speaker ON 95% TV OFF,Living_Room Lamp OFF AC ON 26°C TV OFF Speaker OFF
+8,10,Bedroom Lamp ON Green 40% Faucet OFF,Playroom Lamp ON Purple 88%,Kitchen AC ON 24°C Lamp ON Green 78% Speaker OFF
+20,21,Bathroom Faucet OFF Lamp OFF AC OFF,Living_Room TV ON 44% Faucet OFF AC OFF,Kitchen TV ON 36% Faucet OFF,Playroom AC OFF TV OFF
+17,19,Kitchen Lamp OFF TV ON 53% AC ON 22°C,Playroom AC OFF TV OFF Lamp ON Green 55%
+15,17,Bathroom Faucet OFF AC OFF,Kitchen Speaker OFF Faucet ON 13oz AC ON 19°C
+18,20,Kitchen Speaker OFF TV OFF
+20,22,Bathroom Speaker ON 69%,Bedroom AC OFF,Playroom Speaker ON 40% TV OFF AC OFF,Living_Room Lamp ON Blue 53%
+7,9,Bathroom Speaker ON 67% TV ON 86% AC ON 23°C,Playroom TV ON 91% Lamp OFF
+17,18,Playroom Lamp ON Green 79% Speaker OFF Faucet OFF,Bathroom TV OFF AC ON 24°C
+6,7,Bathroom Lamp ON Blue 65% Speaker ON 60% Faucet OFF,Bedroom AC ON 24°C Lamp ON Blue 74%
+5,6,Bathroom AC OFF TV OFF,Kitchen TV ON 93% AC OFF Speaker ON 49%,Playroom Lamp OFF AC ON 25°C Faucet OFF
+19,21,Kitchen Faucet OFF
+10,11,Kitchen Faucet OFF AC ON 26°C TV ON 32%,Bathroom TV OFF,Playroom Speaker OFF AC OFF Faucet OFF
+8,9,Kitchen AC ON 23°C
+19,20,Bathroom Speaker OFF Lamp OFF,Bedroom Speaker OFF,Living_Room AC ON 25°C TV OFF Faucet ON 16oz
+10,12,Living_Room Lamp ON Violet 62% Speaker OFF AC ON 26°C,Kitchen AC OFF Faucet OFF Speaker ON 37%,Bedroom Faucet ON 6oz Lamp OFF AC ON 16°C
+5,7,Bathroom Lamp OFF Speaker ON 87% Faucet ON 8oz,Living_Room Faucet ON 6oz Speaker OFF TV ON 30%
+17,19,Living_Room Lamp ON Purple 73%
+7,8,Bedroom Lamp ON Red 95% Faucet ON 10oz AC OFF,Playroom Speaker OFF Lamp ON Violet 83% Faucet ON 7oz
+5,6,Kitchen TV OFF
+16,17,Kitchen Speaker OFF,Bedroom AC OFF Lamp ON Green 33% Speaker ON 30%,Playroom AC OFF Faucet ON 9oz
+10,11,Bathroom Lamp ON Violet 34% AC OFF Faucet ON 7oz,Playroom Faucet ON 7oz Lamp ON Purple 42%,Living_Room Faucet OFF,Bedroom AC OFF
+17,18,Bathroom TV OFF AC ON 20°C,Living_Room Speaker ON 44% AC OFF Faucet ON 15oz
+18,19,Bathroom TV ON 38%,Bedroom Speaker ON 89% Faucet OFF Lamp OFF,Living_Room Lamp OFF AC ON 24°C,Kitchen Faucet OFF
+20,21,Playroom TV OFF Speaker ON 69% AC ON 21°C
+16,17,Playroom Faucet OFF Lamp ON Green 82%,Living_Room AC ON 26°C Speaker OFF
+7,9,Bathroom AC OFF TV OFF
+6,8,Kitchen TV ON 61% AC OFF,Playroom TV OFF,Living_Room AC ON 24°C Speaker ON 60% TV OFF
+5,7,Bedroom Faucet ON 14oz,Bathroom TV ON 99%,Playroom AC OFF Faucet ON 10oz
+20,22,Living_Room TV ON 66% Lamp ON Purple 79% Faucet ON 20oz,Kitchen Lamp ON Purple 47%,Bedroom Speaker OFF AC ON 18°C
+6,7,Bedroom Lamp OFF Faucet OFF,Kitchen AC OFF Faucet ON 14oz,Bathroom Faucet OFF Lamp ON Violet 89% Speaker ON 81%,Playroom Speaker ON 54% AC ON 21°C TV OFF
+17,19,Kitchen Speaker ON 40% AC ON 20°C Lamp OFF
+17,19,Kitchen Lamp OFF TV OFF,Living_Room Lamp OFF
+8,10,Bathroom Lamp ON Violet 93%
+15,17,Playroom TV OFF Lamp ON Green 99% AC ON 23°C,Kitchen Faucet OFF,Bedroom Speaker ON 61% Faucet OFF
+20,21,Living_Room Lamp OFF Speaker ON 84%,Kitchen Speaker OFF
+8,10,Playroom Lamp OFF Faucet OFF Speaker ON 76%
+20,22,Bathroom Speaker OFF Faucet OFF,Living_Room Speaker OFF Faucet ON 16oz AC OFF
+7,8,Playroom TV ON 64%,Kitchen Faucet ON 18oz TV ON 46%,Bedroom Speaker ON 95% Faucet OFF TV OFF
+15,17,Playroom Faucet OFF
+8,9,Kitchen AC ON 16°C Lamp ON Purple 57% Faucet ON 19oz,Playroom Speaker ON 50% TV ON 73% AC OFF
+9,11,Bedroom AC OFF
+9,11,Living_Room Faucet OFF Lamp ON Blue 80% AC ON 21°C,Kitchen AC ON 20°C,Bathroom Speaker OFF Faucet ON 11oz TV ON 33% Lamp ON Red 78%
+17,18,Bathroom TV OFF Lamp ON Purple 86%,Living_Room Faucet ON 20oz,Playroom AC ON 16°C
+15,17,Bedroom Faucet OFF Speaker OFF Lamp ON Red 75%,Living_Room Faucet OFF
+15,17,Living_Room Lamp ON Red 38% AC ON 17°C
+17,19,Living_Room AC ON 18°C Faucet ON 19oz Lamp ON Blue 72%,Bedroom Speaker OFF,Bathroom Speaker OFF TV OFF
+9,10,Bathroom Faucet ON 11oz Lamp ON Purple 56% TV ON 81% Speaker ON 40%,Bedroom Lamp ON Purple 70% Faucet OFF
+17,18,Bedroom Speaker ON 34%,Playroom Lamp OFF AC OFF TV ON 66%
+17,18,Kitchen TV OFF Faucet OFF Lamp OFF,Bathroom Lamp OFF Speaker OFF AC OFF
+17,18,Bedroom AC ON 25°C TV OFF Faucet ON 18oz
+7,9,Living_Room Faucet OFF,Bedroom Faucet ON 18oz TV ON 86% Speaker OFF,Playroom AC OFF TV OFF Faucet OFF
+5,7,Playroom TV OFF Speaker OFF AC OFF,Kitchen TV OFF,Living_Room AC OFF Lamp OFF
+8,10,Kitchen Speaker OFF,Living_Room AC ON 17°C,Bathroom TV OFF Speaker OFF Lamp OFF
+20,22,Living_Room AC ON 24°C,Playroom TV OFF
+7,9,Playroom AC ON 18°C
+8,10,Kitchen Speaker ON 41% Lamp OFF TV ON 74%,Bedroom TV ON 63%
+16,18,Playroom Speaker ON 71% TV ON 68%
+19,21,Living_Room AC OFF Faucet ON 4oz TV ON 42%,Bedroom TV OFF
+6,8,Bedroom Lamp OFF Faucet OFF,Bathroom TV ON 46%
+9,10,Bathroom Speaker OFF Lamp OFF TV OFF
+10,11,Kitchen Speaker ON 72%,Living_Room AC ON 23°C
+19,21,Bathroom TV OFF,Bedroom Faucet ON 19oz AC ON 17°C TV OFF,Living_Room Lamp ON Green 80% Speaker OFF
+19,21,Bedroom Speaker ON 91%,Bathroom Lamp OFF TV ON 64%,Living_Room TV OFF Faucet OFF
+15,17,Playroom Faucet OFF TV ON 32% Lamp ON Green 80%,Kitchen Speaker OFF,Bathroom AC ON 18°C
+17,18,Bathroom Faucet ON 17oz AC OFF
+10,11,Bedroom Speaker ON 54%
+17,19,Bathroom AC OFF Lamp OFF Faucet ON 18oz,Kitchen AC OFF Faucet ON 20oz Speaker OFF Lamp OFF
+17,18,Kitchen Speaker ON 97% TV OFF,Playroom Faucet OFF,Bathroom Lamp OFF Faucet ON 12oz
+15,16,Playroom Lamp ON Red 34%,Living_Room TV OFF Speaker ON 86%,Bedroom Speaker ON 100% Lamp ON Blue 61%
+20,21,Playroom AC ON 17°C Speaker OFF Faucet ON 5oz Lamp ON Blue 98%,Kitchen Lamp ON Green 86% TV OFF,Bathroom AC ON 20°C Lamp ON Violet 60%
+9,10,Bathroom Faucet OFF Lamp OFF TV ON 36%,Bedroom Lamp OFF TV OFF AC ON 21°C,Living_Room AC OFF,Kitchen Faucet ON 14oz
+9,11,Bathroom Speaker ON 96% TV ON 63%,Playroom Speaker OFF Faucet OFF Lamp OFF
+10,12,Bedroom TV OFF Faucet ON 17oz AC OFF
+10,12,Bedroom AC ON 21°C
+7,8,Living_Room AC OFF,Bathroom TV ON 50% Lamp ON Green 32%
+5,6,Playroom Speaker ON 31% Lamp ON Purple 55% Faucet ON 9oz,Kitchen TV OFF Speaker ON 56%
+5,6,Kitchen Speaker OFF Lamp ON Violet 96%
+7,9,Kitchen Faucet ON 5oz AC OFF TV OFF
+15,16,Living_Room AC ON 25°C,Kitchen Faucet ON 19oz TV OFF Speaker OFF
+5,6,Living_Room Lamp OFF Faucet ON 13oz TV OFF,Playroom Speaker ON 48%,Bedroom TV ON 45%
+19,21,Living_Room AC OFF TV ON 32%
+15,16,Kitchen Speaker ON 99% TV OFF Lamp OFF
+7,8,Living_Room Faucet OFF AC ON 16°C TV OFF
+16,17,Living_Room TV ON 97%
+10,11,Bathroom Speaker OFF AC ON 19°C
+18,19,Kitchen Lamp OFF,Playroom Lamp OFF AC ON 22°C,Bedroom TV OFF
+9,10,Bathroom Lamp ON Blue 56%,Living_Room AC ON 22°C TV OFF Speaker OFF
+15,16,Bathroom TV ON 99% AC OFF Lamp ON Blue 84%
+9,11,Kitchen Lamp OFF,Living_Room TV OFF Faucet OFF,Playroom AC ON 17°C Faucet ON 11oz
+8,9,Playroom Speaker ON 51%,Bedroom Lamp OFF Speaker ON 48%,Living_Room AC OFF TV ON 73% Lamp ON Blue 59%,Bathroom Speaker ON 41% Faucet ON 10oz
+18,20,Kitchen Speaker ON 30%
+10,12,Playroom TV ON 45%,Bedroom Speaker ON 89%
+17,18,Living_Room Lamp ON Green 37%
+17,19,Living_Room Faucet ON 6oz TV ON 74% Lamp OFF Speaker ON 47%,Playroom TV OFF Faucet ON 13oz
+16,17,Playroom Speaker OFF Faucet OFF AC OFF Lamp OFF
+15,17,Kitchen Faucet OFF AC ON 23°C,Bedroom Lamp ON Purple 87% Speaker OFF Faucet ON 6oz
+20,22,Living_Room Speaker OFF Lamp ON Green 52%,Bathroom AC OFF TV ON 64% Lamp OFF
