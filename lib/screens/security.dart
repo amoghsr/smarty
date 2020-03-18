@@ -51,7 +51,7 @@ class _SecurityState extends State<Security> {
                   children: <Widget>[
                     Container(
                       decoration: BoxDecoration(
-                        color:  Color(0xffBEBEBE),
+                        color: Color(0xffBEBEBE),
                         borderRadius: BorderRadius.all(
                           Radius.circular(20),
                         ),

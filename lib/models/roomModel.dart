@@ -2,8 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import 'devicesModel.dart';
-
 class Room {
   String imageUrl;
   String roomName;
@@ -73,7 +71,6 @@ Icon getIcons(String roomName) {
       return Icon(FontAwesomeIcons.bath);
   }
 }
-
 
 //List<Room> rooms = [
 //  Room(

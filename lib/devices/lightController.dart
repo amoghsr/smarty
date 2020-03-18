@@ -294,7 +294,6 @@ class _LightControllerState extends State<LightController> {
                             });
                           },
                         );
-                      ;
 
                       Map<String, dynamic> values =
                           new Map<String, dynamic>.from(

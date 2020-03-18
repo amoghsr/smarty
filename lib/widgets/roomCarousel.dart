@@ -4,7 +4,6 @@ This file helps create the carousels for the room1 in the house.
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:smarty/models/dbService.dart';
 import 'package:smarty/models/devicesModel.dart';
 import 'package:smarty/models/roomModel.dart';
 import 'package:smarty/screens/rooms.dart';
@@ -44,7 +43,7 @@ class RoomCarousel extends StatelessWidget {
                 Opacity(
                   opacity: 0.5,
                   child: Text(
-                    'Scroll through all the room1 in your house.',
+                    'Scroll through all the rooms in your house.',
                     style: TextStyle(
                       fontSize: 11,
                       fontWeight: FontWeight.w400,
@@ -105,7 +104,7 @@ class RoomCarousel extends StatelessWidget {
                                   style: TextStyle(
                                     fontFamily: 'Montserrat',
                                     fontWeight: FontWeight.w700,
-//                                color: Colors.white,
+                                    color: Colors.white,
                                     fontSize: 15,
                                   ),
                                 ),
@@ -119,7 +118,7 @@ class RoomCarousel extends StatelessWidget {
                                     style: TextStyle(
                                       fontFamily: 'Poppins',
                                       fontSize: 10,
-//                                  color: Colors.white,
+                                      color: Colors.white,
                                     ),
                                   ),
                                 ),

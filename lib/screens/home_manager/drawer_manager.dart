@@ -1,25 +1,93 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:smarty/models/themeModel.dart';
-import 'package:smarty/screens/home_manager/navigation_manager.dart';
 import 'package:smarty/screens/manageUsers.dart';
 import 'package:smarty/services/auth.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:flutter_icons/flutter_icons.dart';
-import 'package:smarty/models/user.dart';
-import 'package:smarty/models/dbService.dart';
+import 'package:get_version/get_version.dart';
+import 'dart:io' show Platform;
 
-class DrawerPage extends StatefulWidget {
+// The drawer manager class handles the drawer menu items and the actions of these items for the Home Manager Role
+class DrawerManager extends StatefulWidget {
   @override
-  _DrawerPageState createState() => _DrawerPageState();
+  _DrawerManagerState createState() => _DrawerManagerState();
 }
 
-class _DrawerPageState extends State<DrawerPage> {
+class _DrawerManagerState extends State<DrawerManager> {
+
+  String _platformVersion = 'Unknown';
+  String _projectVersion = '';
+  String _projectCode = '';
+  String _projectAppID = '';
+  String _projectName = '';
+
+  @override
+  void initState() {
+    _initPlatformState();
+    super.initState();
+  }
+
+  // Platform messages are asynchronous, so we initialize in an async method.
+  void _initPlatformState() async {
+    String platformVersion;
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      platformVersion = await GetVersion.platformVersion;
+    } on PlatformException {
+      platformVersion = 'Failed to get platform version.';
+    }
+
+    String projectVersion;
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      projectVersion = await GetVersion.projectVersion;
+    } on PlatformException {
+      projectVersion = 'Failed to get project version.';
+    }
+
+    String projectCode;
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      projectCode = await GetVersion.projectCode;
+    } on PlatformException {
+      projectCode = 'Failed to get build number.';
+    }
+
+    String projectAppID;
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      projectAppID = await GetVersion.appID;
+    } on PlatformException {
+      projectAppID = 'Failed to get app ID.';
+    }
+
+    String projectName;
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      projectName = await GetVersion.appName;
+    } on PlatformException {
+      projectName = 'Failed to get app name.';
+    }
+
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
+    if (!mounted) return;
+
+    setState(() {
+      _platformVersion = platformVersion;
+      _projectVersion = projectVersion;
+      _projectCode = projectCode;
+      _projectAppID = projectAppID;
+      _projectName = projectName;
+    });
+  }
+
   final AuthService _auth = AuthService();
   bool valueSwitch = true;
-  var user;
-  var stream;
 
   _launchCaller() async {
     const url = 'tel:800123';
@@ -31,53 +99,30 @@ class _DrawerPageState extends State<DrawerPage> {
   }
 
   @override
-  void initState() {
-    super.initState();
-    () {
-      user = Provider.of<User>(context, listen: false);
-      while(user==null){}
-      stream = DatabaseService1().getUserDetails(user.uid);
-    }();
-  }
-
   Widget build(BuildContext context) {
     double screenwidth = MediaQuery.of(context).size.width;
-    double screenheight = MediaQuery.of(context).size.height;
     return Drawer(
       child: SafeArea(
 // The various items in the hamburger menu are saved inside a ListView, which is basically a vertical list
         child: ListView(
 // ListView items are saved in a children list of Widgets
           children: <Widget>[
-            new StreamBuilder(
-              stream: stream, 
-              builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot){
-                if (snapshot.data == null)
-                  return Container();
-                return UserAccountsDrawerHeader(
+            UserAccountsDrawerHeader(
               accountName: Text(
-                snapshot.data['displayName'],
+                _projectName,
                 style: TextStyle(
                   fontFamily: 'Montserrat',
                   fontWeight: FontWeight.w700,
+                  fontSize: 20.0,
                 ),
               ),
               accountEmail: Text(
-                snapshot.data['email'],
+                'v$_projectVersion',
                 style: TextStyle(
                   fontFamily: 'Montserrat',
+                  fontSize: 12.0,
                 ),
               ),
-              currentAccountPicture: CircleAvatar(
-                child: Text(
-                  'JD',
-                  style: TextStyle(
-                    fontFamily: 'Montserrat',
-                  ),
-                ),
-              ),
-            );
-              }
             ),
 // ListTile represents a list tile item in the menu
             ListTile(
@@ -93,27 +138,6 @@ class _DrawerPageState extends State<DrawerPage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => ManageUsers()),
-                );
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.settings),
-              title: Text(
-                'Account Settings',
-              ),
-            ),
-            ListTile(
-              leading: Icon(Icons.lock),
-              title: Text(
-                'For Home Manager',
-              ),
-              trailing: Icon(
-                Icons.arrow_forward,
-              ),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => NavigationManager()),
                 );
               },
             ),
@@ -134,15 +158,9 @@ class _DrawerPageState extends State<DrawerPage> {
             ListTile(
               leading: Icon(MaterialIcons.phone),
               title: Text(
-                'Customer Helpline',
+                'Helpline',
               ),
               onTap: _launchCaller,
-            ),
-            ListTile(
-              leading: Icon(FontAwesomeIcons.questionCircle),
-              title: Text(
-                'About Developers',
-              ),
             ),
             Divider(),
 // Log out button
@@ -152,9 +170,10 @@ class _DrawerPageState extends State<DrawerPage> {
               },
               leading: Icon(Icons.exit_to_app),
               title: Text(
-                'Log out',
+                "Logout",
               ),
             ),
+
           ],
         ),
       ),

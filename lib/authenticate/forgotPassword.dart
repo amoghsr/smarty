@@ -86,7 +86,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                             await _auth.resetPasswordEmail(email);
                             Navigator.pop(
                               context,
-                                MaterialPageRoute(builder: (context) => SignIn()),
+                              MaterialPageRoute(builder: (context) => SignIn()),
                             );
                           }
                         },

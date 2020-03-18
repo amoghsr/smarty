@@ -13,6 +13,7 @@ class WeatherModel {
 
     return await network.getData();
   }
+
 //future weatherdata
   Future weatherData() async {
     Location loc = Location();

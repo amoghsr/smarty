@@ -40,7 +40,7 @@ class _SignInState extends State<SignIn> {
                       'Glad to have you back.',
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        fontSize: 48,
+                        fontSize: 36,
                         fontFamily: 'Poppins',
                         fontWeight: FontWeight.w700,
                         height: 1.1,
@@ -64,31 +64,31 @@ class _SignInState extends State<SignIn> {
                       children: <Widget>[
                         Expanded(
                           child: Stack(
-                              alignment: Alignment(1.0, 1.0),
-                              children: <Widget>[
-                                TextFormField(
-                                  decoration: InputDecoration(
-                                    labelText: 'Email Address',
-                                  ),
-                                  validator: (val) =>
-                                      val.isEmpty ? 'Enter your email' : null,
-                                  onChanged: (val) {
-                                    setState(() => email = val);
-                                  },
-                                  controller: _controller,
+                            alignment: Alignment(1.0, 1.0),
+                            children: <Widget>[
+                              TextFormField(
+                                decoration: InputDecoration(
+                                  labelText: 'Email Address',
                                 ),
-                                _controller.text.length > 0
-                                    ? new IconButton(
-                                        icon: new Icon(Icons.clear),
-                                        onPressed: () {
-                                          setState(() {
-                                            _controller.clear();
-                                          });
-                                        })
-                                    : Container(
-                                        height: 0.0,
-                                      )
-                              ],
+                                validator: (val) =>
+                                    val.isEmpty ? 'Enter your email' : null,
+                                onChanged: (val) {
+                                  setState(() => email = val);
+                                },
+                                controller: _controller,
+                              ),
+                              _controller.text.length > 0
+                                  ? new IconButton(
+                                      icon: new Icon(Icons.clear),
+                                      onPressed: () {
+                                        setState(() {
+                                          _controller.clear();
+                                        });
+                                      })
+                                  : Container(
+                                      height: 0.0,
+                                    )
+                            ],
                           ),
                         ),
                       ],
@@ -114,15 +114,15 @@ class _SignInState extends State<SignIn> {
                                 ),
                                 _passController.text.length > 0
                                     ? new IconButton(
-                                    icon: new Icon(Icons.clear),
-                                    onPressed: () {
-                                      setState(() {
-                                        _passController.clear();
-                                      });
-                                    })
+                                        icon: new Icon(Icons.clear),
+                                        onPressed: () {
+                                          setState(() {
+                                            _passController.clear();
+                                          });
+                                        })
                                     : Container(
-                                  height: 0.0,
-                                )
+                                        height: 0.0,
+                                      )
                               ]),
                         ),
                       ],

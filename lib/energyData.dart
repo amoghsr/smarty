@@ -1,8 +1,6 @@
-import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:smarty/line_chart.dart';
-import 'package:smarty/shared/constants.dart';
 
 class EnergyStats extends StatefulWidget {
   String energyType;

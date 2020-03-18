@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:smarty/models/leaderboardModel.dart';
@@ -8,6 +7,7 @@ class LeaderboardData extends StatefulWidget {
   String leaderboardType;
 
   LeaderboardData({this.leaderboardType});
+
   _LeaderboardDataState createState() => _LeaderboardDataState();
 }
 
@@ -46,7 +46,7 @@ class _LeaderboardDataState extends State<LeaderboardData> {
                             height: screenheight * 0.06,
                           ),
                           Container(
-                            width: screenwidth*0.06,
+                            width: screenwidth * 0.06,
                             child: Icon(
                               FontAwesomeIcons.trophy,
                               size: 30,
@@ -80,7 +80,7 @@ class _LeaderboardDataState extends State<LeaderboardData> {
                             height: screenheight * 0.03,
                           ),
                           Container(
-                            width: screenwidth*0.06,
+                            width: screenwidth * 0.06,
                             child: Icon(
                               FontAwesomeIcons.trophy,
                               size: 45,
@@ -113,7 +113,7 @@ class _LeaderboardDataState extends State<LeaderboardData> {
                             height: screenheight * 0.06,
                           ),
                           Container(
-                            width: screenwidth*0.06,
+                            width: screenwidth * 0.06,
                             child: Icon(
                               FontAwesomeIcons.trophy,
                               size: 30,
