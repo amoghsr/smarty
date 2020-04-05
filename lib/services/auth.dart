@@ -16,7 +16,10 @@ class AuthService {
 
   // Create user obj based on Firebase user
   User _userFromFirebaseUser(FirebaseUser user) {
-    return user != null ? User(uid: user.uid, houseId: user.photoUrl) : null;
+    String x = user.photoUrl;
+//    String y = x.split("-")[0];
+//    String w = x.split("-")[1];
+    return user != null ? User(uid: user.uid, houseId: "1") : null;
   }
 
   // Auth change user stream

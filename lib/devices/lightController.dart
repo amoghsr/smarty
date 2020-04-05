@@ -1,6 +1,8 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:smarty/devices/CommonControllers/deviceCommonControllers.dart';
+import 'package:smarty/models/user.dart';
 import 'package:smarty/shared/constants.dart';
 
 class LightController extends StatefulWidget {
@@ -33,6 +35,7 @@ class _LightControllerState extends State<LightController> {
   Widget build(BuildContext context) {
     double screenwidth = MediaQuery.of(context).size.width;
     double screenheight = MediaQuery.of(context).size.height;
+    final user = Provider.of<User>(context);
     return Container(
       height: screenheight,
       width: screenwidth,
@@ -65,7 +68,9 @@ class _LightControllerState extends State<LightController> {
                 Container(
                   child: StreamBuilder(
                     stream: widget.itemRef
-                        .child("Rooms/" +
+                        .child("Homes/" +
+                            user.houseId +
+                            "/Rooms/" +
                             widget.roomName +
                             "/devices/" +
                             widget.devName +
@@ -102,7 +107,9 @@ class _LightControllerState extends State<LightController> {
                   scale: 2,
                   child: StreamBuilder(
                     stream: widget.itemRef
-                        .child("Rooms/" +
+                        .child("Homes/" +
+                            user.houseId +
+                            "/Rooms/" +
                             widget.roomName +
                             "/devices/" +
                             widget.devName +
@@ -113,7 +120,8 @@ class _LightControllerState extends State<LightController> {
                         return Switch(
                           value: false,
                           onChanged: (value) {
-                            stateChange(value, widget.roomName, widget.devName);
+                            stateChange(value, widget.roomName, widget.devName,
+                                user.houseId);
                             setState(() {
                               isSwitched = value;
                             });
@@ -129,7 +137,8 @@ class _LightControllerState extends State<LightController> {
                       return Switch(
                         value: convert(values["State"]),
                         onChanged: (value) {
-                          stateChange(value, widget.roomName, widget.devName);
+                          stateChange(value, widget.roomName, widget.devName,
+                              user.houseId);
                           setState(() {
                             isSwitched = value;
                           });
@@ -172,7 +181,8 @@ class _LightControllerState extends State<LightController> {
               //TODO :ADD db connection
               GestureDetector(
                   onTap: () {
-                    setColor(Colors.green, widget.roomName, widget.devName);
+                    setColor(Colors.green, widget.roomName, widget.devName,
+                        user.houseId);
                     setState(() {
                       bulbColor = Colors.green;
                     });
@@ -180,7 +190,8 @@ class _LightControllerState extends State<LightController> {
                   child: colorRow(Colors.green)),
               GestureDetector(
                 onTap: () {
-                  setColor(Colors.lightBlue, widget.roomName, widget.devName);
+                  setColor(Colors.lightBlue, widget.roomName, widget.devName,
+                      user.houseId);
                   setState(() {
                     bulbColor = Colors.lightBlue;
                   });
@@ -189,7 +200,8 @@ class _LightControllerState extends State<LightController> {
               ),
               GestureDetector(
                   onTap: () {
-                    setColor(Colors.indigo, widget.roomName, widget.devName);
+                    setColor(Colors.indigo, widget.roomName, widget.devName,
+                        user.houseId);
                     setState(() {
                       bulbColor = Colors.indigo;
                     });
@@ -197,7 +209,8 @@ class _LightControllerState extends State<LightController> {
                   child: colorRow(Colors.indigo)),
               GestureDetector(
                   onTap: () {
-                    setColor(Colors.purple, widget.roomName, widget.devName);
+                    setColor(Colors.purple, widget.roomName, widget.devName,
+                        user.houseId);
                     setState(() {
                       bulbColor = Colors.purple;
                     });
@@ -205,7 +218,8 @@ class _LightControllerState extends State<LightController> {
                   child: colorRow(Colors.purple)),
               GestureDetector(
                   onTap: () {
-                    setColor(Colors.red, widget.roomName, widget.devName);
+                    setColor(Colors.red, widget.roomName, widget.devName,
+                        user.houseId);
                     setState(() {
                       bulbColor = Colors.red;
                     });
@@ -274,7 +288,9 @@ class _LightControllerState extends State<LightController> {
                   width: 250,
                   child: StreamBuilder(
                     stream: widget.itemRef
-                        .child("Rooms/" +
+                        .child("Homes/" +
+                            user.houseId +
+                            "/Rooms/" +
                             widget.roomName +
                             "/devices/" +
                             widget.devName +
@@ -287,11 +303,13 @@ class _LightControllerState extends State<LightController> {
                           max: 100,
                           min: 0,
                           onChanged: (double newValue) {
-                            setBrightness(newValue.round(), widget.roomName,
-                                widget.devName, "Brightness");
                             setState(() {
                               brightness = newValue.round();
                             });
+                          },
+                          onChangeEnd: (double newValue) {
+                            setBrightness(newValue.round(), widget.roomName,
+                                widget.devName, "Brightness", user.houseId);
                           },
                         );
 
@@ -303,11 +321,13 @@ class _LightControllerState extends State<LightController> {
                         max: 100,
                         min: 0,
                         onChanged: (double newValue) {
-                          setBrightness(newValue.round(), widget.roomName,
-                              widget.devName, "Brightness");
                           setState(() {
                             brightness = newValue.round();
                           });
+                        },
+                        onChangeEnd: (double newValue) {
+                          setBrightness(newValue.round(), widget.roomName,
+                              widget.devName, "Brightness", user.houseId);
                         },
                       );
                     },

@@ -17,6 +17,7 @@ class Wrapper extends StatelessWidget {
     if (user == null) {
       return Authenticate();
     } else {
+      print(user.uid + user.houseId);
       return StreamProvider<List<Room>>.value(
         value: DatabaseService1().streamRooms(user),
         child: StreamProvider<List<Device>>.value(
@@ -30,30 +31,6 @@ class Wrapper extends StatelessWidget {
           ),
         ),
       );
-//              home: MyOtherRoom(
-//                  initRoom: 0,
-//                  rooms: [
-//                    Room(
-//                        imageUrl: 'assets/images/bathroom.png',
-//                        roomName: 'Bathroom',
-//                        description: 'Fresh!',
-//                        nDevices: '2',
-//                        icon: Icon(FontAwesomeIcons.bath),
-//                        d: ['Lamp', 'AC']),
-//                    Room(
-//                        imageUrl: 'assets/images/kitchen.png',
-//                        roomName: 'Kitchen',
-//                        description: 'Cooking space',
-//                        nDevices: '2',
-//                        icon: Icon(FontAwesomeIcons.utensils),
-//                        d: ['Lamp', 'AC']),
-//                  ],
-//                  devices: devices),
-//            ),
-//          ),
-//        ),
-//      );
-
     }
   }
 }

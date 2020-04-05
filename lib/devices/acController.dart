@@ -1,7 +1,9 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 import 'package:smarty/devices/CommonControllers/deviceCommonControllers.dart';
+import 'package:smarty/models/user.dart';
 import 'package:smarty/shared/constants.dart';
 
 class ACController extends StatelessWidget {
@@ -22,6 +24,7 @@ class ACController extends StatelessWidget {
   Widget build(BuildContext context) {
     double screenwidth = MediaQuery.of(context).size.width;
     double screenheight = MediaQuery.of(context).size.height;
+    final user = Provider.of<User>(context);
     return Column(
       children: <Widget>[
         Row(
@@ -58,7 +61,11 @@ class ACController extends StatelessWidget {
                       height: screenheight * 0.015,
                     ),
                     StreamBuilder(
-                      stream: itemRef.child("Sensors/TempandHumid/").onValue,
+                      stream: itemRef
+                          .child("Homes/" +
+                              user.houseId +
+                              "/Sensors/TempandHumid/")
+                          .onValue,
                       builder: (context, snap) {
                         if (snap.data == null)
                           return Text(
@@ -91,7 +98,11 @@ class ACController extends StatelessWidget {
                       height: screenheight * 0.015,
                     ),
                     StreamBuilder(
-                      stream: itemRef.child("Sensors/TempandHumid/").onValue,
+                      stream: itemRef
+                          .child("Homes/" +
+                              user.houseId +
+                              "/Sensors/TempandHumid/")
+                          .onValue,
                       builder: (context, snap) {
                         if (snap.data == null)
                           return Text(
@@ -121,7 +132,13 @@ class ACController extends StatelessWidget {
             child: Container(
               child: StreamBuilder(
                 stream: itemRef
-                    .child("Rooms/" + roomName + "/devices/" + devName + "/")
+                    .child("Homes/" +
+                        user.houseId +
+                        "/Rooms/" +
+                        roomName +
+                        "/devices/" +
+                        devName +
+                        "/")
                     .onValue,
                 builder: (context, snap) {
                   if (snap.data == null)
@@ -154,7 +171,8 @@ class ACController extends StatelessWidget {
                               },
                             )),
                         onChangeEnd: (double value) {
-                          setTemp(value.ceil().toInt(), roomName, devName);
+                          setTemp(value.ceil().toInt(), roomName, devName,
+                              user.houseId);
 //                          print(value);
                         });
                   Map<String, dynamic> values =
@@ -188,7 +206,8 @@ class ACController extends StatelessWidget {
                             },
                           )),
                       onChangeEnd: (double value) {
-                        setTemp(value.ceil().toInt(), roomName, devName);
+                        setTemp(value.ceil().toInt(), roomName, devName,
+                            user.houseId);
 //                        print(value);
                       });
                 },

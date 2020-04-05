@@ -1,8 +1,10 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:smarty/devices/CommonControllers/deviceCommonControllers.dart';
 import 'package:smarty/devices/acController.dart';
 import 'package:smarty/devices/lightController.dart';
+import 'package:smarty/models/user.dart';
 
 import 'devices/faucetController.dart';
 import 'devices/speakerController.dart';
@@ -32,6 +34,7 @@ class _DevicesControllerState extends State<DevicesController>
   @override
   Widget build(BuildContext context) {
     // bool isSwitched = widget.isDisabled;
+    final user = Provider.of<User>(context);
     Widget showDevice = LightController(
         itemRef: itemRef,
         context: context,

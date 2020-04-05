@@ -11,24 +11,29 @@ bool icon = false;
 int waterAmount = 8;
 DatabaseReference itemRef;
 
-void stateChange(bool newvalue, String room, String device) {
+void stateChange(bool newvalue, String room, String device, String houseId) {
   if (newvalue == false) {
     itemRef
-        .child("Rooms/" + room + "/devices/" + device + "/")
+        .child(
+            "Homes/" + houseId + "/Rooms/" + room + "/devices/" + device + "/")
         .update({'State': "off"});
   } else {
     itemRef
-        .child("Rooms/" + room + "/devices/" + device + "/")
+        .child(
+            "Homes/" + houseId + "/Rooms/" + room + "/devices/" + device + "/")
         .update({'State': "on"});
   }
 }
 
-Stream getString(String room, String device) {
+Stream getString(String room, String device, String houseId) {
   Stream x;
   final FirebaseDatabase database = FirebaseDatabase
       .instance; //Rather then just writing FirebaseDatabase(), get the instance.
 
-  x = database.reference().child("Rooms/" + room + "/" + device + "/").onValue;
+  x = database
+      .reference()
+      .child("Homes/" + houseId + "/Rooms/" + room + "/" + device + "/")
+      .onValue;
   return x;
 }
 
@@ -42,16 +47,17 @@ bool convert(String x) {
   return w;
 }
 
-void setColor(Color newvalue, String room, String device) {
+void setColor(Color newvalue, String room, String device, String houseId) {
   var hex = '#${newvalue.value.toRadixString(16)}';
   itemRef
-      .child("Rooms/" + room + "/devices/" + device + "/")
+      .child("Homes/" + houseId + "/Rooms/" + room + "/devices/" + device + "/")
       .update({'Color': hex});
 }
 
-void setBrightness(int newvalue, String room, String device, String type) {
+void setBrightness(
+    int newvalue, String room, String device, String type, String houseId) {
   itemRef
-      .child("Rooms/" + room + "/devices/" + device + "/")
+      .child("Homes/" + houseId + "/Rooms/" + room + "/devices/" + device + "/")
       .update({type: newvalue});
 }
 
@@ -68,9 +74,9 @@ Color stringtocol(String code) {
   return map[code];
 }
 
-void setTemp(int newvalue, String room, String device) {
+void setTemp(int newvalue, String room, String device, String houseId) {
   itemRef
-      .child("Rooms/" + room + "/devices/" + device + "/")
+      .child("Homes/" + houseId + "/Rooms/" + room + "/devices/" + device + "/")
       .update({'Temperature': newvalue});
 }
 

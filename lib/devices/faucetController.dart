@@ -2,7 +2,9 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:provider/provider.dart';
 import 'package:smarty/devices/CommonControllers/deviceCommonControllers.dart';
+import 'package:smarty/models/user.dart';
 import 'package:smarty/shared/constants.dart';
 
 class FaucetController extends StatefulWidget {
@@ -30,6 +32,7 @@ class _FaucetControllerState extends State<FaucetController> {
   Widget build(BuildContext context) {
     double screenwidth = MediaQuery.of(context).size.width;
     double screenheight = MediaQuery.of(context).size.height;
+    final user = Provider.of<User>(context);
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
@@ -48,7 +51,9 @@ class _FaucetControllerState extends State<FaucetController> {
               scale: 2,
               child: StreamBuilder(
                 stream: widget.itemRef
-                    .child("Rooms/" +
+                    .child("Homes/" +
+                        user.houseId +
+                        "/Rooms/" +
                         widget.roomName +
                         "/devices/" +
                         widget.devName +
@@ -59,7 +64,8 @@ class _FaucetControllerState extends State<FaucetController> {
                     return Switch(
                       value: false,
                       onChanged: (value) {
-                        stateChange(value, widget.roomName, widget.devName);
+                        stateChange(value, widget.roomName, widget.devName,
+                            user.houseId);
                         setState(() {
                           isSwitched = value;
                         });
@@ -74,7 +80,8 @@ class _FaucetControllerState extends State<FaucetController> {
                   return Switch(
                     value: convert(values["State"]),
                     onChanged: (value) {
-                      stateChange(value, widget.roomName, widget.devName);
+                      stateChange(
+                          value, widget.roomName, widget.devName, user.houseId);
                       setState(() {
                         isSwitched = value;
                       });
