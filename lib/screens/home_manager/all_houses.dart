@@ -14,8 +14,6 @@ class AllHouses extends StatefulWidget {
 
 class _AllHousesState extends State<AllHouses> {
 
-  final LocalAuthenticationService _localAuth = locator<LocalAuthenticationService>();
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -39,12 +37,6 @@ class _AllHousesState extends State<AllHouses> {
           child: ListView(
             padding: EdgeInsets.symmetric(vertical: 20.0),
             children: <Widget>[
-              Center(
-                child: RaisedButton(
-                  child: Text('authenticate'),
-                  onPressed: _localAuth.authenticate,
-                ),
-              ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.0),
                 child: Row(
@@ -176,71 +168,5 @@ class _AllHousesState extends State<AllHouses> {
         ),
       ),
     );
-  }
-}
-
-class DataSearch extends SearchDelegate<String> {
-
-  final cities = [
-    "Bhandup",
-    "Mumbai",
-    "Delhi",
-    "Agra",
-    "Lucknow",
-    "Kochi",
-    "Bangalore",
-    "Bhopal",
-    "Jaipur",
-    "Allahabad",
-    "Noida",
-    "Thane",
-    "Pune"
-  ];
-
-  final recentCities = [
-    "Bhandup",
-    "Mumbai",
-    "Delhi",
-    "Agra"
-  ];
-
-  @override
-  List<Widget> buildActions(BuildContext context) {
-    // TODO: implement buildActions
-    // Actions for the app bar
-    return [
-      IconButton(
-        icon: Icon(Icons.clear),
-        onPressed: () {},
-      )
-    ];
-  }
-
-  @override
-  Widget buildLeading(BuildContext context) {
-    // TODO: implement buildLeading
-    // Leading icon on the right of the app bar
-    return IconButton(
-      icon: AnimatedIcon(
-        icon: AnimatedIcons.menu_arrow,
-        progress: transitionAnimation,
-      ),
-      onPressed: () {},
-    );
-  }
-
-  @override
-  Widget buildResults(BuildContext context) {
-    // TODO: implement buildResults
-    // Show some result based on the selection
-
-    throw UnimplementedError();
-  }
-
-  @override
-  Widget buildSuggestions(BuildContext context) {
-    // TODO: implement buildSuggestions
-    // Show when someone searches for anything
-
   }
 }
