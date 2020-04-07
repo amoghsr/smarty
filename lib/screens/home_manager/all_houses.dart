@@ -1,10 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:smarty/shared/constants.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:smarty/services/local_authentication_service.dart';
-import 'package:smarty/services/service_locator.dart';
+import 'package:smarty/shared/constants.dart';
+
 import 'drawer_manager.dart';
 
 class AllHouses extends StatefulWidget {
@@ -13,7 +11,6 @@ class AllHouses extends StatefulWidget {
 }
 
 class _AllHousesState extends State<AllHouses> {
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
