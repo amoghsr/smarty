@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:smarty/screens/drawer.dart';
 import 'package:smarty/shared/constants.dart';
+import 'package:smarty/widgets/voiceAgent.dart';
 
 import '../energyData.dart';
 
@@ -35,15 +36,7 @@ class _StatisticsState extends State<Statistics> {
                   'Statistics',
                   style: kAppBarTextStyle,
                 ),
-                actions: <Widget>[
-                  new IconButton(
-                    icon: Icon(
-                      Icons.mic,
-                      color: Colors.white,
-                      semanticLabel: 'Notifcations',
-                    ),
-                  ),
-                ],
+                actions: <Widget>[MicClass()],
                 bottom: TabBar(
                   labelPadding: EdgeInsets.only(left: 50, right: 50, top: 5),
                   isScrollable: true,

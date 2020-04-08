@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smarty/screens/drawer.dart';
 import 'package:smarty/shared/constants.dart';
+import 'package:smarty/widgets/voiceAgent.dart';
 
 import 'leaderboardData.dart';
 
@@ -35,6 +36,7 @@ class _LeaderboardState extends State<Leaderboard> {
                   'Leaderboard',
                   style: kAppBarTextStyle,
                 ),
+                actions: <Widget>[MicClass()],
                 bottom: TabBar(
 //                  labelPadding: EdgeInsets.only(left: 40, right: 40, top: 5),
                   isScrollable: true,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smarty/screens/drawer.dart';
 import 'package:smarty/shared/constants.dart';
+import 'package:smarty/widgets/voiceAgent.dart';
 
 class Security extends StatefulWidget {
   @override
@@ -15,18 +16,13 @@ class _SecurityState extends State<Security> {
     double screenheight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
+
         title: Text(
           'Security',
           style: kAppBarTextStyle,
         ),
         actions: <Widget>[
-          new IconButton(
-            icon: Icon(
-              Icons.mic,
-              color: Colors.white,
-              semanticLabel: 'Notifcations',
-            ),
-          ),
+          MicClass()
         ],
       ),
       drawer: DrawerPage(),
