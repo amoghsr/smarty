@@ -73,7 +73,26 @@ class _VoiceAgentState extends State<VoiceAgent> {
     "Kitchen Speaker"
   ];
 
-  Map<String, String> resultMap;
+  Map<String, String> resultMap = {};
+  List<String> state = ['ON', 'OFF'];
+  List<String> room = [
+    'Living Room',
+    'Bedroom',
+    'Kitchen',
+    'Bathroom',
+    'Playroom'
+  ];
+  List<String> device = [
+    'Lamp',
+    'AC',
+    'Light',
+    'TV',
+    'Speaker',
+    'Water Heater',
+    'Faucet',
+    'Tap',
+    'Geyser'
+  ];
 
   @override
   void initState() {
@@ -117,14 +136,37 @@ class _VoiceAgentState extends State<VoiceAgent> {
   @override
   Widget build(BuildContext context) {
     listen();
-    if (resultText.toLowerCase().contains("on") &&
-        resultText.toLowerCase().contains("living room") &&
-        (resultText.toLowerCase().contains("lamp") ||
-            resultText.toLowerCase().contains("light"))) {
-      resultMap["State"] = "ON";
-      resultMap["Room"] = "Living Room";
-      resultMap["Device"] = "Lamp";
+
+    // for (int i = 0; i < state.length; i++) {
+    //   for (int j = 0; j < room.length; j++) {
+    //     for (int k = 0; k < device.length; k++) {
+    //       if (resultText.toLowerCase().contains(state[i].toLowerCase()) &&
+    //           resultText.toLowerCase().contains(room[j].toLowerCase()) &&
+    //           (resultText.toLowerCase().contains(device[k].toLowerCase()))) {
+    //         resultMap["State"] = state[i];
+    //         resultMap["Room"] = room[j];
+    //         resultMap["Device"] = device[k];
+    //       }
+    //     }
+    //   }
+    // }
+
+    
+    for (int i = 0; i < state.length; i++) {
+      if (resultText.toLowerCase().contains(state[i].toLowerCase()))
+        resultMap["State"] = state[i];
     }
+
+    for (int j = 0; j < room.length; j++) {
+      if (resultText.toLowerCase().contains(room[j].toLowerCase()))
+        resultMap["Room"] = room[j];
+    }
+    
+    for (int k = 0; k < device.length; k++) {
+      if (resultText.toLowerCase().contains(device[k].toLowerCase()))
+        resultMap["Device"] = device[k];
+    }
+
     print(resultMap);
     return StatefulBuilder(builder: (context, setState) {
       return AlertDialog(
