@@ -22,7 +22,7 @@ public final class GeneratedPluginRegistrant {
     flutterEngine.getPlugins().add(new com.dexterous.flutterlocalnotifications.FlutterLocalNotificationsPlugin());
       com.baseflow.flutter.plugin.geolocator.GeolocatorPlugin.registerWith(shimPluginRegistry.registrarFor("com.baseflow.flutter.plugin.geolocator.GeolocatorPlugin"));
       com.appleeducate.getversion.GetVersionPlugin.registerWith(shimPluginRegistry.registrarFor("com.appleeducate.getversion.GetVersionPlugin"));
-      com.baseflow.googleapiavailability.GoogleApiAvailabilityPlugin.registerWith(shimPluginRegistry.registrarFor("com.baseflow.googleapiavailability.GoogleApiAvailabilityPlugin"));
+    flutterEngine.getPlugins().add(new com.baseflow.googleapiavailability.GoogleApiAvailabilityPlugin());
       io.flutter.plugins.localauth.LocalAuthPlugin.registerWith(shimPluginRegistry.registrarFor("io.flutter.plugins.localauth.LocalAuthPlugin"));
     flutterEngine.getPlugins().add(new io.flutter.plugins.packageinfo.PackageInfoPlugin());
       com.baseflow.permissionhandler.PermissionHandlerPlugin.registerWith(shimPluginRegistry.registrarFor("com.baseflow.permissionhandler.PermissionHandlerPlugin"));

@@ -1,6 +1,8 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
+import 'package:smarty/models/user.dart';
 import 'package:smarty/shared/constants.dart';
 
 import 'CommonControllers/deviceCommonControllers.dart';
@@ -30,6 +32,7 @@ class _TVControllerState extends State<TVController> {
   Widget build(BuildContext context) {
     double screenwidth = MediaQuery.of(context).size.width;
     double screenheight = MediaQuery.of(context).size.height;
+    final user = Provider.of<User>(context);
     return Column(
       children: <Widget>[
         topAppBar(widget.roomName, 'TV', Icons.tv),
@@ -49,7 +52,9 @@ class _TVControllerState extends State<TVController> {
               scale: 2,
               child: StreamBuilder(
                 stream: widget.itemRef
-                    .child("Rooms/" +
+                    .child("Homes/" +
+                        user.houseId +
+                        "/Rooms/" +
                         widget.roomName +
                         "/devices/" +
                         widget.devName +
@@ -60,7 +65,8 @@ class _TVControllerState extends State<TVController> {
                     return Switch(
                       value: false,
                       onChanged: (value) {
-                        stateChange(value, widget.roomName, widget.devName);
+                        stateChange(value, widget.roomName, widget.devName,
+                            user.houseId);
                         setState(() {
                           isSwitched = value;
                         });
@@ -75,7 +81,8 @@ class _TVControllerState extends State<TVController> {
                   return Switch(
                     value: convert(values["State"]),
                     onChanged: (value) {
-                      stateChange(value, widget.roomName, widget.devName);
+                      stateChange(
+                          value, widget.roomName, widget.devName, user.houseId);
                       setState(() {
                         isSwitched = value;
                       });
@@ -190,7 +197,9 @@ class _TVControllerState extends State<TVController> {
                 width: 250,
                 child: StreamBuilder(
                   stream: widget.itemRef
-                      .child("Rooms/" +
+                      .child("Homes/" +
+                          user.houseId +
+                          "/Rooms/" +
                           widget.roomName +
                           "/devices/" +
                           widget.devName +
@@ -204,7 +213,7 @@ class _TVControllerState extends State<TVController> {
                         min: 0,
                         onChanged: (double newValue) {
                           setBrightness(newValue.round(), widget.roomName,
-                              widget.devName, "Volume");
+                              widget.devName, "Volume", user.houseId);
                           setState(() {
                             brightness = newValue.round();
                           });
@@ -220,7 +229,7 @@ class _TVControllerState extends State<TVController> {
                       min: 0,
                       onChanged: (double newValue) {
                         setBrightness(newValue.round(), widget.roomName,
-                            widget.devName, "Volume");
+                            widget.devName, "Volume", user.houseId);
                         setState(() {
                           brightness = newValue.round();
                         });

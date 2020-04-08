@@ -1,8 +1,10 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:smarty/devices_controller.dart';
 import 'package:smarty/models/devicesModel.dart';
 import 'package:smarty/models/roomModel.dart';
+import 'package:smarty/models/user.dart';
 import 'package:smarty/shared/constants.dart';
 
 //Todo:first
@@ -64,14 +66,26 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
     itemRef = database.reference();
   }
 
-  void stateChange(bool newvalue, String room, String device) {
+  void stateChange(bool newvalue, String room, String device, String houseId) {
     if (newvalue == false) {
       itemRef
-          .child("Rooms/" + room + "/devices/" + device + "/")
+          .child("Homes/" +
+              houseId +
+              "/Rooms/" +
+              room +
+              "/devices/" +
+              device +
+              "/")
           .update({'State': "off"});
     } else {
       itemRef
-          .child("Rooms/" + room + "/devices/" + device + "/")
+          .child("Homes/" +
+              houseId +
+              "/Rooms/" +
+              room +
+              "/devices/" +
+              device +
+              "/")
           .update({'State': "on"});
     }
   }
@@ -90,13 +104,13 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
       if ((i.inRoom == roomName) && (i.deviceName == devName)) return i;
   }
 
-  Stream getString(String room, String device) {
+  Stream getString(String room, String device, String houseId) {
     Stream x;
     final FirebaseDatabase database = FirebaseDatabase
         .instance; //Rather then just writing FirebaseDatabase(), get the instance.
     x = database
         .reference()
-        .child("Rooms/" + room + "/" + device + "/")
+        .child("Homes/" + houseId + "/Rooms/" + room + "/" + device + "/")
         .onValue;
     return x;
   }
@@ -114,7 +128,7 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
   Widget build(BuildContext context) {
     double screenwidth = MediaQuery.of(context).size.width;
     double screenheight = MediaQuery.of(context).size.height;
-
+    final user = Provider.of<User>(context);
     return Scaffold(
       // appBar: AppBar(
       //   title: Text(
@@ -189,7 +203,8 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
                     child: TabBarView(
                       physics: NeverScrollableScrollPhysics(),
                       children: [
-                        for (var i in rooms) getListTile(rooms.indexOf(i)),
+                        for (var i in rooms)
+                          getListTile(rooms.indexOf(i), user),
                       ],
                     ),
                   ),
@@ -221,7 +236,7 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
     );
   }
 
-  ListView getListTile(int l) {
+  ListView getListTile(int l, User user) {
     return ListView.builder(
         itemCount: rooms[l].d.length,
         itemBuilder: (context, i) {
@@ -244,7 +259,9 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
                   title: Text(rooms[l].d[i]),
                   trailing: StreamBuilder(
                     stream: itemRef
-                        .child("Rooms/" +
+                        .child("Homes/" +
+                            user.houseId +
+                            "/Rooms/" +
                             rooms[l].roomName +
                             "/devices/" +
                             rooms[l].d[i] +
@@ -257,7 +274,8 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
                       return Switch(
                         value: convert(values["State"]),
                         onChanged: (value) {
-                          stateChange(value, rooms[l].roomName, rooms[l].d[i]);
+                          stateChange(value, rooms[l].roomName, rooms[l].d[i],
+                              user.houseId);
                           setState(() {
                             getDevState(rooms[l].roomName, rooms[l].d[i])
                                 .toggleSt = value;
