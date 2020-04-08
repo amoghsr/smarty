@@ -19,7 +19,7 @@ class DatabaseService1 {
     return data.snapshots().map(IDlist);
   }
 
-//  final x = Provider.of<List<String>>.(context),
+// provider all of HomeIDs
   List<String> IDlist(QuerySnapshot doc) {
     List<String> x = [];
     doc.documents.forEach((element) {
@@ -49,11 +49,7 @@ class DatabaseService1 {
     return x;
   }
 
-    Stream<DocumentSnapshot> getUserDetails(String uid){
-        return _db
-        .collection("UserData")
-        .document(uid)
-        .get().asStream();
+  Stream<DocumentSnapshot> getUserDetails(String uid) {
+    return _db.collection("UserData").document(uid).get().asStream();
   }
-
 }

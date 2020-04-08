@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:smarty/screens/drawer.dart';
 import 'package:smarty/shared/constants.dart';
 import 'package:smarty/widgets/voiceAgent.dart';
+import 'package:flutter_vlc_player/vlc_player_controller.dart';
+import 'package:flutter_vlc_player/vlc_player.dart';
 
 class Security extends StatefulWidget {
   @override
@@ -14,16 +16,17 @@ class _SecurityState extends State<Security> {
   Widget build(BuildContext context) {
     double screenwidth = MediaQuery.of(context).size.width;
     double screenheight = MediaQuery.of(context).size.height;
+    final String urlToStreamVideo = 'http://10.0.0.55/html/';
+    final VlcPlayerController controller = VlcPlayerController();
+    final int playerWidth = 640;
+    final int playerHeight = 360;
     return Scaffold(
       appBar: AppBar(
-
         title: Text(
           'Security',
           style: kAppBarTextStyle,
         ),
-        actions: <Widget>[
-          MicClass()
-        ],
+        actions: <Widget>[MicClass()],
       ),
       drawer: DrawerPage(),
       body: SingleChildScrollView(
@@ -63,6 +66,13 @@ class _SecurityState extends State<Security> {
                       ),
                       height: screenheight * 0.55,
                       width: screenwidth * 0.89,
+                    ),
+                    VlcPlayer(
+                      defaultWidth: playerWidth,
+                      defaultHeight: playerHeight,
+                      url: urlToStreamVideo,
+                      controller: controller,
+                      placeholder: Center(child: CircularProgressIndicator()),
                     ),
                   ],
                 ),

@@ -19,7 +19,12 @@ class AuthService {
     String x = user.photoUrl;
 //    String y = x.split("-")[0];
 //    String w = x.split("-")[1];
-    return user != null ? User(uid: user.uid, houseId: "1") : null;
+    return user != null
+        ? User(
+            uid: user.uid,
+            houseId: user.photoUrl.substring(0, 3),
+            type: user.photoUrl.substring(3))
+        : null;
   }
 
   // Auth change user stream

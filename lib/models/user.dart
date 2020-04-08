@@ -1,9 +1,9 @@
 class User {
   final String uid;
   final String houseId;
-//  final String type;
+  final String type;
 
-  User({this.uid, this.houseId});
+  User({this.uid, this.houseId, this.type});
 
 //  factory User.fromMap(Map data, String id) {
 //    var w = User(
