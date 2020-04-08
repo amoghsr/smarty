@@ -35,6 +35,15 @@ class _StatisticsState extends State<Statistics> {
                   'Statistics',
                   style: kAppBarTextStyle,
                 ),
+                actions: <Widget>[
+                  new IconButton(
+                    icon: Icon(
+                      Icons.mic,
+                      color: Colors.white,
+                      semanticLabel: 'Notifcations',
+                    ),
+                  ),
+                ],
                 bottom: TabBar(
                   labelPadding: EdgeInsets.only(left: 50, right: 50, top: 5),
                   isScrollable: true,

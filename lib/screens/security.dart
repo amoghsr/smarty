@@ -19,6 +19,15 @@ class _SecurityState extends State<Security> {
           'Security',
           style: kAppBarTextStyle,
         ),
+        actions: <Widget>[
+          new IconButton(
+            icon: Icon(
+              Icons.mic,
+              color: Colors.white,
+              semanticLabel: 'Notifcations',
+            ),
+          ),
+        ],
       ),
       drawer: DrawerPage(),
       body: SingleChildScrollView(

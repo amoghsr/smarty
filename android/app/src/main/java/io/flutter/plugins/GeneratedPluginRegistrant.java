@@ -26,6 +26,7 @@ public final class GeneratedPluginRegistrant {
       io.flutter.plugins.localauth.LocalAuthPlugin.registerWith(shimPluginRegistry.registrarFor("io.flutter.plugins.localauth.LocalAuthPlugin"));
     flutterEngine.getPlugins().add(new io.flutter.plugins.packageinfo.PackageInfoPlugin());
       com.baseflow.permissionhandler.PermissionHandlerPlugin.registerWith(shimPluginRegistry.registrarFor("com.baseflow.permissionhandler.PermissionHandlerPlugin"));
+      bz.rxla.flutter.speechrecognition.SpeechRecognitionPlugin.registerWith(shimPluginRegistry.registrarFor("bz.rxla.flutter.speechrecognition.SpeechRecognitionPlugin"));
     flutterEngine.getPlugins().add(new io.flutter.plugins.urllauncher.UrlLauncherPlugin());
   }
 }

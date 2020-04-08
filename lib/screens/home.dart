@@ -17,7 +17,7 @@ import 'package:smarty/shared/constants.dart';
 import 'package:smarty/widgets/devicesCarousel.dart';
 import 'package:smarty/widgets/roomCarousel.dart';
 import 'package:smarty/widgets/routineCarousel.dart';
-
+import 'package:speech_recognition/speech_recognition.dart';
 import '../alertBox.dart';
 
 class Home extends StatefulWidget {
@@ -47,12 +47,31 @@ class _HomeState extends State<Home> {
 
   void initState() {
     super.initState();
+    initSpeechRecognizer();
 //    var l = getLocationData();
     final FirebaseDatabase database = FirebaseDatabase
         .instance; //Rather then just writing FirebaseDatabase(), get the instance.
     itemRef = database.reference();
 //    storeValues(l);
 //    fetchData();
+  }
+
+  void initSpeechRecognizer() {
+    _speechRecognition = SpeechRecognition();
+    _speechRecognition.setAvailabilityHandler(
+        (bool result) => setState(() => _isAvailable = result));
+    _speechRecognition.setRecognitionStartedHandler(
+      () => setState(() => _isListening = true),
+    );
+    _speechRecognition.setRecognitionResultHandler(
+      (String speech) => setState(() => resultText = speech),
+    );
+    _speechRecognition.setRecognitionCompleteHandler(
+      () => setState(() => _isListening = false),
+    );
+    _speechRecognition.activate().then(
+          (result) => setState(() => _isAvailable = result),
+        );
   }
 
   @override
@@ -102,6 +121,10 @@ class _HomeState extends State<Home> {
 //      isLoading = false; //Data has loaded
 //    });
 //  }
+  SpeechRecognition _speechRecognition;
+  bool _isAvailable = false;
+  bool _isListening = false;
+  String resultText = "";
 
   Widget build(BuildContext context) {
     double screenwidth = MediaQuery.of(context).size.width;
@@ -114,50 +137,88 @@ class _HomeState extends State<Home> {
         ),
         actions: <Widget>[
           new IconButton(
-            icon: Icon(
-              Icons.notifications_none,
-              semanticLabel: 'Notifcations',
-            ),
-            onPressed: () async {
-              showDialog(
-                  context: context,
-                  builder: (BuildContext context) => StreamBuilder(
-                        stream: itemRef.child("Sensors/Fire/").onValue,
-                        builder: (context, snap) {
-                          if (snap.data == null)
-                            return CustomDialog(
-                              image: Image.asset("assets/images/fire.png"),
-                              title: "NO NOTIFICATION!",
-                              description: "What a boring day",
-                              col: Color(0xffE26069),
-                              buttonText: "Okay",
-                            );
-                          Map<String, dynamic> values =
-                              new Map<String, dynamic>.from(
-                                  snap.data.snapshot.value);
-                          if (values["Danger"] == "high") {
-                            return CustomDialog(
-                              image: Image.asset("assets/images/fire.png"),
-                              title: "FIRE DETECTED!",
-                              description: "Sprinklers have been activated.",
-                              col: Color(0xffE26069),
-                              buttonText: "Okay",
-                            );
-                          } else {
-                            return CustomDialog(
-                              image: Image.asset("assets/images/fire.png"),
-                              title: "NO NOTIFICATION!",
-                              description: "What a boring day",
-                              col: Color(0xffE26069),
-                              buttonText: "Okay",
-                            );
-                          }
-                        },
-                      ));
-              await _showNotificationWithDefaultSound(
-                  'FIRE DETECTED', 'Sprinklers have been activated.');
-            },
-          ),
+              icon: Icon(
+                Icons.mic,
+                color: Colors.white,
+                semanticLabel: 'Notifcations',
+              ),
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (context) {
+                      return StatefulBuilder(builder: (context, setState) {
+                        return AlertDialog(
+                          title: Container(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    FloatingActionButton(
+                                      child: Icon(Icons.cancel),
+                                      mini: true,
+                                      backgroundColor: Colors.deepOrange,
+                                      onPressed: () {
+                                        if (_isListening)
+                                          _speechRecognition.cancel().then(
+                                                (result) => setState(() {
+                                                  _isListening = result;
+                                                  resultText = "";
+                                                }),
+                                              );
+                                      },
+                                    ),
+                                    FloatingActionButton(
+                                      child: Icon(Icons.mic),
+                                      onPressed: () {
+                                        if (_isAvailable && !_isListening)
+                                          _speechRecognition
+                                              .listen(locale: "en_US")
+                                              .then(
+                                                  (result) => print('$result'));
+                                      },
+                                      backgroundColor: Colors.pink,
+                                    ),
+                                    FloatingActionButton(
+                                      child: Icon(Icons.stop),
+                                      mini: true,
+                                      backgroundColor: Colors.deepPurple,
+                                      onPressed: () {
+                                        if (_isListening)
+                                          _speechRecognition.stop().then(
+                                                (result) => setState(() =>
+                                                    _isListening = result),
+                                              );
+                                      },
+                                    ),
+                                  ],
+                                ),
+                                Container(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.8,
+                                  decoration: BoxDecoration(
+                                    color: Colors.cyanAccent[100],
+                                    borderRadius: BorderRadius.circular(6.0),
+                                  ),
+                                  padding: EdgeInsets.symmetric(
+                                    vertical: 8.0,
+                                    horizontal: 12.0,
+                                  ),
+                                  child: Text(
+                                    resultText,
+                                    style: TextStyle(
+                                        fontSize: 20.0, color: Colors.black),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        );
+                      });
+                    });
+              }),
         ],
       ),
 
@@ -239,3 +300,43 @@ class _HomeState extends State<Home> {
     );
   }
 }
+
+// onPressed: () async {
+// showDialog(
+//       context: context,
+//       builder: (BuildContext context) => StreamBuilder(
+//             stream: itemRef.child("Sensors/Fire/").onValue,
+//             builder: (context, snap) {
+//               if (snap.data == null)
+//                 return CustomDialog(
+//                   image: Image.asset("assets/images/fire.png"),
+//                   title: "NO NOTIFICATION!",
+//                   description: "What a boring day",
+//                   col: Color(0xffE26069),
+//                   buttonText: "Okay",
+//                 );
+//               Map<String, dynamic> values =
+//                   new Map<String, dynamic>.from(
+//                       snap.data.snapshot.value);
+//               if (values["Danger"] == "high") {
+//                 return CustomDialog(
+//                   image: Image.asset("assets/images/fire.png"),
+//                   title: "FIRE DETECTED!",
+//                   description: "Sprinklers have been activated.",
+//                   col: Color(0xffE26069),
+//                   buttonText: "Okay",
+//                 );
+//               } else {
+//                 return CustomDialog(
+//                   image: Image.asset("assets/images/fire.png"),
+//                   title: "NO NOTIFICATION!",
+//                   description: "What a boring day",
+//                   col: Color(0xffE26069),
+//                   buttonText: "Okay",
+//                 );
+//               }
+//             },
+//           ));
+//   await _showNotificationWithDefaultSound(
+//       'FIRE DETECTED', 'Sprinklers have been activated.');
+// },
