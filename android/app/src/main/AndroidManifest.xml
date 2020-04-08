@@ -8,12 +8,12 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-<<<<<<< HEAD
+
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
-=======
+
     <uses-permission android:name="android.permission.USE_FINGERPRINT"/>
->>>>>>> e2d3f5c72f3225b59ce4920a08196e6329a866a0
+
 
     <application
         android:name="io.flutter.app.FlutterApplication"

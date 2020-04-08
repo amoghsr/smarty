@@ -6,6 +6,7 @@ import 'package:smarty/models/devicesModel.dart';
 import 'package:smarty/models/roomModel.dart';
 import 'package:smarty/models/user.dart';
 import 'package:smarty/shared/constants.dart';
+import 'package:smarty/widgets/voiceAgent.dart';
 
 //Todo:first
 //List<Tab> rlist = [
@@ -150,6 +151,7 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
                   (rmName != rlist[widget.initRoom].text) ? rmName : initrmName,
                   style: kAppBarTextStyle,
                 ),
+                actions: <Widget>[MicClass()],
                 bottom: TabBar(
                   isScrollable: true,
                   labelColor: Theme.of(context).accentColor,

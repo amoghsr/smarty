@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smarty/models/routineModel.dart';
 import 'package:smarty/shared/constants.dart';
+import 'package:smarty/widgets/voiceAgent.dart';
 
 class RoutineScreen extends StatefulWidget {
   @override
@@ -17,6 +18,7 @@ class _RoutineScreenState extends State<RoutineScreen> {
             'All Routines',
             style: kAppBarTextStyle,
           ),
+          actions: <Widget>[MicClass()],
         ),
         body: SafeArea(
           child: Column(
@@ -39,7 +41,8 @@ class _RoutineScreenState extends State<RoutineScreen> {
                   itemBuilder: (BuildContext context, int index) {
                     Routine routine = routines[index];
                     return Container(
-                      margin: EdgeInsets.symmetric(horizontal: 20.0, vertical: 8),
+                      margin:
+                          EdgeInsets.symmetric(horizontal: 20.0, vertical: 8),
                       width: 400.0,
                       child: Stack(
                         children: <Widget>[
