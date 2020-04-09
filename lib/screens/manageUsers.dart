@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:smarty/shared/constants.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'addNewUser.dart';
 
 class ManageUsers extends StatefulWidget {
   @override
@@ -30,6 +31,26 @@ class _ManageUsersState extends State<ManageUsers> {
           child: ListView(
             padding: EdgeInsets.symmetric(vertical: 20.0),
             children: <Widget>[
+              Container(
+                padding: EdgeInsets.all(10),
+//                color: Theme.of(context).cardColor,
+                child: Card(
+                  child: ListTile(
+                    title: Text('Add user'),
+                    subtitle: Text('Add a new user to your home'),
+//                    leading: Icon(Icons.add),
+                    trailing: Icon(FontAwesome.user_plus),
+                    onTap: (){
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => AddNewUser()),
+                      );
+                    },
+                  ),
+
+                ),
+              ),
               Padding(
                 padding: EdgeInsets.only(
                   top: 20,
@@ -102,137 +123,6 @@ class _ManageUsersState extends State<ManageUsers> {
                                         Padding(
                                           padding: const EdgeInsets.symmetric(
                                               horizontal: 14.0, vertical: 10),
-//                                          child: Row(
-//                                            mainAxisAlignment:
-//                                                MainAxisAlignment.spaceBetween,
-//                                            children: <Widget>[
-//                                              GestureDetector(
-//                                                onTap: () {
-//                                                  print('elderly button pressed');
-//                                                },
-//                                                child: Container(
-//                                                  height: 140,
-//                                                  width: 110,
-//                                                  decoration: BoxDecoration(
-//                                                    color: Theme.of(context)
-//                                                        .cardColor,
-//                                                    borderRadius:
-//                                                        BorderRadius.circular(
-//                                                            10.0),
-//                                                    boxShadow: [
-//                                                      BoxShadow(
-//                                                        color: Colors.black12
-//                                                            .withOpacity(0.03),
-//                                                        blurRadius: 4,
-//                                                        spreadRadius: 3,
-//                                                        offset: Offset(
-//                                                          1,
-//                                                          4,
-//                                                        ),
-//                                                      ),
-//                                                    ],
-//                                                  ),
-//                                                  child: Column(
-////                                                  mainAxisAlignment: MainAxisAlignment.center,
-//                                                    crossAxisAlignment: CrossAxisAlignment.center,
-//                                                    children: <Widget>[
-//                                                      Padding(
-//                                                        padding: const EdgeInsets.only(top: 40.0, right: 35, left: 35, bottom: 15,),
-//                                                        child: Image.asset('assets/images/person/child.png'),
-//                                                      ),
-//                                                      Text(
-//                                                        'Child',
-//                                                        style: kUserDataText,
-//                                                      )
-//                                                    ],
-//                                                  ),
-//                                                ),
-//                                              ),
-//                                              Container(
-//                                                height: 140,
-//                                                width: 110,
-//                                                decoration: BoxDecoration(
-//                                                  color: Theme.of(context)
-//                                                      .cardColor,
-//                                                  borderRadius:
-//                                                  BorderRadius.circular(
-//                                                      10.0),
-//                                                  boxShadow: [
-//                                                    BoxShadow(
-//                                                      color: Colors.black12
-//                                                          .withOpacity(0.03),
-//                                                      blurRadius: 4,
-//                                                      spreadRadius: 3,
-//                                                      offset: Offset(
-//                                                        1,
-//                                                        4,
-//                                                      ),
-//                                                    ),
-//                                                  ],
-//                                                ),
-//                                                child: Column(
-////                                                  mainAxisAlignment: MainAxisAlignment.center,
-//                                                  crossAxisAlignment: CrossAxisAlignment.center,
-//                                                  children: <Widget>[
-//                                                    Padding(
-//                                                      padding: const EdgeInsets.only(top: 40.0, right: 35, left: 35, bottom: 15,),
-//                                                      child: Image.asset('assets/images/person/adult.png'),
-//
-//                                                    ),
-//                                                    Text(
-//                                                      'Adult',
-//                                                    )
-//                                                  ],
-//                                                ),
-//                                              ),
-//                                              Container(
-//                                                height: 140,
-//                                                width: 110,
-//                                                decoration: BoxDecoration(
-//                                                  color: Theme.of(context)
-//                                                      .cardColor,
-//                                                  borderRadius:
-//                                                  BorderRadius.circular(
-//                                                      10.0),
-//                                                  border: Border.all(
-//                                                    color: Theme.of(context).accentColor.withOpacity(0.8),
-//                                                  ),
-//                                                  boxShadow: [
-//                                                    BoxShadow(
-//                                                      color: Theme.of(context).accentColor
-//                                                          .withOpacity(0.09),
-//                                                      blurRadius: 4,
-//                                                      spreadRadius: 3,
-//                                                      offset: Offset(
-//                                                        1,
-//                                                        4,
-//                                                      ),
-//                                                    ),
-//                                                  ],
-//                                                ),
-//                                                child: Column(
-////                                                  mainAxisAlignment: MainAxisAlignment.center,
-//                                                  crossAxisAlignment: CrossAxisAlignment.center,
-//                                                  children: <Widget>[
-//                                                    Padding(
-//                                                      padding: const EdgeInsets.only(top: 40.0, right: 35, left: 35, bottom: 15,),
-//                                                      child: Image.asset('assets/images/person/old.png'),
-//
-//                                                    ),
-//                                                    Text(
-//                                                      'Elderly',
-//                                                    )
-//                                                  ],
-//                                                ),
-//                                              ),
-//                                            ],
-//                                          ),
-                                        ),
-                                        new ListTile(
-                                          leading: new Icon(Icons.mode_edit),
-                                          title: new Text('Modify user type'),
-                                          onTap: () {
-                                          },
                                         ),
                                         new ListTile(
                                           leading: new Icon(
@@ -322,131 +212,6 @@ class _ManageUsersState extends State<ManageUsers> {
                                         Padding(
                                           padding: const EdgeInsets.symmetric(
                                               horizontal: 14.0, vertical: 10),
-//                                          child: Row(
-//                                            mainAxisAlignment:
-//                                                MainAxisAlignment.spaceBetween,
-//                                            children: <Widget>[
-//                                              GestureDetector(
-//                                                onTap: () {
-//                                                  print('elderly button pressed');
-//                                                },
-//                                                child: Container(
-//                                                  height: 140,
-//                                                  width: 110,
-//                                                  decoration: BoxDecoration(
-//                                                    color: Theme.of(context)
-//                                                        .cardColor,
-//                                                    borderRadius:
-//                                                        BorderRadius.circular(
-//                                                            10.0),
-//                                                    boxShadow: [
-//                                                      BoxShadow(
-//                                                        color: Colors.black12
-//                                                            .withOpacity(0.03),
-//                                                        blurRadius: 4,
-//                                                        spreadRadius: 3,
-//                                                        offset: Offset(
-//                                                          1,
-//                                                          4,
-//                                                        ),
-//                                                      ),
-//                                                    ],
-//                                                  ),
-//                                                  child: Column(
-////                                                  mainAxisAlignment: MainAxisAlignment.center,
-//                                                    crossAxisAlignment: CrossAxisAlignment.center,
-//                                                    children: <Widget>[
-//                                                      Padding(
-//                                                        padding: const EdgeInsets.only(top: 40.0, right: 35, left: 35, bottom: 15,),
-//                                                        child: Image.asset('assets/images/person/child.png'),
-//                                                      ),
-//                                                      Text(
-//                                                        'Child',
-//                                                        style: kUserDataText,
-//                                                      )
-//                                                    ],
-//                                                  ),
-//                                                ),
-//                                              ),
-//                                              Container(
-//                                                height: 140,
-//                                                width: 110,
-//                                                decoration: BoxDecoration(
-//                                                  color: Theme.of(context)
-//                                                      .cardColor,
-//                                                  borderRadius:
-//                                                  BorderRadius.circular(
-//                                                      10.0),
-//                                                  boxShadow: [
-//                                                    BoxShadow(
-//                                                      color: Colors.black12
-//                                                          .withOpacity(0.03),
-//                                                      blurRadius: 4,
-//                                                      spreadRadius: 3,
-//                                                      offset: Offset(
-//                                                        1,
-//                                                        4,
-//                                                      ),
-//                                                    ),
-//                                                  ],
-//                                                ),
-//                                                child: Column(
-////                                                  mainAxisAlignment: MainAxisAlignment.center,
-//                                                  crossAxisAlignment: CrossAxisAlignment.center,
-//                                                  children: <Widget>[
-//                                                    Padding(
-//                                                      padding: const EdgeInsets.only(top: 40.0, right: 35, left: 35, bottom: 15,),
-//                                                      child: Image.asset('assets/images/person/adult.png'),
-//
-//                                                    ),
-//                                                    Text(
-//                                                      'Adult',
-//                                                    )
-//                                                  ],
-//                                                ),
-//                                              ),
-//                                              Container(
-//                                                height: 140,
-//                                                width: 110,
-//                                                decoration: BoxDecoration(
-//                                                  color: Theme.of(context)
-//                                                      .cardColor,
-//                                                  borderRadius:
-//                                                  BorderRadius.circular(
-//                                                      10.0),
-//                                                  border: Border.all(
-//                                                    color: Theme.of(context).accentColor.withOpacity(0.8),
-//                                                  ),
-//                                                  boxShadow: [
-//                                                    BoxShadow(
-//                                                      color: Theme.of(context).accentColor
-//                                                          .withOpacity(0.09),
-//                                                      blurRadius: 4,
-//                                                      spreadRadius: 3,
-//                                                      offset: Offset(
-//                                                        1,
-//                                                        4,
-//                                                      ),
-//                                                    ),
-//                                                  ],
-//                                                ),
-//                                                child: Column(
-////                                                  mainAxisAlignment: MainAxisAlignment.center,
-//                                                  crossAxisAlignment: CrossAxisAlignment.center,
-//                                                  children: <Widget>[
-//                                                    Padding(
-//                                                      padding: const EdgeInsets.only(top: 40.0, right: 35, left: 35, bottom: 15,),
-//                                                      child: Image.asset('assets/images/person/old.png'),
-//
-//                                                    ),
-//                                                    Text(
-//                                                      'Elderly',
-//                                                    )
-//                                                  ],
-//                                                ),
-//                                              ),
-//                                            ],
-//                                          ),
                                         ),
                                         new ListTile(
                                           leading: new Icon(Icons.mode_edit),
