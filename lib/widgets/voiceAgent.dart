@@ -75,10 +75,11 @@ class _VoiceAgentState extends State<VoiceAgent> {
   ];
 
   Map<String, String> resultMap = {
-    "State": "",
-    "Room": "",
-    "Device": ""
+    "State": " ",
+    "Room": " ",
+    "Device": " "
   }; //room and device
+
   List<String> state = ['ON', 'OFF'];
   List<String> room = [
     'Living Room',
@@ -140,7 +141,7 @@ class _VoiceAgentState extends State<VoiceAgent> {
   Widget build(BuildContext context) {
     listen();
 
-    bool invalidMap = false;
+    bool validMap = false;
     bool excluded = false;
     bool invalidText = false;
 
@@ -163,31 +164,22 @@ class _VoiceAgentState extends State<VoiceAgent> {
       }
     }
 
-    String checkExclusion = "";
-    checkExclusion = resultMap["Room"].replaceAll(" ", "_") + " " + resultMap["Device"];
-//
-//    if (resultMap.containsKey("State") &&
-//        resultMap.containsKey("Room") &&
-//        resultMap.containsKey("Device")) {
-//      invalidMap = true;
-//      print(invalidMap);
-//    }
-//      else {
-//      setState(() {
-//      invalidText = true;
-//      });
-//    }
+    String checkExclusion = " ";
+    while (resultMap["Room"] == null) {}
 
-    if(resultMap.containsValue("")) invalidMap = true;
-    else invalidMap = false;
+    checkExclusion =
+        resultMap["Room"].replaceAll(" ", "_") + " " + resultMap["Device"];
 
+    if (resultMap.containsValue(" "))
+      validMap = false;
+    else
+      validMap = true;
 
     if (exclude_list.contains(checkExclusion)) {
       excluded = true;
     }
 
-    if (excluded == false && invalidMap == true) {} 
-    else {
+    if (excluded == true || validMap == false) {
       resultMap = {};
       setState(() {
         invalidText = true;
@@ -213,17 +205,15 @@ class _VoiceAgentState extends State<VoiceAgent> {
                   style: TextStyle(fontSize: 24.0),
                 )
               : Column(
-                children: <Widget>[
-                  Text(
+                  children: <Widget>[
+                    Text(
                       resultText,
                       style: TextStyle(fontSize: 24.0),
                     ),
-                  Text(
-                    "ERROR",
-                    style: TextStyle(color: Colors.red, fontSize: 18.0)
-                  )
-                ],
-              ),
+                    Text("ERROR",
+                        style: TextStyle(color: Colors.red, fontSize: 18.0))
+                  ],
+                ),
         ),
         backgroundColor: Colors.transparent,
       );
