@@ -75,9 +75,9 @@ class _VoiceAgentState extends State<VoiceAgent> {
   ];
 
   Map<String, String> resultMap = {
-    "State": " ",
-    "Room": " ",
-    "Device": " "
+//    "State": " ",
+//    "Room": " ",
+//    "Device": " "
   }; //room and device
 
   List<String> state = ['ON', 'OFF'];
@@ -164,29 +164,40 @@ class _VoiceAgentState extends State<VoiceAgent> {
       }
     }
 
-    String checkExclusion = " ";
-    while (resultMap["Room"] == null) {}
 
-    checkExclusion =
-        resultMap["Room"].replaceAll(" ", "_") + " " + resultMap["Device"];
+//    while (resultMap["Room"] == null) {}
 
-    if (resultMap.containsValue(" "))
-      validMap = false;
-    else
-      validMap = true;
+setState(() {
 
-    if (exclude_list.contains(checkExclusion)) {
-      excluded = true;
-    }
+  if ((resultMap["Room"]==null) || (resultMap["State"]==null) || (resultMap["Device"]==null)){
+    validMap = true;
+  }
+  else{
+    validMap = false;
+  }
 
-    if (excluded == true || validMap == false) {
+//    if (resultMap.containsValue(" "))
+//      validMap = false;
+//    else
+//      validMap = true;
+
+//    String checkExclusion = " ";
+//    checkExclusion =
+//        resultMap["Room"].replaceAll(" ", "_") + " " + resultMap["Device"];
+
+//    if (exclude_list.contains(checkExclusion)) {
+//      excluded = true;
+//    }
+
+
+    if (validMap == true) {
       resultMap = {};
       setState(() {
         invalidText = true;
       });
     }
     print("RESULT MAP: $resultMap");
-
+});
     return StatefulBuilder(builder: (context, setState) {
       return AlertDialog(
         title: Container(
