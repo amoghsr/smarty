@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:smarty/models/devicesModel.dart';
+import 'package:smarty/models/roomModel.dart';
+import 'package:smarty/models/user.dart';
 import 'package:smarty/shared/constants.dart';
 import 'package:smarty/services/auth.dart';
 
@@ -24,6 +28,13 @@ class _AddNewUserState extends State<AddNewUser> {
   void onChanged(bool value) {}
   @override
   Widget build(BuildContext context) {
+    final rooms = Provider.of<List<Room>>(context);
+    final devices = Provider.of<List<Device>>(context);
+    final user = Provider.of<User>(context);
+    homeId = user.houseId;
+    devices.forEach((element) {
+      print(element.deviceName);
+    });
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -130,7 +141,7 @@ class _AddNewUserState extends State<AddNewUser> {
                   if (_formKey.currentState.validate()) {
                     setState(() => loading = true);
                     dynamic result = await _auth.registerWithEmailAndPassword(
-                        email, password, name, homeId, "-O");
+                        email, password, name, homeId, "-U");
                     if (result == null) {
                       setState(() {
                         loading = false;
