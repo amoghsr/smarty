@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -67,7 +68,19 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
     itemRef = database.reference();
   }
 
-  void stateChange(bool newvalue, String room, String device, String houseId) {
+  incrementCount(User user, String room, String device) {
+    Firestore.instance
+        .collection('Homes')
+        .document(user.houseId)
+        .collection(user.uid)
+        .document(room)
+        .updateData({device: FieldValue.increment(1)}).catchError((e) {
+      print(e);
+    });
+  }
+
+  void stateChange(
+      bool newvalue, String room, String device, String houseId, User user) {
     if (newvalue == false) {
       itemRef
           .child("Homes/" +
@@ -79,6 +92,7 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
               "/")
           .update({'State': "off"});
     } else {
+      incrementCount(user, room, device);
       itemRef
           .child("Homes/" +
               houseId +
@@ -277,7 +291,7 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
                         value: convert(values["State"]),
                         onChanged: (value) {
                           stateChange(value, rooms[l].roomName, rooms[l].d[i],
-                              user.houseId);
+                              user.houseId, user);
                           setState(() {
                             getDevState(rooms[l].roomName, rooms[l].d[i])
                                 .toggleSt = value;
