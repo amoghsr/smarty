@@ -73,7 +73,7 @@ class _VoiceAgentState extends State<VoiceAgent> {
     "Kitchen Speaker"
   ];
 
-  Map<String, String> resultMap;
+  Map<String, String> resultMap = {};
 
   @override
   void initState() {
@@ -92,10 +92,9 @@ class _VoiceAgentState extends State<VoiceAgent> {
       () => setState(() => _isListening = true),
     );
 
-    _speechRecognition
-        .setRecognitionResultHandler((String speech) => setState(() {
-              resultText = speech;
-            }));
+    _speechRecognition.setRecognitionResultHandler(
+      (String speech) => setState(() => resultText = speech),
+    );
 
     _speechRecognition.setRecognitionCompleteHandler(
       () => setState(() => _isListening = false),
@@ -106,21 +105,21 @@ class _VoiceAgentState extends State<VoiceAgent> {
         );
   }
 
-  String r = "";
   void listen() {
     if (_isAvailable && !_isListening)
-      _speechRecognition.listen(locale: "en_US").then((result) {
-        print('$result');
-      });
+      _speechRecognition
+          .listen(locale: "en_US")
+          .then((result) => print('test test test $result'));
   }
 
   @override
   Widget build(BuildContext context) {
     listen();
+
     if (resultText.toLowerCase().contains("on") &&
         resultText.toLowerCase().contains("living room") &&
         (resultText.toLowerCase().contains("lamp") ||
-            resultText.toLowerCase().contains("light"))) {
+        resultText.toLowerCase().contains("light"))) {
       resultMap["State"] = "ON";
       resultMap["Room"] = "Living Room";
       resultMap["Device"] = "Lamp";
