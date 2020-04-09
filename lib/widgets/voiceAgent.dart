@@ -49,7 +49,6 @@ class _VoiceAgentState extends State<VoiceAgent> {
   bool _isListening = false;
 
   String resultText = "";
-  String errorText = "";
   List<String> exclude_list = [
     "Living_Room Exhaust_Fan",
     "Living_Room Water_Heater",
@@ -74,12 +73,7 @@ class _VoiceAgentState extends State<VoiceAgent> {
     "Kitchen Speaker"
   ];
 
-  Map<String, String> resultMap = {
-    "State": " ",
-    "Room": " ",
-    "Device": " "
-  }; //room and device
-
+  Map<String, String> resultMap = {};
   List<String> state = ['ON', 'OFF'];
   List<String> room = [
     'Living Room',
@@ -89,16 +83,20 @@ class _VoiceAgentState extends State<VoiceAgent> {
     'Bathroom',
     'Playroom'
   ];
-
-  Map<String, List<String>> device = {
-    'Lamp': ['Lamp', 'Light', 'Lights', 'Bulb'],
-    'AC': ['AC', 'Air Conditioning', 'Air Conditioner', 'Cooler', 'Aircon'],
-    'Exhaust Fan': ['Exhaust Fan', 'Fan'],
-    'Speaker': ['Speaker', 'Speakers', 'Sound', 'Audio'],
-    'TV': ['TV', 'Television', 'Cable', 'Monitor'],
-    'Faucet': ['Faucet', 'Tap', 'Pipe', 'Water'],
-    'Water Heater': ['Water Heater', 'Geyser', 'Heater']
-  };
+  List<String> device = [
+    'Lamp',
+    'AC',
+    'Air Conditioner',
+    'Fan',
+    'Light',
+    'TV',
+    'Speaker',
+    'Water Heater',
+    'Heater'
+        'Faucet',
+    'Tap',
+    'Geyser'
+  ];
 
   @override
   void initState() {
@@ -142,9 +140,6 @@ class _VoiceAgentState extends State<VoiceAgent> {
     listen();
 
     bool validMap = false;
-    bool excluded = false;
-    bool invalidText = false;
-
     for (int i = 0; i < state.length; i++) {
       if (resultText.toLowerCase().contains(state[i].toLowerCase()))
         resultMap["State"] = state[i];
@@ -156,37 +151,18 @@ class _VoiceAgentState extends State<VoiceAgent> {
     }
 
     for (int k = 0; k < device.length; k++) {
-      for (int key = 0; key < device.values.toList()[k].length; key++) {
-        if (resultText
-            .toLowerCase()
-            .contains(device.values.toList()[k][key].toLowerCase()))
-          resultMap["Device"] = device.keys.toList()[k];
-      }
+      if (resultText.toLowerCase().contains(device[k].toLowerCase()))
+        resultMap["Device"] = device[k];
     }
 
-    String checkExclusion = " ";
-    while (resultMap["Room"] == null) {}
+    print(resultMap);
 
-    checkExclusion =
-        resultMap["Room"].replaceAll(" ", "_") + " " + resultMap["Device"];
+    if (resultMap.containsKey("State") &&
+        resultMap.containsKey("Room") &&
+        resultMap.containsKey("Device")) validMap = true;
+    print(validMap);
 
-    if (resultMap.containsValue(" "))
-      validMap = false;
-    else
-      validMap = true;
-
-    if (exclude_list.contains(checkExclusion)) {
-      excluded = true;
-    }
-
-    if (excluded == true || validMap == false) {
-      resultMap = {};
-      setState(() {
-        invalidText = true;
-      });
-    }
-    print("RESULT MAP: $resultMap");
-
+    
     return StatefulBuilder(builder: (context, setState) {
       return AlertDialog(
         title: Container(
@@ -199,21 +175,10 @@ class _VoiceAgentState extends State<VoiceAgent> {
             vertical: 8.0,
             horizontal: 12.0,
           ),
-          child: (invalidText == false)
-              ? Text(
-                  resultText,
-                  style: TextStyle(fontSize: 24.0),
-                )
-              : Column(
-                  children: <Widget>[
-                    Text(
-                      resultText,
-                      style: TextStyle(fontSize: 24.0),
-                    ),
-                    Text("ERROR",
-                        style: TextStyle(color: Colors.red, fontSize: 18.0))
-                  ],
-                ),
+          child: Text(
+            resultText,
+            style: TextStyle(fontSize: 24.0),
+          ),
         ),
         backgroundColor: Colors.transparent,
       );
