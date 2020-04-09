@@ -10,8 +10,14 @@ import 'package:smarty/test/firebaseControlDevices.dart';
 
 class DeviceCarousel extends StatelessWidget {
   @override
+  List<Device> favouritedevices(List<Device> x) {
+    x..sort((a, b) => b.count.compareTo(a.count));
+    return x;
+  }
+
   Widget build(BuildContext context) {
     final devices = Provider.of<List<Device>>(context);
+    List<Device> dev = favouritedevices(devices);
     if (devices != null) {
       return Column(
         children: <Widget>[
@@ -71,9 +77,9 @@ class DeviceCarousel extends StatelessWidget {
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               //Todo: change devices from here to stream
-              itemCount: devices.length,
+              itemCount: 3,
               itemBuilder: (BuildContext context, int index) {
-                Device device = devices[index];
+                Device device = dev[index];
                 return Container(
                   margin: EdgeInsets.all(8.0),
                   width: 170.0,

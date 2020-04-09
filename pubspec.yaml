@@ -49,6 +49,8 @@ dependencies:
   geolocator: ^3.0.1
   http: ^0.12.0+3
   speech_recognition: ^0.3.0+1
+  flutter_vlc_player: ^1.0.0
+  video_player:
 
 dev_dependencies:
   flutter_test:

@@ -6,6 +6,8 @@ import 'package:smarty/models/devicesModel.dart';
 import 'package:smarty/models/navigationBar.dart';
 import 'package:smarty/models/themeModel.dart';
 import 'package:smarty/models/user.dart';
+import 'package:smarty/screens/home_manager/dashboard_manager.dart';
+import 'package:smarty/screens/manageUsers.dart';
 
 import 'models/roomModel.dart';
 
@@ -17,20 +19,35 @@ class Wrapper extends StatelessWidget {
     if (user == null) {
       return Authenticate();
     } else {
-      print(user.uid + user.houseId);
-      return StreamProvider<List<Room>>.value(
-        value: DatabaseService1().streamRooms(user),
-        child: StreamProvider<List<Device>>.value(
-          value: DatabaseService1().streamDevices(user),
-          child: StreamProvider<List<String>>.value(
-            value: DatabaseService1().streamHomiIDs(),
-            child: MaterialApp(
-              theme: Provider.of<ThemeModel>(context).currentTheme,
-              home: MyNavigationBar(),
+      if (user.type == "M") {
+        return StreamProvider<List<Room>>.value(
+          value: DatabaseService1().streamRooms(user),
+          child: StreamProvider<List<Device>>.value(
+            value: DatabaseService1().streamDevices(user),
+            child: StreamProvider<List<String>>.value(
+              value: DatabaseService1().streamHomiIDs(),
+              child: MaterialApp(
+                theme: Provider.of<ThemeModel>(context).currentTheme,
+                home: DashboardManager(),
+              ),
             ),
           ),
-        ),
-      );
+        );
+      } else {
+        return StreamProvider<List<Room>>.value(
+          value: DatabaseService1().streamRooms(user),
+          child: StreamProvider<List<Device>>.value(
+            value: DatabaseService1().streamDevices(user),
+            child: StreamProvider<List<String>>.value(
+              value: DatabaseService1().streamHomiIDs(),
+              child: MaterialApp(
+                theme: Provider.of<ThemeModel>(context).currentTheme,
+                home: MyNavigationBar(),
+              ),
+            ),
+          ),
+        );
+      }
     }
   }
 }

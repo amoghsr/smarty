@@ -4,6 +4,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:smarty/models/themeModel.dart';
+import 'package:smarty/screens/home_manager/all_houses.dart';
 import 'package:smarty/screens/manageUsers.dart';
 import 'package:smarty/services/auth.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -17,7 +18,6 @@ class DrawerManager extends StatefulWidget {
 }
 
 class _DrawerManagerState extends State<DrawerManager> {
-
   String _platformVersion = 'Unknown';
   String _projectVersion = '';
   String _projectCode = '';
@@ -142,6 +142,22 @@ class _DrawerManagerState extends State<DrawerManager> {
               },
             ),
             ListTile(
+// Leading is an element in the start of the list tile horizontally
+              leading: Container(
+                  width: screenwidth * 0.03,
+                  child: Icon(FontAwesomeIcons.users)),
+// Title of the list
+              title: Text(
+                'All Houses',
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AllHouses()),
+                );
+              },
+            ),
+            ListTile(
               leading: Icon(FontAwesomeIcons.solidMoon),
               title: Text('Dark Mode'),
               trailing: Switch(
@@ -173,7 +189,6 @@ class _DrawerManagerState extends State<DrawerManager> {
                 "Logout",
               ),
             ),
-
           ],
         ),
       ),
