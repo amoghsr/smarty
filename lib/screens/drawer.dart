@@ -35,7 +35,7 @@ class _DrawerPageState extends State<DrawerPage> {
     super.initState();
     () {
       user = Provider.of<User>(context, listen: false);
-      while(user==null){}
+      while (user == null) {}
       stream = DatabaseService1().getUserDetails(user.uid);
     }();
   }
@@ -43,121 +43,241 @@ class _DrawerPageState extends State<DrawerPage> {
   Widget build(BuildContext context) {
     double screenwidth = MediaQuery.of(context).size.width;
     double screenheight = MediaQuery.of(context).size.height;
-    return Drawer(
-      child: SafeArea(
+    final user = Provider.of<User>(context);
+    if (user.type == "O") {
+      return Drawer(
+        child: SafeArea(
 // The various items in the hamburger menu are saved inside a ListView, which is basically a vertical list
-        child: ListView(
+          child: ListView(
 // ListView items are saved in a children list of Widgets
-          children: <Widget>[
-            new StreamBuilder(
-              stream: stream, 
-              builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot){
-                if (snapshot.data == null)
-                  return Container();
-                return UserAccountsDrawerHeader(
-              accountName: Text(
-                snapshot.data['displayName'],
-                style: TextStyle(
-                  fontFamily: 'Montserrat',
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-              accountEmail: Text(
-                snapshot.data['email'],
-                style: TextStyle(
-                  fontFamily: 'Montserrat',
-                ),
-              ),
-              currentAccountPicture: CircleAvatar(
-                child: Text(
-                  'JD',
-                  style: TextStyle(
-                    fontFamily: 'Montserrat',
-                  ),
-                ),
-              ),
-            );
-              }
-            ),
+            children: <Widget>[
+              new StreamBuilder(
+                  stream: stream,
+                  builder:
+                      (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+                    if (snapshot.data == null) return Container();
+                    return UserAccountsDrawerHeader(
+                      accountName: Text(
+                        snapshot.data['displayName'],
+                        style: TextStyle(
+                          fontFamily: 'Montserrat',
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                      accountEmail: Text(
+                        snapshot.data['email'],
+                        style: TextStyle(
+                          fontFamily: 'Montserrat',
+                        ),
+                      ),
+                      currentAccountPicture: CircleAvatar(
+                        child: Text(
+                          'JD',
+                          style: TextStyle(
+                            fontFamily: 'Montserrat',
+                          ),
+                        ),
+                      ),
+                    );
+                  }),
 // ListTile represents a list tile item in the menu
-            ListTile(
+              ListTile(
 // Leading is an element in the start of the list tile horizontally
-              leading: Container(
-                  width: screenwidth * 0.03,
-                  child: Icon(FontAwesomeIcons.users)),
+                leading: Container(
+                    width: screenwidth * 0.03,
+                    child: Icon(FontAwesomeIcons.users)),
 // Title of the list
-              title: Text(
-                'Manage Users',
-              ),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => ManageUsers()),
-                );
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.settings),
-              title: Text(
-                'Account Settings',
-              ),
-            ),
-            ListTile(
-              leading: Icon(Icons.lock),
-              title: Text(
-                'For Home Manager',
-              ),
-              trailing: Icon(
-                Icons.arrow_forward,
-              ),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => NavigationManager()),
-                );
-              },
-            ),
-            ListTile(
-              leading: Icon(FontAwesomeIcons.solidMoon),
-              title: Text('Dark Mode'),
-              trailing: Switch(
-                value: valueSwitch,
-                onChanged: (value) {
-                  setState(() {
-                    valueSwitch = value;
-                    Provider.of<ThemeModel>(context, listen: false)
-                        .toggleTheme();
-                  });
+                title: Text(
+                  'Manage Users',
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ManageUsers()),
+                  );
                 },
               ),
-            ),
-            ListTile(
-              leading: Icon(MaterialIcons.phone),
-              title: Text(
-                'Customer Helpline',
+              ListTile(
+                leading: Icon(Icons.settings),
+                title: Text(
+                  'Account Settings',
+                ),
               ),
-              onTap: _launchCaller,
-            ),
-            ListTile(
-              leading: Icon(FontAwesomeIcons.questionCircle),
-              title: Text(
-                'About Developers',
+              ListTile(
+                leading: Icon(Icons.lock),
+                title: Text(
+                  'For Home Manager',
+                ),
+                trailing: Icon(
+                  Icons.arrow_forward,
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => NavigationManager()),
+                  );
+                },
               ),
-            ),
-            Divider(),
+              ListTile(
+                leading: Icon(FontAwesomeIcons.solidMoon),
+                title: Text('Dark Mode'),
+                trailing: Switch(
+                  value: valueSwitch,
+                  onChanged: (value) {
+                    setState(() {
+                      valueSwitch = value;
+                      Provider.of<ThemeModel>(context, listen: false)
+                          .toggleTheme();
+                    });
+                  },
+                ),
+              ),
+              ListTile(
+                leading: Icon(MaterialIcons.phone),
+                title: Text(
+                  'Customer Helpline',
+                ),
+                onTap: _launchCaller,
+              ),
+              ListTile(
+                leading: Icon(FontAwesomeIcons.questionCircle),
+                title: Text(
+                  'About Developers',
+                ),
+              ),
+              Divider(),
 // Log out button
-            ListTile(
-              onTap: () async {
-                await _auth.signOut();
-              },
-              leading: Icon(Icons.exit_to_app),
-              title: Text(
-                'Log out',
+              ListTile(
+                onTap: () async {
+                  await _auth.signOut();
+                },
+                leading: Icon(Icons.exit_to_app),
+                title: Text(
+                  'Log out',
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
-    );
+      );
+    } else {
+      return Drawer(
+        child: SafeArea(
+// The various items in the hamburger menu are saved inside a ListView, which is basically a vertical list
+          child: ListView(
+// ListView items are saved in a children list of Widgets
+            children: <Widget>[
+              new StreamBuilder(
+                  stream: stream,
+                  builder:
+                      (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+                    if (snapshot.data == null) return Container();
+                    return UserAccountsDrawerHeader(
+                      accountName: Text(
+                        snapshot.data['displayName'],
+                        style: TextStyle(
+                          fontFamily: 'Montserrat',
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                      accountEmail: Text(
+                        snapshot.data['email'],
+                        style: TextStyle(
+                          fontFamily: 'Montserrat',
+                        ),
+                      ),
+                      currentAccountPicture: CircleAvatar(
+                        child: Text(
+                          'JD',
+                          style: TextStyle(
+                            fontFamily: 'Montserrat',
+                          ),
+                        ),
+                      ),
+                    );
+                  }),
+// ListTile represents a list tile item in the menu
+//              ListTile(
+//// Leading is an element in the start of the list tile horizontally
+//                leading: Container(
+//                    width: screenwidth * 0.03,
+//                    child: Icon(FontAwesomeIcons.users)),
+//// Title of the list
+//                title: Text(
+//                  'Manage Users',
+//                ),
+//                onTap: () {
+//                  Navigator.push(
+//                    context,
+//                    MaterialPageRoute(builder: (context) => ManageUsers()),
+//                  );
+//                },
+//              ),
+              ListTile(
+                leading: Icon(Icons.settings),
+                title: Text(
+                  'Account Settings',
+                ),
+              ),
+//              ListTile(
+//                leading: Icon(Icons.lock),
+//                title: Text(
+//                  'For Home Manager',
+//                ),
+//                trailing: Icon(
+//                  Icons.arrow_forward,
+//                ),
+//                onTap: () {
+//                  Navigator.push(
+//                    context,
+//                    MaterialPageRoute(
+//                        builder: (context) => NavigationManager()),
+//                  );
+//                },
+//              ),
+              ListTile(
+                leading: Icon(FontAwesomeIcons.solidMoon),
+                title: Text('Dark Mode'),
+                trailing: Switch(
+                  value: valueSwitch,
+                  onChanged: (value) {
+                    setState(() {
+                      valueSwitch = value;
+                      Provider.of<ThemeModel>(context, listen: false)
+                          .toggleTheme();
+                    });
+                  },
+                ),
+              ),
+              ListTile(
+                leading: Icon(MaterialIcons.phone),
+                title: Text(
+                  'Customer Helpline',
+                ),
+                onTap: _launchCaller,
+              ),
+              ListTile(
+                leading: Icon(FontAwesomeIcons.questionCircle),
+                title: Text(
+                  'About Developers',
+                ),
+              ),
+              Divider(),
+// Log out button
+              ListTile(
+                onTap: () async {
+                  await _auth.signOut();
+                },
+                leading: Icon(Icons.exit_to_app),
+                title: Text(
+                  'Log out',
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
   }
 }

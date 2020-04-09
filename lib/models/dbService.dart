@@ -9,12 +9,12 @@ class DatabaseService1 {
   final Firestore _db = Firestore.instance;
 
   Stream<List<Room>> streamRooms(User user) {
-    var ref = _db.collection('Homes').document("123").collection("1");
+    var ref =
+        _db.collection('Homes').document(user.houseId).collection(user.uid);
     return ref.snapshots().map(CreateRoomList);
   }
 
   Stream<List<String>> streamHomiIDs() {
-//    List<String> x = [];
     var data = _db.collection('Homes');
     return data.snapshots().map(IDlist);
   }
@@ -35,7 +35,8 @@ class DatabaseService1 {
   }
 
   Stream<List<Device>> streamDevices(User user) {
-    var ref = _db.collection('Homes').document("123").collection("1");
+    var ref =
+        _db.collection('Homes').document(user.houseId).collection(user.uid);
     return ref.snapshots().map(CreateDeviceList);
   }
 

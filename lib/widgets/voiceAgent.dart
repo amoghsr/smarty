@@ -151,7 +151,6 @@ class _VoiceAgentState extends State<VoiceAgent> {
     //   }
     // }
 
-    
     for (int i = 0; i < state.length; i++) {
       if (resultText.toLowerCase().contains(state[i].toLowerCase()))
         resultMap["State"] = state[i];
@@ -161,7 +160,7 @@ class _VoiceAgentState extends State<VoiceAgent> {
       if (resultText.toLowerCase().contains(room[j].toLowerCase()))
         resultMap["Room"] = room[j];
     }
-    
+
     for (int k = 0; k < device.length; k++) {
       if (resultText.toLowerCase().contains(device[k].toLowerCase()))
         resultMap["Device"] = device[k];
