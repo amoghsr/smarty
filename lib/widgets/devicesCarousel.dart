@@ -2,23 +2,41 @@
 This file helps create the carousels for the devices in the house.
  */
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:provider/provider.dart';
+import 'package:smarty/devices/CommonControllers/deviceCommonControllers.dart';
 import 'package:smarty/models/devicesModel.dart';
+import 'package:smarty/models/user.dart';
 import 'package:smarty/test/firebaseControlDevices.dart';
 
-class DeviceCarousel extends StatelessWidget {
+class DeviceCarousel extends StatefulWidget {
   @override
+  _DeviceCarouselState createState() => _DeviceCarouselState();
+}
+
+class _DeviceCarouselState extends State<DeviceCarousel> {
+  void initState() {
+    super.initState();
+    final FirebaseDatabase database = FirebaseDatabase
+        .instance; //Rather then just writing FirebaseDatabase(), get the instance.
+
+    itemRef = database.reference();
+  }
+
   List<Device> favouritedevices(List<Device> x) {
     x..sort((a, b) => b.count.compareTo(a.count));
     return x;
   }
 
+  @override
   Widget build(BuildContext context) {
     final devices = Provider.of<List<Device>>(context);
-    List<Device> dev = favouritedevices(devices);
-    if (devices != null) {
+    final user = Provider.of<User>(context);
+    if (devices != null && user != null) {
+      List<Device> dev = favouritedevices(devices);
       return Column(
         children: <Widget>[
           Padding(
@@ -33,17 +51,6 @@ class DeviceCarousel extends StatelessWidget {
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                // GestureDetector(
-                //   onTap: () => print('See All'),
-                //   child: Text(
-                //     'See All Devices',
-                //     style: TextStyle(
-                //       fontSize: 12.0,
-                //       color: Theme.of(context).accentColor,
-                //       fontWeight: FontWeight.w600,
-                //     ),
-                //   ),
-                // ),
               ],
             ),
           ),
@@ -90,14 +97,6 @@ class DeviceCarousel extends StatelessWidget {
                       Opacity(
                         opacity: device.opacity,
                         child: GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      FirebaseControlDevices()),
-                            );
-                          },
                           child: Container(
                             height: 180.0,
                             width: 170.0,
@@ -128,24 +127,79 @@ class DeviceCarousel extends StatelessWidget {
                                           ),
                                         ),
                                       ),
-                                      Icon(
-                                        FontAwesome.toggle_on,
-                                        size: 24,
-                                        color: Theme.of(context).accentColor,
-                                      )
+                                      StreamBuilder(
+                                        stream: itemRef
+                                            .child("Homes/" +
+                                                user.houseId +
+                                                "/Rooms/" +
+                                                device.inRoom +
+                                                "/devices/" +
+                                                device.deviceName +
+                                                "/")
+                                            .onValue,
+                                        builder: (context, snap) {
+                                          if (snap.data == null)
+                                            return Switch(
+                                              value: false,
+                                              onChanged: (value) {
+                                                stateChange(
+                                                    value,
+                                                    device.inRoom,
+                                                    device.deviceName,
+                                                    user.houseId,
+                                                    user);
+                                                setState(() {
+                                                  isSwitched = value;
+                                                });
+                                              },
+                                              activeTrackColor:
+                                                  Theme.of(context).canvasColor,
+                                              activeColor:
+                                                  Theme.of(context).canvasColor,
+                                              inactiveTrackColor:
+                                                  Theme.of(context).canvasColor,
+                                              inactiveThumbColor:
+                                                  Theme.of(context).canvasColor,
+                                            );
+                                          Map<String, dynamic> values =
+                                              new Map<String, dynamic>.from(
+                                                  snap.data.snapshot.value);
+                                          return Switch(
+                                            value: convert(values["State"]),
+                                            onChanged: (value) {
+                                              stateChange(
+                                                  value,
+                                                  device.inRoom,
+                                                  device.deviceName,
+                                                  user.houseId,
+                                                  user);
+                                              setState(() {
+                                                isSwitched = value;
+                                              });
+                                            },
+                                            activeTrackColor: Theme.of(context)
+                                                .backgroundColor,
+                                            activeColor:
+                                                Colors.lightGreenAccent,
+                                            inactiveTrackColor:
+                                                Theme.of(context)
+                                                    .backgroundColor,
+                                          );
+                                        },
+                                      ),
                                     ],
                                   ),
-//                                  Row(
-//                                    children: <Widget>[
-//                                      Image(
-//                                        height: 50,
-//                                        width: 50,
-//                                        image: AssetImage(
-//                                          device.imageUrl,
-//                                        ),
-//                                      ),
-//                                    ],
-//                                  ),
+                                  Row(
+                                    children: <Widget>[
+                                      Image(
+                                        height: 50,
+                                        width: 50,
+                                        image: AssetImage(
+                                          device.imageUrl,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                   Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
@@ -157,14 +211,39 @@ class DeviceCarousel extends StatelessWidget {
                                           fontWeight: FontWeight.w700,
                                         ),
                                       ),
-                                      Text(
-                                        device.state,
-                                        style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w500,
-                                          fontFamily: 'Montserrat',
-                                        ),
-                                      )
+                                      StreamBuilder(
+                                        stream: itemRef
+                                            .child("Homes/" +
+                                                user.houseId +
+                                                "/Rooms/" +
+                                                device.inRoom +
+                                                "/devices/" +
+                                                device.deviceName +
+                                                "/")
+                                            .onValue,
+                                        builder: (context, snap) {
+                                          if (snap.data == null)
+                                            return Text(
+                                              "Off",
+                                              style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.w500,
+                                                fontFamily: 'Montserrat',
+                                              ),
+                                            );
+                                          Map<String, dynamic> values =
+                                              new Map<String, dynamic>.from(
+                                                  snap.data.snapshot.value);
+                                          return Text(
+                                            values["State"],
+                                            style: TextStyle(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.w500,
+                                              fontFamily: 'Montserrat',
+                                            ),
+                                          );
+                                        },
+                                      ),
                                     ],
                                   ),
                                 ],

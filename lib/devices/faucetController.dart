@@ -65,7 +65,7 @@ class _FaucetControllerState extends State<FaucetController> {
                       value: false,
                       onChanged: (value) {
                         stateChange(value, widget.roomName, widget.devName,
-                            user.houseId);
+                            user.houseId, user);
                         setState(() {
                           isSwitched = value;
                         });
@@ -80,8 +80,8 @@ class _FaucetControllerState extends State<FaucetController> {
                   return Switch(
                     value: convert(values["State"]),
                     onChanged: (value) {
-                      stateChange(
-                          value, widget.roomName, widget.devName, user.houseId);
+                      stateChange(value, widget.roomName, widget.devName,
+                          user.houseId, user);
                       setState(() {
                         isSwitched = value;
                       });

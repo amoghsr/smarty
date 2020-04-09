@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:smarty/models/user.dart';
 import 'package:smarty/shared/constants.dart';
 
 bool isSwitched = false;
@@ -11,18 +13,31 @@ bool icon = false;
 int waterAmount = 8;
 DatabaseReference itemRef;
 
-void stateChange(bool newvalue, String room, String device, String houseId) {
+void stateChange(
+    bool newvalue, String room, String device, String houseId, User user) {
   if (newvalue == false) {
     itemRef
         .child(
             "Homes/" + houseId + "/Rooms/" + room + "/devices/" + device + "/")
         .update({'State': "off"});
   } else {
+    incrementCount(user, room, device);
     itemRef
         .child(
             "Homes/" + houseId + "/Rooms/" + room + "/devices/" + device + "/")
         .update({'State': "on"});
   }
+}
+
+incrementCount(User user, String room, String device) {
+  Firestore.instance
+      .collection('Homes')
+      .document(user.houseId)
+      .collection(user.uid)
+      .document(room)
+      .updateData({device: FieldValue.increment(1)}).catchError((e) {
+    print(e);
+  });
 }
 
 Stream getString(String room, String device, String houseId) {

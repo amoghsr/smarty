@@ -1,9 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:smarty/models/user.dart';
 import 'package:smarty/services/database.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseAuth _auth2 = FirebaseAuth.instance;
 
   Future resetPasswordEmail(String email) async {
     try {
@@ -50,6 +52,12 @@ class AuthService {
       print(error.toString());
       return null;
     }
+  }
+
+  Future<AuthResult> register(String email, String password, String name, String homeId, String userType) async {
+    FirebaseApp app = await FirebaseApp.configure(
+        name: 'Secondary', options: await FirebaseApp.instance.options);
+    return FirebaseAuth.fromApp(app).createUserWithEmailAndPassword(email: email, password: email);
   }
 
   // Register with email, password, name and age.

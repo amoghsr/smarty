@@ -121,7 +121,7 @@ class _LightControllerState extends State<LightController> {
                           value: false,
                           onChanged: (value) {
                             stateChange(value, widget.roomName, widget.devName,
-                                user.houseId);
+                                user.houseId, user);
                             setState(() {
                               isSwitched = value;
                             });
@@ -138,7 +138,7 @@ class _LightControllerState extends State<LightController> {
                         value: convert(values["State"]),
                         onChanged: (value) {
                           stateChange(value, widget.roomName, widget.devName,
-                              user.houseId);
+                              user.houseId, user);
                           setState(() {
                             isSwitched = value;
                           });

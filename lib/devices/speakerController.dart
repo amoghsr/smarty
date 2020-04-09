@@ -83,7 +83,7 @@ class _SpeakerControllerState extends State<SpeakerController>
                       value: false,
                       onChanged: (value) {
                         stateChange(value, widget.roomName, widget.devName,
-                            user.houseId);
+                            user.houseId, user);
                         setState(() {
                           isSwitched = value;
                         });
@@ -98,8 +98,8 @@ class _SpeakerControllerState extends State<SpeakerController>
                   return Switch(
                     value: convert(values["State"]),
                     onChanged: (value) {
-                      stateChange(
-                          value, widget.roomName, widget.devName, user.houseId);
+                      stateChange(value, widget.roomName, widget.devName,
+                          user.houseId, user);
                       setState(() {
                         isSwitched = value;
                       });

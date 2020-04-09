@@ -66,7 +66,7 @@ class _TVControllerState extends State<TVController> {
                       value: false,
                       onChanged: (value) {
                         stateChange(value, widget.roomName, widget.devName,
-                            user.houseId);
+                            user.houseId, user);
                         setState(() {
                           isSwitched = value;
                         });
@@ -81,8 +81,8 @@ class _TVControllerState extends State<TVController> {
                   return Switch(
                     value: convert(values["State"]),
                     onChanged: (value) {
-                      stateChange(
-                          value, widget.roomName, widget.devName, user.houseId);
+                      stateChange(value, widget.roomName, widget.devName,
+                          user.houseId, user);
                       setState(() {
                         isSwitched = value;
                       });
