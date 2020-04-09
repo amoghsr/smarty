@@ -27,6 +27,7 @@ class _ManageUsersState extends State<ManageUsers> {
             style: kAppBarTextStyle,
           ),
         ),
+
         body: SafeArea(
           child: ListView(
             padding: EdgeInsets.symmetric(vertical: 20.0),
