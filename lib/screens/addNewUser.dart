@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:smarty/models/devicesModel.dart';
+import 'package:smarty/models/roomModel.dart';
+import 'package:smarty/models/user.dart';
 import 'package:smarty/shared/constants.dart';
 import 'package:smarty/services/auth.dart';
 
@@ -24,6 +28,22 @@ class _AddNewUserState extends State<AddNewUser> {
   void onChanged(bool value) {}
   @override
   Widget build(BuildContext context) {
+
+    // Get rooms list using provider
+    final rooms = Provider.of<List<Room>>(context);
+
+    // Get device list using provider
+    final devices = Provider.of<List<Device>>(context);
+
+    // Get currently logged in user's details
+    final user = Provider.of<User>(context);
+
+    // Use home owner's homeID and add it to the home user.
+    homeId = user.houseId;
+    devices.forEach((element) {
+      print(element.deviceName);
+    });
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -76,6 +96,7 @@ class _AddNewUserState extends State<AddNewUser> {
                   setState(() => email = val);
                 },
               ),
+
 //              TextFormField(
 //                keyboardType: TextInputType.number,
 //                decoration: InputDecoration(
@@ -129,8 +150,8 @@ class _AddNewUserState extends State<AddNewUser> {
                 onPressed: () async {
                   if (_formKey.currentState.validate()) {
                     setState(() => loading = true);
-                    dynamic result = await _auth.registerWithEmailAndPassword(
-                        email, password, name, homeId, "-O");
+                    dynamic result = await _auth.register(
+                        email, password, name, homeId, "-U");
                     if (result == null) {
                       setState(() {
                         loading = false;
