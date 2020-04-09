@@ -77,6 +77,7 @@ class _VoiceAgentState extends State<VoiceAgent> {
   List<String> state = ['ON', 'OFF'];
   List<String> room = [
     'Living Room',
+    'Hall',
     'Bedroom',
     'Kitchen',
     'Bathroom',
@@ -85,11 +86,14 @@ class _VoiceAgentState extends State<VoiceAgent> {
   List<String> device = [
     'Lamp',
     'AC',
+    'Air Conditioner',
+    'Fan',
     'Light',
     'TV',
     'Speaker',
     'Water Heater',
-    'Faucet',
+    'Heater'
+        'Faucet',
     'Tap',
     'Geyser'
   ];
@@ -111,10 +115,9 @@ class _VoiceAgentState extends State<VoiceAgent> {
       () => setState(() => _isListening = true),
     );
 
-    _speechRecognition
-        .setRecognitionResultHandler((String speech) => setState(() {
-              resultText = speech;
-            }));
+    _speechRecognition.setRecognitionResultHandler(
+      (String speech) => setState(() => resultText = speech),
+    );
 
     _speechRecognition.setRecognitionCompleteHandler(
       () => setState(() => _isListening = false),
@@ -125,32 +128,18 @@ class _VoiceAgentState extends State<VoiceAgent> {
         );
   }
 
-  String r = "";
   void listen() {
     if (_isAvailable && !_isListening)
-      _speechRecognition.listen(locale: "en_US").then((result) {
-        print('$result');
-      });
+      _speechRecognition
+          .listen(locale: "en_US")
+          .then((result) => print('$result'));
   }
 
   @override
   Widget build(BuildContext context) {
     listen();
 
-    // for (int i = 0; i < state.length; i++) {
-    //   for (int j = 0; j < room.length; j++) {
-    //     for (int k = 0; k < device.length; k++) {
-    //       if (resultText.toLowerCase().contains(state[i].toLowerCase()) &&
-    //           resultText.toLowerCase().contains(room[j].toLowerCase()) &&
-    //           (resultText.toLowerCase().contains(device[k].toLowerCase()))) {
-    //         resultMap["State"] = state[i];
-    //         resultMap["Room"] = room[j];
-    //         resultMap["Device"] = device[k];
-    //       }
-    //     }
-    //   }
-    // }
-
+    bool validMap = false;
     for (int i = 0; i < state.length; i++) {
       if (resultText.toLowerCase().contains(state[i].toLowerCase()))
         resultMap["State"] = state[i];
@@ -167,6 +156,13 @@ class _VoiceAgentState extends State<VoiceAgent> {
     }
 
     print(resultMap);
+
+    if (resultMap.containsKey("State") &&
+        resultMap.containsKey("Room") &&
+        resultMap.containsKey("Device")) validMap = true;
+    print(validMap);
+
+    
     return StatefulBuilder(builder: (context, setState) {
       return AlertDialog(
         title: Container(
