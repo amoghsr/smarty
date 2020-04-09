@@ -54,10 +54,14 @@ class AuthService {
     }
   }
 
-  Future<AuthResult> register(String email, String password, String name, String homeId, String userType) async {
+  Future<AuthResult> register(String email, String password, String name,
+      String homeId, String userType) async {
+    Future<AuthResult> d;
     FirebaseApp app = await FirebaseApp.configure(
         name: 'Secondary', options: await FirebaseApp.instance.options);
-    return FirebaseAuth.fromApp(app).createUserWithEmailAndPassword(email: email, password: email);
+    d = FirebaseAuth.fromApp(app)
+        .createUserWithEmailAndPassword(email: email, password: email);
+    return d;
   }
 
   // Register with email, password, name and age.
