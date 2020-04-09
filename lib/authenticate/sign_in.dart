@@ -127,39 +127,6 @@ class _SignInState extends State<SignIn> {
                         ),
                       ],
                     ),
-//                    TextFormField(
-//                      keyboardType: TextInputType.emailAddress,
-//                      decoration: InputDecoration(
-//                        labelText: "Email Address",
-//                      ),
-//                      validator: (val) =>
-//                          val.isEmpty ? 'Enter your email' : null,
-//                      onChanged: (val) {
-//                        setState(() => email = val);
-//                      },
-//                    ),
-//                    TextFormField(
-//                      controller: _controller,
-//                      obscureText: true,
-//                      decoration: InputDecoration(
-//                        labelText: 'Password',
-//                        suffixIcon: IconButton(
-//                          icon: Icon(
-//                            Icons.close,
-//                            size: 18,
-//                          ),
-//                          onPressed: () {
-//                            _controller.clear();
-//                          },
-//                        ),
-//                      ),
-//                      validator: (val) => val.length < 6
-//                          ? 'Passwords must be at least 6 characters long, and can\'t be things like “password”, “123456” or “abcdef”.'
-//                          : null,
-//                      onChanged: (val) {
-//                        setState(() => password = val);
-//                      },
-//                    ),
                     SizedBox(height: 40.0),
                     RaisedButton(
                       padding: EdgeInsets.symmetric(
@@ -217,30 +184,30 @@ class _SignInState extends State<SignIn> {
                     SizedBox(
                       height: 10,
                     ),
-                    GestureDetector(
-                      onTap: () => widget.toggleView(),
-                      child: Text(
-                        'Don\'t have an account? Sign up here',
-                        style: TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                    RaisedButton(
-                      child: Text(
-                        'Sign In for Home Managers',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'Poppins',
-                          color: Theme.of(context).primaryColor,
-                        ),
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(50.0),
-                      ),
-                      onPressed: () {},
-                    ),
+//                    GestureDetector(
+//                      onTap: () => widget.toggleView(),
+//                      child: Text(
+//                        'Don\'t have an account? Sign up here',
+//                        style: TextStyle(
+//                          fontSize: 13,
+//                          fontWeight: FontWeight.w600,
+//                        ),
+//                      ),
+//                    ),
+//                    RaisedButton(
+//                      child: Text(
+//                        'Sign In for Home Managers',
+//                        style: TextStyle(
+//                          fontWeight: FontWeight.bold,
+//                          fontFamily: 'Poppins',
+//                          color: Theme.of(context).primaryColor,
+//                        ),
+//                      ),
+//                      shape: RoundedRectangleBorder(
+//                        borderRadius: BorderRadius.circular(50.0),
+//                      ),
+//                      onPressed: () {},
+//                    ),
                   ],
                 ),
               ),
