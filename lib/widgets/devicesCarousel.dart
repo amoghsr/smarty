@@ -13,7 +13,6 @@ import 'package:smarty/models/user.dart';
 import 'package:smarty/test/firebaseControlDevices.dart';
 
 class DeviceCarousel extends StatefulWidget {
-  DatabaseReference itemRef;
   @override
   _DeviceCarouselState createState() => _DeviceCarouselState();
 }
@@ -23,7 +22,8 @@ class _DeviceCarouselState extends State<DeviceCarousel> {
     super.initState();
     final FirebaseDatabase database = FirebaseDatabase
         .instance; //Rather then just writing FirebaseDatabase(), get the instance.
-    DatabaseReference itemRef = database.reference();
+
+    itemRef = database.reference();
   }
 
   List<Device> favouritedevices(List<Device> x) {
@@ -35,8 +35,8 @@ class _DeviceCarouselState extends State<DeviceCarousel> {
   Widget build(BuildContext context) {
     final devices = Provider.of<List<Device>>(context);
     final user = Provider.of<User>(context);
-    List<Device> dev = favouritedevices(devices);
-    if (devices != null) {
+    if (devices != null && user != null) {
+      List<Device> dev = favouritedevices(devices);
       return Column(
         children: <Widget>[
           Padding(
@@ -51,17 +51,6 @@ class _DeviceCarouselState extends State<DeviceCarousel> {
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                // GestureDetector(
-                //   onTap: () => print('See All'),
-                //   child: Text(
-                //     'See All Devices',
-                //     style: TextStyle(
-                //       fontSize: 12.0,
-                //       color: Theme.of(context).accentColor,
-                //       fontWeight: FontWeight.w600,
-                //     ),
-                //   ),
-                // ),
               ],
             ),
           ),
@@ -108,14 +97,6 @@ class _DeviceCarouselState extends State<DeviceCarousel> {
                       Opacity(
                         opacity: device.opacity,
                         child: GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      FirebaseControlDevices()),
-                            );
-                          },
                           child: Container(
                             height: 180.0,
                             width: 170.0,
@@ -208,17 +189,17 @@ class _DeviceCarouselState extends State<DeviceCarousel> {
                                       ),
                                     ],
                                   ),
-//                                  Row(
-//                                    children: <Widget>[
-//                                      Image(
-//                                        height: 50,
-//                                        width: 50,
-//                                        image: AssetImage(
-//                                          device.imageUrl,
-//                                        ),
-//                                      ),
-//                                    ],
-//                                  ),
+                                  Row(
+                                    children: <Widget>[
+                                      Image(
+                                        height: 50,
+                                        width: 50,
+                                        image: AssetImage(
+                                          device.imageUrl,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                   Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
@@ -230,14 +211,39 @@ class _DeviceCarouselState extends State<DeviceCarousel> {
                                           fontWeight: FontWeight.w700,
                                         ),
                                       ),
-                                      Text(
-                                        device.state,
-                                        style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w500,
-                                          fontFamily: 'Montserrat',
-                                        ),
-                                      )
+                                      StreamBuilder(
+                                        stream: itemRef
+                                            .child("Homes/" +
+                                                user.houseId +
+                                                "/Rooms/" +
+                                                device.inRoom +
+                                                "/devices/" +
+                                                device.deviceName +
+                                                "/")
+                                            .onValue,
+                                        builder: (context, snap) {
+                                          if (snap.data == null)
+                                            return Text(
+                                              "Off",
+                                              style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.w500,
+                                                fontFamily: 'Montserrat',
+                                              ),
+                                            );
+                                          Map<String, dynamic> values =
+                                              new Map<String, dynamic>.from(
+                                                  snap.data.snapshot.value);
+                                          return Text(
+                                            values["State"],
+                                            style: TextStyle(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.w500,
+                                              fontFamily: 'Montserrat',
+                                            ),
+                                          );
+                                        },
+                                      ),
                                     ],
                                   ),
                                 ],
