@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:smarty/models/devicesModel.dart';
 import 'package:smarty/models/roomModel.dart';
 import 'package:smarty/models/user.dart';
+import 'package:smarty/services/database.dart';
 import 'package:smarty/shared/constants.dart';
 import 'package:smarty/services/auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -183,8 +184,9 @@ class _AddNewUserState extends State<AddNewUser> {
                     } else {
                       addUser(result.user.uid, ["Bedroom-Lamp1", "Bedroom-AC"],
                           user);
-//
 
+                      await DatabaseService(uid: result.user.uid)
+                          .updateUserData(name, homeId, email);
                     }
                   }
                 },

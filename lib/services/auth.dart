@@ -60,7 +60,8 @@ class AuthService {
     FirebaseApp app = await FirebaseApp.configure(
         name: 'Secondary', options: await FirebaseApp.instance.options);
     d = FirebaseAuth.fromApp(app)
-        .createUserWithEmailAndPassword(email: email, password: email);
+        .createUserWithEmailAndPassword(email: email, password: password);
+
     return d;
   }
 

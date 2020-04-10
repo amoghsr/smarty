@@ -4,6 +4,10 @@ import 'package:smarty/models/devicesModel.dart';
 import 'package:smarty/models/user.dart';
 import 'roomModel.dart';
 import 'package:async/async.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:smarty/models/user.dart';
+import 'package:smarty/services/database.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 class DatabaseService1 {
   final Firestore _db = Firestore.instance;

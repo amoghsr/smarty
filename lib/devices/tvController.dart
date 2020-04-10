@@ -61,7 +61,7 @@ class _TVControllerState extends State<TVController> {
                         "/")
                     .onValue,
                 builder: (context, snap) {
-                  if (snap.data == null)
+                  if (snap.data == null) {
                     return Switch(
                       value: false,
                       onChanged: (value) {
@@ -76,21 +76,23 @@ class _TVControllerState extends State<TVController> {
                       inactiveTrackColor: Theme.of(context).canvasColor,
                       inactiveThumbColor: Theme.of(context).canvasColor,
                     );
-                  Map<String, dynamic> values =
-                      new Map<String, dynamic>.from(snap.data.snapshot.value);
-                  return Switch(
-                    value: convert(values["State"]),
-                    onChanged: (value) {
-                      stateChange(value, widget.roomName, widget.devName,
-                          user.houseId, user);
-                      setState(() {
-                        isSwitched = value;
-                      });
-                    },
-                    activeTrackColor: Theme.of(context).backgroundColor,
-                    activeColor: Colors.lightGreenAccent,
-                    inactiveTrackColor: Theme.of(context).backgroundColor,
-                  );
+                  } else {
+                    Map<String, dynamic> values =
+                        new Map<String, dynamic>.from(snap.data.snapshot.value);
+                    return Switch(
+                      value: convert(values["State"]),
+                      onChanged: (value) {
+                        stateChange(value, widget.roomName, widget.devName,
+                            user.houseId, user);
+                        setState(() {
+                          isSwitched = value;
+                        });
+                      },
+                      activeTrackColor: Theme.of(context).backgroundColor,
+                      activeColor: Colors.lightGreenAccent,
+                      inactiveTrackColor: Theme.of(context).backgroundColor,
+                    );
+                  }
                 },
               ),
             ),
