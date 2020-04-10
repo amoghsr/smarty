@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:smarty/line_chart.dart';
+import 'package:smarty/screens/p2pPanel.dart';
 
 class EnergyStats extends StatefulWidget {
   String energyType;
@@ -103,33 +104,87 @@ class _EnergyStatsState extends State<EnergyStats> {
                       // crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         SizedBox(width: screenwidth * 0.13),
-                        Container(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Text(
-                                '$formattedDay, $formattedDate $formattedMonth',
-                                style: TextStyle(
-                                  fontFamily: 'Montserrat',
-                                  color: Theme.of(context).accentColor,
-                                  fontSize: 13,
+                        widget.energyType == 'Consumption'
+                            ? Container(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text(
+                                      '$formattedDay, $formattedDate $formattedMonth',
+                                      style: TextStyle(
+                                        fontFamily: 'Montserrat',
+                                        color: Theme.of(context).accentColor,
+                                        fontSize: 13,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: screenheight * 0.01,
+                                    ),
+                                    Text(
+                                      '76 kWh',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontFamily: 'Montserrat',
+                                        color: Theme.of(context).primaryColor,
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              )
+                            : Expanded(
+                                child: InkWell(
+                                  child: Container(
+                                    color: Theme.of(context).accentColor,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: <Widget>[
+                                        Center(
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: <Widget>[
+                                              Text(
+                                                'Peer to Peer',
+                                                style: TextStyle(
+                                                    color: Theme.of(context)
+                                                        .bottomAppBarColor,
+                                                    fontFamily: 'Montserrat',
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.w500),
+                                              ),
+                                              Text(
+                                                'Energy Sharing',
+                                                style: TextStyle(
+                                                    color: Theme.of(context)
+                                                        .bottomAppBarColor,
+                                                    fontFamily: 'Montserrat',
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.w500),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Image.asset(
+                                          "assets/images/energy-sharing.png",
+                                          height: screenheight * 0.13,
+                                          width: screenwidth * 0.13,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  onTap: () => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => P2P()),
+                                  ),
                                 ),
                               ),
-                              SizedBox(
-                                height: screenheight * 0.01,
-                              ),
-                              Text(
-                                '76 kWh',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontFamily: 'Montserrat',
-                                  color: Theme.of(context).primaryColor,
-                                  fontSize: 20,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
                         SizedBox(width: screenwidth * 0.13),
                         Column(
                           children: <Widget>[
