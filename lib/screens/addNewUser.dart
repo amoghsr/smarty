@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:smarty/models/devicesModel.dart';
@@ -5,6 +6,8 @@ import 'package:smarty/models/roomModel.dart';
 import 'package:smarty/models/user.dart';
 import 'package:smarty/shared/constants.dart';
 import 'package:smarty/services/auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 class AddNewUser extends StatefulWidget {
   @override
@@ -24,11 +27,31 @@ class _AddNewUserState extends State<AddNewUser> {
   String homeId = '';
 
   bool _isChecked = false;
+  addUser(String uid, List<String> x, User user) {
+//    Firestore.instance
+//        .collection('Homes')
+//        .document(user.houseId)
+//        .collection(user.uid)
+//        .document(room)
+//        .updateData({device: FieldValue.increment(1)}).catchError((e) {
+//      print(e);
+//    });
+    x.forEach((element) {
+      String x = element;
+      String y = x.split("-")[0]; // room
+      String w = x.split("-")[1]; // device
+      Firestore.instance
+          .collection('Homes')
+          .document(user.houseId)
+          .collection(uid)
+          .document(y)
+          .setData({w: 0}, merge: true);
+    });
+  }
 
   void onChanged(bool value) {}
   @override
   Widget build(BuildContext context) {
-
     // Get rooms list using provider
     final rooms = Provider.of<List<Room>>(context);
 
@@ -40,10 +63,7 @@ class _AddNewUserState extends State<AddNewUser> {
 
     // Use home owner's homeID and add it to the home user.
     homeId = user.houseId;
-    devices.forEach((element) {
-      print(element.deviceName);
-    });
-
+    List<String> selectedDevices = [];
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -129,6 +149,9 @@ class _AddNewUserState extends State<AddNewUser> {
                     _isChecked = value;
                     print('Changed state to: $_isChecked');
                   });
+                  if (value) {
+                    selectedDevices.add(value.toString());
+                  }
                 },
               ),
               SizedBox(
@@ -150,13 +173,18 @@ class _AddNewUserState extends State<AddNewUser> {
                 onPressed: () async {
                   if (_formKey.currentState.validate()) {
                     setState(() => loading = true);
-                    dynamic result = await _auth.register(
+                    AuthResult result = await _auth.register(
                         email, password, name, homeId, "-U");
                     if (result == null) {
                       setState(() {
                         loading = false;
                         error = 'Please supply a valid email';
                       });
+                    } else {
+                      addUser(result.user.uid, ["Bedroom-Lamp1", "Bedroom-AC"],
+                          user);
+//
+
                     }
                   }
                 },
