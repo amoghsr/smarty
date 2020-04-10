@@ -20,7 +20,11 @@ class DatabaseService {
         .setData({
       'userID': uid,
     });
-    return await userDataCollection.document(uid).setData({
+    return await userDataCollection
+        .document("house")
+        .collection(homeId)
+        .document(uid)
+        .setData({
       'displayName': displayName,
       'homeId': homeId,
       'email': email,

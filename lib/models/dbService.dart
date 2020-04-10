@@ -4,13 +4,22 @@ import 'package:smarty/models/devicesModel.dart';
 import 'package:smarty/models/user.dart';
 import 'roomModel.dart';
 import 'package:async/async.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:smarty/models/user.dart';
-import 'package:smarty/services/database.dart';
-import 'package:firebase_core/firebase_core.dart';
 
 class DatabaseService1 {
   final Firestore _db = Firestore.instance;
+  Stream<List<String>> StreamUserlist(String houseId) {
+    CollectionReference ref =
+        _db.collection('UserData').document("house").collection(houseId);
+    return ref.snapshots().map(Userlist);
+  }
+
+  List<String> Userlist(QuerySnapshot doc) {
+    List<String> x = [];
+    doc.documents.forEach((element) {
+      x.add(element["displayName"] + "-" + element["email"]);
+    });
+    return x;
+  }
 
   Stream<List<Room>> streamRooms(User user) {
     var ref =
@@ -18,16 +27,16 @@ class DatabaseService1 {
     return ref.snapshots().map(CreateRoomList);
   }
 
-  Stream<List<String>> streamHomiIDs() {
+  Stream<List<int>> streamHomiIDs() {
     var data = _db.collection('Homes');
     return data.snapshots().map(IDlist);
   }
 
 // provider all of HomeIDs
-  List<String> IDlist(QuerySnapshot doc) {
-    List<String> x = [];
+  List<int> IDlist(QuerySnapshot doc) {
+    List<int> x = [];
     doc.documents.forEach((element) {
-      x.add(element.documentID);
+      x.add(int.parse(element.documentID));
     });
     return x;
   }

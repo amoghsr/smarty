@@ -62,6 +62,8 @@ class _AddNewUserState extends State<AddNewUser> {
     // Get currently logged in user's details
     final user = Provider.of<User>(context);
 
+    //list of users of current house name-email layout
+    final userlist = Provider.of<List<String>>(context);
     // Use home owner's homeID and add it to the home user.
     homeId = user.houseId;
     List<String> selectedDevices = [];
