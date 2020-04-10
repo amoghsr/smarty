@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:smarty/devices/CommonControllers/deviceCommonControllers.dart';
+import 'package:smarty/models/user.dart';
 import 'package:speech_recognition/speech_recognition.dart';
 
 class DoneListening {
@@ -139,7 +141,7 @@ class _VoiceAgentState extends State<VoiceAgent> {
   @override
   Widget build(BuildContext context) {
     listen();
-
+    final user = Provider.of<User>(context);
     bool invalidMap = false;
     bool excluded = false;
     bool invalidText = false;
@@ -164,12 +166,6 @@ class _VoiceAgentState extends State<VoiceAgent> {
     }
 
     setState(() {
-      // if ((resultMap["Room"]==null) || (resultMap["State"]==null) || (resultMap["Device"]==null)){
-      //   validMap = true;
-      // }
-      // else{
-      //   validMap = false;
-      // }
 
       if (resultMap.containsValue("")) invalidMap = true;
 
@@ -182,15 +178,13 @@ class _VoiceAgentState extends State<VoiceAgent> {
         excluded = true;
       }
 
-      // if (resultMap.keys.length != 3) invalidMap == true;
-
       if (invalidMap == true) {
         // resultMap = {};
         invalidText = true;
       } else {
         bool newValue = (resultMap["State"] == "ON") ? true : false;
-        // stateChange(newValue, resultMap["Room"].replaceAll("_", " "),
-        //     resultMap["Device"].replaceAll("_", " "), houseId, user);
+        stateChange(newValue, resultMap["Room"].replaceAll("_", " "),
+            resultMap["Device"].replaceAll("_", " "), user.houseId, user);
       }
       print(invalidText);
 
