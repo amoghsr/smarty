@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smarty/devices/CommonControllers/deviceCommonControllers.dart';
 import 'package:speech_recognition/speech_recognition.dart';
 
 class DoneListening {
@@ -186,8 +187,11 @@ class _VoiceAgentState extends State<VoiceAgent> {
       if (invalidMap == true) {
         // resultMap = {};
         invalidText = true;
+      } else {
+        bool newValue = (resultMap["State"] == "ON") ? true : false;
+        // stateChange(newValue, resultMap["Room"].replaceAll("_", " "),
+        //     resultMap["Device"].replaceAll("_", " "), houseId, user);
       }
-
       print(invalidText);
 
       print("RESULT MAP: $resultMap");
