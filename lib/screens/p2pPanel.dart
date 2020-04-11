@@ -11,6 +11,7 @@ class P2P extends StatefulWidget {
 class _P2PState extends State<P2P> {
   @override
   int electricityAmount = 5;
+  int click = 0;
   Widget build(BuildContext context) {
     double screenwidth = MediaQuery.of(context).size.width;
     double screenheight = MediaQuery.of(context).size.height;
@@ -253,132 +254,147 @@ class _P2PState extends State<P2P> {
             ],
           ),
           SizedBox(
-            height: screenheight * 0.04,
+            height: screenheight * 0.03,
           ),
-          Row(
+          Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              InkWell(
-                  onTap: () => setState(() {
-                        if (electricityAmount > 1)
-                          electricityAmount = electricityAmount - 1;
-                      }),
-                  child: Icon(Icons.remove, size: 45)),
-              SizedBox(
-                width: screenwidth * 0.02,
-              ),
-              Column(
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
+                  InkWell(
+                    onTap: () => setState(() {
+                      if (electricityAmount > 1)
+                        electricityAmount = electricityAmount - 1;
+                    }),
+                    child: Icon(Icons.remove, size: 30, color: Colors.white54),
+                  ),
+                  SizedBox(
+                    width: screenwidth * 0.02,
+                  ),
                   Text(
                     '$electricityAmount',
-                    style: kLightDeviceBottomBar,
-                  ),
-                  Text(
-                    'kWh',
                     style: kLightDeviceBottomBar.copyWith(
-                      fontWeight: FontWeight.w400,
+                      fontSize: 35,
                     ),
+                  ),
+                  SizedBox(
+                    width: screenwidth * 0.02,
+                  ),
+                  InkWell(
+                    onTap: () => setState(() {
+                      if (electricityAmount < 15)
+                        electricityAmount = electricityAmount + 1;
+                    }),
+                    child: Icon(Icons.add, size: 30, color: Colors.white54),
                   ),
                 ],
               ),
-              SizedBox(
-                width: screenwidth * 0.02,
+              Text(
+                'kWh',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
-              InkWell(
-                  onTap: () => setState(() {
-                        if (electricityAmount < 15)
-                          electricityAmount = electricityAmount + 1;
-                      }),
-                  child: Icon(Icons.add, size: 45)),
+              SizedBox(height: screenheight * 0.01),
+              Text(
+                'Purchase Using',
+                style: TextStyle(
+                  fontFamily: 'Montserrat',
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.w300,
+                ),
+              ),
+              SizedBox(height: screenheight * 0.02),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    '$electricityAmount',
+                    style: TextStyle(
+                      fontSize: 25,
+                    ),
+                  ),
+                  (click == 0)
+                      ? Icon(
+                          Icons.flash_on,
+                          color: Color(0xffe8b313),
+                          size: 22,
+                        )
+                      : Row(
+                          children: <Widget>[
+                            SizedBox(
+                              width: screenwidth * 0.02,
+                            ),
+                            Icon(
+                              FontAwesomeIcons.moneyBillWave,
+                              color: Colors.green,
+                              size: 22,
+                            ),
+                          ],
+                        ),
+                ],
+              ),
             ],
           ),
-          SizedBox(height: screenheight * 0.03),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Column(
-                children: [
-                  Row(
-                    children: <Widget>[
-                      Text(
-                        '1',
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.w500),
-                      ),
-                      Icon(Icons.flash_on, color: Color(0xffe8b313), size: 15),
-                    ],
-                  ),
-                  SizedBox(height: screenheight * 0.01),
-                  Container(
-                    color: Theme.of(context).accentColor,
-                    width: screenwidth * 0.2,
-                    height: screenheight * 0.05,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Center(
-                          child: Text(
-                            'BUY',
-                            style: TextStyle(
-                                color: Theme.of(context).bottomAppBarColor,
-                                fontFamily: 'Montserrat',
-                                fontSize: 11,
-                                fontWeight: FontWeight.w700),
-                          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            // A button used for closing the dialog plus switching off the fire alarm.
+            child: FlatButton(
+              onPressed: () {},
+              //   FirebaseDatabase.instance
+              //       .reference()
+              //       .child("Sensors/Fire")
+              //       .update({'Danger': "low"}); // To close the dialog
+              // },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  InkWell(
+                    onTap: () {
+                      setState(() {
+                        click = 0;
+                      });
+                    },
+                    child: Container(
+                      height: 40,
+                      width: 70,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.green, width: 2),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(5),
                         ),
-                        Icon(Icons.flash_on,
-                            color: Color(0xffe8b313), size: 15),
-                      ],
+                      ),
+                      child: Icon(Icons.flash_on,
+                          color: Color(0xffe8b313), size: 30),
                     ),
-                  )
+                  ),
+                  InkWell(
+                    onTap: () {
+                      setState(() {
+                        click = 1;
+                      });
+                    },
+                    child: Container(
+                      height: 40,
+                      width: 70,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.green, width: 2),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(5),
+                        ),
+                      ),
+                      child: Icon(
+                        FontAwesomeIcons.moneyBillWave,
+                        color: Colors.green,
+                        size: 30,
+                      ),
+                    ),
+                  ),
                 ],
               ),
-              Column(
-                children: [
-                  Row(
-                    children: <Widget>[
-                      Text(
-                        '1',
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.w500),
-                      ),
-                      SizedBox(width: screenwidth * 0.01),
-                      Text(
-                        'AED',
-                        style: TextStyle(fontSize: 12.5),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: screenheight * 0.01),
-                  Container(
-                    color: Theme.of(context).accentColor,
-                    width: screenwidth * 0.2,
-                    height: screenheight * 0.05,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Center(
-                          child: Text(
-                            'BUY',
-                            style: TextStyle(
-                                color: Theme.of(context).bottomAppBarColor,
-                                fontFamily: 'Montserrat',
-                                fontSize: 11,
-                                fontWeight: FontWeight.w700),
-                          ),
-                        ),
-                        SizedBox(width: screenwidth * 0.01),
-                        Icon(
-                          FontAwesomeIcons.moneyBillWave,
-                          color: Colors.green,
-                          size: 12,
-                        ),
-                      ],
-                    ),
-                  )
-                ],
-              )
-            ],
+            ),
           ),
         ],
       ),
