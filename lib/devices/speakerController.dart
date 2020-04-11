@@ -96,7 +96,7 @@ class _SpeakerControllerState extends State<SpeakerController>
                   Map<String, dynamic> values =
                       new Map<String, dynamic>.from(snap.data.snapshot.value);
                   return Switch(
-                    value: convert(values["State"]),
+                    value: convert(values["State"]) ?? false,
                     onChanged: (value) {
                       stateChange(value, widget.roomName, widget.devName,
                           user.houseId, user);
@@ -208,6 +208,7 @@ class _SpeakerControllerState extends State<SpeakerController>
                           "/")
                       .onValue,
                   builder: (context, snap) {
+                    print(widget.roomName + "help help");
                     if (snap.data == null)
                       return Slider(
                         value: 0.0,
@@ -221,12 +222,10 @@ class _SpeakerControllerState extends State<SpeakerController>
                           });
                         },
                       );
-                    ;
-
                     Map<String, dynamic> values =
                         new Map<String, dynamic>.from(snap.data.snapshot.value);
                     return Slider(
-                      value: values["Volume"].toDouble(),
+                      value: values["Volume"].toDouble() ?? 22.0,
                       max: 100,
                       min: 0,
                       onChanged: (double newValue) {
