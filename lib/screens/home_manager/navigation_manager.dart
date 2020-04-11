@@ -30,7 +30,6 @@ class _NavigationManagerState extends State<NavigationManager> {
   );
 
   Widget build(BuildContext context) {
-    //Todo : this how you can access all house ids
     final x = Provider.of<List<String>>(context);
 //    x.forEach((element) {
 //      print(element);
