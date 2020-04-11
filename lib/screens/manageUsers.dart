@@ -1,8 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:smarty/services/auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:smarty/shared/constants.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'addNewUser.dart';
+import 'package:provider/provider.dart';
 
 class ManageUsers extends StatefulWidget {
   @override
@@ -11,7 +14,6 @@ class ManageUsers extends StatefulWidget {
 
 class _ManageUsersState extends State<ManageUsers> {
 
-
   @override
   void initState() {
     super.initState();
@@ -19,6 +21,9 @@ class _ManageUsersState extends State<ManageUsers> {
 
   @override
   Widget build(BuildContext context) {
+    //list of users of current house name-email layout
+    final userlist = Provider.of<List<String>>(context);
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -27,264 +32,61 @@ class _ManageUsersState extends State<ManageUsers> {
             style: kAppBarTextStyle,
           ),
         ),
-
         body: SafeArea(
-          child: ListView(
-            padding: EdgeInsets.symmetric(vertical: 20.0),
-            children: <Widget>[
-              Container(
-                padding: EdgeInsets.all(10),
-//                color: Theme.of(context).cardColor,
-                child: Card(
-                  child: ListTile(
-                    title: Text('Add user'),
-                    subtitle: Text('Add a new user to your home'),
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 20),
+            child: ListView(
+              children: <Widget>[
+                Container(
+                  child: Card(
+                    child: ListTile(
+                      title: Text('Add user'),
+                      subtitle: Text('Add a new user to your home'),
 //                    leading: Icon(Icons.add),
-                    trailing: Icon(FontAwesome.user_plus),
-                    onTap: (){
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => AddNewUser()),
-                      );
-                    },
+                      trailing: Icon(FontAwesome.user_plus),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => AddNewUser()),
+                        );
+                      },
+                    ),
                   ),
-
                 ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(
-                  top: 20,
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 4.0, vertical: 20),
+                  child: Text(
+                    'Users in your home',
+                    style: Theme.of(context).textTheme.headline6,
+                  ),
                 ),
-                child: SizedBox(),
-              ),
-              // Home Owner Container
-              Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-
-                    CircleAvatar(
-                      maxRadius: 50,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 12.0, bottom: 4.0),
-                      child: Text(
-                        '\$Home_Owner_Name',
-                        style: TextStyle(
-                          fontSize: 20,
-                        ),
-                      ),
-                    ),
-                    Opacity(
-                      opacity: 0.5,
-                      child: Text(
-                        'THE HOME OWNER',
-                        style: kSubtitleText,
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 30.0,
-              ),
-              Container(
-                margin: EdgeInsets.only(left: 10, right: 10),
-                child: GridView.count(
-                  crossAxisCount: 2,
-                  physics: ScrollPhysics(), // to disable GridView's scrolling
+                ListView.builder(
                   shrinkWrap: true,
-                  children: <Widget>[
-                    // This is the card that holds the home USER information. onTap() it opens the settings for the user.
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: InkWell(
-                        onTap: () {
-                          showModalBottomSheet(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return Padding(
-                                  padding: const EdgeInsets.only(
-                                      bottom: 14.0, top: 5.0),
-                                  child: Container(
-                                    child: new Wrap(
-                                      children: <Widget>[
-                                        Opacity(
-                                          opacity: 0.5,
-                                          child: Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 14.0, vertical: 10),
-                                            child: Text(
-                                              'USER SETTINGS',
-                                              style: kSubtitleText,
-                                            ),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 14.0, vertical: 10),
-                                        ),
-                                        new ListTile(
-                                          leading: new Icon(
-                                            Icons.delete,
-                                            color: Colors.red,
-                                          ),
-                                          title: new Text(
-                                            'Delete this user',
-                                            style: TextStyle(color: Colors.red),
-                                          ),
-                                          onTap: () {},
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              });
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Theme.of(context).cardColor,
-                            boxShadow: [
-                              BoxShadow(
-                                  color: Colors.black12.withOpacity(0.03),
-                                  blurRadius: 4,
-                                  spreadRadius: 3,
-                                  offset: Offset(
-                                    1,
-                                    4,
-                                  )),
-                            ],
-                          ),
-                          height: 24,
-                          child: Container(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                CircleAvatar(
-                                  maxRadius: 30,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      top: 12.0, bottom: 4.0),
-                                  child: Text(
-                                    'Son Appleseed',
-                                    style: TextStyle(),
-                                  ),
-                                ),
-                                Opacity(
-                                  opacity: 0.5,
-                                  child: Text(
-                                    'CHILD',
-                                    style: kSubtitleText,
-                                  ),
-                                )
-                              ],
-                            ),
+                  itemCount: userlist.length,
+                  itemBuilder: (context, index) {
+                    return Card(
+                      child: ListTile(
+                        leading: CircleAvatar(),
+                        title: Text(
+                          userlist[index].split('-')[0],
+                        ),
+                        subtitle: Text(userlist[index].split('-')[1]),
+                        trailing: InkWell(
+                          // TODO: IMPLEMENT DELETE USER
+                          onTap: (){
+                            print('pressed list item $index');
+                          },
+                          child: Icon(
+                            Icons.delete,
+                            color: Colors.redAccent,
                           ),
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: InkWell(
-                        onTap: () {
-                          showModalBottomSheet(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return Padding(
-                                  padding: const EdgeInsets.only(
-                                      bottom: 14.0, top: 5.0),
-                                  child: Container(
-                                    child: new Wrap(
-                                      children: <Widget>[
-                                        Opacity(
-                                          opacity: 0.5,
-                                          child: Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 14.0, vertical: 10),
-                                            child: Text(
-                                              'USER SETTINGS',
-                                              style: kSubtitleText,
-                                            ),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 14.0, vertical: 10),
-                                        ),
-                                        new ListTile(
-                                          leading: new Icon(Icons.mode_edit),
-                                          title: new Text('Modify user type'),
-                                          onTap: () {
-                                          },
-                                        ),
-                                        new ListTile(
-                                          leading: new Icon(
-                                            Icons.delete,
-                                            color: Colors.red,
-                                          ),
-                                          title: new Text(
-                                            'Delete this user',
-                                            style: TextStyle(color: Colors.red),
-                                          ),
-                                          onTap: () {},
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              });
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Theme.of(context).cardColor,
-                            boxShadow: [
-                              BoxShadow(
-                                  color: Colors.black12.withOpacity(0.03),
-                                  blurRadius: 4,
-                                  spreadRadius: 3,
-                                  offset: Offset(
-                                    1,
-                                    4,
-                                  )),
-                            ],
-                          ),
-                          height: 24,
-                          child: Container(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                CircleAvatar(
-                                  maxRadius: 30,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      top: 12.0, bottom: 4.0),
-                                  child: Text(
-                                    'Son Appleseed',
-                                    style: TextStyle(),
-                                  ),
-                                ),
-                                Opacity(
-                                  opacity: 0.5,
-                                  child: Text(
-                                    'CHILD',
-                                    style: kSubtitleText,
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
+                    );
+                  },
+                )
+              ],
+            ),
           ),
         ),
       ),

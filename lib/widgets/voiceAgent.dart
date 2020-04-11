@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:smarty/devices/CommonControllers/deviceCommonControllers.dart';
 import 'package:smarty/models/user.dart';
 import 'package:speech_recognition/speech_recognition.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 
 class DoneListening {
   bool done = false;
@@ -27,8 +28,7 @@ class _MicClassState extends State<MicClass> {
   Widget build(BuildContext context) {
     return IconButton(
         icon: Icon(
-          Icons.mic,
-          color: Colors.white,
+          Icons.keyboard_voice,
           semanticLabel: 'Notifcations',
         ),
         onPressed: () {

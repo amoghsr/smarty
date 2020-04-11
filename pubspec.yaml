@@ -17,6 +17,7 @@ environment:
   sdk: ">=2.5.2 <3.0.0"
 
 dependencies:
+  firebase_admin: ^0.1.2
   async: ^2.4.0
   local_auth: ^0.5.2+3
   get_it: ^1.0.3+2

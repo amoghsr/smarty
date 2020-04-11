@@ -83,7 +83,6 @@ class _DeviceCarouselState extends State<DeviceCarousel> {
 //          color: Colors.blue,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              //Todo: change devices from here to stream
               itemCount: 3,
               itemBuilder: (BuildContext context, int index) {
                 Device device = dev[index];
@@ -118,7 +117,7 @@ class _DeviceCarouselState extends State<DeviceCarousel> {
                                       Opacity(
                                         opacity: 0.7,
                                         child: Text(
-                                          device.inRoom,
+                                          device.inRoom ?? " ",
                                           style: TextStyle(
                                             fontSize: 10,
                                             fontWeight: FontWeight.w400,
@@ -195,7 +194,7 @@ class _DeviceCarouselState extends State<DeviceCarousel> {
                                         height: 50,
                                         width: 50,
                                         image: AssetImage(
-                                          device.imageUrl,
+                                          device.imageUrl ?? " ",
                                         ),
                                       ),
                                     ],
@@ -205,7 +204,7 @@ class _DeviceCarouselState extends State<DeviceCarousel> {
                                         MainAxisAlignment.spaceBetween,
                                     children: <Widget>[
                                       Text(
-                                        device.deviceName,
+                                        device.deviceName ?? " ",
                                         style: TextStyle(
                                           fontSize: 15,
                                           fontWeight: FontWeight.w700,
@@ -235,7 +234,7 @@ class _DeviceCarouselState extends State<DeviceCarousel> {
                                               new Map<String, dynamic>.from(
                                                   snap.data.snapshot.value);
                                           return Text(
-                                            values["State"],
+                                            values["State"] ?? " ",
                                             style: TextStyle(
                                               fontSize: 15,
                                               fontWeight: FontWeight.w500,

@@ -42,7 +42,8 @@ class _NavigationManagerState extends State<NavigationManager> {
           onTap: onTappedBar,
           currentIndex: _currentIndex,
           type: BottomNavigationBarType.fixed,
-//          backgroundColor: Theme.of(context).primaryColor,
+          selectedItemColor: Colors.green,
+          backgroundColor: Theme.of(context).primaryColor,
           items: [
             BottomNavigationBarItem(
               icon: Icon(

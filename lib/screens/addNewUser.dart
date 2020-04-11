@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:smarty/models/devicesModel.dart';
 import 'package:smarty/models/roomModel.dart';
 import 'package:smarty/models/user.dart';
+import 'package:smarty/services/database.dart';
 import 'package:smarty/shared/constants.dart';
 import 'package:smarty/services/auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -49,7 +50,6 @@ class _AddNewUserState extends State<AddNewUser> {
     });
   }
 
-  void onChanged(bool value) {}
   @override
   Widget build(BuildContext context) {
     // Get rooms list using provider
@@ -63,7 +63,9 @@ class _AddNewUserState extends State<AddNewUser> {
 
     // Use home owner's homeID and add it to the home user.
     homeId = user.houseId;
+
     List<String> selectedDevices = [];
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -116,18 +118,6 @@ class _AddNewUserState extends State<AddNewUser> {
                   setState(() => email = val);
                 },
               ),
-
-//              TextFormField(
-//                keyboardType: TextInputType.number,
-//                decoration: InputDecoration(
-//                  labelText: "Home ID",
-//                ),
-//                validator: (val) => val.isEmpty ? 'Enter Home ID' : null,
-//                onChanged: (val) {
-//                  setState(() => homeId = val);
-//                },
-//              ),
-
               TextFormField(
                 obscureText: true,
                 decoration: InputDecoration(
@@ -140,8 +130,8 @@ class _AddNewUserState extends State<AddNewUser> {
                 },
               ),
               CheckboxListTile(
-                subtitle: Text('Living room'),
                 title: Text('Light'),
+                subtitle: Text('Living room'),
                 value: _isChecked,
                 activeColor: Theme.of(context).accentColor,
                 onChanged: (bool value) {
@@ -183,8 +173,8 @@ class _AddNewUserState extends State<AddNewUser> {
                     } else {
                       addUser(result.user.uid, ["Bedroom-Lamp1", "Bedroom-AC"],
                           user);
-//
-
+                      await DatabaseService(uid: result.user.uid)
+                          .updateUserData(name, homeId, email);
                     }
                   }
                 },
