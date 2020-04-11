@@ -7,11 +7,13 @@ class DonateDialog extends StatefulWidget {
   final String title, description, buttonText;
   final String image;
   final Color col;
+  final double balance;
 
   DonateDialog({
     @required this.title,
     @required this.description,
     @required this.buttonText,
+    @required this.balance,
     this.image,
     this.col,
   });
@@ -22,6 +24,8 @@ class DonateDialog extends StatefulWidget {
 
 class _DonateDialogState extends State<DonateDialog> {
   int donationAmount = 5;
+  double conversion = 0.23;
+  // double conversion = 0.23;
   Widget build(BuildContext context) {
     // Returning a dialog box. Here we are specifying the properties of the dialog box.
     return Dialog(
@@ -107,7 +111,7 @@ class _DonateDialogState extends State<DonateDialog> {
                       ),
                       InkWell(
                         onTap: () => setState(() {
-                          if (donationAmount < 15)
+                          if (donationAmount < widget.balance)
                             donationAmount = donationAmount + 1;
                         }),
                         child: Icon(Icons.add, size: 45, color: Colors.white54),
@@ -134,20 +138,30 @@ class _DonateDialogState extends State<DonateDialog> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
-                        '$donationAmount',
-                        style: TextStyle(
-                          fontSize: 25,
-                        ),
-                      ),
                       (click == 0)
-                          ? Icon(
-                              Icons.flash_on,
-                              color: Color(0xffe8b313),
-                              size: 22,
+                          ? Row(
+                              children: <Widget>[
+                                Text(
+                                  '${donationAmount.toInt()}',
+                                  style: TextStyle(
+                                    fontSize: 25,
+                                  ),
+                                ),
+                                Icon(
+                                  Icons.flash_on,
+                                  color: Color(0xffe8b313),
+                                  size: 22,
+                                ),
+                              ],
                             )
                           : Row(
                               children: <Widget>[
+                                Text(
+                                  '${(double.parse((donationAmount * conversion).toStringAsFixed(2)))}',
+                                  style: TextStyle(
+                                    fontSize: 25,
+                                  ),
+                                ),
                                 SizedBox(
                                   width: screenwidth * 0.02,
                                 ),
@@ -217,6 +231,29 @@ class _DonateDialogState extends State<DonateDialog> {
                         ),
                       ),
                     ],
+                  ),
+                ),
+              ),
+              SizedBox(height: screenheight * 0.02),
+              InkWell(
+                onTap: () => Navigator.of(context).pop(),
+                child: Container(
+                  height: 40,
+                  width: 150,
+                  decoration: BoxDecoration(
+                    color: widget.col,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(5),
+                    ),
+                  ),
+                  child: Center(
+                    child: Text(
+                      "DONATE",
+                      style: TextStyle(
+                        fontWeight: FontWeight.w800,
+                        fontSize: 16,
+                      ),
+                    ),
                   ),
                 ),
               ),
