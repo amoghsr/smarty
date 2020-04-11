@@ -178,7 +178,6 @@ class _LightControllerState extends State<LightController> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              //TODO :ADD db connection
               GestureDetector(
                   onTap: () {
                     setColor(Colors.green, widget.roomName, widget.devName,

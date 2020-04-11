@@ -34,7 +34,6 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
   );
 
   Widget build(BuildContext context) {
-    //Todo : this how you can access all house ids
     final x = Provider.of<List<String>>(context);
     final user = Provider.of<User>(context);
     if (user.type == "O") {

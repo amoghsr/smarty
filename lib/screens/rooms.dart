@@ -58,10 +58,10 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
     }
     initrmName = rlist[widget.initRoom].text;
     rmName = rlist[widget.initRoom].text;
-    currRoom = rlist[0].text;
-    currDevice = rooms[0].d[0];
-    initrmName = rlist[0].text;
-    rmName = rlist[0].text;
+    currRoom = rlist[widget.initRoom].text;
+    currDevice = rooms[widget.initRoom].d[0];
+    initrmName = rlist[widget.initRoom].text;
+    rmName = rlist[widget.initRoom].text;
     super.initState();
     final FirebaseDatabase database = FirebaseDatabase
         .instance; //Rather then just writing FirebaseDatabase(), get the instance.
@@ -176,7 +176,6 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
                   onTap: (value) {
                     setState(() {
                       rmName = rlist[value].text;
-                      initrmName = rlist[value].text;
                       currRoom = rlist[value].text;
                       currDevice = rooms[value].d[0];
                     });
@@ -270,7 +269,6 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
                     setState(() {
                       currRoom = rooms[l].roomName;
                       currDevice = rooms[l].d[i];
-                      initrmName = rooms[l].roomName;
                     });
                   },
                   leading: getIcons(rooms[l].d[i]),
