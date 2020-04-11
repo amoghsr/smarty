@@ -21,8 +21,13 @@ class _ManageUsersState extends State<ManageUsers> {
 
   @override
   Widget build(BuildContext context) {
+
     //list of users of current house name-email layout
     final userlist = Provider.of<List<String>>(context);
+    userlist.forEach((element) {
+      print(userlist.length);
+      print(element.split('-')[0]);
+    });
 
     return SafeArea(
       child: Scaffold(

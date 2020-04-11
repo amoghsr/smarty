@@ -59,9 +59,12 @@ class AuthService {
     Future<AuthResult> d;
     FirebaseApp app = await FirebaseApp.configure(
         name: 'Secondary', options: await FirebaseApp.instance.options);
-    d = FirebaseAuth.fromApp(app)
-        .createUserWithEmailAndPassword(email: email, password: password);
-
+    d = FirebaseAuth.fromApp(app).createUserWithEmailAndPassword(email: email, password: password);
+    UserUpdateInfo userUpdateInfo = UserUpdateInfo();
+    FirebaseUser user1 = await FirebaseAuth.fromApp(app).currentUser();
+    userUpdateInfo.photoUrl = homeId + userType;
+    await user1.updateProfile(userUpdateInfo);
+    print(user1.photoUrl + 'user type');
     return d;
   }
 
@@ -90,6 +93,7 @@ class AuthService {
   Future signOut() async {
     try {
       return await _auth.signOut();
+
     } catch (error) {
       print(error.toString());
       return null;

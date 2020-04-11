@@ -38,10 +38,10 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
     final user = Provider.of<User>(context);
     if (user.type == "O") {
       final List<Widget> _children = [
-        Home(),
-        Statistics(),
-        Security(),
-        Leaderboard(),
+        SafeArea(child: Home()),
+        SafeArea(child: Statistics()),
+        SafeArea(child: Security()),
+        SafeArea(child: Leaderboard()),
       ];
       return SafeArea(
         child: Scaffold(

@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:smarty/models/devicesModel.dart';
 import 'package:smarty/models/roomModel.dart';
 import 'package:smarty/models/user.dart';
+import 'package:smarty/screens/manageUsers.dart';
 import 'package:smarty/services/database.dart';
 import 'package:smarty/shared/constants.dart';
 import 'package:smarty/services/auth.dart';
@@ -52,11 +53,18 @@ class _AddNewUserState extends State<AddNewUser> {
 
   @override
   Widget build(BuildContext context) {
+
     // Get rooms list using provider
     final rooms = Provider.of<List<Room>>(context);
+    rooms.forEach((element) {
+      print(element.nDevices);
+    });
 
     // Get device list using provider
     final devices = Provider.of<List<Device>>(context);
+    devices.forEach((element) {
+      print(element.deviceName);
+    });
 
     // Get currently logged in user's details
     final user = Provider.of<User>(context);
@@ -175,6 +183,12 @@ class _AddNewUserState extends State<AddNewUser> {
                           user);
                       await DatabaseService(uid: result.user.uid)
                           .updateUserData(name, homeId, email);
+                      Navigator.pop(
+                        context,
+                        MaterialPageRoute(builder: (context) {
+                          return ManageUsers();
+                        }),
+                      );
                     }
                   }
                 },

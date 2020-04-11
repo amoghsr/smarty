@@ -131,71 +131,73 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     double screenwidth = MediaQuery.of(context).size.width;
     double screenheight = MediaQuery.of(context).size.height;
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Home',
-          style: kAppBarTextStyle,
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(
+            'Home',
+            style: kAppBarTextStyle,
+          ),
+          actions: <Widget>[MicClass()],
         ),
-        actions: <Widget>[MicClass()],
-      ),
 
-      // Drawer is the hamburger menu.
-      // Here starts the body of the Home Page, nested inside a SafeArea widget to keep content inside the viewport
-      drawer: DrawerPage(),
-      body: SafeArea(
-        child: ListView(
-          padding: EdgeInsets.symmetric(vertical: 20.0),
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.only(left: 20.0, right: 120.0, bottom: 3.0),
-              child: Opacity(
-                opacity: 0.6,
-                child: Text(
-                  '$formattedDate $formattedMonth $formattedYear',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w500,
+        // Drawer is the hamburger menu.
+        // Here starts the body of the Home Page, nested inside a SafeArea widget to keep content inside the viewport
+        drawer: DrawerPage(),
+        body: SafeArea(
+          child: ListView(
+            padding: EdgeInsets.symmetric(vertical: 20.0),
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.only(left: 20.0, right: 120.0, bottom: 3.0),
+                child: Opacity(
+                  opacity: 0.6,
+                  child: Text(
+                    '$formattedDate $formattedMonth $formattedYear',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                 ),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Text(
-                    'Welcome Home, Ben',
-                    //${widget.currentUser.email}`
-                    style: TextStyle(
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.w700,
-                        fontFamily: 'Poppins'),
-                  ),
-                  Text(
-                    '32°C',
-                    //${widget.currentUser.email}`
-                    style: TextStyle(
-                        fontSize: 24.0,
-                        fontWeight: FontWeight.w400,
-                        fontFamily: 'Poppins'),
-                  ),
-                ],
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text(
+                      'Welcome Home, Ben',
+                      //${widget.currentUser.email}`
+                      style: TextStyle(
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.w700,
+                          fontFamily: 'Poppins'),
+                    ),
+                    Text(
+                      '32°C',
+                      //${widget.currentUser.email}`
+                      style: TextStyle(
+                          fontSize: 24.0,
+                          fontWeight: FontWeight.w400,
+                          fontFamily: 'Poppins'),
+                    ),
+                  ],
+                ),
               ),
-            ),
 
-            SizedBox(
-              height: 20.0,
-            ),
-            // The routine carousel is a carousel which lists the routines in the house based on a routine model. (routineCarousel.dart)
-            RoutineCarousel(),
-            Divider(),
-            // The room carousel is a carousel which lists the rooms in the house based on a room model. (roomCarousel.dart)
-            RoomCarousel(),
-            Divider(),
-            // The device carousel is a carousel which lists the devices in the house based on a device model. (deviceCarousel.dart)
-            DeviceCarousel(),
-          ],
+              SizedBox(
+                height: 20.0,
+              ),
+              // The routine carousel is a carousel which lists the routines in the house based on a routine model. (routineCarousel.dart)
+              RoutineCarousel(),
+              Divider(),
+              // The room carousel is a carousel which lists the rooms in the house based on a room model. (roomCarousel.dart)
+              RoomCarousel(),
+              Divider(),
+              // The device carousel is a carousel which lists the devices in the house based on a device model. (deviceCarousel.dart)
+              DeviceCarousel(),
+            ],
+          ),
         ),
       ),
     );
