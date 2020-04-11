@@ -50,7 +50,6 @@ class _AddNewUserState extends State<AddNewUser> {
     });
   }
 
-  void onChanged(bool value) {}
   @override
   Widget build(BuildContext context) {
     // Get rooms list using provider
@@ -62,11 +61,11 @@ class _AddNewUserState extends State<AddNewUser> {
     // Get currently logged in user's details
     final user = Provider.of<User>(context);
 
-    //list of users of current house name-email layout
-    final userlist = Provider.of<List<String>>(context);
     // Use home owner's homeID and add it to the home user.
     homeId = user.houseId;
+
     List<String> selectedDevices = [];
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -119,18 +118,6 @@ class _AddNewUserState extends State<AddNewUser> {
                   setState(() => email = val);
                 },
               ),
-
-//              TextFormField(
-//                keyboardType: TextInputType.number,
-//                decoration: InputDecoration(
-//                  labelText: "Home ID",
-//                ),
-//                validator: (val) => val.isEmpty ? 'Enter Home ID' : null,
-//                onChanged: (val) {
-//                  setState(() => homeId = val);
-//                },
-//              ),
-
               TextFormField(
                 obscureText: true,
                 decoration: InputDecoration(
@@ -143,8 +130,8 @@ class _AddNewUserState extends State<AddNewUser> {
                 },
               ),
               CheckboxListTile(
-                subtitle: Text('Living room'),
                 title: Text('Light'),
+                subtitle: Text('Living room'),
                 value: _isChecked,
                 activeColor: Theme.of(context).accentColor,
                 onChanged: (bool value) {
@@ -186,7 +173,6 @@ class _AddNewUserState extends State<AddNewUser> {
                     } else {
                       addUser(result.user.uid, ["Bedroom-Lamp1", "Bedroom-AC"],
                           user);
-
                       await DatabaseService(uid: result.user.uid)
                           .updateUserData(name, homeId, email);
                     }

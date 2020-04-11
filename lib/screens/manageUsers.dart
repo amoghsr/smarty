@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:smarty/shared/constants.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'addNewUser.dart';
+import 'package:provider/provider.dart';
 
 class ManageUsers extends StatefulWidget {
   @override
@@ -19,6 +20,11 @@ class _ManageUsersState extends State<ManageUsers> {
 
   @override
   Widget build(BuildContext context) {
+
+    //list of users of current house name-email layout
+    final userlist = Provider.of<List<String>>(context);
+    print (userlist);
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
