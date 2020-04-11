@@ -19,7 +19,6 @@ class Room {
     this.d,
   });
 
-
   factory Room.fromFirestore(DocumentSnapshot doc) {
     Map data = doc.data;
     var room = Room(
