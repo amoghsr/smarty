@@ -13,21 +13,16 @@ class ManageUsers extends StatefulWidget {
 }
 
 class _ManageUsersState extends State<ManageUsers> {
-
   @override
   void initState() {
     super.initState();
   }
 
+
   @override
   Widget build(BuildContext context) {
-
     //list of users of current house name-email layout
     final userlist = Provider.of<List<String>>(context);
-    userlist.forEach((element) {
-      print(userlist.length);
-      print(element.split('-')[0]);
-    });
 
     return SafeArea(
       child: Scaffold(
@@ -65,26 +60,35 @@ class _ManageUsersState extends State<ManageUsers> {
                     style: Theme.of(context).textTheme.headline6,
                   ),
                 ),
-                ListView.builder(
+                ListView.separated(
+                  separatorBuilder: (context, index) {
+                    return Divider();
+                  },
                   shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
                   itemCount: userlist.length,
                   itemBuilder: (context, index) {
-                    return Card(
-                      child: ListTile(
-                        leading: CircleAvatar(),
-                        title: Text(
-                          userlist[index].split('-')[0],
+                    return ListTile(
+                      leading: CircleAvatar(
+                        backgroundColor:
+                            Theme.of(context).scaffoldBackgroundColor,
+                        child: Text(
+                          '$index',
+                          style: Theme.of(context).textTheme.headline6,
                         ),
-                        subtitle: Text(userlist[index].split('-')[1]),
-                        trailing: InkWell(
-                          // TODO: IMPLEMENT DELETE USER
-                          onTap: (){
-                            print('pressed list item $index');
-                          },
-                          child: Icon(
-                            Icons.delete,
-                            color: Colors.redAccent,
-                          ),
+                      ),
+                      title: Text(
+                        userlist[index].split('-')[0],
+                      ),
+                      subtitle: Text(userlist[index].split('-')[1]),
+                      trailing: InkWell(
+                        // TODO: IMPLEMENT DELETE USER
+                        onTap: () {
+                          print('pressed list item $index');
+                        },
+                        child: Icon(
+                          Icons.delete,
+                          color: Colors.redAccent,
                         ),
                       ),
                     );
