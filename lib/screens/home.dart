@@ -17,8 +17,6 @@ import 'package:smarty/shared/constants.dart';
 import 'package:smarty/widgets/devicesCarousel.dart';
 import 'package:smarty/widgets/roomCarousel.dart';
 import 'package:smarty/widgets/routineCarousel.dart';
-import 'package:speech_recognition/speech_recognition.dart';
-import '../alertBox.dart';
 import 'package:smarty/widgets/voiceAgent.dart';
 
 class Home extends StatefulWidget {

@@ -22,7 +22,9 @@ class Loading extends StatelessWidget {
                   fontSize: 20,
                 ),
               ),
-              SizedBox(height: 4,),
+              SizedBox(
+                height: 4,
+              ),
               Opacity(
                 opacity: 0.5,
                 child: Text(

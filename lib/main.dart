@@ -3,8 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:smarty/models/themeModel.dart';
 import 'package:smarty/models/user.dart';
 import 'package:smarty/services/auth.dart';
-import 'package:smarty/wrapper.dart';
 import 'package:smarty/services/service_locator.dart';
+import 'package:smarty/wrapper.dart';
 
 void main() {
   setupLocator();

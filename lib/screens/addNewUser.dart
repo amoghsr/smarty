@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -5,11 +6,9 @@ import 'package:smarty/models/devicesModel.dart';
 import 'package:smarty/models/roomModel.dart';
 import 'package:smarty/models/user.dart';
 import 'package:smarty/screens/manageUsers.dart';
+import 'package:smarty/services/auth.dart';
 import 'package:smarty/services/database.dart';
 import 'package:smarty/shared/constants.dart';
-import 'package:smarty/services/auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_database/firebase_database.dart';
 
 class AddNewUser extends StatefulWidget {
   @override
@@ -29,6 +28,7 @@ class _AddNewUserState extends State<AddNewUser> {
   String homeId = '';
 
   bool _isChecked = false;
+
   addUser(String uid, List<String> x, User user) {
 //    Firestore.instance
 //        .collection('Homes')
@@ -53,7 +53,6 @@ class _AddNewUserState extends State<AddNewUser> {
 
   @override
   Widget build(BuildContext context) {
-
     // Get rooms list using provider
     final rooms = Provider.of<List<Room>>(context);
     rooms.forEach((element) {
@@ -68,7 +67,6 @@ class _AddNewUserState extends State<AddNewUser> {
 
     // Get currently logged in user's details
     final user = Provider.of<User>(context);
-
     // Use home owner's homeID and add it to the home user.
     homeId = user.houseId;
 
@@ -81,127 +79,148 @@ class _AddNewUserState extends State<AddNewUser> {
           style: kAppBarTextStyle,
         ),
       ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 30.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                'Add a new user to your home',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 30,
-                  fontFamily: 'Montserrat',
-                  fontWeight: FontWeight.w600,
-                  height: 1.1,
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              SizedBox(
-                height: 30.0,
-              ),
-              TextFormField(
-                keyboardType: TextInputType.text,
-                decoration: InputDecoration(
-                  labelText: 'Name',
-                ),
-                validator: (val) =>
-                    val.isEmpty ? 'Enter the home user name' : null,
-                onChanged: (val) {
-                  setState(() => name = val);
-                },
-              ),
-              TextFormField(
-                keyboardType: TextInputType.emailAddress,
-                decoration: InputDecoration(
-                  labelText: "Email Address",
-                ),
-                validator: (val) =>
-                    val.isEmpty ? 'Enter the home user email' : null,
-                onChanged: (val) {
-                  setState(() => email = val);
-                },
-              ),
-              TextFormField(
-                obscureText: true,
-                decoration: InputDecoration(
-                  labelText: "Password",
-                ),
-                validator: (val) =>
-                    val.length < 6 ? 'Enter a password 6+ char long' : null,
-                onChanged: (val) {
-                  setState(() => password = val);
-                },
-              ),
-              CheckboxListTile(
-                title: Text('Light'),
-                subtitle: Text('Living room'),
-                value: _isChecked,
-                activeColor: Theme.of(context).accentColor,
-                onChanged: (bool value) {
-                  setState(() {
-                    _isChecked = value;
-                    print('Changed state to: $_isChecked');
-                  });
-                  if (value) {
-                    selectedDevices.add(value.toString());
-                  }
-                },
-              ),
-              SizedBox(
-                height: 40.0,
-              ),
-              RaisedButton(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 80,
-                  vertical: 20,
-                ),
-                color: Theme.of(context).accentColor,
-                child: Text(
-                  'Add user',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).primaryColor,
+      body: Center(
+        child: SingleChildScrollView(
+          child: Form(
+            key: _formKey,
+            child: Padding(
+              padding: const EdgeInsets.all(30.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text('Add a new user to your home',
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.headline5),
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 10.0),
+                    child: Text(
+                        'Provide some basic details about the home member',
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.subtitle1),
                   ),
-                ),
-                onPressed: () async {
-                  if (_formKey.currentState.validate()) {
-                    setState(() => loading = true);
-                    AuthResult result = await _auth.register(
-                        email, password, name, homeId, "-U");
-                    if (result == null) {
-                      setState(() {
-                        loading = false;
-                        error = 'Please supply a valid email';
-                      });
-                    } else {
-                      addUser(result.user.uid, ["Bedroom-Lamp1", "Bedroom-AC"],
-                          user);
-                      await DatabaseService(uid: result.user.uid)
-                          .updateUserData(name, homeId, email);
-                      Navigator.pop(
-                        context,
-                        MaterialPageRoute(builder: (context) {
-                          return ManageUsers();
-                        }),
-                      );
-                    }
-                  }
-                },
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
+                  SizedBox(
+                    height: 30.0,
+                  ),
+                  TextFormField(
+                    keyboardType: TextInputType.text,
+                    decoration: InputDecoration(
+                      labelText: 'Members name',
+                    ),
+                    validator: (val) =>
+                        val.isEmpty ? 'Enter the home user name' : null,
+                    onChanged: (val) {
+                      setState(() => name = val);
+                    },
+                  ),
+                  TextFormField(
+                    keyboardType: TextInputType.emailAddress,
+                    decoration: InputDecoration(
+                      labelText: "Their email address",
+                    ),
+                    validator: (val) =>
+                        val.isEmpty ? 'Enter the home user email' : null,
+                    onChanged: (val) {
+                      setState(() => email = val);
+                    },
+                  ),
+                  TextFormField(
+                    obscureText: true,
+                    decoration: InputDecoration(
+                      labelText: "Password",
+                    ),
+                    validator: (val) =>
+                        val.length < 6 ? 'Enter a password 6+ char long' : null,
+                    onChanged: (val) {
+                      setState(() => password = val);
+                    },
+                  ),
+//                  ListView.separated(
+//                    separatorBuilder: (context, index) {
+//                      return Divider();
+//                    },
+//                    shrinkWrap: true,
+//                    physics: NeverScrollableScrollPhysics(),
+//                    itemCount: rooms.length,
+//                    itemBuilder: (context, index) {
+//                      return Card(
+//                        child: ExpansionTile(
+//                          title: Text(rooms[index].roomName),
+//                          backgroundColor: Theme.of(context).cardColor,
+//                          children: <Widget>[
+//                            CheckboxListTile(
+//                              title: Text('Light'),
+//                              subtitle: Text('Living room'),
+//                              value: _isChecked,
+//                              activeColor: Theme.of(context).accentColor,
+//                              onChanged: (bool value) {
+//                                setState(() {
+//                                  _isChecked = value;
+//                                  print('Changed state to: $_isChecked');
+//                                });
+//                                if (value) {
+//                                  selectedDevices.add(value.toString());
+//                                }
+//                              },
+//                            ),
+//                          ],
+//                        ),
+//                      );
+//                    },
+//                  ),
+
+                  SizedBox(
+                    height: 40.0,
+                  ),
+
+                  RaisedButton(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 80,
+                      vertical: 20,
+                    ),
+                    color: Theme.of(context).accentColor,
+                    child: Text(
+                      'Add user',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                    ),
+                    onPressed: () async {
+                      if (_formKey.currentState.validate()) {
+                        setState(() => loading = true);
+                        AuthResult result = await _auth.register(
+                            email, password, name, homeId, "-U");
+                        if (result == null) {
+                          setState(() {
+                            loading = false;
+                            error = 'Please supply a valid email';
+                          });
+                        } else {
+                          addUser(result.user.uid,
+                              ["Bedroom-Lamp1", "Bedroom-AC"], user);
+                          await DatabaseService(uid: result.user.uid)
+                              .updateUserData(name, homeId, email);
+                          Navigator.pop(
+                            context,
+                            MaterialPageRoute(builder: (context) {
+                              return ManageUsers();
+                            }),
+                          );
+                        }
+                      }
+                    },
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                  ),
+                  SizedBox(height: 12.0),
+                  Text(
+                    error,
+                    style: TextStyle(color: Colors.red, fontSize: 14.0),
+                  ),
+                ],
               ),
-              SizedBox(height: 12.0),
-              Text(
-                error,
-                style: TextStyle(color: Colors.red, fontSize: 14.0),
-              ),
-            ],
+            ),
           ),
         ),
       ),
