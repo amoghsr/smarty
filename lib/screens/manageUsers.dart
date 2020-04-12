@@ -23,6 +23,7 @@ class _ManageUsersState extends State<ManageUsers> {
   Widget build(BuildContext context) {
     //list of users of current house name-email layout
     final userlist = Provider.of<List<String>>(context);
+    String size = userlist.length.toString();
 
     return SafeArea(
       child: Scaffold(
@@ -34,30 +35,40 @@ class _ManageUsersState extends State<ManageUsers> {
         ),
         body: SafeArea(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 20),
+            padding: EdgeInsets.symmetric(horizontal: 10.0),
             child: ListView(
               children: <Widget>[
                 Container(
-                  child: Card(
-                    child: ListTile(
-                      title: Text('Add user'),
-                      subtitle: Text('Add a new user to your home'),
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 20.0),
+                    child: Card(
+                      color: Theme.of(context).primaryColor,
+                      child: ListTile(
+                        title: Text('Add user'),
+                        subtitle: Text('Set up a new user to your home'),
 //                    leading: Icon(Icons.add),
-                      trailing: Icon(FontAwesome.user_plus),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => AddNewUser()),
-                        );
-                      },
+                        trailing: Icon(FontAwesome.user_plus),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => AddNewUser()),
+                          );
+                        },
+                      ),
                     ),
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 4.0, vertical: 20),
+                  padding: EdgeInsets.only(left: 4.0, right: 4.0, top: 20.0),
                   child: Text(
                     'Users in your home',
                     style: Theme.of(context).textTheme.headline6,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(left: 4.0, right: 4.0, bottom: 20.0, top: 4.0),
+                  child: Text(
+                    'Currently $size users are present'
                   ),
                 ),
                 ListView.separated(
@@ -87,7 +98,7 @@ class _ManageUsersState extends State<ManageUsers> {
                           print('pressed list item $index');
                         },
                         child: Icon(
-                          Icons.delete,
+                          Icons.clear,
                           color: Colors.redAccent,
                         ),
                       ),
