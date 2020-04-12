@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:smarty/models/user.dart';
 import 'package:smarty/services/database.dart';
-import 'package:firebase_core/firebase_core.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -59,7 +59,8 @@ class AuthService {
     Future<AuthResult> d;
     FirebaseApp app = await FirebaseApp.configure(
         name: 'Secondary', options: await FirebaseApp.instance.options);
-    d = FirebaseAuth.fromApp(app).createUserWithEmailAndPassword(email: email, password: password);
+    d = FirebaseAuth.fromApp(app)
+        .createUserWithEmailAndPassword(email: email, password: password);
     UserUpdateInfo userUpdateInfo = UserUpdateInfo();
     FirebaseUser user1 = await FirebaseAuth.fromApp(app).currentUser();
     userUpdateInfo.photoUrl = homeId + userType;
@@ -93,7 +94,6 @@ class AuthService {
   Future signOut() async {
     try {
       return await _auth.signOut();
-
     } catch (error) {
       print(error.toString());
       return null;

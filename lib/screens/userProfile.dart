@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:smarty/shared/constants.dart';
 import 'package:provider/provider.dart';
+import 'package:smarty/shared/constants.dart';
 
 class UserProfile extends StatefulWidget {
   @override
@@ -8,8 +8,6 @@ class UserProfile extends StatefulWidget {
 }
 
 class _UserProfileState extends State<UserProfile> {
-
-
   @override
   void initState() {
     super.initState();
@@ -17,7 +15,6 @@ class _UserProfileState extends State<UserProfile> {
 
   @override
   Widget build(BuildContext context) {
-
     //list of users of current house name-email layout
     final userlist = Provider.of<List<String>>(context);
 
@@ -29,7 +26,6 @@ class _UserProfileState extends State<UserProfile> {
             style: kAppBarTextStyle,
           ),
         ),
-
         body: SafeArea(
           child: ListView(
             padding: EdgeInsets.symmetric(vertical: 20.0),

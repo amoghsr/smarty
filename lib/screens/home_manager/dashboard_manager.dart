@@ -61,11 +61,13 @@ class _DashboardManagerState extends State<DashboardManager> {
                         onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => RegisterHomeOwner()),
+                            MaterialPageRoute(
+                                builder: (context) => RegisterHomeOwner()),
                           );
                         },
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 44.0),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 24.0, vertical: 44.0),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[

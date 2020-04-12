@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -5,11 +6,9 @@ import 'package:smarty/models/devicesModel.dart';
 import 'package:smarty/models/roomModel.dart';
 import 'package:smarty/models/user.dart';
 import 'package:smarty/screens/manageUsers.dart';
+import 'package:smarty/services/auth.dart';
 import 'package:smarty/services/database.dart';
 import 'package:smarty/shared/constants.dart';
-import 'package:smarty/services/auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_database/firebase_database.dart';
 
 class AddNewUser extends StatefulWidget {
   @override
@@ -29,6 +28,7 @@ class _AddNewUserState extends State<AddNewUser> {
   String homeId = '';
 
   bool _isChecked = false;
+
   addUser(String uid, List<String> x, User user) {
 //    Firestore.instance
 //        .collection('Homes')
@@ -88,18 +88,15 @@ class _AddNewUserState extends State<AddNewUser> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Text(
-                    'Add a new user to your home',
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.headline5
-                  ),
+                  Text('Add a new user to your home',
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.headline5),
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 10.0),
                     child: Text(
                         'Provide some basic details about the home member',
                         textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.subtitle1
-                    ),
+                        style: Theme.of(context).textTheme.subtitle1),
                   ),
                   SizedBox(
                     height: 30.0,

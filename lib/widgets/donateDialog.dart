@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:line_awesome_icons/line_awesome_icons.dart';
-import 'package:line_icons/line_icons.dart';
 import 'package:smarty/alertBox.dart';
 import 'package:smarty/shared/constants.dart';
 
@@ -31,6 +29,7 @@ class _DonateDialogState extends State<DonateDialog> {
   double donationAmount = 5;
   double conversion = 0.23;
   double capacity = 48;
+
   // double conversion = 0.23;
   Widget build(BuildContext context) {
     // Returning a dialog box. Here we are specifying the properties of the dialog box.
@@ -254,7 +253,9 @@ class _DonateDialogState extends State<DonateDialog> {
                           child: TransactionDialog().transactionDialog(
                               context,
                               1,
-                              (widget.type == 0) ? "You are purchasing" : "You are donating",
+                              (widget.type == 0)
+                                  ? "You are purchasing"
+                                  : "You are donating",
                               (click == 0)
                                   ? "${donationAmount.toInt()} kWh for ${donationAmount.toInt()} "
                                   : "${donationAmount.toInt()} kWh for ${(double.parse((donationAmount * conversion).toStringAsFixed(2)))}",
@@ -334,7 +335,6 @@ class TransactionDialog extends StatelessWidget {
       this.bal,
       this.donationAmount});
 
-  
   Widget build(BuildContext context) {
     int type = 1;
     return transactionDialog(context, type, title1, title2, description, col,
