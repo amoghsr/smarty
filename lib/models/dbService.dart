@@ -63,7 +63,12 @@ class DatabaseService1 {
     return x;
   }
 
-  Stream<DocumentSnapshot> getUserDetails(String uid) {
-    return _db.collection("UserData").document(uid).get().asStream();
+  Stream<DocumentSnapshot> getUserDetails(String uid, User user) {
+    return Firestore.instance
+        .collection("UserData")
+        .document("house")
+        .collection(user.houseId)
+        .document(user.uid)
+        .snapshots();
   }
 }

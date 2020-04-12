@@ -208,7 +208,7 @@ class _SpeakerControllerState extends State<SpeakerController>
                           "/")
                       .onValue,
                   builder: (context, snap) {
-                    print(widget.roomName + "help help");
+//                    print(widget.roomName + "help help");
                     if (snap.data == null)
                       return Slider(
                         value: 0.0,

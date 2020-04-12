@@ -16,13 +16,6 @@ class MyNavigationBar extends StatefulWidget {
 class _MyNavigationBarState extends State<MyNavigationBar> {
   int _currentIndex = 0;
 
-  final List<Widget> _children = [
-    Home(),
-    Statistics(),
-    Security(),
-    Leaderboard(),
-  ];
-
   void onTappedBar(int index) {
     setState(() {
       _currentIndex = index;

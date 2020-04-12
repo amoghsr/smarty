@@ -1,16 +1,17 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:smarty/authenticate/authenticate.dart';
-import 'package:smarty/models/dbService.dart';
 import 'package:smarty/models/themeModel.dart';
-import 'package:smarty/models/user.dart';
 import 'package:smarty/screens/home_manager/navigation_manager.dart';
 import 'package:smarty/screens/manageUsers.dart';
-import 'package:smarty/screens/userProfile.dart';
 import 'package:smarty/services/auth.dart';
+import 'package:smarty/wrapper.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_icons/flutter_icons.dart';
+import 'package:smarty/models/user.dart';
+import 'package:smarty/models/dbService.dart';
 
 class DrawerPage extends StatefulWidget {
   @override
@@ -38,7 +39,7 @@ class _DrawerPageState extends State<DrawerPage> {
     () {
       user = Provider.of<User>(context, listen: false);
       while (user == null) {}
-      stream = DatabaseService1().getUserDetails(user.uid);
+      stream = DatabaseService1().getUserDetails(user.uid, user);
     }();
   }
 
@@ -100,16 +101,10 @@ class _DrawerPageState extends State<DrawerPage> {
                 },
               ),
               ListTile(
-                leading: Icon(Icons.account_circle),
+                leading: Icon(Icons.settings),
                 title: Text(
-                  'User Profile',
+                  'Account Settings',
                 ),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => UserProfile()),
-                  );
-                },
               ),
               ListTile(
                 leading: Icon(Icons.lock),
@@ -282,6 +277,12 @@ class _DrawerPageState extends State<DrawerPage> {
               ListTile(
                 onTap: () async {
                   await _auth.signOut();
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (BuildContext context) {
+                      return Authenticate();
+                    }),
+                  );
                 },
                 leading: Icon(Icons.exit_to_app),
                 title: Text(

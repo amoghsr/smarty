@@ -93,7 +93,7 @@ class _ManageUsersState extends State<ManageUsers> {
                       trailing: InkWell(
                         // TODO: IMPLEMENT DELETE USER
                         onTap: () {
-                          print('pressed list item $index');
+//                          print('pressed list item $index');
                         },
                         child: Icon(
                           Icons.clear,

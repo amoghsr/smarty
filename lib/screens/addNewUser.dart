@@ -29,26 +29,26 @@ class _AddNewUserState extends State<AddNewUser> {
 
   bool _isChecked = false;
 
-  addUser(String uid, List<String> x, User user) {
-//    Firestore.instance
-//        .collection('Homes')
-//        .document(user.houseId)
-//        .collection(user.uid)
-//        .document(room)
-//        .updateData({device: FieldValue.increment(1)}).catchError((e) {
-//      print(e);
-//    });
+  addUser(List<String> x, String houseId, String email) {
     x.forEach((element) {
       String x = element;
       String y = x.split("-")[0]; // room
       String w = x.split("-")[1]; // device
       Firestore.instance
-          .collection('Homes')
-          .document(user.houseId)
-          .collection(uid)
+          .collection('waitingHomes')
+          .document(email)
+          .collection("layout")
           .document(y)
           .setData({w: 0}, merge: true);
     });
+    Firestore.instance
+        .collection('waitingUsers')
+        .document(email)
+        .setData({"houseId": houseId}, merge: true);
+    Firestore.instance
+        .collection('waitingUsers')
+        .document(email)
+        .setData({"userType": "U"}, merge: true);
   }
 
   @override
@@ -61,9 +61,9 @@ class _AddNewUserState extends State<AddNewUser> {
 
     // Get device list using provider
     final devices = Provider.of<List<Device>>(context);
-    devices.forEach((element) {
-      print(element.deviceName);
-    });
+//    devices.forEach((element) {
+//      print(element.deviceName);
+//    });
 
     // Get currently logged in user's details
     final user = Provider.of<User>(context);
@@ -188,25 +188,14 @@ class _AddNewUserState extends State<AddNewUser> {
                     onPressed: () async {
                       if (_formKey.currentState.validate()) {
                         setState(() => loading = true);
-                        AuthResult result = await _auth.register(
-                            email, password, name, homeId, "-U");
-                        if (result == null) {
-                          setState(() {
-                            loading = false;
-                            error = 'Please supply a valid email';
-                          });
-                        } else {
-                          addUser(result.user.uid,
-                              ["Bedroom-Lamp1", "Bedroom-AC"], user);
-                          await DatabaseService(uid: result.user.uid)
-                              .updateUserData(name, homeId, email);
-                          Navigator.pop(
-                            context,
-                            MaterialPageRoute(builder: (context) {
-                              return ManageUsers();
-                            }),
-                          );
-                        }
+                        addUser(["Bedroom-Lamp", "Bedroom-Speaker"],
+                            user.houseId, email);
+                        Navigator.pop(
+                          context,
+                          MaterialPageRoute(builder: (context) {
+                            return ManageUsers();
+                          }),
+                        );
                       }
                     },
                     shape: RoundedRectangleBorder(
