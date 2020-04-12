@@ -6,13 +6,15 @@ import 'package:smarty/alertBox.dart';
 import 'package:smarty/shared/constants.dart';
 
 class DonateDialog extends StatefulWidget {
-  // Init various values needed by the popup
+  // Init various values needed by the popup'
+  final int type;
   final String title, description, buttonText;
   final String image;
   final Color col;
   final double balance;
 
   DonateDialog({
+    @required this.type,
     @required this.title,
     @required this.description,
     @required this.buttonText,
@@ -251,7 +253,8 @@ class _DonateDialogState extends State<DonateDialog> {
                           backgroundColor: Colors.transparent,
                           child: TransactionDialog().transactionDialog(
                               context,
-                              "You are purchasing",
+                              1,
+                              (widget.type == 0) ? "You are purchasing" : "You are donating",
                               (click == 0)
                                   ? "${donationAmount.toInt()} kWh for ${donationAmount.toInt()} "
                                   : "${donationAmount.toInt()} kWh for ${(double.parse((donationAmount * conversion).toStringAsFixed(2)))}",
@@ -259,7 +262,8 @@ class _DonateDialogState extends State<DonateDialog> {
                               widget.col,
                               click,
                               widget.balance,
-                              donationAmount), // The required child is the content inside the dialog box.
+                              donationAmount,
+                              0), // The required child is the content inside the dialog box.
                         );
                       },
                     ),
@@ -311,6 +315,7 @@ class _DonateDialogState extends State<DonateDialog> {
 
 class TransactionDialog extends StatelessWidget {
   @override
+  final int type;
   final String title1;
   final String title2;
   final String description;
@@ -320,28 +325,33 @@ class TransactionDialog extends StatelessWidget {
   final double donationAmount;
 
   TransactionDialog(
-      {this.title1,
+      {this.type,
+      this.title1,
       this.title2,
       this.description,
       this.col,
       this.click,
       this.bal,
       this.donationAmount});
+
+  
   Widget build(BuildContext context) {
-    return transactionDialog(
-        context, title1, title2, description, col, click, bal, donationAmount);
+    int type = 1;
+    return transactionDialog(context, type, title1, title2, description, col,
+        click, bal, donationAmount, 0);
   }
 
-  int choice = 0;
   transactionDialog(
       BuildContext context,
+      int type,
       String title1,
       String title2,
       String description,
       Color col,
       int click,
       double bal,
-      double donationAmount) {
+      double donationAmount,
+      int c) {
     return Stack(
       children: <Widget>[
         //...bottom card part,
@@ -442,7 +452,7 @@ class TransactionDialog extends StatelessWidget {
                                 showDialog(
                                     context: context,
                                     builder: (context) {
-                                      return completedTransactionDialog();
+                                      return completedTransactionDialog(type);
                                     });
                               },
                               child: Container(
@@ -464,6 +474,7 @@ class TransactionDialog extends StatelessWidget {
                                 Navigator.pop(context);
                                 if (bal < donationAmount) {
                                   print("Bal: $bal, Donation: $donationAmount");
+
                                   showDialog(
                                     context: context,
                                     builder: (BuildContext context) =>
@@ -479,21 +490,36 @@ class TransactionDialog extends StatelessWidget {
                                           backgroundColor: Colors.transparent,
                                           child: transactionDialog2(
                                               context,
+                                              type,
                                               "You do not have",
                                               "sufficient ",
                                               "Would you like to pay the excess (${(double.parse(((donationAmount - bal) * 0.23).toStringAsFixed(2)))} AED)",
                                               col,
-                                              choice,
-                                              bal),
+                                              click,
+                                              bal,
+                                              donationAmount,
+                                              1),
                                         );
                                       },
                                     ),
                                   );
                                 } else {
+                                  if (c != 1) {
+                                    showDialog(
+                                        context: context,
+                                        builder: (context) {
+                                          return completedTransactionDialog(
+                                              type);
+                                        });
+                                  }
+                                }
+                                print(c);
+                                if (c == 1) {
+                                  Navigator.pop(context);
                                   showDialog(
                                       context: context,
                                       builder: (context) {
-                                        return completedTransactionDialog();
+                                        return completedTransactionDialog(type);
                                       });
                                 }
                               },
@@ -539,14 +565,23 @@ class TransactionDialog extends StatelessWidget {
     );
   }
 
-  transactionDialog2(BuildContext context, String title1, String title2,
-      String description, Color col, int click, double bal) {
-    print(title1);
-    return transactionDialog(
-        context, title1, title2, description, col, click, bal, donationAmount);
+  transactionDialog2(
+      BuildContext context,
+      int type,
+      String title1,
+      String title2,
+      String description,
+      Color col,
+      int click,
+      double bal,
+      double donationAmount,
+      int choice) {
+    choice = 1;
+    return transactionDialog(context, type, title1, title2, description, col,
+        click, bal, donationAmount, choice);
   }
 
-  completedTransactionDialog() {
+  completedTransactionDialog(int type) {
     return StatefulBuilder(builder: (context, setState) {
       return AlertDialog(
         title: Column(
@@ -568,7 +603,7 @@ class TransactionDialog extends StatelessWidget {
               ),
               child: Center(
                 child: Text(
-                  "PURCHASE SUCCESSFUL!",
+                  (type == 0) ? "PURCHASE SUCCESSFUL!" : "DONATION SUCCESSFUL!",
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 24.0, color: Colors.green),
                 ),

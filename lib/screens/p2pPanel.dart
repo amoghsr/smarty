@@ -440,13 +440,17 @@ class _P2PState extends State<P2P> {
                             backgroundColor: Colors.transparent,
                             child: TransactionDialog().transactionDialog(
                                 context,
+                                0,
                                 "You are buying",
                                 (click == 0)
                                     ? "$electricityAmount kWh for $electricityAmount "
                                     : "$electricityAmount kWh for ${(double.parse((electricityAmount * conversion).toStringAsFixed(2)))}",
                                 "Would you like to proceed?",
                                 Colors.green,
-                                click, bal, electricityAmount), // The required child is the content inside the dialog box.
+                                click,
+                                bal,
+                                electricityAmount,
+                                0), // The required child is the content inside the dialog box.
                           );
                         },
                       ),
@@ -468,13 +472,17 @@ class _P2PState extends State<P2P> {
                               backgroundColor: Colors.transparent,
                               child: TransactionDialog().transactionDialog(
                                   context,
+                                  0,
                                   "You are purchasing",
                                   (click == 0)
-                                      ? "$electricityAmount kWh for $electricityAmount "
-                                      : "$electricityAmount kWh for ${(double.parse((electricityAmount * conversion).toStringAsFixed(2)))}",
+                                      ? "${electricityAmount.toInt()} kWh for ${electricityAmount.toInt()} "
+                                      : "${electricityAmount.toInt()} kWh for ${(double.parse((electricityAmount * conversion).toStringAsFixed(2)))}",
                                   "Would you like to proceed?",
                                   Colors.green,
-                                  click, bal, electricityAmount), // The required child is the content inside the dialog box.
+                                  click,
+                                  bal,
+                                  electricityAmount,
+                                  0), // The required child is the content inside the dialog box.
                             );
                           },
                         ),
