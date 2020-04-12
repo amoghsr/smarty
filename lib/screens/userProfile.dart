@@ -40,7 +40,6 @@ class _UserProfileState extends State<UserProfile> {
                 ),
                 child: SizedBox(),
               ),
-              // Home Owner Container
               Container(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
