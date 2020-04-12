@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:smarty/alertBox.dart';
 import 'package:smarty/shared/constants.dart';
 import 'package:smarty/widgets/donateDialog.dart';
 import 'dart:math';
@@ -13,6 +14,7 @@ class _P2PState extends State<P2P> {
   @override
   double electricityAmount = 5;
   double bal = 25;
+  double capacity = 48;
   int click = 0;
   double conversion = 0.23;
   Widget build(BuildContext context) {
@@ -291,7 +293,7 @@ class _P2PState extends State<P2P> {
                     ),
                     InkWell(
                       onTap: () => setState(() {
-                        if (electricityAmount < bal)
+                        if (electricityAmount < capacity)
                           electricityAmount = electricityAmount + 1;
                       }),
                       child: Icon(Icons.add, size: 30, color: Colors.white54),
@@ -345,11 +347,7 @@ class _P2PState extends State<P2P> {
                               SizedBox(
                                 width: screenwidth * 0.02,
                               ),
-                              Icon(
-                                FontAwesomeIcons.moneyBillWave,
-                                color: Colors.green,
-                                size: 22,
-                              ),
+                              Text('AED')
                             ],
                           ),
                   ],
@@ -426,12 +424,78 @@ class _P2PState extends State<P2P> {
                     Radius.circular(5),
                   ),
                 ),
-                child: Center(
-                  child: Text(
-                    "BUY",
-                    style: TextStyle(
-                      fontWeight: FontWeight.w800,
-                      fontSize: 16,
+                child: InkWell(
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) => StreamBuilder(
+                        builder: (context, snap) {
+                          return Dialog(
+                            shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.circular(Consts.padding),
+                            ),
+                            elevation: 0.0,
+                            // Elevation means the height of element on the screen from the floor. Basically gives a drop shadow.
+                            backgroundColor: Colors.transparent,
+                            child: TransactionDialog().transactionDialog(
+                                context,
+                                0,
+                                "You are buying",
+                                (click == 0)
+                                    ? "$electricityAmount kWh for $electricityAmount "
+                                    : "$electricityAmount kWh for ${(double.parse((electricityAmount * conversion).toStringAsFixed(2)))}",
+                                "Would you like to proceed?",
+                                Colors.green,
+                                click,
+                                bal,
+                                electricityAmount,
+                                0), // The required child is the content inside the dialog box.
+                          );
+                        },
+                      ),
+                    );
+                  },
+                  child: InkWell(
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) => StreamBuilder(
+                          builder: (context, snap) {
+                            return Dialog(
+                              shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.circular(Consts.padding),
+                              ),
+                              elevation: 0.0,
+                              // Elevation means the height of element on the screen from the floor. Basically gives a drop shadow.
+                              backgroundColor: Colors.transparent,
+                              child: TransactionDialog().transactionDialog(
+                                  context,
+                                  0,
+                                  "You are purchasing",
+                                  (click == 0)
+                                      ? "${electricityAmount.toInt()} kWh for ${electricityAmount.toInt()} "
+                                      : "${electricityAmount.toInt()} kWh for ${(double.parse((electricityAmount * conversion).toStringAsFixed(2)))}",
+                                  "Would you like to proceed?",
+                                  Colors.green,
+                                  click,
+                                  bal,
+                                  electricityAmount,
+                                  0), // The required child is the content inside the dialog box.
+                            );
+                          },
+                        ),
+                      );
+                    },
+                    child: Center(
+                      child: Text(
+                        "BUY",
+                        style: TextStyle(
+                          fontWeight: FontWeight.w800,
+                          fontSize: 18,
+                        ),
+                      ),
                     ),
                   ),
                 ),
