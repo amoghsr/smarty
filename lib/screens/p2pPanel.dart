@@ -34,7 +34,7 @@ class _P2PState extends State<P2P> {
         Color(0xff14B7F7)
       ],
       [
-        "Make a Wish",
+        "Make a Wisheer",
         "assets/images/teddy.png",
         "assets/images/bear.png",
         Color(0xffDFA0A0)
