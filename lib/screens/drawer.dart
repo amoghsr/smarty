@@ -5,6 +5,7 @@ import 'package:smarty/authenticate/authenticate.dart';
 import 'package:smarty/models/themeModel.dart';
 import 'package:smarty/screens/home_manager/navigation_manager.dart';
 import 'package:smarty/screens/manageUsers.dart';
+import 'package:smarty/screens/userProfile.dart';
 import 'package:smarty/services/auth.dart';
 import 'package:smarty/wrapper.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -100,10 +101,17 @@ class _DrawerPageState extends State<DrawerPage> {
                 },
               ),
               ListTile(
-                leading: Icon(Icons.settings),
+                leading: Icon(Icons.account_circle),
                 title: Text(
-                  'Account Settings',
+                  'User Profile',
                 ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => UserProfile()),
+                  );
+                },
               ),
               ListTile(
                 leading: Icon(Icons.lock),
