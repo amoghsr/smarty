@@ -66,6 +66,13 @@ class _UserProfileState extends State<UserProfile> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
                           CircleAvatar(
+                            child: Text(
+                              'JD',
+                              style: TextStyle(
+                                fontSize: 30,
+                                fontFamily: 'Montserrat',
+                              ),
+                            ),
                             maxRadius: 50,
                           ),
                           Padding(
