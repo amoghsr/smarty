@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
@@ -38,7 +39,7 @@ class _DrawerPageState extends State<DrawerPage> {
     () {
       user = Provider.of<User>(context, listen: false);
       while (user == null) {}
-      stream = DatabaseService1().getUserDetails(user.uid);
+      stream = DatabaseService1().getUserDetails(user.uid, user);
     }();
   }
 
@@ -276,6 +277,12 @@ class _DrawerPageState extends State<DrawerPage> {
               ListTile(
                 onTap: () async {
                   await _auth.signOut();
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (BuildContext context) {
+                      return Authenticate();
+                    }),
+                  );
                 },
                 leading: Icon(Icons.exit_to_app),
                 title: Text(

@@ -3,7 +3,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:smarty/alertBox.dart';
 import 'package:smarty/shared/constants.dart';
 import 'package:smarty/widgets/donateDialog.dart';
-import 'dart:math';
 
 class P2P extends StatefulWidget {
   @override
@@ -17,6 +16,7 @@ class _P2PState extends State<P2P> {
   double capacity = 48;
   int click = 0;
   double conversion = 0.23;
+
   Widget build(BuildContext context) {
     double screenwidth = MediaQuery.of(context).size.width;
     double screenheight = MediaQuery.of(context).size.height;
@@ -34,7 +34,7 @@ class _P2PState extends State<P2P> {
         Color(0xff14B7F7)
       ],
       [
-        "Make a Wish",
+        "Make a Wisheer",
         "assets/images/teddy.png",
         "assets/images/bear.png",
         Color(0xffDFA0A0)

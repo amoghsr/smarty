@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get_version/get_version.dart';
 import 'package:provider/provider.dart';
 import 'package:smarty/models/themeModel.dart';
 import 'package:smarty/screens/home_manager/all_houses.dart';
 import 'package:smarty/screens/manageUsers.dart';
 import 'package:smarty/services/auth.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:get_version/get_version.dart';
-import 'dart:io' show Platform;
 
 // The drawer manager class handles the drawer menu items and the actions of these items for the Home Manager Role
 class DrawerManager extends StatefulWidget {

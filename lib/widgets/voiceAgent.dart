@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:smarty/devices/CommonControllers/deviceCommonControllers.dart';
 import 'package:smarty/models/user.dart';
 import 'package:speech_recognition/speech_recognition.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 
 class DoneListening {
   bool done = false;
@@ -101,6 +100,7 @@ class _VoiceAgentState extends State<VoiceAgent> {
     'Faucet': ['Faucet', 'Tap', 'Pipe', 'Water'],
     'Water Heater': ['Water Heater', 'Geyser', 'Heater']
   };
+
   @override
   void initState() {
     super.initState();
@@ -166,7 +166,6 @@ class _VoiceAgentState extends State<VoiceAgent> {
     }
 
     setState(() {
-
       if (resultMap.containsValue("")) invalidMap = true;
 
       String checkExclusion = "";

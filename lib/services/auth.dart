@@ -1,7 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:smarty/models/user.dart';
 import 'package:smarty/services/database.dart';
-import 'package:firebase_core/firebase_core.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -54,18 +55,41 @@ class AuthService {
     }
   }
 
-  Future<AuthResult> register(String email, String password, String name,
-      String homeId, String userType) async {
-    Future<AuthResult> d;
-    FirebaseApp app = await FirebaseApp.configure(
-        name: 'Secondary', options: await FirebaseApp.instance.options);
-    d = FirebaseAuth.fromApp(app).createUserWithEmailAndPassword(email: email, password: password);
-    UserUpdateInfo userUpdateInfo = UserUpdateInfo();
-    FirebaseUser user1 = await FirebaseAuth.fromApp(app).currentUser();
-    userUpdateInfo.photoUrl = homeId + userType;
-    await user1.updateProfile(userUpdateInfo);
-    print(user1.photoUrl + 'user type');
-    return d;
+//
+//  Future<AuthResult> register(String email, String password, String name,
+//      String homeId, String userType) async {
+//    Future<AuthResult> d;
+//    FirebaseApp app = await FirebaseApp.configure(
+//        name: 'Secondary', options: await FirebaseApp.instance.options);
+//    d = FirebaseAuth.fromApp(app)
+//        .createUserWithEmailAndPassword(email: email, password: password);
+//    UserUpdateInfo userUpdateInfo = UserUpdateInfo();
+//    FirebaseUser user1 = await FirebaseAuth.fromApp(app).currentUser();
+//    userUpdateInfo.photoUrl = homeId + userType;
+//    await user1.updateProfile(userUpdateInfo);
+////    print(user1.photoUrl + 'user type');
+//    return d;
+//  }
+
+  moveData(String email, String uid, String hid) {
+    Stream<QuerySnapshot> z = Firestore.instance
+        .collection('waitingHomes')
+        .document(email)
+        .collection("layout")
+        .getDocuments()
+        .asStream();
+    z.forEach((element) {
+      element.documents.forEach((element) {
+        element.data.forEach((key, value) {
+          Firestore.instance
+              .collection('Homes')
+              .document(hid)
+              .collection(uid)
+              .document(element.documentID)
+              .setData({key: value}, merge: true);
+        });
+      });
+    });
   }
 
   // Register with email, password, name and age.
@@ -82,9 +106,10 @@ class AuthService {
       FirebaseUser user = result.user;
       // create a new document for the user with the uid
       await DatabaseService(uid: user.uid).updateUserData(name, homeId, email);
+      moveData(email, user.uid, homeId);
       return _userFromFirebaseUser(user);
     } catch (error) {
-      print(error.toString());
+      print(error.toString() + " this error here");
       return null;
     }
   }
@@ -93,7 +118,6 @@ class AuthService {
   Future signOut() async {
     try {
       return await _auth.signOut();
-
     } catch (error) {
       print(error.toString());
       return null;

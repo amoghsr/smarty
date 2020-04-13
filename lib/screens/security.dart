@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_vlc_player/vlc_player.dart';
+import 'package:flutter_vlc_player/vlc_player_controller.dart';
 import 'package:smarty/screens/drawer.dart';
 import 'package:smarty/shared/constants.dart';
 import 'package:smarty/widgets/voiceAgent.dart';
-import 'package:flutter_vlc_player/vlc_player_controller.dart';
-import 'package:flutter_vlc_player/vlc_player.dart';
 
 class Security extends StatefulWidget {
   @override

@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:smarty/models/user.dart';
 import 'package:smarty/services/auth.dart';
 import 'package:smarty/shared/loadingAuth.dart';
 
@@ -12,7 +14,6 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
-
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
   String error = '';
@@ -124,14 +125,26 @@ class _RegisterState extends State<Register> {
                       onPressed: () async {
                         if (_formKey.currentState.validate()) {
                           setState(() => loading = true);
-                          dynamic result =
-                              await _auth.registerWithEmailAndPassword(
-                                  email, password, name, homeId, "-O");
-                          if (result == null) {
-                            setState(() {
-                              loading = false;
-                              error = 'Please supply a valid email';
-                            });
+                          var waitinguser = await Firestore.instance
+                              .collection('waitingUsers')
+                              .document(email);
+                          if (waitinguser.documentID == email) {
+                            print("true waitinguser");
+                            dynamic result;
+                            waitinguser.get().then(
+                                (DocumentSnapshot value) async => result =
+                                    await _auth.registerWithEmailAndPassword(
+                                        email,
+                                        password,
+                                        name,
+                                        value["houseId"],
+                                        "-U"));
+                            if (result == null) {
+                              setState(() {
+                                loading = false;
+                                error = 'Please supply a valid email';
+                              });
+                            }
                           }
                         }
                       },

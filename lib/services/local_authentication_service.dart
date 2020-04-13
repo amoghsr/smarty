@@ -1,10 +1,11 @@
-import 'package:local_auth/local_auth.dart';
 import 'package:flutter/services.dart';
+import 'package:local_auth/local_auth.dart';
 
 class LocalAuthenticationService {
   /* _auth variable simply instantiates the LocalAuthentication
     library, nothing special here. */
   final _auth = LocalAuthentication();
+
   /*
   bool _isProtectionEnabled keeps track of the respective setting,
   in a real-world app, it should be stored in the shared preferences.
@@ -12,6 +13,7 @@ class LocalAuthenticationService {
   bool _isProtectionEnabled = false;
 
   bool get isProtectionEnabled => _isProtectionEnabled;
+
   set isProtectionEnabled(bool enabled) => _isProtectionEnabled = enabled;
 
   // isAuthenticated variable will keep track of the authentication

@@ -7,7 +7,6 @@ import 'package:smarty/models/navigationBar.dart';
 import 'package:smarty/models/themeModel.dart';
 import 'package:smarty/models/user.dart';
 import 'package:smarty/screens/home_manager/dashboard_manager.dart';
-import 'package:smarty/screens/manageUsers.dart';
 
 import 'models/roomModel.dart';
 
@@ -19,6 +18,7 @@ class Wrapper extends StatelessWidget {
     if (user == null) {
       return Authenticate();
     } else {
+//      print(user.type + "vecefd");
       if (user.type == "M") {
         return StreamProvider<List<Room>>.value(
           value: DatabaseService1().streamRooms(user),

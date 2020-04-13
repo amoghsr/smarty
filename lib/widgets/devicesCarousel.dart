@@ -2,15 +2,12 @@
 This file helps create the carousels for the devices in the house.
  */
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:smarty/devices/CommonControllers/deviceCommonControllers.dart';
 import 'package:smarty/models/devicesModel.dart';
 import 'package:smarty/models/user.dart';
-import 'package:smarty/test/firebaseControlDevices.dart';
 
 class DeviceCarousel extends StatefulWidget {
   @override

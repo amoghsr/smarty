@@ -1,12 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 import 'package:smarty/models/devicesModel.dart';
 import 'package:smarty/models/user.dart';
+
 import 'roomModel.dart';
-import 'package:async/async.dart';
 
 class DatabaseService1 {
   final Firestore _db = Firestore.instance;
+
   Stream<List<String>> StreamUserlist(String houseId) {
     CollectionReference ref =
         _db.collection('UserData').document("house").collection(houseId);
@@ -63,7 +63,12 @@ class DatabaseService1 {
     return x;
   }
 
-  Stream<DocumentSnapshot> getUserDetails(String uid) {
-    return _db.collection("UserData").document(uid).get().asStream();
+  Stream<DocumentSnapshot> getUserDetails(String uid, User user) {
+    return Firestore.instance
+        .collection("UserData")
+        .document("house")
+        .collection(user.houseId)
+        .document(user.uid)
+        .snapshots();
   }
 }

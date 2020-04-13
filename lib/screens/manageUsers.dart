@@ -1,11 +1,10 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:smarty/services/auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:smarty/shared/constants.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'addNewUser.dart';
 import 'package:provider/provider.dart';
+import 'package:smarty/shared/constants.dart';
+
+import 'addNewUser.dart';
 
 class ManageUsers extends StatefulWidget {
   @override
@@ -17,7 +16,6 @@ class _ManageUsersState extends State<ManageUsers> {
   void initState() {
     super.initState();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +49,8 @@ class _ManageUsersState extends State<ManageUsers> {
                         onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => AddNewUser()),
+                            MaterialPageRoute(
+                                builder: (context) => AddNewUser()),
                           );
                         },
                       ),
@@ -66,10 +65,9 @@ class _ManageUsersState extends State<ManageUsers> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(left: 4.0, right: 4.0, bottom: 20.0, top: 4.0),
-                  child: Text(
-                    'Currently $size users are present'
-                  ),
+                  padding: EdgeInsets.only(
+                      left: 4.0, right: 4.0, bottom: 20.0, top: 4.0),
+                  child: Text('Currently $size users are present'),
                 ),
                 ListView.separated(
                   separatorBuilder: (context, index) {
@@ -95,7 +93,7 @@ class _ManageUsersState extends State<ManageUsers> {
                       trailing: InkWell(
                         // TODO: IMPLEMENT DELETE USER
                         onTap: () {
-                          print('pressed list item $index');
+//                          print('pressed list item $index');
                         },
                         child: Icon(
                           Icons.clear,
