@@ -270,7 +270,8 @@ class _UserProfileState extends State<UserProfile> {
                                                               ),
                                                             )
                                                           : Opacity(
-                                                                opacity: 0.6,                                                      child: Column(
+                                                              opacity: 0.6,
+                                                              child: Column(
                                                                 children: <
                                                                     Widget>[
                                                                   rewards.containsKey(
@@ -282,8 +283,7 @@ class _UserProfileState extends State<UserProfile> {
                                                                             rewards[index +
                                                                                 1],
                                                                             SizedBox(
-                                                                              height:
-                                                                                  13,
+                                                                              height: 13,
                                                                             ),
                                                                           ],
                                                                         )
@@ -301,16 +301,15 @@ class _UserProfileState extends State<UserProfile> {
                                                                             Text(
                                                                           // Icons.check,
                                                                           '${index + 1}',
-                                                                          style: TextStyle(
-                                                                              color:
-                                                                                  Colors.white),
+                                                                          style:
+                                                                              TextStyle(color: Colors.white),
                                                                         ),
                                                                       ),
                                                                     ),
                                                                   ),
                                                                 ],
                                                               ),
-                                                          ),
+                                                            ),
                                             ),
                                           ),
                                         ),
@@ -325,7 +324,67 @@ class _UserProfileState extends State<UserProfile> {
                       ),
                     ),
                     SizedBox(
-                      height: 30.0,
+                      height: 10.0,
+                    ),
+                    Divider(),
+                    Padding(
+                      padding: EdgeInsets.only(
+                          left: screenwidth * 0.05, top: screenheight * 0.01),
+                      child: Container(
+                        child: Text(
+                          "Badges",
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.w500),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: screenheight * 0.02),
+                    Padding(
+                      padding: EdgeInsets.only(left: screenwidth * 0.05),
+                      child: Text(
+                        'Saving',
+                        style: TextStyle(fontSize: 15),
+                      ),
+                    ),
+                    
+                    Row(
+                      children: <Widget>[
+                        Expanded(child: Icon(Icons.pregnant_woman, size: 100)),
+                        Expanded(child: Icon(Icons.pregnant_woman, size: 100)),
+                        Expanded(child: Icon(Icons.pregnant_woman, size: 100)),
+                      ],
+                    ),
+                    Divider(),
+                    Padding(
+                      padding: EdgeInsets.only(left: screenwidth * 0.05),
+                      child: Text(
+                        'Donation',
+                        style: TextStyle(fontSize: 15),
+                      ),
+                    ),
+                    // Divider(),
+                    Row(
+                      children: <Widget>[
+                        Expanded(child: Icon(Icons.pregnant_woman, size: 100)),
+                        Expanded(child: Icon(Icons.pregnant_woman, size: 100)),
+                        Expanded(child: Icon(Icons.pregnant_woman, size: 100)),
+                      ],
+                    ),
+                    Divider(),
+                    Padding(
+                      padding: EdgeInsets.only(left: screenwidth * 0.05),
+                      child: Text(
+                        'Challenges',
+                        style: TextStyle(fontSize: 15),
+                      ),
+                    ),
+                    
+                    Row(
+                      children: <Widget>[
+                        Expanded(child: Icon(Icons.pregnant_woman, size: 100)),
+                        Expanded(child: Icon(Icons.pregnant_woman, size: 100)),
+                        Expanded(child: Icon(Icons.pregnant_woman, size: 100)),
+                      ],
                     ),
                   ],
                 ),
