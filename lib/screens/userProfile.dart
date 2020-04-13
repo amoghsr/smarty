@@ -66,8 +66,9 @@ class _UserProfileState extends State<UserProfile> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
                           CircleAvatar(
-                            maxRadius: 50,
+                            maxRadius: 70,
                           ),
+                          
                           Padding(
                             padding:
                                 const EdgeInsets.only(top: 12.0, bottom: 4.0),
