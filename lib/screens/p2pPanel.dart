@@ -30,7 +30,7 @@ class _P2PState extends State<P2P> {
       [
         "Animal Rescue",
         "assets/images/paw.png",
-        "assets/images/circlepaw.png",
+        "assets/images/circlepaw.png",  
         Color(0xff14B7F7)
       ],
       [
