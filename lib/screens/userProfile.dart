@@ -4,6 +4,7 @@ import 'package:smarty/models/dbService.dart';
 import 'package:smarty/models/user.dart';
 import 'package:smarty/shared/constants.dart';
 import 'package:smarty/widgets/voiceAgent.dart';
+import 'package:step_progress_indicator/step_progress_indicator.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:smarty/models/leaderboardModel.dart';
 
@@ -67,7 +68,7 @@ class _UserProfileState extends State<UserProfile> {
     ];
 
     List<String> nums = [];
-    for (int i = 0; i < 100; i++) {
+    for (int i = 0; i < 20; i++) {
       nums.add(i.toString());
     }
 
@@ -143,38 +144,188 @@ class _UserProfileState extends State<UserProfile> {
                                     ),
                                   ],
                                 ),
-                                SizedBox(height: screenheight*0.03,),
+                                SizedBox(
+                                  height: screenheight * 0.03,
+                                ),
                                 //progress bar
-                                Container(
-                                  height: screenheight * 0.06,
-                                  width: screenwidth * 0.89,
-                                  child: ListView.builder(
+                                // Icon(Icons.star,
+                                //           size: 30,
+                                //           color: Colors.grey,),
+
+                                //First carousel
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 15.0),
+                                  child: SingleChildScrollView(
                                     scrollDirection: Axis.horizontal,
-                                    itemCount: nums.length,
-                                    itemBuilder: (context, index) {
-                                      return Row(
-                                        children: <Widget>[
-                                          SizedBox(
-                                            width: screenwidth * 0.002,
+                                    child: Row(
+                                      children: <Widget>[
+                                        SingleChildScrollView(
+                                          child: Icon(
+                                            Icons.star,
+                                            size: 30,
+                                            color: Colors.transparent,
                                           ),
-                                          Container(
-                                              color: Colors.blue,
-                                              width: screenwidth * 0.2,
-                                              child: Container(
-                                                child: Center(
-                                                  child: Text(
-                                                    nums[index].toString(),
-                                                    style: TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize: 20.0),
-                                                  ),
-                                                ),
-                                              )),
-                                        ],
-                                      );
-                                    },
+                                        ),
+                                        SizedBox(width: screenwidth * 0.01),
+                                        SingleChildScrollView(
+                                          scrollDirection: Axis.horizontal,
+                                          child: Container(
+                                            width: (screenwidth * nums.length) /
+                                                5.5,
+                                            child: StepProgressIndicator(
+                                              totalSteps: nums.length,
+                                              // currentStep: 3,
+                                              size: 36,
+                                              selectedColor: Colors.green,
+                                              unselectedColor: Colors.grey[200],
+                                              customStep: (index, color, _) =>
+                                                  index == 4
+                                                      ? Container(
+                                                          color: Colors.transparent,
+                                                          child: Center(
+                                                            // child: Text(
+                                                            //   // Icons.check,
+                                                            //   '${index + 1}',
+                                                            //   style: TextStyle(
+                                                            //       color: Colors
+                                                            //           .white),
+                                                            // ),
+
+                                                            child: Icon(
+                                                                Icons.flash_on,
+                                                                color: Colors
+                                                                    .yellow),
+                                                          ),
+                                                        )
+                                                      : index == 0
+                                                          ? Container(
+                                                              color: Colors
+                                                                  .transparent,
+                                                              child: Center(
+                                                                child: 
+                                                                // Text(
+                                                                //   // Icons.check,
+                                                                //   'HI',
+                                                                //   style: TextStyle(
+                                                                //       color: Colors
+                                                                //           .white),
+                                                                // ),
+                                                                Icon(
+                                                                  Icons.headset
+                                                                ),
+                                                              ),
+                                                            )
+                                                          : index < 4
+                                                              ? Container(
+                                                                  color: Colors
+                                                                      .transparent,
+                                                                  // child: Center(
+                                                                  //   child: Text(
+                                                                  //     // Icons.check,
+                                                                  //     '${index + 1}',
+                                                                  //     style: TextStyle(
+                                                                  //         color:
+                                                                  //             Colors.white),
+                                                                  //   ),
+                                                                  // ),
+                                                                )
+                                                              : Container(
+                                                                  color: Colors
+                                                                      .transparent,
+                                                                  // child: Center(
+                                                                  //   child: Text(
+                                                                  //     // Icons.check,
+                                                                  //     '${index + 1}',
+                                                                  //     style: TextStyle(
+                                                                  //         color:
+                                                                  //             Colors.white),
+                                                                  //   ),
+                                                                  // ),
+                                                                ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
+
+                                //second carousel
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.only(left: 15.0, top: 5),
+                                  child: SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Row(
+                                      children: <Widget>[
+                                        SingleChildScrollView(
+                                          
+                                          child: Icon(
+                                            Icons.star,
+                                            size: 30,
+                                            color: Colors.grey,
+                                          ),
+                                        ),
+                                        SizedBox(width: screenwidth * 0.01),
+                                        SingleChildScrollView(
+                                          scrollDirection: Axis.horizontal,
+                                          child: Container(
+                                            width: (screenwidth * nums.length) /
+                                                5.5,
+                                            child: StepProgressIndicator(
+                                              totalSteps: nums.length,
+                                              // currentStep: 3,
+                                              size: 36,
+                                              selectedColor: Colors.green,
+                                              unselectedColor: Colors.grey[200],
+                                              customStep: (index, color, _) =>
+                                                  index == 3
+                                                      ? Container(
+                                                          color: Colors.green,
+                                                          child: Center(
+                                                            child: Text(
+                                                              // Icons.check,
+                                                              '${index + 1}',
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .white),
+                                                            ),
+                                                          ),
+                                                        )
+                                                      : index < 4
+                                                          ? Container(
+                                                              color: Colors
+                                                                  .lightGreen,
+                                                              child: Center(
+                                                                child: Text(
+                                                                  // Icons.check,
+                                                                  '${index + 1}',
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .white),
+                                                                ),
+                                                              ),
+                                                            )
+                                                          : Container(
+                                                              color:
+                                                                  Colors.grey,
+                                                              child: Center(
+                                                                child: Text(
+                                                                  // Icons.check,
+                                                                  '${index + 1}',
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .white),
+                                                                ),
+                                                              ),
+                                                            ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                )
                               ],
                             ),
                           ),
