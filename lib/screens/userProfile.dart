@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:smarty/models/dbService.dart';
 import 'package:smarty/models/user.dart';
@@ -68,9 +69,22 @@ class _UserProfileState extends State<UserProfile> {
     ];
 
     List<String> nums = [];
-    for (int i = 0; i < 20; i++) {
+    for (int i = 0; i < 30; i++) {
       nums.add(i.toString());
     }
+
+    Map<int, dynamic> rewards = {
+      1: Icon(FontAwesomeIcons.leaf, color: Colors.green, size: 30),
+      5: Icon(Icons.flash_on, color: Color(0xffe8b313), size: 30),
+      10: Icon(FontAwesomeIcons.award, color: Colors.redAccent, size: 30),
+      11: Icon(Icons.flash_on, color: Color(0xffe8b313), size: 30),
+      15: Icon(FontAwesomeIcons.trophy, color: Colors.orangeAccent, size: 30),
+      20: Icon(FontAwesomeIcons.medal, color: Colors.tealAccent, size: 30),
+      23: Icon(Icons.flash_on, color: Color(0xffe8b313), size: 30),
+      25: Icon(FontAwesomeIcons.solarPanel, color: Colors.blueGrey, size: 30),
+      30: Icon(FontAwesomeIcons.calendarTimes,
+          color: Colors.pinkAccent, size: 30),
+    };
 
     return StreamBuilder(
         stream: stream,
@@ -145,129 +159,27 @@ class _UserProfileState extends State<UserProfile> {
                                   ],
                                 ),
                                 SizedBox(
-                                  height: screenheight * 0.03,
-                                ),
-                                //progress bar
-                                // Icon(Icons.star,
-                                //           size: 30,
-                                //           color: Colors.grey,),
-
-                                //First carousel
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 15.0),
-                                  child: SingleChildScrollView(
-                                    scrollDirection: Axis.horizontal,
-                                    child: Row(
-                                      children: <Widget>[
-                                        SingleChildScrollView(
-                                          child: Icon(
-                                            Icons.star,
-                                            size: 30,
-                                            color: Colors.transparent,
-                                          ),
-                                        ),
-                                        SizedBox(width: screenwidth * 0.01),
-                                        SingleChildScrollView(
-                                          scrollDirection: Axis.horizontal,
-                                          child: Container(
-                                            width: (screenwidth * nums.length) /
-                                                5.5,
-                                            child: StepProgressIndicator(
-                                              totalSteps: nums.length,
-                                              // currentStep: 3,
-                                              size: 36,
-                                              selectedColor: Colors.green,
-                                              unselectedColor: Colors.grey[200],
-                                              customStep: (index, color, _) =>
-                                                  index == 4
-                                                      ? Container(
-                                                          color: Colors.transparent,
-                                                          child: Center(
-                                                            // child: Text(
-                                                            //   // Icons.check,
-                                                            //   '${index + 1}',
-                                                            //   style: TextStyle(
-                                                            //       color: Colors
-                                                            //           .white),
-                                                            // ),
-
-                                                            child: Icon(
-                                                                Icons.flash_on,
-                                                                color: Colors
-                                                                    .yellow),
-                                                          ),
-                                                        )
-                                                      : index == 0
-                                                          ? Container(
-                                                              color: Colors
-                                                                  .transparent,
-                                                              child: Center(
-                                                                child: 
-                                                                // Text(
-                                                                //   // Icons.check,
-                                                                //   'HI',
-                                                                //   style: TextStyle(
-                                                                //       color: Colors
-                                                                //           .white),
-                                                                // ),
-                                                                Icon(
-                                                                  Icons.headset
-                                                                ),
-                                                              ),
-                                                            )
-                                                          : index < 4
-                                                              ? Container(
-                                                                  color: Colors
-                                                                      .transparent,
-                                                                  // child: Center(
-                                                                  //   child: Text(
-                                                                  //     // Icons.check,
-                                                                  //     '${index + 1}',
-                                                                  //     style: TextStyle(
-                                                                  //         color:
-                                                                  //             Colors.white),
-                                                                  //   ),
-                                                                  // ),
-                                                                )
-                                                              : Container(
-                                                                  color: Colors
-                                                                      .transparent,
-                                                                  // child: Center(
-                                                                  //   child: Text(
-                                                                  //     // Icons.check,
-                                                                  //     '${index + 1}',
-                                                                  //     style: TextStyle(
-                                                                  //         color:
-                                                                  //             Colors.white),
-                                                                  //   ),
-                                                                  // ),
-                                                                ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
+                                  height: screenheight * 0.02,
                                 ),
 
                                 //second carousel
                                 Padding(
-                                  padding:
-                                      const EdgeInsets.only(left: 15.0, top: 5),
-                                  child: SingleChildScrollView(
-                                    scrollDirection: Axis.horizontal,
-                                    child: Row(
-                                      children: <Widget>[
-                                        SingleChildScrollView(
-                                          
-                                          child: Icon(
+                                  padding: const EdgeInsets.only(left: 15.0),
+                                  child: Row(
+                                    children: <Widget>[
+                                      Column(
+                                        children: <Widget>[
+                                          SizedBox(height: 43),
+                                          Icon(
                                             Icons.star,
-                                            size: 30,
+                                            size: 35,
                                             color: Colors.grey,
                                           ),
-                                        ),
-                                        SizedBox(width: screenwidth * 0.01),
-                                        SingleChildScrollView(
+                                        ],
+                                      ),
+                                      SizedBox(width: screenwidth * 0.02),
+                                      Expanded(
+                                        child: SingleChildScrollView(
                                           scrollDirection: Axis.horizontal,
                                           child: Container(
                                             width: (screenwidth * nums.length) /
@@ -275,55 +187,135 @@ class _UserProfileState extends State<UserProfile> {
                                             child: StepProgressIndicator(
                                               totalSteps: nums.length,
                                               // currentStep: 3,
-                                              size: 36,
+                                              size: 85,
                                               selectedColor: Colors.green,
                                               unselectedColor: Colors.grey[200],
                                               customStep: (index, color, _) =>
                                                   index == 3
-                                                      ? Container(
-                                                          color: Colors.green,
-                                                          child: Center(
-                                                            child: Text(
-                                                              // Icons.check,
-                                                              '${index + 1}',
-                                                              style: TextStyle(
-                                                                  color: Colors
-                                                                      .white),
+                                                      ? Column(
+                                                          children: <Widget>[
+                                                            rewards.containsKey(
+                                                                    index + 1)
+                                                                ? Column(
+                                                                    children: <
+                                                                        Widget>[
+                                                                      rewards[
+                                                                          index +
+                                                                              1],
+                                                                      SizedBox(
+                                                                        height:
+                                                                            8,
+                                                                      ),
+                                                                    ],
+                                                                  )
+                                                                : SizedBox(
+                                                                    height: 43),
+                                                            Expanded(
+                                                              child: Container(
+                                                                color: Colors
+                                                                    .green,
+                                                                child: Center(
+                                                                  child: Text(
+                                                                    // Icons.check,
+                                                                    '${index + 1}',
+                                                                    style: TextStyle(
+                                                                        color: Colors
+                                                                            .white),
+                                                                  ),
+                                                                ),
+                                                              ),
                                                             ),
-                                                          ),
+                                                          ],
                                                         )
                                                       : index < 4
-                                                          ? Container(
-                                                              color: Colors
-                                                                  .lightGreen,
-                                                              child: Center(
-                                                                child: Text(
-                                                                  // Icons.check,
-                                                                  '${index + 1}',
-                                                                  style: TextStyle(
+                                                          ? Opacity(
+                                                              opacity: 0.6,
+                                                              child: Column(
+                                                                children: <
+                                                                    Widget>[
+                                                                  rewards.containsKey(
+                                                                          index +
+                                                                              1)
+                                                                      ? Column(
+                                                                          children: <
+                                                                              Widget>[
+                                                                            rewards[index +
+                                                                                1],
+                                                                            SizedBox(
+                                                                              height: 13,
+                                                                            ),
+                                                                          ],
+                                                                        )
+                                                                      : SizedBox(
+                                                                          height:
+                                                                              43),
+                                                                  Expanded(
+                                                                    child:
+                                                                        Container(
                                                                       color: Colors
-                                                                          .white),
-                                                                ),
+                                                                          .lightGreen,
+                                                                      child:
+                                                                          Center(
+                                                                        child:
+                                                                            Text(
+                                                                          // Icons.check,
+                                                                          '${index + 1}',
+                                                                          style:
+                                                                              TextStyle(color: Colors.white),
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ],
                                                               ),
                                                             )
-                                                          : Container(
-                                                              color:
-                                                                  Colors.grey,
-                                                              child: Center(
-                                                                child: Text(
-                                                                  // Icons.check,
-                                                                  '${index + 1}',
-                                                                  style: TextStyle(
+                                                          : Opacity(
+                                                                opacity: 0.6,                                                      child: Column(
+                                                                children: <
+                                                                    Widget>[
+                                                                  rewards.containsKey(
+                                                                          index +
+                                                                              1)
+                                                                      ? Column(
+                                                                          children: <
+                                                                              Widget>[
+                                                                            rewards[index +
+                                                                                1],
+                                                                            SizedBox(
+                                                                              height:
+                                                                                  13,
+                                                                            ),
+                                                                          ],
+                                                                        )
+                                                                      : SizedBox(
+                                                                          height:
+                                                                              43),
+                                                                  Expanded(
+                                                                    child:
+                                                                        Container(
                                                                       color: Colors
-                                                                          .white),
-                                                                ),
+                                                                          .grey,
+                                                                      child:
+                                                                          Center(
+                                                                        child:
+                                                                            Text(
+                                                                          // Icons.check,
+                                                                          '${index + 1}',
+                                                                          style: TextStyle(
+                                                                              color:
+                                                                                  Colors.white),
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ],
                                                               ),
-                                                            ),
+                                                          ),
                                             ),
                                           ),
                                         ),
-                                      ],
-                                    ),
+                                      ),
+                                    ],
                                   ),
                                 )
                               ],
