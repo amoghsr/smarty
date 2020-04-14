@@ -7,6 +7,7 @@ import 'package:smarty/services/service_locator.dart';
 import 'package:smarty/wrapper.dart';
 
 void main() {
+
   setupLocator();
   runApp(
     ChangeNotifierProvider<ThemeModel>(
