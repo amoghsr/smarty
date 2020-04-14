@@ -47,27 +47,6 @@ class _UserProfileState extends State<UserProfile> {
     double screenwidth = MediaQuery.of(context).size.width;
     double screenheight = MediaQuery.of(context).size.height;
 
-    List<List<dynamic>> charities = [
-      [
-        "Red Cross",
-        "assets/images/cross.png",
-        "assets/images/redcross_circle.png",
-        Color(0xffBE1E2D)
-      ],
-      [
-        "Animal Rescue",
-        "assets/images/paw.png",
-        "assets/images/circlepaw.png",
-        Color(0xff14B7F7)
-      ],
-      [
-        "Make a Wish",
-        "assets/images/teddy.png",
-        "assets/images/bear.png",
-        Color(0xffDFA0A0)
-      ],
-    ];
-
     List<String> nums = [];
     for (int i = 0; i < 30; i++) {
       nums.add(i.toString());
@@ -86,6 +65,67 @@ class _UserProfileState extends State<UserProfile> {
           color: Colors.pinkAccent, size: 30),
     };
 
+    List<dynamic> badges = [
+      [
+        'Saving',
+        [
+          [
+            true,
+            Image.asset('assets/images/save_energy.png',
+                width: 100, height: 100)
+          ],
+          [
+            true,
+            Image.asset('assets/images/eco-battery.png',
+                width: 100, height: 100)
+          ],
+          [
+            true,
+            Image.asset('assets/images/solar.png', width: 100, height: 100)
+          ],
+        ],
+      ],
+      [
+        'Donation',
+        [
+          [
+            true,
+            Image.asset('assets/images/cross_badge.png',
+                width: 100, height: 100)
+          ],
+          [
+            true,
+            Image.asset('assets/images/paw_badge.png', width: 100, height: 100)
+          ],
+          [
+            true,
+            Image.asset('assets/images/teddy_badge.png',
+                width: 100, height: 100)
+          ]
+        ],
+      ],
+      [
+        'Challenges',
+        [
+          [
+            true,
+            Image.asset('assets/images/cross_badge.png',
+                width: 100, height: 100)
+          ],
+          [
+            true,
+            Image.asset('assets/images/cross_badge.png',
+                width: 100, height: 100)
+          ],
+          [
+            true,
+            Image.asset('assets/images/cross_badge.png',
+                width: 100, height: 100)
+          ]
+        ],
+      ],
+    ];
+
     return StreamBuilder(
         stream: stream,
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
@@ -101,6 +141,7 @@ class _UserProfileState extends State<UserProfile> {
               ),
               body: SafeArea(
                 child: ListView(
+                  // physics: NeverScrollableScrollPhysics(),
                   padding: EdgeInsets.symmetric(vertical: 20.0),
                   children: <Widget>[
                     Padding(
@@ -228,87 +269,85 @@ class _UserProfileState extends State<UserProfile> {
                                                           ],
                                                         )
                                                       : index < 4
-                                                          ? Opacity(
-                                                              opacity: 0.6,
-                                                              child: Column(
-                                                                children: <
-                                                                    Widget>[
-                                                                  rewards.containsKey(
-                                                                          index +
-                                                                              1)
-                                                                      ? Column(
-                                                                          children: <
-                                                                              Widget>[
-                                                                            rewards[index +
-                                                                                1],
-                                                                            SizedBox(
-                                                                              height: 13,
-                                                                            ),
-                                                                          ],
-                                                                        )
-                                                                      : SizedBox(
-                                                                          height:
-                                                                              43),
-                                                                  Expanded(
+                                                          ? Column(
+                                                              children: <
+                                                                  Widget>[
+                                                                rewards.containsKey(
+                                                                        index +
+                                                                            1)
+                                                                    ? Column(
+                                                                        children: <
+                                                                            Widget>[
+                                                                          rewards[index +
+                                                                              1],
+                                                                          SizedBox(
+                                                                            height:
+                                                                                13,
+                                                                          ),
+                                                                        ],
+                                                                      )
+                                                                    : SizedBox(
+                                                                        height:
+                                                                            43),
+                                                                Expanded(
+                                                                  child:
+                                                                      Container(
+                                                                    color: Colors
+                                                                        .lightGreen,
                                                                     child:
-                                                                        Container(
-                                                                      color: Colors
-                                                                          .lightGreen,
+                                                                        Center(
                                                                       child:
-                                                                          Center(
-                                                                        child:
-                                                                            Text(
-                                                                          // Icons.check,
-                                                                          '${index + 1}',
-                                                                          style:
-                                                                              TextStyle(color: Colors.white),
-                                                                        ),
+                                                                          Text(
+                                                                        // Icons.check,
+                                                                        '${index + 1}',
+                                                                        style: TextStyle(
+                                                                            color:
+                                                                                Colors.white),
                                                                       ),
                                                                     ),
                                                                   ),
-                                                                ],
-                                                              ),
+                                                                ),
+                                                              ],
                                                             )
-                                                          : Opacity(
-                                                              opacity: 0.6,
-                                                              child: Column(
-                                                                children: <
-                                                                    Widget>[
-                                                                  rewards.containsKey(
-                                                                          index +
-                                                                              1)
-                                                                      ? Column(
-                                                                          children: <
-                                                                              Widget>[
-                                                                            rewards[index +
-                                                                                1],
-                                                                            SizedBox(
-                                                                              height: 13,
-                                                                            ),
-                                                                          ],
-                                                                        )
-                                                                      : SizedBox(
-                                                                          height:
-                                                                              43),
-                                                                  Expanded(
+                                                          : Column(
+                                                              children: <
+                                                                  Widget>[
+                                                                rewards.containsKey(
+                                                                        index +
+                                                                            1)
+                                                                    ? Column(
+                                                                        children: <
+                                                                            Widget>[
+                                                                          rewards[index +
+                                                                              1],
+                                                                          SizedBox(
+                                                                            height:
+                                                                                13,
+                                                                          ),
+                                                                        ],
+                                                                      )
+                                                                    : SizedBox(
+                                                                        height:
+                                                                            43),
+                                                                Expanded(
+                                                                  child:
+                                                                      Container(
+                                                                    color: Colors
+                                                                        .grey,
                                                                     child:
-                                                                        Container(
-                                                                      color: Colors
-                                                                          .grey,
+                                                                        Center(
                                                                       child:
-                                                                          Center(
-                                                                        child:
-                                                                            Text(
-                                                                          // Icons.check,
-                                                                          '${index + 1}',
-                                                                          style:
-                                                                              TextStyle(color: Colors.white),
-                                                                        ),
+                                                                          Text(
+                                                                        // Icons.check,
+                                                                        '${index + 1}',
+                                                                        style: TextStyle(
+                                                                            color:
+                                                                                Colors.white),
                                                                       ),
                                                                     ),
                                                                   ),
-                                                                ],
-                                                              ),
+                                                                ),
+                                                              ],
                                                             ),
                                             ),
                                           ),
@@ -339,52 +378,71 @@ class _UserProfileState extends State<UserProfile> {
                       ),
                     ),
                     SizedBox(height: screenheight * 0.02),
-                    Padding(
-                      padding: EdgeInsets.only(left: screenwidth * 0.05),
-                      child: Text(
-                        'Saving',
-                        style: TextStyle(fontSize: 15),
-                      ),
-                    ),
-                    
-                    Row(
-                      children: <Widget>[
-                        Expanded(child: Icon(Icons.pregnant_woman, size: 100)),
-                        Expanded(child: Icon(Icons.pregnant_woman, size: 100)),
-                        Expanded(child: Icon(Icons.pregnant_woman, size: 100)),
-                      ],
-                    ),
-                    Divider(),
-                    Padding(
-                      padding: EdgeInsets.only(left: screenwidth * 0.05),
-                      child: Text(
-                        'Donation',
-                        style: TextStyle(fontSize: 15),
-                      ),
-                    ),
-                    // Divider(),
-                    Row(
-                      children: <Widget>[
-                        Expanded(child: Icon(Icons.pregnant_woman, size: 100)),
-                        Expanded(child: Icon(Icons.pregnant_woman, size: 100)),
-                        Expanded(child: Icon(Icons.pregnant_woman, size: 100)),
-                      ],
-                    ),
-                    Divider(),
-                    Padding(
-                      padding: EdgeInsets.only(left: screenwidth * 0.05),
-                      child: Text(
-                        'Challenges',
-                        style: TextStyle(fontSize: 15),
-                      ),
-                    ),
-                    
-                    Row(
-                      children: <Widget>[
-                        Expanded(child: Icon(Icons.pregnant_woman, size: 100)),
-                        Expanded(child: Icon(Icons.pregnant_woman, size: 100)),
-                        Expanded(child: Icon(Icons.pregnant_woman, size: 100)),
-                      ],
+
+                    // SizedBox(height: screenheight * 0.02),
+                    ConstrainedBox(
+                      constraints: BoxConstraints(
+                          maxHeight: screenheight,
+                          minHeight: screenheight * 0.1),
+                      child: ListView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: badges.length,
+                          itemBuilder: (context, index1) {
+                            return Expanded(
+                              child: Column(
+                                children: <Widget>[
+                                  Center(
+                                    child: Text(
+                                      badges[index1][0],
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: screenheight * 0.01,
+                                  ),
+                                  Container(
+                                    height: screenheight * 0.1,
+                                    width: screenwidth,
+                                    child: Center(
+                                      child: ListView.separated(
+                                          separatorBuilder:
+                                              (BuildContext context,
+                                                  int index) {
+                                            return SizedBox(
+                                              width: screenwidth * 0.07,
+                                            );
+                                          },
+                                          shrinkWrap: true,
+                                          scrollDirection: Axis.horizontal,
+                                          itemCount: badges[index1][1].length,
+                                          itemBuilder: (context, index2) {
+                                            return Container(
+                                              foregroundDecoration:
+                                                  (badges[index1][1][index2]
+                                                              [0] ==
+                                                          false)
+                                                      ? BoxDecoration(
+                                                          color: Colors.grey,
+                                                          backgroundBlendMode:
+                                                              BlendMode
+                                                                  .saturation,
+                                                        )
+                                                      : null,
+                                              child: badges[index1][1][index2]
+                                                  [1],
+                                            );
+                                          }),
+                                    ),
+                                  ),
+                                  (index1 != 2) ? Divider() : Container()
+                                ],
+                              ),
+                            );
+                          }),
                     ),
                   ],
                 ),
