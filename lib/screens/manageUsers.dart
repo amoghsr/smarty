@@ -88,6 +88,10 @@ class _ManageUsersState extends State<ManageUsers> {
                       ),
                       title: Text(
                         userlist[index].split('-')[0],
+                        style: TextStyle(
+                          fontSize: 17,
+                          fontWeight: FontWeight.w500
+                        ),
                       ),
                       subtitle: Text(userlist[index].split('-')[1]),
                       trailing: InkWell(
