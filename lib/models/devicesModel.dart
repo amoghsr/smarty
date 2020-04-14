@@ -101,11 +101,11 @@ Icon getIcons(String roomName) {
     case 'TV':
       return Icon(FontAwesomeIcons.tv);
     case 'Water Heater':
-      return Icon(FontAwesomeIcons.hotTub);
+      return Icon(FontAwesomeIcons.temperatureHigh);
     case 'Refrigerator':
-      return Icon(FontAwesomeIcons.cubes);
+      return Icon(FontAwesomeIcons.egg);
     case 'Baby Monitor':
-      return Icon(FontAwesomeIcons.babyCarriage);
+      return Icon(FontAwesomeIcons.baby);
   }
 }
 
