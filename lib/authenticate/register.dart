@@ -129,7 +129,6 @@ class _RegisterState extends State<Register> {
                               .collection('waitingUsers')
                               .document(email);
                           if (waitinguser.documentID == email) {
-                            print("true waitinguser");
                             dynamic result;
                             waitinguser.get().then(
                                 (DocumentSnapshot value) async => result =

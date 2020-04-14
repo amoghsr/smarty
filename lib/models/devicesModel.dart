@@ -73,6 +73,12 @@ String getImageUrl(String roomName) {
       return 'assets/images/deviceAssets/heater.png';
     case 'Speaker':
       return 'assets/images/deviceAssets/speaker.png';
+    case 'Refrigerator':
+      return 'assets/images/deviceAssets/fridge.png';
+    case 'Water Heater':
+      return 'assets/images/deviceAssets/waterheater.png';
+    case 'Baby Monitor':
+      return 'assets/images/deviceAssets/babymonitor.png';
   }
 }
 
@@ -94,6 +100,12 @@ Icon getIcons(String roomName) {
       return Icon(Icons.speaker);
     case 'TV':
       return Icon(FontAwesomeIcons.tv);
+    case 'Water Heater':
+      return Icon(FontAwesomeIcons.hotTub);
+    case 'Refrigerator':
+      return Icon(FontAwesomeIcons.cubes);
+    case 'Baby Monitor':
+      return Icon(FontAwesomeIcons.babyCarriage);
   }
 }
 
