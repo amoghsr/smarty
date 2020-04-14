@@ -94,6 +94,12 @@ Icon getIcons(String roomName) {
       return Icon(Icons.speaker);
     case 'TV':
       return Icon(FontAwesomeIcons.tv);
+    case 'Water Heater':
+      return Icon(FontAwesomeIcons.temperatureHigh);
+    case 'Refrigerator':
+      return Icon(FontAwesomeIcons.egg);
+    case 'Baby Monitor':
+      return Icon(FontAwesomeIcons.baby);
   }
 }
 

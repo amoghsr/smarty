@@ -45,8 +45,6 @@ class _DrawerPageState extends State<DrawerPage> {
   }
 
   Widget build(BuildContext context) {
-    double screenwidth = MediaQuery.of(context).size.width;
-    double screenheight = MediaQuery.of(context).size.height;
     final user = Provider.of<User>(context);
     if (user.type == "O") {
       return Drawer(
@@ -96,7 +94,6 @@ class _DrawerPageState extends State<DrawerPage> {
               ListTile(
 // Leading is an element in the start of the list tile horizontally
                 leading: Container(
-                    width: screenwidth * 0.03,
                     child: Icon(FontAwesomeIcons.users)),
 // Title of the list
                 title: Text(

@@ -132,11 +132,14 @@ class _HomeState extends State<Home> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text(
-            'Home',
-            style: kAppBarTextStyle,
+          title: Center(
+            child: Text(
+              'Home',
+              style: kAppBarTextStyle,
+            ),
           ),
-          actions: <Widget>[MicClass()],
+          // TODO Dark mode + Accessibility options
+          actions: <Widget>[Icon(Icons.brightness_6), MicClass()],
         ),
 
         // Drawer is the hamburger menu.
