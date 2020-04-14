@@ -36,12 +36,10 @@ class _AddNewUserState extends State<AddNewUser> {
   // Here you will get all your selected Checkbox items.
   List<String> finalSelectedDevices = [];
 
-  getItems(){
-
+  getItems() {
     // If value is true in map, then add it to the final list of selected devices by the user
     devicesMap.forEach((key, value) {
-      if(value == true)
-      {
+      if (value == true) {
         // Add true checkbox items to the holder list
         finalSelectedDevices.add(key);
       }
@@ -51,11 +49,12 @@ class _AddNewUserState extends State<AddNewUser> {
     print(finalSelectedDevices);
 
     // Clear array after use.
-    finalSelectedDevices.clear();
+//    finalSelectedDevices.clear();
   }
 
   addUser(List<String> x, String houseId, String email) {
     x.forEach((element) {
+      print(element);
       String x = element;
       String y = x.split("-")[0]; // room
       String w = x.split("-")[1]; // device
@@ -66,6 +65,7 @@ class _AddNewUserState extends State<AddNewUser> {
           .document(y)
           .setData({w: 0}, merge: true);
     });
+    finalSelectedDevices.clear();
     Firestore.instance
         .collection('waitingUsers')
         .document(email)
@@ -84,20 +84,21 @@ class _AddNewUserState extends State<AddNewUser> {
     // Get device list using provider
     final devicesList = Provider.of<List<Device>>(context);
 
-    void createMap(List<Device> devices, List<Room> rooms, List<String> selectedDevices) {
-
+    void createMap(
+        List<Device> devices, List<Room> rooms, List<String> selectedDevices) {
       // Counter for adding devices to map
       int devicesCount = 0;
       rooms.forEach((roomElement) {
         devices.forEach((deviceElement) {
-
           // Check if room names from both lists match
           if (roomElement.roomName == deviceElement.inRoom) {
-
             // Prevents app hot reloads/rebuilds to repopulate the selectedDevices list
-            if (!selectedDevices.contains("${roomElement.roomName}" + "-" + "${deviceElement.deviceName}")) {
-
-              selectedDevices.add("${roomElement.roomName}" + "-" + "${deviceElement.deviceName}");
+            if (!selectedDevices.contains("${roomElement.roomName}" +
+                "-" +
+                "${deviceElement.deviceName}")) {
+              selectedDevices.add("${roomElement.roomName}" +
+                  "-" +
+                  "${deviceElement.deviceName}");
 
               //Add devices as key from the list of selectable devices to the map and set its value to false
               devicesMap[selectedDevices[devicesCount]] = false;
@@ -181,15 +182,14 @@ class _AddNewUserState extends State<AddNewUser> {
                   },
                 ),
                 Expanded(
-                  child :
-                  ListView(
+                  child: ListView(
                     children: devicesMap.keys.map((String key) {
                       return new CheckboxListTile(
                         title: Text(
-                            key.split('-')[1],
+                          key.split('-')[1],
                         ),
                         subtitle: Text(
-                            key.split('-')[0],
+                          key.split('-')[0],
                         ),
                         value: devicesMap[key],
                         activeColor: Theme.of(context).accentColor,
@@ -203,11 +203,9 @@ class _AddNewUserState extends State<AddNewUser> {
                     }).toList(),
                   ),
                 ),
-
                 SizedBox(
                   height: 40.0,
                 ),
-
                 RaisedButton(
                   padding: EdgeInsets.symmetric(
                     horizontal: 80,
@@ -221,20 +219,21 @@ class _AddNewUserState extends State<AddNewUser> {
                       color: Theme.of(context).primaryColor,
                     ),
                   ),
-onPressed: getItems,
-//                  onPressed: () async {
-//                    if (_formKey.currentState.validate()) {
-//                      setState(() => loading = true);
-//                      addUser(finalSelectedDevices,
-//                          user.houseId, email);
-//                      Navigator.pop(
-//                        context,
-//                        MaterialPageRoute(builder: (context) {
-//                          return ManageUsers();
-//                        }),
-//                      );
-//                    }
-//                  },
+//onPressed: getItems,
+                  onPressed: () async {
+                    getItems();
+                    if (_formKey.currentState.validate()) {
+                      setState(() => loading = true);
+                      addUser(finalSelectedDevices, user.houseId, email);
+                      print("done here");
+                      Navigator.pop(
+                        context,
+                        MaterialPageRoute(builder: (context) {
+                          return ManageUsers();
+                        }),
+                      );
+                    }
+                  },
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),
                   ),
