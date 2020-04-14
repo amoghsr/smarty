@@ -109,7 +109,7 @@ class AuthService {
       moveData(email, user.uid, homeId);
       return _userFromFirebaseUser(user);
     } catch (error) {
-      print(error.toString() + " this error here");
+      print(error.toString());
       return null;
     }
   }
