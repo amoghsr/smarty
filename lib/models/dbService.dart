@@ -63,6 +63,13 @@ class DatabaseService1 {
   }
 
   Stream<DocumentSnapshot> getUserDetails(String uid, User user) {
+    Firestore.instance
+        .collection("UserData")
+        .document("house")
+        .collection(user.houseId)
+        .document(user.uid)
+        .get()
+        .then((value) => print(user.uid + " " + user.houseId + " vefv"));
     return Firestore.instance
         .collection("UserData")
         .document("house")
