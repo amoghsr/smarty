@@ -28,7 +28,7 @@ class _AddNewUserState extends State<AddNewUser> {
   String homeId = '';
 
   // A list to hold the selectable devices in the house.
-  List<String> selectedDevices = [];
+  List<String> selectableDevicesList = [];
 
   // A map to store all the selectable devices in the house. This map is populated using createMap function
   Map<String, bool> devicesMap = {};
@@ -110,7 +110,7 @@ class _AddNewUserState extends State<AddNewUser> {
       });
     }
 
-    createMap(devicesList, roomsList, selectedDevices);
+    createMap(devicesList, roomsList, selectableDevicesList);
 
     // Get currently logged in user's details
     final user = Provider.of<User>(context);
