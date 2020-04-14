@@ -93,8 +93,7 @@ class _DrawerPageState extends State<DrawerPage> {
 // ListTile represents a list tile item in the menu
               ListTile(
 // Leading is an element in the start of the list tile horizontally
-                leading: Container(
-                    child: Icon(FontAwesomeIcons.users)),
+                leading: Container(child: Icon(FontAwesomeIcons.users)),
 // Title of the list
                 title: Text(
                   'Manage Users',

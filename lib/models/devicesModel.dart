@@ -103,7 +103,7 @@ Icon getIcons(String roomName) {
     case 'Water Heater':
       return Icon(FontAwesomeIcons.temperatureHigh);
     case 'Refrigerator':
-      return Icon(FontAwesomeIcons.egg);
+      return Icon(FontAwesomeIcons.cubes);
     case 'Baby Monitor':
       return Icon(FontAwesomeIcons.baby);
   }
