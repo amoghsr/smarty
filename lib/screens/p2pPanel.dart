@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:smarty/alertBox.dart';
 import 'package:smarty/shared/constants.dart';
+import 'package:smarty/models/boltProvider.dart';
 import 'package:smarty/widgets/donateDialog.dart';
 
 class P2P extends StatefulWidget {
@@ -12,12 +14,12 @@ class P2P extends StatefulWidget {
 class _P2PState extends State<P2P> {
   @override
   double electricityAmount = 5;
-  double bal = 25;
   double capacity = 48;
   int click = 0;
   double conversion = 0.23;
 
   Widget build(BuildContext context) {
+    final bal = Provider.of<BoltProvider>(context);
     double screenwidth = MediaQuery.of(context).size.width;
     double screenheight = MediaQuery.of(context).size.height;
     List<List<dynamic>> charities = [
@@ -30,7 +32,7 @@ class _P2PState extends State<P2P> {
       [
         "Animal Rescue",
         "assets/images/paw.png",
-        "assets/images/circlepaw.png",  
+        "assets/images/circlepaw.png",
         Color(0xff14B7F7)
       ],
       [
@@ -50,7 +52,7 @@ class _P2PState extends State<P2P> {
           Row(
             children: <Widget>[
               Text(
-                '${bal.toInt()}',
+                '${bal.getBalanceAsInt()}',
                 style: TextStyle(
                   fontSize: 19,
                 ),
@@ -185,9 +187,10 @@ class _P2PState extends State<P2P> {
                             builder: (BuildContext context) =>
                                 StatefulBuilder(builder: (context, setState) {
                                   return DonateDialog(
+                                    type: 0,
                                     image: charities[index][2],
                                     title: charities[index][0],
-                                    balance: bal,
+                                    balance: bal.getBalance(),
                                     description:
                                         "Sprinklers have been activated.",
                                     col: charities[index][3],
@@ -448,7 +451,7 @@ class _P2PState extends State<P2P> {
                                 "Would you like to proceed?",
                                 Colors.green,
                                 click,
-                                bal,
+                                bal.getBalance(),
                                 electricityAmount,
                                 0), // The required child is the content inside the dialog box.
                           );
@@ -480,7 +483,7 @@ class _P2PState extends State<P2P> {
                                   "Would you like to proceed?",
                                   Colors.green,
                                   click,
-                                  bal,
+                                  bal.getBalance(),
                                   electricityAmount,
                                   0), // The required child is the content inside the dialog box.
                             );

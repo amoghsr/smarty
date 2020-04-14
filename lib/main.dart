@@ -5,9 +5,9 @@ import 'package:smarty/models/user.dart';
 import 'package:smarty/services/auth.dart';
 import 'package:smarty/services/service_locator.dart';
 import 'package:smarty/wrapper.dart';
+import 'package:smarty/models/boltProvider.dart';
 
 void main() {
-
   setupLocator();
   runApp(
     ChangeNotifierProvider<ThemeModel>(
@@ -25,7 +25,10 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: Provider.of<ThemeModel>(context).currentTheme,
-        home: Wrapper(),
+        home: ChangeNotifierProvider<BoltProvider>(
+          create: (_) => BoltProvider(25),
+          child: Wrapper(),
+        ),
       ),
     );
   }
