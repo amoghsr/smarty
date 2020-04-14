@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:smarty/alertBox.dart';
 import 'package:smarty/models/dbService.dart';
 import 'package:smarty/models/user.dart';
 import 'package:smarty/shared/constants.dart';
@@ -53,16 +54,15 @@ class _UserProfileState extends State<UserProfile> {
     }
 
     Map<int, dynamic> rewards = {
-      1: Icon(FontAwesomeIcons.leaf, color: Colors.green, size: 30),
+      1: Image.asset('assets/images/save_energy.png', width: 30, height: 30),
       5: Icon(Icons.flash_on, color: Color(0xffe8b313), size: 30),
       10: Icon(FontAwesomeIcons.award, color: Colors.redAccent, size: 30),
       11: Icon(Icons.flash_on, color: Color(0xffe8b313), size: 30),
-      15: Icon(FontAwesomeIcons.trophy, color: Colors.orangeAccent, size: 30),
-      20: Icon(FontAwesomeIcons.medal, color: Colors.tealAccent, size: 30),
+      15: Image.asset('assets/images/eco-battery.png', width: 30, height: 30),
+      20: Image.asset('assets/images/solar.png', width: 30, height: 30),
       23: Icon(Icons.flash_on, color: Color(0xffe8b313), size: 30),
       25: Icon(FontAwesomeIcons.solarPanel, color: Colors.blueGrey, size: 30),
-      30: Icon(FontAwesomeIcons.calendarTimes,
-          color: Colors.pinkAccent, size: 30),
+      30: Image.asset('assets/images/may_challenge.png', width: 30, height: 30),
     };
 
     List<dynamic> badges = [
@@ -72,16 +72,22 @@ class _UserProfileState extends State<UserProfile> {
           [
             true,
             Image.asset('assets/images/save_energy.png',
-                width: 100, height: 100)
+                width: 100, height: 100),
+            'Energy Saver',
+            'Say watt? Your journey has begun!'
           ],
           [
-            true,
+            false,
             Image.asset('assets/images/eco-battery.png',
-                width: 100, height: 100)
+                width: 100, height: 100),
+            'Eco Warrior',
+            'Half way through a month? I\'m shocked!'
           ],
           [
-            true,
-            Image.asset('assets/images/solar.png', width: 100, height: 100)
+            false,
+            Image.asset('assets/images/solar.png', width: 100, height: 100),
+            'Solar Marathon',
+            'You got the power! Keep saving!'
           ],
         ],
       ],
@@ -89,18 +95,24 @@ class _UserProfileState extends State<UserProfile> {
         'Donation',
         [
           [
-            true,
+            false,
             Image.asset('assets/images/cross_badge.png',
-                width: 100, height: 100)
+                width: 100, height: 100),
+            'Red Cross Hero',
+            'Donated to the Red Cross Charity'
           ],
           [
             true,
-            Image.asset('assets/images/paw_badge.png', width: 100, height: 100)
+            Image.asset('assets/images/paw_badge.png', width: 100, height: 100),
+            'Animal Lover',
+            'Donated to the Animal Foundation'
           ],
           [
-            true,
+            false,
             Image.asset('assets/images/teddy_badge.png',
-                width: 100, height: 100)
+                width: 100, height: 100),
+            'Secret Genie',
+            'Donated to the Make a Wish Foundation'
           ]
         ],
       ],
@@ -109,19 +121,25 @@ class _UserProfileState extends State<UserProfile> {
         [
           [
             true,
-            Image.asset('assets/images/cross_badge.png',
-                width: 100, height: 100)
+            Image.asset('assets/images/april_challenge.png',
+                width: 100, height: 100),
+            'April Challenge',
+            'Ohm you couldn\'t resist, could you?'
           ],
           [
-            true,
-            Image.asset('assets/images/cross_badge.png',
-                width: 100, height: 100)
+            false,
+            Image.asset('assets/images/may_challenge.png',
+                width: 100, height: 100),
+            'May Challenge',
+            'May the force be with you always!'
           ],
           [
-            true,
-            Image.asset('assets/images/cross_badge.png',
-                width: 100, height: 100)
-          ]
+            false,
+            Image.asset('assets/images/june_challenge.png',
+                width: 100, height: 100),
+            'July Challenge',
+            'You\'ve reached enlightenment!'
+          ],
         ],
       ],
     ];
@@ -156,13 +174,6 @@ class _UserProfileState extends State<UserProfile> {
                         children: <Widget>[
                           CircleAvatar(
                             backgroundImage: NetworkImage(lb[3].userImage),
-                            // Text(
-                            //   'JD',
-                            //   style: TextStyle(
-                            //     fontSize: 30,
-                            //     fontFamily: 'Montserrat',
-                            //   ),
-                            // ),
                             maxRadius: 65,
                           ),
                           Padding(
@@ -378,8 +389,6 @@ class _UserProfileState extends State<UserProfile> {
                       ),
                     ),
                     SizedBox(height: screenheight * 0.02),
-
-                    // SizedBox(height: screenheight * 0.02),
                     ConstrainedBox(
                       constraints: BoxConstraints(
                           maxHeight: screenheight,
@@ -405,7 +414,7 @@ class _UserProfileState extends State<UserProfile> {
                                     height: screenheight * 0.01,
                                   ),
                                   Container(
-                                    height: screenheight * 0.1,
+                                    height: screenheight * 0.13,
                                     width: screenwidth,
                                     child: Center(
                                       child: ListView.separated(
@@ -420,21 +429,66 @@ class _UserProfileState extends State<UserProfile> {
                                           scrollDirection: Axis.horizontal,
                                           itemCount: badges[index1][1].length,
                                           itemBuilder: (context, index2) {
-                                            return Container(
-                                              foregroundDecoration:
-                                                  (badges[index1][1][index2]
-                                                              [0] ==
-                                                          false)
-                                                      ? BoxDecoration(
-                                                          color: Colors.grey,
-                                                          backgroundBlendMode:
-                                                              BlendMode
-                                                                  .saturation,
-                                                        )
-                                                      : null,
-                                              child: badges[index1][1][index2]
-                                                  [1],
-                                            );
+                                            return (badges[index1][1][index2]
+                                                        [0] ==
+                                                    false)
+                                                ? Container(
+                                                    foregroundDecoration:
+                                                        BoxDecoration(
+                                                      color: Colors.grey,
+                                                      backgroundBlendMode:
+                                                          BlendMode.saturation,
+                                                    ),
+                                                    child: badges[index1][1]
+                                                        [index2][1],
+                                                  )
+                                                : InkWell(
+                                                    onTap: () {
+                                                      showDialog(
+                                                        context: context,
+                                                        builder: (BuildContext
+                                                                context) =>
+                                                            StreamBuilder(
+                                                          builder:
+                                                              (context, snap) {
+                                                            return Dialog(
+                                                              shape:
+                                                                  RoundedRectangleBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            Consts.padding),
+                                                              ),
+                                                              elevation: 0.0,
+                                                              // Elevation means the height of element on the screen from the floor. Basically gives a drop shadow.
+                                                              backgroundColor:
+                                                                  Colors
+                                                                      .transparent,
+                                                              child: transactionDialog(
+                                                                  context,
+                                                                  badges[index1]
+                                                                              [1]
+                                                                          [index2]
+                                                                      [2],
+                                                                  badges[index1]
+                                                                              [
+                                                                              1]
+                                                                          [
+                                                                          index2]
+                                                                      [3],
+                                                                  badges[index1]
+                                                                          [1][
+                                                                      index2][1]),
+                                                            );
+                                                          },
+                                                        ),
+                                                      );
+                                                    },
+                                                    child: Container(
+                                                      child: badges[index1][1]
+                                                          [index2][1],
+                                                    ),
+                                                  );
                                           }),
                                     ),
                                   ),
@@ -450,5 +504,144 @@ class _UserProfileState extends State<UserProfile> {
             ),
           );
         });
+  }
+
+  transactionDialog(
+      BuildContext context, String title1, String description, Image image) {
+    return Stack(
+      children: <Widget>[
+        //...bottom card part,
+        Container(
+          padding: EdgeInsets.only(
+            top: Consts.padding + 30,
+            bottom: Consts.padding,
+            left: Consts.padding,
+            right: Consts.padding,
+          ),
+          margin: EdgeInsets.only(top: Consts.avatarRadius),
+          decoration: new BoxDecoration(
+            color: Theme.of(context).canvasColor,
+            shape: BoxShape.rectangle,
+            borderRadius: BorderRadius.circular(Consts.padding),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black26,
+                blurRadius: 10.0,
+                offset: const Offset(0.0, 10.0),
+              ),
+            ],
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min, // To make the card compact
+            children: <Widget>[
+              // Title of the popup
+              Text(
+                title1,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontFamily: 'Montserrat',
+                  color: Colors.white,
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              SizedBox(height: 16.0),
+              // Description on the popup
+              Text(
+                description,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontFamily: 'Montserrat',
+                  color: Colors.white,
+                  fontSize: 18.0,
+                ),
+              ),
+              SizedBox(height: 24.0),
+              FlatButton(
+                color: Colors.green,
+                textColor: Colors.white,
+                padding: EdgeInsets.all(8.0),
+                splashColor: Colors.blueAccent,
+                onPressed: () {},
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      "Share",
+                      style: TextStyle(fontSize: 20.0),
+                    ),
+                    Icon(Icons.share),
+                  ],
+                ),
+              ),
+
+              Column(
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: FlatButton(
+                          color: Colors.blue,
+                          textColor: Colors.white,
+                          padding: EdgeInsets.all(8.0),
+                          splashColor: Colors.blueAccent,
+                          onPressed: () {},
+                          child: Icon(
+                            FontAwesomeIcons.facebookF,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Expanded(
+                        child: FlatButton(
+                          color: Colors.yellow[600],
+                          textColor: Colors.white,
+                          padding: EdgeInsets.all(8.0),
+                          splashColor: Colors.blueAccent,
+                          onPressed: () {},
+                          child: Icon(
+                            FontAwesomeIcons.snapchatGhost,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Expanded(
+                        child: FlatButton(
+                          color: Colors.pinkAccent,
+                          textColor: Colors.white,
+                          padding: EdgeInsets.all(8.0),
+                          splashColor: Colors.blueAccent,
+                          onPressed: () {},
+                          child: Icon(
+                            FontAwesomeIcons.instagram,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              Column(
+                children: [
+                  Row(
+                    children: [],
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+        //...top circlular image part,
+        Positioned(
+            left: Consts.padding,
+            right: Consts.padding,
+            bottom: 230,
+            child: image),
+      ],
+    );
   }
 }
