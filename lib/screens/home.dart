@@ -150,11 +150,12 @@ class _HomeState extends State<Home> {
               Padding(
                 padding: EdgeInsets.only(left: 20.0, right: 120.0, bottom: 3.0),
                 child: Opacity(
-                  opacity: 0.6,
+                  opacity: 0.8,
                   child: Text(
                     '$formattedDate $formattedMonth $formattedYear',
                     style: TextStyle(
-                      fontWeight: FontWeight.w500,
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                 ),
@@ -168,17 +169,17 @@ class _HomeState extends State<Home> {
                       'Welcome Home, Ben',
                       //${widget.currentUser.email}`
                       style: TextStyle(
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.w700,
-                          fontFamily: 'Poppins'),
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
                     Text(
                       '32°C',
                       //${widget.currentUser.email}`
                       style: TextStyle(
-                          fontSize: 24.0,
-                          fontWeight: FontWeight.w400,
-                          fontFamily: 'Poppins'),
+                        fontSize: 24.0,
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
                   ],
                 ),
@@ -189,10 +190,14 @@ class _HomeState extends State<Home> {
               ),
               // The routine carousel is a carousel which lists the routines in the house based on a routine model. (routineCarousel.dart)
               RoutineCarousel(),
-              Divider(),
+              Divider(
+                height: 28.0,
+              ),
               // The room carousel is a carousel which lists the rooms in the house based on a room model. (roomCarousel.dart)
               RoomCarousel(),
-              Divider(),
+              Divider(
+                height: 28.0,
+              ),
               // The device carousel is a carousel which lists the devices in the house based on a device model. (deviceCarousel.dart)
               DeviceCarousel(),
             ],
