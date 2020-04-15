@@ -55,7 +55,9 @@ class ACController extends StatelessWidget {
                     Text(
                       'Temperature',
                       style: kLightDeviceTopBar.copyWith(
-                        color: Colors.white.withOpacity(0.5),
+                        color: Theme
+                            .of(context)
+                            .disabledColor,
                       ),
                     ),
                     SizedBox(
@@ -92,7 +94,9 @@ class ACController extends StatelessWidget {
                     Text(
                       'Humidity',
                       style: kLightDeviceTopBar.copyWith(
-                        color: Colors.white.withOpacity(0.5),
+                        color: Theme
+                            .of(context)
+                            .disabledColor,
                       ),
                     ),
                     SizedBox(

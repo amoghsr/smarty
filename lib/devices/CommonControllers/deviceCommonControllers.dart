@@ -122,9 +122,7 @@ Container topAppBar(String roomName, String appliance, IconData icon) {
           children: <Widget>[
             Text(
               roomName,
-              style: kLightDeviceTopBar.copyWith(
-                color: Colors.white.withOpacity(0.5),
-              ),
+                style: kLightDeviceTopBar
             ),
             SizedBox(
               height: 8,
