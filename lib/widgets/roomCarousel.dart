@@ -41,11 +41,11 @@ class RoomCarousel extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Opacity(
-                  opacity: 0.5,
+                  opacity: 0.8,
                   child: Text(
                     'Scroll through all the rooms in your house.',
                     style: TextStyle(
-                      fontSize: 11,
+                      fontSize: 12.0,
                       fontWeight: FontWeight.w400,
                     ),
                   ),
@@ -105,20 +105,35 @@ class RoomCarousel extends StatelessWidget {
                                     fontFamily: 'Montserrat',
                                     fontWeight: FontWeight.w700,
                                     color: Colors.white,
-                                    fontSize: 15,
+                                    fontSize: 18.0,
+                                    shadows: [
+                                      Shadow(
+                                        blurRadius: 10.0,
+                                        color: Colors.black26.withOpacity(0.4),
+                                        offset: Offset(4.0, 4.0),
+                                      ),
+                                    ],
                                   ),
                                 ),
                                 SizedBox(
                                   height: 2,
                                 ),
                                 Opacity(
-                                  opacity: 0.8,
+                                  opacity: 1.0,
                                   child: Text(
                                     '${room.nDevices} devices',
                                     style: TextStyle(
                                       fontFamily: 'Poppins',
-                                      fontSize: 10,
+                                      fontSize: 12.0,
+                                      fontWeight: FontWeight.w600,
                                       color: Colors.white,
+                                      shadows: [
+                                        Shadow(
+                                          blurRadius: 10.0,
+                                          color: Colors.black38,
+                                          offset: Offset(5.0, 5.0),
+                                        ),
+                                      ],
                                     ),
                                   ),
                                 ),

@@ -60,11 +60,11 @@ class _DeviceCarouselState extends State<DeviceCarousel> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Opacity(
-                  opacity: 0.5,
+                  opacity: 0.8,
                   child: Text(
                     'Most used devices in your house.',
                     style: TextStyle(
-                      fontSize: 11,
+                      fontSize: 12.0,
                       fontWeight: FontWeight.w400,
                     ),
                   ),
@@ -76,7 +76,7 @@ class _DeviceCarouselState extends State<DeviceCarousel> {
             height: 10.0,
           ),
           Container(
-            height: 180.0,
+            height: 210.0,
 //          color: Colors.blue,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
@@ -112,13 +112,12 @@ class _DeviceCarouselState extends State<DeviceCarousel> {
                                         MainAxisAlignment.spaceBetween,
                                     children: <Widget>[
                                       Opacity(
-                                        opacity: 0.7,
+                                        opacity: 0.8,
                                         child: Text(
                                           device.inRoom ?? " ",
                                           style: TextStyle(
-                                            fontSize: 10,
-                                            fontWeight: FontWeight.w400,
-                                            fontFamily: 'Poppins',
+                                            fontSize: 12.0,
+                                            fontWeight: FontWeight.w600,
 //                                      color: Theme.of(context).accentColor,
                                           ),
                                         ),
@@ -174,9 +173,9 @@ class _DeviceCarouselState extends State<DeviceCarousel> {
                                               });
                                             },
                                             activeTrackColor: Theme.of(context)
-                                                .backgroundColor,
+                                                .accentColor,
                                             activeColor:
-                                                Colors.lightGreenAccent,
+                                                Colors.white,
                                             inactiveTrackColor:
                                                 Theme.of(context)
                                                     .backgroundColor,
@@ -196,51 +195,54 @@ class _DeviceCarouselState extends State<DeviceCarousel> {
                                       ),
                                     ],
                                   ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: <Widget>[
-                                      Text(
-                                        device.deviceName ?? " ",
-                                        style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w700,
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(vertical: 10.0),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: <Widget>[
+                                        Text(
+                                          device.deviceName ?? " ",
+                                          style: TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w700,
+                                          ),
                                         ),
-                                      ),
-                                      StreamBuilder(
-                                        stream: itemRef
-                                            .child("Homes/" +
-                                                user.houseId +
-                                                "/Rooms/" +
-                                                device.inRoom +
-                                                "/devices/" +
-                                                device.deviceName +
-                                                "/")
-                                            .onValue,
-                                        builder: (context, snap) {
-                                          if (snap.data == null)
+                                        StreamBuilder(
+                                          stream: itemRef
+                                              .child("Homes/" +
+                                                  user.houseId +
+                                                  "/Rooms/" +
+                                                  device.inRoom +
+                                                  "/devices/" +
+                                                  device.deviceName +
+                                                  "/")
+                                              .onValue,
+                                          builder: (context, snap) {
+                                            if (snap.data == null)
+                                              return Text(
+                                                "Off",
+                                                style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.w500,
+                                                  fontFamily: 'Montserrat',
+                                                ),
+                                              );
+                                            Map<String, dynamic> values =
+                                                new Map<String, dynamic>.from(
+                                                    snap.data.snapshot.value);
                                             return Text(
-                                              "Off",
+                                              values["State"] ?? " ",
                                               style: TextStyle(
                                                 fontSize: 15,
                                                 fontWeight: FontWeight.w500,
                                                 fontFamily: 'Montserrat',
                                               ),
                                             );
-                                          Map<String, dynamic> values =
-                                              new Map<String, dynamic>.from(
-                                                  snap.data.snapshot.value);
-                                          return Text(
-                                            values["State"] ?? " ",
-                                            style: TextStyle(
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.w500,
-                                              fontFamily: 'Montserrat',
-                                            ),
-                                          );
-                                        },
-                                      ),
-                                    ],
+                                          },
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ],
                               ),

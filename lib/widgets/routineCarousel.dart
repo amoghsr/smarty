@@ -14,7 +14,7 @@ class RoutineCarousel extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Text(
-                'Your Routines',
+                'Routines',
                 style: TextStyle(
                   fontSize: 16.0,
                   fontWeight: FontWeight.w600,
@@ -48,11 +48,11 @@ class RoutineCarousel extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Opacity(
-                opacity: 0.5,
+                opacity: 0.8,
                 child: Text(
                   'Tap to control multiple devices at once.',
                   style: TextStyle(
-                    fontSize: 11,
+                    fontSize: 12.0,
                     fontWeight: FontWeight.w400,
                   ),
                 ),
@@ -75,7 +75,7 @@ class RoutineCarousel extends StatelessWidget {
                 margin: EdgeInsets.all(8.0),
                 width: 160.0,
                 decoration: BoxDecoration(
-                  color: Theme.of(context).cardColor,
+                  color: routines[index].routineColor,
                   borderRadius: BorderRadius.circular(10.0),
                 ),
                 child: Stack(
@@ -88,6 +88,7 @@ class RoutineCarousel extends StatelessWidget {
                         padding: EdgeInsets.all(6.0),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -96,9 +97,9 @@ class RoutineCarousel extends StatelessWidget {
                                 Text(
                                   routine.routineName,
                                   style: TextStyle(
-                                    fontFamily: 'Poppins',
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 15,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 16.0,
+                                    color: Colors.white
                                   ),
                                 ),
                               ],
