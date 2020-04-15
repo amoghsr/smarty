@@ -132,6 +132,9 @@ class _DrawerPageState extends State<DrawerPage> {
                 title: Text('Dark Mode'),
                 trailing: Switch(
                   value: valueSwitch,
+                  activeColor: Colors.white,
+                  activeTrackColor: Theme.of(context).accentColor,
+                  inactiveTrackColor: Theme.of(context).backgroundColor,
                   onChanged: (value) {
                     setState(() {
                       valueSwitch = value;

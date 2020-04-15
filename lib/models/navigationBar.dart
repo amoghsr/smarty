@@ -43,8 +43,7 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
             onTap: onTappedBar,
             currentIndex: _currentIndex,
             type: BottomNavigationBarType.fixed,
-            selectedItemColor: Colors.green,
-            backgroundColor: Theme.of(context).primaryColor,
+            selectedItemColor: Theme.of(context).accentColor,
             items: [
               BottomNavigationBarItem(
                 icon: Icon(

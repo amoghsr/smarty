@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:smarty/models/user.dart';
 import 'package:smarty/shared/constants.dart';
@@ -117,12 +118,11 @@ Container topAppBar(String roomName, String appliance, IconData icon) {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(
               roomName,
-              style: kLightDeviceTopBar.copyWith(
-                color: Colors.white.withOpacity(0.5),
-              ),
+                style: kLightDeviceTopBar
             ),
             SizedBox(
               height: 8,
@@ -134,7 +134,7 @@ Container topAppBar(String roomName, String appliance, IconData icon) {
           ],
         ),
         Container(
-          child: Icon(icon, size: 48, color: Colors.white),
+          child: Icon(icon, size: 44.0),
         ),
       ],
     ),

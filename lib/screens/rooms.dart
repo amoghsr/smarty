@@ -297,8 +297,8 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
                                 .toggleSt = value;
                           });
                         },
-                        activeTrackColor: Theme.of(context).backgroundColor,
-                        activeColor: Colors.lightGreenAccent,
+                        activeTrackColor: Theme.of(context).accentColor,
+                        activeColor: Colors.white,
                         inactiveTrackColor: Theme.of(context).backgroundColor,
                       );
                     },

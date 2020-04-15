@@ -31,6 +31,7 @@ class ACController extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
                   roomName,
@@ -54,7 +55,9 @@ class ACController extends StatelessWidget {
                     Text(
                       'Temperature',
                       style: kLightDeviceTopBar.copyWith(
-                        color: Colors.white.withOpacity(0.5),
+                        color: Theme
+                            .of(context)
+                            .disabledColor,
                       ),
                     ),
                     SizedBox(
@@ -91,7 +94,9 @@ class ACController extends StatelessWidget {
                     Text(
                       'Humidity',
                       style: kLightDeviceTopBar.copyWith(
-                        color: Colors.white.withOpacity(0.5),
+                        color: Theme
+                            .of(context)
+                            .disabledColor,
                       ),
                     ),
                     SizedBox(
@@ -184,8 +189,8 @@ class ACController extends StatelessWidget {
                       appearance: CircularSliderAppearance(
                           size: screenheight,
                           customColors: CustomSliderColors(
-                            trackColor: Colors.grey,
-                            progressBarColor: Colors.lightGreenAccent,
+                            trackColor: Theme.of(context).cardColor,
+                            progressBarColor: Theme.of(context).accentColor,
                           ),
                           customWidths: CustomSliderWidths(
                             trackWidth: 15,
@@ -193,12 +198,12 @@ class ACController extends StatelessWidget {
                           ),
                           infoProperties: InfoProperties(
                             topLabelStyle: kLightDeviceTopBar.copyWith(
-                              color: Colors.white.withOpacity(0.5),
-                              fontSize: 16,
+//                              color: Theme.of(context).disabledColor,
+                              fontSize: 18.0,
                             ),
                             topLabelText: 'Set Temp.',
                             mainLabelStyle:
-                                TextStyle(color: Colors.white, fontSize: 35),
+                                TextStyle(fontSize: 40),
                             modifier: (value) {
                               final roundedValue =
                                   (value).ceil().toInt().toString();

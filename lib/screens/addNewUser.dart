@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:smarty/models/devicesModel.dart';
@@ -9,6 +10,7 @@ import 'package:smarty/screens/manageUsers.dart';
 import 'package:smarty/services/auth.dart';
 import 'package:smarty/services/database.dart';
 import 'package:smarty/shared/constants.dart';
+import 'selectDevices.dart';
 
 class AddNewUser extends StatefulWidget {
   @override
@@ -16,7 +18,6 @@ class AddNewUser extends StatefulWidget {
 }
 
 class _AddNewUserState extends State<AddNewUser> {
-  final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
   String error = '';
   bool loading = false;
@@ -117,134 +118,126 @@ class _AddNewUserState extends State<AddNewUser> {
     final user = Provider.of<User>(context);
     // Use home owner's homeID and add it to the home user.
     homeId = user.houseId;
-
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Add User',
-          style: kAppBarTextStyle,
-        ),
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       ),
       body: Center(
-        child: Form(
-          key: _formKey,
-          child: Padding(
-            padding: const EdgeInsets.all(30.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text('Add a new user to your home',
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.headline5),
-                Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10.0),
-                  child: Text(
-                      'Provide some basic details about the home member',
-                      textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.subtitle1),
-                ),
-                SizedBox(
-                  height: 30.0,
-                ),
-                TextFormField(
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                    fillColor: Colors.lightGreenAccent,
-                    labelText: 'Members name',
-                    focusColor: Theme.of(context).accentColor,
-                  ),
-                  validator: (val) =>
-                      val.isEmpty ? 'Enter the home user name' : null,
-                  onChanged: (val) {
-                    setState(() => name = val);
-                  },
-                ),
-                TextFormField(
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: InputDecoration(
-                    labelText: "Their email address",
-                  ),
-                  validator: (val) =>
-                      val.isEmpty ? 'Enter the home user email' : null,
-                  onChanged: (val) {
-                    setState(() => email = val);
-                  },
-                ),
-                TextFormField(
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    labelText: "Password",
-                  ),
-                  validator: (val) =>
-                      val.length < 6 ? 'Enter a password 6+ char long' : null,
-                  onChanged: (val) {
-                    setState(() => password = val);
-                  },
-                ),
-                Expanded(
-                  child: ListView(
-                    children: devicesMap.keys.map((String key) {
-                      return new CheckboxListTile(
-                        title: Text(
-                          key.split('-')[1],
+        child: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Form(
+                  key: _formKey,
+                  child: Padding(
+                    padding: const EdgeInsets.all(30.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 14.0),
+                          child: Opacity(
+                            opacity: 0.5,
+                            child: Text('STEP 1 OF 2',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 14.0,
+                                    fontWeight: FontWeight.w600)),
+                          ),
                         ),
-                        subtitle: Text(
-                          key.split('-')[0],
+                        Text(
+                          'Add a home member',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 30.0,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
-                        value: devicesMap[key],
-                        activeColor: Theme.of(context).accentColor,
-                        checkColor: Theme.of(context).scaffoldBackgroundColor,
-                        onChanged: (bool value) {
-                          setState(() {
-                            devicesMap[key] = value;
-                          });
-                        },
-                      );
-                    }).toList(),
-                  ),
-                ),
-                SizedBox(
-                  height: 40.0,
-                ),
-                RaisedButton(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 80,
-                    vertical: 20,
-                  ),
-                  color: Theme.of(context).accentColor,
-                  child: Text(
-                    'Add user',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Theme.of(context).primaryColor,
+                        Padding(
+                          padding: EdgeInsets.symmetric(vertical: 16.0),
+                          child: Text(
+                              'Provide some basic details about the home member',
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context).textTheme.subtitle1),
+                        ),
+                        SizedBox(
+                          height: 24.0,
+                        ),
+                        TextFormField(
+                          keyboardType: TextInputType.text,
+                          decoration: InputDecoration(
+                            labelText: 'Members name',
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Theme.of(context).accentColor,
+                              ),
+                            ),
+                          ),
+                          validator: (val) =>
+                              val.isEmpty ? 'Enter the home user name' : null,
+                          onChanged: (val) {
+                            setState(() => name = val);
+                          },
+                        ),
+                        TextFormField(
+                          keyboardType: TextInputType.emailAddress,
+                          decoration: InputDecoration(
+                            labelText: 'Member email address',
+                          ),
+                          validator: (val) =>
+                              val.isEmpty ? 'Enter the home user email' : null,
+                          onChanged: (val) {
+                            setState(() => email = val);
+                          },
+                        ),
+                        SizedBox(
+                          height: 40.0,
+                        ),
+                        RaisedButton(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 140,
+                            vertical: 20,
+                          ),
+                          color: Theme.of(context).accentColor,
+                          child: Text(
+                            'Next',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Theme.of(context).primaryColor,
+                            ),
+                          ),
+//onPressed: getItems,
+                          onPressed: () async {
+                            if (_formKey.currentState.validate()) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) {
+                                  return SelectDevices(
+                                    email: email,
+                                    password: password,
+                                    name: name,
+                                    homeId: homeId,
+                                  );
+                                }),
+                              );
+                            }
+                          },
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                        ),
+                        SizedBox(height: 12.0),
+                        Text(
+                          error,
+                          style: TextStyle(color: Colors.red, fontSize: 14.0),
+                        ),
+                      ],
                     ),
                   ),
-//onPressed: getItems,
-                  onPressed: () async {
-                    getItems();
-                    if (_formKey.currentState.validate()) {
-                      setState(() => loading = true);
-                      addUser(finalSelectedDevices, user.houseId, email);
-                      print("done here");
-                      Navigator.pop(
-                        context,
-                        MaterialPageRoute(builder: (context) {
-                          return ManageUsers();
-                        }),
-                      );
-                    }
-                  },
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
                 ),
-                SizedBox(height: 12.0),
-                Text(
-                  error,
-                  style: TextStyle(color: Colors.red, fontSize: 14.0),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

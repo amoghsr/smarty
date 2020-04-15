@@ -86,8 +86,8 @@ class _FaucetControllerState extends State<FaucetController> {
                         isSwitched = value;
                       });
                     },
-                    activeTrackColor: Theme.of(context).backgroundColor,
-                    activeColor: Colors.lightGreenAccent,
+                    activeTrackColor: Theme.of(context).accentColor,
+                    activeColor: Colors.white,
                     inactiveTrackColor: Theme.of(context).backgroundColor,
                   );
                 },
@@ -134,7 +134,7 @@ class _FaucetControllerState extends State<FaucetController> {
                 onTap: () => setState(() {
                       if (waterAmount < 20) waterAmount = waterAmount + 1;
                     }),
-                child: Icon(Icons.add_circle_outline, size: 45)),
+                child: Icon(Icons.add_circle_outline, size: 45),),
           ],
         ),
         Container(
@@ -161,7 +161,7 @@ class _FaucetControllerState extends State<FaucetController> {
             ),
             lineHeight: 14.0,
             percent: 0.7,
-            backgroundColor: Theme.of(context).backgroundColor,
+            backgroundColor: Theme.of(context).cardColor,
             progressColor: Theme.of(context).accentColor,
           ),
         ),

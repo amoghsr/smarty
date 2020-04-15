@@ -139,22 +139,6 @@ class _SpeakerControllerState extends State<SpeakerController>
                 icon: AnimatedIcons.play_pause,
                 progress: controller,
               ),
-
-              // child: (icon == true)
-              //     animate() => myAnimation.reverse();
-              //     ? AnimatedIcon(
-              //         Icons.pause_circle_outline,
-              //         icon: AnimatedIcon.play_pause,
-              //         progress: myAnimation,
-              //         size: 60.0,
-              //       )
-              //     : Icon(
-              //         AnimatedIcon(
-              //         Icons.pause_circle_outline,
-              //         icon: AnimatedIcon.play_pause,
-              //         progress: myAnimation,
-              //         size: 60.0,
-              //       ),
             ),
             SizedBox(
               width: 20,
@@ -171,7 +155,9 @@ class _SpeakerControllerState extends State<SpeakerController>
             fontFamily: 'Montserrat',
             fontSize: 15,
             fontWeight: FontWeight.w600,
-            color: Colors.white.withOpacity(0.7),
+            color: Theme
+                .of(context)
+                .disabledColor,
           ),
         ),
         SizedBox(

@@ -1,48 +1,52 @@
 import 'package:flutter/material.dart';
 import 'package:smarty/models/routineModel.dart';
-import 'package:smarty/shared/constants.dart';
-import 'package:smarty/widgets/voiceAgent.dart';
+import 'package:smarty/screens/routines_pages/routine_page.dart';
 
-class RoutineScreen extends StatefulWidget {
+class CurrentRoutines extends StatefulWidget {
   @override
-  _RoutineScreenState createState() => _RoutineScreenState();
+  _CurrentRoutinesState createState() => _CurrentRoutinesState();
 }
 
-class _RoutineScreenState extends State<RoutineScreen> {
+class _CurrentRoutinesState extends State<CurrentRoutines> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(
-            'All Routines',
-            style: kAppBarTextStyle,
-          ),
-          actions: <Widget>[MicClass()],
-        ),
-        body: SafeArea(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              Padding(
-                padding: EdgeInsets.only(
-                    left: 30.0, right: 20.0, bottom: 20.0, top: 20),
-                child: Text(
-                  'Routines allow you to operate or set schedules for multiple devices in your house.',
-                  style: TextStyle(
-                    fontSize: 12,
-                  ),
+    return Scaffold(
+      body: SafeArea(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.only(
+                  left: 30.0, right: 20.0, bottom: 20.0, top: 20),
+              child: Text(
+                'Routines allow you to operate or set schedules for multiple devices in your house.',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 14.0,
                 ),
               ),
-              Expanded(
-                child: ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  itemCount: routines.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    Routine routine = routines[index];
-                    return Container(
+            ),
+            Expanded(
+              child: ListView.builder(
+                scrollDirection: Axis.vertical,
+                itemCount: routines.length,
+                itemBuilder: (BuildContext context, int index) {
+                  Routine routine = routines[index];
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => RoutinePage(
+                              routineName: routines[index].routineName,
+                              routineColor: routines[index].routineColor,
+                              routineIcon: routines[index].icon,
+                            ),
+                          ));
+                    },
+                    child: Container(
                       margin:
-                          EdgeInsets.symmetric(horizontal: 20.0, vertical: 8),
+                          EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                       width: 400.0,
                       child: Stack(
                         children: <Widget>[
@@ -51,7 +55,7 @@ class _RoutineScreenState extends State<RoutineScreen> {
                             height: 80.0,
                             width: 400.0,
                             decoration: BoxDecoration(
-                              color: Theme.of(context).cardColor,
+                              color: routines[index].routineColor,
                               borderRadius: BorderRadius.circular(5),
                             ),
                             child: Row(
@@ -80,9 +84,9 @@ class _RoutineScreenState extends State<RoutineScreen> {
                                             Text(
                                               routine.routineName,
                                               style: TextStyle(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w600,
-                                              ),
+                                                  fontSize: 18.0,
+                                                  fontWeight: FontWeight.w600,
+                                                  color: Colors.white),
                                             ),
                                           ],
                                         ),
@@ -91,12 +95,13 @@ class _RoutineScreenState extends State<RoutineScreen> {
                                           child: Row(
                                             children: <Widget>[
                                               Opacity(
-                                                opacity: 0.5,
+                                                opacity: 0.8,
                                                 child: Text(
                                                   routine.routineDesc,
                                                   style: TextStyle(
                                                     fontSize: 12,
                                                     fontWeight: FontWeight.w400,
+                                                    color: Colors.white,
                                                   ),
                                                 ),
                                               ),
@@ -114,8 +119,8 @@ class _RoutineScreenState extends State<RoutineScreen> {
                                     Row(
                                       children: <Widget>[
                                         Icon(
-                                          Icons.arrow_forward_ios,
-                                          color: Color(0xFFf8931f),
+                                          Icons.arrow_forward,
+                                          color: Colors.white,
                                         ),
                                       ],
                                     ),
@@ -126,13 +131,12 @@ class _RoutineScreenState extends State<RoutineScreen> {
                           ),
                         ],
                       ),
-                    );
-                  },
-                ),
+                    ),
+                  );
+                },
               ),
-            ],
-          ),
-//          child: getListView(),
+            ),
+          ],
         ),
       ),
     );
