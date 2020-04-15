@@ -49,11 +49,12 @@ class _LightControllerState extends State<LightController> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
                       widget.roomName,
                       style: kLightDeviceTopBar.copyWith(
-                        color: Colors.white.withOpacity(0.5),
+                        color: Theme.of(context).disabledColor
                       ),
                     ),
                     SizedBox(
@@ -143,8 +144,8 @@ class _LightControllerState extends State<LightController> {
                             isSwitched = value;
                           });
                         },
-                        activeTrackColor: Theme.of(context).backgroundColor,
-                        activeColor: Colors.lightGreenAccent,
+                        activeTrackColor: Theme.of(context).accentColor,
+                        activeColor: Colors.white,
                         inactiveTrackColor: Theme.of(context).backgroundColor,
                       );
                     },
@@ -169,7 +170,7 @@ class _LightControllerState extends State<LightController> {
               fontFamily: 'Montserrat',
               fontSize: 15,
               fontWeight: FontWeight.w600,
-              color: Colors.white.withOpacity(0.8),
+              color: Theme.of(context).disabledColor,
             ),
           ),
           SizedBox(
@@ -251,7 +252,7 @@ class _LightControllerState extends State<LightController> {
               fontFamily: 'Montserrat',
               fontSize: 15,
               fontWeight: FontWeight.w600,
-              color: Colors.white.withOpacity(0.7),
+              color: Theme.of(context).disabledColor,
             ),
           ),
           SizedBox(
@@ -266,13 +267,13 @@ class _LightControllerState extends State<LightController> {
                   fontFamily: 'Montserrat',
                   fontSize: 15,
                   fontWeight: FontWeight.w600,
-                  color: Colors.white.withOpacity(0.7),
+                  color: Theme.of(context).disabledColor,
                 ),
               ),
               SliderTheme(
                 data: SliderTheme.of(context).copyWith(
                   activeTrackColor: Theme.of(context).accentColor,
-                  inactiveTrackColor: Theme.of(context).backgroundColor,
+                  inactiveTrackColor: Theme.of(context).cardColor,
                   thumbColor: Theme.of(context).accentColor,
                   overlayColor: Theme.of(context).accentColor,
                   thumbShape: RoundSliderThumbShape(
@@ -339,7 +340,7 @@ class _LightControllerState extends State<LightController> {
                   fontFamily: 'Montserrat',
                   fontSize: 15,
                   fontWeight: FontWeight.w600,
-                  color: Colors.white.withOpacity(0.7),
+                  color: Theme.of(context).disabledColor,
                 ),
               ),
             ],

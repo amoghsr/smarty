@@ -88,8 +88,8 @@ class _TVControllerState extends State<TVController> {
                           isSwitched = value;
                         });
                       },
-                      activeTrackColor: Theme.of(context).backgroundColor,
-                      activeColor: Colors.lightGreenAccent,
+                      activeTrackColor: Theme.of(context).accentColor,
+                      activeColor: Colors.white,
                       inactiveTrackColor: Theme.of(context).backgroundColor,
                     );
                   }
@@ -115,7 +115,7 @@ class _TVControllerState extends State<TVController> {
               height: 50,
               width: 50,
               decoration: BoxDecoration(
-                color: Theme.of(context).backgroundColor,
+                color: Theme.of(context).cardColor,
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(30),
                   topLeft: Radius.circular(30),
@@ -123,7 +123,7 @@ class _TVControllerState extends State<TVController> {
               ),
               child: Center(
                 child: Text(
-                  'CH-',
+                  'CH -',
                   style: kLightDeviceBottomBar.copyWith(fontSize: 18),
                 ),
               ),
@@ -133,7 +133,7 @@ class _TVControllerState extends State<TVController> {
               height: 55,
               width: 55,
               decoration: BoxDecoration(
-                color: Theme.of(context).backgroundColor,
+                color: Theme.of(context).cardColor,
                 borderRadius: BorderRadius.all(
                   Radius.circular(20),
                 ),
@@ -147,7 +147,7 @@ class _TVControllerState extends State<TVController> {
               height: 50,
               width: 50,
               decoration: BoxDecoration(
-                color: Theme.of(context).backgroundColor,
+                color: Theme.of(context).cardColor,
                 borderRadius: BorderRadius.only(
                   bottomRight: Radius.circular(30),
                   topRight: Radius.circular(30),
@@ -180,11 +180,11 @@ class _TVControllerState extends State<TVController> {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Icon(FontAwesomeIcons.volumeOff, size: 30),
+            Icon(Icons.volume_mute, size: 30),
             SliderTheme(
               data: SliderTheme.of(context).copyWith(
                 activeTrackColor: Theme.of(context).accentColor,
-                inactiveTrackColor: Theme.of(context).backgroundColor,
+                inactiveTrackColor: Theme.of(context).cardColor,
                 thumbColor: Theme.of(context).accentColor,
                 overlayColor: Theme.of(context).accentColor,
                 thumbShape: RoundSliderThumbShape(
@@ -241,7 +241,7 @@ class _TVControllerState extends State<TVController> {
                 ),
               ),
             ),
-            Icon(FontAwesomeIcons.volumeUp, size: 30),
+            Icon(Icons.volume_up, size: 30),
           ],
         )
       ],
