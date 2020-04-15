@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:smarty/models/user.dart';
 import 'package:smarty/screens/home.dart';
@@ -43,12 +44,16 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
             onTap: onTappedBar,
             currentIndex: _currentIndex,
             type: BottomNavigationBarType.fixed,
+            showUnselectedLabels: false,
             selectedItemColor: Theme.of(context).accentColor,
+            backgroundColor: Theme
+                .of(context)
+                .primaryColor,
             items: [
               BottomNavigationBarItem(
                 icon: Icon(
-                  AntDesign.home,
-                  semanticLabel: 'Home page',
+                  MaterialCommunityIcons.home_automation,
+                  semanticLabel: 'This is the home page',
                 ),
                 title: new Text(
                   'Home',
@@ -57,8 +62,8 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
               ),
               BottomNavigationBarItem(
                 icon: Icon(
-                  FontAwesome5.chart_bar,
-                  semanticLabel: 'Energy Statistics',
+                  MaterialCommunityIcons.chart_bar,
+                  semanticLabel: 'View Energy Statistics or sell your homes energy to the community',
                 ),
                 title: new Text(
                   'Stats',
@@ -67,7 +72,7 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
               ),
               BottomNavigationBarItem(
                 icon: Icon(
-                  FontAwesome5.eye,
+                  Icons.visibility,
                   semanticLabel: 'Home Security',
                 ),
                 title: new Text(
@@ -77,7 +82,7 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
               ),
               BottomNavigationBarItem(
                 icon: Icon(
-                  AntDesign.up,
+                  MaterialCommunityIcons.trophy,
                   semanticLabel: 'Community Leaderboard',
                 ),
                 title: new Text(
@@ -102,11 +107,17 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
             onTap: onTappedBar,
             currentIndex: _currentIndex,
             type: BottomNavigationBarType.fixed,
-//          backgroundColor: Theme.of(context).primaryColor,
+            showUnselectedLabels: false,
+            selectedItemColor: Theme
+                .of(context)
+                .accentColor,
+            backgroundColor: Theme
+                .of(context)
+                .primaryColor,
             items: [
               BottomNavigationBarItem(
                 icon: Icon(
-                  AntDesign.home,
+                  MaterialCommunityIcons.home_automation,
                   semanticLabel: 'Home page',
                 ),
                 title: new Text(
@@ -116,7 +127,7 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
               ),
               BottomNavigationBarItem(
                 icon: Icon(
-                  FontAwesome5.eye,
+                  Icons.visibility,
                   semanticLabel: 'Home Security',
                 ),
                 title: new Text(
@@ -126,7 +137,7 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
               ),
               BottomNavigationBarItem(
                 icon: Icon(
-                  AntDesign.up,
+                  MaterialCommunityIcons.trophy,
                   semanticLabel: 'Community Leaderboard',
                 ),
                 title: new Text(
