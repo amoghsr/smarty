@@ -95,7 +95,6 @@ class _ManageUsersState extends State<ManageUsers> {
                       ),
                       subtitle: Text(userlist[index].split('-')[1]),
                       trailing: InkWell(
-                        // TODO: IMPLEMENT DELETE USER
                         onTap: () {
 //                          print('pressed list item $index');
                         },

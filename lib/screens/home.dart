@@ -127,8 +127,6 @@ class _HomeState extends State<Home> {
 //  String resultText = "";
 
   Widget build(BuildContext context) {
-    double screenwidth = MediaQuery.of(context).size.width;
-    double screenheight = MediaQuery.of(context).size.height;
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(

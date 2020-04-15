@@ -114,7 +114,7 @@ class _RoutineScreenState extends State<RoutineScreen> {
                                     Row(
                                       children: <Widget>[
                                         Icon(
-                                          Icons.arrow_forward_ios,
+                                          Icons.arrow_forward,
                                           color: Color(0xFFf8931f),
                                         ),
                                       ],
