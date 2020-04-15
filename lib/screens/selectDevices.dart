@@ -42,6 +42,8 @@ class _SelectDevicesState extends State<SelectDevices> {
   // Here you will get all your selected Checkbox items.
   List<String> finalSelectedDevices = [];
 
+  int count = 0;
+
   selectAllDevices() {
     devicesMap.forEach((key, value) {
       setState(() {
@@ -249,12 +251,9 @@ class _SelectDevicesState extends State<SelectDevices> {
                       setState(() => loading = true);
                       addUser(finalSelectedDevices, user.houseId, widget.email);
                       print("done here");
-                      Navigator.pop(
-                        context,
-                        MaterialPageRoute(builder: (context) {
-                          return ManageUsers();
-                        }),
-                      );
+                      Navigator.popUntil(context, (route) {
+                        return count++ == 2;
+                      });
                     }
                   },
                   shape: RoundedRectangleBorder(
