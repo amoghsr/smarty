@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:smarty/devices/CommonControllers/deviceCommonControllers.dart';
 import 'package:smarty/models/user.dart';
@@ -27,9 +28,10 @@ class _MicClassState extends State<MicClass> {
   Widget build(BuildContext context) {
     return IconButton(
         icon: Icon(
-          Icons.keyboard_voice,
-          semanticLabel: 'Notifcations',
+          MaterialCommunityIcons.assistant,
+          semanticLabel: 'Voice Assistant to help you turn on or turn of devices. For example, say: "Turn on living room lamp".',
         ),
+        tooltip: 'Voide Assistant',
         onPressed: () {
           showDialog(
               context: context,
