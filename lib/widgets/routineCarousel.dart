@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:smarty/models/routineModel.dart';
 
-import '../screens/routines.dart';
+import '../screens/routines_pages/routines_main_view.dart';
 
 class RoutineCarousel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
+        SizedBox(height: 4.0,),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 20.0),
           child: Row(
@@ -24,15 +25,15 @@ class RoutineCarousel extends StatelessWidget {
                 onTap: () => Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => RoutineScreen(),
+                    builder: (context) => RoutineMainView(),
                   ),
                 ),
                 child: Text(
-                  'Edit or Add',
+                  'Edit',
                   style: TextStyle(
                     fontSize: 12.0,
                     color: Theme.of(context).accentColor,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.w700,
                   ),
                 ),
               ),
@@ -50,7 +51,7 @@ class RoutineCarousel extends StatelessWidget {
               Opacity(
                 opacity: 0.8,
                 child: Text(
-                  'Tap to control multiple devices at once.',
+                  'Tap to control multiple devices at once',
                   style: TextStyle(
                     fontSize: 12.0,
                     fontWeight: FontWeight.w400,

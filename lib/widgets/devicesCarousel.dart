@@ -42,7 +42,7 @@ class _DeviceCarouselState extends State<DeviceCarousel> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text(
-                  'Favourite Devices',
+                  'Your favourite devices',
                   style: TextStyle(
                     fontSize: 16.0,
                     fontWeight: FontWeight.w600,
@@ -52,7 +52,7 @@ class _DeviceCarouselState extends State<DeviceCarousel> {
             ),
           ),
           SizedBox(
-            height: 4,
+            height: 4.0,
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.0),
@@ -62,7 +62,7 @@ class _DeviceCarouselState extends State<DeviceCarousel> {
                 Opacity(
                   opacity: 0.8,
                   child: Text(
-                    'Most used devices in your house.',
+                    'Most used devices by you',
                     style: TextStyle(
                       fontSize: 12.0,
                       fontWeight: FontWeight.w400,
