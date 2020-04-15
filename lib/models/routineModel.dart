@@ -7,8 +7,10 @@ class Routine {
   String routineName;
   String routineDesc;
   Color routineColor;
+  DateTime routineTime;
 
-  Routine({this.icon, this.routineName, this.routineDesc, this.routineColor});
+  Routine(
+      {this.icon, this.routineName, this.routineDesc, this.routineColor, this.routineTime});
 }
 
 List<Routine> routines = [
@@ -20,6 +22,7 @@ List<Routine> routines = [
     routineColor: Colors.blue,
     routineName: 'Exiting',
     routineDesc: 'On Tap',
+    routineTime: new DateTime.now(),
   ),
   Routine(
     icon: Icon(
@@ -29,6 +32,7 @@ List<Routine> routines = [
     routineColor: Colors.red[600],
     routineName: 'Movie',
     routineDesc: 'On Tap',
+    routineTime: new DateTime.now(),
   ),
   Routine(
     icon: Icon(
@@ -38,5 +42,6 @@ List<Routine> routines = [
     routineColor: Colors.deepPurpleAccent,
     routineName: 'Night Time',
     routineDesc: 'From 9:00 PM to 6:00 AM',
+    routineTime: new DateTime.now(),
   ),
 ];
