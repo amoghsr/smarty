@@ -8,8 +8,11 @@
 
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+import 'package:smarty/models/themeModel.dart';
 import 'package:smarty/models/weatherModel.dart';
 import 'package:smarty/screens/drawer.dart';
 import 'package:smarty/services/auth.dart';
@@ -130,14 +133,22 @@ class _HomeState extends State<Home> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Center(
-            child: Text(
-              'Home',
-              style: kAppBarTextStyle,
-            ),
+          title: Text(
+            'Home',
+            style: kAppBarTextStyle,
           ),
-          // TODO Dark mode + Accessibility options
-          actions: <Widget>[Icon(Icons.brightness_6), MicClass()],
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(MaterialCommunityIcons.theme_light_dark),
+              onPressed: () {
+                setState(() {
+                  Provider.of<ThemeModel>(context, listen: false)
+                      .toggleTheme();
+                });
+              },
+            ),
+            MicClass()
+          ],
         ),
 
         // Drawer is the hamburger menu.
