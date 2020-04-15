@@ -199,7 +199,7 @@ class _SelectDevicesState extends State<SelectDevices> {
                   ],
                 ),
                 SizedBox(
-                  height: 10.0,
+                  height: 20.0,
                 ),
                 Expanded(
                   child: Scrollbar(

@@ -136,7 +136,7 @@ class _AddNewUserState extends State<AddNewUser> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 10.0),
+                          padding: const EdgeInsets.symmetric(vertical: 14.0),
                           child: Opacity(
                             opacity: 0.5,
                             child: Text('STEP 1 OF 2',
@@ -146,18 +146,23 @@ class _AddNewUserState extends State<AddNewUser> {
                                     fontWeight: FontWeight.w600)),
                           ),
                         ),
-                        Text('Add a home member',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(fontSize: 30.0)),
+                        Text(
+                          'Add a home member',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 30.0,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
                         Padding(
-                          padding: EdgeInsets.symmetric(vertical: 10.0),
+                          padding: EdgeInsets.symmetric(vertical: 16.0),
                           child: Text(
                               'Provide some basic details about the home member',
                               textAlign: TextAlign.center,
                               style: Theme.of(context).textTheme.subtitle1),
                         ),
                         SizedBox(
-                          height: 30.0,
+                          height: 24.0,
                         ),
                         TextFormField(
                           keyboardType: TextInputType.text,
