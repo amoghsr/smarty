@@ -190,7 +190,6 @@ class CurrentRoutinePage extends StatelessWidget {
                     color: Theme.of(context).disabledColor),
               ),
             ),
-            // TODO Devices carousel widget
             RoutineDeviceCarousel(
               routineColor: routineColor,
             ),
