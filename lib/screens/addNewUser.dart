@@ -9,6 +9,7 @@ import 'package:smarty/screens/manageUsers.dart';
 import 'package:smarty/services/auth.dart';
 import 'package:smarty/services/database.dart';
 import 'package:smarty/shared/constants.dart';
+import 'selectDevices.dart';
 
 class AddNewUser extends StatefulWidget {
   @override
@@ -16,7 +17,6 @@ class AddNewUser extends StatefulWidget {
 }
 
 class _AddNewUserState extends State<AddNewUser> {
-  final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
   String error = '';
   bool loading = false;
@@ -133,9 +133,23 @@ class _AddNewUserState extends State<AddNewUser> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10.0),
+                  child: Opacity(
+                    opacity: 0.5,
+                    child: Text('STEP 1 OF 2',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 14.0,
+                          fontWeight: FontWeight.w600
+                        )),
+                  ),
+                ),
                 Text('Add a new user to your home',
                     textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.headline5),
+                    style: TextStyle(
+                      fontSize: 30.0
+                    )),
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 10.0),
                   child: Text(
@@ -181,28 +195,6 @@ class _AddNewUserState extends State<AddNewUser> {
                     setState(() => password = val);
                   },
                 ),
-                Expanded(
-                  child: ListView(
-                    children: devicesMap.keys.map((String key) {
-                      return new CheckboxListTile(
-                        title: Text(
-                          key.split('-')[1],
-                        ),
-                        subtitle: Text(
-                          key.split('-')[0],
-                        ),
-                        value: devicesMap[key],
-                        activeColor: Theme.of(context).accentColor,
-                        checkColor: Theme.of(context).scaffoldBackgroundColor,
-                        onChanged: (bool value) {
-                          setState(() {
-                            devicesMap[key] = value;
-                          });
-                        },
-                      );
-                    }).toList(),
-                  ),
-                ),
                 SizedBox(
                   height: 40.0,
                 ),
@@ -213,7 +205,7 @@ class _AddNewUserState extends State<AddNewUser> {
                   ),
                   color: Theme.of(context).accentColor,
                   child: Text(
-                    'Add user',
+                    'Next',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Theme.of(context).primaryColor,
@@ -221,15 +213,11 @@ class _AddNewUserState extends State<AddNewUser> {
                   ),
 //onPressed: getItems,
                   onPressed: () async {
-                    getItems();
-                    if (_formKey.currentState.validate()) {
-                      setState(() => loading = true);
-                      addUser(finalSelectedDevices, user.houseId, email);
-                      print("done here");
-                      Navigator.pop(
+                    if (_formKey.currentState.validate()){
+                      Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) {
-                          return ManageUsers();
+                          return SelectDevices(email: email, password: password, name: name, homeId: homeId,);
                         }),
                       );
                     }
