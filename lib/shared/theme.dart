@@ -6,7 +6,7 @@ ThemeData darkTheme = ThemeData(
   platform: TargetPlatform.iOS,
   fontFamily: 'Montserrat',
     appBarTheme: AppBarTheme(
-      elevation: 0,
+      elevation: 0.0
     ),
 );
 

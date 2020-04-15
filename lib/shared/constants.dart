@@ -2,6 +2,7 @@
 This file stores styling for some of the components needed in the UI
  */
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 const kNavigationBarTextStyle = TextStyle(
@@ -10,6 +11,7 @@ const kNavigationBarTextStyle = TextStyle(
 
 const kAppBarTextStyle = TextStyle(
   fontSize: 16,
+  fontWeight: FontWeight.bold,
 );
 
 const kLightDeviceTopBar = TextStyle(
