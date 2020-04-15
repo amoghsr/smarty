@@ -143,10 +143,7 @@ class _SelectDevicesState extends State<SelectDevices> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Select Devices',
-          style: kAppBarTextStyle,
-        ),
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       ),
       body: Center(
         child: Form(
@@ -233,8 +230,8 @@ class _SelectDevicesState extends State<SelectDevices> {
                 ),
                 RaisedButton(
                   padding: EdgeInsets.symmetric(
-                    horizontal: 80,
-                    vertical: 20,
+                    horizontal: 120.0,
+                    vertical: 20.0,
                   ),
                   color: Theme.of(context).accentColor,
                   child: Text(

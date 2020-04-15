@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:smarty/models/devicesModel.dart';
@@ -118,7 +119,9 @@ class _AddNewUserState extends State<AddNewUser> {
     // Use home owner's homeID and add it to the home user.
     homeId = user.houseId;
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      ),
       body: Center(
         child: SingleChildScrollView(
           child: Column(
