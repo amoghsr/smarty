@@ -4,14 +4,14 @@ import 'package:smarty/shared/constants.dart';
 import 'package:smarty/widgets/devicesCarousel.dart';
 import 'package:smarty/widgets/roomCarousel.dart';
 
-class RoutinePage extends StatelessWidget {
+class SuggestedRoutinePage extends StatelessWidget {
   final String routineName;
   final String time;
   final List devices;
   final Color routineColor;
   final Icon routineIcon;
 
-  const RoutinePage(
+  const SuggestedRoutinePage(
       {Key key,
       this.routineName,
       this.time,
@@ -19,41 +19,6 @@ class RoutinePage extends StatelessWidget {
       this.routineColor,
       this.routineIcon})
       : super(key: key);
-
-  Future<void> _confirmDialog(BuildContext context) async {
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: true, // user must tap button for close dialog!
-      builder: (BuildContext context) {
-        return AlertDialog(
-          backgroundColor: Theme.of(context).primaryColor,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10.0),
-          ),
-          title: Text('Delete this routine?'),
-          content: const Text(
-              'You will lose this routine forever once you delete it.'),
-          actions: <Widget>[
-            FlatButton(
-              child: const Text('Cancel'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-            FlatButton(
-              child: const Text(
-                'Delete',
-                style: TextStyle(color: Colors.red),
-              ),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            )
-          ],
-        );
-      },
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +29,7 @@ class RoutinePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(
-              'Current Routine',
+              'Suggested Routine',
               style: TextStyle(fontSize: 12.0, color: Colors.white),
             ),
             SizedBox(height: 2.0),
@@ -199,25 +164,23 @@ class RoutinePage extends StatelessWidget {
               height: 40.0,
             ),
 
-            /// DELETE ROUTINES SECTION
+            /// ADD ROUTINES SECTION
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10.0),
               child: Container(
                 child: GestureDetector(
-                  onTap: () {
-                    _confirmDialog(context);
-                  },
+                  onTap: () {},
                   child: Card(
                     color: Theme.of(context).primaryColor,
                     child: ListTile(
                       leading: Icon(
-                        Icons.delete,
-                        color: Colors.redAccent,
+                        Icons.add_circle,
+                        color: Colors.greenAccent,
                       ),
                       title: Text(
-                        'Delete this routine',
+                        'Add this routine',
                         style: TextStyle(
-                            color: Colors.redAccent,
+                            color: Colors.greenAccent,
                             fontWeight: FontWeight.w600),
                       ),
                     ),

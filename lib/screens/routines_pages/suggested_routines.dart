@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smarty/models/routineModel.dart';
-import 'package:smarty/screens/routines_pages/routine_page.dart';
+import 'package:smarty/screens/routines_pages/current_routine_page.dart';
+import 'package:smarty/screens/routines_pages/suggested_routine_page.dart';
 
 class SuggestedRoutines extends StatefulWidget {
   @override
@@ -37,7 +38,8 @@ class _SuggestedRoutinesState extends State<SuggestedRoutines> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => RoutinePage(
+                            builder: (context) =>
+                                SuggestedRoutinePage(
                               routineName: routines[index].routineName,
                               routineColor: routines[index].routineColor,
                               routineIcon: routines[index].icon,
