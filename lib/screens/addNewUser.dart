@@ -117,122 +117,119 @@ class _AddNewUserState extends State<AddNewUser> {
     final user = Provider.of<User>(context);
     // Use home owner's homeID and add it to the home user.
     homeId = user.houseId;
-
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Add User',
-          style: kAppBarTextStyle,
-        ),
-      ),
+      appBar: AppBar(),
       body: Center(
-        child: Form(
-          key: _formKey,
-          child: Padding(
-            padding: const EdgeInsets.all(30.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10.0),
-                  child: Opacity(
-                    opacity: 0.5,
-                    child: Text('STEP 1 OF 2',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 14.0,
-                          fontWeight: FontWeight.w600
-                        )),
-                  ),
-                ),
-                Text('Add a new user to your home',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 30.0
-                    )),
-                Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10.0),
-                  child: Text(
-                      'Provide some basic details about the home member',
-                      textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.subtitle1),
-                ),
-                SizedBox(
-                  height: 30.0,
-                ),
-                TextFormField(
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                    fillColor: Colors.lightGreenAccent,
-                    labelText: 'Members name',
-                    focusColor: Theme.of(context).accentColor,
-                  ),
-                  validator: (val) =>
-                      val.isEmpty ? 'Enter the home user name' : null,
-                  onChanged: (val) {
-                    setState(() => name = val);
-                  },
-                ),
-                TextFormField(
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: InputDecoration(
-                    labelText: "Their email address",
-                  ),
-                  validator: (val) =>
-                      val.isEmpty ? 'Enter the home user email' : null,
-                  onChanged: (val) {
-                    setState(() => email = val);
-                  },
-                ),
-                TextFormField(
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    labelText: "Password",
-                  ),
-                  validator: (val) =>
-                      val.length < 6 ? 'Enter a password 6+ char long' : null,
-                  onChanged: (val) {
-                    setState(() => password = val);
-                  },
-                ),
-                SizedBox(
-                  height: 40.0,
-                ),
-                RaisedButton(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 80,
-                    vertical: 20,
-                  ),
-                  color: Theme.of(context).accentColor,
-                  child: Text(
-                    'Next',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Theme.of(context).primaryColor,
+        child: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Form(
+                  key: _formKey,
+                  child: Padding(
+                    padding: const EdgeInsets.all(30.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 10.0),
+                          child: Opacity(
+                            opacity: 0.5,
+                            child: Text('STEP 1 OF 2',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 14.0,
+                                    fontWeight: FontWeight.w600)),
+                          ),
+                        ),
+                        Text('Add a home member',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(fontSize: 30.0)),
+                        Padding(
+                          padding: EdgeInsets.symmetric(vertical: 10.0),
+                          child: Text(
+                              'Provide some basic details about the home member',
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context).textTheme.subtitle1),
+                        ),
+                        SizedBox(
+                          height: 30.0,
+                        ),
+                        TextFormField(
+                          keyboardType: TextInputType.text,
+                          decoration: InputDecoration(
+                            labelText: 'Members name',
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Theme.of(context).accentColor,
+                              ),
+                            ),
+                          ),
+                          validator: (val) =>
+                              val.isEmpty ? 'Enter the home user name' : null,
+                          onChanged: (val) {
+                            setState(() => name = val);
+                          },
+                        ),
+                        TextFormField(
+                          keyboardType: TextInputType.emailAddress,
+                          decoration: InputDecoration(
+                            labelText: 'Member email address',
+                          ),
+                          validator: (val) =>
+                              val.isEmpty ? 'Enter the home user email' : null,
+                          onChanged: (val) {
+                            setState(() => email = val);
+                          },
+                        ),
+                        SizedBox(
+                          height: 40.0,
+                        ),
+                        RaisedButton(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 140,
+                            vertical: 20,
+                          ),
+                          color: Theme.of(context).accentColor,
+                          child: Text(
+                            'Next',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Theme.of(context).primaryColor,
+                            ),
+                          ),
+//onPressed: getItems,
+                          onPressed: () async {
+                            if (_formKey.currentState.validate()) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) {
+                                  return SelectDevices(
+                                    email: email,
+                                    password: password,
+                                    name: name,
+                                    homeId: homeId,
+                                  );
+                                }),
+                              );
+                            }
+                          },
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                        ),
+                        SizedBox(height: 12.0),
+                        Text(
+                          error,
+                          style: TextStyle(color: Colors.red, fontSize: 14.0),
+                        ),
+                      ],
                     ),
                   ),
-//onPressed: getItems,
-                  onPressed: () async {
-                    if (_formKey.currentState.validate()){
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) {
-                          return SelectDevices(email: email, password: password, name: name, homeId: homeId,);
-                        }),
-                      );
-                    }
-                  },
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
                 ),
-                SizedBox(height: 12.0),
-                Text(
-                  error,
-                  style: TextStyle(color: Colors.red, fontSize: 14.0),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
