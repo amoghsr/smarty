@@ -6,24 +6,23 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 const kNavigationBarTextStyle = TextStyle(
-  fontSize: 11,
+  fontSize: 11.5,
 );
 
 const kAppBarTextStyle = TextStyle(
-  fontSize: 16,
+  fontSize: 16.0,
   fontWeight: FontWeight.bold,
 );
 
+
 const kLightDeviceTopBar = TextStyle(
-  fontFamily: 'Montserrat',
-  color: Colors.white,
-  fontSize: 11,
+  fontFamily: 'Montserrat', fontSize: 12.0,
 );
 
 const kLightDeviceBottomBar = TextStyle(
   fontFamily: 'Montserrat',
   fontWeight: FontWeight.w800,
-  fontSize: 22,
+  fontSize: 22.0,
 );
 
 const kTextInputDecoration = InputDecoration(
