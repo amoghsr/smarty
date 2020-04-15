@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:smarty/models/routineModel.dart';
 
@@ -28,12 +29,22 @@ class RoutineCarousel extends StatelessWidget {
                     builder: (context) => RoutineMainView(),
                   ),
                 ),
-                child: Text(
-                  'Edit',
-                  style: TextStyle(
-                    fontSize: 12.0,
-                    color: Theme.of(context).accentColor,
-                    fontWeight: FontWeight.w700,
+                child: Container(
+                  padding: EdgeInsets.symmetric(
+                      vertical: 6.0, horizontal: 14.0),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(4.0),
+                    color: Theme
+                        .of(context)
+                        .primaryColor,
+                  ),
+
+                  child: Text(
+                    'See all',
+                    style: TextStyle(
+                      fontSize: 12.0,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
               ),
@@ -65,7 +76,7 @@ class RoutineCarousel extends StatelessWidget {
           height: 10.0,
         ),
         Container(
-          height: 100.0,
+          height: 90.0,
 //          color: Colors.blue,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
@@ -98,9 +109,9 @@ class RoutineCarousel extends StatelessWidget {
                                 Text(
                                   routine.routineName,
                                   style: TextStyle(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 16.0,
-                                    color: Colors.white
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 16.0,
+                                      color: Colors.white
                                   ),
                                 ),
                               ],
