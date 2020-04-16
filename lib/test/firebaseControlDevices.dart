@@ -101,7 +101,7 @@ class _FirebaseControlDevicesState extends State<FirebaseControlDevices> {
                       new Map<String, dynamic>.from(snap.data.snapshot.value);
                   values.forEach((key, value) {
                     value.forEach((key1, value1) {
-                      print(key1);
+//                      print(key1);
                     });
                   });
                   return Switch(

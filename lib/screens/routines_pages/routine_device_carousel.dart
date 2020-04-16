@@ -1,31 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:smarty/models/dbRoutines.dart';
+import 'package:smarty/models/routineModel.dart';
 import 'package:smarty/shared/constants.dart';
 
 class RoutineDeviceCarousel extends StatefulWidget {
   final Color routineColor;
+  final Map<String, String> devicesMap;
 
-  const RoutineDeviceCarousel({Key key, this.routineColor}) : super(key: key);
+  const RoutineDeviceCarousel({Key key, this.routineColor, this.devicesMap})
+      : super(key: key);
 
   @override
   _RoutineDeviceCarouselState createState() => _RoutineDeviceCarouselState();
 }
 
 class _RoutineDeviceCarouselState extends State<RoutineDeviceCarousel> {
-  static Map<String, String> devicesMap = {
-    'Living Room-Speaker': 'off',
-    'Living Room-TV': 'off',
-    'Living Room-Lights': 'off',
-    'Bedroom-Lights': 'off',
-    'Outdoor-Lights': 'on',
-  };
-
   @override
   Widget build(BuildContext context) {
+    final rou = Provider.of<List<dbRoutine>>(context);
     return Container(
       height: 120.0,
       child: ListView(
         scrollDirection: Axis.horizontal,
-        children: devicesMap.keys.map((String key) {
+        children: widget.devicesMap.keys.map((String key) {
           return Padding(
             padding: const EdgeInsets.only(left: 10.0, top: 8.0, bottom: 8.0),
             child: Container(
@@ -53,7 +51,7 @@ class _RoutineDeviceCarouselState extends State<RoutineDeviceCarousel> {
                           color: Colors.white, fontSize: 18.0),
                     ),
                     Text(
-                      devicesMap[key].toUpperCase(),
+                      widget.devicesMap[key].toUpperCase(),
                       style: TextStyle(color: Colors.white),
                     ),
                   ],

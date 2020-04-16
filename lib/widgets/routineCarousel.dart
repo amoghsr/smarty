@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:smarty/models/dbRoutines.dart';
 import 'package:smarty/models/routineModel.dart';
 
 import '../screens/routines_pages/routines_main_view.dart';
@@ -7,9 +9,12 @@ import '../screens/routines_pages/routines_main_view.dart';
 class RoutineCarousel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final routines = Provider.of<List<Routine>>(context);
     return Column(
       children: <Widget>[
-        SizedBox(height: 4.0,),
+        SizedBox(
+          height: 4.0,
+        ),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 20.0),
           child: Row(
@@ -30,15 +35,12 @@ class RoutineCarousel extends StatelessWidget {
                   ),
                 ),
                 child: Container(
-                  padding: EdgeInsets.symmetric(
-                      vertical: 6.0, horizontal: 14.0),
+                  padding:
+                      EdgeInsets.symmetric(vertical: 6.0, horizontal: 14.0),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(4.0),
-                    color: Theme
-                        .of(context)
-                        .primaryColor,
+                    color: Theme.of(context).primaryColor,
                   ),
-
                   child: Text(
                     'See all',
                     style: TextStyle(
@@ -111,8 +113,7 @@ class RoutineCarousel extends StatelessWidget {
                                   style: TextStyle(
                                       fontWeight: FontWeight.w600,
                                       fontSize: 16.0,
-                                      color: Colors.white
-                                  ),
+                                      color: Colors.white),
                                 ),
                               ],
                             ),
