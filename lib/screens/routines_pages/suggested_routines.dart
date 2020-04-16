@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
+import 'package:smarty/models/dbRoutines.dart';
 import 'package:smarty/models/routineModel.dart';
 import 'package:smarty/screens/routines_pages/current_routine_page.dart';
 import 'package:smarty/screens/routines_pages/suggested_routine_page.dart';
@@ -11,6 +14,7 @@ class SuggestedRoutines extends StatefulWidget {
 class _SuggestedRoutinesState extends State<SuggestedRoutines> {
   @override
   Widget build(BuildContext context) {
+    final routines = Provider.of<List<dbRoutine>>(context);
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -32,17 +36,17 @@ class _SuggestedRoutinesState extends State<SuggestedRoutines> {
                 scrollDirection: Axis.vertical,
                 itemCount: routines.length,
                 itemBuilder: (BuildContext context, int index) {
-                  Routine routine = routines[index];
+                  dbRoutine routine = routines[index];
                   return GestureDetector(
                     onTap: () {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) =>
-                                SuggestedRoutinePage(
-                              routineName: routines[index].routineName,
-                              routineColor: routines[index].routineColor,
-                              routineIcon: routines[index].icon,
+                            builder: (context) => SuggestedRoutinePage(
+                              routineName: routines[index].Name,
+                              routine: routines[index],
+//                              routineColor: routines[index].routineColor,
+//                              routineIcon: routines[index].icon,
                             ),
                           ));
                     },
@@ -57,7 +61,7 @@ class _SuggestedRoutinesState extends State<SuggestedRoutines> {
                             height: 80.0,
                             width: 400.0,
                             decoration: BoxDecoration(
-                              color: routines[index].routineColor,
+                              color: Colors.blue,
                               borderRadius: BorderRadius.circular(5),
                             ),
                             child: Row(
@@ -67,7 +71,10 @@ class _SuggestedRoutinesState extends State<SuggestedRoutines> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: <Widget>[
-                                    routine.icon,
+                                    Icon(
+                                      FontAwesomeIcons.walking,
+                                      color: Colors.blue[100],
+                                    ),
                                   ],
                                 ),
                                 Expanded(
@@ -84,7 +91,7 @@ class _SuggestedRoutinesState extends State<SuggestedRoutines> {
                                         Row(
                                           children: <Widget>[
                                             Text(
-                                              routine.routineName,
+                                              routine.Name,
                                               style: TextStyle(
                                                   fontSize: 18.0,
                                                   fontWeight: FontWeight.w600,
@@ -99,7 +106,7 @@ class _SuggestedRoutinesState extends State<SuggestedRoutines> {
                                               Opacity(
                                                 opacity: 0.8,
                                                 child: Text(
-                                                  routine.routineDesc,
+                                                  routine.ETime,
                                                   style: TextStyle(
                                                     fontSize: 12,
                                                     fontWeight: FontWeight.w400,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:smarty/models/routineModel.dart';
 import 'package:smarty/screens/routines_pages/current_routine_page.dart';
 
@@ -10,6 +11,7 @@ class CurrentRoutines extends StatefulWidget {
 class _CurrentRoutinesState extends State<CurrentRoutines> {
   @override
   Widget build(BuildContext context) {
+    final routines = Provider.of<List<Routine>>(context);
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -37,11 +39,11 @@ class _CurrentRoutinesState extends State<CurrentRoutines> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) =>
-                                CurrentRoutinePage(
+                            builder: (context) => CurrentRoutinePage(
                               routineName: routines[index].routineName,
                               routineColor: routines[index].routineColor,
                               routineIcon: routines[index].icon,
+                              routine: routines[index],
                             ),
                           ));
                     },

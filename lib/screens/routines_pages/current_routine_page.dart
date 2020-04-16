@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smarty/models/routineModel.dart';
 import 'package:smarty/screens/routines_pages/routine_device_carousel.dart';
 import 'package:smarty/shared/constants.dart';
 import 'package:smarty/widgets/devicesCarousel.dart';
@@ -10,6 +11,7 @@ class CurrentRoutinePage extends StatelessWidget {
   final List devices;
   final Color routineColor;
   final Icon routineIcon;
+  final Routine routine;
 
   const CurrentRoutinePage(
       {Key key,
@@ -17,7 +19,8 @@ class CurrentRoutinePage extends StatelessWidget {
       this.time,
       this.devices,
       this.routineColor,
-      this.routineIcon})
+      this.routineIcon,
+      this.routine})
       : super(key: key);
 
   Future<void> _confirmDialog(BuildContext context) async {
@@ -192,6 +195,7 @@ class CurrentRoutinePage extends StatelessWidget {
             ),
             RoutineDeviceCarousel(
               routineColor: routineColor,
+              devicesMap: routine.devices,
             ),
 
             Divider(

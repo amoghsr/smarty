@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:smarty/models/devicesModel.dart';
+import 'package:smarty/models/routineModel.dart';
 import 'package:smarty/models/user.dart';
+import 'dbRoutines.dart';
 import 'roomModel.dart';
 
 class DatabaseService1 {
@@ -69,5 +71,67 @@ class DatabaseService1 {
         .collection(user.houseId)
         .document(user.uid)
         .snapshots();
+  }
+
+//suggested
+  Stream<List<dbRoutine>> getSuggestedRoutines(User user) {
+    var ref = _db
+        .collection('Routines')
+        .document(user.houseId)
+        .collection(user.uid)
+        .document("Suggested")
+        .collection("Routines");
+    return ref.snapshots().map(CreatedbRoutineList);
+  }
+
+  List<dbRoutine> CreatedbRoutineList(QuerySnapshot data) {
+    List<dbRoutine> w = [];
+    data.documents.forEach((element) {
+      Map<String, String> x = {};
+      element.data.forEach((key, value) {
+        if (key != "StartTime" && key != "EndTime") {
+          x[key] = value;
+        }
+      });
+      w.add(dbRoutine.fromFirestore(element.data["StartTime"],
+          element.data["EndTime"], element.documentID.toUpperCase(), x));
+    });
+    return w;
+  }
+
+//Current Routines
+  Stream<List<Routine>> getCurrentRoutines(User user) {
+    var ref = _db
+        .collection('Routines')
+        .document(user.houseId)
+        .collection("Current Routines");
+    return ref.snapshots().map(CreateRoutineList);
+  }
+
+  List<Routine> CreateRoutineList(QuerySnapshot data) {
+    List<Routine> w = [];
+    data.documents.forEach((element) {
+      Map<String, String> x = {};
+      element.data.forEach((key, value) {
+        if (key != "STime" &&
+            key != "ETime" &&
+            key != "color" &&
+            key != "Description" &&
+            key != "logo") {
+          x[key] = value;
+          print(x);
+        }
+      });
+      w.add(Routine.fromFirestore(
+        element.data["STime"],
+        element.data["ETime"],
+        element.documentID.toUpperCase(),
+        x,
+        element.data["Description"],
+        element.data["logo"],
+        element.data["color"],
+      ));
+    });
+    return w;
   }
 }

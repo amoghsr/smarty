@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smarty/models/dbRoutines.dart';
 import 'package:smarty/screens/routines_pages/routine_device_carousel.dart';
 import 'package:smarty/shared/constants.dart';
 import 'package:smarty/widgets/devicesCarousel.dart';
@@ -10,6 +11,7 @@ class SuggestedRoutinePage extends StatelessWidget {
   final List devices;
   final Color routineColor;
   final Icon routineIcon;
+  final dbRoutine routine;
 
   const SuggestedRoutinePage(
       {Key key,
@@ -17,7 +19,8 @@ class SuggestedRoutinePage extends StatelessWidget {
       this.time,
       this.devices,
       this.routineColor,
-      this.routineIcon})
+      this.routineIcon,
+      this.routine})
       : super(key: key);
 
   @override
@@ -157,7 +160,8 @@ class SuggestedRoutinePage extends StatelessWidget {
             ),
 
             RoutineDeviceCarousel(
-              routineColor: routineColor,
+              routineColor: routine.color,
+              devicesMap: routine.devices,
             ),
 
             Divider(
