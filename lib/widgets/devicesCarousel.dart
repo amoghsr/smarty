@@ -204,7 +204,7 @@ class _DeviceCarouselState extends State<DeviceCarousel> {
                                         Text(
                                           device.deviceName ?? " ",
                                           style: TextStyle(
-                                            fontSize: 15,
+                                            fontSize: 14.0,
                                             fontWeight: FontWeight.w700,
                                           ),
                                         ),
@@ -232,9 +232,11 @@ class _DeviceCarouselState extends State<DeviceCarousel> {
                                                 new Map<String, dynamic>.from(
                                                     snap.data.snapshot.value);
                                             return Text(
-                                              values["State"] ?? " ",
+                                              values["State"]
+                                                  .toString()
+                                                  .toUpperCase() ?? " ",
                                               style: TextStyle(
-                                                fontSize: 15,
+                                                fontSize: 14.0,
                                                 fontWeight: FontWeight.w500,
                                                 fontFamily: 'Montserrat',
                                               ),

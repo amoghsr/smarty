@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:smarty/models/routineModel.dart';
 import 'package:smarty/screens/routines_pages/current_routine_page.dart';
+import 'package:smarty/screens/routines_pages/suggested_routine_page.dart';
 
-class CurrentRoutines extends StatefulWidget {
+class SuggestedRoutines extends StatefulWidget {
   @override
-  _CurrentRoutinesState createState() => _CurrentRoutinesState();
+  _SuggestedRoutinesState createState() => _SuggestedRoutinesState();
 }
 
-class _CurrentRoutinesState extends State<CurrentRoutines> {
+class _SuggestedRoutinesState extends State<SuggestedRoutines> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,7 +20,7 @@ class _CurrentRoutinesState extends State<CurrentRoutines> {
               padding: EdgeInsets.only(
                   left: 30.0, right: 20.0, bottom: 20.0, top: 20),
               child: Text(
-                'Routines allow you to operate or set schedules for multiple devices in your house.',
+                'Suggested routines appear after some time.',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 14.0,
@@ -38,7 +39,7 @@ class _CurrentRoutinesState extends State<CurrentRoutines> {
                           context,
                           MaterialPageRoute(
                             builder: (context) =>
-                                CurrentRoutinePage(
+                                SuggestedRoutinePage(
                               routineName: routines[index].routineName,
                               routineColor: routines[index].routineColor,
                               routineIcon: routines[index].icon,

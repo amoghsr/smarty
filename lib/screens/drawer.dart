@@ -93,7 +93,8 @@ class _DrawerPageState extends State<DrawerPage> {
 // ListTile represents a list tile item in the menu
               ListTile(
 // Leading is an element in the start of the list tile horizontally
-                leading: Container(child: Icon(FontAwesomeIcons.users)),
+                leading: Container(
+                    child: Icon(MaterialCommunityIcons.face_profile)),
 // Title of the list
                 title: Text(
                   'Manage Users',
@@ -104,12 +105,6 @@ class _DrawerPageState extends State<DrawerPage> {
                     MaterialPageRoute(builder: (context) => ManageUsers()),
                   );
                 },
-              ),
-              ListTile(
-                leading: Icon(Icons.settings),
-                title: Text(
-                  'Account Settings',
-                ),
               ),
               ListTile(
                 leading: Icon(Icons.lock),
@@ -128,7 +123,7 @@ class _DrawerPageState extends State<DrawerPage> {
                 },
               ),
               ListTile(
-                leading: Icon(FontAwesomeIcons.solidMoon),
+                leading: Icon(MaterialCommunityIcons.theme_light_dark),
                 title: Text('Dark Mode'),
                 trailing: Switch(
                   value: valueSwitch,
@@ -148,6 +143,13 @@ class _DrawerPageState extends State<DrawerPage> {
                 leading: Icon(MaterialIcons.phone),
                 title: Text(
                   'Customer Helpline',
+                ),
+                onTap: _launchCaller,
+              ),
+              ListTile(
+                leading: Icon(MaterialIcons.report_problem),
+                title: Text(
+                  'Report Problem',
                 ),
                 onTap: _launchCaller,
               ),

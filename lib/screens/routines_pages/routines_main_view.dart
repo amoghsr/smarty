@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:smarty/models/routineModel.dart';
 import 'package:smarty/screens/routines_pages/current_routines.dart';
+import 'package:smarty/screens/routines_pages/suggested_routines.dart';
 import 'package:smarty/shared/constants.dart';
 import 'package:smarty/widgets/voiceAgent.dart';
 
@@ -36,7 +36,7 @@ class _RoutineMainViewState extends State<RoutineMainView> {
           body: TabBarView(
             children: [
               CurrentRoutines(),
-              Center(child: Text("Page 2")),
+              SuggestedRoutines(),
             ],
           ),
         ),

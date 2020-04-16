@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 
 const kNavigationBarTextStyle = TextStyle(
   fontSize: 11.5,
+  fontWeight: FontWeight.w600,
 );
 
 const kAppBarTextStyle = TextStyle(
