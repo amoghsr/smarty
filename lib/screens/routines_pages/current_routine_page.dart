@@ -157,7 +157,7 @@ class CurrentRoutinePage extends StatelessWidget {
                           ),
                           child: Text(
                             routine.Stime,
-                            style: Theme.of(context).textTheme.headline6,
+                            style: Theme.of(context).textTheme.headline,
                           ),
                         ),
                       ],
@@ -179,7 +179,7 @@ class CurrentRoutinePage extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(horizontal: 16.0),
                           child: Text(
                             routine.Etime,
-                            style: Theme.of(context).textTheme.headline6,
+                            style: Theme.of(context).textTheme.headline,
                           ),
                         ),
                       ],

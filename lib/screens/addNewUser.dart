@@ -159,7 +159,7 @@ class _AddNewUserState extends State<AddNewUser> {
                           child: Text(
                               'Provide some basic details about the home member',
                               textAlign: TextAlign.center,
-                              style: Theme.of(context).textTheme.subtitle1),
+                              style: Theme.of(context).textTheme.subtitle),
                         ),
                         SizedBox(
                           height: 24.0,

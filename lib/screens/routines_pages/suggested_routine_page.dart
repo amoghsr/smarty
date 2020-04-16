@@ -131,7 +131,7 @@ class SuggestedRoutinePage extends StatelessWidget {
                           ),
                           child: Text(
                             routine.STime,
-                            style: Theme.of(context).textTheme.headline6,
+                            style: Theme.of(context).textTheme.headline,
                           ),
                         ),
                       ],
@@ -153,7 +153,7 @@ class SuggestedRoutinePage extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(horizontal: 16.0),
                           child: Text(
                             routine.ETime,
-                            style: Theme.of(context).textTheme.headline6,
+                            style: Theme.of(context).textTheme.headline,
                           ),
                         ),
                       ],
