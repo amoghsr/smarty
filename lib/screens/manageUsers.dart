@@ -65,7 +65,7 @@ class _ManageUsersState extends State<ManageUsers> {
                   padding: EdgeInsets.only(left: 4.0, right: 4.0, top: 20.0),
                   child: Text(
                     'Users in your home',
-                    style: Theme.of(context).textTheme.headline,
+                    style: Theme.of(context).textTheme.headline6,
                   ),
                 ),
                 Padding(
@@ -86,8 +86,8 @@ class _ManageUsersState extends State<ManageUsers> {
                         backgroundColor:
                             Theme.of(context).scaffoldBackgroundColor,
                         child: Text(
-                          '$index',
-                          style: Theme.of(context).textTheme.headline,
+                          '${index + 1}',
+                          style: Theme.of(context).textTheme.headline6,
                         ),
                       ),
                       title: Text(

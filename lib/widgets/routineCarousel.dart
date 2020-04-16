@@ -34,19 +34,14 @@ class RoutineCarousel extends StatelessWidget {
                     builder: (context) => RoutineMainView(),
                   ),
                 ),
-                child: Container(
-                  padding:
-                      EdgeInsets.symmetric(vertical: 6.0, horizontal: 14.0),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(4.0),
-                    color: Theme.of(context).primaryColor,
-                  ),
-                  child: Text(
-                    'See all',
-                    style: TextStyle(
-                      fontSize: 12.0,
-                      fontWeight: FontWeight.w600,
-                    ),
+                child: Text(
+                  'See all',
+                  style: TextStyle(
+                    fontSize: 12.0,
+                    fontWeight: FontWeight.w600,
+                    color: Theme
+                        .of(context)
+                        .accentColor,
                   ),
                 ),
               ),
@@ -54,7 +49,7 @@ class RoutineCarousel extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: 4,
+          height: 4.0,
         ),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 20.0),

@@ -22,18 +22,19 @@ class _ForgotPasswordState extends State<ForgotPassword> {
             child: Scaffold(
               appBar: AppBar(
                 backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-                elevation: 0,
+                elevation: 0.0,
               ),
               body: Container(
-                padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
+                padding: EdgeInsets.symmetric(horizontal: 38.0),
                 child: Form(
                   key: _formKey,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        'Forgot Password',
-                        textAlign: TextAlign.center,
+                        'Forgot Password?',
+                        textAlign: TextAlign.left,
                         style: TextStyle(
                           fontSize: 48,
                           fontFamily: 'Poppins',
@@ -69,14 +70,16 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       SizedBox(height: 40.0),
                       RaisedButton(
                         padding: EdgeInsets.symmetric(
-                          horizontal: 80,
+                          horizontal: 100,
                           vertical: 20,
                         ),
+                        color: Theme
+                            .of(context)
+                            .accentColor,
                         child: Text(
-                          'Send Reset Link',
+                          'Send reset link',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontFamily: 'Poppins',
                             color: Theme.of(context).primaryColor,
                           ),
                         ),
@@ -90,9 +93,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                             );
                           }
                         },
-                        color: Theme.of(context).accentColor,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(50.0),
+                          borderRadius: BorderRadius.circular(10.0),
                         ),
                       ),
                     ],
