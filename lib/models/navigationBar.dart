@@ -6,7 +6,7 @@ import 'package:smarty/models/user.dart';
 import 'package:smarty/screens/home.dart';
 import 'package:smarty/screens/leaderboard.dart';
 import 'package:smarty/screens/security.dart';
-import 'package:smarty/screens/statistics.dart';
+import 'package:smarty/screens/statsPage.dart';
 import 'package:smarty/shared/constants.dart';
 
 class MyNavigationBar extends StatefulWidget {
@@ -33,7 +33,7 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
     if (user.type == "O") {
       final List<Widget> _children = [
         SafeArea(child: Home()),
-        SafeArea(child: Statistics()),
+        SafeArea(child: StatsScreen()),
         SafeArea(child: Security()),
         SafeArea(child: Leaderboard()),
       ];

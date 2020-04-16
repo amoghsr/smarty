@@ -2,6 +2,7 @@ package io.flutter.plugins;
 
 import androidx.annotation.Keep;
 import androidx.annotation.NonNull;
+
 import io.flutter.embedding.engine.FlutterEngine;
 import io.flutter.embedding.engine.plugins.shim.ShimPluginRegistry;
 
@@ -23,7 +24,7 @@ public final class GeneratedPluginRegistrant {
       software.solid.fluttervlcplayer.FlutterVlcPlayerPlugin.registerWith(shimPluginRegistry.registrarFor("software.solid.fluttervlcplayer.FlutterVlcPlayerPlugin"));
       com.baseflow.flutter.plugin.geolocator.GeolocatorPlugin.registerWith(shimPluginRegistry.registrarFor("com.baseflow.flutter.plugin.geolocator.GeolocatorPlugin"));
       com.appleeducate.getversion.GetVersionPlugin.registerWith(shimPluginRegistry.registrarFor("com.appleeducate.getversion.GetVersionPlugin"));
-    flutterEngine.getPlugins().add(new com.baseflow.googleapiavailability.GoogleApiAvailabilityPlugin());
+      com.baseflow.googleapiavailability.GoogleApiAvailabilityPlugin.registerWith(shimPluginRegistry.registrarFor("com.baseflow.googleapiavailability.GoogleApiAvailabilityPlugin"));
       io.flutter.plugins.localauth.LocalAuthPlugin.registerWith(shimPluginRegistry.registrarFor("io.flutter.plugins.localauth.LocalAuthPlugin"));
     flutterEngine.getPlugins().add(new io.flutter.plugins.packageinfo.PackageInfoPlugin());
       com.baseflow.permissionhandler.PermissionHandlerPlugin.registerWith(shimPluginRegistry.registrarFor("com.baseflow.permissionhandler.PermissionHandlerPlugin"));
