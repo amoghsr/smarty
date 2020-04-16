@@ -157,7 +157,7 @@ class CurrentRoutinePage extends StatelessWidget {
                           ),
                           child: Text(
                             routine.Stime,
-                            style: Theme.of(context).textTheme.headline,
+                            style: Theme.of(context).textTheme.headline6,
                           ),
                         ),
                       ],

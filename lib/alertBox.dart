@@ -58,7 +58,7 @@ class CustomDialog extends StatelessWidget {
           ),
           margin: EdgeInsets.only(top: Consts.avatarRadius),
           decoration: new BoxDecoration(
-            color: Theme.of(context).canvasColor,
+            color: Theme.of(context).primaryColor,
             shape: BoxShape.rectangle,
             borderRadius: BorderRadius.circular(Consts.padding),
             boxShadow: [
@@ -73,13 +73,15 @@ class CustomDialog extends StatelessWidget {
             mainAxisSize: MainAxisSize.min, // To make the card compact
             children: <Widget>[
               // Title of the popup
-              Text(
-                title,
-                style: TextStyle(
-                  fontFamily: 'Montserrat',
-                  color: col,
-                  fontSize: 24.0,
-                  fontWeight: FontWeight.w700,
+              Center(
+                child: Text(
+                  title,
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
+                    color: col,
+                    fontSize: 24.0,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
               ),
               SizedBox(height: 16.0),
@@ -108,7 +110,7 @@ class CustomDialog extends StatelessWidget {
                     onTap: () => Navigator.of(context).pop(),
                     child: Container(
                       height: 40,
-                      width: 100,
+                      width: 200,
                       decoration: BoxDecoration(
                         color: col,
                         borderRadius: BorderRadius.all(

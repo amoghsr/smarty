@@ -22,6 +22,8 @@ import 'package:smarty/widgets/roomCarousel.dart';
 import 'package:smarty/widgets/routineCarousel.dart';
 import 'package:smarty/widgets/voiceAgent.dart';
 
+import '../alertBox.dart';
+
 class Home extends StatefulWidget {
 //  final weatherdata;
 //  Home(this.weatherdata);
@@ -142,11 +144,14 @@ class _HomeState extends State<Home> {
           actions: <Widget>[
             IconButton(
               icon: Icon(MaterialCommunityIcons.theme_light_dark),
-              onPressed: () {
+              onPressed: () async {
                 setState(() {
                   Provider.of<ThemeModel>(context, listen: false)
                       .toggleTheme();
                 });
+                
+                await _showNotificationWithDefaultSound(
+                    'FIRE DETECTED', 'Sprinklers have been activated.');
               },
             ),
             MicClass()
@@ -249,31 +254,68 @@ class _HomeState extends State<Home> {
 //                   image: Image.asset("assets/images/fire.png"),
 //                   title: "NO NOTIFICATION!",
 //                   description: "What a boring day",
-//                   col: Color(0xffE26069),
+//                   col: Colors.red[500],,
 //                   buttonText: "Okay",
 //                 );
 //               Map<String, dynamic> values =
 //                   new Map<String, dynamic>.from(
 //                       snap.data.snapshot.value);
 //               if (values["Danger"] == "high") {
-//                 return CustomDialog(
-//                   image: Image.asset("assets/images/fire.png"),
-//                   title: "FIRE DETECTED!",
-//                   description: "Sprinklers have been activated.",
-//                   col: Color(0xffE26069),
-//                   buttonText: "Okay",
-//                 );
+// return CustomDialog(
+//   image: Image.asset("assets/images/fire.png"),
+//   title: "FIRE DETECTED!",
+//   description: "Sprinklers have been activated.",
+//   col: Color(0xffE26069),
+//   buttonText: "Okay",
+// );
 //               } else {
 //                 return CustomDialog(
 //                   image: Image.asset("assets/images/fire.png"),
 //                   title: "NO NOTIFICATION!",
 //                   description: "What a boring day",
-//                   col: Color(0xffE26069),
+//                   col: Colors.red[500],,
 //                   buttonText: "Okay",
 //                 );
 //               }
 //             },
 //           ));
-//   await _showNotificationWithDefaultSound(
-//       'FIRE DETECTED', 'Sprinklers have been activated.');
+// await _showNotificationWithDefaultSound(
+//     'FIRE DETECTED', 'Sprinklers have been activated.');
 // },
+
+// ************************* AI DIALOG BOX ******************************//
+// showDialog(
+//                   context: context,
+//                   builder: (BuildContext context) => StreamBuilder(
+//                     stream: itemRef.child("Sensors/Fire/").onValue,
+//                     builder: (context, snap) {
+//                       return CustomDialog(
+//                         image:
+//                             Image.asset("assets/images/renewable-energy.png"),
+//                         title: "CAREFUL!",
+//                         description:
+//                             "You have almost reached your daily limit!",
+//                         col: Colors.red[500],
+//                         buttonText: "Optimize Now",
+//                       );
+//                     },
+//                   ),
+//                 );
+
+// ************************* P2P DIALOG BOX ******************************//
+
+// showDialog(
+//   context: context,
+//   builder: (BuildContext context) => StreamBuilder(
+//     stream: itemRef.child("Sensors/Fire/").onValue,
+//     builder: (context, snap) {
+//       return CustomDialog(
+//         image: Image.asset("assets/images/battery.png"),
+//         title: "BATTERY EMPTY!",
+//         description: "You are running out of electricity!",
+//         col: Colors.red[500],
+//         buttonText: "Purchase Electricity",
+//       );
+//     },
+//   ),
+// );
