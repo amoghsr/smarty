@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 import 'package:smarty/line_chart.dart';
+import 'package:smarty/screens/allDevices.dart';
 import 'package:smarty/screens/p2pPanel.dart';
 import 'package:smarty/shared/constants.dart';
 import 'package:smarty/utils.dart';
@@ -208,19 +210,26 @@ class _EnergyStatsState extends State<EnergyStats> {
                         Column(
                           children: <Widget>[
                             widget.energyType == 'Consumption'
-                                ? Container(
-                                    color: Theme.of(context).accentColor,
-                                    width: screenwidth * 0.35,
-                                    height: screenheight * 0.05,
-                                    child: Center(
-                                      child: Text(
-                                        'SEE ALL DEVICES',
-                                        style: TextStyle(
-                                            color: Theme.of(context)
-                                                .bottomAppBarColor,
-                                            fontFamily: 'Montserrat',
-                                            fontSize: 10,
-                                            fontWeight: FontWeight.w500),
+                                ? InkWell(
+                                    onTap: () => Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => AllDevices()),
+                                    ),
+                                    child: Container(
+                                      color: Theme.of(context).accentColor,
+                                      width: screenwidth * 0.35,
+                                      height: screenheight * 0.05,
+                                      child: Center(
+                                        child: Text(
+                                          'SEE ALL DEVICES',
+                                          style: TextStyle(
+                                              color: Theme.of(context)
+                                                  .bottomAppBarColor,
+                                              fontFamily: 'Montserrat',
+                                              fontSize: 10,
+                                              fontWeight: FontWeight.w500),
+                                        ),
                                       ),
                                     ),
                                   )
@@ -234,22 +243,30 @@ class _EnergyStatsState extends State<EnergyStats> {
                 Divider(),
                 Container(
                   height: screenheight * 0.3,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      // Expanded(
-                      //   child: ExamplePage(
-                      //     viewModel: viewModel05,
-                      //   ),
-                      // ),
-                      CustomPaint(
-                        painter: ShapesPainter(),
-                        child: Container(height: 30, width: 40)
+                  child: Center(
+                    child: Transform.scale(
+                      scale: 2,
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                          left: screenwidth * 0.25,
+                          right: screenwidth * 0.25,
+                        ),
+                        child: LiquidCustomProgressIndicator(
+                          center: Text(
+                            '50%',
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w500),
+                          ),
+                          value: 0.5,
+                          valueColor: AlwaysStoppedAnimation(Colors.green),
+                          backgroundColor: Colors.white,
+                          direction: Axis.horizontal,
+                          shapePath: _buildBattery(),
+                        ),
                       ),
-                      SizedBox(
-                        width: screenwidth * 0.1,
-                      ),
-                    ],
+                    ),
                   ),
                 ),
               ],
@@ -259,21 +276,11 @@ class _EnergyStatsState extends State<EnergyStats> {
       ),
     );
   }
-}
 
-class ShapesPainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint();
-    // set the color property of the paint
-    paint.color = Colors.white;
-    var rect = Rect.fromLTWH(0, 0, 80, 40);
-    var rect2 = Rect.fromLTWH(70, 10, 20, 20);
-    canvas.drawRect(rect2, paint);
-    // center of the canvas is (x,y) => (width/2, height/2)
-    canvas.drawRect(rect, paint);
+  Path _buildBattery() {
+    return Path()
+      ..addRect(Rect.fromLTWH(0, 0, 80, 40))
+      ..addRect(Rect.fromLTWH(80, 10, 10, 20))
+      ..close();
   }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) => false;
 }
