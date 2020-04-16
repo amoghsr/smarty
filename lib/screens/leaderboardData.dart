@@ -32,7 +32,6 @@ class _LeaderboardDataState extends State<LeaderboardData> {
         child: GestureDetector(
           onVerticalDragUpdate: (_) {},
           child: Container(
-            color: Theme.of(context).scaffoldBackgroundColor,
             child: Column(
               children: <Widget>[
                 Container(
@@ -46,7 +45,6 @@ class _LeaderboardDataState extends State<LeaderboardData> {
                             height: screenheight * 0.06,
                           ),
                           Container(
-                            width: screenwidth * 0.06,
                             child: Icon(
                               FontAwesomeIcons.trophy,
                               size: 30,
@@ -74,24 +72,21 @@ class _LeaderboardDataState extends State<LeaderboardData> {
                         ],
                       ),
                       Column(
-                        // mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           SizedBox(
                             height: screenheight * 0.03,
                           ),
                           Container(
-                            width: screenwidth * 0.06,
                             child: Icon(
                               FontAwesomeIcons.trophy,
                               size: 45,
-                              color: Color(0xffD4AF37),
+                              color: Colors.yellow,
                             ),
                           ),
                           SizedBox(
                             height: screenheight * 0.02,
                           ),
                           Container(
-                            // height: screenheight,
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
                             ),
@@ -113,11 +108,10 @@ class _LeaderboardDataState extends State<LeaderboardData> {
                             height: screenheight * 0.06,
                           ),
                           Container(
-                            width: screenwidth * 0.06,
                             child: Icon(
                               FontAwesomeIcons.trophy,
                               size: 30,
-                              color: Color(0xffBE5504),
+                              color: Colors.deepOrange,
                             ),
                           ),
                           SizedBox(
@@ -175,10 +169,10 @@ class _LeaderboardDataState extends State<LeaderboardData> {
           return Column(
             children: <Widget>[
               Container(
-                margin: EdgeInsets.all(5.5),
+                margin: EdgeInsets.only(bottom: 10.0, left: 10.0, right: 10.0),
                 decoration: BoxDecoration(
                   color: Theme.of(context).cardColor,
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(8.0),
                 ),
                 child: ListTile(
                   // onTap: () {

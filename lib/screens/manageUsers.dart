@@ -86,7 +86,7 @@ class _ManageUsersState extends State<ManageUsers> {
                         backgroundColor:
                             Theme.of(context).scaffoldBackgroundColor,
                         child: Text(
-                          '$index',
+                          '${index + 1}',
                           style: Theme.of(context).textTheme.headline6,
                         ),
                       ),
