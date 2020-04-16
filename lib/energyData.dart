@@ -128,31 +128,42 @@ class _EnergyStatsState extends State<EnergyStats> {
                       children: <Widget>[
                         SizedBox(width: screenwidth * 0.13),
                         widget.energyType == 'Consumption'
-                            ? Container(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    Text(
-                                      '$formattedDay, $formattedDate $formattedMonth',
-                                      style: TextStyle(
-                                        fontFamily: 'Montserrat',
-                                        color: Theme.of(context).accentColor,
-                                        fontSize: 13,
-                                      ),
+                            ? Expanded(
+                                child: InkWell(
+                                  child: Container(
+                                    color: Theme.of(context).accentColor,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: <Widget>[
+                                        Center(
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: <Widget>[
+                                              Text(
+                                                'See All Devices',
+                                                style: TextStyle(
+                                                    color: Theme.of(context)
+                                                        .bottomAppBarColor,
+                                                    fontFamily: 'Montserrat',
+                                                    fontSize: 18,
+                                                    fontWeight:
+                                                        FontWeight.w600),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                    SizedBox(
-                                      height: screenheight * 0.01,
-                                    ),
-                                    Text(
-                                      '76 kWh',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                        fontFamily: 'Montserrat',
-                                        color: Theme.of(context).primaryColor,
-                                        fontSize: 20,
-                                      ),
-                                    ),
-                                  ],
+                                  ),
+                                  onTap: () => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => AllDevices()),
+                                  ),
                                 ),
                               )
                             : Expanded(
@@ -209,35 +220,6 @@ class _EnergyStatsState extends State<EnergyStats> {
                                 ),
                               ),
                         SizedBox(width: screenwidth * 0.13),
-                        Column(
-                          children: <Widget>[
-                            widget.energyType == 'Consumption'
-                                ? InkWell(
-                                    onTap: () => Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => AllDevices()),
-                                    ),
-                                    child: Container(
-                                      color: Theme.of(context).accentColor,
-                                      width: screenwidth * 0.35,
-                                      height: screenheight * 0.05,
-                                      child: Center(
-                                        child: Text(
-                                          'SEE ALL DEVICES',
-                                          style: TextStyle(
-                                              color: Theme.of(context)
-                                                  .bottomAppBarColor,
-                                              fontFamily: 'Montserrat',
-                                              fontSize: 10,
-                                              fontWeight: FontWeight.w500),
-                                        ),
-                                      ),
-                                    ),
-                                  )
-                                : Container()
-                          ],
-                        ),
                       ],
                     ),
                   ),

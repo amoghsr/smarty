@@ -1,24 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:smarty/models/routineModel.dart';
 import 'package:smarty/screens/routines_pages/routine_device_carousel.dart';
 import 'package:smarty/shared/constants.dart';
 import 'package:smarty/widgets/devicesCarousel.dart';
 import 'package:smarty/widgets/roomCarousel.dart';
 
 class CurrentRoutinePage extends StatelessWidget {
-  final String routineName;
-  final String time;
-  final List devices;
-  final Color routineColor;
-  final Icon routineIcon;
+  final Routine routine;
 
-  const CurrentRoutinePage(
-      {Key key,
-      this.routineName,
-      this.time,
-      this.devices,
-      this.routineColor,
-      this.routineIcon})
-      : super(key: key);
+  const CurrentRoutinePage({Key key, this.routine}) : super(key: key);
 
   Future<void> _confirmDialog(BuildContext context) async {
     return showDialog<void>(
@@ -69,12 +59,12 @@ class CurrentRoutinePage extends StatelessWidget {
             ),
             SizedBox(height: 2.0),
             Text(
-              routineName,
+              routine.routineName,
               style: kAppBarTextStyle.copyWith(color: Colors.white),
             ),
           ],
         ),
-        backgroundColor: routineColor,
+        backgroundColor: routine.routineColor,
       ),
       body: Center(
         child: Column(
@@ -92,9 +82,9 @@ class CurrentRoutinePage extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 20.0),
                         child: CircleAvatar(
-                          child: routineIcon,
+                          child: routine.icon,
                           maxRadius: 50.0,
-                          backgroundColor: routineColor,
+                          backgroundColor: routine.routineColor,
                         ),
                       ),
                       Text(
@@ -106,7 +96,7 @@ class CurrentRoutinePage extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 6.0),
                         child: Text(
-                          routineName,
+                          routine.routineName,
                           style: TextStyle(
                               fontSize: 28.0, fontWeight: FontWeight.w600),
                         ),
@@ -145,7 +135,7 @@ class CurrentRoutinePage extends StatelessWidget {
                             horizontal: 16.0,
                           ),
                           child: Text(
-                            '8:00 AM',
+                            routine.Stime,
                             style: Theme.of(context).textTheme.headline6,
                           ),
                         ),
@@ -167,7 +157,7 @@ class CurrentRoutinePage extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 16.0),
                           child: Text(
-                            '9:00 AM',
+                            routine.Etime,
                             style: Theme.of(context).textTheme.headline6,
                           ),
                         ),
@@ -191,7 +181,8 @@ class CurrentRoutinePage extends StatelessWidget {
               ),
             ),
             RoutineDeviceCarousel(
-              routineColor: routineColor,
+              routineColor: routine.routineColor,
+              devicesMap: routine.devices,
             ),
 
             Divider(
