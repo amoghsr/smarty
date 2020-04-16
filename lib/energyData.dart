@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 import 'package:smarty/line_chart.dart';
 import 'package:smarty/screens/p2pPanel.dart';
+import 'package:smarty/shared/constants.dart';
+import 'package:smarty/utils.dart';
 
 class EnergyStats extends StatefulWidget {
   String energyType;
@@ -19,6 +22,22 @@ var day = new DateFormat('EEEEE');
 String formattedDay = day.format(now);
 var month = new DateFormat('MMMM');
 String formattedMonth = month.format(now);
+
+class ExampleViewModel {
+  final List<Color> pageColors;
+  final CircularSliderAppearance appearance;
+  final double min;
+  final double max;
+  final double value;
+  final InnerWidget innerWidget;
+  ExampleViewModel(
+      {@required this.pageColors,
+      @required this.appearance,
+      this.min,
+      this.max,
+      this.value,
+      this.innerWidget});
+}
 
 class _EnergyStatsState extends State<EnergyStats> {
   @override
@@ -214,290 +233,25 @@ class _EnergyStatsState extends State<EnergyStats> {
                 ),
                 Divider(),
                 Container(
-                  height: screenheight * 0.15,
-                  margin: EdgeInsets.only(
-                    left: screenwidth * 0.02,
-                    right: screenwidth * 0.02,
-                    top: screenheight * 0.015,
-                  ),
-                  width: screenwidth * 0.9,
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).backgroundColor,
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  child: Container(
-                    width: screenwidth * 0.8,
-//                        margin: EdgeInsets.symmetric(
-//                            horizontal: screenwidth * 0.05,
-//                            vertical: screenheight * 0.02),
-//                        color: Colors.blue,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Container(
-//                            padding: EdgeInsets.only(left: screenwidth * 0.01, right: screenwidth * 0.01),
-                              alignment: Alignment.center,
-                              width: screenwidth * 0.37,
-//                              color: Colors.yellow,
-
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  Icon(
-                                    Icons.flash_on,
-                                    size: 35,
-                                  ),
-                                  SizedBox(
-                                    width: screenwidth * 0.01,
-                                  ),
-                                  Column(
-                                    children: <Widget>[
-                                      Text(
-                                        'Generating',
-                                        style: TextStyle(
-                                          fontFamily: 'Montserrat',
-                                          fontWeight: FontWeight.w100,
-                                          color: Colors.white.withOpacity(0.7),
-                                          fontSize: 10,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: screenheight * 0.005,
-                                      ),
-                                      Text(
-                                        '103 Wh',
-                                        style: TextStyle(
-                                          fontFamily: 'Poppins',
-                                          fontWeight: FontWeight.w700,
-                                          color: Theme.of(context).accentColor,
-                                          fontSize: 24,
-                                        ),
-                                      ),
-                                      Text(
-                                        '40% COVERAGE',
-                                        style: TextStyle(
-                                          fontFamily: 'Montserrat',
-                                          fontWeight: FontWeight.w400,
-                                          color: Colors.white,
-                                          fontSize: 10,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-
-                            //DIVIDER:
-                            Container(
-                              height: screenheight * 0.09,
-                              width: screenwidth * 0.10,
-//                                  padding: EdgeInsets.only(
-//                                    left: screenwidth * 0.03,
-//                                  ),
-                              child: VerticalDivider(
-                                color: Colors.black,
-                                thickness: 0.8,
-                              ),
-                            ),
-                            Container(
-//                            padding: EdgeInsets.only(left: screenwidth * 0.01, right: screenwidth * 0.01),
-                              alignment: Alignment.center,
-                              width: screenwidth * 0.37,
-//                                  color: Colors.green,
-
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  Icon(
-                                    Icons.power,
-                                    size: 35,
-                                  ),
-                                  SizedBox(
-                                    width: screenwidth * 0.01,
-                                  ),
-                                  Column(
-                                    children: <Widget>[
-                                      Text(
-                                        'Consuming',
-                                        style: TextStyle(
-                                          fontFamily: 'Montserrat',
-                                          fontWeight: FontWeight.w100,
-                                          color: Colors.white.withOpacity(0.7),
-                                          fontSize: 10,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: screenheight * 0.007,
-                                      ),
-                                      Text(
-                                        '2 kWh',
-                                        style: TextStyle(
-                                          fontFamily: 'Poppins',
-                                          fontWeight: FontWeight.w700,
-                                          color: Theme.of(context).accentColor,
-                                          fontSize: 24,
-                                        ),
-                                      ),
-                                      Text(
-                                        '3 DEVICES',
-                                        style: TextStyle(
-                                          fontFamily: 'Montserrat',
-                                          fontWeight: FontWeight.w400,
-                                          color: Colors.white,
-                                          fontSize: 10,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
+                  height: screenheight * 0.3,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      // Expanded(
+                      //   child: ExamplePage(
+                      //     viewModel: viewModel05,
+                      //   ),
+                      // ),
+                      CustomPaint(
+                        painter: ShapesPainter(),
+                        child: Container(height: 30, width: 40)
+                      ),
+                      SizedBox(
+                        width: screenwidth * 0.1,
+                      ),
+                    ],
                   ),
                 ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    //FIRST BOX
-
-                    Container(
-                      height: screenheight * 0.13,
-                      margin: EdgeInsets.only(
-                        left: screenwidth * 0.05,
-                        right: screenwidth * 0.02,
-                        top: screenheight * 0.02,
-                      ),
-                      width: screenwidth * 0.42,
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).backgroundColor,
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Icon(
-                                Icons.battery_full,
-                                size: 35,
-                              ),
-                              SizedBox(
-                                width: screenwidth * 0.01,
-                              ),
-                              Column(
-                                children: <Widget>[
-                                  Text(
-                                    'BATTERY LEVEL',
-                                    style: TextStyle(
-                                      fontFamily: 'Montserrat',
-                                      fontWeight: FontWeight.w100,
-                                      color: Colors.white.withOpacity(0.7),
-                                      fontSize: 10,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: screenheight * 0.007,
-                                  ),
-                                  Text(
-                                    '90%',
-                                    style: TextStyle(
-                                      fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.w700,
-                                      color: Theme.of(context).accentColor,
-                                      fontSize: 24,
-                                    ),
-                                  ),
-                                  Text(
-                                    'DISCHARGING',
-                                    style: TextStyle(
-                                      fontFamily: 'Montserrat',
-                                      fontWeight: FontWeight.w400,
-                                      color: Colors.white,
-                                      fontSize: 10,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-
-                    //2nd box
-                    Container(
-                      height: screenheight * 0.13,
-                      margin: EdgeInsets.only(
-                        left: screenwidth * 0.04,
-                        right: screenwidth * 0.04,
-                        top: screenheight * 0.02,
-                      ),
-                      width: screenwidth * 0.42,
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).backgroundColor,
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Icon(
-                                Icons.euro_symbol,
-                                size: 35,
-                              ),
-                              SizedBox(
-                                width: screenwidth * 0.01,
-                              ),
-                              Column(
-                                children: <Widget>[
-                                  Text(
-                                    'VIEW BILLS',
-                                    style: TextStyle(
-                                      fontFamily: 'Montserrat',
-                                      fontWeight: FontWeight.w100,
-                                      color: Colors.white.withOpacity(0.7),
-                                      fontSize: 10,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: screenheight * 0.007,
-                                  ),
-                                  Text(
-                                    '103.5',
-                                    style: TextStyle(
-                                      fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.w700,
-                                      color: Theme.of(context).accentColor,
-                                      fontSize: 24,
-                                    ),
-                                  ),
-                                  Text(
-                                    'AMOUNT DUE',
-                                    style: TextStyle(
-                                      fontFamily: 'Montserrat',
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 10,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                )
               ],
             ),
           ),
@@ -505,4 +259,21 @@ class _EnergyStatsState extends State<EnergyStats> {
       ),
     );
   }
+}
+
+class ShapesPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint();
+    // set the color property of the paint
+    paint.color = Colors.white;
+    var rect = Rect.fromLTWH(0, 0, 80, 40);
+    var rect2 = Rect.fromLTWH(70, 10, 20, 20);
+    canvas.drawRect(rect2, paint);
+    // center of the canvas is (x,y) => (width/2, height/2)
+    canvas.drawRect(rect, paint);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) => false;
 }

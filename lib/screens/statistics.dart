@@ -32,9 +32,11 @@ class _StatisticsState extends State<Statistics> {
               SliverAppBar(
                 pinned: true,
                 floating: false,
-                title: Text(
-                  'Statistics',
-                  style: kAppBarTextStyle,
+                title: Center(
+                  child: Text(
+                    'Statistics',
+                    style: kAppBarTextStyle,
+                  ),
                 ),
                 actions: <Widget>[MicClass()],
                 bottom: TabBar(
