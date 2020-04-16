@@ -78,9 +78,7 @@ class DatabaseService1 {
     var ref = _db
         .collection('Routines')
         .document(user.houseId)
-        .collection(user.uid)
-        .document("Suggested")
-        .collection("Routines");
+        .collection("Suggested Routines");
     return ref.snapshots().map(CreatedbRoutineList);
   }
 
@@ -89,12 +87,12 @@ class DatabaseService1 {
     data.documents.forEach((element) {
       Map<String, String> x = {};
       element.data.forEach((key, value) {
-        if (key != "StartTime" && key != "EndTime") {
+        if (key != "STime" && key != "ETime") {
           x[key] = value;
         }
       });
-      w.add(dbRoutine.fromFirestore(element.data["StartTime"],
-          element.data["EndTime"], element.documentID.toUpperCase(), x));
+      w.add(dbRoutine.fromFirestore(element.data["STime"],
+          element.data["ETime"], element.documentID.toUpperCase(), x));
     });
     return w;
   }
@@ -119,7 +117,7 @@ class DatabaseService1 {
             key != "Description" &&
             key != "logo") {
           x[key] = value;
-          print(x);
+//          print(x);
         }
       });
       w.add(Routine.fromFirestore(

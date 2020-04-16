@@ -1,5 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:smarty/models/routineModel.dart';
+import 'package:smarty/models/user.dart';
 import 'package:smarty/screens/routines_pages/routine_device_carousel.dart';
 import 'package:smarty/shared/constants.dart';
 import 'package:smarty/widgets/devicesCarousel.dart';
@@ -9,7 +12,6 @@ class CurrentRoutinePage extends StatelessWidget {
   final Routine routine;
 
   const CurrentRoutinePage({Key key, this.routine}) : super(key: key);
-
   Future<void> _confirmDialog(BuildContext context) async {
     return showDialog<void>(
       context: context,
@@ -45,8 +47,27 @@ class CurrentRoutinePage extends StatelessWidget {
     );
   }
 
+  delete(Routine routine, User user) {
+    Firestore.instance
+        .collection("Routines")
+        .document(user.houseId)
+        .collection("Suggested Routines")
+        .document(routine.routineName)
+        .setData({"STime": routine.Stime, "ETime": routine.Etime});
+    Firestore.instance
+        .collection("Routines")
+        .document(user.houseId)
+        .collection("Suggested Routines")
+        .document(routine.routineName)
+        .setData(routine.devices, merge: true);
+//      Firestore.instance
+//          .collection("Routines")
+//          .document(user.houseId).collection("Current Routines").document(routine.routineName).delete();
+  }
+
   @override
   Widget build(BuildContext context) {
+    User user = Provider.of<User>(context);
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.white),
@@ -195,6 +216,7 @@ class CurrentRoutinePage extends StatelessWidget {
               child: Container(
                 child: GestureDetector(
                   onTap: () {
+                    delete(routine, user);
                     _confirmDialog(context);
                   },
                   child: Card(

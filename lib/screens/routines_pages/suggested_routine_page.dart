@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:smarty/models/dbRoutines.dart';
+import 'package:smarty/models/user.dart';
 import 'package:smarty/screens/routines_pages/routine_device_carousel.dart';
 import 'package:smarty/shared/constants.dart';
 import 'package:smarty/widgets/devicesCarousel.dart';
@@ -10,6 +12,30 @@ class SuggestedRoutinePage extends StatelessWidget {
   final dbRoutine routine;
 
   const SuggestedRoutinePage({Key key, this.routine}) : super(key: key);
+  AddtoCurrentRoutines(dbRoutine routine, User user, String logo, String color,
+      String description) {
+    Firestore.instance
+        .collection("Routines")
+        .document(user.houseId)
+        .collection("Suggested Routines")
+        .document(routine.Name)
+        .setData({
+      "STime": routine.STime,
+      "ETime": routine.ETime,
+      "logo": logo,
+      "Description": description,
+      "color": color
+    });
+    Firestore.instance
+        .collection("Routines")
+        .document(user.houseId)
+        .collection("Suggested Routines")
+        .document(routine.Name)
+        .setData(routine.devices, merge: true);
+//      Firestore.instance
+//          .collection("Routines")
+//          .document(user.houseId).collection("Suggested Routines").document(routine.routineName).delete();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +130,7 @@ class SuggestedRoutinePage extends StatelessWidget {
                             horizontal: 16.0,
                           ),
                           child: Text(
-                            '8:00 AM',
+                            routine.STime,
                             style: Theme.of(context).textTheme.headline6,
                           ),
                         ),
@@ -126,7 +152,7 @@ class SuggestedRoutinePage extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 16.0),
                           child: Text(
-                            '9:00 AM',
+                            routine.ETime,
                             style: Theme.of(context).textTheme.headline6,
                           ),
                         ),
