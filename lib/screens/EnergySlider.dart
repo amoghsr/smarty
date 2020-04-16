@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'dart:math' as math;
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 
-
 import 'package:flutter/material.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 
@@ -17,11 +16,11 @@ class ExampleViewModel {
 
   ExampleViewModel(
       {@required this.pageColors,
-        @required this.appearance,
-        this.min,
-        this.max,
-        this.value,
-        this.innerWidget});
+      @required this.appearance,
+      this.min,
+      this.max,
+      this.value,
+      this.innerWidget});
 }
 
 class ExamplePage extends StatelessWidget {
@@ -44,23 +43,24 @@ class ExamplePage extends StatelessWidget {
         child: SafeArea(
           child: Center(
               child: SleekCircularSlider(
-                onChangeStart: (double value) {
-                  print(value);
-                },
-                onChangeEnd: (double value) {
-                  print(value);
-                },
-                innerWidget: viewModel.innerWidget,
-                appearance: viewModel.appearance,
-                min: viewModel.min,
-                max: viewModel.max,
-                initialValue: viewModel.value,
-              )),
+            onChangeStart: (double value) {
+              print(value);
+            },
+            onChangeEnd: (double value) {
+              print(value);
+            },
+            innerWidget: viewModel.innerWidget,
+            appearance: viewModel.appearance,
+            min: viewModel.min,
+            max: viewModel.max,
+            initialValue: viewModel.value,
+          )),
         ),
       ),
     );
   }
 }
+
 class HexColor extends Color {
   static int _getColorFromHex(String hexColor) {
     hexColor = hexColor.toUpperCase().replaceAll('#', '');
@@ -73,70 +73,79 @@ class HexColor extends Color {
   HexColor(final String hexColor) : super(_getColorFromHex(hexColor));
 }
 
-
 /// Example 03
 final customWidth03 =
-    CustomSliderWidths(trackWidth: 1, progressBarWidth: 20, shadowWidth: 50);
+    CustomSliderWidths(trackWidth: 1, progressBarWidth: 13, shadowWidth: 20);
 final customColors03 = CustomSliderColors(
-    trackColor: HexColor('#90E3D0'),
-    progressBarColors: [HexColor('#FFC84B'), HexColor('#00BFD5')],
-    shadowColor: HexColor('#5FC7B0'),
+    trackColor: HexColor('#C73866'),
+    progressBarColors: [
+      HexColor('#FFDCA2'),
+      HexColor('#FFBD71'),
+      HexColor('#FD8F52'),
+      HexColor('#FE676E'),
+      HexColor('#C73866'),
+    ],
+    shadowColor: HexColor('#FE676E'),
     shadowMaxOpacity: 0.05);
 
 final info03 = InfoProperties(
-    bottomLabelStyle: TextStyle(
-        color: HexColor('#002D43'), fontSize: 20, fontWeight: FontWeight.w700),
-    bottomLabelText: 'Goal',
-    mainLabelStyle: TextStyle(
-        color: Color.fromRGBO(97, 169, 210, 1),
-        fontSize: 30.0,
-        fontWeight: FontWeight.w200),
+    topLabelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+    topLabelText: 'Generated',
+    mainLabelStyle: TextStyle(fontSize: 2.0, fontWeight: FontWeight.w200),
+    bottomLabelText: '35 kWh',
+    bottomLabelStyle: TextStyle(fontSize: 12.0, fontWeight: FontWeight.w400),
     modifier: (double value) {
-      final kcal = value.toInt();
-      return '$kcal kCal';
+//      final time = printDuration(Duration(seconds: value.toInt()));
+//        int consumption = 20;
+      return '';
     });
 final CircularSliderAppearance appearance03 = CircularSliderAppearance(
-    customWidths: customWidth03,
-    customColors: customColors03,
-    infoProperties: info03,
-    size: 250.0,
-    startAngle: 180,
-    angleRange: 340);
+  customWidths: customWidth03,
+  customColors: customColors03,
+  infoProperties: info03,
+  size: 150.0,
+  startAngle: 270,
+  angleRange: 360,
+);
 final viewModel03 = ExampleViewModel(
     appearance: appearance03,
-    min: 500,
-    max: 2300,
-    value: 1623,
-    pageColors: [HexColor('#D9FFF7'), HexColor('#FFFFFF')]);
+    min: 0,
+    max: 27,
+    value: 20,
+    pageColors: [Colors.transparent, Colors.transparent]);
 final example03 = ExamplePage(
   viewModel: viewModel03,
 );
 
 /// Example 05
 final customWidth05 =
-CustomSliderWidths(trackWidth: 1, progressBarWidth: 15, shadowWidth: 20);
+    CustomSliderWidths(trackWidth: 1, progressBarWidth: 15, shadowWidth: 20);
 final customColors05 = CustomSliderColors(
     trackColor: HexColor('#93a5cf'),
-    progressBarColors: [Colors.lightGreenAccent, Colors.lightGreen, Colors.green, Colors.teal, Colors.tealAccent, ],
+    progressBarColors: [
+      Colors.lightGreenAccent,
+      Colors.lightGreen,
+      Colors.green,
+      Colors.teal,
+      Colors.tealAccent,
+    ],
     shadowColor: HexColor('#5FC7B0'),
     shadowMaxOpacity: 0.05);
 
-
 final info05 = InfoProperties(
     topLabelStyle: TextStyle(
-        color: Colors.white, fontSize: 17, fontWeight: FontWeight.w600),
-    topLabelText: 'Consuming',
+        color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
+    topLabelText: 'Consumed',
     mainLabelStyle: TextStyle(
         color: Colors.white, fontSize: 2.0, fontWeight: FontWeight.w200),
-      bottomLabelText: '20 kWh',
+    bottomLabelText: '20 kWh',
     bottomLabelStyle: TextStyle(
         color: Colors.white, fontSize: 12.0, fontWeight: FontWeight.w400),
     modifier: (double value) {
 //      final time = printDuration(Duration(seconds: value.toInt()));
 //        int consumption = 20;
       return '';
-    }
-    );
+    });
 final CircularSliderAppearance appearance05 = CircularSliderAppearance(
     customWidths: customWidth05,
     customColors: customColors05,
@@ -149,7 +158,10 @@ final viewModel05 = ExampleViewModel(
     min: 0,
     max: 27,
     value: 20,
-    pageColors: [Colors.black, Colors.black87]);
+    pageColors: [
+      Colors.transparent,
+      Colors.transparent,
+    ]);
 final example05 = ExamplePage(
   viewModel: viewModel05,
 );
@@ -163,31 +175,6 @@ String printDuration(Duration duration) {
   String twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60));
   String twoDigitSeconds = twoDigits(duration.inSeconds.remainder(60));
   return "${twoDigits(duration.inHours)}:$twoDigitMinutes:$twoDigitSeconds";
-}
-
-class EnergySlider extends StatefulWidget {
-  EnergySlider({Key key}) : super(key: key);
-
-  _EnergySliderState createState() => _EnergySliderState();
-}
-
-class _EnergySliderState extends State<EnergySlider> {
-  final controller = PageController(initialPage: 0);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        child: PageView(
-      controller: controller,
-      children: <Widget>[
-
-        example05,
-        example03,
-
-
-      ],
-    ));
-  }
 }
 
 double degreeToRadians(double degree) {

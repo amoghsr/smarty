@@ -5,8 +5,8 @@ import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 import 'package:smarty/line_chart.dart';
 import 'package:smarty/screens/allDevices.dart';
 import 'package:smarty/screens/p2pPanel.dart';
+import 'package:smarty/screens/EnergySlider.dart';
 import 'package:smarty/shared/constants.dart';
-import 'package:smarty/utils.dart';
 
 class EnergyStats extends StatefulWidget {
   String energyType;
@@ -43,6 +43,8 @@ class ExampleViewModel {
 
 class _EnergyStatsState extends State<EnergyStats> {
   @override
+  final controller = PageController(initialPage: 0);
+
   Widget build(BuildContext context) {
     double screenwidth = MediaQuery.of(context).size.width;
     double screenheight = MediaQuery.of(context).size.height;
@@ -241,8 +243,31 @@ class _EnergyStatsState extends State<EnergyStats> {
                   ),
                 ),
                 Divider(),
+                Row(
+                  children: <Widget>[
+                    SizedBox(width: screenwidth * 0.07),
+                    Expanded(
+                      child: Container(
+                        height: screenheight * 0.3,
+                        child: ExamplePage(
+                          viewModel: viewModel05,
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: screenwidth * 0.2),
+                    Expanded(
+                      child: Container(
+                        height: screenheight * 0.3,
+                        child: ExamplePage(
+                          viewModel: viewModel03,
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: screenwidth * 0.07),
+                  ],
+                ),
                 Container(
-                  height: screenheight * 0.3,
+                  height: screenheight * 0.2,
                   child: Center(
                     child: Transform.scale(
                       scale: 2,
