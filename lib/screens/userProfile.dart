@@ -152,9 +152,11 @@ class _UserProfileState extends State<UserProfile> {
             child: Scaffold(
               appBar: AppBar(
                 actions: <Widget>[MicClass()],
-                title: Text(
-                  'User Profile',
-                  style: kAppBarTextStyle,
+                title: Center(
+                  child: Text(
+                    'User Profile',
+                    style: kAppBarTextStyle,
+                  ),
                 ),
               ),
               body: SafeArea(

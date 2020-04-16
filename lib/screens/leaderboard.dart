@@ -32,9 +32,11 @@ class _LeaderboardState extends State<Leaderboard> {
               SliverAppBar(
                 pinned: true,
                 floating: false,
-                title: Text(
-                  'Leaderboard',
-                  style: kAppBarTextStyle,
+                title: Center(
+                  child: Text(
+                    'Leaderboard',
+                    style: kAppBarTextStyle,
+                  ),
                 ),
                 actions: <Widget>[MicClass()],
                 bottom: TabBar(

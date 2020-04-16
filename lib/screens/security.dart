@@ -22,9 +22,11 @@ class _SecurityState extends State<Security> {
     final int playerHeight = 360;
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Security',
-          style: kAppBarTextStyle,
+        title: Center(
+          child: Text(
+            'Security',
+            style: kAppBarTextStyle,
+          ),
         ),
         actions: <Widget>[MicClass()],
       ),

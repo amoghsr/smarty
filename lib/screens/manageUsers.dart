@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:smarty/shared/constants.dart';
+import 'package:smarty/widgets/voiceAgent.dart';
 
 import 'addNewUser.dart';
 
@@ -26,10 +27,13 @@ class _ManageUsersState extends State<ManageUsers> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text(
-            'Manage Users',
-            style: kAppBarTextStyle,
+          title: Center(
+            child: Text(
+              'Manage Users',
+              style: kAppBarTextStyle,
+            ),
           ),
+          actions: <Widget>[MicClass()],
         ),
         body: SafeArea(
           child: Padding(
@@ -89,9 +93,7 @@ class _ManageUsersState extends State<ManageUsers> {
                       title: Text(
                         userlist[index].split('-')[0],
                         style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.w500
-                        ),
+                            fontSize: 17, fontWeight: FontWeight.w500),
                       ),
                       subtitle: Text(userlist[index].split('-')[1]),
                       trailing: InkWell(

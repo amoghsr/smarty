@@ -26,9 +26,11 @@ class _AllDevicesState extends State<AllDevices> with TickerProviderStateMixin {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'All Devices',
-          style: kAppBarTextStyle,
+        title: Center(
+          child: Text(
+            'All Devices',
+            style: kAppBarTextStyle,
+          ),
         ),
         actions: <Widget>[MicClass()],
       ),

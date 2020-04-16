@@ -133,9 +133,11 @@ class _HomeState extends State<Home> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text(
-            'Home',
-            style: kAppBarTextStyle,
+          title: Center(
+            child: Text(
+              'Home',
+              style: kAppBarTextStyle,
+            ),
           ),
           actions: <Widget>[
             IconButton(
