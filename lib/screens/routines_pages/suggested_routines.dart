@@ -43,7 +43,6 @@ class _SuggestedRoutinesState extends State<SuggestedRoutines> {
                           context,
                           MaterialPageRoute(
                             builder: (context) => SuggestedRoutinePage(
-                              routineName: routines[index].Name,
                               routine: routines[index],
 //                              routineColor: routines[index].routineColor,
 //                              routineIcon: routines[index].icon,

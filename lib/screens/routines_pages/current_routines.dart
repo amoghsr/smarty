@@ -40,9 +40,6 @@ class _CurrentRoutinesState extends State<CurrentRoutines> {
                           context,
                           MaterialPageRoute(
                             builder: (context) => CurrentRoutinePage(
-                              routineName: routines[index].routineName,
-                              routineColor: routines[index].routineColor,
-                              routineIcon: routines[index].icon,
                               routine: routines[index],
                             ),
                           ));

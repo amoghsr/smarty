@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:smarty/models/dbRoutines.dart';
 import 'package:smarty/screens/routines_pages/routine_device_carousel.dart';
 import 'package:smarty/shared/constants.dart';
@@ -6,22 +7,9 @@ import 'package:smarty/widgets/devicesCarousel.dart';
 import 'package:smarty/widgets/roomCarousel.dart';
 
 class SuggestedRoutinePage extends StatelessWidget {
-  final String routineName;
-  final String time;
-  final List devices;
-  final Color routineColor;
-  final Icon routineIcon;
   final dbRoutine routine;
 
-  const SuggestedRoutinePage(
-      {Key key,
-      this.routineName,
-      this.time,
-      this.devices,
-      this.routineColor,
-      this.routineIcon,
-      this.routine})
-      : super(key: key);
+  const SuggestedRoutinePage({Key key, this.routine}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -37,12 +25,12 @@ class SuggestedRoutinePage extends StatelessWidget {
             ),
             SizedBox(height: 2.0),
             Text(
-              routineName,
+              routine.Name,
               style: kAppBarTextStyle.copyWith(color: Colors.white),
             ),
           ],
         ),
-        backgroundColor: routineColor,
+        backgroundColor: routine.color,
       ),
       body: Center(
         child: Column(
@@ -60,9 +48,12 @@ class SuggestedRoutinePage extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 20.0),
                         child: CircleAvatar(
-                          child: routineIcon,
+                          child: Icon(
+                            FontAwesomeIcons.walking,
+                            color: Colors.blue[100],
+                          ),
                           maxRadius: 50.0,
-                          backgroundColor: routineColor,
+                          backgroundColor: routine.color,
                         ),
                       ),
                       Text(
@@ -74,7 +65,7 @@ class SuggestedRoutinePage extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 6.0),
                         child: Text(
-                          routineName,
+                          routine.Name,
                           style: TextStyle(
                               fontSize: 28.0, fontWeight: FontWeight.w600),
                         ),
