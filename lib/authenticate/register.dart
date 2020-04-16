@@ -31,20 +31,18 @@ class _RegisterState extends State<Register> {
         ? Loading()
         : Scaffold(
             body: Container(
-              padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
+              padding: EdgeInsets.symmetric(horizontal: 38.0),
               child: Form(
                 key: _formKey,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text(
-                      'Sign Up',
+                      'Create an account',
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        fontSize: 48,
-                        fontFamily: 'Poppins',
+                        fontSize: 32.0,
                         fontWeight: FontWeight.w700,
-                        height: 1.1,
                       ),
                     ),
                     SizedBox(
@@ -110,15 +108,14 @@ class _RegisterState extends State<Register> {
                     ),
                     RaisedButton(
                       padding: EdgeInsets.symmetric(
-                        horizontal: 80,
+                        horizontal: 130,
                         vertical: 20,
                       ),
                       color: Theme.of(context).accentColor,
                       child: Text(
-                        'Sign Up',
+                        'Sign in',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontFamily: 'Poppins',
                           color: Theme.of(context).primaryColor,
                         ),
                       ),
@@ -148,7 +145,7 @@ class _RegisterState extends State<Register> {
                         }
                       },
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(50.0),
+                        borderRadius: BorderRadius.circular(10.0),
                       ),
                     ),
                     SizedBox(height: 12.0),
@@ -161,7 +158,7 @@ class _RegisterState extends State<Register> {
                       child: Text(
                         'Go back to sign in',
                         style: TextStyle(
-                          fontSize: 13,
+                          fontSize: 14.0,
                         ),
                       ),
                     ),
