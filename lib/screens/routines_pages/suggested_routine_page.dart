@@ -239,6 +239,7 @@ class CustomDialog extends StatefulWidget {
 
 class _CustomDialogState extends State<CustomDialog> {
   Widget _icon;
+  IconData _iconForFirestore;
   String routineNameByUser;
   String routineDescByUser;
 
@@ -246,6 +247,7 @@ class _CustomDialogState extends State<CustomDialog> {
     IconData icon = await FlutterIconPicker.showIconPicker(context,
         iconPackMode: IconPack.material);
 
+    _iconForFirestore = icon;
     _icon = Icon(
       icon,
       color: Colors.white,
@@ -486,7 +488,9 @@ class _CustomDialogState extends State<CustomDialog> {
           onPressed: () {
             /// VALIDATION OF FIELDS
             if (_formKey.currentState.validate()) {
-              print(selectedColor.toString() +
+              print(
+                  _iconForFirestore.toString() + ' ' +
+                      selectedColor.toString() +
                   ' ' +
                   routineDescByUser +
                   ' ' +
