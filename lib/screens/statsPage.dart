@@ -6,7 +6,6 @@ import 'package:smarty/screens/drawer.dart';
 import 'package:smarty/shared/constants.dart';
 import 'package:smarty/widgets/voiceAgent.dart';
 
-import '../energyData.dart';
 import '../line_chart.dart';
 
 class StatsScreen extends StatefulWidget {
@@ -15,10 +14,11 @@ class StatsScreen extends StatefulWidget {
 }
 
 class _StatsScreenState extends State<StatsScreen> {
-  Widget build(BuildContext context) {
-    double screenwidth = MediaQuery.of(context).size.width;
-    double screenheight = MediaQuery.of(context).size.height;
+  List<bool> isSelected = [true, false, false];
 
+  var _value;
+
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Center(
@@ -36,8 +36,6 @@ class _StatsScreenState extends State<StatsScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 16.0),
           child: Column(
             children: [
-
-              /// DAILY CONSUMPTION CONTAINER
               Container(
                 decoration: BoxDecoration(
 //                  color: Theme.of(context).cardColor,
@@ -70,8 +68,6 @@ class _StatsScreenState extends State<StatsScreen> {
               Divider(
                 height: 20.0,
               ),
-
-              /// CIRCLE INDICATOR CONTAINER
               Container(
                 width: MediaQuery
                     .of(context)
@@ -85,8 +81,8 @@ class _StatsScreenState extends State<StatsScreen> {
                     Column(
                       children: <Widget>[
                         buildCircularProgressWidget(
-                          200,
-                          24.0,
+                          190,
+                          20.0,
                           0.4,
                           buildCircularProgressWidget(
                             136,
@@ -115,8 +111,6 @@ class _StatsScreenState extends State<StatsScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-
-                        /// BOX ONE
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
@@ -255,126 +249,142 @@ class _StatsScreenState extends State<StatsScreen> {
                     )
                   ],
                 ),
-//              child: Row(
-//                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                crossAxisAlignment: CrossAxisAlignment.center,
-//                children: [
-//                  Column(
-//                    children: [
-//                      buildCircularProgressWidget(
-//                        140,
-//                        9,
-//                        0.6,
-//                        buildCircularProgressWidget(
-//                            100,
-//                            9,
-//                            0.5,
-//                            buildCircularProgressWidget(
-//                              60,
-//                              9,
-//                              0.4,
-//                              Container(),
-//                              Colors.grey.withOpacity(0.4),
-//                              Colors.yellow,
-//                            ),
-//                            Colors.grey.withOpacity(0.4),
-//                            Colors.teal[300]),
-//                        Colors.grey.withOpacity(0.2),
-//                        Colors.red,
-//                      )
-//                    ],
-//                  ),
-//                ],
-//              ),
               ),
-
               Divider(
-                height: 20.0,
+                height: 28.0,
               ),
-
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Text(
-                    'Energy Consumption',
-                    style: TextStyle(fontSize: 18.0),
+                  DropdownButton(
+                    underline: Container(),
+                    onChanged: (value) {
+                      setState(() {
+                        _value = value;
+                      });
+                    },
+                    value: _value,
+                    items: [
+                      DropdownMenuItem(
+                        value: "1",
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: <Widget>[
+                            Icon(MaterialCommunityIcons.devices),
+                            SizedBox(width: 10),
+                            Text(
+                              "Consumption",
+                              style: TextStyle(
+                                  fontSize: 18.0, fontWeight: FontWeight.w600),
+                            ),
+                          ],
+                        ),
+                      ),
+                      DropdownMenuItem(
+                        value: "2",
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: <Widget>[
+                            Icon(MaterialCommunityIcons.solar_panel),
+                            SizedBox(width: 10),
+                            Text(
+                              "Generation",
+                              style: TextStyle(
+                                  fontSize: 18.0, fontWeight: FontWeight.w600),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
                   Row(
                     children: <Widget>[
-                      GestureDetector(
-                        child: Container(
-                          width: 30.0,
-                          padding: EdgeInsets.all(6.0),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(4.0),
-                            color: Theme
-                                .of(context)
-                                .primaryColor,
-                          ),
-                          child: Center(
-                            child: Text('D'),
-                          ),
-                        ),
+                      ToggleButtons(
+                        constraints: BoxConstraints.tight(Size(36, 36)),
+//                        borderRadius: BorderRadius.circular(8.0),
+                        selectedColor: Theme
+                            .of(context)
+                            .accentColor,
+                        fillColor: Theme
+                            .of(context)
+                            .primaryColor,
+//                        renderBorder: false,
+                        children: <Widget>[
+                          Text('D'),
+                          Text('W'),
+                          Text('M'),
+                        ],
+                        onPressed: (int index) {
+                          setState(() {
+                            for (int buttonIndex = 0; buttonIndex <
+                                isSelected.length; buttonIndex++) {
+                              if (buttonIndex == index) {
+                                isSelected[buttonIndex] = true;
+                              } else {
+                                isSelected[buttonIndex] = false;
+                              }
+                            }
+                          });
+                        },
+                        isSelected: isSelected,
                       ),
-                      SizedBox(width: 6.0),
-                      GestureDetector(
-                        child: Container(
-                          width: 30.0,
-                          padding: EdgeInsets.all(6.0),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(4.0),
-                            color: Theme
-                                .of(context)
-                                .primaryColor,
-                          ),
-                          child: Center(
-                            child: Text('D'),
-                          ),
-                        ),
-                      ),
-                      SizedBox(width: 6.0),
-                      GestureDetector(
-                        child: Container(
-                          width: 30.0,
-                          padding: EdgeInsets.all(6.0),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(4.0),
-                            color: Theme
-                                .of(context)
-                                .primaryColor,
-                          ),
-                          child: Center(
-                            child: Text('D'),
-                          ),
-                        ),
-                      ),
+//                      GestureDetector(
+//                        onTap: () {
+//                          setState(() {
+//                            pressAttentionD = !pressAttentionD;
+//                          });
+//                        },
+//                        child: Container(
+//                          width: 30.0,
+//                          padding: EdgeInsets.all(6.0),
+//                          decoration: BoxDecoration(
+//                            borderRadius: BorderRadius.circular(4.0),
+//                            color: pressAttentionD ? Colors.grey : Colors.blue,
+//                          ),
+//                          child: Center(
+//                            child: Text('D'),
+//                          ),
+//                        ),
+//                      ),
+//                      SizedBox(width: 6.0),
+//                      GestureDetector(
+//                        child: Container(
+//                          width: 30.0,
+//                          padding: EdgeInsets.all(6.0),
+//                          decoration: BoxDecoration(
+//                            borderRadius: BorderRadius.circular(4.0),
+//                            color: pressAttentionW ? Colors.grey : Colors.blue,
+//                          ),
+//                          child: Center(
+//                            child: Text('W'),
+//                          ),
+//                        ),
+//                      ),
+//                      SizedBox(width: 6.0),
+//                      GestureDetector(
+//                        onTap: () {
+//                          setState(() {
+//                            pressAttentionW = !pressAttentionW;
+//                            print('gay');
+//                          });
+//                        },
+//                        child: Container(
+//                          width: 30.0,
+//                          padding: EdgeInsets.all(6.0),
+//                          decoration: BoxDecoration(
+//                            borderRadius: BorderRadius.circular(4.0),
+//                            color: Theme.of(context).primaryColor,
+//                          ),
+//                          child: Center(
+//                            child: Text('Y'),
+//                          ),
+//                        ),
+//                      ),
                     ],
                   ),
                 ],
               ),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: <Widget>[
-                    Container(
-                      height: screenheight * 0.35,
-                      child: LineChartSample2('Consumption', 'Week', 1.7, 13),
-                    ),
-                  ],
-                ),
-              ),
 
-              /// GRAPHS
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Container(
-                  padding: EdgeInsets.all(10),
-                  child: Column(
-                    children: <Widget>[
-                    ],
-                  ),
-                ),
-              )
             ],
           ),
         ),
