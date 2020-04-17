@@ -50,13 +50,13 @@ class _LeaderboardState extends State<Leaderboard> {
                     Container(
                       width: screenwidth * 0.4,
                       child: Tab(
-                        text: "DAILY STREAK",
+                        text: "DAILY SAVINGS",
                       ),
                     ),
                     Container(
                       width: screenwidth * 0.4,
                       child: Tab(
-                        text: "DAILY SAVINGS",
+                        text: "DAILY STREAK",
                       ),
                     ),
                   ],
@@ -72,8 +72,8 @@ class _LeaderboardState extends State<Leaderboard> {
               child: TabBarView(
                 physics: NeverScrollableScrollPhysics(),
                 children: [
-                  LeaderboardData(leaderboardType: 'DAILY STREAK'),
                   LeaderboardData(leaderboardType: 'DAILY SAVINGS'),
+                  LeaderboardData(leaderboardType: 'DAILY STREAK'),
                 ],
               ),
             ),

@@ -14,9 +14,9 @@ class LeaderboardData extends StatefulWidget {
 class _LeaderboardDataState extends State<LeaderboardData> {
   @override
   Widget build(BuildContext context) {
-    List<Leaderboard> lb = (widget.leaderboardType == 'DAILY STREAK')
-        ? streakLeaderboard
-        : dailySavingsLeaderboard;
+    List<Leaderboard> lb = (widget.leaderboardType == 'DAILY SAVINGS')
+        ? dailySavingsLeaderboard
+        : streakLeaderboard;
 
     double screenwidth = MediaQuery.of(context).size.width;
     double screenheight = MediaQuery.of(context).size.height;
@@ -62,6 +62,7 @@ class _LeaderboardDataState extends State<LeaderboardData> {
                             child: CircleAvatar(
                               radius: 40,
                               backgroundColor: Theme.of(context).canvasColor,
+                              // TODO: Get leaderboard image based on House ID (2nd Place)
                               backgroundImage: NetworkImage(lb[1].userImage),
                             ),
                           ),
@@ -93,6 +94,7 @@ class _LeaderboardDataState extends State<LeaderboardData> {
                             child: CircleAvatar(
                               radius: 65,
                               backgroundColor: Theme.of(context).canvasColor,
+                              // TODO: Get leaderboard image based on House ID (1st Place)
                               backgroundImage: NetworkImage(lb[0].userImage),
                             ),
                           ),
@@ -125,6 +127,7 @@ class _LeaderboardDataState extends State<LeaderboardData> {
                             child: CircleAvatar(
                               radius: 40,
                               backgroundColor: Theme.of(context).canvasColor,
+                              // TODO: Get leaderboard image based on House ID (3rd Place)
                               backgroundImage: NetworkImage(lb[2].userImage),
                             ),
                           ),
@@ -145,10 +148,6 @@ class _LeaderboardDataState extends State<LeaderboardData> {
                     children: [
                       getListTile(lb),
                       getListTile(lb),
-                      /* getListTile(lb),
-                            getListTile(lb),
-                            getListTile(lb),
-                            getListTile(lb), */
                     ],
                   ),
                 ),
@@ -171,10 +170,14 @@ class _LeaderboardDataState extends State<LeaderboardData> {
               Container(
                 margin: EdgeInsets.only(bottom: 10.0, left: 10.0, right: 10.0),
                 decoration: BoxDecoration(
-                  color: Theme.of(context).cardColor,
-                  borderRadius: BorderRadius.circular(8.0),
-                ),
+                    color: Theme.of(context).cardColor,
+                    borderRadius: BorderRadius.circular(8.0),
+                    // TODO: OUTLINE BASED ON CURRENT HOME OWNER
+                    border: (i == 2)
+                        ? Border.all(color: Colors.green, width: 2)
+                        : null),
                 child: ListTile(
+                  // TODO: MAKE THE LIST TILE CLICKABLE WHICH LEADS TO THE USER PROFILE FOR THAT HOME OWNER
                   // onTap: () {
                   //   setState(() {
                   //     currRoom = rooms[l].roomName;
@@ -195,13 +198,16 @@ class _LeaderboardDataState extends State<LeaderboardData> {
                         child: CircleAvatar(
                           radius: 20,
                           backgroundColor: Theme.of(context).canvasColor,
+                          // TODO: Get leaderboard image based on House ID
                           backgroundImage: NetworkImage(lb[i].userImage),
                         ),
                       ),
                       SizedBox(width: 20),
+                      // TODO: GET THE HOME OWNER NAMES
                       Text(lb[i].userName),
                     ],
                   ),
+                  // TODO: GET THE HOUSEWISE DAILY CONSUMPTION UP UNTIL THAT POINT IN THE DAY
                   trailing: Text(
                     lb[i].points.toString(),
                   ),
