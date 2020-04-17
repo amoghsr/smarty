@@ -1,5 +1,10 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:smarty/devices/CommonControllers/deviceCommonControllers.dart';
+import 'package:smarty/screens/optimizationDialog.dart';
+
+import 'models/devicesModel.dart';
 
 // Future showAlertBox(
 //     BuildContext context, String img, String title, String desc, Color color) {
@@ -16,19 +21,34 @@ import 'package:flutter/material.dart';
 // }
 
 // A dialog popup that is displayed when there is an anomaly (fire) detected by the sensors.
-class CustomDialog extends StatelessWidget {
+class CustomDialog extends StatefulWidget {
   // Init various values needed by the popup
   final String title, description, buttonText;
   final Image image;
   final Color col;
+  final dynamic path;
+  final bool optimize;
 
-  CustomDialog({
-    @required this.title,
-    @required this.description,
-    @required this.buttonText,
-    this.image,
-    this.col,
-  });
+  CustomDialog(
+      {@required this.title,
+      @required this.description,
+      @required this.buttonText,
+      this.image,
+      this.col,
+      this.path,
+      this.optimize});
+
+  @override
+  _CustomDialogState createState() => _CustomDialogState();
+}
+
+class _CustomDialogState extends State<CustomDialog> {
+  @override
+  void setState(fn) {
+    if (mounted) {
+      super.setState(fn);
+    }
+  }
 
   Widget build(BuildContext context) {
     // Returning a dialog box. Here we are specifying the properties of the dialog box.
@@ -44,7 +64,6 @@ class CustomDialog extends StatelessWidget {
     );
   }
 
-  // Content inside the dialogBox
   dialogContent(BuildContext context) {
     return Stack(
       children: <Widget>[
@@ -75,10 +94,10 @@ class CustomDialog extends StatelessWidget {
               // Title of the popup
               Center(
                 child: Text(
-                  title,
+                  widget.title,
                   style: TextStyle(
                     fontFamily: 'Montserrat',
-                    color: col,
+                    color: widget.col,
                     fontSize: 24.0,
                     fontWeight: FontWeight.w700,
                   ),
@@ -87,7 +106,7 @@ class CustomDialog extends StatelessWidget {
               SizedBox(height: 16.0),
               // Description on the popup
               Text(
-                description,
+                widget.description,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontFamily: 'Montserrat',
@@ -107,18 +126,45 @@ class CustomDialog extends StatelessWidget {
                         .update({'Danger': "low"}); // To close the dialog
                   },
                   child: InkWell(
-                    onTap: () => Navigator.of(context).pop(),
+                    onTap: () {
+                      Navigator.of(context).pop();
+                      if (widget.optimize != true) {
+                        if (widget.path != null)
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => widget.path),
+                          );
+                      } else if (widget.optimize == true) {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) =>
+                              StreamBuilder(builder: (context, snap) {
+                            return Dialog(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.circular(Consts.padding),
+                                ),
+                                elevation: 0.0,
+                                // Elevation means the height of element on the screen from the floor. Basically gives a drop shadow.
+                                backgroundColor: Colors.transparent,
+                                child: Optimization() // The required child is the content inside the dialog box.
+                                );
+                          }),
+                        );
+                      }
+                    },
                     child: Container(
                       height: 40,
                       width: 200,
                       decoration: BoxDecoration(
-                        color: col,
+                        color: widget.col,
                         borderRadius: BorderRadius.all(
                           Radius.circular(5),
                         ),
                       ),
                       child: Center(
-                        child: Text(buttonText),
+                        child: Text(widget.buttonText),
                       ),
                     ),
                   ),
@@ -134,12 +180,13 @@ class CustomDialog extends StatelessWidget {
           child: CircleAvatar(
             backgroundColor: Colors.white,
             radius: Consts.avatarRadius,
-            child: image,
+            child: widget.image,
           ),
         ),
       ],
     );
   }
+
 }
 
 class Consts {

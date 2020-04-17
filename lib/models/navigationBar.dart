@@ -3,6 +3,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:smarty/models/user.dart';
+import 'package:smarty/screens/energy_sharing_screen.dart';
 import 'package:smarty/screens/home.dart';
 import 'package:smarty/screens/leaderboard.dart';
 import 'package:smarty/screens/security.dart';
@@ -32,11 +33,11 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
     final user = Provider.of<User>(context);
     if (user.type == "O") {
       final List<Widget> _children = [
-        SafeArea(child: Home()),
-        SafeArea(child: StatsScreen()),
-        SafeArea(child: Container(),),
-        SafeArea(child: Security()),
-        SafeArea(child: Leaderboard()),
+        Home(),
+        StatsScreen(),
+        EnergySharingScreen(),
+        Security(),
+        Leaderboard(),
       ];
       return SafeArea(
         child: Scaffold(
