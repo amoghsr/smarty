@@ -47,13 +47,10 @@ class _CurrentRoutinesState extends State<CurrentRoutines> {
                     child: Container(
                       margin:
                           EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                      width: 400.0,
                       child: Stack(
                         children: <Widget>[
                           Container(
                             padding: EdgeInsets.all(20.0),
-                            height: 80.0,
-                            width: 400.0,
                             decoration: BoxDecoration(
                               color: routines[index].routineColor,
                               borderRadius: BorderRadius.circular(5),

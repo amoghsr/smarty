@@ -17,11 +17,13 @@ class LineChartSample2 extends StatefulWidget {
 
 class _LineChartSample2State extends State<LineChartSample2> {
   List<Color> gradientColors = [
-    Colors.lightGreenAccent,
-    Colors.lightGreenAccent,
+    Colors.deepPurpleAccent,
+    Colors.blue,
+    Colors.yellow,
+    Colors.orange,
+    Colors.red,
+    Colors.deepPurpleAccent
   ];
-
-  bool showAvg = false;
 
   @override
   Widget build(BuildContext context) {
@@ -37,10 +39,13 @@ class _LineChartSample2State extends State<LineChartSample2> {
                   aspectRatio: widget.aspect,
                   child: Container(
                     decoration: BoxDecoration(
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(18),
-                        ),
-                        color: Theme.of(context).scaffoldBackgroundColor),
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(18),
+                      ),
+                      color: Theme
+                          .of(context)
+                          .scaffoldBackgroundColor,
+                    ),
                     child: Padding(
                       padding: const EdgeInsets.only(
                           right: 18.0, left: 12.0, top: 24, bottom: 12),
@@ -64,25 +69,6 @@ class _LineChartSample2State extends State<LineChartSample2> {
                   ),
                 ),
               ),
-              // SizedBox(
-              //   width: 60,
-              //   height: 34,
-              //   child: FlatButton(
-              //     onPressed: () {
-              //       setState(() {
-              //         showAvg = !showAvg;
-              //       });
-              //     },
-              //     child: Text(
-              //       'AVG',
-              //       style: TextStyle(
-              //           fontSize: 11,
-              //           color: showAvg
-              //               ? Colors.white.withOpacity(0.5)
-              //               : Colors.white.withOpacity(0.5)),
-              //     ),
-              //   ),
-              // ),
             ],
           ),
         ),
