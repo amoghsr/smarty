@@ -376,6 +376,9 @@ class _StatsScreenState extends State<StatsScreen> {
                       dropdownItems[_value], days[selectedDay], 5, 49),
                 ),
               ),
+              Divider(
+                height: 28.0,
+              ),
             ],
           ),
         ),

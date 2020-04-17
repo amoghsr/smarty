@@ -98,23 +98,20 @@ class _SuggestedRoutinesState extends State<SuggestedRoutines> {
                                             ),
                                           ],
                                         ),
-                                        Padding(
-                                          padding: EdgeInsets.only(top: 1.0),
-                                          child: Row(
-                                            children: <Widget>[
-                                              Opacity(
-                                                opacity: 0.8,
-                                                child: Text(
-                                                  routine.ETime,
-                                                  style: TextStyle(
-                                                    fontSize: 12,
-                                                    fontWeight: FontWeight.w400,
-                                                    color: Colors.white,
-                                                  ),
+                                        Row(
+                                          children: <Widget>[
+                                            Opacity(
+                                              opacity: 0.8,
+                                              child: Text(
+                                                routine.ETime,
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w400,
+                                                  color: Colors.white,
                                                 ),
                                               ),
-                                            ],
-                                          ),
+                                            ),
+                                          ],
                                         ),
                                       ],
                                     ),
