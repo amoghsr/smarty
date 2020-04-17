@@ -127,7 +127,7 @@ class _SuggestedRoutinesState extends State<SuggestedRoutines> {
                                     Row(
                                       children: <Widget>[
                                         Icon(
-                                          Icons.add_circle,
+                                          Icons.add,
                                           color: Colors.white,
                                         ),
                                       ],

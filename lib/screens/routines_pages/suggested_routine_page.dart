@@ -105,6 +105,45 @@ class SuggestedRoutinePage extends StatelessWidget {
                 ),
               ),
             ),
+
+            /// ADD ROUTINES SECTION
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              child: Container(
+                child: GestureDetector(
+                  onTap: () {
+                    showDialog(
+                        context: context,
+                        builder: (_) {
+                          return CustomDialog(
+                            routineName: routine.Name,
+                          );
+                        });
+                  },
+                  child: Card(
+                    color: Theme
+                        .of(context)
+                        .primaryColor,
+                    child: ListTile(
+                      leading: Icon(
+                        Icons.add,
+                        color: Colors.lightGreen,
+                      ),
+                      title: Text(
+                        'Add to your routines',
+                        style: TextStyle(
+                            color: Colors.lightGreen,
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Divider(
+              height: 40.0,
+            ),
+
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Container(
@@ -182,42 +221,6 @@ class SuggestedRoutinePage extends StatelessWidget {
               devicesMap: routine.devices,
             ),
 
-            Divider(
-              height: 40.0,
-            ),
-
-            /// ADD ROUTINES SECTION
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10.0),
-              child: Container(
-                child: GestureDetector(
-                  onTap: () {
-                    showDialog(
-                        context: context,
-                        builder: (_) {
-                          return CustomDialog(
-                            routineName: routine.Name,
-                          );
-                        });
-                  },
-                  child: Card(
-                    color: Theme.of(context).primaryColor,
-                    child: ListTile(
-                      leading: Icon(
-                        Icons.add_circle,
-                        color: Colors.lightGreen,
-                      ),
-                      title: Text(
-                        'Add this routine?',
-                        style: TextStyle(
-                            color: Colors.lightGreen,
-                            fontWeight: FontWeight.w600),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            )
           ],
         ),
       ),
