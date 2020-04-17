@@ -8,6 +8,7 @@ import 'package:smarty/models/user.dart';
 import 'package:smarty/screens/routines_pages/routine_device_carousel.dart';
 import 'package:smarty/shared/constants.dart';
 import 'package:flutter_iconpicker/flutter_iconpicker.dart';
+import 'package:flutter_iconpicker/Serialization/iconDataSerialization.dart';
 
 class SuggestedRoutinePage extends StatelessWidget {
   final dbRoutine routine;
@@ -239,13 +240,17 @@ class CustomDialog extends StatefulWidget {
 
 class _CustomDialogState extends State<CustomDialog> {
   Widget _icon;
+  IconData _iconForFirestore;
   String routineNameByUser;
   String routineDescByUser;
+  Map<String, dynamic> _iconMap;
 
   _pickIcon() async {
     IconData icon = await FlutterIconPicker.showIconPicker(context,
         iconPackMode: IconPack.material);
 
+    _iconForFirestore = icon;
+    _iconMap = iconDataToMap(_iconForFirestore);
     _icon = Icon(
       icon,
       color: Colors.white,
@@ -460,6 +465,7 @@ class _CustomDialogState extends State<CustomDialog> {
                       width: 40.0,
                     ),
                   ),
+
                 ],
               ),
             ],
@@ -486,7 +492,9 @@ class _CustomDialogState extends State<CustomDialog> {
           onPressed: () {
             /// VALIDATION OF FIELDS
             if (_formKey.currentState.validate()) {
-              print(selectedColor.toString() +
+              print(
+                  mapToIconData(_iconMap).toString() + ' ' +
+                      selectedColor.toString() +
                   ' ' +
                   routineDescByUser +
                   ' ' +
