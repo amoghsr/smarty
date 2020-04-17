@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:smarty/authenticate/forgotPassword.dart';
 import 'package:smarty/services/auth.dart';
 import 'package:smarty/shared/loadingAuth.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+// import 'package:flutter_svg/flutter_svg.dart';
 
 class SignIn extends StatefulWidget {
   final Function toggleView;
