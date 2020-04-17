@@ -21,6 +21,7 @@ import 'package:smarty/widgets/devicesCarousel.dart';
 import 'package:smarty/widgets/roomCarousel.dart';
 import 'package:smarty/widgets/routineCarousel.dart';
 import 'package:smarty/widgets/voiceAgent.dart';
+import 'package:flutter_iconpicker/flutter_iconpicker.dart';
 
 import '../alertBox.dart';
 
@@ -146,10 +147,9 @@ class _HomeState extends State<Home> {
               icon: Icon(MaterialCommunityIcons.theme_light_dark),
               onPressed: () async {
                 setState(() {
-                  Provider.of<ThemeModel>(context, listen: false)
-                      .toggleTheme();
+                  Provider.of<ThemeModel>(context, listen: false).toggleTheme();
                 });
-                
+
                 await _showNotificationWithDefaultSound(
                     'FIRE DETECTED', 'Sprinklers have been activated.');
               },
