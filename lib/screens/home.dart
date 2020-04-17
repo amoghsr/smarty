@@ -15,6 +15,7 @@ import 'package:provider/provider.dart';
 import 'package:smarty/models/themeModel.dart';
 import 'package:smarty/models/weatherModel.dart';
 import 'package:smarty/screens/drawer.dart';
+import 'package:smarty/screens/p2pPanel.dart';
 import 'package:smarty/services/auth.dart';
 import 'package:smarty/shared/constants.dart';
 import 'package:smarty/widgets/devicesCarousel.dart';
@@ -145,13 +146,30 @@ class _HomeState extends State<Home> {
             IconButton(
               icon: Icon(MaterialCommunityIcons.theme_light_dark),
               onPressed: () async {
-                setState(() {
-                  Provider.of<ThemeModel>(context, listen: false)
-                      .toggleTheme();
-                });
-                
-                await _showNotificationWithDefaultSound(
-                    'FIRE DETECTED', 'Sprinklers have been activated.');
+                // setState(() {
+                //   Provider.of<ThemeModel>(context, listen: false)
+                //       .toggleTheme();
+                // });
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) => StreamBuilder(
+                    stream: itemRef.child("Sensors/Fire/").onValue,
+                    builder: (context, snap) {
+                      return CustomDialog(
+                        image:
+                            Image.asset("assets/images/renewable-energy.png"),
+                        title: "CAREFUL!",
+                        description:
+                            "You have almost reached your daily limit!",
+                        col: Colors.red[500],
+                        buttonText: "Optimize Now",
+                        optimize: true,
+                      );
+                    },
+                  ),
+                );
+                // await _showNotificationWithDefaultSound(
+                //     'FIRE DETECTED', 'Sprinklers have been activated.');
               },
             ),
             MicClass()
@@ -282,7 +300,14 @@ class _HomeState extends State<Home> {
 // await _showNotificationWithDefaultSound(
 //     'FIRE DETECTED', 'Sprinklers have been activated.');
 // },
-
+// ************************* DOORBELL RUNG ******************************//
+// return CustomDialog(
+//                   image: Image.asset("assets/images/doorbell.png"),
+//                   title: "DOORBELL RUNG!",
+//                   description: "Someone's at the door!",
+//                   col: Colors.red[500],,
+//                   buttonText: "Okay",
+//                 );
 // ************************* AI DIALOG BOX ******************************//
 // showDialog(
 //                   context: context,
@@ -303,19 +328,19 @@ class _HomeState extends State<Home> {
 //                 );
 
 // ************************* P2P DIALOG BOX ******************************//
-
 // showDialog(
-//   context: context,
-//   builder: (BuildContext context) => StreamBuilder(
-//     stream: itemRef.child("Sensors/Fire/").onValue,
-//     builder: (context, snap) {
-//       return CustomDialog(
-//         image: Image.asset("assets/images/battery.png"),
-//         title: "BATTERY EMPTY!",
-//         description: "You are running out of electricity!",
-//         col: Colors.red[500],
-//         buttonText: "Purchase Electricity",
-//       );
-//     },
-//   ),
-// );
+//                   context: context,
+//                   builder: (BuildContext context) => StreamBuilder(
+//                     stream: itemRef.child("Sensors/Fire/").onValue,
+//                     builder: (context, snap) {
+//                       return CustomDialog(
+//                         image: Image.asset("assets/images/battery.png"),
+//                         title: "BATTERY EMPTY!",
+//                         description: "You are running out of electricity!",
+//                         col: Colors.red[500],
+//                         buttonText: "Purchase Electricity",
+//                         path: P2P(),
+//                       );
+//                     },
+//                   ),
+//                 );
