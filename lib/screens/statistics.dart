@@ -17,12 +17,6 @@ class _StatisticsState extends State<Statistics> {
     double screenwidth = MediaQuery.of(context).size.width;
     double screenheight = MediaQuery.of(context).size.height;
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text(
-      //     'Statistics',
-      //     style: kAppBarTextStyle,
-      //   ),
-      // ),
       drawer: DrawerPage(),
       body: DefaultTabController(
         length: 2,
