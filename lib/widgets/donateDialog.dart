@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:smarty/alertBox.dart';
 import 'package:smarty/shared/constants.dart';
@@ -29,6 +30,8 @@ class _DonateDialogState extends State<DonateDialog> {
   double donationAmount = 5;
   double conversion = 0.23;
   double capacity = 48;
+  Color selectedColor = Colors.deepOrange;
+  Color iconColor = Colors.white;
 
   // double conversion = 0.23;
   Widget build(BuildContext context) {
@@ -64,7 +67,7 @@ class _DonateDialogState extends State<DonateDialog> {
           decoration: new BoxDecoration(
             color: Theme
                 .of(context)
-                .primaryColor,
+                .canvasColor,
             shape: BoxShape.rectangle,
             borderRadius: BorderRadius.circular(Consts.padding),
           ),
@@ -72,19 +75,21 @@ class _DonateDialogState extends State<DonateDialog> {
             mainAxisSize: MainAxisSize.min, // To make the card compact
             children: <Widget>[
               // Title of the popup
+              Text('Donating to', style: TextStyle(fontSize: 14.0),),
               Text(
                 widget.title,
                 style: TextStyle(
                   fontFamily: 'Montserrat',
                   color: widget.col,
-                  fontSize: 24.0,
+                  fontSize: 22.0,
                   fontWeight: FontWeight.w700,
                 ),
               ),
-              SizedBox(height: screenheight * 0.03),
+              SizedBox(height: 8.0),
               // Description on the popup
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -94,72 +99,84 @@ class _DonateDialogState extends State<DonateDialog> {
                           if (donationAmount > 1)
                             donationAmount = donationAmount - 1;
                         }),
-                        child:
-                            Icon(Icons.remove, size: 45, color: Colors.white54),
+                        child: Icon(MaterialCommunityIcons.minus_circle,
+                            size: 28, color: Colors.red),
                       ),
-                      SizedBox(
-                        width: screenwidth * 0.02,
-                      ),
+                      SizedBox(width: 24.0,),
                       Text(
                         '${donationAmount.toInt()}',
                         style: kLightDeviceBottomBar.copyWith(
                           fontSize: 50,
                         ),
                       ),
-                      SizedBox(
-                        width: screenwidth * 0.02,
-                      ),
+                      SizedBox(width: 24.0,),
                       InkWell(
                         onTap: () => setState(() {
                           if (donationAmount < capacity)
                             donationAmount = donationAmount + 1;
                         }),
-                        child: Icon(Icons.add, size: 45, color: Colors.white54),
+                        child: Icon(Icons.add_circle,
+                            size: 28, color: Colors.blue),
                       ),
                     ],
                   ),
+                  SizedBox(
+                    height: 4.0,
+                  ),
                   Text(
-                    'KWh',
+                    'Donate KWh units',
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 18.0,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  SizedBox(height: screenheight * 0.01),
-                  Text(
-                    'Donate Using',
-                    style: TextStyle(
-                      fontFamily: 'Montserrat',
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.w300,
-                    ),
-                  ),
-                  SizedBox(height: screenheight * 0.02),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      (click == 0)
-                          ? Row(
+                  SizedBox(height: 24.0),
+                ],
+              ),
+              SizedBox(height: 10,),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: <Widget>[
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          'Donate Using',
+                          style: TextStyle(
+                            fontFamily: 'Montserrat',
+                            fontSize: 14.0,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            (click == 0)
+                                ? Row(
                               children: <Widget>[
                                 Text(
                                   '${donationAmount.toInt()}',
                                   style: TextStyle(
-                                    fontSize: 25,
+                                    fontSize: 28,
                                   ),
                                 ),
                                 Icon(
                                   Icons.flash_on,
-                                  color: Color(0xffe8b313),
-                                  size: 22,
+                                  color: Colors.deepOrange,
+                                  size: 24,
                                 ),
                               ],
                             )
-                          : Row(
+                                : Row(
                               children: <Widget>[
                                 Text(
-                                  '${(double.parse((donationAmount * conversion).toStringAsFixed(2)))}',
+                                  '${(double.parse((donationAmount * conversion)
+                                      .toStringAsFixed(2)))}',
                                   style: TextStyle(
-                                    fontSize: 25,
+                                    fontSize: 28,
                                   ),
                                 ),
                                 SizedBox(
@@ -168,69 +185,97 @@ class _DonateDialogState extends State<DonateDialog> {
                                 Text('AED'),
                               ],
                             ),
-                    ],
-                  ),
-                ],
-              ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                // A button used for closing the dialog plus switching off the fire alarm.
-                child: FlatButton(
-                  onPressed: () {},
-                  //   FirebaseDatabase.instance
-                  //       .reference()
-                  //       .child("Sensors/Fire")
-                  //       .update({'Danger': "low"}); // To close the dialog
-                  // },
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      InkWell(
-                        onTap: () {
-                          setState(() {
-                            click = 0;
-                          });
-                        },
-                        child: Container(
-                          height: 40,
-                          width: 70,
-                          decoration: BoxDecoration(
-                            border: Border.all(color: widget.col, width: 2),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(5),
-                            ),
-                          ),
-                          child: Icon(Icons.flash_on,
-                              color: Color(0xffe8b313), size: 30),
+                          ],
                         ),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          setState(() {
-                            click = 1;
-                          });
-                        },
-                        child: Container(
-                          height: 40,
-                          width: 70,
-                          decoration: BoxDecoration(
-                            border: Border.all(color: widget.col, width: 2),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(5),
+                      ],
+                    ),
+                    Row(
+                      children: <Widget>[
+                        Row(
+                          children: <Widget>[
+                            GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  click = 0;
+                                  selectedColor = Colors.deepOrange;
+                                });
+                              },
+                              child: Container(
+                                height: 50,
+                                width: 50,
+                                decoration: BoxDecoration(
+                                  color: selectedColor == Colors.deepOrange
+                                      ? Colors.deepOrange
+                                      : Theme
+                                      .of(context)
+                                      .primaryColor,
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: selectedColor ==
+                                            Colors.deepOrange
+                                            ? Colors.deepOrange.withOpacity(0.4)
+                                            : Colors.black.withOpacity(0.2),
+                                        offset: Offset(0, 0),
+                                        blurRadius: 10.0)
+                                  ],
+                                ),
+                                child: Icon(
+                                  Icons.flash_on,
+                                  color: selectedColor == Colors.deepOrange
+                                      ? Colors.white
+                                      : Colors.deepOrange,
+                                  size: 20,
+                                ),
+                              ),
                             ),
-                          ),
-                          child: Icon(
-                            FontAwesomeIcons.moneyBillWave,
-                            color: Colors.green,
-                            size: 30,
-                          ),
+                            SizedBox(
+                              width: 12.0,
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  click = 1;
+                                  selectedColor = Colors.lightGreen;
+                                });
+                              },
+                              child: Container(
+                                height: 50,
+                                width: 50,
+                                decoration: BoxDecoration(
+                                    color: selectedColor == Colors.lightGreen
+                                        ? Colors.lightGreen
+                                        : Theme
+                                        .of(context)
+                                        .primaryColor,
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: selectedColor ==
+                                              Colors.lightGreen
+                                              ? Colors.lightGreen.withOpacity(
+                                              0.4)
+                                              : Colors.black.withOpacity(0.2),
+                                          offset: Offset(0, 0),
+                                          blurRadius: 10.0)
+                                    ]),
+                                child: Icon(
+                                  Icons.attach_money,
+                                  color: selectedColor == Colors.lightGreen
+                                      ? Colors.white
+                                      : Colors.lightGreen,
+                                  size: 20,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                    ],
-                  ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
-              SizedBox(height: screenheight * 0.02),
+              SizedBox(height: 36.0),
               InkWell(
                 onTap: () {
                   Navigator.of(context).pop();
@@ -270,19 +315,18 @@ class _DonateDialogState extends State<DonateDialog> {
                   );
                 },
                 child: Container(
-                  height: 40,
-                  width: 150,
+                  height: 50,
                   decoration: BoxDecoration(
                     color: widget.col,
                     borderRadius: BorderRadius.all(
-                      Radius.circular(5),
+                      Radius.circular(8.0),
                     ),
                   ),
                   child: Center(
                     child: Text(
-                      "DONATE",
+                      'Donate',
                       style: TextStyle(
-                        fontWeight: FontWeight.w800,
+                        fontWeight: FontWeight.w700,
                         fontSize: 16,
                       ),
                     ),
@@ -371,7 +415,9 @@ class TransactionDialog extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min, // To make the card compact
             children: <Widget>[
-              SizedBox(height: 10.0,),
+              SizedBox(
+                height: 10.0,
+              ),
               // Title of the popup
               Text(
                 title1,
@@ -414,7 +460,9 @@ class TransactionDialog extends StatelessWidget {
                         )
                 ],
               ),
-              SizedBox(height: 16.0,),
+              SizedBox(
+                height: 16.0,
+              ),
               // Description on the popup
               Text(
                 description,
@@ -498,8 +546,7 @@ class TransactionDialog extends StatelessWidget {
                             showDialog(
                                 context: context,
                                 builder: (context) {
-                                  return completedTransactionDialog(
-                                      type);
+                                  return completedTransactionDialog(type);
                                 });
                           }
                         }
@@ -523,8 +570,10 @@ class TransactionDialog extends StatelessWidget {
                           ),
                         ),
                         child: Center(
-                          child: Text('Yes', style: TextStyle(
-                              color: Colors.white),),
+                          child: Text(
+                            'Yes',
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ),
                       ),
                     ),
@@ -541,8 +590,10 @@ class TransactionDialog extends StatelessWidget {
                         ),
                       ),
                       child: Center(
-                        child: Text('No', style: TextStyle(color: Colors
-                            .white),),
+                        child: Text(
+                          'No',
+                          style: TextStyle(color: Colors.white),
+                        ),
                       ),
                     ),
                   ),
