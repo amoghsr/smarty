@@ -4,6 +4,8 @@
 * various routines and the nav bar (But this stays common to all)
 */
 
+import 'dart:async';
+
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -22,6 +24,7 @@ import 'package:smarty/widgets/routineCarousel.dart';
 import 'package:smarty/widgets/voiceAgent.dart';
 import 'package:weather/weather.dart';
 import '../alertBox.dart';
+import 'package:http/http.dart' as http;
 
 class Home extends StatefulWidget {
   @override
@@ -54,19 +57,6 @@ class _HomeState extends State<Home> {
         .instance; //Rather then just writing FirebaseDatabase(), get the instance.
     itemRef = database.reference();
 
-    ws = new WeatherStation(key);
-    initPlatformState();
-  }
-
-  Future<void> initPlatformState() async {
-    queryWeather();
-  }
-
-  void queryWeather() async {
-    Weather w = await ws.currentWeather();
-    setState(() {
-      _res = w.toString();
-    });
   }
 
   @override
