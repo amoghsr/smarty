@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:smarty/devices/CommonControllers/deviceCommonControllers.dart';
 import 'package:smarty/models/user.dart';
@@ -29,7 +30,8 @@ class _MicClassState extends State<MicClass> {
     return IconButton(
         icon: Icon(
           MaterialCommunityIcons.assistant,
-          semanticLabel: 'Voice Assistant to help you turn on or turn of devices. For example, say: "Turn on living room lamp".',
+          semanticLabel:
+              'Voice Assistant to help you turn on or turn of devices. For example, say: "Turn on living room lamp".',
         ),
         tooltip: 'Voide Assistant',
         onPressed: () {
@@ -109,7 +111,18 @@ class _VoiceAgentState extends State<VoiceAgent> {
     initSpeechRecognizer();
   }
 
+  void requestPermission() async {
+    PermissionStatus permission = await PermissionHandler()
+        .checkPermissionStatus(PermissionGroup.microphone);
+
+    if (permission != PermissionStatus.granted) {
+      await PermissionHandler()
+          .requestPermissions([PermissionGroup.microphone]);
+    }
+  }
+
   void initSpeechRecognizer() {
+    requestPermission();
     _speechRecognition = SpeechRecognition();
 
     _speechRecognition.setAvailabilityHandler(
