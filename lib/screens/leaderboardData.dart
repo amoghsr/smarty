@@ -142,7 +142,7 @@ class _LeaderboardDataState extends State<LeaderboardData> {
                 ),
                 Container(
                   // color: Colors.green,
-                  height: screenheight * 0.35,
+//                  height: screenheight * 0.35,
                   child: TabBarView(
                     physics: NeverScrollableScrollPhysics(),
                     children: [
