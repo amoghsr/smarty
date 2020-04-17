@@ -328,6 +328,7 @@ class _DonateDialogState extends State<DonateDialog> {
                       style: TextStyle(
                         fontWeight: FontWeight.w700,
                         fontSize: 16,
+                        color: Colors.white,
                       ),
                     ),
                   ),
