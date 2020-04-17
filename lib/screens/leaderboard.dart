@@ -67,7 +67,7 @@ class _LeaderboardState extends State<Leaderboard> {
           body: GestureDetector(
             onVerticalDragUpdate: (_) {},
             child: Container(
-              height: screenheight * 0.8,
+//              height: screenheight * 0.8,
               width: screenwidth,
               child: TabBarView(
                 physics: NeverScrollableScrollPhysics(),
