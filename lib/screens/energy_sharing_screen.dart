@@ -22,10 +22,10 @@ class _EnergySharingScreenState extends State<EnergySharingScreen> {
   double capacity = 48;
   int click = 0;
   double conversion = 0.23;
-  Color selectedColor = Colors.orange;
+  Color selectedColor = Colors.deepOrange;
   Color iconColor = Colors.white;
 
-  Future<void> _neverSatisfied() async {
+  Future<void> _infoDialog() async {
     return showDialog<void>(
       context: context,
       barrierDismissible: false, // user must tap button!
@@ -251,7 +251,7 @@ class _EnergySharingScreenState extends State<EnergySharingScreen> {
                     ),
                   ),
                   GestureDetector(
-                    onTap: _neverSatisfied,
+                    onTap: _infoDialog,
                     child: Icon(MaterialCommunityIcons.help_circle_outline),
                   ),
                 ],
@@ -612,6 +612,9 @@ class _EnergySharingScreenState extends State<EnergySharingScreen> {
                   ),
                 ),
               ),
+            ),
+            SizedBox(
+              height: 40.0,
             ),
           ],
         ),
