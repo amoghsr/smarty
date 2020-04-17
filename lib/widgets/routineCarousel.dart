@@ -76,7 +76,6 @@ class RoutineCarousel extends StatelessWidget {
               Routine routine = routines[index];
               return Container(
                 margin: EdgeInsets.all(8.0),
-                width: 160.0,
                 decoration: BoxDecoration(
                   color: routines[index].routineColor,
                   borderRadius: BorderRadius.circular(10.0),
@@ -86,7 +85,6 @@ class RoutineCarousel extends StatelessWidget {
                   children: <Widget>[
                     Container(
                       height: 100.0,
-                      width: 160.0,
                       child: Padding(
                         padding: EdgeInsets.all(6.0),
                         child: Column(
@@ -96,13 +94,20 @@ class RoutineCarousel extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: <Widget>[
-                                routine.icon,
-                                Text(
-                                  routine.routineName,
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 16.0,
-                                      color: Colors.white),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 6.0),
+                                  child: routine.icon,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 6.0, right: 12.0),
+                                  child: Text(
+                                    routine.routineName,
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 16.0,
+                                        color: Colors.white),
+                                  ),
                                 ),
                               ],
                             ),

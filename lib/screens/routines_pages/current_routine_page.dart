@@ -57,7 +57,8 @@ class CurrentRoutinePage extends StatelessWidget {
             FlatButton(
               child: const Text(
                 'Delete',
-                style: TextStyle(color: Colors.red),
+                style: TextStyle(
+                    color: Colors.red, fontWeight: FontWeight.bold),
               ),
               onPressed: () {
                 delete(routine, user);
