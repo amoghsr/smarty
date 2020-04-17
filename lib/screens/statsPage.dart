@@ -16,7 +16,7 @@ class StatsScreen extends StatefulWidget {
 class _StatsScreenState extends State<StatsScreen> {
   List<bool> isSelected = [true, false, false];
 
-  var _value;
+  var _value = '1';
 
   Widget build(BuildContext context) {
     return Scaffold(

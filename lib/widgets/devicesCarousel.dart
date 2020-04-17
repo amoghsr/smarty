@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:smarty/devices/CommonControllers/deviceCommonControllers.dart';
 import 'package:smarty/models/devicesModel.dart';
 import 'package:smarty/models/user.dart';
+import 'package:smarty/shared/constants.dart';
 
 class DeviceCarousel extends StatefulWidget {
   @override
@@ -43,10 +44,7 @@ class _DeviceCarouselState extends State<DeviceCarousel> {
               children: <Widget>[
                 Text(
                   'Your favourite devices',
-                  style: TextStyle(
-                    fontSize: 16.0,
-                    fontWeight: FontWeight.w600,
-                  ),
+                  style: kHeadingTextStyle,
                 ),
               ],
             ),
