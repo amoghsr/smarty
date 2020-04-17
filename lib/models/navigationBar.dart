@@ -3,6 +3,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:smarty/models/user.dart';
+import 'package:smarty/screens/allDevices.dart';
 import 'package:smarty/screens/energy_sharing_screen.dart';
 import 'package:smarty/screens/home.dart';
 import 'package:smarty/screens/leaderboard.dart';

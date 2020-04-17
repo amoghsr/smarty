@@ -416,17 +416,47 @@ class _P2PState extends State<P2P> {
               ),
             ),
             SizedBox(height: screenheight * 0.01),
-            InkWell(
-              onTap: () => Navigator.of(context).pop(),
-              child: Container(
-                height: 40,
-                width: 150,
-                decoration: BoxDecoration(
-                  color: Colors.green,
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(5),
-                  ),
+            Container(
+              height: 40,
+              width: 150,
+              decoration: BoxDecoration(
+                color: Colors.green,
+                borderRadius: BorderRadius.all(
+                  Radius.circular(5),
                 ),
+              ),
+              child: InkWell(
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) => StreamBuilder(
+                      builder: (context, snap) {
+                        return Dialog(
+                          shape: RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.circular(Consts.padding),
+                          ),
+                          elevation: 0.0,
+                          // Elevation means the height of element on the screen from the floor. Basically gives a drop shadow.
+                          backgroundColor: Colors.transparent,
+                          child: TransactionDialog().transactionDialog(
+                              context,
+                              0,
+                              "You are buying",
+                              (click == 0)
+                                  ? "$electricityAmount kWh for $electricityAmount "
+                                  : "$electricityAmount kWh for ${(double.parse((electricityAmount * conversion).toStringAsFixed(2)))}",
+                              "Would you like to proceed?",
+                              Colors.green,
+                              click,
+                              bal.getBalance(),
+                              electricityAmount,
+                              0), // The required child is the content inside the dialog box.
+                        );
+                      },
+                    ),
+                  );
+                },
                 child: InkWell(
                   onTap: () {
                     showDialog(
@@ -444,10 +474,10 @@ class _P2PState extends State<P2P> {
                             child: TransactionDialog().transactionDialog(
                                 context,
                                 0,
-                                "You are buying",
+                                "You are purchasing",
                                 (click == 0)
-                                    ? "$electricityAmount kWh for $electricityAmount "
-                                    : "$electricityAmount kWh for ${(double.parse((electricityAmount * conversion).toStringAsFixed(2)))}",
+                                    ? "${electricityAmount.toInt()} kWh for ${electricityAmount.toInt()} "
+                                    : "${electricityAmount.toInt()} kWh for ${(double.parse((electricityAmount * conversion).toStringAsFixed(2)))}",
                                 "Would you like to proceed?",
                                 Colors.green,
                                 click,
@@ -459,45 +489,12 @@ class _P2PState extends State<P2P> {
                       ),
                     );
                   },
-                  child: InkWell(
-                    onTap: () {
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) => StreamBuilder(
-                          builder: (context, snap) {
-                            return Dialog(
-                              shape: RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.circular(Consts.padding),
-                              ),
-                              elevation: 0.0,
-                              // Elevation means the height of element on the screen from the floor. Basically gives a drop shadow.
-                              backgroundColor: Colors.transparent,
-                              child: TransactionDialog().transactionDialog(
-                                  context,
-                                  0,
-                                  "You are purchasing",
-                                  (click == 0)
-                                      ? "${electricityAmount.toInt()} kWh for ${electricityAmount.toInt()} "
-                                      : "${electricityAmount.toInt()} kWh for ${(double.parse((electricityAmount * conversion).toStringAsFixed(2)))}",
-                                  "Would you like to proceed?",
-                                  Colors.green,
-                                  click,
-                                  bal.getBalance(),
-                                  electricityAmount,
-                                  0), // The required child is the content inside the dialog box.
-                            );
-                          },
-                        ),
-                      );
-                    },
-                    child: Center(
-                      child: Text(
-                        "BUY",
-                        style: TextStyle(
-                          fontWeight: FontWeight.w800,
-                          fontSize: 18,
-                        ),
+                  child: Center(
+                    child: Text(
+                      "BUY",
+                      style: TextStyle(
+                        fontWeight: FontWeight.w800,
+                        fontSize: 18,
                       ),
                     ),
                   ),

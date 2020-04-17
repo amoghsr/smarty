@@ -18,7 +18,9 @@ class _AllDevicesState extends State<AllDevices> with TickerProviderStateMixin {
   double height = 70;
   bool showDevices = false;
 
+  // TODO: Get the list of rooms
   List<String> roomNames = ["Living Room", "Kitchen"];
+  // TODO: Get the list of devices per room (EVEN IF THE CONSUMPTION FOR THAT DEVICE IN THAT DAY IS 0)
   List<String> deviceNames = ["AC", "Lamp", "Speaker"];
   Widget build(BuildContext context) {
     double screenwidth = MediaQuery.of(context).size.width;
@@ -66,6 +68,7 @@ class _AllDevicesState extends State<AllDevices> with TickerProviderStateMixin {
                                     style: TextStyle(fontSize: 17),
                                   ),
                                   Text(
+                                    // TODO: Get the Number of devices per room, to display here
                                     '3 Devices',
                                     style: TextStyle(
                                       fontSize: 10,
@@ -76,6 +79,7 @@ class _AllDevicesState extends State<AllDevices> with TickerProviderStateMixin {
                             ],
                           ),
                           Text(
+                            // TODO: Total Consumption per room (Total of all devices per room) uptil that point of the day
                             '3 KwH',
                             style: TextStyle(fontSize: 17),
                           ),
@@ -107,6 +111,7 @@ class _AllDevicesState extends State<AllDevices> with TickerProviderStateMixin {
                                           ],
                                         ),
                                         Text(
+                                          // TODO: Total per device (Sum of consumption throughout the day for that device) up until that point of the day
                                           '1 KwH',
                                           style: TextStyle(fontSize: 16),
                                         ),

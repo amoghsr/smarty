@@ -4,6 +4,8 @@
 * various routines and the nav bar (But this stays common to all)
 */
 
+import 'dart:async';
+
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -22,6 +24,7 @@ import 'package:smarty/widgets/routineCarousel.dart';
 import 'package:smarty/widgets/voiceAgent.dart';
 import 'package:weather/weather.dart';
 import '../alertBox.dart';
+import 'package:http/http.dart' as http;
 
 class Home extends StatefulWidget {
   @override
@@ -54,19 +57,6 @@ class _HomeState extends State<Home> {
         .instance; //Rather then just writing FirebaseDatabase(), get the instance.
     itemRef = database.reference();
 
-    ws = new WeatherStation(key);
-    initPlatformState();
-  }
-
-  Future<void> initPlatformState() async {
-    queryWeather();
-  }
-
-  void queryWeather() async {
-    Weather w = await ws.currentWeather();
-    setState(() {
-      _res = w.toString();
-    });
   }
 
   @override
@@ -95,24 +85,6 @@ class _HomeState extends State<Home> {
                 //   Provider.of<ThemeModel>(context, listen: false)
                 //       .toggleTheme();
                 // });
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) => StreamBuilder(
-                    stream: itemRef.child("Sensors/Fire/").onValue,
-                    builder: (context, snap) {
-                      return CustomDialog(
-                        image:
-                            Image.asset("assets/images/renewable-energy.png"),
-                        title: "CAREFUL!",
-                        description:
-                            "You have almost reached your daily limit!",
-                        col: Colors.red[500],
-                        buttonText: "Optimize Now",
-                        optimize: true,
-                      );
-                    },
-                  ),
-                );
                 // await _showNotificationWithDefaultSound(
                 //     'FIRE DETECTED', 'Sprinklers have been activated.');
               },
@@ -254,25 +226,31 @@ class _HomeState extends State<Home> {
 //                   buttonText: "Okay",
 //                 );
 // ************************* AI DIALOG BOX ******************************//
-// showDialog(
-//                   context: context,
-//                   builder: (BuildContext context) => StreamBuilder(
-//                     stream: itemRef.child("Sensors/Fire/").onValue,
-//                     builder: (context, snap) {
-//                       return CustomDialog(
-//                         image:
-//                             Image.asset("assets/images/renewable-energy.png"),
-//                         title: "CAREFUL!",
-//                         description:
-//                             "You have almost reached your daily limit!",
-//                         col: Colors.red[500],
-//                         buttonText: "Optimize Now",
-//                       );
-//                     },
-//                   ),
-//                 );
+// TODO: POPUP THIS DIALOG WHEN DAILY CONSUMPTION REACHES 80% OF THE CALCULATED DAILY LIMIT
+                // showDialog(
+                //   context: context,
+                //   builder: (BuildContext context) => StreamBuilder(
+                //     stream: itemRef.child("Sensors/Fire/").onValue,
+                //     builder: (context, snap) {
+                //       return CustomDialog(
+                //         image:
+                //             Image.asset("assets/images/renewable-energy.png"),
+                //         title: "CAREFUL!",
+                //         description:
+                //             "You have almost reached your daily limit!",
+                //         col: Colors.red[500],
+                //         buttonText: "Optimize Now",
+                //         optimize: true,
+                //       );
+                //     },
+                //   ),
+                // );
+                
 
 // ************************* P2P DIALOG BOX ******************************//
+// TODO: POPUP THIS DIALOG WHEN DAILY CONSUMPTION REACHES THE DAILY GENERATION VALUE (BATTERY LEVEL EMPTY)
+// TODO: POPUP THIS DIALOG ONLY AFTER 6PM (WHEN GENERATION IS ZERO BECAUSE DURING THE DAY THE GENERATION VALUE KEEPS INCREASING)
+
 // showDialog(
 //                   context: context,
 //                   builder: (BuildContext context) => StreamBuilder(
