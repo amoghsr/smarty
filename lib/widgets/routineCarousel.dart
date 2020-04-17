@@ -5,6 +5,7 @@ import 'package:smarty/models/dbRoutines.dart';
 import 'package:smarty/models/routineModel.dart';
 import 'package:smarty/shared/constants.dart';
 
+import 'package:flutter_iconpicker/flutter_iconpicker.dart';
 import '../screens/routines_pages/routines_main_view.dart';
 
 class RoutineCarousel extends StatelessWidget {
@@ -21,10 +22,7 @@ class RoutineCarousel extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Text(
-                'Routines',
-                  style: kHeadingTextStyle
-              ),
+              Text('Routines', style: kHeadingTextStyle),
               GestureDetector(
                 onTap: () => Navigator.push(
                   context,
@@ -37,9 +35,7 @@ class RoutineCarousel extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 12.0,
                     fontWeight: FontWeight.w600,
-                    color: Theme
-                        .of(context)
-                        .accentColor,
+                    color: Theme.of(context).accentColor,
                   ),
                 ),
               ),

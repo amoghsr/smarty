@@ -117,16 +117,20 @@ class DatabaseService1 {
             key != "Description" &&
             key != "logo") {
           x[key] = value;
-//          print(x);
         }
+      });
+      Map<dynamic, dynamic> we = element.data["logo"];
+      Map<String, dynamic> wet = {};
+      we.forEach((key, value) {
+        wet[key.toString()] = value;
       });
       w.add(Routine.fromFirestore(
         element.data["STime"],
         element.data["ETime"],
-        element.documentID.toUpperCase(),
+        element.documentID,
         x,
         element.data["Description"],
-        element.data["logo"],
+        wet,
         element.data["color"],
       ));
     });

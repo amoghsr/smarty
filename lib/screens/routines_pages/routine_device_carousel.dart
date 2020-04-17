@@ -18,7 +18,6 @@ class RoutineDeviceCarousel extends StatefulWidget {
 class _RoutineDeviceCarouselState extends State<RoutineDeviceCarousel> {
   @override
   Widget build(BuildContext context) {
-    final rou = Provider.of<List<dbRoutine>>(context);
     return Container(
       height: 120.0,
       child: ListView(

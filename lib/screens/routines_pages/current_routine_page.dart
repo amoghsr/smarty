@@ -17,6 +17,28 @@ class CurrentRoutinePage extends StatelessWidget {
       context: context,
       barrierDismissible: true, // user must tap button for close dialog!
       builder: (BuildContext context) {
+        delete(Routine routine, User user) {
+          Firestore.instance
+              .collection("Routines")
+              .document(user.houseId)
+              .collection("Suggested Routines")
+              .document(routine.routineName)
+              .setData({"STime": routine.Stime, "ETime": routine.Etime});
+          Firestore.instance
+              .collection("Routines")
+              .document(user.houseId)
+              .collection("Suggested Routines")
+              .document(routine.routineName)
+              .setData(routine.devices, merge: true);
+          Firestore.instance
+              .collection("Routines")
+              .document(user.houseId)
+              .collection("Current Routines")
+              .document(routine.routineName)
+              .delete();
+        }
+
+        User user = Provider.of<User>(context);
         return AlertDialog(
           backgroundColor: Theme.of(context).primaryColor,
           shape: RoundedRectangleBorder(
@@ -38,6 +60,7 @@ class CurrentRoutinePage extends StatelessWidget {
                 style: TextStyle(color: Colors.red),
               ),
               onPressed: () {
+                delete(routine, user);
                 Navigator.of(context).pop();
               },
             )
@@ -47,27 +70,8 @@ class CurrentRoutinePage extends StatelessWidget {
     );
   }
 
-  delete(Routine routine, User user) {
-    Firestore.instance
-        .collection("Routines")
-        .document(user.houseId)
-        .collection("Suggested Routines")
-        .document(routine.routineName)
-        .setData({"STime": routine.Stime, "ETime": routine.Etime});
-    Firestore.instance
-        .collection("Routines")
-        .document(user.houseId)
-        .collection("Suggested Routines")
-        .document(routine.routineName)
-        .setData(routine.devices, merge: true);
-//      Firestore.instance
-//          .collection("Routines")
-//          .document(user.houseId).collection("Current Routines").document(routine.routineName).delete();
-  }
-
   @override
   Widget build(BuildContext context) {
-    User user = Provider.of<User>(context);
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.white),
@@ -157,7 +161,7 @@ class CurrentRoutinePage extends StatelessWidget {
                           ),
                           child: Text(
                             routine.Stime,
-                            style: Theme.of(context).textTheme.headline6,
+                            style: Theme.of(context).textTheme.headline,
                           ),
                         ),
                       ],
@@ -179,7 +183,7 @@ class CurrentRoutinePage extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(horizontal: 16.0),
                           child: Text(
                             routine.Etime,
-                            style: Theme.of(context).textTheme.headline6,
+                            style: Theme.of(context).textTheme.headline,
                           ),
                         ),
                       ],
@@ -216,7 +220,6 @@ class CurrentRoutinePage extends StatelessWidget {
               child: Container(
                 child: GestureDetector(
                   onTap: () {
-                    delete(routine, user);
                     _confirmDialog(context);
                   },
                   child: Card(

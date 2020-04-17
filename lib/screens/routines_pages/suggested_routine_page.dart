@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_iconpicker/Models/IconPack.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:smarty/models/dbRoutines.dart';
 import 'package:smarty/models/user.dart';
 import 'package:smarty/screens/routines_pages/routine_device_carousel.dart';
@@ -14,31 +15,6 @@ class SuggestedRoutinePage extends StatelessWidget {
   final dbRoutine routine;
 
   const SuggestedRoutinePage({Key key, this.routine}) : super(key: key);
-  AddtoCurrentRoutines(dbRoutine routine, User user, String logo, String color,
-      String description) {
-    Firestore.instance
-        .collection("Routines")
-        .document(user.houseId)
-        .collection("Suggested Routines")
-        .document(routine.Name)
-        .setData({
-      "STime": routine.STime,
-      "ETime": routine.ETime,
-      "logo": logo,
-      "Description": description,
-      "color": color
-    });
-    Firestore.instance
-        .collection("Routines")
-        .document(user.houseId)
-        .collection("Suggested Routines")
-        .document(routine.Name)
-        .setData(routine.devices, merge: true);
-//      Firestore.instance
-//          .collection("Routines")
-//          .document(user.houseId).collection("Suggested Routines").document(routine.routineName).delete();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -117,14 +93,12 @@ class SuggestedRoutinePage extends StatelessWidget {
                         context: context,
                         builder: (_) {
                           return CustomDialog(
-                            routineName: routine.Name,
+                            routine: routine,
                           );
                         });
                   },
                   child: Card(
-                    color: Theme
-                        .of(context)
-                        .primaryColor,
+                    color: Theme.of(context).primaryColor,
                     child: ListTile(
                       leading: Icon(
                         Icons.add,
@@ -172,7 +146,7 @@ class SuggestedRoutinePage extends StatelessWidget {
                           ),
                           child: Text(
                             routine.STime,
-                            style: Theme.of(context).textTheme.headline6,
+                            style: Theme.of(context).textTheme.headline,
                           ),
                         ),
                       ],
@@ -194,7 +168,7 @@ class SuggestedRoutinePage extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(horizontal: 16.0),
                           child: Text(
                             routine.ETime,
-                            style: Theme.of(context).textTheme.headline6,
+                            style: Theme.of(context).textTheme.headline,
                           ),
                         ),
                       ],
@@ -221,7 +195,6 @@ class SuggestedRoutinePage extends StatelessWidget {
               routineColor: routine.color,
               devicesMap: routine.devices,
             ),
-
           ],
         ),
       ),
@@ -230,9 +203,9 @@ class SuggestedRoutinePage extends StatelessWidget {
 }
 
 class CustomDialog extends StatefulWidget {
-  final routineName;
+  final dbRoutine routine;
 
-  const CustomDialog({Key key, this.routineName}) : super(key: key);
+  const CustomDialog({Key key, this.routine}) : super(key: key);
 
   @override
   _CustomDialogState createState() => new _CustomDialogState();
@@ -244,6 +217,33 @@ class _CustomDialogState extends State<CustomDialog> {
   String routineNameByUser;
   String routineDescByUser;
   Map<String, dynamic> _iconMap;
+  AddtoCurrentRoutines(dbRoutine routine, User user, Map<String, dynamic> logo,
+      String color, String description, String Name) {
+    Firestore.instance
+        .collection("Routines")
+        .document(user.houseId)
+        .collection("Current Routines")
+        .document(Name)
+        .setData({
+      "STime": routine.STime,
+      "ETime": routine.ETime,
+      "logo": logo,
+      "Description": description,
+      "color": color
+    });
+    Firestore.instance
+        .collection("Routines")
+        .document(user.houseId)
+        .collection("Current Routines")
+        .document(Name)
+        .setData(routine.devices, merge: true);
+    Firestore.instance
+        .collection("Routines")
+        .document(user.houseId)
+        .collection("Suggested Routines")
+        .document(Name)
+        .delete();
+  }
 
   _pickIcon() async {
     IconData icon = await FlutterIconPicker.showIconPicker(context,
@@ -263,18 +263,17 @@ class _CustomDialogState extends State<CustomDialog> {
   // DEFAULT COLOR OPTION
   Color selectedColor = Colors.blue;
   final _formKey = GlobalKey<FormState>();
-
+  String colorsSelected = "blue";
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<User>(context);
     return AlertDialog(
-      backgroundColor: Theme
-          .of(context)
-          .primaryColor,
+      backgroundColor: Theme.of(context).primaryColor,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20.0),
       ),
       title: Center(
-        child: Text('Add ${widget.routineName.toString()}'),
+        child: Text('Add ${widget.routine.Name.toString()}'),
       ),
       content: SingleChildScrollView(
         child: Form(
@@ -283,8 +282,7 @@ class _CustomDialogState extends State<CustomDialog> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Text(
-                'Customise ${widget.routineName
-                    .toString()} here before adding it',
+                'Customise ${widget.routine.Name.toString()} here before adding it',
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 20.0),
@@ -296,10 +294,10 @@ class _CustomDialogState extends State<CustomDialog> {
                     child: _icon != null
                         ? _icon
                         : Icon(
-                      Icons.add,
-                      size: 40.0,
-                      color: Colors.white,
-                    ),
+                            Icons.add,
+                            size: 40.0,
+                            color: Colors.white,
+                          ),
                   ),
                   maxRadius: 40.0,
                   backgroundColor: selectedColor,
@@ -328,7 +326,7 @@ class _CustomDialogState extends State<CustomDialog> {
                   setState(() => routineNameByUser = val);
                 },
                 decoration: InputDecoration(
-                  hintText: widget.routineName,
+                  hintText: widget.routine.Name,
                   helperText: 'For ex. Going out',
                   focusColor: selectedColor,
                   enabledBorder: new UnderlineInputBorder(
@@ -364,10 +362,10 @@ class _CustomDialogState extends State<CustomDialog> {
                 height: 24.0,
               ),
               Center(
-                  child: Text(
-                      'Give your routine a color',
-                      style: TextStyle(fontSize: 16.0,)
-                  )),
+                  child: Text('Give your routine a color',
+                      style: TextStyle(
+                        fontSize: 16.0,
+                      ))),
               SizedBox(
                 height: 18.0,
               ),
@@ -378,6 +376,7 @@ class _CustomDialogState extends State<CustomDialog> {
                     onTap: () {
                       setState(() {
                         selectedColor = Colors.blue;
+                        colorsSelected = "blue";
                       });
                     },
                     child: Container(
@@ -396,6 +395,7 @@ class _CustomDialogState extends State<CustomDialog> {
                     onTap: () {
                       setState(() {
                         selectedColor = Colors.lightGreen;
+                        colorsSelected = "green";
                       });
                     },
                     child: Container(
@@ -414,6 +414,7 @@ class _CustomDialogState extends State<CustomDialog> {
                     onTap: () {
                       setState(() {
                         selectedColor = Colors.deepOrange;
+                        colorsSelected = "orange";
                       });
                     },
                     child: Container(
@@ -432,6 +433,7 @@ class _CustomDialogState extends State<CustomDialog> {
                     onTap: () {
                       setState(() {
                         selectedColor = Colors.red;
+                        colorsSelected = "red";
                       });
                     },
                     child: Container(
@@ -451,6 +453,7 @@ class _CustomDialogState extends State<CustomDialog> {
                     onTap: () {
                       setState(() {
                         selectedColor = Colors.deepPurpleAccent;
+                        colorsSelected = "purple";
                       });
                     },
                     child: Container(
@@ -465,7 +468,6 @@ class _CustomDialogState extends State<CustomDialog> {
                       width: 40.0,
                     ),
                   ),
-
                 ],
               ),
             ],
@@ -492,13 +494,9 @@ class _CustomDialogState extends State<CustomDialog> {
           onPressed: () {
             /// VALIDATION OF FIELDS
             if (_formKey.currentState.validate()) {
-              print(
-                  mapToIconData(_iconMap).toString() + ' ' +
-                      selectedColor.toString() +
-                  ' ' +
-                  routineDescByUser +
-                  ' ' +
-                  routineDescByUser);
+              AddtoCurrentRoutines(widget.routine, user, _iconMap,
+                  colorsSelected, routineDescByUser, routineNameByUser);
+              print(_iconMap);
               Navigator.of(context).pop();
             } else {
               return null;
