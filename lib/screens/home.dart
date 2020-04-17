@@ -245,7 +245,6 @@ class _HomeState extends State<Home> {
                 //     },
                 //   ),
                 // );
-                
 
 // ************************* P2P DIALOG BOX ******************************//
 // TODO: POPUP THIS DIALOG WHEN DAILY CONSUMPTION REACHES THE DAILY GENERATION VALUE (BATTERY LEVEL EMPTY)

@@ -22,7 +22,6 @@ class _UserProfileState extends State<UserProfile> {
   var user;
   var stream;
 
-
   _launchCaller() async {
     const url = 'tel:800123';
     if (await canLaunch(url)) {
@@ -40,6 +39,11 @@ class _UserProfileState extends State<UserProfile> {
       while (user == null) {}
       stream = DatabaseService1().getUserDetails(user.uid, user);
     }();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override
@@ -165,69 +169,65 @@ class _UserProfileState extends State<UserProfile> {
                 ),
               ),
               body: SafeArea(
-                child: ListView(
-                  // physics: NeverScrollableScrollPhysics(),
-                  padding: EdgeInsets.symmetric(vertical: 20.0),
-                  children: <Widget>[
-                    Padding(
-                      padding: EdgeInsets.only(
-                        top: 20,
+                child: Container(
+                  child: ListView(
+                    // physics: NeverScrollableScrollPhysics(),
+                    padding: EdgeInsets.symmetric(vertical: 20.0),
+                    children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.only(
+                          top: 20,
+                        ),
+                        child: SizedBox(),
                       ),
-                      child: SizedBox(),
-                    ),
-                    Container(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          CircleAvatar(
-                            //TODO: Current Home Owner's User Image
-                            backgroundImage: NetworkImage(lb[3].userImage),
-                            maxRadius: 65,
-                          ),
-                          Padding(
-                            padding:
-                                const EdgeInsets.only(top: 12.0, bottom: 4.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: <Widget>[
-                                Text(
+                      Container(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            CircleAvatar(
+                              //TODO: Current Home Owner's User Image
+                              backgroundImage: NetworkImage(lb[3].userImage),
+                              maxRadius: 65,
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(top: 12.0, bottom: 4.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: <Widget>[
+                                  Text(
                                     //TODO: Current Home Owner's User Name
-                                  // snapshot.data['displayName']
-                                  lb[3].userName.split(" ")[0] + "'s Home",
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w700,
+                                    // snapshot.data['displayName']
+                                    lb[3].userName.split(" ")[0] + "'s Home",
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w700,
+                                    ),
                                   ),
-                                ),
-                                SizedBox(height: screenheight * 0.01),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    SizedBox(
-                                      width: screenwidth * 0.04,
-                                    ),
-                                    Text(
-                                      //TODO: Current bolt balance (reflected and updated throughout the app), stored in the db
-                                      'Balance: ${bal.getBalanceAsInt()}',
-                                      style: TextStyle(
-                                        fontSize: 14.5,
+                                  SizedBox(height: screenheight * 0.01),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      SizedBox(
+                                        width: screenwidth * 0.04,
                                       ),
-                                    ),
-                                    Icon(Icons.flash_on,
-                                        size: 19, color: Color(0xffe8b313)),
-                                    SizedBox(
-                                      width: screenwidth * 0.03,
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: screenheight * 0.02,
-                                ),
-
-                                //second carousel
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 15.0),
-                                  child: Row(
+                                      Text(
+                                        //TODO: Current bolt balance (reflected and updated throughout the app), stored in the db
+                                        'Balance: ${bal.getBalanceAsInt()}',
+                                        style: TextStyle(
+                                          fontSize: 14.5,
+                                        ),
+                                      ),
+                                      Icon(Icons.flash_on,
+                                          size: 19, color: Color(0xffe8b313)),
+                                      SizedBox(
+                                        width: screenwidth * 0.03,
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(height: screenheight * 0.01),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: <Widget>[
                                       Column(
                                         children: <Widget>[
@@ -256,8 +256,8 @@ class _UserProfileState extends State<UserProfile> {
                                               selectedColor: Colors.green,
                                               unselectedColor: Colors.grey[200],
                                               customStep: (index, color, _) =>
-                                              //TODO: Replace 3 with current daily streak day + 1
-                                              //TODO: Designs the progress bar for the current streak day
+                                                  //TODO: Replace 3 with current daily streak day + 1
+                                                  //TODO: Designs the progress bar for the current streak day
                                                   index == 3
                                                       ? Column(
                                                           children: <Widget>[
@@ -294,7 +294,7 @@ class _UserProfileState extends State<UserProfile> {
                                                             ),
                                                           ],
                                                         )
-                                                  //TODO: 4 is replaced with (current daily streak day - 1)
+                                                      //TODO: 4 is replaced with (current daily streak day - 1)
                                                       : index < 4
                                                           ? Column(
                                                               children: <
@@ -322,18 +322,22 @@ class _UserProfileState extends State<UserProfile> {
                                                                     color: Colors
                                                                         .lightGreen,
                                                                     child:
-                                                                        Center(
+                                                                        Container(
+                                                                      color: Colors
+                                                                          .lightGreen,
                                                                       child:
-                                                                          Text(
-                                                                        // Icons.check,
-                                                                        '${index + 1}',
-                                                                        style: TextStyle(
-                                                                            color:
-                                                                                Colors.white),
+                                                                          Center(
+                                                                        child:
+                                                                            Text(
+                                                                          // Icons.check,
+                                                                          '${index + 1}',
+                                                                          style:
+                                                                              TextStyle(color: Colors.white),
+                                                                        ),
                                                                       ),
                                                                     ),
                                                                   ),
-                                                                ),
+                                                                )
                                                               ],
                                                             )
                                                           : Column(
@@ -382,139 +386,138 @@ class _UserProfileState extends State<UserProfile> {
                                       ),
                                     ],
                                   ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10.0,
-                    ),
-                    Divider(),
-                    Padding(
-                      padding: EdgeInsets.only(
-                          left: screenwidth * 0.05, top: screenheight * 0.01),
-                      child: Container(
-                        child: Text(
-                          "Badges",
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.w500),
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: screenheight * 0.02),
-                    ConstrainedBox(
-                      constraints: BoxConstraints(
-                          maxHeight: screenheight,
-                          minHeight: screenheight * 0.1),
-                      child: ListView.builder(
-                          shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
-                          itemCount: badges.length,
-                          itemBuilder: (context, index1) {
-                            return Expanded(
-                              child: Column(
-                                children: <Widget>[
-                                  Center(
-                                    child: Text(
-                                      badges[index1][0],
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: screenheight * 0.01,
-                                  ),
-                                  Container(
-                                    height: screenheight * 0.13,
-                                    width: screenwidth,
-                                    child: Center(
-                                      child: ListView.separated(
-                                          separatorBuilder:
-                                              (BuildContext context,
-                                                  int index) {
-                                            return SizedBox(
-                                              width: screenwidth * 0.07,
-                                            );
-                                          },
-                                          shrinkWrap: true,
-                                          scrollDirection: Axis.horizontal,
-                                          itemCount: badges[index1][1].length,
-                                          itemBuilder: (context, index2) {
-                                            return (badges[index1][1][index2]
-                                                        [0] ==
-                                                    false)
-                                                ? Container(
-                                                    foregroundDecoration:
-                                                        BoxDecoration(
-                                                      color: Colors.grey,
-                                                      backgroundBlendMode:
-                                                          BlendMode.saturation,
-                                                    ),
-                                                    child: badges[index1][1]
-                                                        [index2][1],
-                                                  )
-                                                : InkWell(
-                                                    onTap: () {
-                                                      showDialog(
-                                                        context: context,
-                                                        builder: (BuildContext
-                                                                context) =>
-                                                            StreamBuilder(
-                                                          builder:
-                                                              (context, snap) {
-                                                            return Dialog(
-                                                              shape:
-                                                                  RoundedRectangleBorder(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            Consts.padding),
-                                                              ),
-                                                              elevation: 0.0,
-                                                              // Elevation means the height of element on the screen from the floor. Basically gives a drop shadow.
-                                                              backgroundColor:
-                                                                  Colors
-                                                                      .transparent,
-                                                              child: transactionDialog(
-                                                                  context,
-                                                                  badges[index1]
-                                                                              [1]
-                                                                          [index2]
-                                                                      [2],
-                                                                  badges[index1]
-                                                                              [
-                                                                              1]
-                                                                          [
-                                                                          index2]
-                                                                      [3],
-                                                                  badges[index1]
-                                                                          [1][
-                                                                      index2][1]),
-                                                            );
-                                                          },
-                                                        ),
-                                                      );
-                                                    },
-                                                    child: Container(
-                                                      child: badges[index1][1]
-                                                          [index2][1],
-                                                    ),
-                                                  );
-                                          }),
-                                    ),
-                                  ),
-                                  (index1 != 2) ? Divider() : Container()
                                 ],
                               ),
-                            );
-                          }),
-                    ),
-                  ],
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      Divider(),
+                      Padding(
+                        padding: EdgeInsets.only(
+                            left: screenwidth * 0.05, top: screenheight * 0.01),
+                        child: Container(
+                          child: Text(
+                            "Badges",
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.w500),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: screenheight * 0.02),
+                      ConstrainedBox(
+                        constraints: BoxConstraints(
+                            maxHeight: screenheight,
+                            minHeight: screenheight * 0.1),
+                        child: ListView.builder(
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            itemCount: badges.length,
+                            itemBuilder: (context, index1) {
+                              return Expanded(
+                                child: Column(
+                                  children: <Widget>[
+                                    Center(
+                                      child: Text(
+                                        badges[index1][0],
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: screenheight * 0.01,
+                                    ),
+                                    Container(
+                                      height: screenheight * 0.13,
+                                      width: screenwidth,
+                                      child: Center(
+                                        child: ListView.separated(
+                                            separatorBuilder:
+                                                (BuildContext context,
+                                                    int index) {
+                                              return SizedBox(
+                                                width: screenwidth * 0.07,
+                                              );
+                                            },
+                                            shrinkWrap: true,
+                                            scrollDirection: Axis.horizontal,
+                                            itemCount: badges[index1][1].length,
+                                            itemBuilder: (context, index2) {
+                                              return (badges[index1][1][index2]
+                                                          [0] ==
+                                                      false)
+                                                  ? Container(
+                                                      foregroundDecoration:
+                                                          BoxDecoration(
+                                                        color: Colors.grey,
+                                                        backgroundBlendMode:
+                                                            BlendMode
+                                                                .saturation,
+                                                      ),
+                                                      child: badges[index1][1]
+                                                          [index2][1],
+                                                    )
+                                                  : InkWell(
+                                                      onTap: () {
+                                                        showDialog(
+                                                          context: context,
+                                                          builder: (BuildContext
+                                                                  context) =>
+                                                              StreamBuilder(
+                                                            builder: (context,
+                                                                snap) {
+                                                              return Dialog(
+                                                                shape:
+                                                                    RoundedRectangleBorder(
+                                                                  borderRadius:
+                                                                      BorderRadius.circular(
+                                                                          Consts
+                                                                              .padding),
+                                                                ),
+                                                                elevation: 0.0,
+                                                                // Elevation means the height of element on the screen from the floor. Basically gives a drop shadow.
+                                                                backgroundColor:
+                                                                    Colors
+                                                                        .transparent,
+                                                                child: transactionDialog(
+                                                                    context,
+                                                                    badges[index1][1]
+                                                                            [
+                                                                            index2]
+                                                                        [2],
+                                                                    badges[index1][1]
+                                                                            [
+                                                                            index2]
+                                                                        [3],
+                                                                    badges[index1]
+                                                                            [1][
+                                                                        index2][1]),
+                                                              );
+                                                            },
+                                                          ),
+                                                        );
+                                                      },
+                                                      child: Container(
+                                                        child: badges[index1][1]
+                                                            [index2][1],
+                                                      ),
+                                                    );
+                                            }),
+                                      ),
+                                    ),
+                                    (index1 != 2) ? Divider() : Container()
+                                  ],
+                                ),
+                              );
+                            }),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
