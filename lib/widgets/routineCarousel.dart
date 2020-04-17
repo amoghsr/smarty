@@ -22,10 +22,7 @@ class RoutineCarousel extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Text(
-                'Routines',
-                  style: kHeadingTextStyle
-              ),
+              Text('Routines', style: kHeadingTextStyle),
               GestureDetector(
                 onTap: () => Navigator.push(
                   context,
