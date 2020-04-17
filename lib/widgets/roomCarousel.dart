@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:smarty/models/devicesModel.dart';
 import 'package:smarty/models/roomModel.dart';
 import 'package:smarty/screens/rooms.dart';
+import 'package:smarty/shared/constants.dart';
 
 class RoomCarousel extends StatelessWidget {
   @override
@@ -24,10 +25,7 @@ class RoomCarousel extends StatelessWidget {
               children: <Widget>[
                 Text(
                   'All Rooms',
-                  style: TextStyle(
-                    fontSize: 16.0,
-                    fontWeight: FontWeight.w600,
-                  ),
+                    style: kHeadingTextStyle
                 ),
               ],
             ),

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:smarty/models/dbRoutines.dart';
 import 'package:smarty/models/routineModel.dart';
+import 'package:smarty/shared/constants.dart';
 
 import '../screens/routines_pages/routines_main_view.dart';
 
@@ -22,10 +23,7 @@ class RoutineCarousel extends StatelessWidget {
             children: <Widget>[
               Text(
                 'Routines',
-                style: TextStyle(
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.w600,
-                ),
+                  style: kHeadingTextStyle
               ),
               GestureDetector(
                 onTap: () => Navigator.push(
