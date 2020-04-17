@@ -34,7 +34,7 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
     final user = Provider.of<User>(context);
     if (user.type == "O") {
       final List<Widget> _children = [
-        AllDevices(),
+        Home(),
         StatsScreen(),
         EnergySharingScreen(),
         Security(),
