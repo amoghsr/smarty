@@ -1,8 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_iconpicker/Serialization/iconDataSerialization.dart';
 //Current Routines
 
 class Routine {
@@ -21,14 +20,21 @@ class Routine {
       this.Etime,
       this.devices});
 
-  factory Routine.fromFirestore(String STime, String ETime, String Name,
-      Map<String, String> x, String desc, String logo, String color) {
+  factory Routine.fromFirestore(
+      String STime,
+      String ETime,
+      String Name,
+      Map<String, String> x,
+      String desc,
+      Map<String, dynamic> logo,
+      String color) {
     return Routine(
       icon: Icon(
-        FontAwesomeIcons.walking,
-        color: Colors.blue[100],
+        mapToIconData(logo),
+        color: Colors.white,
+        size: 36.0,
       ),
-      routineColor: Colors.blue,
+      routineColor: getcolour(color),
       routineName: Name,
       routineDesc: desc,
       Stime: STime,
@@ -37,36 +43,18 @@ class Routine {
     );
   }
 }
-//
-//List<Routine> routines = [
-//  Routine(
-//    icon: Icon(
-//      FontAwesomeIcons.walking,
-//      color: Colors.blue[100],
-//    ),
-//    routineColor: Colors.blue,
-//    routineName: 'Exiting',
-//    routineDesc: 'On Tap',
-////    routineTime: new DateTime.now(),
-//  ),
-//  Routine(
-//    icon: Icon(
-//      FontAwesomeIcons.film,
-//      color: Colors.red[100],
-//    ),
-//    routineColor: Colors.red[600],
-//    routineName: 'Movie',
-//    routineDesc: 'On Tap',
-////    routineTime: new DateTime.now(),
-//  ),
-//  Routine(
-//    icon: Icon(
-//      FontAwesomeIcons.solidMoon,
-//      color: Colors.deepPurple[100],
-//    ),
-//    routineColor: Colors.deepPurpleAccent,
-//    routineName: 'Night Time',
-//    routineDesc: 'From 9:00 PM to 6:00 AM',
-////    routineTime: new DateTime.now(),
-//  ),
-//];
+
+Color getcolour(String x) {
+  switch (x) {
+    case 'blue':
+      return Colors.blue;
+    case 'green':
+      return Colors.lightGreen;
+    case 'orange':
+      return Colors.deepOrange;
+    case 'red':
+      return Colors.red;
+    case 'purple':
+      return Colors.deepPurpleAccent;
+  }
+}

@@ -22,14 +22,29 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return StreamProvider<User>.value(
       value: AuthService().user,
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: Provider.of<ThemeModel>(context).currentTheme,
-        home: ChangeNotifierProvider<BoltProvider>(
-          create: (_) => BoltProvider(25),
-          child: Wrapper(),
-        ),
+      child: MultiProvider(
+        providers: [
+          ChangeNotifierProvider<BoltProvider>(
+            create: (_) => BoltProvider(25),
+          ),
+        ],
+        child: Consumer<BoltProvider>(builder: (context, counter, _) {
+          return MaterialApp(
+            home: Wrapper(),
+            theme: Provider.of<ThemeModel>(context).currentTheme,
+          );
+        }),
       ),
     );
   }
 }
+
+// MaterialApp(
+//           debugShowCheckedModeBanner: false,
+//           theme: Provider.of<ThemeModel>(context).currentTheme,
+//           home: ChangeNotifierProvider<BoltProvider>(
+//             create: (_) => BoltProvider(25),
+//             child: Wrapper(),
+//           ),
+//         ),
+//       ),);

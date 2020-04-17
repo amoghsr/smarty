@@ -10,6 +10,11 @@ const kNavigationBarTextStyle = TextStyle(
   fontWeight: FontWeight.w600,
 );
 
+const kHeadingTextStyle = TextStyle(
+  fontSize: 18.0,
+  fontWeight: FontWeight.w600,
+);
+
 const kAppBarTextStyle = TextStyle(
   fontSize: 16.0,
   fontWeight: FontWeight.bold,

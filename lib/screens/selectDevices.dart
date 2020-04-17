@@ -193,7 +193,7 @@ class _SelectDevicesState extends State<SelectDevices> {
                                 onTap: deselectAllDevices,
                                 child: Text(
                                   'Reset selection',
-                                  style: Theme.of(context).textTheme.bodyText2,
+                                  style: Theme.of(context).textTheme.body2,
                                 )),
                           ),
                   ],

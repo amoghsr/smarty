@@ -24,7 +24,7 @@ class _SuggestedRoutinesState extends State<SuggestedRoutines> {
               padding: EdgeInsets.only(
                   left: 30.0, right: 20.0, bottom: 20.0, top: 20),
               child: Text(
-                'Suggested routines appear after some time.',
+                'Suggested routines appear after you use your devices for a while.',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 14.0,
@@ -127,7 +127,7 @@ class _SuggestedRoutinesState extends State<SuggestedRoutines> {
                                     Row(
                                       children: <Widget>[
                                         Icon(
-                                          Icons.arrow_forward,
+                                          Icons.add,
                                           color: Colors.white,
                                         ),
                                       ],

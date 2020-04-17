@@ -25,6 +25,7 @@ public final class GeneratedPluginRegistrant {
       com.appleeducate.getversion.GetVersionPlugin.registerWith(shimPluginRegistry.registrarFor("com.appleeducate.getversion.GetVersionPlugin"));
     flutterEngine.getPlugins().add(new com.baseflow.googleapiavailability.GoogleApiAvailabilityPlugin());
       io.flutter.plugins.localauth.LocalAuthPlugin.registerWith(shimPluginRegistry.registrarFor("io.flutter.plugins.localauth.LocalAuthPlugin"));
+    flutterEngine.getPlugins().add(new com.lyokone.location.LocationPlugin());
     flutterEngine.getPlugins().add(new io.flutter.plugins.packageinfo.PackageInfoPlugin());
       com.baseflow.permissionhandler.PermissionHandlerPlugin.registerWith(shimPluginRegistry.registrarFor("com.baseflow.permissionhandler.PermissionHandlerPlugin"));
       bz.rxla.flutter.speechrecognition.SpeechRecognitionPlugin.registerWith(shimPluginRegistry.registrarFor("bz.rxla.flutter.speechrecognition.SpeechRecognitionPlugin"));

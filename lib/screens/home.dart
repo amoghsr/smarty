@@ -4,8 +4,6 @@
 * various routines and the nav bar (But this stays common to all)
 */
 
-//import 'dart:html';
-
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -15,20 +13,17 @@ import 'package:provider/provider.dart';
 import 'package:smarty/models/themeModel.dart';
 import 'package:smarty/models/weatherModel.dart';
 import 'package:smarty/screens/drawer.dart';
+import 'package:smarty/screens/p2pPanel.dart';
 import 'package:smarty/services/auth.dart';
 import 'package:smarty/shared/constants.dart';
 import 'package:smarty/widgets/devicesCarousel.dart';
 import 'package:smarty/widgets/roomCarousel.dart';
 import 'package:smarty/widgets/routineCarousel.dart';
 import 'package:smarty/widgets/voiceAgent.dart';
-
+import 'package:weather/weather.dart';
 import '../alertBox.dart';
 
 class Home extends StatefulWidget {
-//  final weatherdata;
-//  Home(this.weatherdata);
-//  final FirebaseUser currentUser;   //Ignore
-//  Home(this.currentUser);           //Ignore
   @override
   _HomeState createState() => _HomeState();
 }
@@ -48,36 +43,31 @@ class _HomeState extends State<Home> {
   bool valueSwitch = true;
 
   var weatherdata = WeatherModel().weatherData();
+  String _res = 'Unknown';
+  String key = 'd6990a93802ef960b648309d2769ec32';
+  WeatherStation ws;
 
   void initState() {
     super.initState();
-//    initSpeechRecognizer();
-//    var l = getLocationData();
+
     final FirebaseDatabase database = FirebaseDatabase
         .instance; //Rather then just writing FirebaseDatabase(), get the instance.
     itemRef = database.reference();
-//    storeValues(l);
-//    fetchData();
+
+    ws = new WeatherStation(key);
+    initPlatformState();
   }
 
-//
-//  void initSpeechRecognizer() {
-//    _speechRecognition = SpeechRecognition();
-//    _speechRecognition.setAvailabilityHandler(
-//        (bool result) => setState(() => _isAvailable = result));
-//    _speechRecognition.setRecognitionStartedHandler(
-//      () => setState(() => _isListening = true),
-//    );
-//    _speechRecognition.setRecognitionResultHandler(
-//      (String speech) => setState(() => resultText = speech),
-//    );
-//    _speechRecognition.setRecognitionCompleteHandler(
-//      () => setState(() => _isListening = false),
-//    );
-//    _speechRecognition.activate().then(
-//          (result) => setState(() => _isAvailable = result),
-//        );
-//  }
+  Future<void> initPlatformState() async {
+    queryWeather();
+  }
+
+  void queryWeather() async {
+    Weather w = await ws.currentWeather();
+    setState(() {
+      _res = w.toString();
+    });
+  }
 
   @override
   /*
@@ -87,50 +77,6 @@ class _HomeState extends State<Home> {
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
 
   WeatherModel wm = WeatherModel();
-
-  int temperature;
-  int condition;
-  String cityName;
-
-//  void storeValues(dynamic weatherdata) {
-//    setState(() {
-//      if (weatherdata == null) {
-//        temperature = 0;
-//        condition = 0;
-//        cityName = 'ERROR';
-//        return;
-//      }
-//      var temp = weatherdata['main']["temp"];
-//      temperature = temp.toInt();
-//      condition = weatherdata["weather"][0]["id"];
-//      cityName = weatherdata["name"];
-//    });
-//  }
-//  bool isLoading = false;
-//
-//  fetchData() async {
-//    setState(() {
-//      isLoading = true; //Data is loading
-//    });
-//    if (weatherdata == null) {
-//      temperature = 0;
-//      condition = 0;
-//      cityName = 'ERROR';
-//      return;
-//    }
-//    var temp = weatherdata['main']["temp"];
-//    temperature = temp.toInt();
-//    condition = weatherdata["weather"][0]["id"];
-//    cityName = weatherdata["name"];
-//    setState(() {
-//      isLoading = false; //Data has loaded
-//    });
-//  }
-//  SpeechRecognition _speechRecognition;
-//  bool _isAvailable = false;
-//  bool _isListening = false;
-//  String resultText = "";
-
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
@@ -145,13 +91,30 @@ class _HomeState extends State<Home> {
             IconButton(
               icon: Icon(MaterialCommunityIcons.theme_light_dark),
               onPressed: () async {
-                setState(() {
-                  Provider.of<ThemeModel>(context, listen: false)
-                      .toggleTheme();
-                });
-                
-                await _showNotificationWithDefaultSound(
-                    'FIRE DETECTED', 'Sprinklers have been activated.');
+                // setState(() {
+                //   Provider.of<ThemeModel>(context, listen: false)
+                //       .toggleTheme();
+                // });
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) => StreamBuilder(
+                    stream: itemRef.child("Sensors/Fire/").onValue,
+                    builder: (context, snap) {
+                      return CustomDialog(
+                        image:
+                            Image.asset("assets/images/renewable-energy.png"),
+                        title: "CAREFUL!",
+                        description:
+                            "You have almost reached your daily limit!",
+                        col: Colors.red[500],
+                        buttonText: "Optimize Now",
+                        optimize: true,
+                      );
+                    },
+                  ),
+                );
+                // await _showNotificationWithDefaultSound(
+                //     'FIRE DETECTED', 'Sprinklers have been activated.');
               },
             ),
             MicClass()
@@ -282,7 +245,14 @@ class _HomeState extends State<Home> {
 // await _showNotificationWithDefaultSound(
 //     'FIRE DETECTED', 'Sprinklers have been activated.');
 // },
-
+// ************************* DOORBELL RUNG ******************************//
+// return CustomDialog(
+//                   image: Image.asset("assets/images/doorbell.png"),
+//                   title: "DOORBELL RUNG!",
+//                   description: "Someone's at the door!",
+//                   col: Colors.red[500],,
+//                   buttonText: "Okay",
+//                 );
 // ************************* AI DIALOG BOX ******************************//
 // showDialog(
 //                   context: context,
@@ -303,19 +273,19 @@ class _HomeState extends State<Home> {
 //                 );
 
 // ************************* P2P DIALOG BOX ******************************//
-
 // showDialog(
-//   context: context,
-//   builder: (BuildContext context) => StreamBuilder(
-//     stream: itemRef.child("Sensors/Fire/").onValue,
-//     builder: (context, snap) {
-//       return CustomDialog(
-//         image: Image.asset("assets/images/battery.png"),
-//         title: "BATTERY EMPTY!",
-//         description: "You are running out of electricity!",
-//         col: Colors.red[500],
-//         buttonText: "Purchase Electricity",
-//       );
-//     },
-//   ),
-// );
+//                   context: context,
+//                   builder: (BuildContext context) => StreamBuilder(
+//                     stream: itemRef.child("Sensors/Fire/").onValue,
+//                     builder: (context, snap) {
+//                       return CustomDialog(
+//                         image: Image.asset("assets/images/battery.png"),
+//                         title: "BATTERY EMPTY!",
+//                         description: "You are running out of electricity!",
+//                         col: Colors.red[500],
+//                         buttonText: "Purchase Electricity",
+//                         path: P2P(),
+//                       );
+//                     },
+//                   ),
+//                 );

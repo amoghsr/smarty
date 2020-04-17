@@ -14,10 +14,11 @@ description: A new Flutter application.
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.5.2 <3.0.0"
+  sdk: '>=2.5.2 <3.0.0'
 
 dependencies:
   firebase_admin: ^0.1.2
+  flutter_svg: ^0.17.4
   async: ^2.4.0
   local_auth: ^0.5.2+3
   get_it: ^1.0.3+2
@@ -29,7 +30,8 @@ dependencies:
   font_awesome_flutter: ^8.5.0
   fl_chart: ^0.8.0
   intl: ^0.15.1
-  bubble_tab_indicator: "^0.1.4"
+  bubble_tab_indicator: '^0.1.4'
+  flutter_iconpicker: ^1.1.1
   flutter:
     sdk: flutter
   firebase_core: 0.4.4
@@ -42,7 +44,7 @@ dependencies:
   flutter_local_notifications: ^1.1.5+1
   #  cloud_functions: ^0.4.1
   cloud_firestore: ^0.12.9+5
-
+  permission_handler: ^3.2.0
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
@@ -60,18 +62,16 @@ dependencies:
   firebase: ^7.3.0
   firebase_auth_web: ^0.1.2
   liquid_progress_indicator: ^0.3.2
-  
+  weather: ^0.9.6
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter.
 flutter:
-
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
@@ -81,6 +81,7 @@ flutter:
   assets:
     - assets/images/
     - assets/images/deviceAssets/
+    - assets/svg/
     # - assets/images/person/
 
   # An image asset can refer to one or more resolution-specific "variants", see
