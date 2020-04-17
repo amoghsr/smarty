@@ -70,8 +70,6 @@ class _EnergySharingScreenState extends State<EnergySharingScreen> {
       ),
       drawer: DrawerPage(),
       body: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        physics: NeverScrollableScrollPhysics(),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
