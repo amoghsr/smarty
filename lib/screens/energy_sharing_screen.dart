@@ -613,6 +613,9 @@ class _EnergySharingScreenState extends State<EnergySharingScreen> {
                 ),
               ),
             ),
+            SizedBox(
+              height: 40.0,
+            ),
           ],
         ),
       ),
