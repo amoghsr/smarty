@@ -34,6 +34,7 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
       final List<Widget> _children = [
         SafeArea(child: Home()),
         SafeArea(child: StatsScreen()),
+        SafeArea(child: Container(),),
         SafeArea(child: Security()),
         SafeArea(child: Leaderboard()),
       ];
@@ -67,6 +68,16 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
                 ),
                 title: new Text(
                   'Stats',
+                  style: kNavigationBarTextStyle,
+                ),
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(
+                  MaterialCommunityIcons.share,
+                  semanticLabel: 'Share energy among the community!',
+                ),
+                title: new Text(
+                  'eShare',
                   style: kNavigationBarTextStyle,
                 ),
               ),
