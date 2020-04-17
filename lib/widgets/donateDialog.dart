@@ -119,7 +119,7 @@ class _DonateDialogState extends State<DonateDialog> {
                     ],
                   ),
                   Text(
-                    'kWh',
+                    'KWh',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w600,
@@ -252,8 +252,12 @@ class _DonateDialogState extends State<DonateDialog> {
                                   ? "You are purchasing"
                                   : "You are donating",
                               (click == 0)
-                                  ? "${donationAmount.toInt()} kWh for ${donationAmount.toInt()} "
-                                  : "${donationAmount.toInt()} kWh for ${(double.parse((donationAmount * conversion).toStringAsFixed(2)))}",
+                                  ? "${donationAmount
+                                  .toInt()} KWh for ${donationAmount.toInt()} "
+                                  : "${donationAmount.toInt()} KWh for ${(double
+                                  .parse(
+                                  (donationAmount * conversion).toStringAsFixed(
+                                      2)))}",
                               "Would you like to proceed?",
                               widget.col,
                               click,
@@ -417,11 +421,12 @@ class TransactionDialog extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontFamily: 'Montserrat',
-                  fontSize: 18.0,
+                  fontSize: 16.0,
                 ),
               ),
               SizedBox(height: 24.0),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   InkWell(
                     onTap: () {
@@ -543,6 +548,7 @@ class TransactionDialog extends StatelessWidget {
                   ),
                 ],
               ),
+              SizedBox(height: 16.0),
             ],
           ),
         ),
