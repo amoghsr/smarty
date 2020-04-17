@@ -9,6 +9,7 @@ import 'package:smarty/widgets/voiceAgent.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:smarty/models/leaderboardModel.dart';
+import 'package:smarty/models/boltProvider.dart';
 
 class UserProfile extends StatefulWidget {
   @override
@@ -20,7 +21,6 @@ class _UserProfileState extends State<UserProfile> {
   bool valueSwitch = true;
   var user;
   var stream;
-  double bal = 25;
 
   _launchCaller() async {
     const url = 'tel:800123';
@@ -50,16 +50,20 @@ class _UserProfileState extends State<UserProfile> {
   Widget build(BuildContext context) {
     //list of users of current house name-email layout
     List<Leaderboard> lb = streakLeaderboard;
+    final bal = Provider.of<BoltProvider>(context);
     double screenwidth = MediaQuery.of(context).size.width;
     double screenheight = MediaQuery.of(context).size.height;
 
+    //T
     List<String> nums = [];
     for (int i = 0; i < 30; i++) {
       nums.add(i.toString());
     }
 
+    //TODO: The key of this map is daily streak day count
     Map<int, dynamic> rewards = {
       1: Image.asset('assets/images/save_energy.png', width: 30, height: 30),
+      3: Icon(FontAwesomeIcons.trophy, color: Color(0xffe8b313), size: 30),
       5: Icon(Icons.flash_on, color: Color(0xffe8b313), size: 30),
       10: Icon(FontAwesomeIcons.award, color: Colors.redAccent, size: 30),
       11: Icon(Icons.flash_on, color: Color(0xffe8b313), size: 30),
@@ -181,6 +185,7 @@ class _UserProfileState extends State<UserProfile> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
                             CircleAvatar(
+                              //TODO: Current Home Owner's User Image
                               backgroundImage: NetworkImage(lb[3].userImage),
                               maxRadius: 65,
                             ),
@@ -191,6 +196,7 @@ class _UserProfileState extends State<UserProfile> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: <Widget>[
                                   Text(
+                                    //TODO: Current Home Owner's User Name
                                     // snapshot.data['displayName']
                                     lb[3].userName.split(" ")[0] + "'s Home",
                                     style: TextStyle(
@@ -206,7 +212,8 @@ class _UserProfileState extends State<UserProfile> {
                                         width: screenwidth * 0.04,
                                       ),
                                       Text(
-                                        'Balance: ${bal.toInt()}',
+                                        //TODO: Current bolt balance (reflected and updated throughout the app), stored in the db
+                                        'Balance: ${bal.getBalanceAsInt()}',
                                         style: TextStyle(
                                           fontSize: 14.5,
                                         ),
@@ -218,101 +225,102 @@ class _UserProfileState extends State<UserProfile> {
                                       ),
                                     ],
                                   ),
-                                  SizedBox(
-                                    height: screenheight * 0.02,
-                                  ),
-
-                                  //second carousel
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 15.0),
-                                    child: Row(
-                                      children: <Widget>[
-                                        Column(
-                                          children: <Widget>[
-                                            SizedBox(height: 43),
-                                            Icon(
-                                              Icons.star,
-                                              size: 35,
-                                              color: Colors.grey,
-                                            ),
-                                          ],
-                                        ),
-                                        SizedBox(width: screenwidth * 0.02),
-                                        Expanded(
-                                          child: SingleChildScrollView(
-                                            scrollDirection: Axis.horizontal,
-                                            child: Container(
-                                              width:
-                                                  (screenwidth * nums.length) /
-                                                      5.5,
-                                              child: StepProgressIndicator(
-                                                totalSteps: nums.length,
-                                                // currentStep: 3,
-                                                size: 85,
-                                                selectedColor: Colors.green,
-                                                unselectedColor:
-                                                    Colors.grey[200],
-                                                customStep: (index, color, _) =>
-                                                    // TODO: DAILY STREAK COUNT INSTEAD OF 3
-                                                    index == 3
-                                                        ? Column(
-                                                            children: <Widget>[
-                                                              rewards.containsKey(
-                                                                      index + 1)
-                                                                  ? Column(
-                                                                      children: <
-                                                                          Widget>[
-                                                                        rewards[
-                                                                            index +
-                                                                                1],
-                                                                        SizedBox(
-                                                                          height:
-                                                                              8,
-                                                                        ),
-                                                                      ],
-                                                                    )
-                                                                  : SizedBox(
-                                                                      height:
-                                                                          43),
-                                                              Expanded(
-                                                                child:
-                                                                    Container(
-                                                                  color: Colors
-                                                                      .green,
-                                                                  child: Center(
-                                                                    child: Text(
-                                                                      // Icons.check,
-                                                                      '${index + 1}',
-                                                                      style: TextStyle(
-                                                                          color:
-                                                                              Colors.white),
-                                                                    ),
+                                  SizedBox(height: screenheight * 0.01),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Column(
+                                        children: <Widget>[
+                                          SizedBox(height: 43),
+                                          Icon(
+                                            Icons.star,
+                                            size: 35,
+                                            //TODO: Color changes from grey to red when daily streak count resets to 0
+                                            //TODO: i.e., the user has not stayed under the daily limit and broke his streak (hence streak val reset)
+                                            //TODO: Color stays grey when daily streak count > 0
+                                            color: Colors.grey,
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(width: screenwidth * 0.02),
+                                      Expanded(
+                                        child: SingleChildScrollView(
+                                          scrollDirection: Axis.horizontal,
+                                          child: Container(
+                                            width: (screenwidth * nums.length) /
+                                                5.5,
+                                            child: StepProgressIndicator(
+                                              totalSteps: nums.length,
+                                              // currentStep: 3,
+                                              size: 85,
+                                              selectedColor: Colors.green,
+                                              unselectedColor: Colors.grey[200],
+                                              customStep: (index, color, _) =>
+                                                  //TODO: Replace 3 with current daily streak day + 1
+                                                  //TODO: Designs the progress bar for the current streak day
+                                                  index == 3
+                                                      ? Column(
+                                                          children: <Widget>[
+                                                            rewards.containsKey(
+                                                                    index + 1)
+                                                                ? Column(
+                                                                    children: <
+                                                                        Widget>[
+                                                                      rewards[
+                                                                          index +
+                                                                              1],
+                                                                      SizedBox(
+                                                                        height:
+                                                                            8,
+                                                                      ),
+                                                                    ],
+                                                                  )
+                                                                : SizedBox(
+                                                                    height: 43),
+                                                            Expanded(
+                                                              child: Container(
+                                                                color: Colors
+                                                                    .green,
+                                                                child: Center(
+                                                                  child: Text(
+                                                                    // Icons.check,
+                                                                    '${index + 1}',
+                                                                    style: TextStyle(
+                                                                        color: Colors
+                                                                            .white),
                                                                   ),
                                                                 ),
                                                               ),
-                                                            ],
-                                                          )
-                                                        : index < 4
-                                                            ? Column(
-                                                                children: <
-                                                                    Widget>[
-                                                                  rewards.containsKey(
-                                                                          index +
-                                                                              1)
-                                                                      ? Column(
-                                                                          children: <
-                                                                              Widget>[
-                                                                            rewards[index +
-                                                                                1],
-                                                                            SizedBox(
-                                                                              height: 13,
-                                                                            ),
-                                                                          ],
-                                                                        )
-                                                                      : SizedBox(
-                                                                          height:
-                                                                              43),
-                                                                  Expanded(
+                                                            ),
+                                                          ],
+                                                        )
+                                                      //TODO: 4 is replaced with (current daily streak day - 1)
+                                                      : index < 4
+                                                          ? Column(
+                                                              children: <
+                                                                  Widget>[
+                                                                rewards.containsKey(
+                                                                        index +
+                                                                            1)
+                                                                    ? Column(
+                                                                        children: <
+                                                                            Widget>[
+                                                                          rewards[index +
+                                                                              1],
+                                                                          SizedBox(
+                                                                            height:
+                                                                                13,
+                                                                          ),
+                                                                        ],
+                                                                      )
+                                                                    : SizedBox(
+                                                                        height:
+                                                                            43),
+                                                                Expanded(
+                                                                  child:
+                                                                      Container(
+                                                                    color: Colors
+                                                                        .lightGreen,
                                                                     child:
                                                                         Container(
                                                                       color: Colors
@@ -329,53 +337,55 @@ class _UserProfileState extends State<UserProfile> {
                                                                       ),
                                                                     ),
                                                                   ),
-                                                                ],
-                                                              )
-                                                            : Column(
-                                                                children: <
-                                                                    Widget>[
-                                                                  rewards.containsKey(
-                                                                          index +
-                                                                              1)
-                                                                      ? Column(
-                                                                          children: <
-                                                                              Widget>[
-                                                                            rewards[index +
-                                                                                1],
-                                                                            SizedBox(
-                                                                              height: 13,
-                                                                            ),
-                                                                          ],
-                                                                        )
-                                                                      : SizedBox(
-                                                                          height:
-                                                                              43),
-                                                                  Expanded(
+                                                                )
+                                                              ],
+                                                            )
+                                                          : Column(
+                                                              children: <
+                                                                  Widget>[
+                                                                rewards.containsKey(
+                                                                        index +
+                                                                            1)
+                                                                    ? Column(
+                                                                        children: <
+                                                                            Widget>[
+                                                                          rewards[index +
+                                                                              1],
+                                                                          SizedBox(
+                                                                            height:
+                                                                                13,
+                                                                          ),
+                                                                        ],
+                                                                      )
+                                                                    : SizedBox(
+                                                                        height:
+                                                                            43),
+                                                                Expanded(
+                                                                  child:
+                                                                      Container(
+                                                                    color: Colors
+                                                                        .grey,
                                                                     child:
-                                                                        Container(
-                                                                      color: Colors
-                                                                          .grey,
+                                                                        Center(
                                                                       child:
-                                                                          Center(
-                                                                        child:
-                                                                            Text(
-                                                                          // Icons.check,
-                                                                          '${index + 1}',
-                                                                          style:
-                                                                              TextStyle(color: Colors.white),
-                                                                        ),
+                                                                          Text(
+                                                                        // Icons.check,
+                                                                        '${index + 1}',
+                                                                        style: TextStyle(
+                                                                            color:
+                                                                                Colors.white),
                                                                       ),
                                                                     ),
                                                                   ),
-                                                                ],
-                                                              ),
-                                              ),
+                                                                ),
+                                                              ],
+                                                            ),
                                             ),
                                           ),
                                         ),
-                                      ],
-                                    ),
-                                  )
+                                      ),
+                                    ],
+                                  ),
                                 ],
                               ),
                             ),

@@ -5,6 +5,8 @@ class BoltProvider with ChangeNotifier {
 
   BoltProvider(this._balance);
 
+  //TODO: Store bolts balance(user's ecash) house ID wise
+
   getBalance() => _balance;
   getBalanceAsInt() => _balance.toInt();
   setBalance(double balance) => _balance = balance;

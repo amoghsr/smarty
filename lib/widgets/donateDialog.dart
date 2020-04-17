@@ -62,16 +62,11 @@ class _DonateDialogState extends State<DonateDialog> {
           ),
           margin: EdgeInsets.only(top: Consts.avatarRadius),
           decoration: new BoxDecoration(
-            color: Theme.of(context).canvasColor,
+            color: Theme
+                .of(context)
+                .primaryColor,
             shape: BoxShape.rectangle,
             borderRadius: BorderRadius.circular(Consts.padding),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black26,
-                blurRadius: 10.0,
-                offset: const Offset(0.0, 10.0),
-              ),
-            ],
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min, // To make the card compact
@@ -357,34 +352,28 @@ class TransactionDialog extends StatelessWidget {
         //...bottom card part,
         Container(
           padding: EdgeInsets.only(
-            top: Consts.padding + 10,
+            top: Consts.padding,
             bottom: Consts.padding,
             left: Consts.padding,
             right: Consts.padding,
           ),
           margin: EdgeInsets.only(top: Consts.avatarRadius),
           decoration: new BoxDecoration(
-            color: Theme.of(context).canvasColor,
-            shape: BoxShape.rectangle,
+            color: Theme
+                .of(context)
+                .primaryColor,
             borderRadius: BorderRadius.circular(Consts.padding),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black26,
-                blurRadius: 10.0,
-                offset: const Offset(0.0, 10.0),
-              ),
-            ],
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min, // To make the card compact
             children: <Widget>[
+              SizedBox(height: 10.0,),
               // Title of the popup
               Text(
                 title1,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontFamily: 'Montserrat',
-                  color: Colors.white,
                   fontSize: 20.0,
                   fontWeight: FontWeight.w500,
                 ),
@@ -397,7 +386,6 @@ class TransactionDialog extends StatelessWidget {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontFamily: 'Montserrat',
-                      color: Colors.white,
                       fontSize: 20.0,
                       fontWeight: FontWeight.w500,
                     ),
@@ -405,7 +393,7 @@ class TransactionDialog extends StatelessWidget {
                   (click == 0)
                       ? Icon(
                           Icons.flash_on,
-                          color: Color(0xffe8b313),
+                    color: Colors.deepOrange,
                         )
                       : Row(
                           children: <Widget>[
@@ -414,7 +402,6 @@ class TransactionDialog extends StatelessWidget {
                               'AED',
                               style: TextStyle(
                                 fontFamily: 'Montserrat',
-                                color: Colors.white,
                                 fontSize: 20.0,
                                 fontWeight: FontWeight.w500,
                               ),
@@ -423,139 +410,138 @@ class TransactionDialog extends StatelessWidget {
                         )
                 ],
               ),
-              SizedBox(height: 16.0),
+              SizedBox(height: 16.0,),
               // Description on the popup
               Text(
                 description,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontFamily: 'Montserrat',
-                  color: Colors.white,
                   fontSize: 18.0,
                 ),
               ),
               SizedBox(height: 24.0),
-              Align(
-                alignment: Alignment.bottomCenter,
-                // A button used for closing the dialog plus switching off the fire alarm.
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: <Widget>[
-                    InkWell(
+              Row(
+                children: <Widget>[
+                  InkWell(
+                    onTap: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: (click == 1)
+                        ? InkWell(
                       onTap: () {
-                        Navigator.of(context).pop();
+                        Navigator.pop(context);
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return completedTransactionDialog(type);
+                            });
                       },
-                      child: (click == 1)
-                          ? InkWell(
-                              onTap: () {
-                                Navigator.pop(context);
-                                showDialog(
-                                    context: context,
-                                    builder: (context) {
-                                      return completedTransactionDialog(type);
-                                    });
-                              },
-                              child: Container(
-                                height: 40,
-                                width: 80,
-                                decoration: BoxDecoration(
-                                  color: Colors.green,
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(5),
-                                  ),
-                                ),
-                                child: Center(
-                                  child: Text('Yes'),
-                                ),
-                              ),
-                            )
-                          : InkWell(
-                              onTap: () {
-                                Navigator.pop(context);
-                                if (bal < donationAmount) {
-                                  print("Bal: $bal, Donation: $donationAmount");
-
-                                  showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) =>
-                                        StreamBuilder(
-                                      builder: (context, snap) {
-                                        return Dialog(
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(
-                                                Consts.padding),
-                                          ),
-                                          elevation: 0.0,
-                                          // Elevation means the height of element on the screen from the floor. Basically gives a drop shadow.
-                                          backgroundColor: Colors.transparent,
-                                          child: transactionDialog2(
-                                              context,
-                                              type,
-                                              "You do not have",
-                                              "sufficient ",
-                                              "Would you like to pay the excess (${(double.parse(((donationAmount - bal) * 0.23).toStringAsFixed(2)))} AED)",
-                                              col,
-                                              click,
-                                              bal,
-                                              donationAmount,
-                                              1),
-                                        );
-                                      },
-                                    ),
-                                  );
-                                } else {
-                                  if (c != 1) {
-                                    showDialog(
-                                        context: context,
-                                        builder: (context) {
-                                          return completedTransactionDialog(
-                                              type);
-                                        });
-                                  }
-                                }
-                                print(c);
-                                if (c == 1) {
-                                  Navigator.pop(context);
-                                  showDialog(
-                                      context: context,
-                                      builder: (context) {
-                                        return completedTransactionDialog(type);
-                                      });
-                                }
-                              },
-                              child: Container(
-                                height: 40,
-                                width: 80,
-                                decoration: BoxDecoration(
-                                  color: Colors.green,
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(5),
-                                  ),
-                                ),
-                                child: Center(
-                                  child: Text('Yes'),
-                                ),
-                              ),
-                            ),
-                    ),
-                    InkWell(
-                      onTap: () => Navigator.of(context).pop(),
                       child: Container(
                         height: 40,
                         width: 80,
                         decoration: BoxDecoration(
-                          color: Colors.red,
+                          color: Colors.green,
                           borderRadius: BorderRadius.all(
                             Radius.circular(5),
                           ),
                         ),
                         child: Center(
-                          child: Text('No'),
+                          child: Text('Yes'),
+                        ),
+                      ),
+                    )
+                        : InkWell(
+                      onTap: () {
+                        Navigator.pop(context);
+                        if (bal < donationAmount) {
+                          print("Bal: $bal, Donation: $donationAmount");
+
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) =>
+                                StreamBuilder(
+                                  builder: (context, snap) {
+                                    return Dialog(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            Consts.padding),
+                                      ),
+                                      elevation: 0.0,
+                                      // Elevation means the height of element on the screen from the floor. Basically gives a drop shadow.
+                                      backgroundColor: Colors.transparent,
+                                      child: transactionDialog2(
+                                          context,
+                                          type,
+                                          "You do not have",
+                                          "sufficient ",
+                                          "Would you like to pay the excess (${(double
+                                              .parse(
+                                              ((donationAmount - bal) * 0.23)
+                                                  .toStringAsFixed(2)))} AED)",
+                                          col,
+                                          click,
+                                          bal,
+                                          donationAmount,
+                                          1),
+                                    );
+                                  },
+                                ),
+                          );
+                        } else {
+                          if (c != 1) {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return completedTransactionDialog(
+                                      type);
+                                });
+                          }
+                        }
+                        print(c);
+                        if (c == 1) {
+                          Navigator.pop(context);
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                return completedTransactionDialog(type);
+                              });
+                        }
+                      },
+                      child: Container(
+                        height: 40,
+                        width: 80,
+                        decoration: BoxDecoration(
+                          color: Colors.green,
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(5),
+                          ),
+                        ),
+                        child: Center(
+                          child: Text('Yes', style: TextStyle(
+                              color: Colors.white),),
                         ),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                  InkWell(
+                    onTap: () => Navigator.of(context).pop(),
+                    child: Container(
+                      height: 40,
+                      width: 80,
+                      decoration: BoxDecoration(
+                        color: Colors.red,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(5),
+                        ),
+                      ),
+                      child: Center(
+                        child: Text('No', style: TextStyle(color: Colors
+                            .white),),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
@@ -590,7 +576,7 @@ class TransactionDialog extends StatelessWidget {
           children: <Widget>[
             Icon(
               FontAwesomeIcons.checkCircle,
-              color: Colors.green,
+              color: Colors.lightGreen,
               size: 100,
             ),
             SizedBox(height: 20),
@@ -605,13 +591,15 @@ class TransactionDialog extends StatelessWidget {
                 child: Text(
                   (type == 0) ? "PURCHASE SUCCESSFUL!" : "DONATION SUCCESSFUL!",
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 24.0, color: Colors.green),
+                  style: TextStyle(fontSize: 24.0, color: Colors.lightGreen),
                 ),
               ),
             ),
           ],
         ),
-        backgroundColor: Colors.transparent,
+        backgroundColor: Theme
+            .of(context)
+            .primaryColor,
       );
     });
   }
