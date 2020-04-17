@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:smarty/screens/drawer.dart';
 import 'package:smarty/shared/constants.dart';
 import 'package:smarty/widgets/voiceAgent.dart';
@@ -20,6 +21,8 @@ class _EnergySharingScreenState extends State<EnergySharingScreen> {
   double capacity = 48;
   int click = 0;
   double conversion = 0.23;
+  Color selectedColor = Colors.orange;
+  Color iconColor = Colors.white;
 
   Widget build(BuildContext context) {
     final bal = Provider.of<BoltProvider>(context);
@@ -215,10 +218,10 @@ class _EnergySharingScreenState extends State<EnergySharingScreen> {
                     child: Column(
                       children: <Widget>[
                         Text(
-                          'Your average consumption: 5kWh',
+                          'Your average consumption: 5 KWh',
                           style: TextStyle(
-                              fontSize: 13,
-                              fontWeight: FontWeight.w400,
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w500,
                               color: Theme.of(context).accentColor),
                         ),
                       ],
@@ -239,8 +242,7 @@ class _EnergySharingScreenState extends State<EnergySharingScreen> {
                           if (electricityAmount > 1)
                             electricityAmount = electricityAmount - 1;
                         }),
-                        child:
-                            Icon(Icons.remove, size: 30, color: Colors.white54),
+                        child: Icon(Icons.remove, size: 30),
                       ),
                       SizedBox(width: 20.0),
                       Text(
@@ -256,7 +258,7 @@ class _EnergySharingScreenState extends State<EnergySharingScreen> {
                           if (electricityAmount < capacity)
                             electricityAmount = electricityAmount + 1;
                         }),
-                        child: Icon(Icons.add, size: 30, color: Colors.white54),
+                        child: Icon(Icons.add, size: 30),
                       ),
                     ],
                   ),
@@ -276,32 +278,18 @@ class _EnergySharingScreenState extends State<EnergySharingScreen> {
               child: Container(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          click = 0;
-                        });
-                      },
-                      child: Container(
-                        height: 70,
-                        width: 70,
-                        decoration: BoxDecoration(
-                            color: Theme.of(context).primaryColor,
-                            borderRadius: BorderRadius.circular(10.0)),
-                        child: Icon(Icons.flash_on,
-                            color: Color(0xffe8b313), size: 30),
-                      ),
-                    ),
                     Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         SizedBox(height: screenheight * 0.01),
                         Text(
-                          'Purchase Using',
+                          'Purchase with',
                           style: TextStyle(
                             fontFamily: 'Montserrat',
-                            fontSize: 15.0,
-                            fontWeight: FontWeight.w300,
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.w500,
                           ),
                         ),
                         SizedBox(height: screenheight * 0.01),
@@ -310,56 +298,124 @@ class _EnergySharingScreenState extends State<EnergySharingScreen> {
                           children: [
                             (click == 0)
                                 ? Row(
-                                    children: <Widget>[
-                                      Text(
-                                        '${electricityAmount.toInt()}',
-                                        style: TextStyle(
-                                          fontSize: 25,
-                                        ),
-                                      ),
-                                      Icon(
-                                        Icons.flash_on,
-                                        color: Color(0xffe8b313),
-                                        size: 22,
-                                      ),
-                                    ],
-                                  )
-                                : Row(
-                                    children: <Widget>[
-                                      Text(
-                                        '${(double.parse((electricityAmount * conversion).toStringAsFixed(2)))}',
-                                        style: TextStyle(
-                                          fontSize: 25,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: screenwidth * 0.02,
-                                      ),
-                                      Text('AED')
-                                    ],
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
+                                Text(
+                                  '${electricityAmount.toInt()}',
+                                  style: TextStyle(
+                                    fontSize: 28,
                                   ),
+                                ),
+                                Icon(
+                                  Icons.flash_on,
+                                  color: Colors.deepOrange,
+                                  size: 28,
+                                ),
+                              ],
+                            )
+                                : Row(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: <Widget>[
+                                Text(
+                                  '${(double.parse((electricityAmount * conversion).toStringAsFixed(2)))}',
+                                  style: TextStyle(
+                                    fontSize: 28,
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: screenwidth * 0.02,
+                                ),
+                                Column(
+                                  children: <Widget>[
+                                    Text('AED'),
+                                    SizedBox(height: 3.0)
+                                  ],
+                                ),
+                              ],
+                            ),
                           ],
                         ),
                       ],
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          click = 1;
-                        });
-                      },
-                      child: Container(
-                        height: 70,
-                        width: 70,
-                        decoration: BoxDecoration(
-                            color: Theme.of(context).primaryColor,
-                            borderRadius: BorderRadius.circular(10.0)),
-                        child: Icon(
-                          Icons.attach_money,
-                          color: Colors.lightGreen,
-                          size: 30,
+                    Row(
+                      children: <Widget>[
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              click = 0;
+                              selectedColor = Colors.deepOrange;
+                            });
+                          },
+                          child: Container(
+                            height: 70,
+                            width: 70,
+                            decoration: BoxDecoration(
+                              color: selectedColor == Colors.deepOrange
+                                  ? Colors.deepOrange
+                                  : Theme
+                                  .of(context)
+                                  .primaryColor,
+                              borderRadius: BorderRadius.circular(10.0),
+                              boxShadow: [
+                                BoxShadow(
+                                    color: selectedColor == Colors.deepOrange
+                                        ? Colors.deepOrange.withOpacity(0.4)
+                                        : Colors.black.withOpacity(0.2),
+                                    offset: Offset(0, 0),
+                                    blurRadius: 10.0)
+                              ],
+                            ),
+                            child: Icon(
+                              Icons.flash_on,
+                              color: selectedColor == Colors.deepOrange
+                                  ? Colors.white
+                                  : Colors.deepOrange,
+                              size: 30,
+                            ),
+                          ),
                         ),
-                      ),
+                        SizedBox(
+                          width: 12.0,
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              click = 1;
+                              selectedColor = Colors.lightGreen;
+                            });
+                          },
+                          child: Container(
+                            height: 70,
+                            width: 70,
+                            decoration: BoxDecoration(
+                                color: selectedColor ==
+                                    Colors.lightGreen
+                                    ? Colors.lightGreen
+                                    : Theme
+                                    .of(context)
+                                    .primaryColor,
+                                borderRadius: BorderRadius.circular(10.0),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: selectedColor ==
+                                          Colors.lightGreen
+                                          ? Colors.lightGreen
+                                          .withOpacity(0.4)
+                                          : Colors.black.withOpacity(0.2),
+                                      offset: Offset(0, 0),
+                                      blurRadius: 10.0)
+                                ]),
+                            child: Icon(
+                              Icons.attach_money,
+                              color:
+                              selectedColor == Colors.lightGreen
+                                  ? Colors.white
+                                  : Colors.lightGreen,
+                              size: 30,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
