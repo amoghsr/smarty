@@ -370,11 +370,11 @@ class _EnergySharingScreenState extends State<EnergySharingScreen> {
                   const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
               child: Container(
                 child: GestureDetector(
-                  onTap: () => Navigator.of(context).pop(),
+                  onTap: () {
+                    Navigator.of(context).pop();
+                  },
                   child: Container(
                     height: 50.0,
-                    padding:
-                        EdgeInsets.symmetric(vertical: 10.0, horizontal: 150.0),
                     decoration: BoxDecoration(
                       color: Theme.of(context).accentColor,
                       borderRadius: BorderRadius.all(
