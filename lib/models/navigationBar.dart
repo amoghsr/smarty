@@ -11,6 +11,8 @@ import 'package:smarty/screens/security.dart';
 import 'package:smarty/screens/statsPage.dart';
 import 'package:smarty/shared/constants.dart';
 
+import 'generationModel.dart';
+
 class MyNavigationBar extends StatefulWidget {
   @override
   _MyNavigationBarState createState() => _MyNavigationBarState();
@@ -30,7 +32,7 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
   );
 
   Widget build(BuildContext context) {
-    final x = Provider.of<List<String>>(context);
+
     final user = Provider.of<User>(context);
     if (user.type == "O") {
       final List<Widget> _children = [
@@ -49,9 +51,7 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
             type: BottomNavigationBarType.fixed,
             showUnselectedLabels: false,
             selectedItemColor: Theme.of(context).accentColor,
-            backgroundColor: Theme
-                .of(context)
-                .primaryColor,
+            backgroundColor: Theme.of(context).primaryColor,
             items: [
               BottomNavigationBarItem(
                 icon: Icon(
@@ -66,7 +66,8 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
               BottomNavigationBarItem(
                 icon: Icon(
                   MaterialCommunityIcons.chart_bar,
-                  semanticLabel: 'View Energy Statistics or sell your homes energy to the community',
+                  semanticLabel:
+                      'View Energy Statistics or sell your homes energy to the community',
                 ),
                 title: new Text(
                   'Stats',
@@ -121,12 +122,8 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
             currentIndex: _currentIndex,
             type: BottomNavigationBarType.fixed,
             showUnselectedLabels: false,
-            selectedItemColor: Theme
-                .of(context)
-                .accentColor,
-            backgroundColor: Theme
-                .of(context)
-                .primaryColor,
+            selectedItemColor: Theme.of(context).accentColor,
+            backgroundColor: Theme.of(context).primaryColor,
             items: [
               BottomNavigationBarItem(
                 icon: Icon(

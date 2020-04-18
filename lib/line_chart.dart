@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import 'models/generationModel.dart';
 import 'statsGeneration.dart';
 
 class LineChartSample2 extends StatefulWidget {
@@ -27,6 +29,7 @@ class _LineChartSample2State extends State<LineChartSample2> {
 
   @override
   Widget build(BuildContext context) {
+    final x = Provider.of<Generation>(context);
     return Center(
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
@@ -62,14 +65,13 @@ class _LineChartSample2State extends State<LineChartSample2> {
                             if (snapshot.data == null)
                               return CircularProgressIndicator();
                             return LineChart(
-                              mainData(widget.groupBy, snapshot),
+                              mainData(widget.groupBy, x),
                             );
                           }),
-                    ),
                   ),
                 ),
               ),
-            ],
+              )],
           ),
         ),
       ),
@@ -77,7 +79,7 @@ class _LineChartSample2State extends State<LineChartSample2> {
   }
 
   LineChartData mainData(
-      String groupby, AsyncSnapshot<QuerySnapshot> snapshot) {
+      String groupby, Generation snapshot) {
     List<int> noofdays = [30, 31, 31, 28, 31, 31, 30, 31, 31, 30, 31, 30];
 
     Map<String, int> hourData = Generation2().hourlyData(snapshot, 0, '1');

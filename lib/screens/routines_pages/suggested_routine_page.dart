@@ -231,6 +231,7 @@ class _CustomDialogState extends State<CustomDialog> {
       "Description": description,
       "color": color
     });
+    print(routine.Name + "  name   " + Name);
     Firestore.instance
         .collection("Routines")
         .document(user.houseId)
@@ -241,7 +242,7 @@ class _CustomDialogState extends State<CustomDialog> {
         .collection("Routines")
         .document(user.houseId)
         .collection("Suggested Routines")
-        .document(Name)
+        .document(routine.Name)
         .delete();
   }
 

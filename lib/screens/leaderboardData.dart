@@ -177,12 +177,12 @@ class _LeaderboardDataState extends State<LeaderboardData> {
                         : null),
                 child: ListTile(
                   // TODO: MAKE THE LIST TILE CLICKABLE WHICH LEADS TO THE USER PROFILE FOR THAT HOME OWNER
-                  // onTap: () {
-                  //   setState(() {
-                  //     currRoom = rooms[l].roomName;
-                  //     currDevice = rooms[l].d[i];
-                  //   });
-                  // },
+//                   onTap: () {
+//                     setState(() {
+//                       currRoom = rooms[l].roomName;
+//                       currDevice = rooms[l].d[i];
+//                     });
+//                   },
                   title: Row(
                     children: <Widget>[
                       Text((i + 1).toString()),

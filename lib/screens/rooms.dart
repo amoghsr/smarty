@@ -9,15 +9,6 @@ import 'package:smarty/models/user.dart';
 import 'package:smarty/shared/constants.dart';
 import 'package:smarty/widgets/voiceAgent.dart';
 
-//Todo:first
-//List<Tab> rlist = [
-//  Tab(text: rooms[0].roomName, icon: rooms[0].icon),
-//  Tab(text: rooms[1].roomName, icon: rooms[1].icon),
-//  Tab(text: rooms[2].roomName, icon: rooms[2].icon),
-//  Tab(text: rooms[3].roomName, icon: rooms[3].icon),
-//  Tab(text: rooms[4].roomName, icon: rooms[4].icon),
-//];
-
 class MyOtherRoom extends StatefulWidget {
   @override
   int initRoom;
@@ -39,7 +30,6 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
   List<Device> devices;
   DatabaseReference itemRef;
 
-  //Todo:first
   Color bulbColor = Colors.white;
   String currRoom;
   String currDevice;

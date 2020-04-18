@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:smarty/models/devicesModel.dart';
+import 'package:smarty/models/generationModel.dart';
 import 'package:smarty/models/routineModel.dart';
 import 'package:smarty/models/user.dart';
 import 'dbRoutines.dart';
@@ -7,6 +8,18 @@ import 'roomModel.dart';
 
 class DatabaseService1 {
   final Firestore _db = Firestore.instance;
+
+  Stream<Generation> streamGeneratedEnergy(User user) {
+    CollectionReference ref = _db
+        .collection('Homes')
+        .document(user.houseId)
+        .collection("generated_energy");
+    return ref.snapshots().map(CreateGeneration);
+  }
+
+  Generation CreateGeneration(QuerySnapshot doc) {
+    return Generation.fromFirestore(doc.documents);
+  }
 
   Stream<List<String>> StreamUserlist(String houseId) {
     CollectionReference ref =
