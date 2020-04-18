@@ -45,9 +45,7 @@ class _LineChartSample2State extends State<LineChartSample2> {
                       borderRadius: const BorderRadius.all(
                         Radius.circular(18),
                       ),
-                      color: Theme
-                          .of(context)
-                          .scaffoldBackgroundColor,
+                      color: Theme.of(context).scaffoldBackgroundColor,
                     ),
                     child: Padding(
                       padding: const EdgeInsets.only(
@@ -68,18 +66,18 @@ class _LineChartSample2State extends State<LineChartSample2> {
                               mainData(widget.groupBy, x),
                             );
                           }),
+                    ),
                   ),
                 ),
-              ),
-              )],
+              )
+            ],
           ),
         ),
       ),
     );
   }
 
-  LineChartData mainData(
-      String groupby, Generation snapshot) {
+  LineChartData mainData(String groupby, Generation snapshot) {
     List<int> noofdays = [30, 31, 31, 28, 31, 31, 30, 31, 31, 30, 31, 30];
 
     Map<String, int> hourData = Generation2().hourlyData(snapshot, 0, '1');

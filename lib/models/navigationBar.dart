@@ -32,7 +32,6 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
   );
 
   Widget build(BuildContext context) {
-
     final user = Provider.of<User>(context);
     if (user.type == "O") {
       final List<Widget> _children = [

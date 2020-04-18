@@ -7,7 +7,7 @@ class Generation {
   int dailyTotal;
   Map<String, int> monthly;
   Map<String, int> weekly;
-  Map<String ,int> daily;
+  Map<String, int> daily;
 
   Generation({this.dailyTotal, this.monthly, this.weekly, this.daily});
 
@@ -21,7 +21,7 @@ class Generation {
     int dailyTotal = 0;
     Map<String, int> monthly = new Map<String, int>();
     Map<String, int> weekly = new Map<String, int>();
-    Map<String, int> daily = new Map<String,  int>();
+    Map<String, int> daily = new Map<String, int>();
     doc.forEach((element) {
       element.data.forEach((key, value) {
         if (element.documentID == formattedMonth &&
