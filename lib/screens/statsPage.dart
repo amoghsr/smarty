@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:provider/provider.dart';
+import 'package:smarty/models/generationModel.dart';
 import 'package:smarty/screens/allDevices.dart';
 import 'package:smarty/screens/drawer.dart';
 import 'package:smarty/shared/constants.dart';
@@ -42,6 +44,7 @@ class _StatsScreenState extends State<StatsScreen> {
   List<String> dropdownItems = ['Consumption', 'Generation'];
 
   Widget build(BuildContext context) {
+    final x = Provider.of<Generation>(context);
     return Scaffold(
       appBar: AppBar(
         title: Center(
@@ -119,7 +122,7 @@ class _StatsScreenState extends State<StatsScreen> {
                                     80,
                                     20.0,
                                     //TODO: (AVERAGE DAILY GENERATION OF OUR HOUSE / 48.0)
-                                    0.8,
+                                    x.dailyTotal.toDouble() / 500,
                                     Container(),
                                     Colors.greenAccent.withOpacity(0.4),
                                     Colors.greenAccent[400],

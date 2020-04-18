@@ -13,6 +13,7 @@ import 'package:smarty/services/dialogProvider.dart';
 import 'package:smarty/shared/constants.dart';
 
 import 'boltProvider.dart';
+import 'generationModel.dart';
 
 class MyNavigationBar extends StatefulWidget {
   @override
@@ -38,7 +39,6 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
   );
 
   Widget build(BuildContext context) {
-    final x = Provider.of<List<String>>(context);
     final user = Provider.of<User>(context);
     if (user.type == "O") {
       final List<Widget> _children = [
