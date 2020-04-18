@@ -12,7 +12,7 @@ class Optimization extends StatefulWidget {
 
 class _OptimizationState extends State<Optimization> {
   // TODO: Get the room names
-  List<String> roomNames = ["Living Room", "Kitchen"];
+  List<String> roomNames = ["Living Room", "Kitchen", "Playroom"];
   // TODO: Get the device names for each room (IF THEY ARE ON)
   List<String> deviceNames = ["AC", "Lamp", "Speaker"];
 
@@ -75,121 +75,129 @@ class _OptimizationState extends State<Optimization> {
                 ),
               ),
               SizedBox(height: 24.0),
-              ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: roomNames.length,
-                  physics: BouncingScrollPhysics(),
-                  itemBuilder: (context, i) {
-                    return Container(
-                      margin: EdgeInsets.all(5.5),
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).cardColor,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Theme(
-                        data: Theme.of(context)
-                            .copyWith(dividerColor: Colors.transparent),
-                        child: ListTile(
-                          title: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              SizedBox(height: 10),
-                              Text(
-                                desc[deviceNames[i]],
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                              SizedBox(height: 10),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: <Widget>[
-                                      getIcons(deviceNames[i]),
-                                      SizedBox(
-                                        width: 8,
-                                      ),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: <Widget>[
-                                          Text(
-                                            deviceNames[i],
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.w600),
-                                          ),
-                                          Text(
-                                            roomNames[i],
-                                            style: TextStyle(
-                                                fontSize: 11,
-                                                color: Colors.white),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
+              ConstrainedBox(
+                constraints: BoxConstraints(
+                    maxHeight: screenheight * 0.35,
+                    minHeight: screenheight * 0.1),
+                child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: roomNames.length,
+                    physics: BouncingScrollPhysics(),
+                    itemBuilder: (context, i) {
+                      return Container(
+                        margin: EdgeInsets.all(5.5),
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).cardColor,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Theme(
+                          data: Theme.of(context)
+                              .copyWith(dividerColor: Colors.transparent),
+                          child: ListTile(
+                            title: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                SizedBox(height: 10),
+                                Text(
+                                  desc[deviceNames[i]],
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w500,
                                   ),
-                                  Row(
-                                    children: <Widget>[
-                                      Container(
-                                        height: 25,
-                                        width: 25,
-                                        decoration: BoxDecoration(
-                                          color: Colors.green,
-                                          borderRadius: BorderRadius.all(
-                                            Radius.circular(5),
-                                          ),
+                                ),
+                                SizedBox(height: 10),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: <Widget>[
+                                        getIcons(deviceNames[i]),
+                                        SizedBox(
+                                          width: 8,
                                         ),
-                                        child: Center(
-                                            child: Icon(Icons.check, size: 18)),
-                                      ),
-                                      SizedBox(width: 15),
-                                      InkWell(
-                                        onTap: () {
-                                          setState(() {
-                                            roomNames.removeAt(i);
-
-                                            if (roomNames.length == 0) {
-                                              Timer(Duration(seconds: 1), () {
-                                                Navigator.pop(context);
-                                              });
-                                            }
-                                          });
-                                        },
-                                        child: Container(
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Text(
+                                              deviceNames[i],
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.w600),
+                                            ),
+                                            Text(
+                                              roomNames[i],
+                                              style: TextStyle(
+                                                  fontSize: 11,
+                                                  color: Colors.white),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                    Row(
+                                      children: <Widget>[
+                                        Container(
                                           height: 25,
                                           width: 25,
                                           decoration: BoxDecoration(
-                                            color: Colors.red,
+                                            color: Colors.green,
                                             borderRadius: BorderRadius.all(
                                               Radius.circular(5),
                                             ),
                                           ),
                                           child: Center(
-                                            child: Icon(Icons.clear, size: 18),
+                                              child:
+                                                  Icon(Icons.check, size: 18)),
+                                        ),
+                                        SizedBox(width: 15),
+                                        InkWell(
+                                          onTap: () {
+                                            setState(() {
+                                              roomNames.removeAt(i);
+
+                                              if (roomNames.length == 0) {
+                                                Timer(Duration(seconds: 1), () {
+                                                  Navigator.pop(context);
+                                                });
+                                              }
+                                            });
+                                          },
+                                          child: Container(
+                                            height: 25,
+                                            width: 25,
+                                            decoration: BoxDecoration(
+                                              color: Colors.red,
+                                              borderRadius: BorderRadius.all(
+                                                Radius.circular(5),
+                                              ),
+                                            ),
+                                            child: Center(
+                                              child:
+                                                  Icon(Icons.clear, size: 18),
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                              SizedBox(height: 10),
-                            ],
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: 10),
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                    );
-                  }),
+                      );
+                    }),
+              ),
               SizedBox(height: 15),
               Align(
                 alignment: Alignment.bottomCenter,
