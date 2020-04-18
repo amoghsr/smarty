@@ -12,6 +12,12 @@ class Security extends StatefulWidget {
 
 class _SecurityState extends State<Security> {
   bool isLocked = true;
+  void initState() {
+    super.initState();
+    // if (Provider.of<BoltProvider>(context, listen: false).getBalanceAsInt() == 10)
+    //   Timer.run(
+    //       () => Provider.of<DialogProvider>(context, listen: false).popAi());
+  }
 
   Widget build(BuildContext context) {
     double screenwidth = MediaQuery.of(context).size.width;

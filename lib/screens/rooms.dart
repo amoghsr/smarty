@@ -49,6 +49,10 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
   List<String> x;
 
   void initState() {
+    // if (Provider.of<BoltProvider>(context, listen: false).getBalanceAsInt() == 10)
+    //   Timer.run(
+    //       () => Provider.of<DialogProvider>(context, listen: false).popAi());
+
     rooms = widget.rooms;
     devices = widget.devices;
     for (var r in rooms) {

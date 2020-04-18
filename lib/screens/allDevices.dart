@@ -18,6 +18,11 @@ class _AllDevicesState extends State<AllDevices> with TickerProviderStateMixin {
   double height = 70;
   bool showDevices = false;
 
+  void initState() {
+    // if (Provider.of<BoltProvider>(context, listen: false).getBalanceAsInt() == 10)
+    //   Timer.run(
+    //       () => Provider.of<DialogProvider>(context, listen: false).popAi());
+  }
   // TODO: Get the list of rooms
   List<String> roomNames = ["Living Room", "Kitchen"];
   // TODO: Get the list of devices per room (EVEN IF THE CONSUMPTION FOR THAT DEVICE IN THAT DAY IS 0)
@@ -56,7 +61,9 @@ class _AllDevicesState extends State<AllDevices> with TickerProviderStateMixin {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
-                              SizedBox(width: 6.0,),
+                              SizedBox(
+                                width: 6.0,
+                              ),
                               getRoomIcons(roomNames[i]),
                               SizedBox(width: screenwidth * 0.05),
                               Column(
@@ -66,7 +73,9 @@ class _AllDevicesState extends State<AllDevices> with TickerProviderStateMixin {
                                     roomNames[i],
                                     style: TextStyle(fontSize: 18.0),
                                   ),
-                                  SizedBox(height: 4.0,),
+                                  SizedBox(
+                                    height: 4.0,
+                                  ),
                                   Text(
                                     // TODO: Get the Number of devices per room, to display here
                                     '3 Devices',
@@ -91,8 +100,8 @@ class _AllDevicesState extends State<AllDevices> with TickerProviderStateMixin {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 22.0),
                         child: ListView.separated(
-                            separatorBuilder: (BuildContext context,
-                                int index) => Divider(),
+                            separatorBuilder:
+                                (BuildContext context, int index) => Divider(),
                             shrinkWrap: true,
                             itemCount: deviceNames.length,
                             itemBuilder: (context, index) {
@@ -101,13 +110,13 @@ class _AllDevicesState extends State<AllDevices> with TickerProviderStateMixin {
                                 children: [
                                   Row(
                                     mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment: CrossAxisAlignment
-                                        .center,
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
                                     children: <Widget>[
                                       Row(
-                                        crossAxisAlignment: CrossAxisAlignment
-                                            .center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
                                         children: <Widget>[
                                           getIcons(deviceNames[index]),
                                           SizedBox(width: 10),

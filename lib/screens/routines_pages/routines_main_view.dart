@@ -12,6 +12,11 @@ class RoutineMainView extends StatefulWidget {
 
 class _RoutineMainViewState extends State<RoutineMainView> {
   @override
+  void initState() {
+    // if (Provider.of<BoltProvider>(context, listen: false).getBalanceAsInt() == 10)
+    //   Timer.run(
+    //       () => Provider.of<DialogProvider>(context, listen: false).popAi());
+  }
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 2,

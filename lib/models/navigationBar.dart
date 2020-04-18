@@ -9,7 +9,10 @@ import 'package:smarty/screens/home.dart';
 import 'package:smarty/screens/leaderboard.dart';
 import 'package:smarty/screens/security.dart';
 import 'package:smarty/screens/statsPage.dart';
+import 'package:smarty/services/dialogProvider.dart';
 import 'package:smarty/shared/constants.dart';
+
+import 'boltProvider.dart';
 
 class MyNavigationBar extends StatefulWidget {
   @override
@@ -18,6 +21,11 @@ class MyNavigationBar extends StatefulWidget {
 
 class _MyNavigationBarState extends State<MyNavigationBar> {
   int _currentIndex = 0;
+  @override
+  void initState() {
+    super.initState();
+  }
+
 
   void onTappedBar(int index) {
     setState(() {
@@ -49,9 +57,7 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
             type: BottomNavigationBarType.fixed,
             showUnselectedLabels: false,
             selectedItemColor: Theme.of(context).accentColor,
-            backgroundColor: Theme
-                .of(context)
-                .primaryColor,
+            backgroundColor: Theme.of(context).primaryColor,
             items: [
               BottomNavigationBarItem(
                 icon: Icon(
@@ -66,7 +72,8 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
               BottomNavigationBarItem(
                 icon: Icon(
                   MaterialCommunityIcons.chart_bar,
-                  semanticLabel: 'View Energy Statistics or sell your homes energy to the community',
+                  semanticLabel:
+                      'View Energy Statistics or sell your homes energy to the community',
                 ),
                 title: new Text(
                   'Stats',
@@ -121,12 +128,8 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
             currentIndex: _currentIndex,
             type: BottomNavigationBarType.fixed,
             showUnselectedLabels: false,
-            selectedItemColor: Theme
-                .of(context)
-                .accentColor,
-            backgroundColor: Theme
-                .of(context)
-                .primaryColor,
+            selectedItemColor: Theme.of(context).accentColor,
+            backgroundColor: Theme.of(context).primaryColor,
             items: [
               BottomNavigationBarItem(
                 icon: Icon(

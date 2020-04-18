@@ -4,12 +4,19 @@ import 'package:smarty/models/currentDayProvider.dart';
 import 'package:smarty/models/themeModel.dart';
 import 'package:smarty/models/user.dart';
 import 'package:smarty/services/auth.dart';
+import 'package:smarty/services/dialogLocator.dart';
+import 'package:smarty/services/dialogManager.dart';
+import 'package:smarty/services/dialogProvider.dart';
 import 'package:smarty/services/service_locator.dart';
 import 'package:smarty/wrapper.dart';
 import 'package:smarty/models/boltProvider.dart';
 
 void main() {
   setupLocator();
+  setupAIPopUp();
+  setupP2PPopUp();
+  setupDoorBell();
+  setupFire();
   runApp(
     ChangeNotifierProvider<ThemeModel>(
       create: (BuildContext context) => ThemeModel(),
@@ -31,10 +38,20 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider<CurrentDayProvider>(
             create: (_) => CurrentDayProvider(20),
           ),
+          ChangeNotifierProvider<DialogProvider>(
+            create: (_) => DialogProvider(),
+          ),
         ],
         child: Consumer<BoltProvider>(builder: (context, counter, _) {
           return MaterialApp(
             home: Wrapper(),
+            builder: (context, widget) => Navigator(
+              onGenerateRoute: (settings) => MaterialPageRoute(
+                builder: (context) => DialogManager(
+                  child: widget,
+                ),
+              ),
+            ),
             theme: Provider.of<ThemeModel>(context).currentTheme,
           );
         }),

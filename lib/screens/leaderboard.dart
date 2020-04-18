@@ -1,4 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:smarty/models/boltProvider.dart';
 import 'package:smarty/screens/drawer.dart';
 import 'package:smarty/shared/constants.dart';
 import 'package:smarty/widgets/voiceAgent.dart';
@@ -12,9 +16,17 @@ class Leaderboard extends StatefulWidget {
 
 class _LeaderboardState extends State<Leaderboard> {
   @override
+    void initState() {
+    super.initState();
+    // if (Provider.of<BoltProvider>(context, listen: false).getBalanceAsInt() == 10)
+    //   Timer.run(
+    //       () => Provider.of<DialogProvider>(context, listen: false).popAi());
+  }
   Widget build(BuildContext context) {
     double screenwidth = MediaQuery.of(context).size.width;
     double screenheight = MediaQuery.of(context).size.height;
+    // USED FOR TESTING POP UP  
+    // Provider.of<BoltProvider>(context, listen: false).setBalance(10);
     return Scaffold(
       // appBar: AppBar(
       // title: Text(

@@ -21,6 +21,13 @@ class _StatsScreenState extends State<StatsScreen> {
     return batteryValue.toInt();
   }
 
+  void initState() {
+    super.initState();
+    // if (Provider.of<BoltProvider>(context, listen: false).getBalanceAsInt() == 10)
+    //   Timer.run(
+    //       () => Provider.of<DialogProvider>(context, listen: false).popAi());
+  }
+
   // moied integration for battery
   double doubleBatteryValue = 0.5; // uses single double value from here
   double batteryValue;

@@ -4,10 +4,15 @@
 * various routines and the nav bar (But this stays common to all)
 */
 
+import 'dart:async';
+
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:smarty/models/boltProvider.dart';
 import 'package:smarty/screens/home_manager/register_homeowner.dart';
 import 'package:smarty/services/auth.dart';
+import 'package:smarty/services/dialogProvider.dart';
 import 'package:smarty/shared/constants.dart';
 
 import 'drawer_manager.dart';
@@ -28,7 +33,6 @@ class _DashboardManagerState extends State<DashboardManager> {
         .instance; //Rather then just writing FirebaseDatabase(), get the instance.
     itemRef = database.reference();
   }
-
   /*
   * A notification plugin that provides the app with the ability to send notifications to
   * the user for certain events such as when there is an anomaly (fire) detected by the flame detector.

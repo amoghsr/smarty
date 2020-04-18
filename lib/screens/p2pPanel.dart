@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:smarty/alertBox.dart';
+import 'package:smarty/services/dialogProvider.dart';
 import 'package:smarty/shared/constants.dart';
 import 'package:smarty/models/boltProvider.dart';
 import 'package:smarty/widgets/donateDialog.dart';
@@ -17,6 +20,12 @@ class _P2PState extends State<P2P> {
   double capacity = 48;
   int click = 0;
   double conversion = 0.23;
+  void initState() {
+    super.initState();
+    // if (Provider.of<BoltProvider>(context, listen: false).getBalanceAsInt() == 10)
+    //   Timer.run(
+    //       () => Provider.of<DialogProvider>(context, listen: false).popAi());
+  }
 
   Widget build(BuildContext context) {
     final bal = Provider.of<BoltProvider>(context);
@@ -124,7 +133,6 @@ class _P2PState extends State<P2P> {
                 ],
               ),
             ),
-            
             SizedBox(
               height: 10.0,
             ),
@@ -434,8 +442,7 @@ class _P2PState extends State<P2P> {
                       builder: (context, snap) {
                         return Dialog(
                           shape: RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.circular(Consts.padding),
+                            borderRadius: BorderRadius.circular(Consts.padding),
                           ),
                           elevation: 0.0,
                           // Elevation means the height of element on the screen from the floor. Basically gives a drop shadow.
