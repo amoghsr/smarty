@@ -23,10 +23,7 @@ class RoomCarousel extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text(
-                  'All Rooms',
-                    style: kHeadingTextStyle
-                ),
+                Text('All Rooms', style: kHeadingTextStyle),
               ],
             ),
           ),
@@ -92,6 +89,12 @@ class RoomCarousel extends StatelessWidget {
                                 fit: BoxFit.fill,
                               ),
                               borderRadius: BorderRadius.circular(10.0),
+                              boxShadow: [
+                                BoxShadow(
+                                    color: Colors.black.withOpacity(0.08),
+                                    offset: Offset(2.0, 6.0),
+                                    blurRadius: 6.0)
+                              ],
                               color: Theme
                                   .of(context)
                                   .backgroundColor,
@@ -112,8 +115,8 @@ class RoomCarousel extends StatelessWidget {
                                       shadows: [
                                         Shadow(
                                           blurRadius: 10.0,
-                                          color: Colors.black26.withOpacity(
-                                              0.4),
+                                          color:
+                                          Colors.black26.withOpacity(0.4),
                                           offset: Offset(4.0, 4.0),
                                         ),
                                       ],

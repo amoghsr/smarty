@@ -500,7 +500,7 @@ class _StatsScreenState extends State<StatsScreen> {
                         borderRadius: BorderRadius.circular(10.0),
                         boxShadow: [
                           BoxShadow(
-                              color: Colors.black.withOpacity(0.2),
+                              color: Colors.black.withOpacity(0.08),
                               offset: Offset(1.0, 3.0),
                               blurRadius: 4.0)
                         ]),
