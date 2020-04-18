@@ -5,11 +5,13 @@
 */
 
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:smarty/models/themeModel.dart';
@@ -44,19 +46,34 @@ class _HomeState extends State<Home> {
 
   DatabaseReference itemRef;
   bool valueSwitch = true;
-
-  var weatherdata = WeatherModel().weatherData();
-  String _res = 'Unknown';
+  double weather;
   String key = 'd6990a93802ef960b648309d2769ec32';
-  WeatherStation ws;
+
+  Future<Position> getPosition() async {
+    Position position = await Geolocator()
+        .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    return position;
+  }
+
+  Future getWeather(var lat, var lon) async {
+    http.Response response = await http.get(
+        'https://api.openweathermap.org/data/2.5/weather?lat=${lat.toInt()}&units=metric&lon=${lon.toInt()}&appid=d6990a93802ef960b648309d2769ec32');
+
+    var results = jsonDecode(response.body);
+    setState(() {
+      this.weather = results['main']['temp'];
+    });
+  }
 
   void initState() {
     super.initState();
+    getPosition().then((position) {
+      getWeather(position.latitude, position.longitude);
+    });
 
     final FirebaseDatabase database = FirebaseDatabase
         .instance; //Rather then just writing FirebaseDatabase(), get the instance.
     itemRef = database.reference();
-
   }
 
   @override
@@ -66,7 +83,6 @@ class _HomeState extends State<Home> {
   */
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
 
-  WeatherModel wm = WeatherModel();
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
@@ -81,18 +97,14 @@ class _HomeState extends State<Home> {
             IconButton(
               icon: Icon(MaterialCommunityIcons.theme_light_dark),
               onPressed: () async {
-                // setState(() {
-                //   Provider.of<ThemeModel>(context, listen: false)
-                //       .toggleTheme();
-                // });
-                // await _showNotificationWithDefaultSound(
-                //     'FIRE DETECTED', 'Sprinklers have been activated.');
+                setState(() {
+                  Provider.of<ThemeModel>(context, listen: false).toggleTheme();
+                });
               },
             ),
             MicClass()
           ],
         ),
-
         // Drawer is the hamburger menu.
         // Here starts the body of the Home Page, nested inside a SafeArea widget to keep content inside the viewport
         drawer: DrawerPage(),
@@ -126,14 +138,16 @@ class _HomeState extends State<Home> {
                         fontWeight: FontWeight.w700,
                       ),
                     ),
-                    Text(
-                      '32°C',
-                      //${widget.currentUser.email}`
-                      style: TextStyle(
-                        fontSize: 24.0,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
+                    (weather == null)
+                        ? CircularProgressIndicator()
+                        : Text(
+                            '${weather.round().toString()}°C',
+                            //${widget.currentUser.email}`
+                            style: TextStyle(
+                              fontSize: 24.0,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
                   ],
                 ),
               ),
@@ -227,24 +241,24 @@ class _HomeState extends State<Home> {
 //                 );
 // ************************* AI DIALOG BOX ******************************//
 // TODO: POPUP THIS DIALOG WHEN DAILY CONSUMPTION REACHES 80% OF THE CALCULATED DAILY LIMIT
-                // showDialog(
-                //   context: context,
-                //   builder: (BuildContext context) => StreamBuilder(
-                //     stream: itemRef.child("Sensors/Fire/").onValue,
-                //     builder: (context, snap) {
-                //       return CustomDialog(
-                //         image:
-                //             Image.asset("assets/images/renewable-energy.png"),
-                //         title: "CAREFUL!",
-                //         description:
-                //             "You have almost reached your daily limit!",
-                //         col: Colors.red[500],
-                //         buttonText: "Optimize Now",
-                //         optimize: true,
-                //       );
-                //     },
-                //   ),
-                // );
+// showDialog(
+//   context: context,
+//   builder: (BuildContext context) => StreamBuilder(
+//     stream: itemRef.child("Sensors/Fire/").onValue,
+//     builder: (context, snap) {
+//       return CustomDialog(
+//         image:
+//             Image.asset("assets/images/renewable-energy.png"),
+//         title: "CAREFUL!",
+//         description:
+//             "You have almost reached your daily limit!",
+//         col: Colors.red[500],
+//         buttonText: "Optimize Now",
+//         optimize: true,
+//       );
+//     },
+//   ),
+// );
 
 // ************************* P2P DIALOG BOX ******************************//
 // TODO: POPUP THIS DIALOG WHEN DAILY CONSUMPTION REACHES THE DAILY GENERATION VALUE (BATTERY LEVEL EMPTY)
