@@ -124,6 +124,7 @@ class _P2PState extends State<P2P> {
                 ],
               ),
             ),
+            
             SizedBox(
               height: 10.0,
             ),
