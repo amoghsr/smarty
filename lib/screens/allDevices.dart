@@ -28,50 +28,50 @@ class _AllDevicesState extends State<AllDevices> with TickerProviderStateMixin {
 
     return Scaffold(
       appBar: AppBar(
-        title: Center(
-          child: Text(
-            'All Devices',
-            style: kAppBarTextStyle,
-          ),
+        title: Text(
+          'All Devices',
+          style: kAppBarTextStyle,
         ),
         actions: <Widget>[MicClass()],
       ),
-      drawer: DrawerPage(),
       body: ListView.builder(
           shrinkWrap: true,
           itemCount: roomNames.length,
-          physics: BouncingScrollPhysics(),
           itemBuilder: (context, i) {
             return Container(
-              margin: EdgeInsets.all(5.5),
+              margin: EdgeInsets.only(left: 12.0, right: 12.0, top: 6.0),
               child: Card(
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(8),
                 ),
+//                elevation: 4.0,
                 child: Container(
-                  child: Theme(
-                    data: Theme.of(context)
-                        .copyWith(dividerColor: Colors.transparent),
-                    child: ExpansionTile(
-                      title: Row(
+                  child: ExpansionTile(
+                    title: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 12.0),
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
+                              SizedBox(width: 6.0,),
                               getRoomIcons(roomNames[i]),
                               SizedBox(width: screenwidth * 0.05),
                               Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
                                   Text(
                                     roomNames[i],
-                                    style: TextStyle(fontSize: 17),
+                                    style: TextStyle(fontSize: 18.0),
                                   ),
+                                  SizedBox(height: 4.0,),
                                   Text(
                                     // TODO: Get the Number of devices per room, to display here
                                     '3 Devices',
                                     style: TextStyle(
-                                      fontSize: 10,
+                                      fontSize: 12.0,
                                     ),
                                   ),
                                 ],
@@ -80,52 +80,58 @@ class _AllDevicesState extends State<AllDevices> with TickerProviderStateMixin {
                           ),
                           Text(
                             // TODO: Total Consumption per room (Total of all devices per room) uptil that point of the day
-                            '3 KwH',
-                            style: TextStyle(fontSize: 17),
+                            '3 KWh',
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.w600),
                           ),
                         ],
                       ),
-                      children: <Widget>[
-                        ListView.builder(
+                    ),
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 22.0),
+                        child: ListView.separated(
+                            separatorBuilder: (BuildContext context,
+                                int index) => Divider(),
                             shrinkWrap: true,
                             itemCount: deviceNames.length,
                             itemBuilder: (context, index) {
-                              return Padding(
-                                padding:
-                                    const EdgeInsets.only(right: 62, left: 50),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: <Widget>[
-                                        Row(
-                                          children: <Widget>[
-                                            getIcons(deviceNames[index]),
-                                            SizedBox(width: 10),
-                                            Text(
-                                              deviceNames[index],
-                                              style: TextStyle(fontSize: 16),
-                                            ),
-                                          ],
-                                        ),
-                                        Text(
-                                          // TODO: Total per device (Sum of consumption throughout the day for that device) up until that point of the day
-                                          '1 KwH',
-                                          style: TextStyle(fontSize: 16),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 8,
-                                    ),
-                                  ],
-                                ),
+                              return Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment: CrossAxisAlignment
+                                        .center,
+                                    children: <Widget>[
+                                      Row(
+                                        crossAxisAlignment: CrossAxisAlignment
+                                            .center,
+                                        children: <Widget>[
+                                          getIcons(deviceNames[index]),
+                                          SizedBox(width: 10),
+                                          Text(
+                                            deviceNames[index],
+                                            style: TextStyle(fontSize: 16),
+                                          ),
+                                        ],
+                                      ),
+                                      Text(
+                                        // TODO: Total per device (Sum of consumption throughout the day for that device) up until that point of the day
+                                        '1 KWh',
+                                        style: TextStyle(fontSize: 16),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                ],
                               );
                             }),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ),

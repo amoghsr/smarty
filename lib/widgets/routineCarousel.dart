@@ -30,13 +30,40 @@ class RoutineCarousel extends StatelessWidget {
                     builder: (context) => RoutineMainView(),
                   ),
                 ),
-                child: Text(
-                  'See all',
-                  style: TextStyle(
-                    fontSize: 12.0,
-                    fontWeight: FontWeight.w600,
-                    color: Theme.of(context).accentColor,
-                  ),
+                child: Row(
+                  children: <Widget>[
+                    Text(
+                      'See all',
+                      style: TextStyle(
+                        fontSize: 12.0,
+                        fontWeight: FontWeight.w600,
+                        color: Theme
+                            .of(context)
+                            .accentColor,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 4.0,
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.red,
+                        borderRadius: BorderRadius.circular(
+                          (20.0),
+                        ),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8.0, vertical: 4.0),
+                        child: Text(
+                          'new',
+                          style: TextStyle(color: Colors.white,
+                              fontSize: 12.0,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
@@ -79,6 +106,12 @@ class RoutineCarousel extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: routines[index].routineColor,
                   borderRadius: BorderRadius.circular(10.0),
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.black.withOpacity(0.2),
+                          offset: Offset(2.0, 4.0),
+                          blurRadius: 4.0)
+                    ]
                 ),
                 child: Stack(
                   alignment: Alignment.topCenter,

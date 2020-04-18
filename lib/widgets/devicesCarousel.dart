@@ -97,6 +97,12 @@ class _DeviceCarouselState extends State<DeviceCarousel> {
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10.0),
                               color: Theme.of(context).cardColor,
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.black.withOpacity(0.08),
+                                      offset: Offset(2.0, 6.0),
+                                      blurRadius: 4.0)
+                                ]
                             ),
                             child: Padding(
                               padding: EdgeInsets.all(14.0),

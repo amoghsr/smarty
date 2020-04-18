@@ -98,8 +98,16 @@ class _HomeState extends State<Home> {
               icon: Icon(MaterialCommunityIcons.theme_light_dark),
               onPressed: () async {
                 setState(() {
+<<<<<<< HEAD
                   Provider.of<ThemeModel>(context, listen: false).toggleTheme();
                 });
+=======
+                  Provider.of<ThemeModel>(context, listen: false)
+                      .toggleTheme();
+                });
+                // await _showNotificationWithDefaultSound(
+                //     'FIRE DETECTED', 'Sprinklers have been activated.');
+>>>>>>> dca4ea577efdac9ccf40e4037e3ecc30255a6438
               },
             ),
             MicClass()
@@ -167,6 +175,7 @@ class _HomeState extends State<Home> {
               ),
               // The device carousel is a carousel which lists the devices in the house based on a device model. (deviceCarousel.dart)
               DeviceCarousel(),
+              SizedBox(height: 36.0,),
             ],
           ),
         ),
