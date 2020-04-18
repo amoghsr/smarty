@@ -54,20 +54,23 @@ class Wrapper extends StatelessWidget {
                   value: DatabaseService1().getCurrentRoutines(user),
                   child: StreamProvider<Generation>.value(
                     value: DatabaseService1().streamGeneratedEnergy(user),
-                    child: StreamProvider<List<String>>.value(
-                      value: DatabaseService1().StreamUserlist(user.houseId),
-                      child: MaterialApp(
-                        theme: Provider.of<ThemeModel>(context).currentTheme,
-                        home: MyNavigationBar(),
+                    child: StreamProvider<Generation>.value(
+                      value: DatabaseService1().streamConsumedEnergy(user),
+                      child: StreamProvider<List<String>>.value(
+                        value: DatabaseService1().StreamUserlist(user.houseId),
+                        child: MaterialApp(
+                          theme: Provider.of<ThemeModel>(context).currentTheme,
+                          home: MyNavigationBar(),
+                          ),
+                        ),
                       ),
                     ),
                   ),
                 ),
               ),
             ),
-          ),
-        );
+          );
+        }
       }
     }
   }
-}

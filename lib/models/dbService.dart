@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:smarty/models/devicesModel.dart';
 import 'package:smarty/models/generationModel.dart';
+import 'package:smarty/models/consumptionModel.dart';
 import 'package:smarty/models/routineModel.dart';
 import 'package:smarty/models/user.dart';
 import 'dbRoutines.dart';
@@ -19,6 +20,18 @@ class DatabaseService1 {
 
   Generation CreateGeneration(QuerySnapshot doc) {
     return Generation.fromFirestore(doc.documents);
+  }
+
+  Stream<Generation> streamConsumedEnergy(User user) {
+    CollectionReference ref = _db
+        .collection('Homes')
+        .document(user.houseId)
+        .collection("consumed_energy");
+    return ref.snapshots().map(CreateGeneration);
+  }
+
+  Consumption CreateConsumption(QuerySnapshot doc) {
+    return Consumption.fromFirestore(doc.documents);
   }
 
   Stream<List<String>> StreamUserlist(String houseId) {
