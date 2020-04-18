@@ -74,11 +74,13 @@ class _HomeState extends State<Home> {
     getPosition().then((position) {
       getWeather(position.latitude, position.longitude);
     });
-    
-    // if (Provider.of<BoltProvider>(context, listen: false).getBalanceAsInt() == 10)
-    //   Timer.run(
-    //       () => Provider.of<DialogProvider>(context, listen: false).popAi());
 
+    // if (Provider.of<BoltProvider>(context, listen: false).getBalanceAsInt() == 10)
+    // Timer.run(
+    //     () => Provider.of<DialogProvider>(context, listen: false).popAi());
+
+    Timer.run(
+        () => Provider.of<DialogProvider>(context, listen: false).popAi());
     final FirebaseDatabase database = FirebaseDatabase
         .instance; //Rather then just writing FirebaseDatabase(), get the instance.
     itemRef = database.reference();
