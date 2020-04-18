@@ -53,7 +53,7 @@ class _CurrentRoutinesState extends State<CurrentRoutines> {
                             padding: EdgeInsets.all(20.0),
                             decoration: BoxDecoration(
                               color: routines[index].routineColor,
-                              borderRadius: BorderRadius.circular(5),
+                              borderRadius: BorderRadius.circular(8.0),
                             ),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,

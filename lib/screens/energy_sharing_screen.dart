@@ -31,9 +31,7 @@ class _EnergySharingScreenState extends State<EnergySharingScreen> {
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-          backgroundColor: Theme
-              .of(context)
-              .primaryColor,
+          backgroundColor: Theme.of(context).primaryColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20.0),
           ),
@@ -44,8 +42,10 @@ class _EnergySharingScreenState extends State<EnergySharingScreen> {
             child: ListBody(
               children: <Widget>[
                 Text(
-                  'You can purchase energy from the community when your home is in need of energy.',
-                  style: TextStyle(fontSize: 14.0),),
+                  'Extra electricity produced by your home\'s solar panel\'s can be used by donating them to charitable organisations.',
+                  style: TextStyle(fontSize: 14.0),
+                  textAlign: TextAlign.center,
+                ),
               ],
             ),
           ),
@@ -117,39 +117,30 @@ class _EnergySharingScreenState extends State<EnergySharingScreen> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.0),
               child: Row(
-                children: <Widget>[
-                  Text('Donate', style: kHeadingTextStyle),
-                  SizedBox(
-                    width: screenwidth * 0.03,
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Opacity(
-                    opacity: 1.0,
-                    child: Text(
-                      'Support your local charities and make a difference.',
-                      style: TextStyle(
-                        fontSize: 13.0,
-                        fontWeight: FontWeight.w400,
-                      ),
+                  Text(
+                    'Donate',
+                    style: TextStyle(
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.w600,
                     ),
+                  ),
+                  GestureDetector(
+                    onTap: _infoDialog,
+                    child: Icon(MaterialCommunityIcons.help_circle_outline),
                   ),
                 ],
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(
-                  top: 8.0, bottom: 4.0, left: 20.0, right: 20.0),
+              padding:
+                  const EdgeInsets.only(top: 8.0, bottom: 4.0, right: 20.0),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    'Extra electricity produced by your home\'s solar panel\'s can be used by donating them to charitable organisations.',
+                    'Support your local charities and make a difference',
                     style: TextStyle(fontSize: 12.0),
                   )
                 ],
@@ -250,10 +241,6 @@ class _EnergySharingScreenState extends State<EnergySharingScreen> {
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  GestureDetector(
-                    onTap: _infoDialog,
-                    child: Icon(MaterialCommunityIcons.help_circle_outline),
-                  ),
                 ],
               ),
             ),
@@ -326,14 +313,9 @@ class _EnergySharingScreenState extends State<EnergySharingScreen> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.0),
               child: Container(
-                width: MediaQuery
-                    .of(context)
-                    .size
-                    .width,
+                width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
-                    color: Theme
-                        .of(context)
-                        .primaryColor,
+                    color: Theme.of(context).primaryColor,
                     borderRadius: BorderRadius.circular(6.0),
                     boxShadow: [
                       BoxShadow(
@@ -395,44 +377,42 @@ class _EnergySharingScreenState extends State<EnergySharingScreen> {
                           children: [
                             (click == 0)
                                 ? Row(
-                              crossAxisAlignment:
-                              CrossAxisAlignment.center,
-                              children: <Widget>[
-                                Text(
-                                  '${electricityAmount.toInt()}',
-                                  style: TextStyle(
-                                    fontSize: 28,
-                                  ),
-                                ),
-                                Icon(
-                                  Icons.flash_on,
-                                  color: Colors.deepOrange,
-                                  size: 28,
-                                ),
-                              ],
-                            )
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: <Widget>[
+                                      Text(
+                                        '${electricityAmount.toInt()}',
+                                        style: TextStyle(
+                                          fontSize: 28,
+                                        ),
+                                      ),
+                                      Icon(
+                                        Icons.flash_on,
+                                        color: Colors.deepOrange,
+                                        size: 28,
+                                      ),
+                                    ],
+                                  )
                                 : Row(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: <Widget>[
-                                Text(
-                                  '${(double.parse(
-                                      (electricityAmount * conversion)
-                                          .toStringAsFixed(2)))}',
-                                  style: TextStyle(
-                                    fontSize: 28,
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: <Widget>[
+                                      Text(
+                                        '${(double.parse((electricityAmount * conversion).toStringAsFixed(2)))}',
+                                        style: TextStyle(
+                                          fontSize: 28,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: screenwidth * 0.02,
+                                      ),
+                                      Column(
+                                        children: <Widget>[
+                                          Text('AED'),
+                                          SizedBox(height: 3.0)
+                                        ],
+                                      ),
+                                    ],
                                   ),
-                                ),
-                                SizedBox(
-                                  width: screenwidth * 0.02,
-                                ),
-                                Column(
-                                  children: <Widget>[
-                                    Text('AED'),
-                                    SizedBox(height: 3.0)
-                                  ],
-                                ),
-                              ],
-                            ),
                           ],
                         ),
                       ],
@@ -452,9 +432,7 @@ class _EnergySharingScreenState extends State<EnergySharingScreen> {
                             decoration: BoxDecoration(
                               color: selectedColor == Colors.deepOrange
                                   ? Colors.deepOrange
-                                  : Theme
-                                  .of(context)
-                                  .primaryColor,
+                                  : Theme.of(context).primaryColor,
                               borderRadius: BorderRadius.circular(10.0),
                               boxShadow: [
                                 BoxShadow(
@@ -490,9 +468,7 @@ class _EnergySharingScreenState extends State<EnergySharingScreen> {
                             decoration: BoxDecoration(
                                 color: selectedColor == Colors.lightGreen
                                     ? Colors.lightGreen
-                                    : Theme
-                                    .of(context)
-                                    .primaryColor,
+                                    : Theme.of(context).primaryColor,
                                 borderRadius: BorderRadius.circular(10.0),
                                 boxShadow: [
                                   BoxShadow(
