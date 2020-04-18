@@ -26,134 +26,133 @@ class _LeaderboardDataState extends State<LeaderboardData> {
         : lb.sort((a, b) => a.points.compareTo(b.points));
 
     return Scaffold(
-      body: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        // physics: NeverScrollableScrollPhysics(),
-        child: GestureDetector(
-          onVerticalDragUpdate: (_) {},
-          child: Container(
-            child: Column(
-              children: <Widget>[
-                Container(
-                  height: screenheight * 0.39,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: <Widget>[
-                      Column(
-                        children: <Widget>[
-                          SizedBox(
-                            height: screenheight * 0.06,
+      body: SafeArea(
+        child: Column(
+          children: <Widget>[
+            ConstrainedBox(
+              constraints: BoxConstraints(
+                maxHeight: screenheight * 0.40,
+                minHeight: screenheight * 0.1,
+              ),
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    child: Column(
+                      children: <Widget>[
+                        SizedBox(
+                          height: screenheight * 0.06,
+                        ),
+                        Container(
+                          child: Icon(
+                            FontAwesomeIcons.trophy,
+                            size: 30,
+                            color: Color(0xffAAA9AD),
                           ),
-                          Container(
-                            child: Icon(
-                              FontAwesomeIcons.trophy,
-                              size: 30,
-                              color: Color(0xffAAA9AD),
-                            ),
+                        ),
+                        SizedBox(
+                          height: screenheight * 0.02,
+                        ),
+                        Container(
+                          // height: screenheight,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
                           ),
-                          SizedBox(
-                            height: screenheight * 0.02,
+                          child: CircleAvatar(
+                            radius: 40,
+                            backgroundColor: Theme.of(context).canvasColor,
+                            // TODO: Get leaderboard image based on House ID (2nd Place)
+                            backgroundImage: NetworkImage(lb[1].userImage),
                           ),
-                          Container(
-                            // height: screenheight,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                            ),
-                            child: CircleAvatar(
-                              radius: 40,
-                              backgroundColor: Theme.of(context).canvasColor,
-                              // TODO: Get leaderboard image based on House ID (2nd Place)
-                              backgroundImage: NetworkImage(lb[1].userImage),
-                            ),
-                          ),
-                          SizedBox(
-                            height: screenheight * 0.01,
-                          ),
-                          Text(lb[1].userName.split(' ')[0]),
-                        ],
-                      ),
-                      Column(
-                        children: <Widget>[
-                          SizedBox(
-                            height: screenheight * 0.03,
-                          ),
-                          Container(
-                            child: Icon(
-                              FontAwesomeIcons.trophy,
-                              size: 45,
-                              color: Colors.yellow,
-                            ),
-                          ),
-                          SizedBox(
-                            height: screenheight * 0.02,
-                          ),
-                          Container(
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                            ),
-                            child: CircleAvatar(
-                              radius: 65,
-                              backgroundColor: Theme.of(context).canvasColor,
-                              // TODO: Get leaderboard image based on House ID (1st Place)
-                              backgroundImage: NetworkImage(lb[0].userImage),
-                            ),
-                          ),
-                          SizedBox(
-                            height: screenheight * 0.01,
-                          ),
-                          Text(lb[0].userName.split(' ')[0]),
-                        ],
-                      ),
-                      Column(
-                        children: <Widget>[
-                          SizedBox(
-                            height: screenheight * 0.06,
-                          ),
-                          Container(
-                            child: Icon(
-                              FontAwesomeIcons.trophy,
-                              size: 30,
-                              color: Colors.deepOrange,
-                            ),
-                          ),
-                          SizedBox(
-                            height: screenheight * 0.02,
-                          ),
-                          Container(
-                            // height: screenheight,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                            ),
-                            child: CircleAvatar(
-                              radius: 40,
-                              backgroundColor: Theme.of(context).canvasColor,
-                              // TODO: Get leaderboard image based on House ID (3rd Place)
-                              backgroundImage: NetworkImage(lb[2].userImage),
-                            ),
-                          ),
-                          SizedBox(
-                            height: screenheight * 0.01,
-                          ),
-                          Text(lb[2].userName.split(' ')[0]),
-                        ],
-                      ),
-                    ],
+                        ),
+                        SizedBox(
+                          height: screenheight * 0.01,
+                        ),
+                        Text(lb[1].userName.split(' ')[0]),
+                      ],
+                    ),
                   ),
-                ),
-                Container(
-                  // color: Colors.green,
-//                  height: screenheight * 0.35,
-                  child: TabBarView(
-                    physics: NeverScrollableScrollPhysics(),
-                    children: [
-                      getListTile(lb),
-                      getListTile(lb),
-                    ],
+                  Expanded(
+                    child: Column(
+                      children: <Widget>[
+                        SizedBox(
+                          height: screenheight * 0.03,
+                        ),
+                        Container(
+                          child: Icon(
+                            FontAwesomeIcons.trophy,
+                            size: 45,
+                            color: Colors.yellow,
+                          ),
+                        ),
+                        SizedBox(
+                          height: screenheight * 0.02,
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                          ),
+                          child: CircleAvatar(
+                            radius: 65,
+                            backgroundColor: Theme.of(context).canvasColor,
+                            // TODO: Get leaderboard image based on House ID (1st Place)
+                            backgroundImage: NetworkImage(lb[0].userImage),
+                          ),
+                        ),
+                        SizedBox(
+                          height: screenheight * 0.01,
+                        ),
+                        Text(lb[0].userName.split(' ')[0]),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                  Expanded(
+                    child: Column(
+                      children: <Widget>[
+                        SizedBox(
+                          height: screenheight * 0.06,
+                        ),
+                        Container(
+                          child: Icon(
+                            FontAwesomeIcons.trophy,
+                            size: 30,
+                            color: Colors.deepOrange,
+                          ),
+                        ),
+                        SizedBox(
+                          height: screenheight * 0.02,
+                        ),
+                        Container(
+                          // height: screenheight,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                          ),
+                          child: CircleAvatar(
+                            radius: 40,
+                            backgroundColor: Theme.of(context).canvasColor,
+                            // TODO: Get leaderboard image based on House ID (3rd Place)
+                            backgroundImage: NetworkImage(lb[2].userImage),
+                          ),
+                        ),
+                        SizedBox(
+                          height: screenheight * 0.01,
+                        ),
+                        Text(lb[2].userName.split(' ')[0]),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
+            Expanded(
+              child: TabBarView(
+                physics: NeverScrollableScrollPhysics(),
+                children: [
+                  getListTile(lb),
+                  getListTile(lb),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -163,7 +162,7 @@ class _LeaderboardDataState extends State<LeaderboardData> {
     return ListView.builder(
         shrinkWrap: true,
         itemCount: lb.length,
-        physics: BouncingScrollPhysics(),
+        // physics: BouncingScrollPhysics(),
         itemBuilder: (context, i) {
           return Column(
             children: <Widget>[
