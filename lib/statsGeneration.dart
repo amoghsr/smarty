@@ -8,11 +8,11 @@ import 'package:flutter/material.dart';
 
 void main() {
   runApp(
-    Generation(),
+    Generation2(),
   );
 }
 
-class Generation extends StatelessWidget {
+class Generation2 extends StatelessWidget {
   // Returns the average generation data in a day.
   int averageDayData(
       AsyncSnapshot<QuerySnapshot> snapshot, int month, String date) {

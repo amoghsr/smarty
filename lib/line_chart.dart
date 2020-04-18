@@ -80,13 +80,13 @@ class _LineChartSample2State extends State<LineChartSample2> {
       String groupby, AsyncSnapshot<QuerySnapshot> snapshot) {
     List<int> noofdays = [30, 31, 31, 28, 31, 31, 30, 31, 31, 30, 31, 30];
 
-    Map<String, int> hourData = Generation().hourlyData(snapshot, 0, '1');
+    Map<String, int> hourData = Generation2().hourlyData(snapshot, 0, '1');
     List<int> hours = hourData.values.toList();
     List<FlSpot> hourCoords = [
       FlSpot(0, 0),
     ];
 
-    List<int> weekData = Generation().weekData(snapshot, 0, '1');
+    List<int> weekData = Generation2().weekData(snapshot, 0, '1');
     List<FlSpot> weekCoords = [
       FlSpot(0, 0),
     ];
@@ -107,7 +107,7 @@ class _LineChartSample2State extends State<LineChartSample2> {
     for (int i = 0, j = 1; i < monthData.length; i++, j += 2) {
       monthCoords.add(FlSpot(
         j.toDouble(),
-        (Generation().monthData(snapshot, i, noofdays[i]).toDouble()) % 5 + 1,
+        (Generation2().monthData(snapshot, i, noofdays[i]).toDouble()) % 5 + 1,
       ));
     }
     return LineChartData(
