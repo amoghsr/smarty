@@ -19,6 +19,8 @@ class UserProfile extends StatefulWidget {
 class _UserProfileState extends State<UserProfile> {
   @override
   bool valueSwitch = true;
+  int totalDays = 30;
+
   var user;
   var stream;
 
@@ -46,6 +48,95 @@ class _UserProfileState extends State<UserProfile> {
     super.dispose();
   }
 
+  //TODO: The key of this map is daily streak day count
+  Map<int, dynamic> rewards = {
+    1: Image.asset('assets/images/save_energy.png', width: 30, height: 30),
+    3: Icon(FontAwesomeIcons.trophy, color: Color(0xffe8b313), size: 30),
+    5: Icon(Icons.flash_on, color: Color(0xffe8b313), size: 30),
+    10: Icon(FontAwesomeIcons.award, color: Colors.redAccent, size: 30),
+    11: Icon(Icons.flash_on, color: Color(0xffe8b313), size: 30),
+    15: Image.asset('assets/images/eco-battery.png', width: 30, height: 30),
+    20: Image.asset('assets/images/solar.png', width: 30, height: 30),
+    23: Icon(Icons.flash_on, color: Color(0xffe8b313), size: 30),
+    25: Icon(FontAwesomeIcons.solarPanel, color: Colors.blueGrey, size: 30),
+    30: Image.asset('assets/images/may_challenge.png', width: 30, height: 30),
+  };
+
+  List<dynamic> badges = [
+    [
+      'Saving',
+      [
+        [
+          false,
+          Image.asset('assets/images/save_energy.png', width: 100, height: 100),
+          'Energy Saver',
+          'Say watt? Your journey has begun!'
+        ],
+        [
+          false,
+          Image.asset('assets/images/eco-battery.png', width: 100, height: 100),
+          'Eco Warrior',
+          'Half way through a month? I\'m shocked!'
+        ],
+        [
+          false,
+          Image.asset('assets/images/solar.png', width: 100, height: 100),
+          'Solar Marathon',
+          'You got the power! Keep saving!'
+        ],
+      ],
+    ],
+    [
+      'Donation',
+      [
+        [
+          false,
+          Image.asset('assets/images/cross_badge.png', width: 100, height: 100),
+          'Red Cross Hero',
+          'Donated to the Red Cross Charity'
+        ],
+        [
+          true,
+          Image.asset('assets/images/paw_badge.png', width: 100, height: 100),
+          'Animal Lover',
+          'Donated to the Animal Foundation'
+        ],
+        [
+          false,
+          Image.asset('assets/images/teddy_badge.png', width: 100, height: 100),
+          'Secret Genie',
+          'Donated to the Make a Wish Foundation'
+        ]
+      ],
+    ],
+    [
+      'Challenges',
+      [
+        [
+          true,
+          Image.asset('assets/images/april_challenge.png',
+              width: 100, height: 100),
+          'April Challenge',
+          'Ohm you couldn\'t resist, could you?'
+        ],
+        [
+          false,
+          Image.asset('assets/images/may_challenge.png',
+              width: 100, height: 100),
+          'May Challenge',
+          'May the force be with you always!'
+        ],
+        [
+          false,
+          Image.asset('assets/images/june_challenge.png',
+              width: 100, height: 100),
+          'July Challenge',
+          'You\'ve reached enlightenment!'
+        ],
+      ],
+    ],
+  ];
+
   @override
   Widget build(BuildContext context) {
     //list of users of current house name-email layout
@@ -53,106 +144,16 @@ class _UserProfileState extends State<UserProfile> {
     final bal = Provider.of<BoltProvider>(context);
     double screenwidth = MediaQuery.of(context).size.width;
     double screenheight = MediaQuery.of(context).size.height;
-
-    //T
-    List<String> nums = [];
-    for (int i = 0; i < 30; i++) {
-      nums.add(i.toString());
+    //TODO: GET CURRENT STREAK DAY OVER HERE
+    int currentDay = 20;
+    for (int i = 1; i <= currentDay; i++) {
+      setState(() {
+        if (i == 1) badges[0][1][0][0] = true;
+        if (i == 15) badges[0][1][1][0] = true;
+        if (i == 20) badges[0][1][2][0] = true;
+        if (i == 30) badges[2][1][1][0] = true;
+      });
     }
-
-    //TODO: The key of this map is daily streak day count
-    Map<int, dynamic> rewards = {
-      1: Image.asset('assets/images/save_energy.png', width: 30, height: 30),
-      3: Icon(FontAwesomeIcons.trophy, color: Color(0xffe8b313), size: 30),
-      5: Icon(Icons.flash_on, color: Color(0xffe8b313), size: 30),
-      10: Icon(FontAwesomeIcons.award, color: Colors.redAccent, size: 30),
-      11: Icon(Icons.flash_on, color: Color(0xffe8b313), size: 30),
-      15: Image.asset('assets/images/eco-battery.png', width: 30, height: 30),
-      20: Image.asset('assets/images/solar.png', width: 30, height: 30),
-      23: Icon(Icons.flash_on, color: Color(0xffe8b313), size: 30),
-      25: Icon(FontAwesomeIcons.solarPanel, color: Colors.blueGrey, size: 30),
-      30: Image.asset('assets/images/may_challenge.png', width: 30, height: 30),
-    };
-
-    List<dynamic> badges = [
-      [
-        'Saving',
-        [
-          [
-            true,
-            Image.asset('assets/images/save_energy.png',
-                width: 100, height: 100),
-            'Energy Saver',
-            'Say watt? Your journey has begun!'
-          ],
-          [
-            false,
-            Image.asset('assets/images/eco-battery.png',
-                width: 100, height: 100),
-            'Eco Warrior',
-            'Half way through a month? I\'m shocked!'
-          ],
-          [
-            false,
-            Image.asset('assets/images/solar.png', width: 100, height: 100),
-            'Solar Marathon',
-            'You got the power! Keep saving!'
-          ],
-        ],
-      ],
-      [
-        'Donation',
-        [
-          [
-            false,
-            Image.asset('assets/images/cross_badge.png',
-                width: 100, height: 100),
-            'Red Cross Hero',
-            'Donated to the Red Cross Charity'
-          ],
-          [
-            true,
-            Image.asset('assets/images/paw_badge.png', width: 100, height: 100),
-            'Animal Lover',
-            'Donated to the Animal Foundation'
-          ],
-          [
-            false,
-            Image.asset('assets/images/teddy_badge.png',
-                width: 100, height: 100),
-            'Secret Genie',
-            'Donated to the Make a Wish Foundation'
-          ]
-        ],
-      ],
-      [
-        'Challenges',
-        [
-          [
-            true,
-            Image.asset('assets/images/april_challenge.png',
-                width: 100, height: 100),
-            'April Challenge',
-            'Ohm you couldn\'t resist, could you?'
-          ],
-          [
-            false,
-            Image.asset('assets/images/may_challenge.png',
-                width: 100, height: 100),
-            'May Challenge',
-            'May the force be with you always!'
-          ],
-          [
-            false,
-            Image.asset('assets/images/june_challenge.png',
-                width: 100, height: 100),
-            'July Challenge',
-            'You\'ve reached enlightenment!'
-          ],
-        ],
-      ],
-    ];
-
     return StreamBuilder(
         stream: stream,
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
@@ -190,8 +191,8 @@ class _UserProfileState extends State<UserProfile> {
                               maxRadius: 65,
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(
-                                  top: 12.0, bottom: 4.0),
+                              padding:
+                                  const EdgeInsets.only(top: 12.0, bottom: 4.0),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: <Widget>[
@@ -206,8 +207,7 @@ class _UserProfileState extends State<UserProfile> {
                                   ),
                                   SizedBox(height: screenheight * 0.01),
                                   Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: <Widget>[
                                       SizedBox(
                                         width: screenwidth * 0.04,
@@ -228,8 +228,7 @@ class _UserProfileState extends State<UserProfile> {
                                   ),
                                   SizedBox(height: screenheight * 0.01),
                                   Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: <Widget>[
                                       Column(
                                         children: <Widget>[
@@ -250,19 +249,17 @@ class _UserProfileState extends State<UserProfile> {
                                           scrollDirection: Axis.horizontal,
                                           child: Container(
                                             width:
-                                                (screenwidth * nums.length) /
-                                                    5.5,
+                                                (screenwidth * totalDays) / 5.5,
                                             child: StepProgressIndicator(
-                                              totalSteps: nums.length,
+                                              totalSteps: totalDays,
                                               // currentStep: 3,
                                               size: 85,
                                               selectedColor: Colors.green,
-                                              unselectedColor:
-                                                  Colors.grey[200],
+                                              unselectedColor: Colors.grey[200],
                                               customStep: (index, color, _) =>
                                                   //TODO: Replace 3 with current daily streak day + 1
                                                   //TODO: Designs the progress bar for the current streak day
-                                                  index == 3
+                                                  index == currentDay - 1
                                                       ? Column(
                                                           children: <Widget>[
                                                             rewards.containsKey(
@@ -280,11 +277,9 @@ class _UserProfileState extends State<UserProfile> {
                                                                     ],
                                                                   )
                                                                 : SizedBox(
-                                                                    height:
-                                                                        43),
+                                                                    height: 43),
                                                             Expanded(
-                                                              child:
-                                                                  Container(
+                                                              child: Container(
                                                                 color: Colors
                                                                     .green,
                                                                 child: Center(
@@ -292,8 +287,8 @@ class _UserProfileState extends State<UserProfile> {
                                                                     // Icons.check,
                                                                     '${index + 1}',
                                                                     style: TextStyle(
-                                                                        color:
-                                                                            Colors.white),
+                                                                        color: Colors
+                                                                            .white),
                                                                   ),
                                                                 ),
                                                               ),
@@ -301,7 +296,7 @@ class _UserProfileState extends State<UserProfile> {
                                                           ],
                                                         )
                                                       //TODO: 4 is replaced with (current daily streak day - 1)
-                                                      : index < 4
+                                                      : index < currentDay - 1
                                                           ? Column(
                                                               children: <
                                                                   Widget>[
@@ -314,7 +309,8 @@ class _UserProfileState extends State<UserProfile> {
                                                                           rewards[index +
                                                                               1],
                                                                           SizedBox(
-                                                                            height: 13,
+                                                                            height:
+                                                                                13,
                                                                           ),
                                                                         ],
                                                                       )
@@ -357,7 +353,8 @@ class _UserProfileState extends State<UserProfile> {
                                                                           rewards[index +
                                                                               1],
                                                                           SizedBox(
-                                                                            height: 13,
+                                                                            height:
+                                                                                13,
                                                                           ),
                                                                         ],
                                                                       )
@@ -375,8 +372,9 @@ class _UserProfileState extends State<UserProfile> {
                                                                           Text(
                                                                         // Icons.check,
                                                                         '${index + 1}',
-                                                                        style:
-                                                                            TextStyle(color: Colors.white),
+                                                                        style: TextStyle(
+                                                                            color:
+                                                                                Colors.white),
                                                                       ),
                                                                     ),
                                                                   ),
@@ -401,8 +399,7 @@ class _UserProfileState extends State<UserProfile> {
                       Divider(),
                       Padding(
                         padding: EdgeInsets.only(
-                            left: screenwidth * 0.05,
-                            top: screenheight * 0.01),
+                            left: screenwidth * 0.05, top: screenheight * 0.01),
                         child: Container(
                           child: Text(
                             "Badges",
@@ -458,8 +455,7 @@ class _UserProfileState extends State<UserProfile> {
                                                         BoxDecoration(
                                                       color: Colors.grey,
                                                       backgroundBlendMode:
-                                                          BlendMode
-                                                              .saturation,
+                                                          BlendMode.saturation,
                                                     ),
                                                     child: badges[index1][1]
                                                         [index2][1],
@@ -471,15 +467,15 @@ class _UserProfileState extends State<UserProfile> {
                                                         builder: (BuildContext
                                                                 context) =>
                                                             StreamBuilder(
-                                                          builder: (context,
-                                                              snap) {
+                                                          builder:
+                                                              (context, snap) {
                                                             return Dialog(
                                                               shape:
                                                                   RoundedRectangleBorder(
                                                                 borderRadius:
-                                                                    BorderRadius.circular(
-                                                                        Consts
-                                                                            .padding),
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            Consts.padding),
                                                               ),
                                                               elevation: 0.0,
                                                               // Elevation means the height of element on the screen from the floor. Basically gives a drop shadow.
@@ -488,11 +484,13 @@ class _UserProfileState extends State<UserProfile> {
                                                                       .transparent,
                                                               child: transactionDialog(
                                                                   context,
-                                                                  badges[index1][1]
-                                                                          [
-                                                                          index2]
+                                                                  badges[index1]
+                                                                              [1]
+                                                                          [index2]
                                                                       [2],
-                                                                  badges[index1][1]
+                                                                  badges[index1]
+                                                                              [
+                                                                              1]
                                                                           [
                                                                           index2]
                                                                       [3],
