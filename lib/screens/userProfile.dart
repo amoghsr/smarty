@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:smarty/alertBox.dart';
+import 'package:smarty/models/currentDayProvider.dart';
 import 'package:smarty/models/dbService.dart';
 import 'package:smarty/models/user.dart';
 import 'package:smarty/shared/constants.dart';
@@ -145,8 +146,9 @@ class _UserProfileState extends State<UserProfile> {
     double screenwidth = MediaQuery.of(context).size.width;
     double screenheight = MediaQuery.of(context).size.height;
     //TODO: GET CURRENT STREAK DAY OVER HERE
-    int currentDay = 20;
-    for (int i = 1; i <= currentDay; i++) {
+    final currentDay = Provider.of<CurrentDayProvider>(context);
+    
+    for (int i = 1; i <= currentDay.getCurrentDay(); i++) {
       setState(() {
         if (i == 1) badges[0][1][0][0] = true;
         if (i == 15) badges[0][1][1][0] = true;
@@ -259,7 +261,7 @@ class _UserProfileState extends State<UserProfile> {
                                               customStep: (index, color, _) =>
                                                   //TODO: Replace 3 with current daily streak day + 1
                                                   //TODO: Designs the progress bar for the current streak day
-                                                  index == currentDay - 1
+                                                  index == currentDay.getCurrentDay() - 1
                                                       ? Column(
                                                           children: <Widget>[
                                                             rewards.containsKey(
@@ -296,7 +298,7 @@ class _UserProfileState extends State<UserProfile> {
                                                           ],
                                                         )
                                                       //TODO: 4 is replaced with (current daily streak day - 1)
-                                                      : index < currentDay - 1
+                                                      : index < currentDay.getCurrentDay() - 1
                                                           ? Column(
                                                               children: <
                                                                   Widget>[

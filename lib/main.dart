@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:smarty/models/currentDayProvider.dart';
 import 'package:smarty/models/themeModel.dart';
 import 'package:smarty/models/user.dart';
 import 'package:smarty/services/auth.dart';
@@ -26,6 +27,9 @@ class MyApp extends StatelessWidget {
         providers: [
           ChangeNotifierProvider<BoltProvider>(
             create: (_) => BoltProvider(25),
+          ),
+          ChangeNotifierProvider<CurrentDayProvider>(
+            create: (_) => CurrentDayProvider(20),
           ),
         ],
         child: Consumer<BoltProvider>(builder: (context, counter, _) {

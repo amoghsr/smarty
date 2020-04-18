@@ -80,7 +80,7 @@ class RoutineCarousel extends StatelessWidget {
               Opacity(
                 opacity: 0.8,
                 child: Text(
-                  'Tap to control multiple devices at once',
+                  'Set routines based on your preferred devices',
                   style: TextStyle(
                     fontSize: 12.0,
                     fontWeight: FontWeight.w400,
