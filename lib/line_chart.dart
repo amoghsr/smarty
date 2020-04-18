@@ -50,22 +50,13 @@ class _LineChartSample2State extends State<LineChartSample2> {
                     child: Padding(
                       padding: const EdgeInsets.only(
                           right: 18.0, left: 12.0, top: 24, bottom: 12),
-                      child: StreamBuilder(
-                          stream: widget.energyType == 'Generation'
-                              ? Firestore.instance
-                                  .collection('generated_energy')
-                                  .snapshots()
-                              : Firestore.instance
-                                  .collection('consumed_energy')
-                                  .snapshots(),
-                          builder: (BuildContext context,
-                              AsyncSnapshot<QuerySnapshot> snapshot) {
-                            if (snapshot.data == null)
-                              return CircularProgressIndicator();
-                            return LineChart(
-                              mainData(widget.groupBy, x),
-                            );
-                          }),
+                      child: widget.energyType == 'Generation' ?
+                        LineChart(
+                              mainData(widget.groupBy, x)
+                            )
+                        : LineChart (
+                              mainData(widget.groupBy, x)
+                            )
                     ),
                   ),
                 ),
@@ -80,35 +71,36 @@ class _LineChartSample2State extends State<LineChartSample2> {
   LineChartData mainData(String groupby, Generation snapshot) {
     List<int> noofdays = [30, 31, 31, 28, 31, 31, 30, 31, 31, 30, 31, 30];
 
-    Map<String, int> hourData = Generation2().hourlyData(snapshot, 0, '1');
+    Map<String, int> hourData = snapshot.daily;
     List<int> hours = hourData.values.toList();
     List<FlSpot> hourCoords = [
       FlSpot(0, 0),
     ];
 
-    List<int> weekData = Generation2().weekData(snapshot, 0, '1');
+    Map<String, int> weekData = snapshot.weekly;
+    List<int> weekly = weekData.values.toList();
     List<FlSpot> weekCoords = [
       FlSpot(0, 0),
     ];
 
-    List<int> monthData = new List<int>(12);
+    Map<String, int> monthData = snapshot.monthly;
+    List<int> monthly = monthData.values.toList();
     List<FlSpot> monthCoords = [
       FlSpot(0, 0),
     ];
 
     for (int i = 0, j = 1; i < hourData.length; i++, j += 2) {
-      hourCoords.add(FlSpot(j.toDouble(), hours[i].toDouble() % 5 + 1));
+      hourCoords.add(FlSpot(j.toDouble(), hours[i].toDouble() % 5));
     }
 
     for (int i = 0, j = 1; i < weekData.length; i++, j += 2) {
-      weekCoords.add(FlSpot(j.toDouble(), weekData[i].toDouble() % 5 + 1));
+      weekCoords.add(FlSpot(j.toDouble(), weekly[i].toDouble() % 5));
     }
 
     for (int i = 0, j = 1; i < monthData.length; i++, j += 2) {
       monthCoords.add(FlSpot(
         j.toDouble(),
-        (Generation2().monthData(snapshot, i, noofdays[i]).toDouble()) % 5 + 1,
-      ));
+        (monthly[i].toDouble()) % 5));
     }
     return LineChartData(
       gridData: FlGridData(
