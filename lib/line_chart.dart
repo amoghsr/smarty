@@ -30,42 +30,41 @@ class _LineChartSample2State extends State<LineChartSample2> {
   @override
   Widget build(BuildContext context) {
     final x = Provider.of<Generation>(context);
-    return Center(
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: Container(
-          child: Stack(
-            children: <Widget>[
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: AspectRatio(
-                  aspectRatio: widget.aspect,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(18),
+    if (x != null) {
+      return Center(
+        child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Container(
+            child: Stack(
+              children: <Widget>[
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: AspectRatio(
+                    aspectRatio: widget.aspect,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(18),
+                        ),
+                        color: Theme.of(context).scaffoldBackgroundColor,
                       ),
-                      color: Theme.of(context).scaffoldBackgroundColor,
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                          right: 18.0, left: 12.0, top: 24, bottom: 12),
-                      child: widget.energyType == 'Generation' ?
-                        LineChart(
-                              mainData(widget.groupBy, x)
-                            )
-                        : LineChart (
-                              mainData(widget.groupBy, x)
-                            )
+                      child: Padding(
+                          padding: const EdgeInsets.only(
+                              right: 18.0, left: 12.0, top: 24, bottom: 12),
+                          child: widget.energyType == 'Generation'
+                              ? LineChart(mainData(widget.groupBy, x))
+                              : CircularProgressIndicator()),
                     ),
                   ),
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           ),
         ),
-      ),
-    );
+      );
+    } else {
+      return Container();
+    }
   }
 
   LineChartData mainData(String groupby, Generation snapshot) {
@@ -89,8 +88,8 @@ class _LineChartSample2State extends State<LineChartSample2> {
       FlSpot(0, 0),
     ];
 
-    for (int i = 0, j = 1; i < hourData.length; i++, j += 2) {
-      hourCoords.add(FlSpot(j.toDouble(), hours[i].toDouble() % 5));
+    for (int i = 0, j = 1; i < hourData.length; i++, j += 3) {
+      hourCoords.add(FlSpot(j.toDouble(), hours[i].toDouble() / 10));
     }
 
     for (int i = 0, j = 1; i < weekData.length; i++, j += 2) {
@@ -98,9 +97,7 @@ class _LineChartSample2State extends State<LineChartSample2> {
     }
 
     for (int i = 0, j = 1; i < monthData.length; i++, j += 2) {
-      monthCoords.add(FlSpot(
-        j.toDouble(),
-        (monthly[i].toDouble()) % 5));
+      monthCoords.add(FlSpot(j.toDouble(), (monthly[i].toDouble()) / 2000));
     }
     return LineChartData(
       gridData: FlGridData(
@@ -132,55 +129,31 @@ class _LineChartSample2State extends State<LineChartSample2> {
             if (groupby == "Day")
               switch (value.toInt()) {
                 case 1:
-                  return '12 AM';
-                case 3:
-                  return '1 AM';
-                case 5:
-                  return '2 AM';
-                case 7:
-                  return '3 AM';
-                case 9:
-                  return '4 AM';
-                case 11:
-                  return '5 AM';
-                case 13:
                   return '6 AM';
-                case 15:
+                case 4:
                   return '7 AM';
-                case 17:
+                case 7:
                   return '8 AM';
-                case 19:
+                case 10:
                   return '9 AM';
-                case 21:
+                case 13:
                   return '10 AM';
-                case 23:
+                case 16:
                   return '11 AM';
-                case 25:
+                case 19:
                   return '12 PM';
-                case 27:
+                case 22:
                   return '1 PM';
-                case 29:
+                case 25:
                   return '2 PM';
-                case 31:
+                case 28:
                   return '3 PM';
-                case 33:
+                case 31:
                   return '4 PM';
-                case 35:
+                case 34:
                   return '5 PM';
                 case 37:
                   return '6 PM';
-                case 39:
-                  return '7 PM';
-                case 41:
-                  return '8 PM';
-                case 43:
-                  return '9 PM';
-                case 45:
-                  return '10 PM';
-                case 47:
-                  return '11 PM';
-                case 49:
-                  return '12 PM';
               }
             else if (groupby == "Week")
               switch (value.toInt()) {
@@ -238,18 +211,37 @@ class _LineChartSample2State extends State<LineChartSample2> {
             fontSize: 10,
           ),
           getTitles: (value) {
-            switch (value.toInt()) {
-              case 1:
-                return '10kWh';
-              case 3:
-                return '30kWh';
-              case 5:
-                return '50kWh';
+            if (groupby == "Day") {
+              switch (value.toInt()) {
+                case 1:
+                  return '1maWh';
+                case 2:
+                  return '2maWh';
+                case 3:
+                  return '3maWh';
+                case 4:
+                  return '4maWh';
+                case 5:
+                  return '5maWh';
+              }
+            } else {
+              switch (value.toInt()) {
+                case 1:
+                  return '2000kWh';
+                case 2:
+                  return '4000kWh';
+                case 3:
+                  return '6000kWh';
+                case 4:
+                  return '8000kWh';
+                case 5:
+                  return '10000kWh';
+              }
             }
             return '';
           },
           reservedSize: 28,
-          margin: 12,
+          margin: 15,
         ),
       ),
       borderData: FlBorderData(

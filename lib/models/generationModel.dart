@@ -28,19 +28,19 @@ class Generation {
             key.toString() == formattedDate) {
           dailyTotal = int.parse(value["total_day"].toString());
           value.forEach((key1, value1) {
-            if (key1 != "total_day") {
-              daily[key1] = int.parse(value1);
+            if (key1.toString() != "total_day") {
+              daily[key1.toString()] = value1;
             }
           });
         }
       });
-
       monthly[element.documentID] = element.data["total_month"];
     });
     var room = Generation(
       dailyTotal: dailyTotal,
       daily: daily,
       monthly: monthly,
+      weekly: new Map<String, int>(),
     );
     return room;
   }
