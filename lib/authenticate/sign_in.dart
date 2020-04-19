@@ -38,11 +38,14 @@ class _SignInState extends State<SignIn> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
+                      SizedBox(height: 20),
                       Image(
                         image: AssetImage('assets/images/logo_white.png'),
                         height: 100,
                       ),
-                      SizedBox(height: 30.0,),
+                      SizedBox(
+                        height: 30.0,
+                      ),
                       Text(
                         'Welcome to Homi',
                         textAlign: TextAlign.center,
@@ -77,8 +80,9 @@ class _SignInState extends State<SignIn> {
                                       decoration: InputDecoration(
                                         labelText: 'Email Address',
                                       ),
-                                      validator: (val) =>
-                                      val.isEmpty ? 'Enter your email' : null,
+                                      validator: (val) => val.isEmpty
+                                          ? 'Enter your email'
+                                          : null,
                                       onChanged: (val) {
                                         setState(() => email = val);
                                       },
@@ -86,15 +90,15 @@ class _SignInState extends State<SignIn> {
                                     ),
                                     _controller.text.length > 0
                                         ? new IconButton(
-                                        icon: new Icon(Icons.clear),
-                                        onPressed: () {
-                                          setState(() {
-                                            _controller.clear();
-                                          });
-                                        })
+                                            icon: new Icon(Icons.clear),
+                                            onPressed: () {
+                                              setState(() {
+                                                _controller.clear();
+                                              });
+                                            })
                                         : Container(
-                                      height: 0.0,
-                                    )
+                                            height: 0.0,
+                                          )
                                   ],
                                 ),
                               ),
@@ -111,8 +115,7 @@ class _SignInState extends State<SignIn> {
                                         decoration: InputDecoration(
                                           labelText: 'Password',
                                         ),
-                                        validator: (val) =>
-                                        val.length < 6
+                                        validator: (val) => val.length < 6
                                             ? 'Passwords must be at least 6 characters long'
                                             : null,
                                         onChanged: (val) {
@@ -122,15 +125,15 @@ class _SignInState extends State<SignIn> {
                                       ),
                                       _passController.text.length > 0
                                           ? new IconButton(
-                                          icon: new Icon(Icons.clear),
-                                          onPressed: () {
-                                            setState(() {
-                                              _passController.clear();
-                                            });
-                                          })
+                                              icon: new Icon(Icons.clear),
+                                              onPressed: () {
+                                                setState(() {
+                                                  _passController.clear();
+                                                });
+                                              })
                                           : Container(
-                                        height: 0.0,
-                                      )
+                                              height: 0.0,
+                                            )
                                     ]),
                               ),
                             ],
@@ -161,11 +164,9 @@ class _SignInState extends State<SignIn> {
                       RaisedButton(
                         padding: EdgeInsets.symmetric(
                           horizontal: 130,
-                          vertical: 20,
+                          // vertical: 10,
                         ),
-                        color: Theme
-                            .of(context)
-                            .accentColor,
+                        color: Theme.of(context).accentColor,
                         child: Text(
                           'Sign in',
                           style: TextStyle(
