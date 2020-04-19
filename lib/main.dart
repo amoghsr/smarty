@@ -6,11 +6,13 @@ import 'package:smarty/models/themeModel.dart';
 import 'package:smarty/models/user.dart';
 import 'package:smarty/services/auth.dart';
 import 'package:smarty/services/dialogLocator.dart';
-import 'package:smarty/services/dialogManager.dart';
-import 'package:smarty/services/dialogProvider.dart';
 import 'package:smarty/services/service_locator.dart';
 import 'package:smarty/wrapper.dart';
 import 'package:smarty/models/boltProvider.dart';
+
+import 'models/dbService.dart';
+import 'models/devicesModel.dart';
+import 'models/roomModel.dart';
 
 void main() {
   setupLocator();
@@ -40,22 +42,20 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider<CurrentDayProvider>(
             create: (_) => CurrentDayProvider(20),
           ),
-          ChangeNotifierProvider<DialogProvider>(
-            create: (_) => DialogProvider(),
-          ),
         ],
         child: Consumer<BoltProvider>(builder: (context, counter, _) {
-          return MaterialApp(
-            home: Wrapper(),
-            builder: (context, widget) => Navigator(
-              onGenerateRoute: (settings) => MaterialPageRoute(
-                builder: (context) => DialogManager(
-                  child: widget,
+          return Consumer<CurrentDayProvider>(builder: (context, counter, _) {
+            return StreamProvider<List<Room>>.value(
+              value: DatabaseService1().streamRooms(Provider.of<User>(context)),
+              child: StreamProvider<List<Device>>.value(
+                value: DatabaseService1().streamDevices(Provider.of<User>(context)),
+                child: MaterialApp(
+                  home: Wrapper(),
+                  theme: Provider.of<ThemeModel>(context).currentTheme,
                 ),
               ),
-            ),
-            theme: Provider.of<ThemeModel>(context).currentTheme,
-          );
+            );
+          });
         }),
       ),
     );

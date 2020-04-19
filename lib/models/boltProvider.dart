@@ -9,5 +9,8 @@ class BoltProvider with ChangeNotifier {
 //confirmation
   getBalance() => _balance;
   getBalanceAsInt() => _balance.toInt();
-  setBalance(double balance) => _balance = balance;
+  setBalance(double balance) {
+    _balance = balance;
+    notifyListeners();
+  }
 }

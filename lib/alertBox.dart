@@ -1,10 +1,12 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:smarty/devices/CommonControllers/deviceCommonControllers.dart';
 import 'package:smarty/screens/optimizationDialog.dart';
 
 import 'models/devicesModel.dart';
+import 'models/roomModel.dart';
 
 // Future showAlertBox(
 //     BuildContext context, String img, String title, String desc, Color color) {
@@ -136,6 +138,7 @@ class _CustomDialogState extends State<CustomDialog> {
                                 builder: (context) => widget.path),
                           );
                       } else if (widget.optimize == true) {
+
                         showDialog(
                           context: context,
                           builder: (BuildContext context) =>
@@ -148,7 +151,8 @@ class _CustomDialogState extends State<CustomDialog> {
                                 elevation: 0.0,
                                 // Elevation means the height of element on the screen from the floor. Basically gives a drop shadow.
                                 backgroundColor: Colors.transparent,
-                                child: Optimization() // The required child is the content inside the dialog box.
+                                child:
+                                    Optimization() // The required child is the content inside the dialog box.
                                 );
                           }),
                         );
@@ -186,7 +190,6 @@ class _CustomDialogState extends State<CustomDialog> {
       ],
     );
   }
-
 }
 
 class Consts {

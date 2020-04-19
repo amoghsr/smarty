@@ -15,6 +15,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:smarty/models/boltProvider.dart';
+import 'package:smarty/models/roomModel.dart';
 import 'package:smarty/models/themeModel.dart';
 import 'package:smarty/models/weatherModel.dart';
 import 'package:smarty/screens/drawer.dart';
@@ -22,7 +23,7 @@ import 'package:smarty/screens/p2pPanel.dart';
 import 'package:smarty/services/AIPopUpService.dart';
 import 'package:smarty/services/auth.dart';
 import 'package:smarty/services/dialogLocator.dart';
-import 'package:smarty/services/dialogProvider.dart';
+import 'package:smarty/services/dialogManager.dart';
 import 'package:smarty/shared/constants.dart';
 import 'package:smarty/widgets/devicesCarousel.dart';
 import 'package:smarty/widgets/roomCarousel.dart';
@@ -31,6 +32,8 @@ import 'package:smarty/widgets/voiceAgent.dart';
 import 'package:weather/weather.dart';
 import '../alertBox.dart';
 import 'package:http/http.dart' as http;
+
+import 'optimizationDialog.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -74,10 +77,10 @@ class _HomeState extends State<Home> {
     getPosition().then((position) {
       getWeather(position.latitude, position.longitude);
     });
-
     // if (Provider.of<BoltProvider>(context, listen: false).getBalanceAsInt() == 10)
-    // Timer.run(
-    //     () => Provider.of<DialogProvider>(context, listen: false).popAi());
+    //   Timer.run(
+    //       () => Provider.of<DialogProvider>(context, listen: false).popAi());
+
     final FirebaseDatabase database = FirebaseDatabase
         .instance; //Rather then just writing FirebaseDatabase(), get the instance.
     itemRef = database.reference();
@@ -90,7 +93,27 @@ class _HomeState extends State<Home> {
   */
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
 
+  void showAIAlert(BuildContext context, List<Room> room) {
+    showDialog(
+      context: context,
+      builder: (context) => Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(Consts.padding),
+          ),
+          elevation: 0.0,
+          // Elevation means the height of element on the screen from the floor. Basically gives a drop shadow.
+          backgroundColor: Colors.transparent,
+          child: Optimization(
+              r: room) // The required child is the content inside the dialog box.
+          ),
+    );
+  }
+
   Widget build(BuildContext context) {
+    final rooms = Provider.of<List<Room>>(context);
+    // TODO: AI Condition Here
+    Future.delayed(Duration.zero, () => showAIAlert(context, rooms));
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(

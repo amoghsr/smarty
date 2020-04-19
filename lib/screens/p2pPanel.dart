@@ -259,8 +259,9 @@ class _P2PState extends State<P2P> {
                         opacity: 0.5,
                         child: Column(
                           children: <Widget>[
+                            // TODO: Get average consumption over here for this house
                             Text(
-                              'Your average consumption: 5kWh',
+                              'Your average consumption: 1.5kWh',
                               style: TextStyle(
                                   fontSize: 13,
                                   fontWeight: FontWeight.w400,
@@ -447,7 +448,7 @@ class _P2PState extends State<P2P> {
                           elevation: 0.0,
                           // Elevation means the height of element on the screen from the floor. Basically gives a drop shadow.
                           backgroundColor: Colors.transparent,
-                          child: TransactionDialog().transactionDialog(
+                          child: transactionDialog(
                               context,
                               0,
                               "You are buying",
@@ -479,7 +480,7 @@ class _P2PState extends State<P2P> {
                             elevation: 0.0,
                             // Elevation means the height of element on the screen from the floor. Basically gives a drop shadow.
                             backgroundColor: Colors.transparent,
-                            child: TransactionDialog().transactionDialog(
+                            child: transactionDialog(
                                 context,
                                 0,
                                 "You are purchasing",

@@ -9,13 +9,14 @@ import 'package:smarty/models/routineModel.dart';
 import 'package:smarty/models/themeModel.dart';
 import 'package:smarty/models/user.dart';
 import 'package:smarty/screens/home_manager/dashboard_manager.dart';
+import 'package:smarty/services/dialogManager.dart';
+import 'package:smarty/services/dialogProvider.dart';
 import 'models/consumptionModel.dart';
 import 'models/dbRoutines.dart';
 import 'models/roomModel.dart';
 
 class Wrapper extends StatelessWidget {
   @override
-
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
 

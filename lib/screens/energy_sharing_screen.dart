@@ -523,7 +523,7 @@ class _EnergySharingScreenState extends State<EnergySharingScreen> {
                                 elevation: 0.0,
                                 // Elevation means the height of element on the screen from the floor. Basically gives a drop shadow.
                                 backgroundColor: Colors.transparent,
-                                child: TransactionDialog().transactionDialog(
+                                child: transactionDialog(
                                     context,
                                     0,
                                     "You are buying",
@@ -555,7 +555,7 @@ class _EnergySharingScreenState extends State<EnergySharingScreen> {
                                   elevation: 0.0,
                                   // Elevation means the height of element on the screen from the floor. Basically gives a drop shadow.
                                   backgroundColor: Colors.transparent,
-                                  child: TransactionDialog().transactionDialog(
+                                  child: transactionDialog(
                                       context,
                                       0,
                                       "You are purchasing",
