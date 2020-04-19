@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:smarty/models/leaderboardModel.dart';
+import 'package:smarty/models/user.dart';
 
 class LeaderboardData extends StatefulWidget {
   @override
@@ -14,8 +16,8 @@ class LeaderboardData extends StatefulWidget {
 class _LeaderboardDataState extends State<LeaderboardData> {
   @override
   Widget build(BuildContext context) {
-    List<Leaderboard> lb = (widget.leaderboardType == 'DAILY SAVINGS')
-        ? dailySavingsLeaderboard
+    List<LeaderboardModel> lb = (widget.leaderboardType == 'DAILY SAVINGS')
+        ? Provider.of<List<LeaderboardModel>>(context)
         : streakLeaderboard;
 
     double screenwidth = MediaQuery.of(context).size.width;
@@ -25,6 +27,7 @@ class _LeaderboardDataState extends State<LeaderboardData> {
         ? lb.sort((b, a) => a.points.compareTo(b.points))
         : lb.sort((a, b) => a.points.compareTo(b.points));
 
+    final user = Provider.of<User>(context);
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -60,7 +63,6 @@ class _LeaderboardDataState extends State<LeaderboardData> {
                           child: CircleAvatar(
                             radius: 40,
                             backgroundColor: Theme.of(context).canvasColor,
-                            // TODO: Get leaderboard image based on House ID (2nd Place)
                             backgroundImage: NetworkImage(lb[1].userImage),
                           ),
                         ),
@@ -94,7 +96,6 @@ class _LeaderboardDataState extends State<LeaderboardData> {
                           child: CircleAvatar(
                             radius: 65,
                             backgroundColor: Theme.of(context).canvasColor,
-                            // TODO: Get leaderboard image based on House ID (1st Place)
                             backgroundImage: NetworkImage(lb[0].userImage),
                           ),
                         ),
@@ -129,7 +130,6 @@ class _LeaderboardDataState extends State<LeaderboardData> {
                           child: CircleAvatar(
                             radius: 40,
                             backgroundColor: Theme.of(context).canvasColor,
-                            // TODO: Get leaderboard image based on House ID (3rd Place)
                             backgroundImage: NetworkImage(lb[2].userImage),
                           ),
                         ),
@@ -147,8 +147,8 @@ class _LeaderboardDataState extends State<LeaderboardData> {
               child: TabBarView(
                 physics: NeverScrollableScrollPhysics(),
                 children: [
-                  getListTile(lb),
-                  getListTile(lb),
+                  getListTile(lb, user),
+                  getListTile(lb, user),
                 ],
               ),
             ),
@@ -158,7 +158,7 @@ class _LeaderboardDataState extends State<LeaderboardData> {
     );
   }
 
-  ListView getListTile(List<Leaderboard> lb) {
+  ListView getListTile(List<LeaderboardModel> lb, User user) {
     return ListView.builder(
         shrinkWrap: true,
         itemCount: lb.length,
@@ -171,12 +171,11 @@ class _LeaderboardDataState extends State<LeaderboardData> {
                 decoration: BoxDecoration(
                     color: Theme.of(context).cardColor,
                     borderRadius: BorderRadius.circular(8.0),
-                    // TODO: OUTLINE BASED ON CURRENT HOME OWNER
-                    border: (i == 2)
+                    border: (lb[i].userName == "House No " + user.houseId)
                         ? Border.all(color: Colors.green, width: 2)
                         : null),
                 child: ListTile(
-                  // TODO: MAKE THE LIST TILE CLICKABLE WHICH LEADS TO THE USER PROFILE FOR THAT HOME OWNER
+                  // TODO: MAKE THE LIST TILE CLICKABLE WHICH LEADS TO THE USER PROFILE FOR THAT HOME OWNER alister
 //                   onTap: () {
 //                     setState(() {
 //                       currRoom = rooms[l].roomName;
@@ -197,16 +196,13 @@ class _LeaderboardDataState extends State<LeaderboardData> {
                         child: CircleAvatar(
                           radius: 20,
                           backgroundColor: Theme.of(context).canvasColor,
-                          // TODO: Get leaderboard image based on House ID
                           backgroundImage: NetworkImage(lb[i].userImage),
                         ),
                       ),
                       SizedBox(width: 20),
-                      // TODO: GET THE HOME OWNER NAMES
                       Text(lb[i].userName),
                     ],
                   ),
-                  // TODO: GET THE HOUSEWISE DAILY CONSUMPTION UP UNTIL THAT POINT IN THE DAY
                   trailing: Text(
                     lb[i].points.toString(),
                   ),

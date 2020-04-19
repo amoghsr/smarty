@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:smarty/models/devicesModel.dart';
 import 'package:smarty/models/generationModel.dart';
 import 'package:smarty/models/consumptionModel.dart';
+import 'package:smarty/models/leaderboardModel.dart';
 import 'package:smarty/models/routineModel.dart';
 import 'package:smarty/models/user.dart';
 import 'dbRoutines.dart';
@@ -9,6 +10,20 @@ import 'roomModel.dart';
 
 class DatabaseService1 {
   final Firestore _db = Firestore.instance;
+
+  Stream<List<LeaderboardModel>> streamLeaderBoards(User user) {
+    DocumentReference ref = _db.collection('Homes').document("Leaderboard");
+    print("debug");
+    return ref.snapshots().map(CreateLeaderBoard);
+  }
+
+  List<LeaderboardModel> CreateLeaderBoard(DocumentSnapshot doc) {
+    List<LeaderboardModel> w = [];
+    doc.data.forEach((key, value) {
+      w.add(LeaderboardModel.fromFirestore(key, value));
+    });
+    return w;
+  }
 
   Stream<Generation> streamGeneratedEnergy(User user) {
     CollectionReference ref = _db

@@ -144,13 +144,12 @@ class _UserProfileState extends State<UserProfile> {
   @override
   Widget build(BuildContext context) {
     //list of users of current house name-email layout
-    List<Leaderboard> lb = streakLeaderboard;
+    List<LeaderboardModel> lb = Provider.of<List<LeaderboardModel>>(context);
     final bal = Provider.of<BoltProvider>(context);
     double screenwidth = MediaQuery.of(context).size.width;
     double screenheight = MediaQuery.of(context).size.height;
     //TODO: GET CURRENT STREAK DAY OVER HERE
     final currentDay = Provider.of<CurrentDayProvider>(context);
-
     for (int i = 1; i <= currentDay.getCurrentDay(); i++) {
       setState(() {
         if (i == 1) badges[0][1][0][0] = true;
@@ -192,7 +191,7 @@ class _UserProfileState extends State<UserProfile> {
                           children: <Widget>[
                             CircleAvatar(
                               //TODO: Current Home Owner's User Image
-                              backgroundImage: NetworkImage(lb[3].userImage),
+                              backgroundImage: NetworkImage(lb[1].userImage),
                               maxRadius: 65,
                             ),
                             Padding(
@@ -204,7 +203,7 @@ class _UserProfileState extends State<UserProfile> {
                                   Text(
                                     //TODO: Current Home Owner's User Name
                                     // snapshot.data['displayName']
-                                    lb[3].userName.split(" ")[0] + "'s Home",
+                                    lb[0].userName + "'s Home",
                                     style: TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.w700,

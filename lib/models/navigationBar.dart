@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:smarty/models/leaderboardModel.dart';
 import 'package:smarty/models/user.dart';
 import 'package:smarty/screens/allDevices.dart';
 import 'package:smarty/screens/energy_sharing_screen.dart';
@@ -13,6 +14,7 @@ import 'package:smarty/services/dialogProvider.dart';
 import 'package:smarty/shared/constants.dart';
 
 import 'boltProvider.dart';
+import 'devicesModel.dart';
 import 'generationModel.dart';
 
 class MyNavigationBar extends StatefulWidget {
@@ -26,7 +28,6 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
   void initState() {
     super.initState();
   }
-
 
   void onTappedBar(int index) {
     setState(() {
