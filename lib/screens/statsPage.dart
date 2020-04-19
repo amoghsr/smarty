@@ -48,6 +48,7 @@ class _StatsScreenState extends State<StatsScreen> {
   Widget build(BuildContext context) {
     final x = Provider.of<Generation>(context);
     final y = Provider.of<Consumption>(context);
+    final userlist = Provider.of<List<String>>(context);
     var now = new DateTime.now();
     var date = new DateFormat('dd');
     int weekly = 0;
@@ -93,8 +94,7 @@ class _StatsScreenState extends State<StatsScreen> {
                             ],
                           ),
                           Text(
-                            // TODO: DAILY LIMIT IS BASED ON THE NUMBER OF USERS PER HOUSE (9 * N) kwh
-                            '19 KWh',
+                            (userlist.length * 9).toString() + ' KWh',
                             style: TextStyle(
                                 fontSize: 24.0, fontWeight: FontWeight.w600),
                           )
@@ -404,7 +404,6 @@ class _StatsScreenState extends State<StatsScreen> {
                 scrollDirection: Axis.vertical,
                 child: Container(
                   height: 250.0,
-                  // TODO: Retrieve FLChart values passed in by Piya
                   child: LineChartSample2(
                       dropdownItems[_value], viewBy[selectedViewIndex], 5, 49),
                 ),
@@ -438,7 +437,6 @@ class _StatsScreenState extends State<StatsScreen> {
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: <Widget>[
                                 Text(
-                                  // TODO: AVERAGE CONSUMPTION UP UNTIL THAT POINT (TOTAL DAILY CONSUMPTION / TOTAL HOURS THAT HAS PASSED)
                                   (y.dailyTotal / int.parse(formattedDate))
                                       .floor()
                                       .toString(),
@@ -579,8 +577,6 @@ class _StatsScreenState extends State<StatsScreen> {
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: <Widget>[
                             Text(
-                              // TODO: BATTERY ((DAILY GENERATION - DAILY CONSUMPTION)/DAILY GENERATION) * 100
-//                              percentConverter(doubleBatteryValue).toString(),
                               (((x.dailyTotal - y.dailyTotal) / x.dailyTotal) *
                                       100)
                                   .floor()

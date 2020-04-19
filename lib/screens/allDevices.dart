@@ -99,7 +99,6 @@ class _AllDevicesState extends State<AllDevices> with TickerProviderStateMixin {
                             ],
                           ),
                           Text(
-                            // TODO: Total Consumption per room (Total of all devices per room) uptil that point of the day
                             usage[roomNames[i]].toString() + ' KWh',
                             style: TextStyle(
                                 fontSize: 18, fontWeight: FontWeight.w600),
@@ -141,7 +140,6 @@ class _AllDevicesState extends State<AllDevices> with TickerProviderStateMixin {
                                         ],
                                       ),
                                       Text(
-                                        // TODO: Total per device (Sum of consumption throughout the day for that device) up until that point of the day
                                         y.devicesDaily[roomNames[i]][y
                                                 .devicesDaily[roomNames[i]].keys
                                                 .toList()[index]]
