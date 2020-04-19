@@ -25,25 +25,6 @@ class Device {
       this.toggleSt,
       this.count});
 
-//  static List<Device> fromFirestore(DocumentSnapshot doc) {
-//    List<Device> x = [];
-//    Map data = doc.data;
-//    data.forEach((key, value) {
-//      x.add(Device(
-//        deviceName: key,
-//        inRoom: doc.documentID,
-//        icon: getIcons(key),
-//        imageUrl: getImageUrl(key),
-//        count: value,
-//        state: 'Off',
-//        toggleSt: false,
-//        level: '5',
-//        opacity: 1,
-//      ));
-//    });
-//    return x;
-//  }
-
   factory Device.fromFirestore(String key, int value, String doc) => Device(
         deviceName: key,
         inRoom: doc,

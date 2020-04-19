@@ -22,7 +22,6 @@ class Wrapper extends StatelessWidget {
     if (user == null) {
       return Authenticate();
     } else {
-//      print(user.type + "vecefd");
       if (user.type == "M") {
         return StreamProvider<List<Room>>.value(
           value: DatabaseService1().streamRooms(user),

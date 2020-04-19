@@ -7,7 +7,6 @@ class LeaderboardModel {
 
   LeaderboardModel({this.userImage, this.userName, this.points});
   factory LeaderboardModel.fromFirestore(String key, int value) {
-    print("debug4");
     var z = LeaderboardModel(
       userImage:
           'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSIKUqNEbwpxA_cEgMyUwUwqqiTXyNhx7m5WkXpk-ONJUrbqvtq',

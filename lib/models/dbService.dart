@@ -13,7 +13,6 @@ class DatabaseService1 {
 
   Stream<List<LeaderboardModel>> streamLeaderBoards(User user) {
     DocumentReference ref = _db.collection('Homes').document("Leaderboard");
-    print("debug");
     return ref.snapshots().map(CreateLeaderBoard);
   }
 

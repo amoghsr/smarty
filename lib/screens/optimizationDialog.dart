@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:smarty/models/devicesModel.dart';
 
 import '../BadgeBox.dart';
@@ -11,7 +12,7 @@ class Optimization extends StatefulWidget {
 }
 
 class _OptimizationState extends State<Optimization> {
-  // TODO: Get the room names
+//  // TODO: Get the room names
   List<String> roomNames = ["Living Room", "Kitchen", "Playroom"];
   // TODO: Get the device names for each room (IF THEY ARE ON)
   List<String> deviceNames = ["AC", "Lamp", "Speaker"];
@@ -26,6 +27,7 @@ class _OptimizationState extends State<Optimization> {
   bool expanded = false;
 
   Widget build(BuildContext context) {
+    final x = Provider.of<List<Device>>(context);
     double screenheight = MediaQuery.of(context).size.height;
     return Stack(
       children: <Widget>[

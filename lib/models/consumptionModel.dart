@@ -22,7 +22,6 @@ class Consumption {
     String formattedDate = date.format(now);
     var month = new DateFormat('MMMM');
     String formattedMonth = month.format(now);
-
     int dailyTotal = 0;
     Map<String, Map<String, double>> devicesDaily =
         new Map<String, Map<String, double>>();
@@ -49,17 +48,23 @@ class Consumption {
             if (key == formattedMonth && key1.toString() == formattedDate) {
               value1.forEach((key2, value2) {
                 if (key2 != "Daily_Total") {
-                  daily[key2.toString()] = value2;
+                  daily[key2.toString()] = value2.floor();
                 } else {
-                  dailyTotal = value2;
-                  weekly[key1] = value2;
+                  dailyTotal = value2.floor();
+                  print("debug2 " +
+                      value2.toString() +
+                      "  day: " +
+                      formattedDate);
+                  weekly[key1] = value2.floor();
+                  print("debug3");
                 }
               });
             }
             if (awd.values.contains(key) && awd.containsKey(key1)) {
               value1.forEach((key2, value2) {
                 if (key2.toString() == "Daily_Total") {
-                  weekly[key1] = value2;
+                  weekly[key1] = value2.floor();
+                  print("debug4");
                 }
               });
             }
@@ -67,7 +72,7 @@ class Consumption {
         } else {
           value.forEach((key1, value1) {
             Devicess[key] = num.parse(
-                value1[formattedDate]["Total_Daily"].toStringAsFixed(2));
+                value1[formattedDate]["Total_Daily"].toStringAsFixed(3));
           });
         }
       });
