@@ -15,12 +15,9 @@ import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:smarty/models/boltProvider.dart';
-<<<<<<< HEAD
 import 'package:smarty/models/roomModel.dart';
-=======
 import 'package:smarty/models/consumptionModel.dart';
 import 'package:smarty/models/generationModel.dart';
->>>>>>> 4fb534cfcd1722cb5416b6645b258a8021d95782
 import 'package:smarty/models/themeModel.dart';
 import 'package:smarty/models/weatherModel.dart';
 import 'package:smarty/screens/drawer.dart';
@@ -29,6 +26,7 @@ import 'package:smarty/services/AIPopUpService.dart';
 import 'package:smarty/services/auth.dart';
 import 'package:smarty/services/dialogLocator.dart';
 import 'package:smarty/services/dialogManager.dart';
+import 'package:smarty/services/dialogProvider.dart';
 import 'package:smarty/shared/constants.dart';
 import 'package:smarty/widgets/devicesCarousel.dart';
 import 'package:smarty/widgets/roomCarousel.dart';
@@ -82,24 +80,19 @@ class _HomeState extends State<Home> {
     getPosition().then((position) {
       getWeather(position.latitude, position.longitude);
     });
-<<<<<<< HEAD
-=======
 
 //     if (Provider.of<BoltProvider>(context, listen: false).getBalanceAsInt() == 10)
 //     Timer.run(
 //         () => Provider.of<DialogProvider>(context, listen: false).popAi());
 
-    if (Provider.of<Consumption>(context, listen: false).dailyTotal >=
-        Provider.of<Generation>(context, listen: false).dailyTotal * 0.8)
-      Timer.run(
-          () => Provider.of<DialogProvider>(context, listen: false).popAi());
+    // Timer.run(
+    //     () => Provider.of<DialogProvider>(context, listen: false).popAi());
 
     if (Provider.of<Consumption>(context, listen: false).dailyTotal >=
         Provider.of<Generation>(context, listen: false).dailyTotal * 0.95)
       Timer.run(
           () => Provider.of<DialogProvider>(context, listen: false).popP2P());
 
->>>>>>> 4fb534cfcd1722cb5416b6645b258a8021d95782
     // if (Provider.of<BoltProvider>(context, listen: false).getBalanceAsInt() == 10)
     //   Timer.run(
     //       () => Provider.of<DialogProvider>(context, listen: false).popAi());
@@ -134,8 +127,11 @@ class _HomeState extends State<Home> {
 
   Widget build(BuildContext context) {
     final rooms = Provider.of<List<Room>>(context);
+
     // TODO: AI Condition Here
-    Future.delayed(Duration.zero, () => showAIAlert(context, rooms));
+    if (Provider.of<Consumption>(context, listen: false).dailyTotal >=
+        Provider.of<Generation>(context, listen: false).dailyTotal * 0.8)
+      Future.delayed(Duration.zero, () => showAIAlert(context, rooms));
 
     return SafeArea(
       child: Scaffold(

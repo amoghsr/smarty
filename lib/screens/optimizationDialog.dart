@@ -1,14 +1,13 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-=======
->>>>>>> 4fb534cfcd1722cb5416b6645b258a8021d95782
 import 'package:provider/provider.dart';
+import 'package:smarty/devices/CommonControllers/deviceCommonControllers.dart';
 import 'package:smarty/models/devicesModel.dart';
 import 'package:smarty/models/roomModel.dart';
+import 'package:smarty/models/user.dart';
 import 'package:smarty/screens/rooms.dart';
 import '../BadgeBox.dart';
 
@@ -20,21 +19,6 @@ class Optimization extends StatefulWidget {
 }
 
 class _OptimizationState extends State<Optimization> {
-<<<<<<< HEAD
-=======
-//  // TODO: Get the room names
-  List<String> roomNames = ["Living Room", "Kitchen", "Playroom"];
-  // TODO: Get the device names for each room (IF THEY ARE ON)
-  List<String> deviceNames = ["AC", "Lamp", "Speaker"];
-
-  Map<String, String> desc = {
-    "AC": "Set the temperature to 24°C",
-    "Lamp": "Set the brightness to 25%",
-    "Speaker": "Turn off the Speakers",
-    "TV": "Turn off TV",
-    "Exhaust Fan": "Turn off the Exhaust Fan "
-  };
->>>>>>> 4fb534cfcd1722cb5416b6645b258a8021d95782
   bool expanded = false;
   List<dynamic> roomDeviceNames = [];
   Icon getDevIcons(String roomName) {
@@ -65,9 +49,9 @@ class _OptimizationState extends State<Optimization> {
   }
 
   Widget build(BuildContext context) {
-    final x = Provider.of<List<Device>>(context);
-    double screenheight = MediaQuery.of(context).size.height;
     List<Room> rooms = widget.r;
+    double screenheight = MediaQuery.of(context).size.height;
+    final user = Provider.of<User>(context);
 
     final devices = Provider.of<List<Device>>(context);
     print('Devices: ${devices[0].deviceName}');
@@ -76,7 +60,7 @@ class _OptimizationState extends State<Optimization> {
         for (var j in i.d) {
           for (var k in devices) {
             if (k.inRoom == i.roomName) if (k.deviceName == j) if (k.state ==
-                'Off') roomDeviceNames.add([i.roomName.toString(), j]);
+                'Off') roomDeviceNames.add([i.roomName.toString(), 'Off']);
           }
         }
       }
@@ -189,6 +173,22 @@ class _OptimizationState extends State<Optimization> {
                                         Row(
                                           children: <Widget>[
                                             InkWell(
+                                              onTap: () {
+                                                stateChange(
+                                                    false,
+                                                    roomDeviceNames[i][0],
+                                                    roomDeviceNames[i][1],
+                                                    user.houseId,
+                                                    user);
+                                                roomDeviceNames.clear();
+                                                if (roomDeviceNames.length ==
+                                                    0) {
+                                                  Timer(Duration(seconds: 1),
+                                                      () {
+                                                    Navigator.pop(context);
+                                                  });
+                                                }
+                                              },
                                               child: Container(
                                                 height: 25,
                                                 width: 25,
@@ -253,17 +253,31 @@ class _OptimizationState extends State<Optimization> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: <Widget>[
-                          Container(
-                            height: 40,
-                            width: 80,
-                            decoration: BoxDecoration(
-                              color: Colors.green[600],
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(5),
+                          InkWell(
+                            onTap: () {
+                              for (int i = 0; i < roomDeviceNames.length; i++)
+                                stateChange(false, roomDeviceNames[i][0],
+                                    roomDeviceNames[i][1], user.houseId, user);
+
+                              roomDeviceNames.clear();
+                              if (roomDeviceNames.length == 0) {
+                                Timer(Duration(seconds: 1), () {
+                                  Navigator.pop(context);
+                                });
+                              }
+                            },
+                            child: Container(
+                              height: 40,
+                              width: 80,
+                              decoration: BoxDecoration(
+                                color: Colors.green[600],
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(5),
+                                ),
                               ),
-                            ),
-                            child: Center(
-                              child: Text('Accept All'),
+                              child: Center(
+                                child: Text('Accept All'),
+                              ),
                             ),
                           ),
                           InkWell(
