@@ -20,11 +20,7 @@ class MyOtherRoom extends StatefulWidget {
 
   _MyOtherRoomState createState() => _MyOtherRoomState();
 }
-Device getDevState(String roomName, String devName) {
-    //bool isSwitched = true;
-    for (var i in devices)
-      if ((i.inRoom == roomName) && (i.deviceName == devName)) return i;
-  }
+
 class _MyOtherRoomState extends State<MyOtherRoom> {
   @override
   List<Room> rooms;
@@ -75,6 +71,12 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
         .updateData({device: FieldValue.increment(1)}).catchError((e) {
       print(e);
     });
+  }
+
+  Device getDevState(String roomName, String devName) {
+    //bool isSwitched = true;
+    for (var i in devices)
+      if ((i.inRoom == roomName) && (i.deviceName == devName)) return i;
   }
 
   void stateChange(

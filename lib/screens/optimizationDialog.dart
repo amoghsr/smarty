@@ -8,7 +8,6 @@ import 'package:smarty/devices/CommonControllers/deviceCommonControllers.dart';
 import 'package:smarty/models/devicesModel.dart';
 import 'package:smarty/models/roomModel.dart';
 import 'package:smarty/models/user.dart';
-import 'package:smarty/screens/rooms.dart';
 import '../BadgeBox.dart';
 
 class Optimization extends StatefulWidget {
@@ -65,6 +64,13 @@ class _OptimizationState extends State<Optimization> {
         }
       }
     }
+
+    Device getDevState(String roomName, String devName) {
+      //bool isSwitched = true;
+      for (var i in devices)
+        if ((i.inRoom == roomName) && (i.deviceName == devName)) return i;
+    }
+
     return Stack(
       children: <Widget>[
         //...bottom card part,
