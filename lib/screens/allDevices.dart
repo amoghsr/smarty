@@ -42,126 +42,132 @@ class _AllDevicesState extends State<AllDevices> with TickerProviderStateMixin {
         usage[key] = num.parse(total.toString().substring(0, 4));
       });
     }
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'All Devices',
-          style: kAppBarTextStyle,
+    if (y != null) {
+      return Scaffold(
+        appBar: AppBar(
+          title: Text(
+            'All Devices',
+            style: kAppBarTextStyle,
+          ),
+          actions: <Widget>[MicClass()],
         ),
-        actions: <Widget>[MicClass()],
-      ),
-      body: ListView.builder(
-          shrinkWrap: true,
-          itemCount: roomNames.length,
-          itemBuilder: (context, i) {
-            return Container(
-              margin: EdgeInsets.only(left: 12.0, right: 12.0, top: 6.0),
-              child: Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
+        body: ListView.builder(
+            shrinkWrap: true,
+            itemCount: roomNames.length,
+            itemBuilder: (context, i) {
+              return Container(
+                margin: EdgeInsets.only(left: 12.0, right: 12.0, top: 6.0),
+                child: Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
 //                elevation: 4.0,
-                child: Container(
-                  child: ExpansionTile(
-                    title: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 12.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              SizedBox(
-                                width: 6.0,
-                              ),
-                              getRoomIcons(roomNames[i]),
-                              SizedBox(width: screenwidth * 0.05),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Text(
-                                    roomNames[i],
-                                    style: TextStyle(fontSize: 18.0),
-                                  ),
-                                  SizedBox(
-                                    height: 4.0,
-                                  ),
-                                  Text(
-                                    y.devicesDaily[roomNames[i]].length
-                                        .toString(),
-                                    style: TextStyle(
-                                      fontSize: 12.0,
+                  child: Container(
+                    child: ExpansionTile(
+                      title: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 12.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                SizedBox(
+                                  width: 6.0,
+                                ),
+                                getRoomIcons(roomNames[i]),
+                                SizedBox(width: screenwidth * 0.05),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text(
+                                      roomNames[i],
+                                      style: TextStyle(fontSize: 18.0),
                                     ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                          Text(
-                            usage[roomNames[i]].toString() + ' KWh',
-                            style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.w600),
-                          ),
-                        ],
-                      ),
-                    ),
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 22.0),
-                        child: ListView.separated(
-                            separatorBuilder:
-                                (BuildContext context, int index) => Divider(),
-                            shrinkWrap: true,
-                            itemCount: y.devicesDaily[roomNames[i]].length,
-                            itemBuilder: (context, index) {
-                              return Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: <Widget>[
-                                      Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: <Widget>[
-                                          getIcons(y
-                                              .devicesDaily[roomNames[i]].keys
-                                              .toList()[index]),
-                                          SizedBox(width: 10),
-                                          Text(
-                                            y.devicesDaily[roomNames[i]].keys
-                                                .toList()[index],
-                                            style: TextStyle(fontSize: 16),
-                                          ),
-                                        ],
+                                    SizedBox(
+                                      height: 4.0,
+                                    ),
+                                    Text(
+                                      y.devicesDaily[roomNames[i]].length
+                                          .toString(),
+                                      style: TextStyle(
+                                        fontSize: 12.0,
                                       ),
-                                      Text(
-                                        y.devicesDaily[roomNames[i]][y
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            Text(
+                              usage[roomNames[i]].toString() + ' KWh',
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.w600),
+                            ),
+                          ],
+                        ),
+                      ),
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 22.0),
+                          child: ListView.separated(
+                              separatorBuilder:
+                                  (BuildContext context, int index) =>
+                                      Divider(),
+                              shrinkWrap: true,
+                              itemCount: y.devicesDaily[roomNames[i]].length,
+                              itemBuilder: (context, index) {
+                                return Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: <Widget>[
+                                        Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: <Widget>[
+                                            getIcons(y
                                                 .devicesDaily[roomNames[i]].keys
-                                                .toList()[index]]
-                                            .toString(),
-                                        style: TextStyle(fontSize: 16),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                ],
-                              );
-                            }),
-                      ),
-                    ],
+                                                .toList()[index]),
+                                            SizedBox(width: 10),
+                                            Text(
+                                              y.devicesDaily[roomNames[i]].keys
+                                                  .toList()[index],
+                                              style: TextStyle(fontSize: 16),
+                                            ),
+                                          ],
+                                        ),
+                                        Text(
+                                          y.devicesDaily[roomNames[i]][y
+                                                  .devicesDaily[roomNames[i]]
+                                                  .keys
+                                                  .toList()[index]]
+                                              .toString(),
+                                          style: TextStyle(fontSize: 16),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                  ],
+                                );
+                              }),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            );
-          }),
-    );
+              );
+            }),
+      );
+    } else {
+      return Container();
+    }
   }
 
   Icon getRoomIcons(String roomName) {

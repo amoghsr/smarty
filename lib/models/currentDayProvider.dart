@@ -1,12 +1,17 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
 //Map<hid,curtenday>
 //userProfile leaderboard
 class CurrentDayProvider with ChangeNotifier {
   int _currentDay;
-  CurrentDayProvider(this._currentDay);
-  //TODO: Store current Streak Day house ID wise
-
+  String houseID;
+  CurrentDayProvider(this._currentDay, this.houseID);
   getCurrentDay() => _currentDay;
-  setCurrentDay(int currentDay) => _currentDay = currentDay;
+  setCurrentDay(int currentDay) {
+    FirebaseDatabase.instance
+        .reference()
+        .child("Points/" + houseID + "/")
+        .update({"Currency": currentDay.toInt()});
+  }
 }

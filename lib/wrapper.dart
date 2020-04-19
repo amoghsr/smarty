@@ -12,7 +12,9 @@ import 'package:smarty/models/user.dart';
 import 'package:smarty/screens/home_manager/dashboard_manager.dart';
 import 'package:smarty/services/dialogManager.dart';
 import 'package:smarty/services/dialogProvider.dart';
+import 'models/boltProvider.dart';
 import 'models/consumptionModel.dart';
+import 'models/currentDayProvider.dart';
 import 'models/dbRoutines.dart';
 import 'models/roomModel.dart';
 
@@ -54,23 +56,30 @@ class Wrapper extends StatelessWidget {
             value: DatabaseService1().streamDevices(user),
             child: StreamProvider<List<int>>.value(
               value: DatabaseService1().streamHomiIDs(),
-              child: StreamProvider<List<dbRoutine>>.value(
-                value: DatabaseService1().getSuggestedRoutines(user),
-                child: StreamProvider<List<Routine>>.value(
-                  value: DatabaseService1().getCurrentRoutines(user),
-                  child: StreamProvider<List<LeaderboardModel>>.value(
-                    value: DatabaseService1().streamLeaderBoards(user),
-                    child: StreamProvider<Generation>.value(
-                      value: DatabaseService1().streamGeneratedEnergy(user),
-                      child: StreamProvider<Consumption>.value(
-                        value: DatabaseService1().streamConsumedEnergy(user),
-                        child: StreamProvider<List<String>>.value(
-                          value:
-                              DatabaseService1().StreamUserlist(user.houseId),
-                          child: MaterialApp(
-                            theme:
-                                Provider.of<ThemeModel>(context).currentTheme,
-                            home: MyNavigationBar(),
+              child: StreamProvider<Map<String, CurrentDayProvider>>.value(
+                value: DatabaseService1().getCurrent(),
+                child: StreamProvider<Map<String, BoltProvider>>.value(
+                  value: DatabaseService1().getBolts(),
+                  child: StreamProvider<List<dbRoutine>>.value(
+                    value: DatabaseService1().getSuggestedRoutines(user),
+                    child: StreamProvider<List<Routine>>.value(
+                      value: DatabaseService1().getCurrentRoutines(user),
+                      child: StreamProvider<List<LeaderboardModel>>.value(
+                        value: DatabaseService1().streamLeaderBoards(user),
+                        child: StreamProvider<Generation>.value(
+                          value: DatabaseService1().streamGeneratedEnergy(user),
+                          child: StreamProvider<Consumption>.value(
+                            value:
+                                DatabaseService1().streamConsumedEnergy(user),
+                            child: StreamProvider<List<String>>.value(
+                              value: DatabaseService1()
+                                  .StreamUserlist(user.houseId),
+                              child: MaterialApp(
+                                theme: Provider.of<ThemeModel>(context)
+                                    .currentTheme,
+                                home: MyNavigationBar(),
+                              ),
+                            ),
                           ),
                         ),
                       ),

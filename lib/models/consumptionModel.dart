@@ -48,31 +48,27 @@ class Consumption {
             if (key == formattedMonth && key1.toString() == formattedDate) {
               value1.forEach((key2, value2) {
                 if (key2 != "Daily_Total") {
-                  daily[key2.toString()] = value2.floor();
+                  daily[key2.toString()] = value2.ceil();
                 } else {
-                  dailyTotal = value2.floor();
-                  print("debug2 " +
-                      value2.toString() +
-                      "  day: " +
-                      formattedDate);
-                  weekly[key1] = value2.floor();
-                  print("debug3");
+                  dailyTotal = value2.ceil();
+
+                  weekly[key1] = value2.ceil();
                 }
               });
             }
             if (awd.values.contains(key) && awd.containsKey(key1)) {
               value1.forEach((key2, value2) {
                 if (key2.toString() == "Daily_Total") {
-                  weekly[key1] = value2.floor();
-                  print("debug4");
+                  weekly[key1] = value2.ceil();
                 }
               });
             }
           });
         } else {
           value.forEach((key1, value1) {
-            Devicess[key] = num.parse(
-                value1[formattedDate]["Total_Daily"].toStringAsFixed(3));
+            if (value1[formattedDate]["Total_Daily"] != null)
+              Devicess[key] = num.parse(
+                  value1[formattedDate]["Total_Daily"].toStringAsFixed(3));
           });
         }
       });
@@ -81,7 +77,7 @@ class Consumption {
       }
     });
     var room = Consumption(
-      dailyTotal: dailyTotal,
+      dailyTotal: dailyTotal ?? 0,
       daily: daily,
       monthly: monthly,
       weekly: weekly,

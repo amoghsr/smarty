@@ -1,10 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:smarty/models/boltProvider.dart';
 import 'package:smarty/models/devicesModel.dart';
 import 'package:smarty/models/generationModel.dart';
 import 'package:smarty/models/consumptionModel.dart';
 import 'package:smarty/models/leaderboardModel.dart';
 import 'package:smarty/models/routineModel.dart';
 import 'package:smarty/models/user.dart';
+import 'currentDayProvider.dart';
 import 'dbRoutines.dart';
 import 'roomModel.dart';
 
@@ -102,6 +104,35 @@ class DatabaseService1 {
       });
     });
     return x;
+  }
+
+  Stream<Map<String, BoltProvider>> getBolts() {
+    var ref = _db.collection('Points');
+    return ref.snapshots().map(getBoltsMap);
+  }
+
+  Map<String, BoltProvider> getBoltsMap(QuerySnapshot doc) {
+    Map<String, BoltProvider> rer = {};
+    doc.documents.forEach((element) {
+      rer[element.documentID] = new BoltProvider(
+          num.parse(element.data["Bolts"]), element.documentID);
+    });
+
+    return rer;
+  }
+
+  Stream<Map<String, CurrentDayProvider>> getCurrent() {
+    var ref = _db.collection('Points');
+    return ref.snapshots().map(getcurrentsMap);
+  }
+
+  Map<String, CurrentDayProvider> getcurrentsMap(QuerySnapshot doc) {
+    Map<String, CurrentDayProvider> rer = {};
+    doc.documents.forEach((element) {
+      rer[element.documentID] = new CurrentDayProvider(
+          num.parse(element.data["Currency"]), element.documentID);
+    });
+    return rer;
   }
 
   Stream<DocumentSnapshot> getUserDetails(String uid, User user) {
