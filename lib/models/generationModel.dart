@@ -17,7 +17,16 @@ class Generation {
     String formattedDate = date.format(now);
     var month = new DateFormat('MMMM');
     String formattedMonth = month.format(now);
-
+    Map<String, String> awd = {};
+    for (int i = 0; i < now.weekday; i++) {
+      DateTime x = now.subtract(new Duration(days: i + 1));
+      var date1 = new DateFormat('dd');
+      String formattedDate1 =
+          date1.format(now.subtract(new Duration(days: i + 1)));
+      var month1 = new DateFormat('MMMM');
+      String formattedMonth1 = month1.format(x);
+      awd[formattedDate1] = formattedMonth1;
+    }
     int dailyTotal = 0;
     Map<String, int> monthly = new Map<String, int>();
     Map<String, int> weekly = new Map<String, int>();
@@ -27,20 +36,30 @@ class Generation {
         if (element.documentID == formattedMonth &&
             key.toString() == formattedDate) {
           dailyTotal = int.parse(value["total_day"].toString());
+          weekly[key] = int.parse(value["total_day"].toString());
           value.forEach((key1, value1) {
             if (key1.toString() != "total_day") {
               daily[key1.toString()] = value1;
             }
           });
         }
+        if (awd.values.contains(element.documentID) &&
+            awd.containsKey(key.toString())) {
+          value.forEach((key1, value1) {
+            if (key1.toString() == "total_day") {
+              weekly[key] = value1;
+            }
+          });
+        }
       });
       monthly[element.documentID] = element.data["total_month"];
     });
+
     var room = Generation(
       dailyTotal: dailyTotal,
       daily: daily,
       monthly: monthly,
-      weekly: new Map<String, int>(),
+      weekly: weekly,
     );
     return room;
   }

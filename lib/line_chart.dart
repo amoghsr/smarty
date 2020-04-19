@@ -52,10 +52,11 @@ class _LineChartSample2State extends State<LineChartSample2> {
                           padding: const EdgeInsets.only(
                               right: 18.0, left: 12.0, top: 24, bottom: 12),
                           child: widget.energyType == 'Generation'
-                              ? LineChart(mainGenerationData(widget.groupBy, x)) : 
-                              widget.energyType == 'Consumption' 
-                                ? LineChart(mainConsumptionData(widget.groupBy, y))
-                                : CircularProgressIndicator()),
+                              ? LineChart(mainGenerationData(widget.groupBy, x))
+                              : widget.energyType == 'Consumption'
+                                  ? LineChart(
+                                      mainConsumptionData(widget.groupBy, y))
+                                  : CircularProgressIndicator()),
                     ),
                   ),
                 )
@@ -159,19 +160,19 @@ class _LineChartSample2State extends State<LineChartSample2> {
               }
             else if (groupby == "Week")
               switch (value.toInt()) {
-                case 1:
-                  return 'SUN';
-                case 3:
-                  return 'MON';
-                case 5:
-                  return 'TUE';
-                case 7:
-                  return 'WED';
-                case 9:
-                  return 'THU';
-                case 11:
-                  return 'FRI';
                 case 13:
+                  return 'SUN';
+                case 1:
+                  return 'MON';
+                case 3:
+                  return 'TUE';
+                case 5:
+                  return 'WED';
+                case 7:
+                  return 'THU';
+                case 9:
+                  return 'FRI';
+                case 11:
                   return 'SAT';
               }
             else
@@ -296,7 +297,7 @@ class _LineChartSample2State extends State<LineChartSample2> {
       FlSpot(0, 0),
     ];
 
-    for (int i = 0, j = 1; i < hourData.length; i++, j += 3) {
+    for (int i = 0, j = 1; i < hourData.length; i++, j += 2) {
       hourCoords.add(FlSpot(j.toDouble(), hours[i].toDouble() / 10));
     }
 
@@ -337,47 +338,71 @@ class _LineChartSample2State extends State<LineChartSample2> {
             if (groupby == "Day")
               switch (value.toInt()) {
                 case 1:
-                  return '6 AM';
-                case 4:
-                  return '7 AM';
+                  return '12 AM';
+                case 3:
+                  return '1 AM';
+                case 5:
+                  return '2 AM';
                 case 7:
-                  return '8 AM';
-                case 10:
-                  return '9 AM';
+                  return '3 AM';
+                case 9:
+                  return '4 AM';
+                case 11:
+                  return '5 AM';
                 case 13:
-                  return '10 AM';
-                case 16:
-                  return '11 AM';
+                  return '6 AM';
+                case 15:
+                  return '7 AM';
+                case 17:
+                  return '8 AM';
                 case 19:
-                  return '12 PM';
-                case 22:
-                  return '1 PM';
+                  return '9 AM';
+                case 21:
+                  return '10 AM';
+                case 23:
+                  return '11 AM';
                 case 25:
+                  return '12 PM';
+                case 27:
+                  return '1 PM';
+                case 29:
                   return '2 PM';
-                case 28:
-                  return '3 PM';
                 case 31:
+                  return '3 PM';
+                case 33:
                   return '4 PM';
-                case 34:
+                case 35:
                   return '5 PM';
                 case 37:
                   return '6 PM';
+                case 39:
+                  return '7 PM';
+                case 41:
+                  return '8 PM';
+                case 43:
+                  return '9 PM';
+                case 45:
+                  return '10 PM';
+                case 47:
+                  return '11 PM';
+                case 49:
+                  return '12 PM';
               }
             else if (groupby == "Week")
               switch (value.toInt()) {
-                case 1:
-                  return 'SUN';
-                case 3:
-                  return 'MON';
-                case 5:
-                  return 'TUE';
-                case 7:
-                  return 'WED';
-                case 9:
-                  return 'THU';
-                case 11:
-                  return 'FRI';
                 case 13:
+                  return 'SUN';
+                case 1:
+                  return 'MON';
+                case 3:
+                  return 'TUE';
+                case 5:
+                  return 'WED';
+                case 7:
+                  return 'THU';
+                case 9:
+                  return 'FRI';
+                case 11:
                   return 'SAT';
               }
             else
@@ -481,9 +506,6 @@ class _LineChartSample2State extends State<LineChartSample2> {
     );
   }
 }
-
-
-
 
 //   LineChartData avgData(String groupby, AsyncSnapshot<QuerySnapshot> snapshot) {
 //     return LineChartData(

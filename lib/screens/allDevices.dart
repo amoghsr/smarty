@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_vlc_player/vlc_player.dart';
 import 'package:flutter_vlc_player/vlc_player_controller.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
+import 'package:smarty/models/consumptionModel.dart';
 import 'package:smarty/models/devicesModel.dart';
 
 import 'package:smarty/screens/drawer.dart';
@@ -23,14 +25,23 @@ class _AllDevicesState extends State<AllDevices> with TickerProviderStateMixin {
     //   Timer.run(
     //       () => Provider.of<DialogProvider>(context, listen: false).popAi());
   }
-  // TODO: Get the list of rooms
-  List<String> roomNames = ["Living Room", "Kitchen"];
-  // TODO: Get the list of devices per room (EVEN IF THE CONSUMPTION FOR THAT DEVICE IN THAT DAY IS 0)
-  List<String> deviceNames = ["AC", "Lamp", "Speaker"];
+
   Widget build(BuildContext context) {
+    List<String> roomNames = [];
+    Map<String, double> usage = {};
     double screenwidth = MediaQuery.of(context).size.width;
     double screenheight = MediaQuery.of(context).size.height;
-
+    final y = Provider.of<Consumption>(context);
+    if (y != null) {
+      y.devicesDaily.forEach((key, va) {
+        roomNames.add(key);
+        double total = 0;
+        va.forEach((key, va) {
+          total = total + va;
+        });
+        usage[key] = total;
+      });
+    }
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -77,8 +88,8 @@ class _AllDevicesState extends State<AllDevices> with TickerProviderStateMixin {
                                     height: 4.0,
                                   ),
                                   Text(
-                                    // TODO: Get the Number of devices per room, to display here
-                                    '3 Devices',
+                                    y.devicesDaily[roomNames[i]].length
+                                        .toString(),
                                     style: TextStyle(
                                       fontSize: 12.0,
                                     ),
@@ -89,7 +100,7 @@ class _AllDevicesState extends State<AllDevices> with TickerProviderStateMixin {
                           ),
                           Text(
                             // TODO: Total Consumption per room (Total of all devices per room) uptil that point of the day
-                            '3 KWh',
+                            usage[roomNames[i]].toString() + ' KWh',
                             style: TextStyle(
                                 fontSize: 18, fontWeight: FontWeight.w600),
                           ),
@@ -103,7 +114,7 @@ class _AllDevicesState extends State<AllDevices> with TickerProviderStateMixin {
                             separatorBuilder:
                                 (BuildContext context, int index) => Divider(),
                             shrinkWrap: true,
-                            itemCount: deviceNames.length,
+                            itemCount: y.devicesDaily[roomNames[i]].length,
                             itemBuilder: (context, index) {
                               return Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
@@ -118,17 +129,23 @@ class _AllDevicesState extends State<AllDevices> with TickerProviderStateMixin {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.center,
                                         children: <Widget>[
-                                          getIcons(deviceNames[index]),
+                                          getIcons(y
+                                              .devicesDaily[roomNames[i]].keys
+                                              .toList()[index]),
                                           SizedBox(width: 10),
                                           Text(
-                                            deviceNames[index],
+                                            y.devicesDaily[roomNames[i]].keys
+                                                .toList()[index],
                                             style: TextStyle(fontSize: 16),
                                           ),
                                         ],
                                       ),
                                       Text(
                                         // TODO: Total per device (Sum of consumption throughout the day for that device) up until that point of the day
-                                        '1 KWh',
+                                        y.devicesDaily[roomNames[i]][y
+                                                .devicesDaily[roomNames[i]].keys
+                                                .toList()[index]]
+                                            .toString(),
                                         style: TextStyle(fontSize: 16),
                                       ),
                                     ],
