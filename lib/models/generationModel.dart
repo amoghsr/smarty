@@ -35,11 +35,13 @@ class Generation {
       element.data.forEach((key, value) {
         if (element.documentID == formattedMonth &&
             key.toString() == formattedDate) {
-          dailyTotal = int.parse(value["total_day"].toString());
-          weekly[key] = int.parse(value["total_day"].toString());
+          dailyTotal = int.parse(value["total_day"].floor().toString());
+          weekly[key] = int.parse(value["total_day"].floor().toString());
+          print("debug8");
           value.forEach((key1, value1) {
             if (key1.toString() != "total_day") {
-              daily[key1.toString()] = value1;
+              daily[key1.toString()] = value1.floor();
+              print("debug6");
             }
           });
         }
@@ -47,12 +49,14 @@ class Generation {
             awd.containsKey(key.toString())) {
           value.forEach((key1, value1) {
             if (key1.toString() == "total_day") {
-              weekly[key] = value1;
+              weekly[key] = value1.floor();
+              print("debug7");
             }
           });
         }
       });
-      monthly[element.documentID] = element.data["total_month"];
+      monthly[element.documentID] = element.data["total_month"].floor();
+      print("debug8");
     });
 
     var room = Generation(

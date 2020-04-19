@@ -4,6 +4,7 @@ import 'package:smarty/authenticate/authenticate.dart';
 import 'package:smarty/models/dbService.dart';
 import 'package:smarty/models/devicesModel.dart';
 import 'package:smarty/models/generationModel.dart';
+import 'package:smarty/models/leaderboardModel.dart';
 import 'package:smarty/models/navigationBar.dart';
 import 'package:smarty/models/routineModel.dart';
 import 'package:smarty/models/themeModel.dart';
@@ -23,21 +24,23 @@ class Wrapper extends StatelessWidget {
     if (user == null) {
       return Authenticate();
     } else {
-//      print(user.type + "vecefd");
       if (user.type == "M") {
         return StreamProvider<List<Room>>.value(
           value: DatabaseService1().streamRooms(user),
-          child: StreamProvider<List<Device>>.value(
-            value: DatabaseService1().streamDevices(user),
-            child: StreamProvider<List<int>>.value(
-              value: DatabaseService1().streamHomiIDs(),
-              child: StreamProvider<List<dbRoutine>>.value(
-                value: DatabaseService1().getSuggestedRoutines(user),
-                child: StreamProvider<List<String>>.value(
-                  value: DatabaseService1().StreamUserlist(user.houseId),
-                  child: MaterialApp(
-                    theme: Provider.of<ThemeModel>(context).currentTheme,
-                    home: DashboardManager(),
+          child: StreamProvider<List<LeaderboardModel>>.value(
+            value: DatabaseService1().streamLeaderBoards(user),
+            child: StreamProvider<List<Device>>.value(
+              value: DatabaseService1().streamDevices(user),
+              child: StreamProvider<List<int>>.value(
+                value: DatabaseService1().streamHomiIDs(),
+                child: StreamProvider<List<dbRoutine>>.value(
+                  value: DatabaseService1().getSuggestedRoutines(user),
+                  child: StreamProvider<List<String>>.value(
+                    value: DatabaseService1().StreamUserlist(user.houseId),
+                    child: MaterialApp(
+                      theme: Provider.of<ThemeModel>(context).currentTheme,
+                      home: DashboardManager(),
+                    ),
                   ),
                 ),
               ),
@@ -55,15 +58,20 @@ class Wrapper extends StatelessWidget {
                 value: DatabaseService1().getSuggestedRoutines(user),
                 child: StreamProvider<List<Routine>>.value(
                   value: DatabaseService1().getCurrentRoutines(user),
-                  child: StreamProvider<Generation>.value(
-                    value: DatabaseService1().streamGeneratedEnergy(user),
-                    child: StreamProvider<Consumption>.value(
-                      value: DatabaseService1().streamConsumedEnergy(user),
-                      child: StreamProvider<List<String>>.value(
-                        value: DatabaseService1().StreamUserlist(user.houseId),
-                        child: MaterialApp(
-                          theme: Provider.of<ThemeModel>(context).currentTheme,
-                          home: MyNavigationBar(),
+                  child: StreamProvider<List<LeaderboardModel>>.value(
+                    value: DatabaseService1().streamLeaderBoards(user),
+                    child: StreamProvider<Generation>.value(
+                      value: DatabaseService1().streamGeneratedEnergy(user),
+                      child: StreamProvider<Consumption>.value(
+                        value: DatabaseService1().streamConsumedEnergy(user),
+                        child: StreamProvider<List<String>>.value(
+                          value:
+                              DatabaseService1().StreamUserlist(user.houseId),
+                          child: MaterialApp(
+                            theme:
+                                Provider.of<ThemeModel>(context).currentTheme,
+                            home: MyNavigationBar(),
+                          ),
                         ),
                       ),
                     ),

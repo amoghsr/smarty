@@ -56,8 +56,6 @@ class _DialogManagerState extends State<DialogManager> {
   }
 
   void _showP2PDialog() {
-    // ************************* P2P DIALOG BOX ******************************//
-    // TODO: POPUP THIS DIALOG WHEN DAILY CONSUMPTION REACHES THE DAILY GENERATION VALUE (BATTERY LEVEL EMPTY)
     // TODO: POPUP THIS DIALOG ONLY AFTER 6PM (WHEN GENERATION IS ZERO BECAUSE DURING THE DAY THE GENERATION VALUE KEEPS INCREASING)
     showDialog(
       context: context,
@@ -84,14 +82,14 @@ class _DialogManagerState extends State<DialogManager> {
       builder: (BuildContext context) => StreamBuilder(
           // stream: itemRef.child("Sensors/Fire/").onValue,
           builder: (context, snap) {
-            return CustomDialog(
-              image: Image.asset("assets/images/doorbell.png"),
-              title: "DOORBELL RUNG!",
-              description: "Someone's at the door!",
-              col: Colors.red[500],
-              buttonText: "Okay",
-            );
-          }),
+        return CustomDialog(
+          image: Image.asset("assets/images/doorbell.png"),
+          title: "DOORBELL RUNG!",
+          description: "Someone's at the door!",
+          col: Colors.red[500],
+          buttonText: "Okay",
+        );
+      }),
     );
   }
 
@@ -112,5 +110,4 @@ class _DialogManagerState extends State<DialogManager> {
       }),
     );
   }
-
 }

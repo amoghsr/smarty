@@ -15,7 +15,12 @@ import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:smarty/models/boltProvider.dart';
+<<<<<<< HEAD
 import 'package:smarty/models/roomModel.dart';
+=======
+import 'package:smarty/models/consumptionModel.dart';
+import 'package:smarty/models/generationModel.dart';
+>>>>>>> 4fb534cfcd1722cb5416b6645b258a8021d95782
 import 'package:smarty/models/themeModel.dart';
 import 'package:smarty/models/weatherModel.dart';
 import 'package:smarty/screens/drawer.dart';
@@ -77,6 +82,24 @@ class _HomeState extends State<Home> {
     getPosition().then((position) {
       getWeather(position.latitude, position.longitude);
     });
+<<<<<<< HEAD
+=======
+
+//     if (Provider.of<BoltProvider>(context, listen: false).getBalanceAsInt() == 10)
+//     Timer.run(
+//         () => Provider.of<DialogProvider>(context, listen: false).popAi());
+
+    if (Provider.of<Consumption>(context, listen: false).dailyTotal >=
+        Provider.of<Generation>(context, listen: false).dailyTotal * 0.8)
+      Timer.run(
+          () => Provider.of<DialogProvider>(context, listen: false).popAi());
+
+    if (Provider.of<Consumption>(context, listen: false).dailyTotal >=
+        Provider.of<Generation>(context, listen: false).dailyTotal * 0.95)
+      Timer.run(
+          () => Provider.of<DialogProvider>(context, listen: false).popP2P());
+
+>>>>>>> 4fb534cfcd1722cb5416b6645b258a8021d95782
     // if (Provider.of<BoltProvider>(context, listen: false).getBalanceAsInt() == 10)
     //   Timer.run(
     //       () => Provider.of<DialogProvider>(context, listen: false).popAi());

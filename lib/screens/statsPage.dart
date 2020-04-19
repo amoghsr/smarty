@@ -132,7 +132,7 @@ class _StatsScreenState extends State<StatsScreen> {
                                   buildCircularProgressWidget(
                                     80,
                                     20.0,
-                                    x.dailyTotal.toDouble() / 500,
+                                    x.dailyTotal.toDouble() / 400,
                                     Container(),
                                     Colors.greenAccent.withOpacity(0.4),
                                     Colors.greenAccent[400],

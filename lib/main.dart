@@ -34,6 +34,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return StreamProvider<User>.value(
       value: AuthService().user,
+      //Todo: remove all this
       child: MultiProvider(
         providers: [
           ChangeNotifierProvider<BoltProvider>(

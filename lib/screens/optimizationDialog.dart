@@ -1,8 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+=======
+>>>>>>> 4fb534cfcd1722cb5416b6645b258a8021d95782
 import 'package:provider/provider.dart';
 import 'package:smarty/models/devicesModel.dart';
 import 'package:smarty/models/roomModel.dart';
@@ -17,6 +20,21 @@ class Optimization extends StatefulWidget {
 }
 
 class _OptimizationState extends State<Optimization> {
+<<<<<<< HEAD
+=======
+//  // TODO: Get the room names
+  List<String> roomNames = ["Living Room", "Kitchen", "Playroom"];
+  // TODO: Get the device names for each room (IF THEY ARE ON)
+  List<String> deviceNames = ["AC", "Lamp", "Speaker"];
+
+  Map<String, String> desc = {
+    "AC": "Set the temperature to 24°C",
+    "Lamp": "Set the brightness to 25%",
+    "Speaker": "Turn off the Speakers",
+    "TV": "Turn off TV",
+    "Exhaust Fan": "Turn off the Exhaust Fan "
+  };
+>>>>>>> 4fb534cfcd1722cb5416b6645b258a8021d95782
   bool expanded = false;
   List<dynamic> roomDeviceNames = [];
   Icon getDevIcons(String roomName) {
@@ -47,6 +65,7 @@ class _OptimizationState extends State<Optimization> {
   }
 
   Widget build(BuildContext context) {
+    final x = Provider.of<List<Device>>(context);
     double screenheight = MediaQuery.of(context).size.height;
     List<Room> rooms = widget.r;
 
