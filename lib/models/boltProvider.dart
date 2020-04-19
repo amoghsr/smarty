@@ -1,18 +1,19 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
 //Map<Hid,boltProvider>
 class BoltProvider with ChangeNotifier {
   double _balance;
-
-  BoltProvider(this._balance);
-
-  //TODO: Store bolts balance(user's ecash) house ID wise alister
-  //usages:
-//confirmation
+  String houseID;
+  BoltProvider(this._balance, this.houseID);
   getBalance() => _balance;
   getBalanceAsInt() => _balance.toInt();
   setBalance(double balance) {
-    _balance = balance;
-    notifyListeners();
+    FirebaseDatabase.instance
+        .reference()
+        .child("Points/" + houseID + "/")
+        .update({"Bolts": balance.toInt()});
   }
+
+  notifyListeners();
 }

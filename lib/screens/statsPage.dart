@@ -57,6 +57,7 @@ class _StatsScreenState extends State<StatsScreen> {
         weekly = weekly + val;
       });
     }
+    int no1w = DateTime.now().hour;
     String formattedDate = date.format(now);
     return Scaffold(
       appBar: AppBar(
@@ -128,11 +129,11 @@ class _StatsScreenState extends State<StatsScreen> {
                                 buildCircularProgressWidget(
                                   136,
                                   20.0,
-                                  y.dailyTotal.toDouble() / 400,
+                                  y.dailyTotal.toDouble() / 100,
                                   buildCircularProgressWidget(
                                     80,
                                     20.0,
-                                    x.dailyTotal.toDouble() / 400,
+                                    x.dailyTotal.toDouble() / 100,
                                     Container(),
                                     Colors.greenAccent.withOpacity(0.4),
                                     Colors.greenAccent[400],
@@ -437,9 +438,7 @@ class _StatsScreenState extends State<StatsScreen> {
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: <Widget>[
                                 Text(
-                                  (y.dailyTotal / int.parse(formattedDate))
-                                      .floor()
-                                      .toString(),
+                                  (y.dailyTotal / no1w).floor().toString(),
                                   style: TextStyle(
                                     height: 1,
                                     fontSize: 34.0,

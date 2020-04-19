@@ -38,10 +38,10 @@ class MyApp extends StatelessWidget {
       child: MultiProvider(
         providers: [
           ChangeNotifierProvider<BoltProvider>(
-            create: (_) => BoltProvider(25),
+            create: (_) => BoltProvider(25, "d"),
           ),
           ChangeNotifierProvider<CurrentDayProvider>(
-            create: (_) => CurrentDayProvider(20),
+            create: (_) => CurrentDayProvider(20, "e"),
           ),
         ],
         child: Consumer<BoltProvider>(builder: (context, counter, _) {

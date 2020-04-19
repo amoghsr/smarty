@@ -30,7 +30,7 @@ class _LineChartSample2State extends State<LineChartSample2> {
   Widget build(BuildContext context) {
     final x = Provider.of<Generation>(context);
     final y = Provider.of<Consumption>(context);
-    if (x != null) {
+    if (x != null && y != null) {
       return Center(
         child: SingleChildScrollView(
           scrollDirection: Axis.horizontal,
@@ -92,15 +92,15 @@ class _LineChartSample2State extends State<LineChartSample2> {
     ];
 
     for (int i = 0, j = 1; i < hourData.length; i++, j += 3) {
-      hourCoords.add(FlSpot(j.toDouble(), hours[i].toDouble() / 10));
+      hourCoords.add(FlSpot(j.toDouble(), hours[i].toDouble()));
     }
 
     for (int i = 0, j = 1; i < weekData.length; i++, j += 2) {
-      weekCoords.add(FlSpot(j.toDouble(), weekly[i].toDouble() % 5));
+      weekCoords.add(FlSpot(j.toDouble(), weekly[i].toDouble() / 10));
     }
 
     for (int i = 0, j = 1; i < monthData.length; i++, j += 2) {
-      monthCoords.add(FlSpot(j.toDouble(), (monthly[i].toDouble()) / 2000));
+      monthCoords.add(FlSpot(j.toDouble(), (monthly[i].toDouble()) / 1000));
     }
     return LineChartData(
       gridData: FlGridData(
@@ -298,7 +298,7 @@ class _LineChartSample2State extends State<LineChartSample2> {
     ];
 
     for (int i = 0, j = 1; i < hourData.length; i++, j += 2) {
-      hourCoords.add(FlSpot(j.toDouble(), hours[i].toDouble() / 10));
+      hourCoords.add(FlSpot(j.toDouble(), hours[i].toDouble()));
     }
 
     for (int i = 0, j = 1; i < weekData.length; i++, j += 2) {
