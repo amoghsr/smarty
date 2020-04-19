@@ -91,6 +91,9 @@ class _HomeState extends State<Home> {
       Timer.run(
           () => Provider.of<DialogProvider>(context, listen: false).popP2P());
 
+    // if (Provider.of<BoltProvider>(context, listen: false).getBalanceAsInt() == 10)
+    // Timer.run(
+    //     () => Provider.of<DialogProvider>(context, listen: false).popAi());
     final FirebaseDatabase database = FirebaseDatabase
         .instance; //Rather then just writing FirebaseDatabase(), get the instance.
     itemRef = database.reference();

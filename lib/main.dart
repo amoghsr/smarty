@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:smarty/models/currentDayProvider.dart';
@@ -17,6 +18,7 @@ void main() {
   setupP2PPopUp();
   setupDoorBell();
   setupFire();
+  debugDefaultTargetPlatformOverride = TargetPlatform.fuchsia;
   runApp(
     ChangeNotifierProvider<ThemeModel>(
       create: (BuildContext context) => ThemeModel(),
