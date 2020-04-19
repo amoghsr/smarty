@@ -18,6 +18,7 @@ void main() {
   setupP2PPopUp();
   setupDoorBell();
   setupFire();
+  debugDefaultTargetPlatformOverride = TargetPlatform.fuchsia;
   runApp(
     ChangeNotifierProvider<ThemeModel>(
       create: (BuildContext context) => ThemeModel(),
