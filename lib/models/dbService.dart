@@ -22,12 +22,12 @@ class DatabaseService1 {
     return Generation.fromFirestore(doc.documents);
   }
 
-  Stream<Generation> streamConsumedEnergy(User user) {
+  Stream<Consumption> streamConsumedEnergy(User user) {
     CollectionReference ref = _db
         .collection('Homes')
         .document(user.houseId)
         .collection("consumed_energy");
-    return ref.snapshots().map(CreateGeneration);
+    return ref.snapshots().map(CreateConsumption);
   }
 
   Consumption CreateConsumption(QuerySnapshot doc) {

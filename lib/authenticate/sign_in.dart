@@ -164,7 +164,7 @@ class _SignInState extends State<SignIn> {
                       RaisedButton(
                         padding: EdgeInsets.symmetric(
                           horizontal: 130,
-                          // vertical: 10,
+                          vertical: 10,
                         ),
                         color: Theme.of(context).accentColor,
                         child: Text(

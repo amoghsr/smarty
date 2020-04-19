@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:intl/intl.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:provider/provider.dart';
+import 'package:smarty/models/consumptionModel.dart';
 import 'package:smarty/models/generationModel.dart';
 import 'package:smarty/screens/allDevices.dart';
 import 'package:smarty/screens/drawer.dart';
@@ -45,6 +47,17 @@ class _StatsScreenState extends State<StatsScreen> {
 
   Widget build(BuildContext context) {
     final x = Provider.of<Generation>(context);
+    final y = Provider.of<Consumption>(context);
+    final userlist = Provider.of<List<String>>(context);
+    var now = new DateTime.now();
+    var date = new DateFormat('dd');
+    int weekly = 0;
+    if (y != null) {
+      y.weekly.forEach((ke, val) {
+        weekly = weekly + val;
+      });
+    }
+    String formattedDate = date.format(now);
     return Scaffold(
       appBar: AppBar(
         title: Center(
@@ -81,8 +94,7 @@ class _StatsScreenState extends State<StatsScreen> {
                             ],
                           ),
                           Text(
-                            // TODO: DAILY LIMIT IS BASED ON THE NUMBER OF USERS PER HOUSE (9 * N) kwh
-                            '19 KWh',
+                            (userlist.length * 9).toString() + ' KWh',
                             style: TextStyle(
                                 fontSize: 24.0, fontWeight: FontWeight.w600),
                           )
@@ -116,12 +128,10 @@ class _StatsScreenState extends State<StatsScreen> {
                                 buildCircularProgressWidget(
                                   136,
                                   20.0,
-                                  //TODO: (AVERAGE DAILY CONSUMPTION OF OUR HOUSE / AVERAGE DAILY CONSUMPTION LIMIT OF OUR HOUSE)
-                                  0.6,
+                                  y.dailyTotal.toDouble() / 400,
                                   buildCircularProgressWidget(
                                     80,
                                     20.0,
-                                    //TODO: (AVERAGE DAILY GENERATION OF OUR HOUSE / 48.0)
                                     x.dailyTotal.toDouble() / 500,
                                     Container(),
                                     Colors.greenAccent.withOpacity(0.4),
@@ -212,8 +222,7 @@ class _StatsScreenState extends State<StatsScreen> {
                                     crossAxisAlignment: CrossAxisAlignment.end,
                                     children: <Widget>[
                                       Text(
-                                        //TODO: AVERAGE DAILY CONSUMPTION OF OUR HOUSE UP UNTIL THAT POINT OF THE DAY
-                                        '100',
+                                        y.dailyTotal.toString(),
                                         style: TextStyle(
                                           height: 1,
                                           fontSize: 32.0,
@@ -258,8 +267,7 @@ class _StatsScreenState extends State<StatsScreen> {
                                     crossAxisAlignment: CrossAxisAlignment.end,
                                     children: <Widget>[
                                       Text(
-                                        //TODO: AVERAGE DAILY GENERATION OF OUR HOUSE UP UNTIL THAT POINT OF THE DAY
-                                        '100',
+                                        x.dailyTotal.toString(),
                                         style: TextStyle(
                                           height: 1,
                                           fontSize: 32.0,
@@ -396,7 +404,6 @@ class _StatsScreenState extends State<StatsScreen> {
                 scrollDirection: Axis.vertical,
                 child: Container(
                   height: 250.0,
-                  // TODO: Retrieve FLChart values passed in by Piya
                   child: LineChartSample2(
                       dropdownItems[_value], viewBy[selectedViewIndex], 5, 49),
                 ),
@@ -430,8 +437,9 @@ class _StatsScreenState extends State<StatsScreen> {
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: <Widget>[
                                 Text(
-                                  // TODO: AVERAGE CONSUMPTION UP UNTIL THAT POINT (TOTAL DAILY CONSUMPTION / TOTAL HOURS THAT HAS PASSED)
-                                  '100',
+                                  (y.dailyTotal / int.parse(formattedDate))
+                                      .floor()
+                                      .toString(),
                                   style: TextStyle(
                                     height: 1,
                                     fontSize: 34.0,
@@ -467,8 +475,7 @@ class _StatsScreenState extends State<StatsScreen> {
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: <Widget>[
                                 Text(
-                                  // TODO: AVERAGE CONSUMPTION OF THAT WEEK (TOTAL CONSUMPTION UP UNTIL THAT DAY OF THE WEEK/NUMBER OF DAYS THAT PASSED IN THAT WEEK)
-                                  '100',
+                                  (weekly / y.weekly.length).toString(),
                                   style: TextStyle(
                                     height: 1,
                                     fontSize: 34.0,
@@ -570,8 +577,10 @@ class _StatsScreenState extends State<StatsScreen> {
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: <Widget>[
                             Text(
-                              // TODO: BATTERY ((DAILY GENERATION - DAILY CONSUMPTION)/DAILY GENERATION) * 100
-                              percentConverter(doubleBatteryValue).toString(),
+                              (((x.dailyTotal - y.dailyTotal) / x.dailyTotal) *
+                                      100)
+                                  .floor()
+                                  .toString(),
                               style: TextStyle(
                                 fontSize: 40.0,
                                 fontWeight: FontWeight.w600,
@@ -592,18 +601,31 @@ class _StatsScreenState extends State<StatsScreen> {
                     ),
                     LiquidCustomProgressIndicator(
                       center: Text(
-                        percentConverter(doubleBatteryValue).toString() + '%',
+                        (((x.dailyTotal - y.dailyTotal) / x.dailyTotal) * 100)
+                                .floor()
+                                .toString() +
+                            '%',
                         style: TextStyle(
                           fontSize: 14.0,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      value: doubleBatteryValue,
+                      value: ((x.dailyTotal - y.dailyTotal) / x.dailyTotal),
                       valueColor: AlwaysStoppedAnimation(
-                          ((percentConverter(doubleBatteryValue) <= 20)
+                          (((((x.dailyTotal - y.dailyTotal) / x.dailyTotal) *
+                                          100)
+                                      .floor() <=
+                                  20)
                               ? Colors.redAccent
-                              : (percentConverter(doubleBatteryValue) > 20 &&
-                                      percentConverter(doubleBatteryValue) <=
+                              : ((((x.dailyTotal - y.dailyTotal) /
+                                                      x.dailyTotal) *
+                                                  100)
+                                              .floor() >
+                                          20 &&
+                                      (((x.dailyTotal - y.dailyTotal) /
+                                                      x.dailyTotal) *
+                                                  100)
+                                              .floor() <=
                                           60)
                                   ? Colors.orangeAccent
                                   : Colors.greenAccent)),
