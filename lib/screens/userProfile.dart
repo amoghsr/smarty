@@ -146,14 +146,8 @@ class _UserProfileState extends State<UserProfile> {
   @override
   Widget build(BuildContext context) {
     //list of users of current house name-email layout
-<<<<<<< HEAD
     // List<LeaderboardModel> lb = Provider.of<List<LeaderboardModel>>(context);
 
-=======
-    List<LeaderboardModel> lb = Provider.of<List<LeaderboardModel>>(context);
-    final x = Provider.of<Map<String, BoltProvider>>(context);
-    final bal = Provider.of<BoltProvider>(context);
->>>>>>> e1dc06462992f4c7300d49757d27d2a596600fc4
     double screenwidth = MediaQuery.of(context).size.width;
     double screenheight = MediaQuery.of(context).size.height;
     //TODO: GET CURRENT STREAK DAY OVER HERE

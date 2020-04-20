@@ -133,7 +133,7 @@ class _HomeState extends State<Home> {
     //     Provider.of<Generation>(context, listen: false).dailyTotal * 0.8)
     //   Future.delayed(Duration.zero, () => showAIAlert(context, rooms));
 
-    
+    Future.delayed(Duration.zero, () => showAIAlert(context, rooms));
 
     return SafeArea(
       child: Scaffold(
@@ -190,19 +190,19 @@ class _HomeState extends State<Home> {
                     (weather == null)
                         ? CircularProgressIndicator()
                         : Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: <Widget>[
-                        Text('Outside'),
-                        Text(
-                          '${weather.round().toString()}°C',
-                          //${widget.currentUser.email}`
-                          style: TextStyle(
-                            fontSize: 24.0,
-                            fontWeight: FontWeight.w700,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: <Widget>[
+                              Text('Outside'),
+                              Text(
+                                '${weather.round().toString()}°C',
+                                //${widget.currentUser.email}`
+                                style: TextStyle(
+                                  fontSize: 24.0,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
-                      ],
-                    ),
                   ],
                 ),
               ),
