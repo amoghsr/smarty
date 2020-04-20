@@ -68,11 +68,9 @@ class _SecurityState extends State<Security> {
     final int playerHeight = 360;
     return Scaffold(
       appBar: AppBar(
-        title: VlcPlayer(
-          defaultWidth: playerWidth,
-          defaultHeight: playerHeight,
-          url: urlToStreamVideo,
-          controller: controller,
+        title: Text(
+          'Security',
+          style: kAppBarTextStyle,
         ),
       ),
       drawer: Drawer(),
@@ -103,16 +101,23 @@ class _SecurityState extends State<Security> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).cardColor,
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(20),
-                        ),
-                      ),
-                      height: screenheight * 0.3,
-                      width: screenwidth * 0.89,
-                    ),
+                    controller.hasClients
+                        ? new VlcPlayer(
+                            defaultHeight: playerHeight,
+                            defaultWidth: playerWidth,
+                            url: urlToStreamVideo,
+                            controller: controller,
+                          )
+                        : Container(
+                            decoration: BoxDecoration(
+                              color: Theme.of(context).cardColor,
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(20),
+                              ),
+                            ),
+                            height: screenheight * 0.3,
+                            width: screenwidth * 0.89,
+                          ),
                   ],
                 ),
                 SizedBox(
