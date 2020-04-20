@@ -80,7 +80,7 @@ class RoutineCarousel extends StatelessWidget {
                 Opacity(
                   opacity: 0.8,
                   child: Text(
-                    'Set routines based on your preferred devices',
+                    'Routines based on your usage of devices',
                     style: TextStyle(
                       fontSize: 12.0,
                       fontWeight: FontWeight.w400,

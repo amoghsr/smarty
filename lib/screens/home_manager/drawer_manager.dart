@@ -161,6 +161,9 @@ class _DrawerManagerState extends State<DrawerManager> {
               title: Text('Dark Mode'),
               trailing: Switch(
                 value: valueSwitch,
+                inactiveTrackColor: Theme.of(context).backgroundColor,
+                activeColor: Colors.white,
+                activeTrackColor: Theme.of(context).accentColor,
                 onChanged: (value) {
                   setState(() {
                     valueSwitch = value;

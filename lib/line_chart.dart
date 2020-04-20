@@ -84,9 +84,21 @@ class _LineChartSample2State extends State<LineChartSample2> {
     List<FlSpot> weekCoords = [
       FlSpot(0, 0),
     ];
-
+    Map<String, int> month = {
+      "January": 0,
+      "February": 1,
+      "March": 2,
+      "April": 3,
+      "May": 4
+    };
+    print("scsdcsd");
+    print(snapshot.monthly);
     Map<String, int> monthData = snapshot.monthly;
-    List<int> monthly = monthData.values.toList();
+    List<int> monthly = new List(monthData.length);
+    snapshot.monthly.forEach((key, value) {
+      monthly[month[key]] = value;
+    });
+    monthly = monthData.values.toList();
     List<FlSpot> monthCoords = [
       FlSpot(0, 0),
     ];
@@ -217,28 +229,41 @@ class _LineChartSample2State extends State<LineChartSample2> {
             if (groupby == "Day") {
               switch (value.toInt()) {
                 case 1:
-                  return '1maWh';
+                  return '1.7kWh';
                 case 2:
-                  return '2maWh';
+                  return '3.4kWH';
                 case 3:
-                  return '3maWh';
+                  return '5.1kWh';
                 case 4:
-                  return '4maWh';
+                  return '6.8kWh';
                 case 5:
-                  return '5maWh';
+                  return '8.5kWh';
+              }
+            } else if (groupby == "Week") {
+              switch (value.toInt()) {
+                case 1:
+                  return '20kWh';
+                // case 2:
+                //   return '30kWH';
+                case 3:
+                  return '40kWh';
+                // case 4:
+                //   return '50kWh';
+                case 5:
+                  return '60kWh';
               }
             } else {
               switch (value.toInt()) {
                 case 1:
-                  return '2000kWh';
-                case 2:
-                  return '4000kWh';
+                  return '600kWh';
+                // case 2:
+                //   return '900kWh';
                 case 3:
-                  return '6000kWh';
-                case 4:
-                  return '8000kWh';
+                  return '1200kWh';
+                // case 4:
+                //   return '1500kWh';
                 case 5:
-                  return '10000kWh';
+                  return '1800kWh';
               }
             }
             return '';
@@ -447,28 +472,41 @@ class _LineChartSample2State extends State<LineChartSample2> {
             if (groupby == "Day") {
               switch (value.toInt()) {
                 case 1:
-                  return '1maWh';
-                case 2:
-                  return '2maWh';
+                  return '1kWh';
+                // case 2:
+                //   return '2kWH';
                 case 3:
-                  return '3maWh';
-                case 4:
-                  return '4maWh';
+                  return '3kWh';
+                // case 4:
+                //   return '4kWh';
                 case 5:
-                  return '5maWh';
+                  return '5kWh';
+              }
+            } else if (groupby == "Week") {
+              switch (value.toInt()) {
+                case 1:
+                  return '10kWh';
+                // case 2:
+                //   return '20kWH';
+                case 3:
+                  return '30kWh';
+                // case 4:
+                //   return '40kWh';
+                case 5:
+                  return '50kWh';
               }
             } else {
               switch (value.toInt()) {
                 case 1:
-                  return '2000kWh';
-                case 2:
-                  return '4000kWh';
+                  return '400kWh';
+                // case 2:
+                //   return '600kWh';
                 case 3:
-                  return '6000kWh';
-                case 4:
-                  return '8000kWh';
+                  return '800kWh';
+                // case 4:
+                //   return '1000kWh';
                 case 5:
-                  return '10000kWh';
+                  return '1200kWh';
               }
             }
             return '';

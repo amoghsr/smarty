@@ -161,37 +161,45 @@ class _HomeState extends State<Home> {
             padding: EdgeInsets.symmetric(vertical: 20.0),
             children: <Widget>[
               Padding(
-                padding: EdgeInsets.only(left: 20.0, right: 120.0, bottom: 3.0),
-                child: Opacity(
-                  opacity: 0.8,
-                  child: Text(
-                    '$formattedDate $formattedMonth $formattedYear',
-                    style: TextStyle(
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-              ),
-              Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Text(
-                      'Good evening',
-                      //${widget.currentUser.email}`
-                      style: TextStyle(
-                        fontSize: 24.0,
-                        fontWeight: FontWeight.w700,
-                      ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Padding(
+                          padding: EdgeInsets.only(right: 120.0, bottom: 3.0),
+                          child: Opacity(
+                            opacity: 0.8,
+                            child: Text(
+                              '$formattedDate $formattedMonth $formattedYear',
+                              style: TextStyle(
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Text(
+                          'Good Evening! 😄',
+                          //${widget.currentUser.email}`
+                          style: TextStyle(
+                            fontSize: 24.0,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ],
                     ),
                     (weather == null)
                         ? CircularProgressIndicator()
                         : Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: <Widget>[
-                        Text('Outside'),
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 3.0),
+                          child: Text('Outside'),
+                        ),
                         Text(
                           '${weather.round().toString()}°C',
                           //${widget.currentUser.email}`
