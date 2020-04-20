@@ -86,7 +86,20 @@ class _LineChartSample2State extends State<LineChartSample2> {
     ];
 
     Map<String, int> monthData = snapshot.monthly;
-    List<int> monthly = monthData.values.toList();
+    List<int> monthly = [];
+    int i = 0;
+    Map<String, int> month = {
+      "January": 1,
+      "February": 1,
+      "March": 3,
+      "April": 4,
+      "May": 5
+    };
+    snapshot.monthly.forEach((key, value) {
+      monthly[i] = month[key];
+      i++;
+    });
+    monthly = monthData.values.toList();
     List<FlSpot> monthCoords = [
       FlSpot(0, 0),
     ];
@@ -239,7 +252,7 @@ class _LineChartSample2State extends State<LineChartSample2> {
                 //   return '50kWh';
                 case 5:
                   return '60kWh';
-              }  
+              }
             } else {
               switch (value.toInt()) {
                 case 1:
@@ -482,7 +495,7 @@ class _LineChartSample2State extends State<LineChartSample2> {
                 //   return '40kWh';
                 case 5:
                   return '50kWh';
-              }  
+              }
             } else {
               switch (value.toInt()) {
                 case 1:
