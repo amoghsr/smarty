@@ -18,18 +18,22 @@ class LeaderboardData extends StatefulWidget {
 class _LeaderboardDataState extends State<LeaderboardData> {
   @override
   Widget build(BuildContext context) {
-    List<LeaderboardModel> lb = Provider.of<List<LeaderboardModel>>(context);
+    final points = Provider.of<Map<String, PointsProvider>>(context);
+    List<LeaderboardModel> lb = [];
+    var newMap = {};
+    List<dynamic> newList = [];
+    if (widget.leaderboardType == 'DAILY SAVINGS') {
+      lb = Provider.of<List<LeaderboardModel>>(context);
+      lb.sort((a, b) => a.points.compareTo(b.points));
+    } else {
+      newMap = Map.fromEntries(points.entries.toList()
+        ..sort((e2, e1) => e1.value.currentDay.compareTo(e2.value.currentDay)));
+
+      newMap.forEach((k, v) => newList.add([k, v]));
+    }
 
     double screenwidth = MediaQuery.of(context).size.width;
     double screenheight = MediaQuery.of(context).size.height;
-    final points = Provider.of<Map<String, PointsProvider>>(context);
-    
-    if (widget.leaderboardType == 'DAILY SAVINGS')
-      lb.sort((a, b) => a.points.compareTo(b.points));
-
-    
-    // if (widget.leaderboardType == 'DAILY STREAK')
-    //   points.sort((a, b) => points[(a+1).toString()].currentDay.compareTo(points[(b+1).toString()].currentDay));
 
     final user = Provider.of<User>(context);
 
@@ -68,13 +72,22 @@ class _LeaderboardDataState extends State<LeaderboardData> {
                           child: CircleAvatar(
                             radius: 40,
                             backgroundColor: Theme.of(context).canvasColor,
-                            backgroundImage: NetworkImage(lb[1].userImage),
+                            backgroundImage:
+                                (widget.leaderboardType == 'DAILY SAVINGS')
+                                    ? NetworkImage(lb[1].userImage)
+                                    : NetworkImage(houseUserMap[newList[1][1]
+                                        .houseID
+                                        .toString()]['userImage']),
                           ),
                         ),
                         SizedBox(
                           height: screenheight * 0.01,
                         ),
-                        Text(lb[1].userName.split(' ')[0]),
+                        (widget.leaderboardType == 'DAILY SAVINGS')
+                            ? Text(lb[1].userName.split(' ')[0])
+                            : Text(
+                                houseUserMap[newList[1][1].houseID.toString()]
+                                    ['userName']),
                       ],
                     ),
                   ),
@@ -101,13 +114,22 @@ class _LeaderboardDataState extends State<LeaderboardData> {
                           child: CircleAvatar(
                             radius: 65,
                             backgroundColor: Theme.of(context).canvasColor,
-                            backgroundImage: NetworkImage(lb[0].userImage),
+                            backgroundImage:
+                                (widget.leaderboardType == 'DAILY SAVINGS')
+                                    ? NetworkImage(lb[0].userImage)
+                                    : NetworkImage(houseUserMap[newList[0][1]
+                                        .houseID
+                                        .toString()]['userImage']),
                           ),
                         ),
                         SizedBox(
                           height: screenheight * 0.01,
                         ),
-                        Text(lb[0].userName.split(' ')[0]),
+                        (widget.leaderboardType == 'DAILY SAVINGS')
+                            ? Text(lb[0].userName.split(' ')[0])
+                            : Text(
+                                houseUserMap[newList[0][1].houseID.toString()]
+                                    ['userName']),
                       ],
                     ),
                   ),
@@ -135,13 +157,22 @@ class _LeaderboardDataState extends State<LeaderboardData> {
                           child: CircleAvatar(
                             radius: 40,
                             backgroundColor: Theme.of(context).canvasColor,
-                            backgroundImage: NetworkImage(lb[2].userImage),
+                            backgroundImage:
+                                (widget.leaderboardType == 'DAILY SAVINGS')
+                                    ? NetworkImage(lb[2].userImage)
+                                    : NetworkImage(houseUserMap[newList[2][1]
+                                        .houseID
+                                        .toString()]['userImage']),
                           ),
                         ),
                         SizedBox(
                           height: screenheight * 0.01,
                         ),
-                        Text(lb[2].userName.split(' ')[0]),
+                        (widget.leaderboardType == 'DAILY SAVINGS')
+                            ? Text(lb[2].userName.split(' ')[0])
+                            : Text(
+                                houseUserMap[newList[2][1].houseID.toString()]
+                                    ['userName']),
                       ],
                     ),
                   ),
@@ -153,7 +184,7 @@ class _LeaderboardDataState extends State<LeaderboardData> {
                 physics: NeverScrollableScrollPhysics(),
                 children: [
                   getListTile(lb, user, widget.leaderboardType),
-                  getListTile(lb, user, widget.leaderboardType),
+                  getListTile(newList, user, widget.leaderboardType),
                 ],
               ),
             ),
@@ -163,9 +194,8 @@ class _LeaderboardDataState extends State<LeaderboardData> {
     );
   }
 
-  ListView getListTile(List<LeaderboardModel> lb, User user, String type) {
-    
-    return ListView.builder(  
+  ListView getListTile(dynamic lb, User user, String type) {
+    return ListView.builder(
         shrinkWrap: true,
         itemCount: lb.length,
         // physics: BouncingScrollPhysics(),
@@ -177,17 +207,23 @@ class _LeaderboardDataState extends State<LeaderboardData> {
                 decoration: BoxDecoration(
                     color: Theme.of(context).cardColor,
                     borderRadius: BorderRadius.circular(8.0),
-                    border: (lb[i].houseID == user.houseId)
-                        ? Border.all(color: Colors.green, width: 2)
-                        : null),
+                    border: (type == 'DAILY SAVINGS')
+                        ? (lb[i].houseID == user.houseId)
+                            ? Border.all(color: Colors.green, width: 2)
+                            : null
+                        : (lb[i][1].houseID == user.houseId)
+                            ? Border.all(color: Colors.green, width: 2)
+                            : null),
                 child: ListTile(
                   // TODO: MAKE THE LIST TILE CLICKABLE WHICH LEADS TO THE USER PROFILE FOR THAT HOME OWNER alister
                   onTap: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) =>
-                            UserProfile(houseID: lb[i].houseID),
+                        builder: (context) => (type == 'DAILY SAVINGS')
+                            ? UserProfile(houseID: lb[i].houseID)
+                            : UserProfile(
+                                houseID: lb[i][1].houseID),
                       ),
                     );
                   },
@@ -205,21 +241,23 @@ class _LeaderboardDataState extends State<LeaderboardData> {
                         child: CircleAvatar(
                           radius: 20,
                           backgroundColor: Theme.of(context).canvasColor,
-                          backgroundImage: NetworkImage(lb[i].userImage),
+                          backgroundImage: (type == 'DAILY SAVINGS')
+                              ? NetworkImage(lb[i].userImage)
+                              : NetworkImage(
+                                  houseUserMap[lb[i][1].houseID]
+                                      ['userImage']),
                         ),
                       ),
                       SizedBox(width: 20),
-                      Text(lb[i].userName),
+                      (type == 'DAILY SAVINGS')
+                          ? Text(lb[i].userName)
+                          : Text(houseUserMap[lb[i][1].houseID]
+                              ['userName']),
                     ],
                   ),
                   trailing: (type == 'DAILY SAVINGS')
                       ? Text(lb[i].points.toString())
-                      : Text(
-                          Provider.of<Map<String, PointsProvider>>(
-                                  context)[(i + 1).toString()]
-                              .currentDay
-                              .toString(),
-                        ),
+                      : Text(lb[i][1].currentDay.toString()),
                 ),
               ),
             ],
