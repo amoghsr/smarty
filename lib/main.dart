@@ -46,16 +46,20 @@ class MyApp extends StatelessWidget {
         ],
         child: Consumer<BoltProvider>(builder: (context, counter, _) {
           return Consumer<CurrentDayProvider>(builder: (context, counter, _) {
-            return StreamProvider<List<Room>>.value(
-              value: DatabaseService1().streamRooms(Provider.of<User>(context)),
-              child: StreamProvider<List<Device>>.value(
-                value: DatabaseService1().streamDevices(Provider.of<User>(context)),
-                child: MaterialApp(
-                  home: Wrapper(),
-                  theme: Provider.of<ThemeModel>(context).currentTheme,
-                ),
-              ),
+            return MaterialApp(
+              home: Wrapper(),
+              theme: Provider.of<ThemeModel>(context).currentTheme,
             );
+//            return StreamProvider<List<Room>>.value(
+//              value: DatabaseService1().streamRooms(Provider.of<User>(context)),
+//              child: StreamProvider<List<Device>>.value(
+//                value: DatabaseService1().streamDevices(Provider.of<User>(context)),
+//                child: MaterialApp(
+//                  home: Wrapper(),
+//                  theme: Provider.of<ThemeModel>(context).currentTheme,
+//                ),
+//              ),
+//            );
           });
         }),
       ),

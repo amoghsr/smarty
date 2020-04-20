@@ -40,7 +40,6 @@ class DatabaseService1 {
 
   Stream<Consumption> streamConsumedEnergy(User user) {
     CollectionReference ref = _db
-//
         .collection('Energy')
         .document(user.houseId)
         .collection("consumed_energy");

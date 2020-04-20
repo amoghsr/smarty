@@ -65,7 +65,6 @@ class _OptimizationState extends State<Optimization> {
     final user = Provider.of<User>(context);
 
     final devices = Provider.of<List<Device>>(context);
-    print('Devices: ${devices[0].deviceName}');
     if (devices != null) {
       for (var i in rooms) {
         for (var j in i.d) {

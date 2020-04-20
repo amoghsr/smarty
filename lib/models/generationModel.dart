@@ -37,11 +37,9 @@ class Generation {
             key.toString() == formattedDate) {
           dailyTotal = int.parse(value["total_day"].ceil().toString());
           weekly[key] = int.parse(value["total_day"].ceil().toString());
-          print("debug8");
           value.forEach((key1, value1) {
             if (key1.toString() != "total_day") {
               daily[key1.toString()] = value1.ceil();
-              print("debug6");
             }
           });
         }
@@ -50,13 +48,11 @@ class Generation {
           value.forEach((key1, value1) {
             if (key1.toString() == "total_day") {
               weekly[key] = value1.ceil();
-              print("debug7");
             }
           });
         }
       });
       monthly[element.documentID] = element.data["total_month"].ceil();
-      print("debug8");
     });
 
     var room = Generation(
