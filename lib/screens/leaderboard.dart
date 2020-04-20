@@ -25,15 +25,7 @@ class _LeaderboardState extends State<Leaderboard> {
   Widget build(BuildContext context) {
     double screenwidth = MediaQuery.of(context).size.width;
     double screenheight = MediaQuery.of(context).size.height;
-    // USED FOR TESTING POP UP  
-    // Provider.of<BoltProvider>(context, listen: false).setBalance(10);
     return Scaffold(
-      // appBar: AppBar(
-      // title: Text(
-      //   'Leaderboard',
-      //   style: kAppBarTextStyle,
-      // ),
-      // ),
       drawer: DrawerPage(),
       body: DefaultTabController(
         length: 2,

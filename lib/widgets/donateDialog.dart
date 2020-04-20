@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:smarty/alertBox.dart';
 import 'package:smarty/models/boltProvider.dart';
+import 'package:smarty/models/user.dart';
 import 'package:smarty/shared/constants.dart';
 
 class DonateDialog extends StatefulWidget {
@@ -37,6 +38,8 @@ class _DonateDialogState extends State<DonateDialog> {
 
   // double conversion = 0.23;
   Widget build(BuildContext context) {
+    final user = Provider.of<User>(context);
+
     // Returning a dialog box. Here we are specifying the properties of the dialog box.
     return Dialog(
       shape: RoundedRectangleBorder(
@@ -385,6 +388,8 @@ class TransactionDialog extends StatefulWidget {
 
 class _TransactionDialogState extends State<TransactionDialog> {
   Widget build(BuildContext context) {
+    final user = Provider.of<User>(context);
+
     int type = 1;
     return transactionDialog(
         context,
@@ -411,6 +416,8 @@ transactionDialog(
     double bal,
     double donationAmount,
     int c) {
+  final user = Provider.of<User>(context);
+
   return Stack(
     children: <Widget>[
       //...bottom card part,
@@ -522,8 +529,9 @@ transactionDialog(
                           onTap: () {
                             Navigator.pop(context);
                             if (bal < donationAmount) {
-                              Provider.of<BoltProvider>(context, listen: false)
-                                  .setBalance(0);
+                              Provider.of<Map<String, PointsProvider>>(context,
+                                      listen: false)[user.houseId]
+                                  .setBalance(user.houseId, 0);
 
                               showDialog(
                                 context: context,
@@ -554,8 +562,10 @@ transactionDialog(
                                 ),
                               );
                             } else {
-                              Provider.of<BoltProvider>(context, listen: false)
-                                  .setBalance(bal - donationAmount);
+                              Provider.of<Map<String, PointsProvider>>(context,
+                                      listen: false)[user.houseId]
+                                  .setBalance(
+                                      user.houseId, bal - donationAmount);
                               if (c != 1) {
                                 showDialog(
                                     context: context,

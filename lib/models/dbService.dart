@@ -15,10 +15,10 @@ class DatabaseService1 {
 
   Stream<List<LeaderboardModel>> streamLeaderBoards(User user) {
     DocumentReference ref = _db.collection('Homes').document("Leaderboard");
-    return ref.snapshots().map(CreateLeaderBoard);
+    return ref.snapshots().map(createLeaderBoard);
   }
 
-  List<LeaderboardModel> CreateLeaderBoard(DocumentSnapshot doc) {
+  List<LeaderboardModel> createLeaderBoard(DocumentSnapshot doc) {
     List<LeaderboardModel> w = [];
     doc.data.forEach((key, value) {
       w.add(LeaderboardModel.fromFirestore(key, value));
@@ -106,17 +106,25 @@ class DatabaseService1 {
     return x;
   }
 
-  Stream<Map<String, BoltProvider>> getBolts() {
+  Stream<Map<String, PointsProvider>> streamPoints() {
     var ref = _db.collection('Points');
-    return ref.snapshots().map(getBoltsMap);
+    return ref.snapshots().map(getPointsMap);
   }
 
-  Map<String, BoltProvider> getBoltsMap(QuerySnapshot doc) {
-    Map<String, BoltProvider> rer = {};
+  Map<String, PointsProvider> getPointsMap(QuerySnapshot doc) {
+    Map<String, PointsProvider> rer = {};
     doc.documents.forEach((element) {
-      rer[element.documentID] = new BoltProvider(
-          num.parse(element.data["Bolts"]), element.documentID);
+      // print(element.data.);
+      // print("VALUE ${element.data['Bolts']}");
+
+      rer[element.documentID] = PointsProvider(
+        houseID: element.documentID,
+        balance: element.data['Bolts'],
+        currentDay: element.data["CurrentDay"],
+        donationBadges: element.data["DonationBadges"],
+      );
     });
+    
 
     return rer;
   }

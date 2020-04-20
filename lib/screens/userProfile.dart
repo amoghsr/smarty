@@ -14,6 +14,8 @@ import 'package:smarty/models/boltProvider.dart';
 
 class UserProfile extends StatefulWidget {
   @override
+  String houseID;
+  UserProfile({this.houseID});
   _UserProfileState createState() => _UserProfileState();
 }
 
@@ -100,7 +102,7 @@ class _UserProfileState extends State<UserProfile> {
           'Donated to the Red Cross Charity'
         ],
         [
-          true,
+          false,
           Image.asset('assets/images/paw_badge.png', width: 100, height: 100),
           'Animal Lover',
           'Donated to the Animal Foundation'
@@ -144,13 +146,15 @@ class _UserProfileState extends State<UserProfile> {
   @override
   Widget build(BuildContext context) {
     //list of users of current house name-email layout
-    List<LeaderboardModel> lb = Provider.of<List<LeaderboardModel>>(context);
-    final bal = Provider.of<BoltProvider>(context);
+    // List<LeaderboardModel> lb = Provider.of<List<LeaderboardModel>>(context);
+
     double screenwidth = MediaQuery.of(context).size.width;
     double screenheight = MediaQuery.of(context).size.height;
     //TODO: GET CURRENT STREAK DAY OVER HERE
-    final currentDay = Provider.of<CurrentDayProvider>(context);
-    for (int i = 1; i <= currentDay.getCurrentDay(); i++) {
+    final points = Provider.of<Map<String, PointsProvider>>(context);
+
+    // final currentDay = Provider.of<CurrentDayProvider>(context);
+    for (int i = 1; i <= points[widget.houseID].currentDay; i++) {
       setState(() {
         if (i == 1) badges[0][1][0][0] = true;
         if (i == 15) badges[0][1][1][0] = true;
@@ -158,6 +162,13 @@ class _UserProfileState extends State<UserProfile> {
         if (i == 30) badges[2][1][1][0] = true;
       });
     }
+    if (points[widget.houseID].donationBadges.contains(0))
+      badges[1][1][0][0] = true;
+    if (points[widget.houseID].donationBadges.contains(1))
+      badges[1][1][1][0] = true;
+    if (points[widget.houseID].donationBadges.contains(1))
+      badges[1][1][2][0] = true;
+
     return StreamBuilder(
         stream: stream,
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
@@ -191,7 +202,8 @@ class _UserProfileState extends State<UserProfile> {
                           children: <Widget>[
                             CircleAvatar(
                               //TODO: Current Home Owner's User Image
-                              backgroundImage: NetworkImage(lb[1].userImage),
+                              backgroundImage: NetworkImage(
+                                  houseUserMap[widget.houseID]['userImage']),
                               maxRadius: 65,
                             ),
                             Padding(
@@ -203,7 +215,9 @@ class _UserProfileState extends State<UserProfile> {
                                   Text(
                                     //TODO: Current Home Owner's User Name
                                     // snapshot.data['displayName']
-                                    lb[0].userName + "'s Home",
+                                    houseUserMap[widget.houseID]['userName']
+                                            .split(' ')[0] +
+                                        "'s Home",
                                     style: TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.w700,
@@ -218,7 +232,7 @@ class _UserProfileState extends State<UserProfile> {
                                       ),
                                       Text(
                                         //TODO: Current bolt balance (reflected and updated throughout the app), stored in the db
-                                        'Balance: ${bal.getBalanceAsInt()}',
+                                        'Balance: ${points[widget.houseID].getBalanceAsInt()}',
                                         style: TextStyle(
                                           fontSize: 14.5,
                                         ),
@@ -264,8 +278,8 @@ class _UserProfileState extends State<UserProfile> {
                                                   //TODO: Replace 3 with current daily streak day + 1
                                                   //TODO: Designs the progress bar for the current streak day
                                                   index ==
-                                                          currentDay
-                                                                  .getCurrentDay() -
+                                                          points[widget.houseID]
+                                                                  .currentDay -
                                                               1
                                                       ? Column(
                                                           children: <Widget>[
@@ -304,8 +318,9 @@ class _UserProfileState extends State<UserProfile> {
                                                         )
                                                       //TODO: 4 is replaced with (current daily streak day - 1)
                                                       : index <
-                                                              currentDay
-                                                                      .getCurrentDay() -
+                                                              points[widget
+                                                                          .houseID]
+                                                                      .currentDay -
                                                                   1
                                                           ? Column(
                                                               children: <

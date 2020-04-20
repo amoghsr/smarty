@@ -128,10 +128,12 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     final rooms = Provider.of<List<Room>>(context);
 
-    // TODO: AI Condition Here
-    if (Provider.of<Consumption>(context, listen: false).dailyTotal >=
-        Provider.of<Generation>(context, listen: false).dailyTotal * 0.8)
-      Future.delayed(Duration.zero, () => showAIAlert(context, rooms));
+    // // TODO: AI Condition Here
+    // if (Provider.of<Consumption>(context, listen: false).dailyTotal >=
+    //     Provider.of<Generation>(context, listen: false).dailyTotal * 0.8)
+    //   Future.delayed(Duration.zero, () => showAIAlert(context, rooms));
+
+    
 
     return SafeArea(
       child: Scaffold(

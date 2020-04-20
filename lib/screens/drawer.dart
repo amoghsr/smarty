@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:smarty/authenticate/authenticate.dart';
+import 'package:smarty/models/leaderboardModel.dart';
 import 'package:smarty/models/themeModel.dart';
 import 'package:smarty/screens/home_manager/navigation_manager.dart';
 import 'package:smarty/screens/manageUsers.dart';
@@ -62,12 +63,13 @@ class _DrawerPageState extends State<DrawerPage> {
                       onTap: () => Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => UserProfile(),
+                          builder: (context) =>
+                              UserProfile(houseID: user.houseId),
                         ),
                       ),
                       child: UserAccountsDrawerHeader(
                         accountName: Text(
-                          snapshot.data['displayName'],
+                          houseUserMap[user.houseId]['userName'],
                           style: TextStyle(
                             fontFamily: 'Montserrat',
                             fontWeight: FontWeight.w700,
@@ -80,12 +82,8 @@ class _DrawerPageState extends State<DrawerPage> {
                           ),
                         ),
                         currentAccountPicture: CircleAvatar(
-                          child: Text(
-                            user.type,
-                            style: TextStyle(
-                              fontFamily: 'Montserrat',
-                            ),
-                          ),
+                          backgroundImage: NetworkImage(
+                              houseUserMap[user.houseId]['userImage']),
                         ),
                       ),
                     );
@@ -93,8 +91,8 @@ class _DrawerPageState extends State<DrawerPage> {
 // ListTile represents a list tile item in the menu
               ListTile(
 // Leading is an element in the start of the list tile horizontally
-                leading: Container(
-                    child: Icon(MaterialCommunityIcons.face_profile)),
+                leading:
+                    Container(child: Icon(MaterialCommunityIcons.face_profile)),
 // Title of the list
                 title: Text(
                   'Manage Users',

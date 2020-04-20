@@ -1,19 +1,32 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
-//Map<Hid,boltProvider>
-class BoltProvider with ChangeNotifier {
-  double _balance;
+//Map<Hid,PointsProvider>
+class PointsProvider {
   String houseID;
-  BoltProvider(this._balance, this.houseID);
-  getBalance() => _balance;
-  getBalanceAsInt() => _balance.toInt();
-  setBalance(double balance) {
+  num balance;
+  num currentDay;
+  List<dynamic> donationBadges;
+
+  PointsProvider(
+      {this.houseID, this.balance, this.currentDay, this.donationBadges});
+
+  factory PointsProvider.fromFirestore(DocumentSnapshot doc) {
+    Map data = doc.data;
+    var points = PointsProvider(
+        houseID: doc.documentID,
+        balance: data[doc.documentID]['Bolts'],
+        currentDay: data[doc.documentID]['CurrentDay'],
+        donationBadges: data[doc.documentID]['DonationBadges']);
+    return points;
+  }
+  getBalance() => balance.toDouble();
+  getBalanceAsInt() => balance.toInt();
+  setBalance(String hID, double _balance) {
     FirebaseDatabase.instance
         .reference()
-        .child("Points/" + houseID + "/")
-        .update({"Bolts": balance.toInt()});
+        .child("Points/" + hID + "/")
+        .update({"Bolts": _balance.toInt()});
   }
-
-  notifyListeners();
 }

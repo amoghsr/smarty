@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:smarty/models/boltProvider.dart';
 import 'package:smarty/models/leaderboardModel.dart';
 import 'package:smarty/models/user.dart';
+import 'package:smarty/screens/userProfile.dart';
 
 class LeaderboardData extends StatefulWidget {
   @override
@@ -16,18 +18,21 @@ class LeaderboardData extends StatefulWidget {
 class _LeaderboardDataState extends State<LeaderboardData> {
   @override
   Widget build(BuildContext context) {
-    List<LeaderboardModel> lb = (widget.leaderboardType == 'DAILY SAVINGS')
-        ? Provider.of<List<LeaderboardModel>>(context)
-        : streakLeaderboard;
+    List<LeaderboardModel> lb = Provider.of<List<LeaderboardModel>>(context);
 
     double screenwidth = MediaQuery.of(context).size.width;
     double screenheight = MediaQuery.of(context).size.height;
+    final points = Provider.of<Map<String, PointsProvider>>(context);
+    
+    if (widget.leaderboardType == 'DAILY SAVINGS')
+      lb.sort((a, b) => a.points.compareTo(b.points));
 
-    (widget.leaderboardType == 'DAILY STREAK')
-        ? lb.sort((b, a) => a.points.compareTo(b.points))
-        : lb.sort((a, b) => a.points.compareTo(b.points));
+    
+    // if (widget.leaderboardType == 'DAILY STREAK')
+    //   points.sort((a, b) => points[(a+1).toString()].currentDay.compareTo(points[(b+1).toString()].currentDay));
 
     final user = Provider.of<User>(context);
+
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -147,8 +152,8 @@ class _LeaderboardDataState extends State<LeaderboardData> {
               child: TabBarView(
                 physics: NeverScrollableScrollPhysics(),
                 children: [
-                  getListTile(lb, user),
-                  getListTile(lb, user),
+                  getListTile(lb, user, widget.leaderboardType),
+                  getListTile(lb, user, widget.leaderboardType),
                 ],
               ),
             ),
@@ -158,8 +163,9 @@ class _LeaderboardDataState extends State<LeaderboardData> {
     );
   }
 
-  ListView getListTile(List<LeaderboardModel> lb, User user) {
-    return ListView.builder(
+  ListView getListTile(List<LeaderboardModel> lb, User user, String type) {
+    
+    return ListView.builder(  
         shrinkWrap: true,
         itemCount: lb.length,
         // physics: BouncingScrollPhysics(),
@@ -171,17 +177,20 @@ class _LeaderboardDataState extends State<LeaderboardData> {
                 decoration: BoxDecoration(
                     color: Theme.of(context).cardColor,
                     borderRadius: BorderRadius.circular(8.0),
-                    border: (lb[i].userName == "House No " + user.houseId)
+                    border: (lb[i].houseID == user.houseId)
                         ? Border.all(color: Colors.green, width: 2)
                         : null),
                 child: ListTile(
                   // TODO: MAKE THE LIST TILE CLICKABLE WHICH LEADS TO THE USER PROFILE FOR THAT HOME OWNER alister
-//                   onTap: () {
-//                     setState(() {
-//                       currRoom = rooms[l].roomName;
-//                       currDevice = rooms[l].d[i];
-//                     });
-//                   },
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            UserProfile(houseID: lb[i].houseID),
+                      ),
+                    );
+                  },
                   title: Row(
                     children: <Widget>[
                       Text((i + 1).toString()),
@@ -203,9 +212,14 @@ class _LeaderboardDataState extends State<LeaderboardData> {
                       Text(lb[i].userName),
                     ],
                   ),
-                  trailing: Text(
-                    lb[i].points.toString(),
-                  ),
+                  trailing: (type == 'DAILY SAVINGS')
+                      ? Text(lb[i].points.toString())
+                      : Text(
+                          Provider.of<Map<String, PointsProvider>>(
+                                  context)[(i + 1).toString()]
+                              .currentDay
+                              .toString(),
+                        ),
                 ),
               ),
             ],

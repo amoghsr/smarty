@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_vlc_player/generated/i18n.dart';
+import 'package:smarty/models/user.dart';
 import 'package:smarty/screens/drawer.dart';
 import 'package:smarty/shared/constants.dart';
 import 'package:smarty/widgets/voiceAgent.dart';
@@ -18,10 +19,10 @@ class EnergySharingScreen extends StatefulWidget {
 
 class _EnergySharingScreenState extends State<EnergySharingScreen> {
   @override
-  double electricityAmount = 5;
-  double capacity = 48;
-  int click = 0;
-  double conversion = 0.23;
+  num electricityAmount = 5;
+  num capacity = 48;
+  num click = 0;
+  num conversion = 0.23;
   Color selectedColor = Colors.deepOrange;
   Color iconColor = Colors.white;
 
@@ -63,9 +64,11 @@ class _EnergySharingScreenState extends State<EnergySharingScreen> {
   }
 
   Widget build(BuildContext context) {
-    final bal = Provider.of<BoltProvider>(context);
-    double screenwidth = MediaQuery.of(context).size.width;
-    double screenheight = MediaQuery.of(context).size.height;
+    final user = Provider.of<User>(context);
+
+    final bal = Provider.of<Map<String, PointsProvider>>(context);
+    num screenwidth = MediaQuery.of(context).size.width;
+    num screenheight = MediaQuery.of(context).size.height;
     List<List<dynamic>> charities = [
       [
         "Red Cross",
@@ -98,7 +101,7 @@ class _EnergySharingScreenState extends State<EnergySharingScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
-                Text('${bal.getBalanceAsInt()}',
+                Text('${bal[user.houseId].getBalanceAsInt()}',
                     style: kAppBarTextStyle.copyWith(fontSize: 20.0)),
                 Icon(Icons.flash_on, size: 20.0, color: Colors.deepOrange),
               ],
@@ -212,7 +215,7 @@ class _EnergySharingScreenState extends State<EnergySharingScreen> {
                                     type: 0,
                                     image: charities[index][2],
                                     title: charities[index][0],
-                                    balance: bal.getBalance(),
+                                    balance: bal[user.houseId].getBalance(),
                                     description:
                                         "Sprinklers have been activated.",
                                     col: charities[index][3],
@@ -397,7 +400,7 @@ class _EnergySharingScreenState extends State<EnergySharingScreen> {
                                     crossAxisAlignment: CrossAxisAlignment.end,
                                     children: <Widget>[
                                       Text(
-                                        '${(double.parse((electricityAmount * conversion).toStringAsFixed(2)))}',
+                                        '${(num.parse((electricityAmount * conversion).toStringAsFixed(2)))}',
                                         style: TextStyle(
                                           fontSize: 28,
                                         ),
@@ -529,11 +532,11 @@ class _EnergySharingScreenState extends State<EnergySharingScreen> {
                                     "You are buying",
                                     (click == 0)
                                         ? "$electricityAmount kWh for $electricityAmount "
-                                        : "$electricityAmount kWh for ${(double.parse((electricityAmount * conversion).toStringAsFixed(2)))}",
+                                        : "$electricityAmount kWh for ${(num.parse((electricityAmount * conversion).toStringAsFixed(2)))}",
                                     "Would you like to proceed?",
                                     Colors.green,
                                     click,
-                                    bal.getBalance(),
+                                    bal[user.houseId].getBalance(),
                                     electricityAmount,
                                     0), // The required child is the content inside the dialog box.
                               );
@@ -561,12 +564,12 @@ class _EnergySharingScreenState extends State<EnergySharingScreen> {
                                       "You are purchasing",
                                       (click == 0)
                                           ? "${electricityAmount.toInt()} kWh for ${electricityAmount.toInt()} "
-                                          : "${electricityAmount.toInt()} kWh for ${(double.parse((electricityAmount * conversion).toStringAsFixed(2)))}",
+                                          : "${electricityAmount.toInt()} kWh for ${(num.parse((electricityAmount * conversion).toStringAsFixed(2)))}",
                                       "Would you like to proceed?",
                                       Colors.green,
                                       click,
-                                      bal.getBalance(),
-                                      electricityAmount,
+                                      bal[user.houseId].getBalance(),
+                                      electricityAmount.toDouble(),
                                       0), // The required child is the content inside the dialog box.
                                 );
                               },

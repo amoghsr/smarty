@@ -35,29 +35,12 @@ class MyApp extends StatelessWidget {
     return StreamProvider<User>.value(
       value: AuthService().user,
       //Todo: remove all this
-      child: MultiProvider(
-        providers: [
-          ChangeNotifierProvider<BoltProvider>(
-            create: (_) => BoltProvider(25, "d"),
-          ),
-          ChangeNotifierProvider<CurrentDayProvider>(
-            create: (_) => CurrentDayProvider(20, "e"),
-          ),
-        ],
-        child: Consumer<BoltProvider>(builder: (context, counter, _) {
-          return Consumer<CurrentDayProvider>(builder: (context, counter, _) {
-            return StreamProvider<List<Room>>.value(
-              value: DatabaseService1().streamRooms(Provider.of<User>(context)),
-              child: StreamProvider<List<Device>>.value(
-                value: DatabaseService1().streamDevices(Provider.of<User>(context)),
-                child: MaterialApp(
-                  home: Wrapper(),
-                  theme: Provider.of<ThemeModel>(context).currentTheme,
-                ),
-              ),
-            );
-          });
-        }),
+      child: StreamProvider<Map<String, PointsProvider>>.value(
+        value: DatabaseService1().streamPoints(),
+        child: MaterialApp(
+          home: Wrapper(),
+          theme: Provider.of<ThemeModel>(context).currentTheme,
+        ),
       ),
     );
   }

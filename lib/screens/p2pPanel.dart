@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:smarty/alertBox.dart';
+import 'package:smarty/models/user.dart';
 import 'package:smarty/services/dialogProvider.dart';
 import 'package:smarty/shared/constants.dart';
 import 'package:smarty/models/boltProvider.dart';
@@ -28,7 +29,8 @@ class _P2PState extends State<P2P> {
   }
 
   Widget build(BuildContext context) {
-    final bal = Provider.of<BoltProvider>(context);
+    final user = Provider.of<User>(context);
+    final bal = Provider.of<Map<String, PointsProvider>>(context);
     double screenwidth = MediaQuery.of(context).size.width;
     double screenheight = MediaQuery.of(context).size.height;
     List<List<dynamic>> charities = [
@@ -61,7 +63,7 @@ class _P2PState extends State<P2P> {
           Row(
             children: <Widget>[
               Text(
-                '${bal.getBalanceAsInt()}',
+                '${bal[user.houseId].getBalanceAsInt()}',
                 style: TextStyle(
                   fontSize: 19,
                 ),
@@ -199,7 +201,7 @@ class _P2PState extends State<P2P> {
                                     type: 0,
                                     image: charities[index][2],
                                     title: charities[index][0],
-                                    balance: bal.getBalance(),
+                                    balance: bal[user.houseId].getBalance(),
                                     description:
                                         "Sprinklers have been activated.",
                                     col: charities[index][3],
@@ -458,7 +460,7 @@ class _P2PState extends State<P2P> {
                               "Would you like to proceed?",
                               Colors.green,
                               click,
-                              bal.getBalance(),
+                              bal[user.houseId].getBalance(),
                               electricityAmount,
                               0), // The required child is the content inside the dialog box.
                         );
@@ -490,7 +492,7 @@ class _P2PState extends State<P2P> {
                                 "Would you like to proceed?",
                                 Colors.green,
                                 click,
-                                bal.getBalance(),
+                                bal[user.houseId].getBalance(),
                                 electricityAmount,
                                 0), // The required child is the content inside the dialog box.
                           );
