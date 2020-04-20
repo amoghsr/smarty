@@ -91,8 +91,6 @@ class _LineChartSample2State extends State<LineChartSample2> {
       "April": 3,
       "May": 4
     };
-    print("scsdcsd");
-    print(snapshot.monthly);
     Map<String, int> monthData = snapshot.monthly;
     List<int> monthly = new List(monthData.length);
     snapshot.monthly.forEach((key, value) {
