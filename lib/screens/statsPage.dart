@@ -153,7 +153,7 @@ class _StatsScreenState extends State<StatsScreen> {
                                 20.0,
                                 y.dailyTotal > 0
                                     ? (y.dailyTotal / 100).toDouble()
-                                    : 0,
+                                    : 0.0,
                                 buildCircularProgressWidget(
                                   80,
                                   20.0,
@@ -501,7 +501,7 @@ class _StatsScreenState extends State<StatsScreen> {
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: <Widget>[
                               Text(
-                                (weekly / y.weekly.length).toString(),
+                                (weekly / y.weekly.length).toStringAsFixed(2),
                                 style: TextStyle(
                                   height: 1,
                                   fontSize: 34.0,
