@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconpicker/Models/IconPack.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -231,19 +232,28 @@ class _CustomDialogState extends State<CustomDialog> {
       "Description": description,
       "color": color
     });
-    print(routine.Name + "  name   " + Name);
-    Firestore.instance
-        .collection("Routines")
-        .document(user.houseId)
-        .collection("Current Routines")
-        .document(Name)
-        .setData(routine.devices, merge: true);
+    FirebaseDatabase.instance
+        .reference()
+        .child("Homes/" + user.houseId + "/Routines")
+        .set({
+      Name: {
+        "STime": routine.STime,
+        "ETime": routine.ETime,
+        "Device": routine.devices
+      }
+    });
     Firestore.instance
         .collection("Routines")
         .document(user.houseId)
         .collection("Suggested Routines")
         .document(routine.Name)
         .delete();
+    Firestore.instance
+        .collection("Routines")
+        .document(user.houseId)
+        .collection("Current Routines")
+        .document(Name)
+        .setData(routine.devices, merge: true);
   }
 
   _pickIcon() async {

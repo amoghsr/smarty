@@ -2,7 +2,8 @@ import 'package:smarty/models/dbService.dart';
 
 class LeaderboardModel {
   String userImage;
-  String userName; //house id
+  String userName;
+  String house; //house id
   int points; //house current day consumption
 
   LeaderboardModel({this.userImage, this.userName, this.points});

@@ -39,7 +39,11 @@ class _AllDevicesState extends State<AllDevices> with TickerProviderStateMixin {
         va.forEach((key, va) {
           total = total + va;
         });
-        usage[key] = num.parse(total.toString().substring(0, 4));
+        try {
+          usage[key] = num.parse(total.toString().substring(0, 4));
+        } catch (s) {
+          usage[key] = 0;
+        }
       });
     }
     if (y != null) {

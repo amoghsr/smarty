@@ -145,6 +145,7 @@ class _UserProfileState extends State<UserProfile> {
   Widget build(BuildContext context) {
     //list of users of current house name-email layout
     List<LeaderboardModel> lb = Provider.of<List<LeaderboardModel>>(context);
+    final x = Provider.of<Map<String, BoltProvider>>(context);
     final bal = Provider.of<BoltProvider>(context);
     double screenwidth = MediaQuery.of(context).size.width;
     double screenheight = MediaQuery.of(context).size.height;

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:smarty/models/routineModel.dart';
@@ -36,6 +37,11 @@ class CurrentRoutinePage extends StatelessWidget {
               .collection("Current Routines")
               .document(routine.routineName)
               .delete();
+          FirebaseDatabase.instance
+              .reference()
+              .child(
+                  "Homes/" + user.houseId + "/Routines/" + routine.routineName)
+              .remove();
         }
 
         User user = Provider.of<User>(context);
@@ -57,8 +63,8 @@ class CurrentRoutinePage extends StatelessWidget {
             FlatButton(
               child: const Text(
                 'Delete',
-                style: TextStyle(
-                    color: Colors.red, fontWeight: FontWeight.bold),
+                style:
+                    TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
               ),
               onPressed: () {
                 delete(routine, user);
