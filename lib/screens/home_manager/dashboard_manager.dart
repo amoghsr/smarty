@@ -9,7 +9,7 @@ import 'dart:async';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:smarty/models/boltProvider.dart';
+import 'package:smarty/models/pointsProvider.dart';
 import 'package:smarty/screens/home_manager/register_homeowner.dart';
 import 'package:smarty/services/auth.dart';
 import 'package:smarty/services/dialogProvider.dart';

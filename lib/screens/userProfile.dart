@@ -4,13 +4,13 @@ import 'package:provider/provider.dart';
 import 'package:smarty/alertBox.dart';
 import 'package:smarty/models/currentDayProvider.dart';
 import 'package:smarty/models/dbService.dart';
+import 'package:smarty/models/pointsProvider.dart';
 import 'package:smarty/models/user.dart';
 import 'package:smarty/shared/constants.dart';
 import 'package:smarty/widgets/voiceAgent.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:smarty/models/leaderboardModel.dart';
-import 'package:smarty/models/boltProvider.dart';
 
 class UserProfile extends StatefulWidget {
   @override

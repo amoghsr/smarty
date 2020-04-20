@@ -8,7 +8,7 @@ import 'package:smarty/services/auth.dart';
 import 'package:smarty/services/dialogLocator.dart';
 import 'package:smarty/services/service_locator.dart';
 import 'package:smarty/wrapper.dart';
-import 'package:smarty/models/boltProvider.dart';
+import 'package:smarty/models/pointsProvider.dart';
 
 import 'models/dbService.dart';
 import 'models/devicesModel.dart';

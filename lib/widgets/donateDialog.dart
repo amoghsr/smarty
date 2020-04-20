@@ -3,7 +3,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:smarty/alertBox.dart';
-import 'package:smarty/models/boltProvider.dart';
+import 'package:smarty/models/pointsProvider.dart';
 import 'package:smarty/models/user.dart';
 import 'package:smarty/shared/constants.dart';
 

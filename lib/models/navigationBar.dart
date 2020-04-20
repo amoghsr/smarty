@@ -13,7 +13,7 @@ import 'package:smarty/screens/statsPage.dart';
 import 'package:smarty/services/dialogProvider.dart';
 import 'package:smarty/shared/constants.dart';
 
-import 'boltProvider.dart';
+import 'pointsProvider.dart';
 import 'devicesModel.dart';
 import 'generationModel.dart';
 

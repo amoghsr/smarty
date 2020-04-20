@@ -12,7 +12,6 @@ import 'package:smarty/models/user.dart';
 import 'package:smarty/screens/home_manager/dashboard_manager.dart';
 import 'package:smarty/services/dialogManager.dart';
 import 'package:smarty/services/dialogProvider.dart';
-import 'models/boltProvider.dart';
 import 'models/consumptionModel.dart';
 import 'models/currentDayProvider.dart';
 import 'models/dbRoutines.dart';

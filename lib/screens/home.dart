@@ -14,7 +14,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:smarty/models/boltProvider.dart';
+import 'package:smarty/models/pointsProvider.dart';
 import 'package:smarty/models/roomModel.dart';
 import 'package:smarty/models/consumptionModel.dart';
 import 'package:smarty/models/generationModel.dart';
@@ -88,10 +88,10 @@ class _HomeState extends State<Home> {
     // Timer.run(
     //     () => Provider.of<DialogProvider>(context, listen: false).popAi());
 
-    if (Provider.of<Consumption>(context, listen: false).dailyTotal >=
-        Provider.of<Generation>(context, listen: false).dailyTotal * 0.95)
-      Timer.run(
-          () => Provider.of<DialogProvider>(context, listen: false).popP2P());
+    // if (Provider.of<Consumption>(context, listen: false).dailyTotal >=
+    //     Provider.of<Generation>(context, listen: false).dailyTotal * 0.95)
+    //   Timer.run(
+    //       () => Provider.of<DialogProvider>(context, listen: false).popP2P());
 
     // if (Provider.of<BoltProvider>(context, listen: false).getBalanceAsInt() == 10)
     //   Timer.run(
@@ -133,7 +133,6 @@ class _HomeState extends State<Home> {
     //     Provider.of<Generation>(context, listen: false).dailyTotal * 0.8)
     //   Future.delayed(Duration.zero, () => showAIAlert(context, rooms));
 
-    Future.delayed(Duration.zero, () => showAIAlert(context, rooms));
 
     return SafeArea(
       child: Scaffold(
@@ -190,19 +189,19 @@ class _HomeState extends State<Home> {
                     (weather == null)
                         ? CircularProgressIndicator()
                         : Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: <Widget>[
-                              Text('Outside'),
-                              Text(
-                                '${weather.round().toString()}°C',
-                                //${widget.currentUser.email}`
-                                style: TextStyle(
-                                  fontSize: 24.0,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                              ),
-                            ],
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: <Widget>[
+                        Text('Outside'),
+                        Text(
+                          '${weather.round().toString()}°C',
+                          //${widget.currentUser.email}`
+                          style: TextStyle(
+                            fontSize: 24.0,
+                            fontWeight: FontWeight.w700,
                           ),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ),
