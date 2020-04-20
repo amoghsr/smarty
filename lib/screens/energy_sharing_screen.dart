@@ -112,43 +112,48 @@ class _EnergySharingScreenState extends State<EnergySharingScreen> {
       drawer: DrawerPage(),
       body: SingleChildScrollView(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             SizedBox(
               height: screenheight * 0.025,
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Text(
-                    'Donate',
-                    style: TextStyle(
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: _infoDialog,
-                    child: Icon(MaterialCommunityIcons.help_circle_outline),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding:
-                  const EdgeInsets.only(top: 8.0, bottom: 4.0, right: 20.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(
-                    'Support your local charities and make a difference',
-                    style: TextStyle(fontSize: 12.0),
-                  )
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Text(
+                        'Donate',
+                        style: TextStyle(
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: _infoDialog,
+                        child: Icon(MaterialCommunityIcons.help_circle_outline),
+                      ),
+                    ],
+                  ),
+                  Padding(
+                    padding:
+                    const EdgeInsets.only(top: 8.0, bottom: 4.0, right: 20.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          'Support your local charities and make a difference',
+                          style: TextStyle(fontSize: 12.0),
+                        )
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
+
             SizedBox(
               height: 10.0,
             ),

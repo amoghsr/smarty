@@ -27,11 +27,9 @@ class _ManageUsersState extends State<ManageUsers> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Center(
-            child: Text(
-              'Manage Users',
-              style: kAppBarTextStyle,
-            ),
+          title: Text(
+            'Manage Users',
+            style: kAppBarTextStyle,
           ),
           actions: <Widget>[MicClass()],
         ),

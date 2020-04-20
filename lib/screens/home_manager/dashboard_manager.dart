@@ -58,6 +58,9 @@ class _DashboardManagerState extends State<DashboardManager> {
               padding: EdgeInsets.all(14.0),
               child: Semantics(
                 child: Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12.0),
+                  ),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
