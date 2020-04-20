@@ -268,7 +268,8 @@ class _EnergyStatsState extends State<EnergyStats> {
                                 fontWeight: FontWeight.w500),
                           ),
                           value: 0.5,
-                          valueColor: AlwaysStoppedAnimation(Colors.lightGreenAccent),
+                          valueColor:
+                              AlwaysStoppedAnimation(Colors.lightGreenAccent),
                           backgroundColor: Colors.white,
                           direction: Axis.horizontal,
                           shapePath: _buildBattery(),

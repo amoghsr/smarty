@@ -49,9 +49,9 @@ class Consumption {
               value1.forEach((key2, value2) {
                 if (key2 != "Daily_Total") {
                   daily[key2.toString()] = value2.ceil();
-                } else {
+                  print(key2);
+                } else if (key2 == "Daily_Total") {
                   dailyTotal = value2.ceil();
-
                   weekly[key1] = value2.ceil();
                 }
               });
@@ -76,8 +76,9 @@ class Consumption {
         devicesDaily[element.documentID] = Devicess;
       }
     });
+    if (dailyTotal == 0) dailyTotal = 10;
     var room = Consumption(
-      dailyTotal: dailyTotal ?? 0,
+      dailyTotal: dailyTotal,
       daily: daily,
       monthly: monthly,
       weekly: weekly,

@@ -59,7 +59,6 @@ class _StatsScreenState extends State<StatsScreen> {
       });
     }
     int no1w = DateTime.now().hour;
-    print(no1w.toString() + "wfds");
     String formattedDate = date.format(now);
     return Scaffold(
       appBar: AppBar(
@@ -153,13 +152,13 @@ class _StatsScreenState extends State<StatsScreen> {
                                 136,
                                 20.0,
                                 y.dailyTotal > 0
-                                    ? y.dailyTotal.toDouble() / 100
+                                    ? (y.dailyTotal / 100).toDouble()
                                     : 0,
                                 buildCircularProgressWidget(
                                   80,
                                   20.0,
                                   x.dailyTotal > 0
-                                      ? x.dailyTotal.toDouble() / 100
+                                      ? (x.dailyTotal / 100).toDouble()
                                       : 0,
                                   Container(),
                                   Colors.greenAccent.withOpacity(0.4),
@@ -250,9 +249,7 @@ class _StatsScreenState extends State<StatsScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: <Widget>[
                                     Text(
-                                      y.dailyTotal > 0
-                                          ? y.dailyTotal.toString()
-                                          : "0",
+                                      y.dailyTotal.toString(),
                                       style: TextStyle(
                                         height: 1,
                                         fontSize: 32.0,
@@ -646,7 +643,6 @@ class _StatsScreenState extends State<StatsScreen> {
                     ),
                     value: (y.dailyTotal > 0 && x.dailyTotal > 0)
                         ? (((x.dailyTotal - y.dailyTotal) / x.dailyTotal))
-                            .floor()
                         : 0,
                     valueColor: AlwaysStoppedAnimation(((((y.dailyTotal > 0 &&
                                         x.dailyTotal > 0)
