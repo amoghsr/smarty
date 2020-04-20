@@ -138,11 +138,9 @@ class _HomeState extends State<Home> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Center(
-            child: Text(
-              'Home',
-              style: kAppBarTextStyle,
-            ),
+          title: Text(
+            'Home',
+            style: kAppBarTextStyle,
           ),
           actions: <Widget>[
             IconButton(
@@ -182,23 +180,29 @@ class _HomeState extends State<Home> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Text(
-                      'Welcome Home, Ben',
+                      'Good evening',
                       //${widget.currentUser.email}`
                       style: TextStyle(
-                        fontSize: 20.0,
+                        fontSize: 24.0,
                         fontWeight: FontWeight.w700,
                       ),
                     ),
                     (weather == null)
                         ? CircularProgressIndicator()
-                        : Text(
-                            '${weather.round().toString()}°C',
-                            //${widget.currentUser.email}`
-                            style: TextStyle(
-                              fontSize: 24.0,
-                              fontWeight: FontWeight.w700,
-                            ),
+                        : Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: <Widget>[
+                        Text('Outside'),
+                        Text(
+                          '${weather.round().toString()}°C',
+                          //${widget.currentUser.email}`
+                          style: TextStyle(
+                            fontSize: 24.0,
+                            fontWeight: FontWeight.w700,
                           ),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ),

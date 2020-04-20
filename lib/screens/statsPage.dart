@@ -504,6 +504,7 @@ class _StatsScreenState extends State<StatsScreen> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => AllDevices()),
+//
                   );
                 },
                 child: Padding(

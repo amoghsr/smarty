@@ -18,6 +18,18 @@ class Optimization extends StatefulWidget {
 }
 
 class _OptimizationState extends State<Optimization> {
+//  // TODO: Get the room names
+  List<String> roomNames = ["Living Room", "Kitchen", "Playroom"];
+  // TODO: Get the device names for each room (IF THEY ARE ON)
+  List<String> deviceNames = ["AC", "Lamp", "Speaker"];
+
+  Map<String, String> desc = {
+    "AC": "Set the temperature to 24°C",
+    "Lamp": "Set the brightness to 25%",
+    "Speaker": "Turn off the Speakers",
+    "TV": "Turn off TV",
+    "Exhaust Fan": "Turn off the Exhaust Fan "
+  };
   bool expanded = false;
   List<dynamic> roomDeviceNames = [];
   Icon getDevIcons(String roomName) {
@@ -53,7 +65,6 @@ class _OptimizationState extends State<Optimization> {
     final user = Provider.of<User>(context);
 
     final devices = Provider.of<List<Device>>(context);
-    print('Devices: ${devices[0].deviceName}');
     if (devices != null) {
       for (var i in rooms) {
         for (var j in i.d) {
@@ -103,7 +114,6 @@ class _OptimizationState extends State<Optimization> {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontFamily: 'Montserrat',
-                        color: Colors.white,
                         fontSize: 18.0,
                         fontWeight: FontWeight.w500,
                       ),
@@ -115,7 +125,6 @@ class _OptimizationState extends State<Optimization> {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontFamily: 'Montserrat',
-                        color: Colors.white,
                         fontSize: 14.0,
                       ),
                     ),

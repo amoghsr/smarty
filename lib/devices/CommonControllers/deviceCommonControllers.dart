@@ -13,7 +13,7 @@ var isPlaying = false;
 bool icon = false;
 int waterAmount = 8;
 DatabaseReference itemRef;
-
+//
 void stateChange(
     bool newvalue, String room, String device, String houseId, User user) {
   if (newvalue == false) {
@@ -120,10 +120,7 @@ Container topAppBar(String roomName, String appliance, IconData icon) {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(
-              roomName,
-                style: kLightDeviceTopBar
-            ),
+            Text(roomName, style: kLightDeviceTopBar),
             SizedBox(
               height: 8,
             ),

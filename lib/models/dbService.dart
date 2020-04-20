@@ -28,7 +28,7 @@ class DatabaseService1 {
 
   Stream<Generation> streamGeneratedEnergy(User user) {
     CollectionReference ref = _db
-        .collection('Homes')
+        .collection('Energy')
         .document(user.houseId)
         .collection("generated_energy");
     return ref.snapshots().map(CreateGeneration);
@@ -40,7 +40,7 @@ class DatabaseService1 {
 
   Stream<Consumption> streamConsumedEnergy(User user) {
     CollectionReference ref = _db
-        .collection('Homes')
+        .collection('Energy')
         .document(user.houseId)
         .collection("consumed_energy");
     return ref.snapshots().map(CreateConsumption);
@@ -170,8 +170,8 @@ class DatabaseService1 {
           x[key] = value;
         }
       });
-      w.add(dbRoutine.fromFirestore(element.data["STime"],
-          element.data["ETime"], element.documentID.toUpperCase(), x));
+      w.add(dbRoutine.fromFirestore(
+          element.data["STime"], element.data["ETime"], element.documentID, x));
     });
     return w;
   }

@@ -28,7 +28,7 @@ class Routine {
       String desc,
       Map<String, dynamic> logo,
       String color) {
-    return Routine(
+    final rout = Routine(
       icon: Icon(
         mapToIconData(logo),
         color: Colors.white,
@@ -41,6 +41,7 @@ class Routine {
       Etime: ETime,
       devices: x,
     );
+    return rout;
   }
 }
 

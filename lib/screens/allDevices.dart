@@ -34,12 +34,17 @@ class _AllDevicesState extends State<AllDevices> with TickerProviderStateMixin {
     final y = Provider.of<Consumption>(context);
     if (y != null) {
       y.devicesDaily.forEach((key, va) {
+//
         roomNames.add(key);
         double total = 0;
         va.forEach((key, va) {
           total = total + va;
         });
-        usage[key] = num.parse(total.toString().substring(0, 4));
+        try {
+          usage[key] = num.parse(total.toString().substring(0, 4));
+        } catch (s) {
+          usage[key] = 0;
+        }
       });
     }
     if (y != null) {
