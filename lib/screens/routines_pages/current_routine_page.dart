@@ -37,6 +37,7 @@ class CurrentRoutinePage extends StatelessWidget {
               .collection("Current Routines")
               .document(routine.routineName)
               .delete();
+//
           FirebaseDatabase.instance
               .reference()
               .child(

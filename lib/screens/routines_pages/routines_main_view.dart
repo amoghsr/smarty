@@ -37,6 +37,7 @@ class _RoutineMainViewState extends State<RoutineMainView> {
                   text: 'Current',
                 ),
                 Tab(
+//
                   icon: Icon(Icons.add),
                   text: 'Suggested',
                 ),
