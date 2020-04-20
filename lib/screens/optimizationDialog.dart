@@ -114,7 +114,6 @@ class _OptimizationState extends State<Optimization> {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontFamily: 'Montserrat',
-                        color: Colors.white,
                         fontSize: 18.0,
                         fontWeight: FontWeight.w500,
                       ),
@@ -126,7 +125,6 @@ class _OptimizationState extends State<Optimization> {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontFamily: 'Montserrat',
-                        color: Colors.white,
                         fontSize: 14.0,
                       ),
                     ),
