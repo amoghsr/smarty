@@ -48,6 +48,7 @@ class _StatsScreenState extends State<StatsScreen> {
   Widget build(BuildContext context) {
     final x = Provider.of<Generation>(context);
     final y = Provider.of<Consumption>(context);
+
     final userlist = Provider.of<List<String>>(context);
     var now = new DateTime.now();
     var date = new DateFormat('dd');
@@ -147,16 +148,19 @@ class _StatsScreenState extends State<StatsScreen> {
                             buildCircularProgressWidget(
                               190,
                               20.0,
-                              //TODO: (AVERAGE DAILY CONSUMPTION OF OTHER HOUSES / AVERAGE DAILY CONSUMPTION LIMIT OF OTHER HOUSES)
                               0.4,
                               buildCircularProgressWidget(
                                 136,
                                 20.0,
-                                y.dailyTotal.toDouble() / 100,
+                                y.dailyTotal > 0
+                                    ? y.dailyTotal.toDouble() / 100
+                                    : 0,
                                 buildCircularProgressWidget(
                                   80,
                                   20.0,
-                                  x.dailyTotal.toDouble() / 100,
+                                  x.dailyTotal > 0
+                                      ? x.dailyTotal.toDouble() / 100
+                                      : 0,
                                   Container(),
                                   Colors.greenAccent.withOpacity(0.4),
                                   Colors.greenAccent[400],
@@ -246,7 +250,9 @@ class _StatsScreenState extends State<StatsScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: <Widget>[
                                     Text(
-                                      y.dailyTotal.toString(),
+                                      y.dailyTotal > 0
+                                          ? y.dailyTotal.toString()
+                                          : "0",
                                       style: TextStyle(
                                         height: 1,
                                         fontSize: 32.0,
@@ -291,7 +297,9 @@ class _StatsScreenState extends State<StatsScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: <Widget>[
                                     Text(
-                                      x.dailyTotal.toString(),
+                                      x.dailyTotal > 0
+                                          ? x.dailyTotal.toString()
+                                          : "0",
                                       style: TextStyle(
                                         height: 1,
                                         fontSize: 32.0,
@@ -459,8 +467,9 @@ class _StatsScreenState extends State<StatsScreen> {
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: <Widget>[
                               Text(
-                                (y.dailyTotal / no1w).toStringAsFixed(2),
-//                                sd
+                                y.dailyTotal > 0
+                                    ? (y.dailyTotal / no1w).toStringAsFixed(2)
+                                    : "0",
                                 style: TextStyle(
                                   height: 1,
                                   fontSize: 34.0,
@@ -597,10 +606,13 @@ class _StatsScreenState extends State<StatsScreen> {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: <Widget>[
                           Text(
-                            (((x.dailyTotal - y.dailyTotal) / x.dailyTotal) *
-                                    100)
-                                .floor()
-                                .toString(),
+                            (y.dailyTotal > 0 && x.dailyTotal > 0)
+                                ? (((x.dailyTotal - y.dailyTotal) /
+                                            x.dailyTotal) *
+                                        100)
+                                    .floor()
+                                    .toString()
+                                : "0",
                             style: TextStyle(
                               fontSize: 40.0,
                               fontWeight: FontWeight.w600,
@@ -621,32 +633,48 @@ class _StatsScreenState extends State<StatsScreen> {
                   ),
                   LiquidCustomProgressIndicator(
                     center: Text(
-                      (((x.dailyTotal - y.dailyTotal) / x.dailyTotal) * 100)
+                      (y.dailyTotal > 0 && x.dailyTotal > 0)
+                          ? (((x.dailyTotal - y.dailyTotal) / x.dailyTotal) *
+                                  100)
                               .floor()
-                              .toString() +
-                          '%',
+                              .toString()
+                          : "0" + '%',
                       style: TextStyle(
                         fontSize: 14.0,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    value: ((x.dailyTotal - y.dailyTotal) / x.dailyTotal),
-                    valueColor: AlwaysStoppedAnimation(
-                        (((((x.dailyTotal - y.dailyTotal) / x.dailyTotal) * 100)
-                                    .floor() <=
-                                20)
-                            ? Colors.redAccent
-                            : ((((x.dailyTotal - y.dailyTotal) / x.dailyTotal) *
-                                                100)
-                                            .floor() >
-                                        20 &&
-                                    (((x.dailyTotal - y.dailyTotal) /
-                                                    x.dailyTotal) *
-                                                100)
-                                            .floor() <=
-                                        60)
-                                ? Colors.orangeAccent
-                                : Colors.greenAccent)),
+                    value: (y.dailyTotal > 0 && x.dailyTotal > 0)
+                        ? (((x.dailyTotal - y.dailyTotal) / x.dailyTotal))
+                            .floor()
+                        : 0,
+                    valueColor: AlwaysStoppedAnimation(((((y.dailyTotal > 0 &&
+                                        x.dailyTotal > 0)
+                                    ? (((x.dailyTotal - y.dailyTotal) / x.dailyTotal) *
+                                            100)
+                                        .floor()
+                                    : 0)
+                                .floor() <=
+                            20)
+                        ? Colors.redAccent
+                        : (((y.dailyTotal > 0 && x.dailyTotal > 0)
+                                            ? (((x.dailyTotal - y.dailyTotal) /
+                                                        x.dailyTotal) *
+                                                    100)
+                                                .floor()
+                                            : 0)
+                                        .floor() >
+                                    20 &&
+                                ((y.dailyTotal > 0 && x.dailyTotal > 0)
+                                            ? (((x.dailyTotal - y.dailyTotal) /
+                                                        x.dailyTotal) *
+                                                    100)
+                                                .floor()
+                                            : 0)
+                                        .floor() <=
+                                    60)
+                            ? Colors.orangeAccent
+                            : Colors.greenAccent)),
                     backgroundColor: Theme.of(context).cardColor,
                     direction: Axis.horizontal,
                     shapePath: _buildBattery(),
