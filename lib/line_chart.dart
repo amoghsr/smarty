@@ -84,20 +84,19 @@ class _LineChartSample2State extends State<LineChartSample2> {
     List<FlSpot> weekCoords = [
       FlSpot(0, 0),
     ];
-
-    Map<String, int> monthData = snapshot.monthly;
-    List<int> monthly = [];
-    int i = 0;
     Map<String, int> month = {
-      "January": 1,
+      "January": 0,
       "February": 1,
-      "March": 3,
-      "April": 4,
-      "May": 5
+      "March": 2,
+      "April": 3,
+      "May": 4
     };
+    print("scsdcsd");
+    print(snapshot.monthly);
+    Map<String, int> monthData = snapshot.monthly;
+    List<int> monthly = new List(monthData.length);
     snapshot.monthly.forEach((key, value) {
-      monthly[i] = month[key];
-      i++;
+      monthly[month[key]] = value;
     });
     monthly = monthData.values.toList();
     List<FlSpot> monthCoords = [
