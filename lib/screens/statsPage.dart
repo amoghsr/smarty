@@ -547,164 +547,160 @@ class _StatsScreenState extends State<StatsScreen> {
                     context,
                     MaterialPageRoute(builder: (context) => AllDevices()),
 //
-                  );
-                },
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 24.0, vertical: 12.0),
-                  child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    decoration: BoxDecoration(
-                        color: Theme.of(context).primaryColor,
-                        borderRadius: BorderRadius.circular(10.0),
-                        boxShadow: [
-                          BoxShadow(
-                              color: Colors.black.withOpacity(0.08),
-                              offset: Offset(1.0, 3.0),
-                              blurRadius: 4.0)
-                        ]),
-                    padding: EdgeInsets.all(20.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Expanded(
-                          child: Row(
-                            children: <Widget>[
-                              Icon(MaterialCommunityIcons.devices),
-                              SizedBox(
-                                width: 22.0,
-                              ),
-                              Text(
-                                'See device wise consumption',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 16.0,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Icon(Icons.arrow_forward)
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              Divider(
-                height: 28.0,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      'Current Battery Level',
-                      style: kHeadingTextStyle,
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
+                );
+              },
+              child: Padding(
                 padding: const EdgeInsets.symmetric(
-                    vertical: 12.0, horizontal: 24.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: <Widget>[
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.end,
+                    horizontal: 24.0, vertical: 12.0),
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                      color: Theme.of(context).primaryColor,
+                      borderRadius: BorderRadius.circular(10.0),
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.black.withOpacity(0.08),
+                            offset: Offset(1.0, 3.0),
+                            blurRadius: 4.0)
+                      ]),
+                  padding: EdgeInsets.all(20.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Expanded(
+                        child: Row(
                           children: <Widget>[
-                            Text(
-                              (y.dailyTotal > 0 && x.dailyTotal > 0)
-                                  ? (((x.dailyTotal - y.dailyTotal) /
-                                              x.dailyTotal) *
-                                          100)
-                                      .floor()
-                                      .toString()
-                                  : "0",
-                              style: TextStyle(
-                                fontSize: 40.0,
-                                fontWeight: FontWeight.w600,
-                              ),
+                            Icon(MaterialCommunityIcons.devices),
+                            SizedBox(
+                              width: 22.0,
                             ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 4.0, bottom: 4.0),
-                              child: Text(
-                                '%',
-                                style: TextStyle(height: 1.0, fontSize: 14.0),
+                            Text(
+                              'Device wise consumption',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 16.0,
                               ),
                             ),
                           ],
                         ),
-                        Text('Battery health is normal'),
-                      ],
-                    ),
-                    LiquidCustomProgressIndicator(
-                      center: Text(
-                        (y.dailyTotal > 0 && x.dailyTotal > 0)
-                            ? (((x.dailyTotal - y.dailyTotal) / x.dailyTotal) *
-                                    100)
-                                .floor()
-                                .toString()
-                            : "0" + '%',
-                        style: TextStyle(
-                          fontSize: 14.0,
-                          fontWeight: FontWeight.bold,
-                        ),
                       ),
-                      value: (y.dailyTotal > 0 && x.dailyTotal > 0)
-                          ? (((x.dailyTotal - y.dailyTotal) / x.dailyTotal))
-                          : 0,
-                      valueColor: AlwaysStoppedAnimation(((((y.dailyTotal > 0 &&
-                                          x.dailyTotal > 0)
-                                      ? (((x.dailyTotal - y.dailyTotal) / x.dailyTotal) * 100)
-                                          .floor()
-                                      : 0)
-                                  .floor() <=
-                              20)
-                          ? Colors.redAccent
-                          : (((y.dailyTotal > 0 && x.dailyTotal > 0)
-                                              ? (((x.dailyTotal - y.dailyTotal) /
-                                                          x.dailyTotal) *
-                                                      100)
-                                                  .floor()
-                                              : 0)
-                                          .floor() >
-                                      20 &&
-                                  ((y.dailyTotal > 0 && x.dailyTotal > 0)
-                                              ? (((x.dailyTotal - y.dailyTotal) /
-                                                          x.dailyTotal) *
-                                                      100)
-                                                  .floor()
-                                              : 0)
-                                          .floor() <=
-                                      60)
-                              ? Colors.orangeAccent
-                              : Colors.greenAccent)),
-                      backgroundColor: Theme.of(context).cardColor,
-                      direction: Axis.horizontal,
-                      shapePath: _buildBattery(),
-                    ),
-                  ],
+                      Icon(Icons.arrow_forward)
+                    ],
+                  ),
                 ),
               ),
-              SizedBox(
-                height: 32.0,
+            ),
+            Divider(
+              height: 28.0,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    'Current Battery Level',
+                    style: kHeadingTextStyle,
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: <Widget>[
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: <Widget>[
+                          Text(
+                            (y.dailyTotal > 0 && x.dailyTotal > 0)
+                                ? (((x.dailyTotal - y.dailyTotal) /
+                                            x.dailyTotal) *
+                                        100)
+                                    .floor()
+                                    .toString()
+                                : "0",
+                            style: TextStyle(
+                              fontSize: 40.0,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.only(left: 4.0, bottom: 4.0),
+                            child: Text(
+                              '%',
+                              style: TextStyle(height: 1.0, fontSize: 14.0),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Text('Battery health is normal'),
+                    ],
+                  ),
+                  LiquidCustomProgressIndicator(
+                    center: Text(
+                      (y.dailyTotal > 0 && x.dailyTotal > 0)
+                          ? (((x.dailyTotal - y.dailyTotal) / x.dailyTotal) *
+                                  100)
+                              .floor()
+                              .toString()
+                          : "0" + '%',
+                      style: TextStyle(
+                        fontSize: 14.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    value: (y.dailyTotal > 0 && x.dailyTotal > 0)
+                        ? (((x.dailyTotal - y.dailyTotal) / x.dailyTotal))
+                        : 0,
+                    valueColor: AlwaysStoppedAnimation(((((y.dailyTotal > 0 &&
+                                        x.dailyTotal > 0)
+                                    ? (((x.dailyTotal - y.dailyTotal) / x.dailyTotal) *
+                                            100)
+                                        .floor()
+                                    : 0)
+                                .floor() <=
+                            20)
+                        ? Colors.redAccent
+                        : (((y.dailyTotal > 0 && x.dailyTotal > 0)
+                                            ? (((x.dailyTotal - y.dailyTotal) /
+                                                        x.dailyTotal) *
+                                                    100)
+                                                .floor()
+                                            : 0)
+                                        .floor() >
+                                    20 &&
+                                ((y.dailyTotal > 0 && x.dailyTotal > 0)
+                                            ? (((x.dailyTotal - y.dailyTotal) /
+                                                        x.dailyTotal) *
+                                                    100)
+                                                .floor()
+                                            : 0)
+                                        .floor() <=
+                                    60)
+                            ? Colors.orangeAccent
+                            : Colors.greenAccent)),
+                    backgroundColor: Theme.of(context).cardColor,
+                    direction: Axis.horizontal,
+                    shapePath: _buildBattery(),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 32.0,
+            ),
+          ],
         ),
-      );
-    } else {
-      return Container(
-        child: CircularProgressIndicator(),
-      );
-    }
+      ),
+    );
   }
 
   Widget buildCircularProgressWidget(double rad, double width, double percent,
