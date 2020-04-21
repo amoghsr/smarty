@@ -82,20 +82,21 @@ class _HomeState extends State<Home> {
     getPosition().then((position) {
       getWeather(position.latitude, position.longitude);
     });
-
+    // TODO: Dialog Box for AI condition here
 //     if (Provider.of<BoltProvider>(context, listen: false).getBalanceAsInt() == 10)
     // Timer.run(
     //     () => Provider.of<DialogProvider>(context, listen: false).popAi());
-
+    // TODO: Dialog Box for P2P condition here
     // if (Provider.of<Consumption>(context, listen: false).dailyTotal >=
     //     Provider.of<Generation>(context, listen: false).dailyTotal * 0.95)
-    // Timer.run(
-    //     () => Provider.of<DialogProvider>(context, listen: false).popP2P());
-
-    // if (Provider.of<BoltProvider>(context, listen: false).getBalanceAsInt() == 10)
+    //TODO: Dialog Box for Doorbell condition here
+    // if (condn here)
     //   Timer.run(
-    //       () => Provider.of<DialogProvider>(context, listen: false).popAi());
-
+    //       () => Provider.of<DialogProvider>(context, listen: false).popDoorBell());
+    //TODO: Dialog Box for Fire Sensor Condition here
+    // if (condn here)
+    //   Timer.run(
+    //       () => Provider.of<DialogProvider>(context, listen: false).popDoorBell());
     final FirebaseDatabase database = FirebaseDatabase
         .instance; //Rather then just writing FirebaseDatabase(), get the instance.
     itemRef = database.reference();

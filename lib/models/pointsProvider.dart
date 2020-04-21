@@ -24,6 +24,7 @@ class PointsProvider {
   getBalance() => balance.toDouble();
   getBalanceAsInt() => balance.toInt();
   setBalance(String hID, double _balance) {
+    // TODO: Fix query updating bolt balance
     FirebaseDatabase.instance
         .reference()
         .child("Points/" + hID + "/")

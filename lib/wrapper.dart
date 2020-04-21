@@ -23,7 +23,10 @@ class Wrapper extends StatelessWidget {
     final user = Provider.of<User>(context);
 
     if (user == null) {
-      return Authenticate();
+      return MaterialApp(
+        home: Authenticate(),
+        theme: Provider.of<ThemeModel>(context).currentTheme,
+      );
     } else {
       if (user.type == "M") {
         return StreamProvider<List<Room>>.value(
