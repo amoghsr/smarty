@@ -121,7 +121,7 @@ class _DrawerPageState extends State<DrawerPage> {
                 },
               ),
               ListTile(
-                leading: Icon(MaterialCommunityIcons.theme_light_dark),
+                leading: Icon(MaterialIcons.brightness_4),
                 title: Text('Dark Mode'),
                 trailing: Switch(
                   value: Provider.of<AppThemeProvider>(context, listen: false).getTheme(),

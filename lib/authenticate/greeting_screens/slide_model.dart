@@ -16,7 +16,7 @@ final slideList = [
   Slide(
     imageUrl: 'assets/onboarding_graphics/home.svg',
     title: 'Control your smart devices',
-    description: 'Go into a room to control the devices in it',
+    description: 'Go into a room from the home page to control the devices in it',
   ),
   Slide(
     imageUrl: 'assets/onboarding_graphics/relax.svg',
