@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -48,7 +50,10 @@ class _StatsScreenState extends State<StatsScreen> {
   Widget build(BuildContext context) {
     final x = Provider.of<Generation>(context);
     final y = Provider.of<Consumption>(context);
-
+    var randomGenerator = Random();
+    var positive = randomGenerator.nextBool();
+    var randInt = randomGenerator.nextInt(2);
+    var result1 = positive ? randInt : 0 - randInt;
     final userlist = Provider.of<List<String>>(context);
     var now = new DateTime.now();
     var date = new DateFormat('dd');
@@ -144,11 +149,9 @@ class _StatsScreenState extends State<StatsScreen> {
                       children: <Widget>[
                         Column(
                           children: <Widget>[
-                            
                             buildCircularProgressWidget(
                               190,
                               20.0,
-                              // TODO: PLUG IN COMMUNITY AVERAGE HERE IN %
                               0.4,
                               buildCircularProgressWidget(
                                 136,
@@ -206,8 +209,9 @@ class _StatsScreenState extends State<StatsScreen> {
                                   children: <Widget>[
                                     Text(
                                       //TODO: AVERAGE DAILY CONSUMPTION OF ALL OTHER HOUSES (NOT INCLUDING OURS) UP UNTIL THAT POINT OF THE DAY
-                                      // TODO: Randomize this based on current consumption
-                                      '100',
+                                      y.dailyTotal > 0
+                                          ? (y.dailyTotal + result1).toString()
+                                          : "0",
                                       style: TextStyle(
                                         height: 1,
                                         fontSize: 32.0,
@@ -233,26 +237,11 @@ class _StatsScreenState extends State<StatsScreen> {
                               children: <Widget>[
                                 Row(
                                   children: <Widget>[
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        color: Colors.orange[600],
-                                        shape: BoxShape.circle,
-                                      ),
-                                      height: 12.0,
-                                      width: 12.0,
-                                    ),
-                                    SizedBox(width: 4.0),
-                                    Text('Consumption'),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: <Widget>[
                                     Text(
-                                      y.dailyTotal.toString(),
+                                      //TODO: AVERAGE DAILY CONSUMPTION OF ALL OTHER HOUSES (NOT INCLUDING OURS) UP UNTIL THAT POINT OF THE DAY
+                                      y.dailyTotal > 0
+                                          ? (y.dailyTotal + result1).toString()
+                                          : "0",
                                       style: TextStyle(
                                         height: 1,
                                         fontSize: 32.0,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_vlc_player/generated/i18n.dart';
+import 'package:smarty/models/consumptionModel.dart';
 import 'package:smarty/models/user.dart';
 import 'package:smarty/screens/drawer.dart';
 import 'package:smarty/shared/constants.dart';
@@ -65,7 +66,16 @@ class _EnergySharingScreenState extends State<EnergySharingScreen> {
 
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
-
+    final y = Provider.of<Consumption>(context);
+    final now = DateTime.now();
+    final date = DateTime(2020, 1, 1);
+    final diff = now.difference(new DateTime(date.year, 1, 1, 0, 0));
+    final diffInDays = diff.inDays;
+    String avg = "0";
+    if (y != null) {
+      avg = (y.monthly.values.toList().reduce((a, b) => a + b) / diffInDays)
+          .toStringAsFixed(2);
+    }
     final bal = Provider.of<Map<String, PointsProvider>>(context);
     num screenwidth = MediaQuery.of(context).size.width;
     num screenheight = MediaQuery.of(context).size.height;
@@ -138,8 +148,8 @@ class _EnergySharingScreenState extends State<EnergySharingScreen> {
                     ],
                   ),
                   Padding(
-                    padding:
-                    const EdgeInsets.only(top: 8.0, bottom: 4.0, right: 20.0),
+                    padding: const EdgeInsets.only(
+                        top: 8.0, bottom: 4.0, right: 20.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
@@ -153,7 +163,6 @@ class _EnergySharingScreenState extends State<EnergySharingScreen> {
                 ],
               ),
             ),
-
             SizedBox(
               height: 10.0,
             ),
@@ -344,9 +353,8 @@ class _EnergySharingScreenState extends State<EnergySharingScreen> {
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-                      // TODO: Daily average consumption here
                       Text(
-                        '5 KWh',
+                        avg + ' KWh',
                         style: TextStyle(
                             fontSize: 18.0,
                             fontWeight: FontWeight.w700,

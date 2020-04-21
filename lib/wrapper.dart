@@ -66,29 +66,36 @@ class Wrapper extends StatelessWidget {
                     value: DatabaseService1().streamLeaderBoards(user),
                     child: StreamProvider<Generation>.value(
                       value: DatabaseService1().streamGeneratedEnergy(user),
-                      child: StreamProvider<Consumption>.value(
-                        value: DatabaseService1().streamConsumedEnergy(user),
-                        child: StreamProvider<List<String>>.value(
-                          value:
-                              DatabaseService1().StreamUserlist(user.houseId),
-                          child: MultiProvider(
-                            providers: [
-                              ChangeNotifierProvider<DialogProvider>(
-                                create: (_) => DialogProvider(),
-                              ),
-                            ],
-                            child: MaterialApp(
-                              builder: (context, widget) => Navigator(
-                                onGenerateRoute: (settings) =>
-                                    MaterialPageRoute(
-                                  builder: (context) => DialogManager(
-                                    child: widget,
+                      child: StreamProvider<String>.value(
+                        value: DatabaseService1().fire(user),
+                        child: StreamProvider<int>.value(
+                          value: DatabaseService1().door(user),
+                          child: StreamProvider<Consumption>.value(
+                            value:
+                                DatabaseService1().streamConsumedEnergy(user),
+                            child: StreamProvider<List<String>>.value(
+                              value: DatabaseService1()
+                                  .StreamUserlist(user.houseId),
+                              child: MultiProvider(
+                                providers: [
+                                  ChangeNotifierProvider<DialogProvider>(
+                                    create: (_) => DialogProvider(),
                                   ),
+                                ],
+                                child: MaterialApp(
+                                  builder: (context, widget) => Navigator(
+                                    onGenerateRoute: (settings) =>
+                                        MaterialPageRoute(
+                                      builder: (context) => DialogManager(
+                                        child: widget,
+                                      ),
+                                    ),
+                                  ),
+                                  theme: Provider.of<ThemeModel>(context)
+                                      .currentTheme,
+                                  home: MyNavigationBar(),
                                 ),
                               ),
-                              theme:
-                                  Provider.of<ThemeModel>(context).currentTheme,
-                              home: MyNavigationBar(),
                             ),
                           ),
                         ),

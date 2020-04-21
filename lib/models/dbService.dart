@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:smarty/models/pointsProvider.dart';
 import 'package:smarty/models/devicesModel.dart';
 import 'package:smarty/models/generationModel.dart';
@@ -124,9 +125,22 @@ class DatabaseService1 {
         donationBadges: element.data["DonationBadges"],
       );
     });
-    
 
     return rer;
+  }
+
+  Stream<String> fire(User user) {
+    final FirebaseDatabase database = FirebaseDatabase
+        .instance; //Rather then just writing FirebaseDatabase(), get the instance.
+    DatabaseReference itemRef = database.reference();
+    itemRef.child("Homes/" + user.houseId + "/Sensors/Fire/").onValue;
+  }
+
+  Stream<int> door(User user) {
+    final FirebaseDatabase database = FirebaseDatabase
+        .instance; //Rather then just writing FirebaseDatabase(), get the instance.
+    DatabaseReference itemRef = database.reference();
+    itemRef.child("Homes/" + user.houseId + "/Sensors/Door/").onValue;
   }
 
   Stream<Map<String, CurrentDayProvider>> getCurrent() {
