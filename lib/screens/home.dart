@@ -104,16 +104,31 @@ class _HomeState extends State<Home> {
       Timer.run(
           () => Provider.of<DialogProvider>(context, listen: false).popAi());
     }
-    //TODO: Dialog Box for Doorbell condition here
-    if (Provider.of<int>(context) == 1) {
-      Timer.run(() =>
-          Provider.of<DialogProvider>(context, listen: false).popDoorBell());
-    }
-    //TODO: Dialog Box for Fire Sensor Condition here
-    if (Provider.of<String>(context) == "high") {
-      Timer.run(() =>
-          Provider.of<DialogProvider>(context, listen: false).popFireDialog());
-    }
+
+    final FirebaseDatabase database = FirebaseDatabase
+        .instance; //Rather then just writing FirebaseDatabase(), get the instance.
+    DatabaseReference itemRef = database.reference();
+    //door dialog
+    String q = "0";
+    final e = itemRef.child("Homes/" + user.houseId + "/Sensors/Door").onValue;
+    e.listen((onData) {
+      q = onData.snapshot.value;
+      if (q == "high") {
+        Timer.run(() =>
+            Provider.of<DialogProvider>(context, listen: false).popDoorBell());
+      }
+    });
+    //fire dialogbox
+    String w = "0";
+    final x =
+        itemRef.child("Homes/" + user.houseId + "/Sensors/Fire/Danger").onValue;
+    x.listen((onData) {
+      w = onData.snapshot.value;
+      if (w == "high") {
+        Timer.run(() => Provider.of<DialogProvider>(context, listen: false)
+            .popFireDialog());
+      }
+    });
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(

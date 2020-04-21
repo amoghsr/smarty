@@ -352,7 +352,6 @@ class _LineChartSample2State extends State<LineChartSample2> {
 
     for (int i = 0, j = 1; i < monthData.length; i++, j += 2) {
       monthCoords.add(FlSpot(j.toDouble(), (monthly[i].toDouble()) / 250));
-      print(monthly[i].toDouble() + 17);
     }
     return LineChartData(
       gridData: FlGridData(

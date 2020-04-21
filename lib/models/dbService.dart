@@ -115,9 +115,6 @@ class DatabaseService1 {
   Map<String, PointsProvider> getPointsMap(QuerySnapshot doc) {
     Map<String, PointsProvider> rer = {};
     doc.documents.forEach((element) {
-      // print(element.data.);
-      // print("VALUE ${element.data['Bolts']}");
-
       rer[element.documentID] = PointsProvider(
         houseID: element.documentID,
         balance: element.data['Bolts'],
@@ -127,20 +124,6 @@ class DatabaseService1 {
     });
 
     return rer;
-  }
-
-  Stream<String> fire(User user) {
-    final FirebaseDatabase database = FirebaseDatabase
-        .instance; //Rather then just writing FirebaseDatabase(), get the instance.
-    DatabaseReference itemRef = database.reference();
-    itemRef.child("Homes/" + user.houseId + "/Sensors/Fire/").onValue;
-  }
-
-  Stream<int> door(User user) {
-    final FirebaseDatabase database = FirebaseDatabase
-        .instance; //Rather then just writing FirebaseDatabase(), get the instance.
-    DatabaseReference itemRef = database.reference();
-    itemRef.child("Homes/" + user.houseId + "/Sensors/Door/").onValue;
   }
 
   Stream<Map<String, CurrentDayProvider>> getCurrent() {
