@@ -22,8 +22,6 @@ class _AuthenticateState extends State<Authenticate> {
   Widget build(BuildContext context) {
     if (showSignIn) {
       return MaterialApp(home: GreetingPage(), theme: Provider.of<ThemeModel>(context).currentTheme,);
-    } else {
-      return MaterialApp(home: Register(toggleView: toggleView), theme: Provider.of<ThemeModel>(context).currentTheme,);
     }
   }
 }

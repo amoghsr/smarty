@@ -37,47 +37,50 @@ class _BabyMonitorControllerState extends State<BabyMonitorController> {
     double screenwidth = MediaQuery.of(context).size.width;
     double screenheight = MediaQuery.of(context).size.height;
     final user = Provider.of<User>(context);
-    return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  widget.roomName,
-                  style: kLightDeviceTopBar.copyWith(
-                      color: Theme.of(context).disabledColor),
-                ),
-                SizedBox(
-                  height: screenheight * 0.015,
-                ),
-                Text(
-                  'Baby Monitor',
-                  style: kLightDeviceBottomBar,
-                ),
-              ],
-            ),
-            Container(
-              child: Icon(FontAwesomeIcons.baby, size: 48, color: Colors.white),
-            ),
-          ],
-        ),
-        SizedBox(height: screenheight * 0.02),
-        Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(
-              Radius.circular(10),
-            ),
-          ),
-          child: ClipRRect(
-              borderRadius: BorderRadius.all(
-                Radius.circular(30),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    widget.roomName,
+                    style: kLightDeviceTopBar.copyWith(
+                        color: Theme.of(context).disabledColor),
+                  ),
+                  SizedBox(
+                    height: 4,
+                  ),
+                  Text(
+                    'Baby Monitor',
+                    style: kLightDeviceBottomBar,
+                  ),
+                ],
               ),
-              child: Image.asset('assets/images/baby_monitor.png')),
-        ),
-      ],
+              Container(
+                child: Icon(FontAwesomeIcons.baby, size: 48),
+              ),
+            ],
+          ),
+          SizedBox(height: 20),
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(
+                Radius.circular(10),
+              ),
+            ),
+            child: ClipRRect(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(30),
+                ),
+                child: Image.asset('assets/images/baby_monitor.png')),
+          ),
+        ],
+      ),
     );
   }
 }

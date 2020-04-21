@@ -106,7 +106,7 @@ class _TVControllerState extends State<TVController> {
           ),
         ]),
         SizedBox(
-          height: screenheight * 0.01,
+          height: screenheight * 0.03,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -116,6 +116,12 @@ class _TVControllerState extends State<TVController> {
               width: 50,
               decoration: BoxDecoration(
                 color: Theme.of(context).cardColor,
+    boxShadow: [
+    BoxShadow(
+    color: Colors.black.withOpacity(0.1),
+    offset: Offset(1.0, 4.0),
+    blurRadius: 4.0)
+    ],
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(30),
                   topLeft: Radius.circular(30),
@@ -134,6 +140,12 @@ class _TVControllerState extends State<TVController> {
               width: 55,
               decoration: BoxDecoration(
                 color: Theme.of(context).cardColor,
+    boxShadow: [
+    BoxShadow(
+    color: Colors.black.withOpacity(0.1),
+    offset: Offset(1.0, 4.0),
+    blurRadius: 4.0)
+    ],
                 borderRadius: BorderRadius.all(
                   Radius.circular(20),
                 ),
@@ -147,6 +159,12 @@ class _TVControllerState extends State<TVController> {
               height: 50,
               width: 50,
               decoration: BoxDecoration(
+    boxShadow: [
+    BoxShadow(
+    color: Colors.black.withOpacity(0.1),
+    offset: Offset(1.0, 4.0),
+    blurRadius: 4.0)
+    ],
                 color: Theme.of(context).cardColor,
                 borderRadius: BorderRadius.only(
                   bottomRight: Radius.circular(30),

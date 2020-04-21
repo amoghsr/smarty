@@ -57,7 +57,7 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
             onTap: onTappedBar,
             currentIndex: _currentIndex,
             type: BottomNavigationBarType.fixed,
-            showUnselectedLabels: false,
+            showUnselectedLabels: true,
             selectedItemColor: Theme.of(context).accentColor,
             backgroundColor: Theme.of(context).primaryColor,
             items: [
@@ -129,7 +129,7 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
             onTap: onTappedBar,
             currentIndex: _currentIndex,
             type: BottomNavigationBarType.fixed,
-            showUnselectedLabels: false,
+            showUnselectedLabels: true,
             selectedItemColor: Theme.of(context).accentColor,
             backgroundColor: Theme.of(context).primaryColor,
             items: [

@@ -15,7 +15,7 @@ class RoomCarousel extends StatelessWidget {
     final room1 = Provider.of<List<Room>>(context);
     final devices = Provider.of<List<Device>>(context);
 
-    if (room1 != null) {
+    if (room1 != null && devices != null) {
       return Column(
         children: <Widget>[
           Padding(
@@ -67,17 +67,15 @@ class RoomCarousel extends StatelessWidget {
                     alignment: Alignment.topCenter,
                     children: <Widget>[
                       GestureDetector(
-                        onTap: () =>
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    MyOtherRoom(
-                                        initRoom: index,
-                                        rooms: room1,
-                                        devices: devices),
-                              ),
-                            ),
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => MyOtherRoom(
+                                initRoom: index,
+                                rooms: room1,
+                                devices: devices),
+                          ),
+                        ),
                         child: Container(
                           height: 190.0,
                           width: 140.0,
@@ -94,9 +92,7 @@ class RoomCarousel extends StatelessWidget {
                                   offset: Offset(2.0, 6.0),
                                   blurRadius: 6.0)
                             ],
-                            color: Theme
-                                .of(context)
-                                .backgroundColor,
+                            color: Theme.of(context).backgroundColor,
                           ),
                           child: Padding(
                             padding: EdgeInsets.all(10.0),
@@ -114,8 +110,7 @@ class RoomCarousel extends StatelessWidget {
                                     shadows: [
                                       Shadow(
                                         blurRadius: 10.0,
-                                        color:
-                                        Colors.black26.withOpacity(0.4),
+                                        color: Colors.black26.withOpacity(0.4),
                                         offset: Offset(4.0, 4.0),
                                       ),
                                     ],

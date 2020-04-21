@@ -566,7 +566,7 @@ class _StatsScreenState extends State<StatsScreen> {
                               width: 22.0,
                             ),
                             Text(
-                              'See All Devices',
+                              'See device wise consumption',
                               style: TextStyle(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 16.0,

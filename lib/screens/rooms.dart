@@ -165,7 +165,7 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
                 bottom: TabBar(
                   isScrollable: true,
                   labelColor: Theme.of(context).accentColor,
-                  unselectedLabelColor: Theme.of(context).cardColor,
+                  unselectedLabelColor: Theme.of(context).disabledColor,
                   indicatorColor: Colors.transparent,
                   indicatorSize: TabBarIndicatorSize.tab,
                   tabs: rlist,
@@ -202,13 +202,14 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
                             color: Theme.of(context).accentColor,
                             fontSize: 20,
                             fontFamily: 'Montserrat',
+                            fontWeight: FontWeight.bold,
                           ),
                           // textAlign: TextAlign.left,
                         ),
                       ],
                     ),
                   ),
-                  SizedBox(height: screenheight * 0.005),
+                  SizedBox(height: 12.0),
                   Container(
                     height: screenheight * 0.35,
                     width: screenwidth,
@@ -252,56 +253,65 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
     return ListView.builder(
         itemCount: rooms[l].d.length,
         itemBuilder: (context, i) {
-          return Column(
-            children: <Widget>[
-              Container(
-                margin: EdgeInsets.all(5.5),
-                decoration: BoxDecoration(
-                  color: Theme.of(context).cardColor,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: ListTile(
-                  onTap: () {
-                    setState(() {
-                      currRoom = rooms[l].roomName;
-                      currDevice = rooms[l].d[i];
-                    });
-                  },
-                  leading: getIcons(rooms[l].d[i]),
-                  title: Text(rooms[l].d[i]),
-                  trailing: StreamBuilder(
-                    stream: itemRef
-                        .child("Homes/" +
-                            user.houseId +
-                            "/Rooms/" +
-                            rooms[l].roomName +
-                            "/devices/" +
-                            rooms[l].d[i] +
-                            "/")
-                        .onValue,
-                    builder: (context, snap) {
-                      Map<String, dynamic> values =
-                          new Map<String, dynamic>.from(
-                              snap.data.snapshot.value);
-                      return Switch(
-                        value: convert(values["State"]),
-                        onChanged: (value) {
-                          stateChange(value, rooms[l].roomName, rooms[l].d[i],
-                              user.houseId, user);
-                          setState(() {
-                            getDevState(rooms[l].roomName, rooms[l].d[i])
-                                .toggleSt = value;
-                          });
-                        },
-                        activeTrackColor: Theme.of(context).accentColor,
-                        activeColor: Colors.white,
-                        inactiveTrackColor: Theme.of(context).backgroundColor,
-                      );
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: Column(
+              children: <Widget>[
+                Container(
+                  margin: EdgeInsets.all(6.0),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).cardColor,
+                    borderRadius: BorderRadius.circular(8.0),
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            offset: Offset(1.0, 4.0),
+                            blurRadius: 4.0)
+                      ]
+                  ),
+                  child: ListTile(
+                    onTap: () {
+                      setState(() {
+                        currRoom = rooms[l].roomName;
+                        currDevice = rooms[l].d[i];
+                      });
                     },
+                    leading: getIcons(rooms[l].d[i]),
+                    title: Text(rooms[l].d[i], style: TextStyle(fontWeight: FontWeight.w600),),
+                    trailing: StreamBuilder(
+                      stream: itemRef
+                          .child("Homes/" +
+                              user.houseId +
+                              "/Rooms/" +
+                              rooms[l].roomName +
+                              "/devices/" +
+                              rooms[l].d[i] +
+                              "/")
+                          .onValue,
+                      builder: (context, snap) {
+                        Map<String, dynamic> values =
+                            new Map<String, dynamic>.from(
+                                snap.data.snapshot.value);
+                        return Switch(
+                          value: convert(values["State"]),
+                          onChanged: (value) {
+                            stateChange(value, rooms[l].roomName, rooms[l].d[i],
+                                user.houseId, user);
+                            setState(() {
+                              getDevState(rooms[l].roomName, rooms[l].d[i])
+                                  .toggleSt = value;
+                            });
+                          },
+                          activeTrackColor: Theme.of(context).accentColor,
+                          activeColor: Colors.white,
+                          inactiveTrackColor: Theme.of(context).backgroundColor,
+                        );
+                      },
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           );
         });
   }

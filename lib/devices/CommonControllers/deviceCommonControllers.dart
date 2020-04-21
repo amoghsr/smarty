@@ -112,7 +112,7 @@ Container colorRow(Color color) {
 Container topAppBar(String roomName, String appliance, IconData icon) {
   return Container(
     padding: EdgeInsets.symmetric(
-      horizontal: 15,
+      horizontal: 12,
     ),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -121,9 +121,6 @@ Container topAppBar(String roomName, String appliance, IconData icon) {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(roomName, style: kLightDeviceTopBar),
-            SizedBox(
-              height: 8,
-            ),
             Text(
               appliance,
               style: kLightDeviceBottomBar,
