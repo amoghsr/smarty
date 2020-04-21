@@ -83,24 +83,19 @@ class _HomeState extends State<Home> {
     });
   }
 
-  @override
-  /*
-  * A notification plugin that provides the app with the ability to send notifications to
-  * the user for certain events such as when there is an anomaly (fire) detected by the flame detector.
-  */
-
-  Widget build(BuildContext context) {
-    final user = Provider.of<User>(context);
+  //TODO: POP UPS UPDATED
+  void didChangeDependencies() {
     if (Provider.of<Consumption>(context).dailyTotal >=
         Provider.of<Generation>(context).dailyTotal * 0.8) {
-      Timer.run(
-          () => Provider.of<DialogProvider>(context, listen: false).popAi());
+      if (Provider.of<Consumption>(context).dailyTotal >=
+          Provider.of<Generation>(context).dailyTotal * 0.95) {
+        Timer.run(
+            () => Provider.of<DialogProvider>(context, listen: false).popP2P());
+      } else
+        Timer.run(
+            () => Provider.of<DialogProvider>(context, listen: false).popAi());
     }
-    if (Provider.of<Consumption>(context).dailyTotal >=
-        Provider.of<Generation>(context).dailyTotal * 0.95) {
-      Timer.run(
-          () => Provider.of<DialogProvider>(context, listen: false).popAi());
-    }
+    final user = Provider.of<User>(context);
 
     final FirebaseDatabase database = FirebaseDatabase
         .instance; //Rather then just writing FirebaseDatabase(), get the instance.
@@ -126,6 +121,18 @@ class _HomeState extends State<Home> {
             .popFireDialog());
       }
     });
+    super.didChangeDependencies();
+  }
+
+  @override
+  /*
+  * A notification plugin that provides the app with the ability to send notifications to
+  * the user for certain events such as when there is an anomaly (fire) detected by the flame detector.
+  */
+
+  Widget build(BuildContext context) {
+    final user = Provider.of<User>(context);
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
