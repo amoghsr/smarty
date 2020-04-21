@@ -91,20 +91,19 @@ class _LineChartSample2State extends State<LineChartSample2> {
       "April": 3,
       "May": 4
     };
-    print("scsdcsd");
-    print(snapshot.monthly);
     Map<String, int> monthData = snapshot.monthly;
     List<int> monthly = new List(monthData.length);
+    int i = 0;
     snapshot.monthly.forEach((key, value) {
       monthly[month[key]] = value;
+      i++;
     });
-    monthly = monthData.values.toList();
     List<FlSpot> monthCoords = [
       FlSpot(0, 0),
     ];
 
     for (int i = 0, j = 1; i < hourData.length; i++, j += 3) {
-      hourCoords.add(FlSpot(j.toDouble(), hours[i].toDouble()));
+      hourCoords.add(FlSpot(j.toDouble(), hours[i].toDouble() / 5));
     }
 
     for (int i = 0, j = 1; i < weekData.length; i++, j += 2) {
@@ -112,7 +111,7 @@ class _LineChartSample2State extends State<LineChartSample2> {
     }
 
     for (int i = 0, j = 1; i < monthData.length; i++, j += 2) {
-      monthCoords.add(FlSpot(j.toDouble(), (monthly[i].toDouble()) / 1000));
+      monthCoords.add(FlSpot(j.toDouble(), (monthly[i].toDouble()) / 400));
     }
     return LineChartData(
       gridData: FlGridData(
@@ -230,27 +229,27 @@ class _LineChartSample2State extends State<LineChartSample2> {
               switch (value.toInt()) {
                 case 1:
                   return '1.7kWh';
-                case 2:
-                  return '3.4kWH';
+                // case 2:
+                //   return '3.4kWH';
                 case 3:
                   return '5.1kWh';
-                case 4:
-                  return '6.8kWh';
+                // case 4:
+                //   return '6.8kWh';
                 case 5:
                   return '8.5kWh';
               }
             } else if (groupby == "Week") {
               switch (value.toInt()) {
                 case 1:
-                  return '20kWh';
+                  return '10kWh';
                 // case 2:
                 //   return '30kWH';
                 case 3:
-                  return '40kWh';
+                  return '30kWh';
                 // case 4:
                 //   return '50kWh';
                 case 5:
-                  return '60kWh';
+                  return '50kWh';
               }
             } else {
               switch (value.toInt()) {
@@ -268,7 +267,7 @@ class _LineChartSample2State extends State<LineChartSample2> {
             }
             return '';
           },
-          reservedSize: 28,
+          reservedSize: 40,
           margin: 15,
         ),
       ),
@@ -304,6 +303,14 @@ class _LineChartSample2State extends State<LineChartSample2> {
   LineChartData mainConsumptionData(String groupby, Consumption snapshot) {
     List<int> noofdays = [30, 31, 31, 28, 31, 31, 30, 31, 31, 30, 31, 30];
 
+    Map<String, int> month = {
+      "January": 0,
+      "February": 1,
+      "March": 2,
+      "April": 3,
+      "May": 4
+    };
+
     Map<String, int> hourData = snapshot.daily;
     List<int> hours = hourData.values.toList();
     List<FlSpot> hourCoords = [
@@ -315,23 +322,36 @@ class _LineChartSample2State extends State<LineChartSample2> {
     List<FlSpot> weekCoords = [
       FlSpot(0, 0),
     ];
-
+    Map<String, int> month1 = {
+      "January": 0,
+      "February": 1,
+      "March": 2,
+      "April": 3,
+      "May": 4
+    };
     Map<String, int> monthData = snapshot.monthly;
-    List<int> monthly = monthData.values.toList();
+    List<int> monthly = new List(monthData.length);
+    int i = 0;
+    snapshot.monthly.forEach((key, value) {
+      monthly[month[key]] = value;
+      i++;
+    });
+//    monthly = monthData.values.toList();
     List<FlSpot> monthCoords = [
       FlSpot(0, 0),
     ];
 
     for (int i = 0, j = 1; i < hourData.length; i++, j += 2) {
-      hourCoords.add(FlSpot(j.toDouble(), hours[i].toDouble()));
+      hourCoords.add(FlSpot(j.toDouble(), hours[i].toDouble() / 5));
     }
 
     for (int i = 0, j = 1; i < weekData.length; i++, j += 2) {
-      weekCoords.add(FlSpot(j.toDouble(), weekly[i].toDouble() % 5));
+      weekCoords.add(FlSpot(j.toDouble(), weekly[i].toDouble() / 10));
     }
 
     for (int i = 0, j = 1; i < monthData.length; i++, j += 2) {
-      monthCoords.add(FlSpot(j.toDouble(), (monthly[i].toDouble()) / 2000));
+      monthCoords.add(FlSpot(j.toDouble(), (monthly[i].toDouble()) / 250));
+      print(monthly[i].toDouble() + 17);
     }
     return LineChartData(
       gridData: FlGridData(
@@ -511,7 +531,7 @@ class _LineChartSample2State extends State<LineChartSample2> {
             }
             return '';
           },
-          reservedSize: 28,
+          reservedSize: 35,
           margin: 15,
         ),
       ),
