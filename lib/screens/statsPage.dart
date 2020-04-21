@@ -237,11 +237,26 @@ class _StatsScreenState extends State<StatsScreen> {
                               children: <Widget>[
                                 Row(
                                   children: <Widget>[
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.orange[600],
+                                        shape: BoxShape.circle,
+                                      ),
+                                      height: 12.0,
+                                      width: 12.0,
+                                    ),
+                                    SizedBox(width: 4.0),
+                                    Text('Consumption'),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: <Widget>[
                                     Text(
-                                      //TODO: AVERAGE DAILY CONSUMPTION OF ALL OTHER HOUSES (NOT INCLUDING OURS) UP UNTIL THAT POINT OF THE DAY
-                                      y.dailyTotal > 0
-                                          ? (y.dailyTotal + result1).toString()
-                                          : "0",
+                                      y.dailyTotal.toString(),
                                       style: TextStyle(
                                         height: 1,
                                         fontSize: 32.0,

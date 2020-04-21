@@ -82,7 +82,6 @@ class _HomeState extends State<Home> {
     getPosition().then((position) {
       getWeather(position.latitude, position.longitude);
     });
-    // TODO: Dialog Box for AI condition here
   }
 
   @override
@@ -98,7 +97,6 @@ class _HomeState extends State<Home> {
       Timer.run(
           () => Provider.of<DialogProvider>(context, listen: false).popAi());
     }
-    // TODO: Dialog Box for P2P condition here
     if (Provider.of<Consumption>(context).dailyTotal >=
         Provider.of<Generation>(context).dailyTotal * 0.95) {
       Timer.run(
