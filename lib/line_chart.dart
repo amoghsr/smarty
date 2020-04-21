@@ -322,13 +322,14 @@ class _LineChartSample2State extends State<LineChartSample2> {
     List<FlSpot> weekCoords = [
       FlSpot(0, 0),
     ];
-    Map<String, int> month1 = {
-      "January": 0,
-      "February": 1,
-      "March": 2,
-      "April": 3,
-      "May": 4
-    };
+    // TODO: Remove Duplicate
+    // Map<String, int> month1 = {
+    //   "January": 0,
+    //   "February": 1,
+    //   "March": 2,
+    //   "April": 3,
+    //   "May": 4
+    // };
     Map<String, int> monthData = snapshot.monthly;
     List<int> monthly = new List(monthData.length);
     int i = 0;

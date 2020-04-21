@@ -92,8 +92,8 @@ class _HomeState extends State<Home> {
 
     // if (Provider.of<Consumption>(context, listen: false).dailyTotal >=
     //     Provider.of<Generation>(context, listen: false).dailyTotal * 0.95)
-    //   Timer.run(
-    //       () => Provider.of<DialogProvider>(context, listen: false).popP2P());
+      Timer.run(
+          () => Provider.of<DialogProvider>(context, listen: false).popP2P());
 
     // if (Provider.of<BoltProvider>(context, listen: false).getBalanceAsInt() == 10)
     //   Timer.run(
@@ -109,7 +109,6 @@ class _HomeState extends State<Home> {
   * A notification plugin that provides the app with the ability to send notifications to
   * the user for certain events such as when there is an anomaly (fire) detected by the flame detector.
   */
-  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
 
   void showAIAlert(BuildContext context, List<Room> room) {
     showDialog(
@@ -241,20 +240,5 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Future _showNotificationWithDefaultSound(String title, String desc) async {
-    flutterLocalNotificationsPlugin = new FlutterLocalNotificationsPlugin();
-    var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
-        'Smarty', 'Kaizen Systems', 'Stage 2',
-        importance: Importance.Max, priority: Priority.High);
-    var iOSPlatformChannelSpecifics = new IOSNotificationDetails();
-    var platformChannelSpecifics = new NotificationDetails(
-        androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
-    await flutterLocalNotificationsPlugin.show(
-      0,
-      title,
-      desc,
-      platformChannelSpecifics,
-      payload: 'Default_Sound',
-    );
-  }
+
 }

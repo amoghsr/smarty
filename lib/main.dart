@@ -6,6 +6,8 @@ import 'package:smarty/models/themeModel.dart';
 import 'package:smarty/models/user.dart';
 import 'package:smarty/services/auth.dart';
 import 'package:smarty/services/dialogLocator.dart';
+import 'package:smarty/services/dialogManager.dart';
+import 'package:smarty/services/dialogProvider.dart';
 import 'package:smarty/services/service_locator.dart';
 import 'package:smarty/wrapper.dart';
 import 'package:smarty/models/pointsProvider.dart';
@@ -37,9 +39,23 @@ class MyApp extends StatelessWidget {
       //Todo: remove all this
       child: StreamProvider<Map<String, PointsProvider>>.value(
         value: DatabaseService1().streamPoints(),
-        child: MaterialApp(
-          home: Wrapper(),
-          theme: Provider.of<ThemeModel>(context).currentTheme,
+        child: MultiProvider(
+          providers: [
+            ChangeNotifierProvider<DialogProvider>(
+              create: (_) => DialogProvider(),
+            ),
+          ],
+          child: MaterialApp(
+            builder: (context, widget) => Navigator(
+              onGenerateRoute: (settings) => MaterialPageRoute(
+                builder: (context) => DialogManager(
+                  child: widget,
+                ),
+              ),
+            ),
+            home: Wrapper(),
+            theme: Provider.of<ThemeModel>(context).currentTheme,
+          ),
         ),
       ),
     );

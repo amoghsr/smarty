@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:smarty/alertBox.dart';
 import 'package:smarty/devices/CommonControllers/deviceCommonControllers.dart';
 import 'package:smarty/screens/p2pPanel.dart';
@@ -21,17 +22,48 @@ class _DialogManagerState extends State<DialogManager> {
   DoorBellService _doorBellDialog = locator<DoorBellService>();
   FireService _fireDialog = locator<FireService>();
   @override
+  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
+
   void initState() {
     super.initState();
     _aiDialog.registerDialogListener(_showAIDialog);
     _p2pDialog.registerDialogListener(_showP2PDialog);
     _doorBellDialog.registerDialogListener(_showDoorBellDialog);
     _fireDialog.registerDialogListener(_showFireDialog);
+
+    // initialise the plugin. app_icon needs to be a added as a drawable resource to the Android head project
+    // If you have skipped STEP 3 then change app_icon to @mipmap/ic_launcher
+    var initializationSettingsAndroid =
+        new AndroidInitializationSettings('app_icon');
+    var initializationSettingsIOS = new IOSInitializationSettings();
+    var initializationSettings = new InitializationSettings(
+        initializationSettingsAndroid, initializationSettingsIOS);
+    flutterLocalNotificationsPlugin = new FlutterLocalNotificationsPlugin();
+    flutterLocalNotificationsPlugin.initialize(
+      initializationSettings,
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return widget.child;
+  }
+
+  Future _showNotificationWithDefaultSound(String title, String desc) async {
+    flutterLocalNotificationsPlugin = new FlutterLocalNotificationsPlugin();
+    var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
+        'Smarty', 'Kaizen Systems', 'Stage 2',
+        importance: Importance.Max, priority: Priority.High);
+    var iOSPlatformChannelSpecifics = new IOSNotificationDetails();
+    var platformChannelSpecifics = new NotificationDetails(
+        androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
+    await flutterLocalNotificationsPlugin.show(
+      0,
+      title,
+      desc,
+      platformChannelSpecifics,
+      payload: 'Default_Sound',
+    );
   }
 
   void _showAIDialog() {
@@ -53,6 +85,8 @@ class _DialogManagerState extends State<DialogManager> {
         },
       ),
     );
+    _showNotificationWithDefaultSound(
+        'CAREFUL!', 'You have almost reached your daily limit!');
   }
 
   void _showP2PDialog() {
@@ -73,6 +107,8 @@ class _DialogManagerState extends State<DialogManager> {
         },
       ),
     );
+    _showNotificationWithDefaultSound(
+        'BATTERY EMPTY!', 'You are running out of electricity!');
   }
 
   void _showDoorBellDialog() {
@@ -91,6 +127,8 @@ class _DialogManagerState extends State<DialogManager> {
         );
       }),
     );
+    _showNotificationWithDefaultSound(
+        'DOORBELL RUNG!', 'Someone\'s at the door!');
   }
 
   void _showFireDialog() {
@@ -109,5 +147,7 @@ class _DialogManagerState extends State<DialogManager> {
         );
       }),
     );
+    _showNotificationWithDefaultSound(
+        'FIRE DETECTED!', 'Sprinklers have been activated.');
   }
 }
