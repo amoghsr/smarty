@@ -39,24 +39,7 @@ class MyApp extends StatelessWidget {
       //Todo: remove all this
       child: StreamProvider<Map<String, PointsProvider>>.value(
         value: DatabaseService1().streamPoints(),
-        child: MultiProvider(
-          providers: [
-            ChangeNotifierProvider<DialogProvider>(
-              create: (_) => DialogProvider(),
-            ),
-          ],
-          child: MaterialApp(
-            builder: (context, widget) => Navigator(
-              onGenerateRoute: (settings) => MaterialPageRoute(
-                builder: (context) => DialogManager(
-                  child: widget,
-                ),
-              ),
-            ),
-            home: Wrapper(),
-            theme: Provider.of<ThemeModel>(context).currentTheme,
-          ),
-        ),
+        child: Wrapper(),
       ),
     );
   }

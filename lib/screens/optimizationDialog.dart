@@ -12,17 +12,10 @@ import '../BadgeBox.dart';
 
 class Optimization extends StatefulWidget {
   @override
-  List<Room> r;
-  Optimization({this.r});
   _OptimizationState createState() => _OptimizationState();
 }
 
 class _OptimizationState extends State<Optimization> {
-//  // TODO: Get the room names
-  List<String> roomNames = ["Living Room", "Kitchen", "Playroom"];
-  // TODO: Get the device names for each room (IF THEY ARE ON)
-  List<String> deviceNames = ["AC", "Lamp", "Speaker"];
-
   Map<String, String> desc = {
     "AC": "Set the temperature to 24°C",
     "Lamp": "Set the brightness to 25%",
@@ -32,6 +25,7 @@ class _OptimizationState extends State<Optimization> {
   };
   bool expanded = false;
   List<dynamic> roomDeviceNames = [];
+
   Icon getDevIcons(String roomName) {
     switch (roomName) {
       case 'Lamp':
@@ -60,7 +54,7 @@ class _OptimizationState extends State<Optimization> {
   }
 
   Widget build(BuildContext context) {
-    List<Room> rooms = widget.r;
+    final rooms = Provider.of<List<Room>>(context);
     double screenheight = MediaQuery.of(context).size.height;
     final user = Provider.of<User>(context);
 
@@ -70,7 +64,9 @@ class _OptimizationState extends State<Optimization> {
         for (var j in i.d) {
           for (var k in devices) {
             if (k.inRoom == i.roomName) if (k.deviceName == j) if (k.state ==
-                'Off') roomDeviceNames.add([i.roomName.toString(), 'Off']);
+                'On') {
+              roomDeviceNames.add([i.roomName.toString(), 'On']);
+            }
           }
         }
       }

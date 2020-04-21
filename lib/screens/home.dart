@@ -84,16 +84,13 @@ class _HomeState extends State<Home> {
     });
 
 //     if (Provider.of<BoltProvider>(context, listen: false).getBalanceAsInt() == 10)
-//     Timer.run(
-//         () => Provider.of<DialogProvider>(context, listen: false).popAi());
-
     // Timer.run(
     //     () => Provider.of<DialogProvider>(context, listen: false).popAi());
 
     // if (Provider.of<Consumption>(context, listen: false).dailyTotal >=
     //     Provider.of<Generation>(context, listen: false).dailyTotal * 0.95)
-      Timer.run(
-          () => Provider.of<DialogProvider>(context, listen: false).popP2P());
+    // Timer.run(
+    //     () => Provider.of<DialogProvider>(context, listen: false).popP2P());
 
     // if (Provider.of<BoltProvider>(context, listen: false).getBalanceAsInt() == 10)
     //   Timer.run(
@@ -110,30 +107,8 @@ class _HomeState extends State<Home> {
   * the user for certain events such as when there is an anomaly (fire) detected by the flame detector.
   */
 
-  void showAIAlert(BuildContext context, List<Room> room) {
-    showDialog(
-      context: context,
-      builder: (context) => Dialog(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(Consts.padding),
-          ),
-          elevation: 0.0,
-          // Elevation means the height of element on the screen from the floor. Basically gives a drop shadow.
-          backgroundColor: Colors.transparent,
-          child: Optimization(
-              r: room) // The required child is the content inside the dialog box.
-          ),
-    );
-  }
-
   Widget build(BuildContext context) {
-    final rooms = Provider.of<List<Room>>(context);
     final user = Provider.of<User>(context);
-
-    // // TODO: AI Condition Here
-    // if (Provider.of<Consumption>(context, listen: false).dailyTotal >=
-    //     Provider.of<Generation>(context, listen: false).dailyTotal * 0.8)
-    //   Future.delayed(Duration.zero, () => showAIAlert(context, rooms));
 
     return SafeArea(
       child: Scaffold(
@@ -239,6 +214,4 @@ class _HomeState extends State<Home> {
       ),
     );
   }
-
-
 }
