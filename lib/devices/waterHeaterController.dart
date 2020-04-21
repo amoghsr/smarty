@@ -40,7 +40,7 @@ class WaterHeaterController extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  height: screenheight * 0.015,
+                  height: 4.0,
                 ),
                 Text(
                   'Water Heater',
@@ -51,6 +51,7 @@ class WaterHeaterController extends StatelessWidget {
             Row(
               children: <Widget>[
                 Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
                   children: <Widget>[
                     Text(
                       'Temperature',
@@ -59,7 +60,7 @@ class WaterHeaterController extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      height: screenheight * 0.015,
+                      height: 4.0
                     ),
                     StreamBuilder(
                       stream: itemRef
@@ -89,7 +90,7 @@ class WaterHeaterController extends StatelessWidget {
           ],
         ),
         SizedBox(
-          height: screenheight * 0.01,
+          height: screenheight * 0.03,
         ),
         Expanded(
           child: Center(
