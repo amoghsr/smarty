@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:smarty/alertBox.dart';
 import 'package:smarty/devices/CommonControllers/deviceCommonControllers.dart';
-import 'package:smarty/screens/p2pPanel.dart';
+import 'package:smarty/screens/energy_sharing_screen.dart';
 import 'package:smarty/services/AIPopUpService.dart';
 import 'package:smarty/services/dialogLocator.dart';
 import 'package:smarty/services/doorbellPopUpService.dart';
@@ -102,7 +102,7 @@ class _DialogManagerState extends State<DialogManager> {
             description: "You are running out of electricity!",
             col: Colors.red[500],
             buttonText: "Purchase Electricity",
-            path: P2P(),
+            path: EnergySharingScreen(),
           );
         },
       ),

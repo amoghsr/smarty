@@ -27,30 +27,31 @@ class LeaderboardModel {
   }
 }
 
+
 Map<String, dynamic> houseUserMap = {
   '1': {
     'userImage':
-        'https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
+        'assets/images/Users/User1.png',
     'userName': 'Sarah Hue',
   },
   '2': {
     'userImage':
-        'https://images.pexels.com/photos/736716/pexels-photo-736716.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
+        'assets/images/Users/User2.png',
     'userName': 'Xavier Gordon',
   },
   '3': {
     'userImage':
-        'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
+        'assets/images/Users/User3.png',
     'userName': 'Damian Brown',
   },
   '4': {
     'userImage':
-        'https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
+        'assets/images/Users/User4.png',
     'userName': 'Maddison Smith',
   },
   '5': {
     'userImage':
-        'https://images.pexels.com/photos/2380795/pexels-photo-2380795.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
+        'assets/images/Users/User5.png',
     'userName': 'Chris Patrick',
   }
 };

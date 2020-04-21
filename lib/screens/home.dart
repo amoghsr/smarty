@@ -23,7 +23,6 @@ import 'package:smarty/models/themeModel.dart';
 import 'package:smarty/models/user.dart';
 import 'package:smarty/models/weatherModel.dart';
 import 'package:smarty/screens/drawer.dart';
-import 'package:smarty/screens/p2pPanel.dart';
 import 'package:smarty/services/AIPopUpService.dart';
 import 'package:smarty/services/auth.dart';
 import 'package:smarty/services/dialogLocator.dart';
@@ -134,17 +133,7 @@ class _HomeState extends State<Home> {
             'Home',
             style: kAppBarTextStyle,
           ),
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(MaterialCommunityIcons.theme_light_dark),
-              onPressed: () async {
-                setState(() {
-                  Provider.of<ThemeModel>(context, listen: false).toggleTheme();
-                });
-              },
-            ),
-            MicClass()
-          ],
+          actions: <Widget>[MicClass()],
         ),
         // Drawer is the hamburger menu.
         // Here starts the body of the Home Page, nested inside a SafeArea widget to keep content inside the viewport
@@ -185,7 +174,23 @@ class _HomeState extends State<Home> {
                       ],
                     ),
                     (weather == null)
-                        ? CircularProgressIndicator()
+                        ? Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: <Widget>[
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 3.0),
+                                child: Text('Outside'),
+                              ),
+                              Text(
+                                '29°C',
+                                //${widget.currentUser.email}`
+                                style: TextStyle(
+                                  fontSize: 24.0,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                            ],
+                          )
                         : Column(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: <Widget>[

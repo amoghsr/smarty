@@ -23,11 +23,9 @@ class _RoutineMainViewState extends State<RoutineMainView> {
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
-            title: Center(
-              child: Text(
-                'All Routines',
-                style: kAppBarTextStyle,
-              ),
+            title: Text(
+              'All Routines',
+              style: kAppBarTextStyle,
             ),
             actions: <Widget>[MicClass()],
             bottom: TabBar(

@@ -4,6 +4,7 @@ import 'package:flutter_vlc_player/vlc_player.dart';
 import 'package:flutter_vlc_player/vlc_player_controller.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:smarty/shared/constants.dart';
+import 'package:smarty/widgets/voiceAgent.dart';
 
 class Security extends StatefulWidget {
   @override
@@ -25,6 +26,7 @@ class _SecurityState extends State<Security> {
           'Security',
           style: kAppBarTextStyle,
         ),
+        actions: <Widget>[MicClass()],
       ),
       drawer: Drawer(),
       body: SingleChildScrollView(
@@ -35,14 +37,15 @@ class _SecurityState extends State<Security> {
             child: Column(
               children: <Widget>[
                 Container(
-                  decoration: BoxDecoration(
-                      color: Theme.of(context).cardColor
-                  ),
+                  decoration: BoxDecoration(color: Theme.of(context).cardColor),
                   child: Padding(
                     padding: const EdgeInsets.all(20.0),
                     child: Column(
                       children: <Widget>[
-                        Text('You can view the footage of your homes CCTV set on your front porch', textAlign: TextAlign.center,)
+                        Text(
+                          'You can view the footage of your homes CCTV set on your front porch',
+                          textAlign: TextAlign.center,
+                        )
                       ],
                     ),
                   ),
@@ -57,9 +60,7 @@ class _SecurityState extends State<Security> {
                           "Front-door",
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                              fontSize: 24.0,
-                              fontWeight: FontWeight.bold
-                          ),
+                              fontSize: 24.0, fontWeight: FontWeight.bold),
                         ),
                       ),
                     ),
@@ -71,21 +72,21 @@ class _SecurityState extends State<Security> {
                   children: <Widget>[
                     controller.hasClients
                         ? new VlcPlayer(
-                      defaultHeight: playerHeight,
-                      defaultWidth: playerWidth,
-                      url: urlToStreamVideo,
-                      controller: controller,
-                    )
+                            defaultHeight: playerHeight,
+                            defaultWidth: playerWidth,
+                            url: urlToStreamVideo,
+                            controller: controller,
+                          )
                         : Container(
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).cardColor,
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(10.0),
-                        ),
-                      ),
-                      height: screenheight * 0.3,
-                      width: screenwidth * 0.89,
-                    ),
+                            decoration: BoxDecoration(
+                              color: Theme.of(context).cardColor,
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(10.0),
+                              ),
+                            ),
+                            height: screenheight * 0.3,
+                            width: screenwidth * 0.89,
+                          ),
                   ],
                 ),
                 SizedBox(

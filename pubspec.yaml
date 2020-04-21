@@ -82,6 +82,7 @@ flutter:
   assets:
     - assets/images/
     - assets/images/deviceAssets/
+    - assets/images/Users/
     - assets/onboarding_graphics/
     # - assets/images/person/
 

@@ -155,19 +155,17 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
               SliverAppBar(
                 pinned: true,
                 floating: false,
-                title: Center(
-                  child: Text(
-                    (rmName != rlist[widget.initRoom].text)
-                        ? rmName
-                        : initrmName,
-                    style: kAppBarTextStyle,
-                  ),
+                title: Text(
+                  (rmName != rlist[widget.initRoom].text)
+                      ? rmName
+                      : initrmName,
+                  style: kAppBarTextStyle,
                 ),
                 actions: <Widget>[MicClass()],
                 bottom: TabBar(
                   isScrollable: true,
                   labelColor: Theme.of(context).accentColor,
-                  // unselectedLabelColor: Theme.of(context).backgroundColor,
+                  unselectedLabelColor: Theme.of(context).cardColor,
                   indicatorColor: Colors.transparent,
                   indicatorSize: TabBarIndicatorSize.tab,
                   tabs: rlist,

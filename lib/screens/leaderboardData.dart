@@ -74,8 +74,8 @@ class _LeaderboardDataState extends State<LeaderboardData> {
                             backgroundColor: Theme.of(context).canvasColor,
                             backgroundImage:
                                 (widget.leaderboardType == 'DAILY SAVINGS')
-                                    ? NetworkImage(lb[1].userImage)
-                                    : NetworkImage(houseUserMap[newList[1][1]
+                                    ? AssetImage(lb[1].userImage)
+                                    : AssetImage(houseUserMap[newList[1][1]
                                         .houseID
                                         .toString()]['userImage']),
                           ),
@@ -116,8 +116,8 @@ class _LeaderboardDataState extends State<LeaderboardData> {
                             backgroundColor: Theme.of(context).canvasColor,
                             backgroundImage:
                                 (widget.leaderboardType == 'DAILY SAVINGS')
-                                    ? NetworkImage(lb[0].userImage)
-                                    : NetworkImage(houseUserMap[newList[0][1]
+                                    ? AssetImage(lb[0].userImage)
+                                    : AssetImage(houseUserMap[newList[0][1]
                                         .houseID
                                         .toString()]['userImage']),
                           ),
@@ -159,8 +159,8 @@ class _LeaderboardDataState extends State<LeaderboardData> {
                             backgroundColor: Theme.of(context).canvasColor,
                             backgroundImage:
                                 (widget.leaderboardType == 'DAILY SAVINGS')
-                                    ? NetworkImage(lb[2].userImage)
-                                    : NetworkImage(houseUserMap[newList[2][1]
+                                    ? AssetImage(lb[2].userImage)
+                                    : AssetImage(houseUserMap[newList[2][1]
                                         .houseID
                                         .toString()]['userImage']),
                           ),
@@ -240,8 +240,8 @@ class _LeaderboardDataState extends State<LeaderboardData> {
                           radius: 20,
                           backgroundColor: Theme.of(context).canvasColor,
                           backgroundImage: (type == 'DAILY SAVINGS')
-                              ? NetworkImage(lb[i].userImage)
-                              : NetworkImage(
+                              ? AssetImage(lb[i].userImage)
+                              : AssetImage(
                                   houseUserMap[lb[i][1].houseID]['userImage']),
                         ),
                       ),

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:smarty/authenticate/authenticate.dart';
+import 'package:smarty/models/darkModeSwitchProvider.dart';
 import 'package:smarty/models/leaderboardModel.dart';
 import 'package:smarty/models/themeModel.dart';
 import 'package:smarty/screens/home_manager/navigation_manager.dart';
@@ -22,7 +23,6 @@ class DrawerPage extends StatefulWidget {
 
 class _DrawerPageState extends State<DrawerPage> {
   final AuthService _auth = AuthService();
-  bool valueSwitch = true;
   var user;
   var stream;
 
@@ -82,7 +82,7 @@ class _DrawerPageState extends State<DrawerPage> {
                           ),
                         ),
                         currentAccountPicture: CircleAvatar(
-                          backgroundImage: NetworkImage(
+                          backgroundImage: AssetImage(
                               houseUserMap[user.houseId]['userImage']),
                         ),
                       ),
@@ -124,13 +124,14 @@ class _DrawerPageState extends State<DrawerPage> {
                 leading: Icon(MaterialCommunityIcons.theme_light_dark),
                 title: Text('Dark Mode'),
                 trailing: Switch(
-                  value: valueSwitch,
+                  value: Provider.of<AppThemeProvider>(context, listen: false).getTheme(),
                   activeColor: Colors.white,
                   activeTrackColor: Theme.of(context).accentColor,
                   inactiveTrackColor: Theme.of(context).backgroundColor,
                   onChanged: (value) {
                     setState(() {
-                      valueSwitch = value;
+                      Provider.of<AppThemeProvider>(context, listen: false).toggleTheme();
+
                       Provider.of<ThemeModel>(context, listen: false)
                           .toggleTheme();
                     });
@@ -257,10 +258,10 @@ class _DrawerPageState extends State<DrawerPage> {
                 leading: Icon(FontAwesomeIcons.solidMoon),
                 title: Text('Dark Mode'),
                 trailing: Switch(
-                  value: valueSwitch,
+                  value: Provider.of<AppThemeProvider>(context, listen:false).getTheme(),
                   onChanged: (value) {
                     setState(() {
-                      valueSwitch = value;
+                      Provider.of<AppThemeProvider>(context, listen: false).toggleTheme();
                       Provider.of<ThemeModel>(context, listen: false)
                           .toggleTheme();
                     });

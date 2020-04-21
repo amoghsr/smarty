@@ -29,7 +29,7 @@ class _MicClassState extends State<MicClass> {
   Widget build(BuildContext context) {
     return IconButton(
         icon: Icon(
-          MaterialCommunityIcons.assistant,
+          MaterialCommunityIcons.microphone,
           semanticLabel:
               'Voice Assistant to help you turn on or turn of devices. For example, say: "Turn on living room lamp".',
         ),

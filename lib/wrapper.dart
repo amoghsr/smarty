@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:smarty/authenticate/authenticate.dart';
+import 'package:smarty/models/darkModeSwitchProvider.dart';
 import 'package:smarty/models/dbService.dart';
 import 'package:smarty/models/devicesModel.dart';
 import 'package:smarty/models/generationModel.dart';
@@ -23,9 +24,18 @@ class Wrapper extends StatelessWidget {
     final user = Provider.of<User>(context);
 
     if (user == null) {
-      return MaterialApp(
-        home: Authenticate(),
-        theme: Provider.of<ThemeModel>(context).currentTheme,
+      return MultiProvider(
+        providers: [
+          ChangeNotifierProvider<AppThemeProvider>(
+            create: (_) => AppThemeProvider(darkTheme: true),
+          ),
+        ],
+        child: Consumer<AppThemeProvider>(builder: (context, myModel, child) {
+          return MaterialApp(
+            home: Authenticate(),
+            theme: Provider.of<ThemeModel>(context).currentTheme,
+          );
+        }),
       );
     } else {
       if (user.type == "M") {
@@ -41,9 +51,21 @@ class Wrapper extends StatelessWidget {
                   value: DatabaseService1().getSuggestedRoutines(user),
                   child: StreamProvider<List<String>>.value(
                     value: DatabaseService1().StreamUserlist(user.houseId),
-                    child: MaterialApp(
-                      theme: Provider.of<ThemeModel>(context).currentTheme,
-                      home: DashboardManager(),
+                    child: MultiProvider(
+                      providers: [
+                        ChangeNotifierProvider<AppThemeProvider>(
+                          create: (_) => AppThemeProvider(darkTheme: true),
+                        ),
+                      ],
+                      child: Consumer<AppThemeProvider>(
+                        builder: (context, myModel, child) {
+                          MaterialApp(
+                            theme:
+                                Provider.of<ThemeModel>(context).currentTheme,
+                            home: DashboardManager(),
+                          );
+                        },
+                      ),
                     ),
                   ),
                 ),
@@ -76,19 +98,27 @@ class Wrapper extends StatelessWidget {
                               ChangeNotifierProvider<DialogProvider>(
                                 create: (_) => DialogProvider(),
                               ),
-                            ],
-                            child: MaterialApp(
-                              builder: (context, widget) => Navigator(
-                                onGenerateRoute: (settings) =>
-                                    MaterialPageRoute(
-                                  builder: (context) => DialogManager(
-                                    child: widget,
-                                  ),
-                                ),
+                              ChangeNotifierProvider<AppThemeProvider>(
+                                create: (_) =>
+                                    AppThemeProvider(darkTheme: true),
                               ),
-                              theme:
-                                  Provider.of<ThemeModel>(context).currentTheme,
-                              home: MyNavigationBar(),
+                            ],
+                            child: Consumer<AppThemeProvider>(
+                              builder: (context, myModel, child) {
+                                return MaterialApp(
+                                  builder: (context, widget) => Navigator(
+                                    onGenerateRoute: (settings) =>
+                                        MaterialPageRoute(
+                                      builder: (context) => DialogManager(
+                                        child: widget,
+                                      ),
+                                    ),
+                                  ),
+                                  theme: Provider.of<ThemeModel>(context)
+                                      .currentTheme,
+                                  home: MyNavigationBar(),
+                                );
+                              },
                             ),
                           ),
                         ),

@@ -177,11 +177,9 @@ class _UserProfileState extends State<UserProfile> {
             child: Scaffold(
               appBar: AppBar(
                 actions: <Widget>[MicClass()],
-                title: Center(
-                  child: Text(
-                    'User Profile',
-                    style: kAppBarTextStyle,
-                  ),
+                title: Text(
+                  'User Profile',
+                  style: kAppBarTextStyle,
                 ),
               ),
               body: SafeArea(
@@ -202,7 +200,7 @@ class _UserProfileState extends State<UserProfile> {
                           children: <Widget>[
                             CircleAvatar(
                               //TODO: Current Home Owner's User Image
-                              backgroundImage: NetworkImage(
+                              backgroundImage: AssetImage(
                                   houseUserMap[widget.houseID]['userImage']),
                               maxRadius: 65,
                             ),
