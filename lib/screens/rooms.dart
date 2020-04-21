@@ -165,7 +165,7 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
                 bottom: TabBar(
                   isScrollable: true,
                   labelColor: Theme.of(context).accentColor,
-                  unselectedLabelColor: Theme.of(context).cardColor,
+                  unselectedLabelColor: Theme.of(context).disabledColor,
                   indicatorColor: Colors.transparent,
                   indicatorSize: TabBarIndicatorSize.tab,
                   tabs: rlist,
