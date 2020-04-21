@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:smarty/models/pointsProvider.dart';
 import 'package:smarty/models/devicesModel.dart';
 import 'package:smarty/models/generationModel.dart';
@@ -114,9 +115,6 @@ class DatabaseService1 {
   Map<String, PointsProvider> getPointsMap(QuerySnapshot doc) {
     Map<String, PointsProvider> rer = {};
     doc.documents.forEach((element) {
-      // print(element.data.);
-      // print("VALUE ${element.data['Bolts']}");
-
       rer[element.documentID] = PointsProvider(
         houseID: element.documentID,
         balance: element.data['Bolts'],
@@ -124,7 +122,6 @@ class DatabaseService1 {
         donationBadges: element.data["DonationBadges"],
       );
     });
-    
 
     return rer;
   }

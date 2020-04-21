@@ -83,23 +83,6 @@ class _HomeState extends State<Home> {
       getWeather(position.latitude, position.longitude);
     });
     // TODO: Dialog Box for AI condition here
-//     if (Provider.of<BoltProvider>(context, listen: false).getBalanceAsInt() == 10)
-    // Timer.run(
-    //     () => Provider.of<DialogProvider>(context, listen: false).popAi());
-    // TODO: Dialog Box for P2P condition here
-    // if (Provider.of<Consumption>(context, listen: false).dailyTotal >=
-    //     Provider.of<Generation>(context, listen: false).dailyTotal * 0.95)
-    //TODO: Dialog Box for Doorbell condition here
-    // if (condn here)
-    //   Timer.run(
-    //       () => Provider.of<DialogProvider>(context, listen: false).popDoorBell());
-    //TODO: Dialog Box for Fire Sensor Condition here
-    // if (condn here)
-    //   Timer.run(
-    //       () => Provider.of<DialogProvider>(context, listen: false).popDoorBell());
-    final FirebaseDatabase database = FirebaseDatabase
-        .instance; //Rather then just writing FirebaseDatabase(), get the instance.
-    itemRef = database.reference();
   }
 
   @override
@@ -110,7 +93,42 @@ class _HomeState extends State<Home> {
 
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
+    if (Provider.of<Consumption>(context).dailyTotal >=
+        Provider.of<Generation>(context).dailyTotal * 0.8) {
+      Timer.run(
+          () => Provider.of<DialogProvider>(context, listen: false).popAi());
+    }
+    // TODO: Dialog Box for P2P condition here
+    if (Provider.of<Consumption>(context).dailyTotal >=
+        Provider.of<Generation>(context).dailyTotal * 0.95) {
+      Timer.run(
+          () => Provider.of<DialogProvider>(context, listen: false).popAi());
+    }
 
+    final FirebaseDatabase database = FirebaseDatabase
+        .instance; //Rather then just writing FirebaseDatabase(), get the instance.
+    DatabaseReference itemRef = database.reference();
+    //door dialog
+    String q = "0";
+    final e = itemRef.child("Homes/" + user.houseId + "/Sensors/Door").onValue;
+    e.listen((onData) {
+      q = onData.snapshot.value;
+      if (q == "high") {
+        Timer.run(() =>
+            Provider.of<DialogProvider>(context, listen: false).popDoorBell());
+      }
+    });
+    //fire dialogbox
+    String w = "0";
+    final x =
+        itemRef.child("Homes/" + user.houseId + "/Sensors/Fire/Danger").onValue;
+    x.listen((onData) {
+      w = onData.snapshot.value;
+      if (w == "high") {
+        Timer.run(() => Provider.of<DialogProvider>(context, listen: false)
+            .popFireDialog());
+      }
+    });
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(

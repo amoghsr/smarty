@@ -12,15 +12,15 @@ class PointsProvider {
   PointsProvider(
       {this.houseID, this.balance, this.currentDay, this.donationBadges});
 
-  factory PointsProvider.fromFirestore(DocumentSnapshot doc) {
-    Map data = doc.data;
-    var points = PointsProvider(
-        houseID: doc.documentID,
-        balance: data[doc.documentID]['Bolts'],
-        currentDay: data[doc.documentID]['CurrentDay'],
-        donationBadges: data[doc.documentID]['DonationBadges']);
-    return points;
-  }
+//  factory PointsProvider.fromFirestore(DocumentSnapshot doc) {
+//    Map data = doc.data;
+//    var points = PointsProvider(
+//        houseID: doc.documentID,
+//        balance: data[doc.documentID]['Bolts'],
+//        currentDay: data[doc.documentID]['CurrentDay'],
+//        donationBadges: data[doc.documentID]['DonationBadges']);
+//    return points;
+//  }
   getBalance() => balance.toDouble();
   getBalanceAsInt() => balance.toInt();
   setBalance(String hID, double _balance) {
