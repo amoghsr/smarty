@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:smarty/alertBox.dart';
+import 'package:smarty/models/consumptionModel.dart';
 import 'package:smarty/models/pointsProvider.dart';
 import 'package:smarty/models/user.dart';
 import 'package:smarty/services/dialogProvider.dart';
@@ -29,6 +30,16 @@ class _P2PState extends State<P2P> {
   }
 
   Widget build(BuildContext context) {
+    final y = Provider.of<Consumption>(context);
+    final now = DateTime.now();
+    final date = DateTime(2020, 1, 1);
+    final diff = now.difference(new DateTime(date.year, 1, 1, 0, 0));
+    final diffInDays = diff.inDays;
+    String avg = "0";
+    if (y != null) {
+      avg = (y.monthly.values.toList().reduce((a, b) => a + b) / diffInDays)
+          .toStringAsFixed(2);
+    }
     final user = Provider.of<User>(context);
     final bal = Provider.of<Map<String, PointsProvider>>(context);
     double screenwidth = MediaQuery.of(context).size.width;
@@ -263,7 +274,7 @@ class _P2PState extends State<P2P> {
                           children: <Widget>[
                             // TODO: Get average consumption over here for this house
                             Text(
-                              'Your average consumption: 1.5kWh',
+                              'Your average consumption:' + avg + 'kWh',
                               style: TextStyle(
                                   fontSize: 13,
                                   fontWeight: FontWeight.w400,

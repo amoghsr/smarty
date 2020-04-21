@@ -215,15 +215,13 @@ class _LeaderboardDataState extends State<LeaderboardData> {
                             ? Border.all(color: Colors.green, width: 2)
                             : null),
                 child: ListTile(
-                  // TODO: MAKE THE LIST TILE CLICKABLE WHICH LEADS TO THE USER PROFILE FOR THAT HOME OWNER alister
                   onTap: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => (type == 'DAILY SAVINGS')
                             ? UserProfile(houseID: lb[i].houseID)
-                            : UserProfile(
-                                houseID: lb[i][1].houseID),
+                            : UserProfile(houseID: lb[i][1].houseID),
                       ),
                     );
                   },
@@ -244,15 +242,13 @@ class _LeaderboardDataState extends State<LeaderboardData> {
                           backgroundImage: (type == 'DAILY SAVINGS')
                               ? NetworkImage(lb[i].userImage)
                               : NetworkImage(
-                                  houseUserMap[lb[i][1].houseID]
-                                      ['userImage']),
+                                  houseUserMap[lb[i][1].houseID]['userImage']),
                         ),
                       ),
                       SizedBox(width: 20),
                       (type == 'DAILY SAVINGS')
                           ? Text(lb[i].userName)
-                          : Text(houseUserMap[lb[i][1].houseID]
-                              ['userName']),
+                          : Text(houseUserMap[lb[i][1].houseID]['userName']),
                     ],
                   ),
                   trailing: (type == 'DAILY SAVINGS')
