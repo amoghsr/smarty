@@ -52,7 +52,7 @@ class _DialogManagerState extends State<DialogManager> {
   Future _showNotificationWithDefaultSound(String title, String desc) async {
     flutterLocalNotificationsPlugin = new FlutterLocalNotificationsPlugin();
     var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
-        'Smarty', 'Kaizen Systems', 'Stage 2',
+        'Homi', 'Kaizen Systems', '',
         importance: Importance.Max, priority: Priority.High);
     var iOSPlatformChannelSpecifics = new IOSNotificationDetails();
     var platformChannelSpecifics = new NotificationDetails(
