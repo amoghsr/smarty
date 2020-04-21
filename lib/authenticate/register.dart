@@ -3,12 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:smarty/models/user.dart';
 import 'package:smarty/services/auth.dart';
 import 'package:smarty/shared/loadingAuth.dart';
+import 'package:flutter_icons/flutter_icons.dart';
+import 'package:provider/provider.dart';
+import 'package:smarty/models/themeModel.dart';
 
 class Register extends StatefulWidget {
-  final Function toggleView;
-
-  Register({this.toggleView});
-
   @override
   _RegisterState createState() => _RegisterState();
 }
@@ -19,6 +18,7 @@ class _RegisterState extends State<Register> {
   String error = '';
   bool loading = false;
 
+  int count = 0;
   // text field state
   String name = '';
   String email = '';
@@ -30,18 +30,37 @@ class _RegisterState extends State<Register> {
     return loading
         ? Loading()
         : Scaffold(
+            appBar: AppBar(
+              leading: Container(),
+              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+              elevation: 0.0,
+              actions: <Widget>[
+                IconButton(
+                  icon: Icon(
+                    MaterialIcons.brightness_4,
+                  ),
+                  onPressed: () async {
+                    setState(() {
+                      Provider.of<ThemeModel>(context, listen: false)
+                          .toggleTheme();
+                    });
+                  },
+                ),
+              ],
+            ),
             body: Container(
-              padding: EdgeInsets.symmetric(horizontal: 38.0),
+              padding: EdgeInsets.symmetric(horizontal: 24.0),
               child: Form(
                 key: _formKey,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text(
-                      'Create an account',
+                      'Sign up to Homi',
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        fontSize: 32.0,
+                        fontFamily: 'Poppins',
+                        fontSize: 28.0,
                         fontWeight: FontWeight.w700,
                       ),
                     ),
@@ -73,7 +92,7 @@ class _RegisterState extends State<Register> {
                     TextFormField(
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
-                        labelText: "Email Address",
+                        labelText: "Member email address",
                       ),
                       validator: (val) =>
                           val.isEmpty ? 'Enter your email' : null,
@@ -154,12 +173,15 @@ class _RegisterState extends State<Register> {
                       style: TextStyle(color: Colors.red, fontSize: 14.0),
                     ),
                     GestureDetector(
-                      onTap: () => widget.toggleView(),
+                      onTap: () {
+                        Navigator.popUntil(context, (route) {
+                          return count++ == 2;
+                        });
+                      },
                       child: Text(
                         'Go back to sign in',
                         style: TextStyle(
-                          fontSize: 14.0,
-                        ),
+                            fontSize: 14.0, fontWeight: FontWeight.bold),
                       ),
                     ),
                   ],

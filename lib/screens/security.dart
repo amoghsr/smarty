@@ -3,6 +3,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_vlc_player/vlc_player.dart';
 import 'package:flutter_vlc_player/vlc_player_controller.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:smarty/screens/drawer.dart';
 import 'package:smarty/shared/constants.dart';
 import 'package:smarty/widgets/voiceAgent.dart';
 
@@ -28,7 +29,7 @@ class _SecurityState extends State<Security> {
         ),
         actions: <Widget>[MicClass()],
       ),
-      drawer: Drawer(),
+      drawer: DrawerPage(),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Center(
