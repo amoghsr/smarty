@@ -82,6 +82,7 @@ flutter:
   assets:
     - assets/images/
     - assets/images/deviceAssets/
+    - assets/onboarding_graphics/
     # - assets/images/person/
 
   # An image asset can refer to one or more resolution-specific "variants", see

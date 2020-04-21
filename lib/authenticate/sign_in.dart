@@ -1,8 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:smarty/authenticate/forgotPassword.dart';
 import 'package:smarty/services/auth.dart';
 import 'package:smarty/shared/loadingAuth.dart';
-// import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
+import 'package:smarty/models/themeModel.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 
 class SignIn extends StatefulWidget {
   final Function toggleView;
@@ -27,46 +30,99 @@ class _SignInState extends State<SignIn> {
 
   @override
   Widget build(BuildContext context) {
-    return loading == null
+    return loading
         ? Loading()
         : Scaffold(
+            appBar: AppBar(
+              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+              elevation: 0.0,
+              actions: <Widget>[
+                IconButton(
+                  icon: Icon(
+                    MaterialIcons.brightness_4,
+                  ),
+                  onPressed: () async {
+                    setState(() {
+                      Provider.of<ThemeModel>(context, listen: false)
+                          .toggleTheme();
+                    });
+                  },
+                ),
+              ],
+            ),
             body: Center(
               child: SingleChildScrollView(
-                padding: EdgeInsets.symmetric(horizontal: 38.0),
+                padding: EdgeInsets.symmetric(horizontal: 24.0),
                 child: Form(
                   key: _formKey,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      SizedBox(height: 20),
-                      Image(
-                        image: AssetImage('assets/images/logo_white.png'),
-                        height: 100,
+                      Hero(
+                        tag: 'logo',
+                        child: Material(
+                          color: Colors.green.withOpacity(0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Container(
+                                height: 50,
+                                width: 50,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    colorFilter: ColorFilter.mode(
+                                        Theme.of(context)
+                                            .scaffoldBackgroundColor,
+                                        BlendMode.difference),
+                                    image: AssetImage(
+                                        'assets/images/logo_white.png'),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(width: 20.0),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Text(
+                                    'HOMI',
+                                    style: TextStyle(
+                                      letterSpacing: 10.0,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    'CONTROL',
+                                    style: TextStyle(
+                                      letterSpacing: 10.0,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    'SYSTEM',
+                                    style: TextStyle(
+                                        letterSpacing: 10.0,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
                       ),
                       SizedBox(
                         height: 30.0,
                       ),
                       Text(
-                        'Welcome to Homi',
+                        'Log in to continue',
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          fontSize: 32.0,
-                          fontWeight: FontWeight.w500,
+                          fontFamily: 'Poppins',
+                          fontSize: 28.0,
+                          fontWeight: FontWeight.w700,
                         ),
                       ),
                       SizedBox(
                         height: 20,
-                      ),
-                      Text(
-                        'Log in to continue',
-                        style: TextStyle(
-                          fontSize: 14.0,
-                          fontWeight: FontWeight.w400,
-                          color: Theme.of(context).accentColor,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 30.0,
                       ),
                       Column(
                         children: <Widget>[
@@ -155,41 +211,56 @@ class _SignInState extends State<SignIn> {
                           child: Text(
                             'Forgot Password?',
                             style: TextStyle(
-                              fontSize: 14.0,
-                            ),
+                                fontSize: 14.0, fontWeight: FontWeight.w600),
                           ),
                         ),
                       ),
                       SizedBox(height: 40.0),
-                      RaisedButton(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 130,
-                          vertical: 10,
-                        ),
-                        color: Theme.of(context).accentColor,
-                        child: Text(
-                          'Sign in',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Theme.of(context).primaryColor,
-                          ),
-                        ),
-                        onPressed: () async {
-                          if (_formKey.currentState.validate()) {
-                            setState(() => loading = true);
-                            dynamic result = await _auth
-                                .signInWithEmailAndPassword(email, password);
-                            if (result == null) {
-                              setState(() {
-                                loading = false;
-                                error =
-                                    'Could not sign in with those credentials. Please try again.';
-                              });
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 16.0),
+                        child: GestureDetector(
+                          onTap: () async {
+                            if (_formKey.currentState.validate()) {
+                              setState(() => loading = true);
+                              dynamic result = await _auth
+                                  .signInWithEmailAndPassword(email, password);
+                              if (result == null) {
+                                setState(() {
+                                  loading = false;
+                                  error =
+                                      'Could not sign in with those credentials. Please try again.';
+                                });
+                              }
                             }
-                          }
-                        },
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12.0),
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                                color: Theme.of(context).accentColor,
+                                borderRadius: BorderRadius.circular(8.0),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.black.withOpacity(0.2),
+                                      offset: Offset(0, 2),
+                                      blurRadius: 6.0)
+                                ]),
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 20.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Text(
+                                    'Sign in',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Theme.of(context)
+                                          .scaffoldBackgroundColor,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                       SizedBox(height: 20.0),
@@ -197,14 +268,19 @@ class _SignInState extends State<SignIn> {
                         padding: const EdgeInsets.symmetric(vertical: 4.0),
                         child: Text(
                           error,
-                          style: TextStyle(color: Colors.red, fontSize: 14.0),
+                          style: TextStyle(
+                              color: Colors.red,
+                              fontSize: 14.0,
+                              fontWeight: FontWeight.bold),
                         ),
                       ),
                       SizedBox(
                         height: 8.0,
                       ),
                       GestureDetector(
-                        onTap: () => widget.toggleView(),
+                        onTap: () {
+                          print('Take user to sign up page');
+                        },
                         child: Text(
                           'Don\'t have an account? Sign up here',
                           style: TextStyle(
