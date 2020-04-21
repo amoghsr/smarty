@@ -14,11 +14,13 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:smarty/models/leaderboardModel.dart';
 import 'package:smarty/models/pointsProvider.dart';
 import 'package:smarty/models/roomModel.dart';
 import 'package:smarty/models/consumptionModel.dart';
 import 'package:smarty/models/generationModel.dart';
 import 'package:smarty/models/themeModel.dart';
+import 'package:smarty/models/user.dart';
 import 'package:smarty/models/weatherModel.dart';
 import 'package:smarty/screens/drawer.dart';
 import 'package:smarty/screens/p2pPanel.dart';
@@ -127,12 +129,12 @@ class _HomeState extends State<Home> {
 
   Widget build(BuildContext context) {
     final rooms = Provider.of<List<Room>>(context);
+    final user = Provider.of<User>(context);
 
     // // TODO: AI Condition Here
     // if (Provider.of<Consumption>(context, listen: false).dailyTotal >=
     //     Provider.of<Generation>(context, listen: false).dailyTotal * 0.8)
     //   Future.delayed(Duration.zero, () => showAIAlert(context, rooms));
-
 
     return SafeArea(
       child: Scaffold(
@@ -182,7 +184,7 @@ class _HomeState extends State<Home> {
                           ),
                         ),
                         Text(
-                          'Good Evening! 😄',
+                          'Hello ${houseUserMap[user.houseId.toString()]['userName'].split(' ')[0]}!',
                           //${widget.currentUser.email}`
                           style: TextStyle(
                             fontSize: 24.0,
@@ -194,22 +196,22 @@ class _HomeState extends State<Home> {
                     (weather == null)
                         ? CircularProgressIndicator()
                         : Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 3.0),
-                          child: Text('Outside'),
-                        ),
-                        Text(
-                          '${weather.round().toString()}°C',
-                          //${widget.currentUser.email}`
-                          style: TextStyle(
-                            fontSize: 24.0,
-                            fontWeight: FontWeight.w700,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: <Widget>[
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 3.0),
+                                child: Text('Outside'),
+                              ),
+                              Text(
+                                '${weather.round().toString()}°C',
+                                //${widget.currentUser.email}`
+                                style: TextStyle(
+                                  fontSize: 24.0,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
-                      ],
-                    ),
                   ],
                 ),
               ),
