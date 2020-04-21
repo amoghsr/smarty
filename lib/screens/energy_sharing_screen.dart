@@ -344,6 +344,7 @@ class _EnergySharingScreenState extends State<EnergySharingScreen> {
                           fontWeight: FontWeight.w500,
                         ),
                       ),
+                      // TODO: Daily average consumption here
                       Text(
                         '5 KWh',
                         style: TextStyle(

@@ -21,6 +21,7 @@ class LeaderboardModel {
       houseID: key,
       userImage: houseUserMap[key]['userImage'],
       userName: houseUserMap[key]['userName'],
+      // TODO: Get realtime random values for all users apart from the two houses
       points: value,
     );
     return z;

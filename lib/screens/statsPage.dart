@@ -144,9 +144,11 @@ class _StatsScreenState extends State<StatsScreen> {
                       children: <Widget>[
                         Column(
                           children: <Widget>[
+                            
                             buildCircularProgressWidget(
                               190,
                               20.0,
+                              // TODO: PLUG IN COMMUNITY AVERAGE HERE IN %
                               0.4,
                               buildCircularProgressWidget(
                                 136,
@@ -204,6 +206,7 @@ class _StatsScreenState extends State<StatsScreen> {
                                   children: <Widget>[
                                     Text(
                                       //TODO: AVERAGE DAILY CONSUMPTION OF ALL OTHER HOUSES (NOT INCLUDING OURS) UP UNTIL THAT POINT OF THE DAY
+                                      // TODO: Randomize this based on current consumption
                                       '100',
                                       style: TextStyle(
                                         height: 1,
