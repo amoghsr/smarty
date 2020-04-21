@@ -104,8 +104,8 @@ class _SpeakerControllerState extends State<SpeakerController>
                         isSwitched = value;
                       });
                     },
-                    activeTrackColor: Theme.of(context).backgroundColor,
-                    activeColor: Colors.lightGreenAccent,
+                    activeTrackColor: Theme.of(context).accentColor,
+                    activeColor: Colors.white,
                     inactiveTrackColor: Theme.of(context).backgroundColor,
                   );
                 },

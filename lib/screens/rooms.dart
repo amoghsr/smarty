@@ -264,7 +264,7 @@ class _MyOtherRoomState extends State<MyOtherRoom> {
                     borderRadius: BorderRadius.circular(8.0),
                       boxShadow: [
                         BoxShadow(
-                            color: Colors.black.withOpacity(0.2),
+                            color: Colors.black.withOpacity(0.1),
                             offset: Offset(1.0, 4.0),
                             blurRadius: 4.0)
                       ]

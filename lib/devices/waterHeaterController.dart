@@ -106,17 +106,18 @@ class WaterHeaterController extends StatelessWidget {
                     progressBarColor: Colors.deepOrange,
                   ),
                   customWidths: CustomSliderWidths(
-                    trackWidth: 15,
-                    progressBarWidth: 15,
+                    trackWidth: 20,
+                    progressBarWidth: 24,
                   ),
                   infoProperties: InfoProperties(
                     topLabelStyle: kLightDeviceTopBar.copyWith(
-                      color: Colors.white.withOpacity(0.5),
-                      fontSize: 16,
+                      color: Theme.of(context).disabledColor,
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.w600
                     ),
                     topLabelText: 'Current Temp.',
                     mainLabelStyle:
-                        TextStyle(color: Colors.white, fontSize: 35),
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 36),
                     modifier: (value) {
                       // final roundedValue =
                       //     (value).ceil().toInt().toString();

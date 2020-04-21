@@ -36,11 +36,11 @@ class ACController extends StatelessWidget {
                 Text(
                   roomName,
                   style: kLightDeviceTopBar.copyWith(
-                    color: Colors.white.withOpacity(0.5),
+                    color: Theme.of(context).disabledColor,
                   ),
                 ),
                 SizedBox(
-                  height: screenheight * 0.015,
+                  height: 4,
                 ),
                 Text(
                   'AC',
@@ -61,7 +61,7 @@ class ACController extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      height: screenheight * 0.015,
+                      height:4,
                     ),
                     StreamBuilder(
                       stream: itemRef
@@ -100,7 +100,7 @@ class ACController extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      height: screenheight * 0.015,
+                      height: 4,
                     ),
                     StreamBuilder(
                       stream: itemRef
@@ -130,7 +130,7 @@ class ACController extends StatelessWidget {
           ],
         ),
         SizedBox(
-          height: screenheight * 0.01,
+          height: screenheight * 0.03,
         ),
         Expanded(
           child: Center(
@@ -193,17 +193,18 @@ class ACController extends StatelessWidget {
                             progressBarColor: Theme.of(context).accentColor,
                           ),
                           customWidths: CustomSliderWidths(
-                            trackWidth: 15,
-                            progressBarWidth: 15,
+                            trackWidth: 20,
+                            progressBarWidth: 24,
                           ),
                           infoProperties: InfoProperties(
                             topLabelStyle: kLightDeviceTopBar.copyWith(
-//                              color: Theme.of(context).disabledColor,
+                              color: Theme.of(context).disabledColor,
                               fontSize: 18.0,
+                              fontWeight: FontWeight.w600
                             ),
                             topLabelText: 'Set Temp.',
                             mainLabelStyle:
-                                TextStyle(fontSize: 40),
+                                TextStyle(fontWeight: FontWeight.bold, fontSize: 36),
                             modifier: (value) {
                               final roundedValue =
                                   (value).ceil().toInt().toString();

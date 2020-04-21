@@ -58,7 +58,7 @@ class _ExhaustFanControllerState extends State<ExhaustFanController> {
                           color: Theme.of(context).disabledColor),
                     ),
                     SizedBox(
-                      height: screenheight * 0.015,
+                      height: 4,
                     ),
                     Text(
                       'Exhaust Fan',
@@ -66,7 +66,7 @@ class _ExhaustFanControllerState extends State<ExhaustFanController> {
                     ),
                   ],
                 ),
-                Icon(FontAwesomeIcons.fan, size: 48, color: Colors.white),
+                Icon(FontAwesomeIcons.fan, size: 48),
               ],
             ),
           ),
