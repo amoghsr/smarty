@@ -24,7 +24,7 @@ class _LeaderboardDataState extends State<LeaderboardData> {
     List<dynamic> newList = [];
     if (widget.leaderboardType == 'DAILY SAVINGS') {
       lb = Provider.of<List<LeaderboardModel>>(context);
-      lb.sort((a, b) => a.points.compareTo(b.points));
+      lb.sort((b, a) => a.points.compareTo(b.points));
     } else {
       newMap = Map.fromEntries(points.entries.toList()
         ..sort((e2, e1) => e1.value.currentDay.compareTo(e2.value.currentDay)));

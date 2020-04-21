@@ -79,7 +79,7 @@ class ACController extends StatelessWidget {
                             new Map<String, dynamic>.from(
                                 snap.data.snapshot.value);
                         return Text(
-                          values["Temp"].toString(),
+                          '${values["Temp"].toString()} °C',
                           style: kLightDeviceBottomBar,
                         );
                       },

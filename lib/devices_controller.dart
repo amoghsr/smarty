@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:smarty/devices/CommonControllers/deviceCommonControllers.dart';
 import 'package:smarty/devices/acController.dart';
+import 'package:smarty/devices/babyMonitor.dart';
+import 'package:smarty/devices/exhaustFan.dart';
 import 'package:smarty/devices/lightController.dart';
+import 'package:smarty/devices/waterHeaterController.dart';
 import 'package:smarty/models/user.dart';
 
 import 'devices/faucetController.dart';
@@ -74,8 +77,24 @@ class _DevicesControllerState extends State<DevicesController>
           context: context,
           roomName: widget.chRoom,
           devName: widget.chDevice);
-    } else {
-      return Container();
+    } else if (widget.chDevice == 'Water Heater') {
+      showDevice = WaterHeaterController(
+          itemRef: itemRef,
+          context: context,
+          roomName: widget.chRoom,
+          devName: widget.chDevice);
+    } else if (widget.chDevice == 'Exhaust Fan') {
+      showDevice = ExhaustFanController(
+          itemRef: itemRef,
+          context: context,
+          roomName: widget.chRoom,
+          devName: widget.chDevice);
+    } else if (widget.chDevice == 'Baby Monitor') {
+      showDevice = BabyMonitorController(
+          itemRef: itemRef,
+          context: context,
+          roomName: widget.chRoom,
+          devName: widget.chDevice);
     }
     return showDevice;
   }
