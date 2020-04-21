@@ -36,7 +36,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return StreamProvider<User>.value(
       value: AuthService().user,
-      //Todo: remove all this
       child: StreamProvider<Map<String, PointsProvider>>.value(
         value: DatabaseService1().streamPoints(),
         child: Wrapper(),
