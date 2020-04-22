@@ -183,7 +183,7 @@ class _LeaderboardDataState extends State<LeaderboardData> {
                 ),
                 child: Padding(
                   padding:
-                  const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
+                  const EdgeInsets.symmetric(horizontal: 20.0, vertical: 24),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
