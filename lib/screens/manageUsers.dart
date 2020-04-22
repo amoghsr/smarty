@@ -63,7 +63,7 @@ class _ManageUsersState extends State<ManageUsers> {
                   padding: EdgeInsets.only(left: 4.0, right: 4.0, top: 20.0),
                   child: Text(
                     'Users in your home',
-                    style: Theme.of(context).textTheme.headline,
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
                   ),
                 ),
                 Padding(
@@ -79,28 +79,31 @@ class _ManageUsersState extends State<ManageUsers> {
                   physics: NeverScrollableScrollPhysics(),
                   itemCount: userlist.length,
                   itemBuilder: (context, index) {
-                    return ListTile(
-                      leading: CircleAvatar(
-                        backgroundColor:
-                            Theme.of(context).scaffoldBackgroundColor,
-                        child: Text(
-                          '${index + 1}',
-                          style: Theme.of(context).textTheme.headline,
+                    return Card(
+                      elevation: 0.0,
+                      child: ListTile(
+                        leading: CircleAvatar(
+                          backgroundColor:
+                              Theme.of(context).cardColor,
+                          child: Text(
+                            '${index + 1}',
+                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
+                          ),
                         ),
-                      ),
-                      title: Text(
-                        userlist[index].split('-')[0],
-                        style: TextStyle(
-                            fontSize: 17, fontWeight: FontWeight.w500),
-                      ),
-                      subtitle: Text(userlist[index].split('-')[1]),
-                      trailing: InkWell(
-                        onTap: () {
+                        title: Text(
+                          userlist[index].split('-')[0],
+                          style: TextStyle(
+                              fontSize: 17, fontWeight: FontWeight.w500),
+                        ),
+                        subtitle: Text(userlist[index].split('-')[1]),
+                        trailing: InkWell(
+                          onTap: () {
 //                          print('pressed list item $index');
-                        },
-                        child: Icon(
-                          Icons.clear,
-                          color: Colors.redAccent,
+                          },
+                          child: Icon(
+                            Icons.clear,
+                            color: Colors.redAccent,
+                          ),
                         ),
                       ),
                     );
