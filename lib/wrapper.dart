@@ -106,6 +106,7 @@ class Wrapper extends StatelessWidget {
                             child: Consumer<AppThemeProvider>(
                               builder: (context, myModel, child) {
                                 return MaterialApp(
+                                  debugShowCheckedModeBanner: false,
                                   builder: (context, widget) => Navigator(
                                     onGenerateRoute: (settings) =>
                                         MaterialPageRoute(

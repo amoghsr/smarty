@@ -14,6 +14,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:smarty/models/dbService.dart';
 import 'package:smarty/models/leaderboardModel.dart';
 import 'package:smarty/models/pointsProvider.dart';
 import 'package:smarty/models/roomModel.dart';
@@ -54,7 +55,8 @@ String formattedMonth = month.format(now);
 
 class _HomeState extends State<Home> {
   final AuthService _auth = AuthService();
-
+  var user;
+  var stream;
   DatabaseReference itemRef;
   bool valueSwitch = true;
   double weather;
@@ -81,6 +83,9 @@ class _HomeState extends State<Home> {
     getPosition().then((position) {
       getWeather(position.latitude, position.longitude);
     });
+    user = Provider.of<User>(context, listen: false);
+    while (user == null) {}
+    stream = DatabaseService1().getUserDetails(user.uid, user);
   }
 
   void didChangeDependencies() {
@@ -176,14 +181,20 @@ class _HomeState extends State<Home> {
                             ),
                           ),
                         ),
-                        Text(
-                          'Hello ${houseUserMap[user.houseId.toString()]['userName'].split(' ')[0]}!',
-                          //${widget.currentUser.email}`
-                          style: TextStyle(
-                            fontSize: 24.0,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
+                        StreamBuilder(
+                            stream: stream,
+                            builder: (BuildContext context,
+                                AsyncSnapshot<dynamic> snapshot) {
+                              if (snapshot.data == null) return Container();
+                              return Text(
+                                'Hello ${snapshot.data["displayName"]}!',
+                                //${widget.currentUser.email}`
+                                style: TextStyle(
+                                  fontSize: 24.0,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              );
+                            }),
                       ],
                     ),
                     (weather == null)
