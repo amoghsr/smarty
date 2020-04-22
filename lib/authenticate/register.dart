@@ -56,7 +56,7 @@ class _RegisterState extends State<Register> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text(
-                      'Sign up to Homi',
+                      'Create Account',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontFamily: 'Poppins',
@@ -65,7 +65,7 @@ class _RegisterState extends State<Register> {
                       ),
                     ),
                     SizedBox(
-                      height: 20,
+                      height: 10,
                     ),
                     Text(
                       'Enter the following details',
@@ -92,7 +92,8 @@ class _RegisterState extends State<Register> {
                     TextFormField(
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
-                        labelText: "Member email address",
+                        labelText: "Your email address",
+                        helperText: 'Homeowner should first invite you using this email'
                       ),
                       validator: (val) =>
                           val.isEmpty ? 'Enter your email' : null,
@@ -103,7 +104,7 @@ class _RegisterState extends State<Register> {
                     TextFormField(
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
-                        labelText: "Home ID",
+                        labelText: "Your home's ID",
                       ),
                       validator: (val) => val.isEmpty ? 'Enter Home ID' : null,
                       onChanged: (val) {
@@ -125,46 +126,62 @@ class _RegisterState extends State<Register> {
                     SizedBox(
                       height: 40.0,
                     ),
-                    RaisedButton(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 130,
-                        vertical: 20,
-                      ),
-                      color: Theme.of(context).accentColor,
-                      child: Text(
-                        'Sign in',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Theme.of(context).primaryColor,
-                        ),
-                      ),
-                      onPressed: () async {
-                        if (_formKey.currentState.validate()) {
-                          setState(() => loading = true);
-                          var waitinguser = await Firestore.instance
-                              .collection('waitingUsers')
-                              .document(email);
-                          if (waitinguser.documentID == email) {
-                            dynamic result;
-                            waitinguser.get().then(
-                                (DocumentSnapshot value) async => result =
-                                    await _auth.registerWithEmailAndPassword(
-                                        email,
-                                        password,
-                                        name,
-                                        value["houseId"],
-                                        "-U"));
-                            if (result == null) {
-                              setState(() {
-                                loading = false;
-                                error = 'Please supply a valid email';
-                              });
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 16.0),
+                      child: GestureDetector(
+                        onTap: () async {
+                          if (_formKey.currentState.validate()) {
+                            setState(() => loading = true);
+                            var waitinguser = await Firestore.instance
+                                .collection('waitingUsers')
+                                .document(email);
+                            if (waitinguser.documentID == email) {
+                              dynamic result;
+                              waitinguser.get().then(
+                                      (DocumentSnapshot value) async => result =
+                                  await _auth.registerWithEmailAndPassword(
+                                      email,
+                                      password,
+                                      name,
+                                      value["houseId"],
+                                      "-U"));
+                              if (result == null) {
+                                setState(() {
+                                  loading = false;
+                                  error = 'Please supply a valid email';
+                                });
+                              }
                             }
                           }
-                        }
-                      },
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: Theme.of(context).accentColor,
+                              borderRadius: BorderRadius.circular(8.0),
+                              boxShadow: [
+                                BoxShadow(
+                                    color: Colors.black.withOpacity(0.2),
+                                    offset: Offset(0, 2),
+                                    blurRadius: 6.0)
+                              ]),
+                          child: Padding(
+                            padding:
+                            const EdgeInsets.symmetric(vertical: 20.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Text(
+                                  'Create my account',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Theme.of(context)
+                                        .scaffoldBackgroundColor,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
                       ),
                     ),
                     SizedBox(height: 12.0),

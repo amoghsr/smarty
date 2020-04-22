@@ -89,10 +89,11 @@ class _GreetingPageState extends State<GreetingPage> {
                         Navigator.push(
                           context,
                           CupertinoPageRoute(
-                            builder: (context) => SignIn(),
+                            builder: (context) => GettingStartedScreen(),
                           ),
                         );
                       },
+
                       child: Container(
                         decoration: BoxDecoration(
                             color: Colors.white,
@@ -111,7 +112,7 @@ class _GreetingPageState extends State<GreetingPage> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
                               Text(
-                                'I already have an account',
+                                'Join as a new home member',
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black,
@@ -130,12 +131,12 @@ class _GreetingPageState extends State<GreetingPage> {
                           Navigator.push(
                             context,
                             CupertinoPageRoute(
-                              builder: (context) => GettingStartedScreen(),
+                              builder: (context) => SignIn(),
                             ),
                           );
                         },
                         child: Text(
-                          'Join as a new home member',
+                          'I already have an account',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
