@@ -58,8 +58,11 @@ class _OptimizationState extends State<Optimization> {
     double screenheight = MediaQuery.of(context).size.height;
     final user = Provider.of<User>(context);
 
+
     final devices = Provider.of<List<Device>>(context);
     if (devices != null) {
+      devices[4].state = 'On';
+      devices[2].state = 'On';
       for (var i in rooms) {
         for (var j in i.d) {
           for (var k in devices) {
