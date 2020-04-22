@@ -115,8 +115,7 @@ class _RegisterHomeOwnerState extends State<RegisterHomeOwner> {
                         SizedBox(
                           height: 40.0,
                         ),
-
-                         RaisedButton(
+                        RaisedButton(
                           padding: EdgeInsets.symmetric(
                             horizontal: 80,
                             vertical: 20,
@@ -148,7 +147,6 @@ class _RegisterHomeOwnerState extends State<RegisterHomeOwner> {
                             borderRadius: BorderRadius.circular(50.0),
                           ),
                         ),
-
                         SizedBox(height: 12.0),
                         Text(
                           error,

@@ -37,161 +37,167 @@ class _LeaderboardDataState extends State<LeaderboardData> {
 
     final user = Provider.of<User>(context);
 
-    return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: <Widget>[
-            ConstrainedBox(
-              constraints: BoxConstraints(
-                maxHeight: screenheight * 0.40,
-                minHeight: screenheight * 0.1,
-              ),
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    child: Column(
-                      children: <Widget>[
-                        SizedBox(
-                          height: screenheight * 0.06,
-                        ),
-                        Container(
-                          child: Icon(
-                            FontAwesomeIcons.trophy,
-                            size: 30,
-                            color: Color(0xffAAA9AD),
+    if (user != null && points != null) {
+      return Scaffold(
+        body: SafeArea(
+          child: Column(
+            children: <Widget>[
+              ConstrainedBox(
+                constraints: BoxConstraints(
+                  maxHeight: screenheight * 0.40,
+                  minHeight: screenheight * 0.1,
+                ),
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: Column(
+                        children: <Widget>[
+                          SizedBox(
+                            height: screenheight * 0.06,
                           ),
-                        ),
-                        SizedBox(
-                          height: screenheight * 0.02,
-                        ),
-                        Container(
-                          // height: screenheight,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
+                          Container(
+                            child: Icon(
+                              FontAwesomeIcons.trophy,
+                              size: 30,
+                              color: Color(0xffAAA9AD),
+                            ),
                           ),
-                          child: CircleAvatar(
-                            radius: 40,
-                            backgroundColor: Theme.of(context).canvasColor,
-                            backgroundImage:
-                                (widget.leaderboardType == 'DAILY SAVINGS')
-                                    ? AssetImage(lb[1].userImage)
-                                    : AssetImage(houseUserMap[newList[1][1]
-                                        .houseID
-                                        .toString()]['userImage']),
+                          SizedBox(
+                            height: screenheight * 0.02,
                           ),
-                        ),
-                        SizedBox(
-                          height: screenheight * 0.01,
-                        ),
-                        (widget.leaderboardType == 'DAILY SAVINGS')
-                            ? Text(lb[1].userName.split(' ')[0])
-                            : Text(
-                                houseUserMap[newList[1][1].houseID.toString()]
-                                    ['userName']),
-                      ],
+                          Container(
+                            // height: screenheight,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                            ),
+                            child: CircleAvatar(
+                              radius: 40,
+                              backgroundColor: Theme.of(context).canvasColor,
+                              backgroundImage:
+                                  (widget.leaderboardType == 'DAILY SAVINGS')
+                                      ? AssetImage(lb[1].userImage)
+                                      : AssetImage(houseUserMap[newList[1][1]
+                                          .houseID
+                                          .toString()]['userImage']),
+                            ),
+                          ),
+                          SizedBox(
+                            height: screenheight * 0.01,
+                          ),
+                          (widget.leaderboardType == 'DAILY SAVINGS')
+                              ? Text(lb[1].userName.split(' ')[0])
+                              : Text(
+                                  houseUserMap[newList[1][1].houseID.toString()]
+                                      ['userName']),
+                        ],
+                      ),
                     ),
-                  ),
-                  Expanded(
-                    child: Column(
-                      children: <Widget>[
-                        SizedBox(
-                          height: screenheight * 0.03,
-                        ),
-                        Container(
-                          child: Icon(
-                            FontAwesomeIcons.trophy,
-                            size: 45,
-                            color: Colors.yellow,
+                    Expanded(
+                      child: Column(
+                        children: <Widget>[
+                          SizedBox(
+                            height: screenheight * 0.03,
                           ),
-                        ),
-                        SizedBox(
-                          height: screenheight * 0.02,
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
+                          Container(
+                            child: Icon(
+                              FontAwesomeIcons.trophy,
+                              size: 45,
+                              color: Colors.yellow,
+                            ),
                           ),
-                          child: CircleAvatar(
-                            radius: 65,
-                            backgroundColor: Theme.of(context).canvasColor,
-                            backgroundImage:
-                                (widget.leaderboardType == 'DAILY SAVINGS')
-                                    ? AssetImage(lb[0].userImage)
-                                    : AssetImage(houseUserMap[newList[0][1]
-                                        .houseID
-                                        .toString()]['userImage']),
+                          SizedBox(
+                            height: screenheight * 0.02,
                           ),
-                        ),
-                        SizedBox(
-                          height: screenheight * 0.01,
-                        ),
-                        (widget.leaderboardType == 'DAILY SAVINGS')
-                            ? Text(lb[0].userName.split(' ')[0])
-                            : Text(
-                                houseUserMap[newList[0][1].houseID.toString()]
-                                    ['userName']),
-                      ],
+                          Container(
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                            ),
+                            child: CircleAvatar(
+                              radius: 65,
+                              backgroundColor: Theme.of(context).canvasColor,
+                              backgroundImage:
+                                  (widget.leaderboardType == 'DAILY SAVINGS')
+                                      ? AssetImage(lb[0].userImage)
+                                      : AssetImage(houseUserMap[newList[0][1]
+                                          .houseID
+                                          .toString()]['userImage']),
+                            ),
+                          ),
+                          SizedBox(
+                            height: screenheight * 0.01,
+                          ),
+                          (widget.leaderboardType == 'DAILY SAVINGS')
+                              ? Text(lb[0].userName.split(' ')[0])
+                              : Text(
+                                  houseUserMap[newList[0][1].houseID.toString()]
+                                      ['userName']),
+                        ],
+                      ),
                     ),
-                  ),
-                  Expanded(
-                    child: Column(
-                      children: <Widget>[
-                        SizedBox(
-                          height: screenheight * 0.06,
-                        ),
-                        Container(
-                          child: Icon(
-                            FontAwesomeIcons.trophy,
-                            size: 30,
-                            color: Colors.deepOrange,
+                    Expanded(
+                      child: Column(
+                        children: <Widget>[
+                          SizedBox(
+                            height: screenheight * 0.06,
                           ),
-                        ),
-                        SizedBox(
-                          height: screenheight * 0.02,
-                        ),
-                        Container(
-                          // height: screenheight,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
+                          Container(
+                            child: Icon(
+                              FontAwesomeIcons.trophy,
+                              size: 30,
+                              color: Colors.deepOrange,
+                            ),
                           ),
-                          child: CircleAvatar(
-                            radius: 40,
-                            backgroundColor: Theme.of(context).canvasColor,
-                            backgroundImage:
-                                (widget.leaderboardType == 'DAILY SAVINGS')
-                                    ? AssetImage(lb[2].userImage)
-                                    : AssetImage(houseUserMap[newList[2][1]
-                                        .houseID
-                                        .toString()]['userImage']),
+                          SizedBox(
+                            height: screenheight * 0.02,
                           ),
-                        ),
-                        SizedBox(
-                          height: screenheight * 0.01,
-                        ),
-                        (widget.leaderboardType == 'DAILY SAVINGS')
-                            ? Text(lb[2].userName.split(' ')[0])
-                            : Text(
-                                houseUserMap[newList[2][1].houseID.toString()]
-                                    ['userName']),
-                      ],
+                          Container(
+                            // height: screenheight,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                            ),
+                            child: CircleAvatar(
+                              radius: 40,
+                              backgroundColor: Theme.of(context).canvasColor,
+                              backgroundImage:
+                                  (widget.leaderboardType == 'DAILY SAVINGS')
+                                      ? AssetImage(lb[2].userImage)
+                                      : AssetImage(houseUserMap[newList[2][1]
+                                          .houseID
+                                          .toString()]['userImage']),
+                            ),
+                          ),
+                          SizedBox(
+                            height: screenheight * 0.01,
+                          ),
+                          (widget.leaderboardType == 'DAILY SAVINGS')
+                              ? Text(lb[2].userName.split(' ')[0])
+                              : Text(
+                                  houseUserMap[newList[2][1].houseID.toString()]
+                                      ['userName']),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            Expanded(
-              child: TabBarView(
-                physics: NeverScrollableScrollPhysics(),
-                children: [
-                  getListTile(lb, user, widget.leaderboardType),
-                  getListTile(newList, user, widget.leaderboardType),
-                ],
+              Expanded(
+                child: TabBarView(
+                  physics: NeverScrollableScrollPhysics(),
+                  children: [
+                    getListTile(lb, user, widget.leaderboardType),
+                    getListTile(newList, user, widget.leaderboardType),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
-    );
+      );
+    } else {
+      return Scaffold(
+        body: CircularProgressIndicator(),
+      );
+    }
   }
 
   ListView getListTile(dynamic lb, User user, String type) {

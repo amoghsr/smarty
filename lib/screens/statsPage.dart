@@ -65,7 +65,7 @@ class _StatsScreenState extends State<StatsScreen> {
     }
     int no1w = DateTime.now().hour;
     String formattedDate = date.format(now);
-    if (y != null && x != null) {
+    if (y != null && x != null && userlist != null) {
       return Scaffold(
         appBar: AppBar(
           title: Text(

@@ -84,15 +84,17 @@ class _HomeState extends State<Home> {
   }
 
   void didChangeDependencies() {
-    if (Provider.of<Consumption>(context).dailyTotal >=
-        Provider.of<Generation>(context).dailyTotal * 0.8) {
-      if (Provider.of<Consumption>(context).dailyTotal >=
-          Provider.of<Generation>(context).dailyTotal * 0.95) {
-        Timer.run(
-            () => Provider.of<DialogProvider>(context, listen: false).popP2P());
-      } else
-        Timer.run(
-            () => Provider.of<DialogProvider>(context, listen: false).popAi());
+    final y = Provider.of<Consumption>(context);
+    final x2 = Provider.of<Generation>(context);
+    if (y != null && x2 != null) {
+      if (y.dailyTotal >= x2.dailyTotal * 0.8) {
+        if (y.dailyTotal >= x2.dailyTotal * 0.95) {
+          Timer.run(() =>
+              Provider.of<DialogProvider>(context, listen: false).popP2P());
+        } else
+          Timer.run(() =>
+              Provider.of<DialogProvider>(context, listen: false).popAi());
+      }
     }
     final user = Provider.of<User>(context);
 
