@@ -54,7 +54,6 @@ class _UserProfileState extends State<UserProfile> {
     super.dispose();
   }
 
-  //TODO: The key of this map is daily streak day count
   Map<int, dynamic> rewards = {
     1: Image.asset('assets/images/save_energy.png', width: 30, height: 30),
     3: Icon(FontAwesomeIcons.trophy, color: Color(0xffe8b313), size: 30),
@@ -150,7 +149,6 @@ class _UserProfileState extends State<UserProfile> {
 
     double screenwidth = MediaQuery.of(context).size.width;
     double screenheight = MediaQuery.of(context).size.height;
-    //TODO: GET CURRENT STREAK DAY OVER HERE
     final points = Provider.of<Map<String, PointsProvider>>(context);
 
     // final currentDay = Provider.of<CurrentDayProvider>(context);
@@ -199,7 +197,6 @@ class _UserProfileState extends State<UserProfile> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
                             CircleAvatar(
-                              //TODO: Current Home Owner's User Image
                               backgroundImage: AssetImage(
                                   houseUserMap[widget.houseID]['userImage']),
                               maxRadius: 65,
@@ -211,7 +208,6 @@ class _UserProfileState extends State<UserProfile> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: <Widget>[
                                   Text(
-                                    //TODO: Current Home Owner's User Name
                                     // snapshot.data['displayName']
                                     houseUserMap[widget.houseID]['userName']
                                             .split(' ')[0] +
@@ -229,7 +225,6 @@ class _UserProfileState extends State<UserProfile> {
                                         width: screenwidth * 0.04,
                                       ),
                                       Text(
-                                        //TODO: Current bolt balance (reflected and updated throughout the app), stored in the db
                                         'Balance: ${points[widget.houseID].getBalanceAsInt()}',
                                         style: TextStyle(
                                           fontSize: 14.5,
@@ -252,9 +247,6 @@ class _UserProfileState extends State<UserProfile> {
                                           Icon(
                                             Icons.star,
                                             size: 35,
-                                            //TODO: Color changes from grey to red when daily streak count resets to 0
-                                            //TODO: i.e., the user has not stayed under the daily limit and broke his streak (hence streak val reset)
-                                            //TODO: Color stays grey when daily streak count > 0
                                             color: Colors.grey,
                                           ),
                                         ],
@@ -273,8 +265,6 @@ class _UserProfileState extends State<UserProfile> {
                                               selectedColor: Colors.green,
                                               unselectedColor: Colors.grey[200],
                                               customStep: (index, color, _) =>
-                                                  //TODO: Replace 3 with current daily streak day + 1
-                                                  //TODO: Designs the progress bar for the current streak day
                                                   index ==
                                                           points[widget.houseID]
                                                                   .currentDay -
@@ -314,7 +304,6 @@ class _UserProfileState extends State<UserProfile> {
                                                             ),
                                                           ],
                                                         )
-                                                      //TODO: 4 is replaced with (current daily streak day - 1)
                                                       : index <
                                                               points[widget
                                                                           .houseID]

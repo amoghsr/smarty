@@ -116,9 +116,7 @@ class _RegisterHomeOwnerState extends State<RegisterHomeOwner> {
                           height: 40.0,
                         ),
 
-                        //TODO: Add layout page using Provider which carries information forward from this page to the next
-
-                        RaisedButton(
+                         RaisedButton(
                           padding: EdgeInsets.symmetric(
                             horizontal: 80,
                             vertical: 20,

@@ -83,7 +83,6 @@ class _HomeState extends State<Home> {
     });
   }
 
-  //TODO: POP UPS UPDATED
   void didChangeDependencies() {
     if (Provider.of<Consumption>(context).dailyTotal >=
         Provider.of<Generation>(context).dailyTotal * 0.8) {
