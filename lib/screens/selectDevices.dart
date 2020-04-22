@@ -169,7 +169,7 @@ class _SelectDevicesState extends State<SelectDevices> {
                 Text(
                   'Select devices your member can have access to',
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 23.0),
+                  style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
                   height: 20.0,

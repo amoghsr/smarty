@@ -121,6 +121,7 @@ class _AddNewUserState extends State<AddNewUser> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+
       ),
       body: Center(
         child: SingleChildScrollView(
@@ -151,7 +152,7 @@ class _AddNewUserState extends State<AddNewUser> {
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 30.0,
-                            fontWeight: FontWeight.w600,
+                            fontWeight: FontWeight.w700,
                           ),
                         ),
                         Padding(
@@ -167,7 +168,7 @@ class _AddNewUserState extends State<AddNewUser> {
                         TextFormField(
                           keyboardType: TextInputType.text,
                           decoration: InputDecoration(
-                            labelText: 'Members name',
+                            labelText: 'Home members name',
                             focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
                                 color: Theme.of(context).accentColor,
@@ -184,6 +185,7 @@ class _AddNewUserState extends State<AddNewUser> {
                           keyboardType: TextInputType.emailAddress,
                           decoration: InputDecoration(
                             labelText: 'Member email address',
+                            helperText: 'Members will use this email to join your house.'
                           ),
                           validator: (val) =>
                               val.isEmpty ? 'Enter the home user email' : null,

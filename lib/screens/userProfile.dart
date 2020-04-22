@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
@@ -188,7 +189,7 @@ class _UserProfileState extends State<UserProfile> {
                     children: <Widget>[
                       Padding(
                         padding: EdgeInsets.only(
-                          top: 20,
+                          top: 12,
                         ),
                         child: SizedBox(),
                       ),
@@ -213,7 +214,7 @@ class _UserProfileState extends State<UserProfile> {
                                             .split(' ')[0] +
                                         "'s Home",
                                     style: TextStyle(
-                                      fontSize: 20,
+                                      fontSize: 24,
                                       fontWeight: FontWeight.w700,
                                     ),
                                   ),
@@ -227,11 +228,12 @@ class _UserProfileState extends State<UserProfile> {
                                       Text(
                                         'Balance: ${points[widget.houseID].getBalanceAsInt()}',
                                         style: TextStyle(
-                                          fontSize: 14.5,
+                                          fontSize: 16.0,
+                                          fontWeight: FontWeight.w600
                                         ),
                                       ),
                                       Icon(Icons.flash_on,
-                                          size: 19, color: Color(0xffe8b313)),
+                                          size: 22, color: Color(0xffe8b313)),
                                       SizedBox(
                                         width: screenwidth * 0.03,
                                       ),
@@ -430,13 +432,14 @@ class _UserProfileState extends State<UserProfile> {
                             itemCount: badges.length,
                             itemBuilder: (context, index1) {
                               return Column(
+//                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
                                   Center(
                                     child: Text(
                                       badges[index1][0],
                                       style: TextStyle(
                                         fontSize: 16,
-                                        fontWeight: FontWeight.w500,
+                                        fontWeight: FontWeight.w600,
                                       ),
                                     ),
                                   ),
@@ -569,9 +572,8 @@ class _UserProfileState extends State<UserProfile> {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontFamily: 'Montserrat',
-                  color: Colors.white,
                   fontSize: 20.0,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.w700,
                 ),
               ),
               SizedBox(height: 16.0),
@@ -581,7 +583,6 @@ class _UserProfileState extends State<UserProfile> {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontFamily: 'Montserrat',
-                  color: Colors.white,
                   fontSize: 18.0,
                 ),
               ),

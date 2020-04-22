@@ -45,7 +45,7 @@ class _LeaderboardState extends State<Leaderboard> {
 //                  labelPadding: EdgeInsets.only(left: 40, right: 40, top: 5),
                   isScrollable: true,
                   labelColor: Theme.of(context).accentColor,
-                  unselectedLabelColor: Theme.of(context).backgroundColor,
+                  unselectedLabelColor: Theme.of(context).disabledColor,
                   indicatorColor: Colors.transparent,
                   indicatorSize: TabBarIndicatorSize.tab,
                   tabs: [
