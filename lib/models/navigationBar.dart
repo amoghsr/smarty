@@ -46,7 +46,7 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
       final List<Widget> _children = [
         Home(),
         StatsScreen(),
-        EnergySharingScreen(),
+        EnergySharingScreen(drawerbool: 0,),
         Security(),
         Leaderboard(),
       ];

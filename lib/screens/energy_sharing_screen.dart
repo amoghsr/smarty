@@ -15,6 +15,8 @@ import 'package:smarty/widgets/donateDialog.dart';
 
 class EnergySharingScreen extends StatefulWidget {
   @override
+  int drawerbool;
+  EnergySharingScreen({@required this.drawerbool});
   _EnergySharingScreenState createState() => _EnergySharingScreenState();
 }
 
@@ -119,7 +121,7 @@ class _EnergySharingScreenState extends State<EnergySharingScreen> {
           ),
         ],
       ),
-      drawer: DrawerPage(),
+      drawer: (widget.drawerbool == 0) ? DrawerPage() : null,
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[

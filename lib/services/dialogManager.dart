@@ -100,7 +100,7 @@ class _DialogManagerState extends State<DialogManager> {
             description: "You are running out of electricity!",
             col: Colors.red[500],
             buttonText: "Purchase Electricity",
-            path: EnergySharingScreen(),
+            path: EnergySharingScreen(drawerbool: 1,),
           );
         },
       ),
