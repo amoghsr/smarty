@@ -303,7 +303,7 @@ class _LeaderboardDataState extends State<LeaderboardData> {
                   ),
                   trailing: (type == 'DAILY SAVINGS')
                       ? Text(lb[i].points.toString())
-                      : Text(lb[i][1].currentDay.toString()),
+                      : Text(lb[i][1].currentDay.toString(), style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),),
                 ),
               ),
             ],
