@@ -115,9 +115,6 @@ class _RegisterHomeOwnerState extends State<RegisterHomeOwner> {
                         SizedBox(
                           height: 40.0,
                         ),
-
-                        //TODO: Add layout page using Provider which carries information forward from this page to the next
-
                         RaisedButton(
                           padding: EdgeInsets.symmetric(
                             horizontal: 80,
@@ -150,7 +147,6 @@ class _RegisterHomeOwnerState extends State<RegisterHomeOwner> {
                             borderRadius: BorderRadius.circular(50.0),
                           ),
                         ),
-
                         SizedBox(height: 12.0),
                         Text(
                           error,

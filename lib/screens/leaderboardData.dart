@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:smarty/models/leaderboardModel.dart';
@@ -37,16 +38,12 @@ class _LeaderboardDataState extends State<LeaderboardData> {
 
     final user = Provider.of<User>(context);
 
-    return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: <Widget>[
-            ConstrainedBox(
-              constraints: BoxConstraints(
-                maxHeight: screenheight * 0.40,
-                minHeight: screenheight * 0.1,
-              ),
-              child: Row(
+    if (user != null && points != null) {
+      return Scaffold(
+        body: SafeArea(
+          child: Column(
+            children: <Widget>[
+              Row(
                 children: <Widget>[
                   Expanded(
                     child: Column(
@@ -93,6 +90,7 @@ class _LeaderboardDataState extends State<LeaderboardData> {
                   ),
                   Expanded(
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         SizedBox(
                           height: screenheight * 0.03,
@@ -126,7 +124,7 @@ class _LeaderboardDataState extends State<LeaderboardData> {
                           height: screenheight * 0.01,
                         ),
                         (widget.leaderboardType == 'DAILY SAVINGS')
-                            ? Text(lb[0].userName.split(' ')[0])
+                            ? Text(lb[0].userName.split(' ')[0], style: TextStyle(fontWeight: FontWeight.bold),)
                             : Text(
                                 houseUserMap[newList[0][1].houseID.toString()]
                                     ['userName']),
@@ -178,20 +176,72 @@ class _LeaderboardDataState extends State<LeaderboardData> {
                   ),
                 ],
               ),
-            ),
-            Expanded(
-              child: TabBarView(
-                physics: NeverScrollableScrollPhysics(),
-                children: [
-                  getListTile(lb, user, widget.leaderboardType),
-                  getListTile(newList, user, widget.leaderboardType),
-                ],
+              Container(
+                decoration: BoxDecoration(
+//                  color: Theme.of(context).cardColor,
+                  borderRadius: BorderRadius.circular(8.0),
+                ),
+                child: Padding(
+                  padding:
+                  const EdgeInsets.symmetric(horizontal: 20.0, vertical: 24),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Row(
+                            children: <Widget>[
+                              (widget.leaderboardType == 'DAILY SAVINGS') ?
+                              Text('ENERGY SAVER OF THE DAY') :
+                              Text('DAILY STREAKER!'),
+                            ],
+                          ),
+                          SizedBox(height: 4.0),
+                          (widget.leaderboardType == 'DAILY SAVINGS')
+                              ? Text(lb[0].userName.split(' ')[0], style:
+                          TextStyle(
+                              fontSize: 24.0, fontWeight: FontWeight.w700))
+                              : Text(
+                              houseUserMap[newList[0][1].houseID.toString()]
+                              ['userName'], style:
+                              TextStyle(
+                                  fontSize: 24.0, fontWeight: FontWeight.w700),
+                          ),
+                        ],
+                      ),
+                      Column(
+                        children: <Widget>[
+                          Icon(
+                            MaterialCommunityIcons.trophy,
+                            color: Colors.yellow,
+                            size: 42.0,
+                          )
+                        ],
+                      )
+                    ],
+                  ),
+                ),
               ),
-            ),
-          ],
+              Expanded(
+                child: TabBarView(
+                  physics: NeverScrollableScrollPhysics(),
+                  children: [
+                    getListTile(lb, user, widget.leaderboardType),
+                    getListTile(newList, user, widget.leaderboardType),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
-      ),
-    );
+      );
+    } else {
+      return Scaffold(
+        body: CircularProgressIndicator(),
+      );
+    }
   }
 
   ListView getListTile(dynamic lb, User user, String type) {
@@ -209,10 +259,10 @@ class _LeaderboardDataState extends State<LeaderboardData> {
                     borderRadius: BorderRadius.circular(8.0),
                     border: (type == 'DAILY SAVINGS')
                         ? (lb[i].houseID == user.houseId)
-                            ? Border.all(color: Colors.green, width: 2)
+                            ? Border.all(color: Theme.of(context).accentColor, width: 2)
                             : null
                         : (lb[i][1].houseID == user.houseId)
-                            ? Border.all(color: Colors.green, width: 2)
+                            ? Border.all(color: Theme.of(context).accentColor, width: 2)
                             : null),
                 child: ListTile(
                   onTap: () {
@@ -253,7 +303,7 @@ class _LeaderboardDataState extends State<LeaderboardData> {
                   ),
                   trailing: (type == 'DAILY SAVINGS')
                       ? Text(lb[i].points.toString())
-                      : Text(lb[i][1].currentDay.toString()),
+                      : Text(lb[i][1].currentDay.toString(), style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),),
                 ),
               ),
             ],

@@ -34,7 +34,7 @@ final slideList = [
     description: 'Just say the sentence, "Turn on living room lamp"',
   ),
   Slide(
-    imageUrl: 'assets/onboarding_graphics/analytics.svg',
+    imageUrl: 'assets/onboarding_graphics/fav.svg',
     title: 'Favourite devices',
     description: 'Access your most used smart devices from the home screen',
   ),

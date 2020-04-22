@@ -83,48 +83,49 @@ class _HomeState extends State<Home> {
     });
   }
 
-  //TODO: POP UPS UPDATED
   void didChangeDependencies() {
     if (popup != 1) {
-      if (Provider.of<Consumption>(context).dailyTotal >=
-          Provider.of<Generation>(context).dailyTotal * 0.8) {
-        if (Provider.of<Consumption>(context).dailyTotal >=
-            Provider.of<Generation>(context).dailyTotal * 0.95) {
-          Timer.run(() =>
-              Provider.of<DialogProvider>(context, listen: false).popP2P());
-        } else
-          Timer.run(() =>
-              Provider.of<DialogProvider>(context, listen: false).popAi());
-      }
-      final user = Provider.of<User>(context);
+      final y = Provider.of<Consumption>(context);
+      final x2 = Provider.of<Generation>(context);
+      if (y != null && x2 != null) {
+        if (y.dailyTotal >= x2.dailyTotal * 0.8) {
+          if (y.dailyTotal >= x2.dailyTotal * 0.95) {
+            Timer.run(() =>
+                Provider.of<DialogProvider>(context, listen: false).popP2P());
+          } else
+            Timer.run(() =>
+                Provider.of<DialogProvider>(context, listen: false).popAi());
+        }
+        final user = Provider.of<User>(context);
 
-      final FirebaseDatabase database = FirebaseDatabase
-          .instance; //Rather then just writing FirebaseDatabase(), get the instance.
-      DatabaseReference itemRef = database.reference();
-      //door dialog
-      String q = "0";
-      final e =
-          itemRef.child("Homes/" + user.houseId + "/Sensors/Door").onValue;
-      e.listen((onData) {
-        q = onData.snapshot.value;
-        if (q == "high") {
-          Timer.run(() => Provider.of<DialogProvider>(context, listen: false)
-              .popDoorBell());
-        }
-      });
-      //fire dialogbox
-      String w = "0";
-      final x = itemRef
-          .child("Homes/" + user.houseId + "/Sensors/Fire/Danger")
-          .onValue;
-      x.listen((onData) {
-        w = onData.snapshot.value;
-        if (w == "high") {
-          Timer.run(() => Provider.of<DialogProvider>(context, listen: false)
-              .popFireDialog());
-        }
-      });
-      popup+=1;
+        final FirebaseDatabase database = FirebaseDatabase
+            .instance; //Rather then just writing FirebaseDatabase(), get the instance.
+        DatabaseReference itemRef = database.reference();
+        //door dialog
+        String q = "0";
+        final e =
+            itemRef.child("Homes/" + user.houseId + "/Sensors/Door").onValue;
+        e.listen((onData) {
+          q = onData.snapshot.value;
+          if (q == "high") {
+            Timer.run(() => Provider.of<DialogProvider>(context, listen: false)
+                .popDoorBell());
+          }
+        });
+        //fire dialogbox
+        String w = "0";
+        final x = itemRef
+            .child("Homes/" + user.houseId + "/Sensors/Fire/Danger")
+            .onValue;
+        x.listen((onData) {
+          w = onData.snapshot.value;
+          if (w == "high") {
+            Timer.run(() => Provider.of<DialogProvider>(context, listen: false)
+                .popFireDialog());
+          }
+        });
+        popup += 1;
+      }
     }
     super.didChangeDependencies();
   }

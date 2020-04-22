@@ -268,6 +268,7 @@ class _SignInState extends State<SignIn> {
                         padding: const EdgeInsets.symmetric(vertical: 4.0),
                         child: Text(
                           error,
+                          textAlign: TextAlign.center,
                           style: TextStyle(
                               color: Colors.red,
                               fontSize: 14.0,

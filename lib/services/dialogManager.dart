@@ -68,7 +68,6 @@ class _DialogManagerState extends State<DialogManager> {
 
   void _showAIDialog() {
     // ************************* AI DIALOG BOX ******************************//
-    // TODO: POPUP THIS DIALOG WHEN DAILY CONSUMPTION REACHES 80% OF THE CALCULATED DAILY LIMIT
     showDialog(
       context: context,
       builder: (BuildContext context) => StreamBuilder(
@@ -90,7 +89,6 @@ class _DialogManagerState extends State<DialogManager> {
   }
 
   void _showP2PDialog() {
-    // TODO: POPUP THIS DIALOG ONLY AFTER 6PM (WHEN GENERATION IS ZERO BECAUSE DURING THE DAY THE GENERATION VALUE KEEPS INCREASING)
     showDialog(
       context: context,
       builder: (BuildContext context) => StreamBuilder(

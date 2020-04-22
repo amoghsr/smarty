@@ -17,7 +17,7 @@ class _SecurityState extends State<Security> {
   Widget build(BuildContext context) {
     double screenwidth = MediaQuery.of(context).size.width;
     double screenheight = MediaQuery.of(context).size.height;
-    final String urlToStreamVideo = 'http://10.0.0.59:8160';
+    final String urlToStreamVideo = 'http://10.0.0.57:8160';
     final VlcPlayerController controller = VlcPlayerController();
     final int playerWidth = 640;
     final int playerHeight = 360;

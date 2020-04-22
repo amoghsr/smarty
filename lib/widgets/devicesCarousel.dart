@@ -43,7 +43,7 @@ class _DeviceCarouselState extends State<DeviceCarousel> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text(
-                  'Your favourite devices',
+                  'Frequently used devices',
                   style: kHeadingTextStyle,
                 ),
               ],

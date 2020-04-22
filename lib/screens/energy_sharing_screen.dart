@@ -135,7 +135,7 @@ class _EnergySharingScreenState extends State<EnergySharingScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       Text(
-                        'Donate',
+                        'Donate Energy',
                         style: TextStyle(
                           fontSize: 18.0,
                           fontWeight: FontWeight.w600,
@@ -149,7 +149,7 @@ class _EnergySharingScreenState extends State<EnergySharingScreen> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(
-                        top: 8.0, bottom: 4.0, right: 20.0),
+                        top: 4.0, bottom: 4.0, right: 20.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[

@@ -112,7 +112,6 @@ class _CustomDialogState extends State<CustomDialog> {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontFamily: 'Montserrat',
-                  color: Colors.white,
                   fontSize: 16.0,
                 ),
               ),
@@ -168,7 +167,7 @@ class _CustomDialogState extends State<CustomDialog> {
                         ),
                       ),
                       child: Center(
-                        child: Text(widget.buttonText),
+                        child: Text(widget.buttonText,),
                       ),
                     ),
                   ),
