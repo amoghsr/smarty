@@ -101,6 +101,8 @@ class _EnergySharingScreenState extends State<EnergySharingScreen> {
         Color(0xffDFA0A0)
       ],
     ];
+
+    if (y == null || user == null || bal == null) return Container();
     return Scaffold(
       appBar: AppBar(
         title: Text(

@@ -25,7 +25,7 @@ class _LeaderboardDataState extends State<LeaderboardData> {
     List<dynamic> newList = [];
     if (widget.leaderboardType == 'DAILY SAVINGS') {
       lb = Provider.of<List<LeaderboardModel>>(context);
-      lb.sort((b, a) => a.points.compareTo(b.points));
+      if (lb != null) lb.sort((b, a) => a.points.compareTo(b.points));
     } else {
       newMap = Map.fromEntries(points.entries.toList()
         ..sort((e2, e1) => e1.value.currentDay.compareTo(e2.value.currentDay)));
@@ -38,210 +38,207 @@ class _LeaderboardDataState extends State<LeaderboardData> {
 
     final user = Provider.of<User>(context);
 
-    if (user != null && points != null) {
-      return Scaffold(
-        body: SafeArea(
-          child: Column(
-            children: <Widget>[
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    child: Column(
-                      children: <Widget>[
-                        SizedBox(
-                          height: screenheight * 0.06,
-                        ),
-                        Container(
-                          child: Icon(
-                            FontAwesomeIcons.trophy,
-                            size: 30,
-                            color: Color(0xffAAA9AD),
-                          ),
-                        ),
-                        SizedBox(
-                          height: screenheight * 0.02,
-                        ),
-                        Container(
-                          // height: screenheight,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                          ),
-                          child: CircleAvatar(
-                            radius: 40,
-                            backgroundColor: Theme.of(context).canvasColor,
-                            backgroundImage:
-                                (widget.leaderboardType == 'DAILY SAVINGS')
-                                    ? AssetImage(lb[1].userImage)
-                                    : AssetImage(houseUserMap[newList[1][1]
-                                        .houseID
-                                        .toString()]['userImage']),
-                          ),
-                        ),
-                        SizedBox(
-                          height: screenheight * 0.01,
-                        ),
-                        (widget.leaderboardType == 'DAILY SAVINGS')
-                            ? Text(lb[1].userName.split(' ')[0])
-                            : Text(
-                                houseUserMap[newList[1][1].houseID.toString()]
-                                    ['userName']),
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        SizedBox(
-                          height: screenheight * 0.03,
-                        ),
-                        Container(
-                          child: Icon(
-                            FontAwesomeIcons.trophy,
-                            size: 45,
-                            color: Colors.yellow,
-                          ),
-                        ),
-                        SizedBox(
-                          height: screenheight * 0.02,
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                          ),
-                          child: CircleAvatar(
-                            radius: 65,
-                            backgroundColor: Theme.of(context).canvasColor,
-                            backgroundImage:
-                                (widget.leaderboardType == 'DAILY SAVINGS')
-                                    ? AssetImage(lb[0].userImage)
-                                    : AssetImage(houseUserMap[newList[0][1]
-                                        .houseID
-                                        .toString()]['userImage']),
-                          ),
-                        ),
-                        SizedBox(
-                          height: screenheight * 0.01,
-                        ),
-                        (widget.leaderboardType == 'DAILY SAVINGS')
-                            ? Text(lb[0].userName.split(' ')[0], style: TextStyle(fontWeight: FontWeight.bold),)
-                            : Text(
-                                houseUserMap[newList[0][1].houseID.toString()]
-                                    ['userName']),
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    child: Column(
-                      children: <Widget>[
-                        SizedBox(
-                          height: screenheight * 0.06,
-                        ),
-                        Container(
-                          child: Icon(
-                            FontAwesomeIcons.trophy,
-                            size: 30,
-                            color: Colors.deepOrange,
-                          ),
-                        ),
-                        SizedBox(
-                          height: screenheight * 0.02,
-                        ),
-                        Container(
-                          // height: screenheight,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                          ),
-                          child: CircleAvatar(
-                            radius: 40,
-                            backgroundColor: Theme.of(context).canvasColor,
-                            backgroundImage:
-                                (widget.leaderboardType == 'DAILY SAVINGS')
-                                    ? AssetImage(lb[2].userImage)
-                                    : AssetImage(houseUserMap[newList[2][1]
-                                        .houseID
-                                        .toString()]['userImage']),
-                          ),
-                        ),
-                        SizedBox(
-                          height: screenheight * 0.01,
-                        ),
-                        (widget.leaderboardType == 'DAILY SAVINGS')
-                            ? Text(lb[2].userName.split(' ')[0])
-                            : Text(
-                                houseUserMap[newList[2][1].houseID.toString()]
-                                    ['userName']),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              Container(
-                decoration: BoxDecoration(
-//                  color: Theme.of(context).cardColor,
-                  borderRadius: BorderRadius.circular(8.0),
-                ),
-                child: Padding(
-                  padding:
-                  const EdgeInsets.symmetric(horizontal: 20.0, vertical: 24),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+    if (user == null || points == null || lb == null) return Container();
+    return Scaffold(
+      body: SafeArea(
+        child: Column(
+          children: <Widget>[
+            Row(
+              children: <Widget>[
+                Expanded(
+                  child: Column(
                     children: <Widget>[
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Row(
-                            children: <Widget>[
-                              (widget.leaderboardType == 'DAILY SAVINGS') ?
-                              Text('ENERGY SAVER OF THE DAY') :
-                              Text('DAILY STREAKER!'),
-                            ],
-                          ),
-                          SizedBox(height: 4.0),
-                          (widget.leaderboardType == 'DAILY SAVINGS')
-                              ? Text(lb[0].userName.split(' ')[0], style:
-                          TextStyle(
-                              fontSize: 24.0, fontWeight: FontWeight.w700))
-                              : Text(
-                              houseUserMap[newList[0][1].houseID.toString()]
-                              ['userName'], style:
-                              TextStyle(
-                                  fontSize: 24.0, fontWeight: FontWeight.w700),
-                          ),
-                        ],
+                      SizedBox(
+                        height: screenheight * 0.06,
                       ),
-                      Column(
-                        children: <Widget>[
-                          Icon(
-                            MaterialCommunityIcons.trophy,
-                            color: Colors.yellow,
-                            size: 42.0,
-                          )
-                        ],
-                      )
+                      Container(
+                        child: Icon(
+                          FontAwesomeIcons.trophy,
+                          size: 30,
+                          color: Color(0xffAAA9AD),
+                        ),
+                      ),
+                      SizedBox(
+                        height: screenheight * 0.02,
+                      ),
+                      Container(
+                        // height: screenheight,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                        ),
+                        child: CircleAvatar(
+                          radius: 40,
+                          backgroundColor: Theme.of(context).canvasColor,
+                          backgroundImage: (widget.leaderboardType ==
+                                  'DAILY SAVINGS')
+                              ? AssetImage(lb[1].userImage)
+                              : AssetImage(
+                                  houseUserMap[newList[1][1].houseID.toString()]
+                                      ['userImage']),
+                        ),
+                      ),
+                      SizedBox(
+                        height: screenheight * 0.01,
+                      ),
+                      (widget.leaderboardType == 'DAILY SAVINGS')
+                          ? Text(lb[1].userName.split(' ')[0])
+                          : Text(houseUserMap[newList[1][1].houseID.toString()]
+                              ['userName']),
                     ],
                   ),
                 ),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      SizedBox(
+                        height: screenheight * 0.03,
+                      ),
+                      Container(
+                        child: Icon(
+                          FontAwesomeIcons.trophy,
+                          size: 45,
+                          color: Colors.yellow,
+                        ),
+                      ),
+                      SizedBox(
+                        height: screenheight * 0.02,
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                        ),
+                        child: CircleAvatar(
+                          radius: 65,
+                          backgroundColor: Theme.of(context).canvasColor,
+                          backgroundImage: (widget.leaderboardType ==
+                                  'DAILY SAVINGS')
+                              ? AssetImage(lb[0].userImage)
+                              : AssetImage(
+                                  houseUserMap[newList[0][1].houseID.toString()]
+                                      ['userImage']),
+                        ),
+                      ),
+                      SizedBox(
+                        height: screenheight * 0.01,
+                      ),
+                      (widget.leaderboardType == 'DAILY SAVINGS')
+                          ? Text(
+                              lb[0].userName.split(' ')[0],
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            )
+                          : Text(houseUserMap[newList[0][1].houseID.toString()]
+                              ['userName']),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: Column(
+                    children: <Widget>[
+                      SizedBox(
+                        height: screenheight * 0.06,
+                      ),
+                      Container(
+                        child: Icon(
+                          FontAwesomeIcons.trophy,
+                          size: 30,
+                          color: Colors.deepOrange,
+                        ),
+                      ),
+                      SizedBox(
+                        height: screenheight * 0.02,
+                      ),
+                      Container(
+                        // height: screenheight,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                        ),
+                        child: CircleAvatar(
+                          radius: 40,
+                          backgroundColor: Theme.of(context).canvasColor,
+                          backgroundImage: (widget.leaderboardType ==
+                                  'DAILY SAVINGS')
+                              ? AssetImage(lb[2].userImage)
+                              : AssetImage(
+                                  houseUserMap[newList[2][1].houseID.toString()]
+                                      ['userImage']),
+                        ),
+                      ),
+                      SizedBox(
+                        height: screenheight * 0.01,
+                      ),
+                      (widget.leaderboardType == 'DAILY SAVINGS')
+                          ? Text(lb[2].userName.split(' ')[0])
+                          : Text(houseUserMap[newList[2][1].houseID.toString()]
+                              ['userName']),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            Container(
+              decoration: BoxDecoration(
+//                  color: Theme.of(context).cardColor,
+                borderRadius: BorderRadius.circular(8.0),
               ),
-              Expanded(
-                child: TabBarView(
-                  physics: NeverScrollableScrollPhysics(),
-                  children: [
-                    getListTile(lb, user, widget.leaderboardType),
-                    getListTile(newList, user, widget.leaderboardType),
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20.0, vertical: 24),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Row(
+                          children: <Widget>[
+                            (widget.leaderboardType == 'DAILY SAVINGS')
+                                ? Text('ENERGY SAVER OF THE DAY')
+                                : Text('DAILY STREAKER!'),
+                          ],
+                        ),
+                        SizedBox(height: 4.0),
+                        (widget.leaderboardType == 'DAILY SAVINGS')
+                            ? Text(lb[0].userName.split(' ')[0],
+                                style: TextStyle(
+                                    fontSize: 24.0,
+                                    fontWeight: FontWeight.w700))
+                            : Text(
+                                houseUserMap[newList[0][1].houseID.toString()]
+                                    ['userName'],
+                                style: TextStyle(
+                                    fontSize: 24.0,
+                                    fontWeight: FontWeight.w700),
+                              ),
+                      ],
+                    ),
+                    Column(
+                      children: <Widget>[
+                        Icon(
+                          MaterialCommunityIcons.trophy,
+                          color: Colors.yellow,
+                          size: 42.0,
+                        )
+                      ],
+                    )
                   ],
                 ),
               ),
-            ],
-          ),
+            ),
+            Expanded(
+              child: TabBarView(
+                physics: NeverScrollableScrollPhysics(),
+                children: [
+                  getListTile(lb, user, widget.leaderboardType),
+                  getListTile(newList, user, widget.leaderboardType),
+                ],
+              ),
+            ),
+          ],
         ),
-      );
-    } else {
-      return Scaffold(
-        body: CircularProgressIndicator(),
-      );
-    }
+      ),
+    );
   }
 
   ListView getListTile(dynamic lb, User user, String type) {
@@ -259,10 +256,12 @@ class _LeaderboardDataState extends State<LeaderboardData> {
                     borderRadius: BorderRadius.circular(8.0),
                     border: (type == 'DAILY SAVINGS')
                         ? (lb[i].houseID == user.houseId)
-                            ? Border.all(color: Theme.of(context).accentColor, width: 2)
+                            ? Border.all(
+                                color: Theme.of(context).accentColor, width: 2)
                             : null
                         : (lb[i][1].houseID == user.houseId)
-                            ? Border.all(color: Theme.of(context).accentColor, width: 2)
+                            ? Border.all(
+                                color: Theme.of(context).accentColor, width: 2)
                             : null),
                 child: ListTile(
                   onTap: () {
@@ -302,8 +301,14 @@ class _LeaderboardDataState extends State<LeaderboardData> {
                     ],
                   ),
                   trailing: (type == 'DAILY SAVINGS')
-                      ? Text(lb[i].points.toString(),  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0))
-                      : Text(lb[i][1].currentDay.toString(), style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),),
+                      ? Text(lb[i].points.toString(),
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 16.0))
+                      : Text(
+                          lb[i][1].currentDay.toString(),
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 16.0),
+                        ),
                 ),
               ),
             ],
