@@ -104,22 +104,22 @@ class _DrawerPageState extends State<DrawerPage> {
                   );
                 },
               ),
-              ListTile(
-                leading: Icon(Icons.lock),
-                title: Text(
-                  'For Home Manager',
-                ),
-                trailing: Icon(
-                  Icons.arrow_forward,
-                ),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => NavigationManager()),
-                  );
-                },
-              ),
+//              ListTile(
+//                leading: Icon(Icons.lock),
+//                title: Text(
+//                  'For Home Manager',
+//                ),
+//                trailing: Icon(
+//                  Icons.arrow_forward,
+//                ),
+//                onTap: () {
+//                  Navigator.push(
+//                    context,
+//                    MaterialPageRoute(
+//                        builder: (context) => NavigationManager()),
+//                  );
+//                },
+//              ),
               ListTile(
                 leading: Icon(MaterialIcons.brightness_4),
                 title: Text('Dark Mode'),

@@ -102,7 +102,7 @@ class WaterHeaterController extends StatelessWidget {
               appearance: CircularSliderAppearance(
                   size: screenheight,
                   customColors: CustomSliderColors(
-                    trackColor: Colors.grey,
+                    trackColor: Theme.of(context).disabledColor,
                     progressBarColor: Colors.deepOrange,
                   ),
                   customWidths: CustomSliderWidths(

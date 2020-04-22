@@ -189,7 +189,7 @@ class ACController extends StatelessWidget {
                       appearance: CircularSliderAppearance(
                           size: screenheight,
                           customColors: CustomSliderColors(
-                            trackColor: Theme.of(context).cardColor,
+                            trackColor: Theme.of(context).disabledColor,
                             progressBarColor: Theme.of(context).accentColor,
                           ),
                           customWidths: CustomSliderWidths(
