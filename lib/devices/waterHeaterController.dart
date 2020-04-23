@@ -59,30 +59,11 @@ class WaterHeaterController extends StatelessWidget {
                         color: Theme.of(context).disabledColor,
                       ),
                     ),
-                    SizedBox(
-                      height: 4.0
-                    ),
-                    StreamBuilder(
-                      stream: itemRef
-                          .child("Homes/" +
-                              user.houseId +
-                              "/Sensors/TempandHumid/")
-                          .onValue,
-                      builder: (context, snap) {
-                        if (snap.data == null)
-                          return Text(
-                            "30",
-                            style: kLightDeviceBottomBar,
-                          );
-                        Map<String, dynamic> values =
-                            new Map<String, dynamic>.from(
-                                snap.data.snapshot.value);
-                        return Text(
-                          "55°C",
-                          style: kLightDeviceBottomBar,
-                        );
-                      },
-                    ),
+                    SizedBox(height: 4.0),
+                    Text(
+                      "55°C",
+                      style: kLightDeviceBottomBar,
+                    )
                   ],
                 ),
               ],
@@ -111,10 +92,9 @@ class WaterHeaterController extends StatelessWidget {
                   ),
                   infoProperties: InfoProperties(
                     topLabelStyle: kLightDeviceTopBar.copyWith(
-                      color: Theme.of(context).disabledColor,
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.w600
-                    ),
+                        color: Theme.of(context).disabledColor,
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.w600),
                     topLabelText: 'Current Temp.',
                     mainLabelStyle:
                         TextStyle(fontWeight: FontWeight.bold, fontSize: 36),

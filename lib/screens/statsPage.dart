@@ -211,7 +211,8 @@ class _StatsScreenState extends State<StatsScreen> {
                                     Text(
                                       //TODO: AVERAGE DAILY CONSUMPTION OF ALL OTHER HOUSES (NOT INCLUDING OURS) UP UNTIL THAT POINT OF THE DAY
                                       y.dailyTotal > 0
-                                          ? (y.dailyTotal + result1).toString()
+                                          ? (y.dailyTotal + result1)
+                                              .toStringAsFixed(2)
                                           : "0",
                                       style: TextStyle(
                                         height: 1,
