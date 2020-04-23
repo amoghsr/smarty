@@ -22,7 +22,7 @@ class DatabaseService1 {
   List<LeaderboardModel> createLeaderBoard(DocumentSnapshot doc) {
     List<LeaderboardModel> w = [];
     doc.data.forEach((key, value) {
-      w.add(LeaderboardModel.fromFirestore(key, value));
+      w.add(LeaderboardModel.fromFirestore(key, value.ceil()));
     });
     return w;
   }
