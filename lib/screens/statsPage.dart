@@ -154,7 +154,7 @@ class _StatsScreenState extends State<StatsScreen> {
                               190,
                               20.0,
                               y.dailyTotal > 0
-                                  ? (y.dailyTotal + result1).toDouble()
+                                  ? ((y.dailyTotal + result1) / 100).toDouble()
                                   : 0,
                               buildCircularProgressWidget(
                                 136,
