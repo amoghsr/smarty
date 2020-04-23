@@ -103,7 +103,7 @@ class _LineChartSample2State extends State<LineChartSample2> {
     ];
 
     for (int i = 0, j = 1; i < hourData.length; i++, j += 3) {
-      hourCoords.add(FlSpot(j.toDouble(), hours[i].toDouble() / 5));
+      hourCoords.add(FlSpot(j.toDouble(), hours[i].toDouble()));
     }
 
     for (int i = 0, j = 1; i < weekData.length; i++, j += 2) {
@@ -228,15 +228,15 @@ class _LineChartSample2State extends State<LineChartSample2> {
             if (groupby == "Day") {
               switch (value.toInt()) {
                 case 1:
-                  return '1.7kWh';
+                  return '2 kWh';
                 // case 2:
                 //   return '3.4kWH';
                 case 3:
-                  return '5.1kWh';
+                  return '4 kWh';
                 // case 4:
                 //   return '6.8kWh';
                 case 5:
-                  return '8.5kWh';
+                  return '6 kWh';
               }
             } else if (groupby == "Week") {
               switch (value.toInt()) {
@@ -335,7 +335,7 @@ class _LineChartSample2State extends State<LineChartSample2> {
     ];
 
     for (int i = 0, j = 1; i < hourData.length; i++, j += 2) {
-      hourCoords.add(FlSpot(j.toDouble(), hours[i].toDouble() / 5));
+      hourCoords.add(FlSpot(j.toDouble(), hours[i].toDouble()));
     }
 
     for (int i = 0, j = 1; i < weekData.length; i++, j += 2) {
@@ -484,15 +484,15 @@ class _LineChartSample2State extends State<LineChartSample2> {
             if (groupby == "Day") {
               switch (value.toInt()) {
                 case 1:
-                  return '1kWh';
+                  return '2 kWh';
                 // case 2:
                 //   return '2kWH';
                 case 3:
-                  return '3kWh';
+                  return '4 kWh';
                 // case 4:
                 //   return '4kWh';
                 case 5:
-                  return '5kWh';
+                  return '6 kWh';
               }
             } else if (groupby == "Week") {
               switch (value.toInt()) {
