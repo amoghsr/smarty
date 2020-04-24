@@ -9,10 +9,11 @@ built for the group project for F29SO - Software Engineering.
 
 ## Current Status
 
-The project is currently moving to it's 3rd stage of three in development.
+The project has finished it's 3rd stage of development.
 
 ## Milestones
 
+- (10/02/2020) Stage 3 complete. Report is available on Teams.
 - (10/02/2020) Stage 2 complete. Report is available on Teams.
 - (28/11/2020) Stage 1 complete. Report is available on Teams.
 
